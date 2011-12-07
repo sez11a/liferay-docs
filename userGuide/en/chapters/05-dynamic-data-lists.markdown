@@ -1,6 +1,6 @@
 # Dynamic Data Lists in Liferay
 
-As needs change in businesses and organizations, the technology they use must adapt as well. One day, you'd like your team to sign up for a holiday party. You want to enter in custom sets of data, allow your users to add their information, and be able to access the set of data. To top it all off, you don't want to write a single line of code. Enter Liferay's *Dynamic Data Lists*: an easy way to create, aggregate and display new data types. Data Lists are flexible enough to handle all types of data, both simple and complex. Every fall, you may need to put up a job posting board, only allowing administrators to create new job posts. Maybe you want to allow users to manage a notebook or To-Do list on their private pages. Simply put, Liferay gives you the power to:
+As needs change in businesses and organizations, the technology they use must adapt as well. One day, you'd like your team to sign up for a holiday party. You want to enter in custom sets of data, allow your users to add their information, and be able to access the set of data. To top it all off, you don't want to write a single line of code. Enter Liferay's *Dynamic Data Lists*: an easy way to create, aggregate and display new data types. Data Lists are flexible enough to handle all types of data, both simple and complex. Every fall, you may need to put up a job posting board, only allowing administrators to create new job posts. Maybe you want to allow users to manage a notebook or to do list on their private pages. Simply put, Liferay gives you the power to:
 
 -  Define your own data definitions
 -  Create new lists from those definitions
@@ -12,17 +12,17 @@ All of this capability is easily distilled into two concepts: data defining and 
 
 ## Building a List Platform in Liferay
 
-To expand the social capabilities of our site, we want to build a new, radical platform on Liferay: custom-built lists that users can share with their friends (or enemies, depending on their Social Relation type), and ask other users to contribute to. Marketing has come up with a great name for our new service: `list.it`. Our beautiful `list.it` dashboard will give each user the power to generate their own lists, see the lists of their friends, and tally the results of certain types of lists (surveys, anyone?). Liferay makes this as simple as throwing some Dynamic Data List Display and Form portlets on the user's private and public user pages. 
+To expand the social capabilities of our site, we want to build a new, radical platform on Liferay: custom-built lists that users can share with their friends (or enemies, depending on their Social Relation type), and ask other users to contribute to. Marketing has come up with a great name for our new service: `list.it`. Our beautiful `list.it` dashboard will give each user the power to generate their own lists, see the lists of their friends, and tally the results of certain types of lists (surveys, anyone?). Liferay makes this as simple as throwing Dynamic Data List Display and Form portlets on the user's private and public user pages. 
 
 ## Defining Data Types
 
 When a new user logs in to `list.it`, they are going to want to build a few lists for themselves. Chances are, many of the lists they would want to create -- to do lists, shopping lists and memos come to mind -- will already be defined in the portal. All the user will have to do is create a new list, choose that pre-defined data type, and have at it! We'll take a look at that in a moment, but first we should look at what happens when you need to define your own data types. Perhaps we want to allow our `list.it` users (who would probably call themselves "list-ers" or "list-ies") to create their own data types for lists they create. In this case, they would have unfettered access to the content of their private user site, where they can create a new data type.
 
-Using data lists to outline a new data model is as simple as point and click. You now have a `list.it` account and have been dying to bug your friends and family to sign up for that "volunteer" work that is moving apartments. Using an intuitive visual editor, you can quickly draw up the skeleton for that volunteer list in minutes. Since data lists exemplify a unique type of content for your site, you can find them in the content section of the control panel, going to *Go To &rarr Control Panel &rarr; Content &rarr; Dynamic Data Lists* or *Manage &rarr; Site Content &rarr; Dynamic Data Lists*. Within the dynamic data lists section, you can create either a new data type (*Manage Data Definitions*) or a new list from an existing data type.
+Using data lists to outline a new data model is as simple as point and click. You now have a `list.it` account and have been dying to bug your friends and family to sign up for that "volunteer" work: helping you move next weekend. Using an intuitive visual editor, you can quickly draw up the skeleton for that volunteer list in minutes. Since data lists exemplify a unique type of content for your site, you can find them in the content section of the control panel, by going to *Go To &rarr Control Panel &rarr; Content &rarr; Dynamic Data Lists* or *Manage &rarr; Site Content &rarr; Dynamic Data Lists*. Within the dynamic data lists section, you can create either a new data type (*Manage Data Definitions*) or a new list from an existing data type.
 
 ![Figure 5.1: Data Lists in the control panel.](../../images/05-ddl-control-panel.png)
 
-When creating a new *data definition*, you have a palette of fields to lay out, as well as a blank canvas to construct the definition. The interface will look very similar to creating and editing web content structures covered previously. Let's explore the different data types at our disposal:
+When creating a new *data definition*, you have a palette of fields to lay out, as well as a blank canvas to paint the definition on. The interface will look very similar to creating and editing web content structures covered previously. Let's explore the different data types at our disposal:
 
 **Boolean:** Presents a checkbox to the user and stores either a `true` (checked) or `false` (unchecked) based on state.
 
@@ -48,7 +48,7 @@ When creating a new *data definition*, you have a palette of fields to lay out, 
 
 ![Figure 5.2: Data definition fields.](../../images/05-data-definition-screen.png)
 
-Using that reference as a nice cheat-sheet, you can now create the data type you need for "Volunteer Work Sign-Up". Maybe a `Text` type for the name, copious options as `Select` for all the tasks they can volunteer for (obviously set to allow multiple options), and a `File Upload` so they can upload an image of themselves. After all, how much more official-feeling and fun is it if you can print out some nifty badges?
+Using that reference as a nice cheat sheet, you can now create the data type you need for "Volunteer Work Sign-Up". Maybe a `Text` type for the name, copious options as `Select` for all the tasks they can volunteer for (obviously set to allow multiple options), and a `File Upload` so they can upload an image of themselves. After all, how much more official-feeling and fun is it if you can print out some nifty badges?
 
 When creating data definitions, you can also customize the appearance of the input fields, and provide helpful tips and hints for those entering data. Some data types have specific configuration options, but all have some in common. The following properties can be edited by double-clicking on any field, by clicking the gear icon in the upper-right corner of the field, or by clicking the *Settings* tab when the field is selected (highlighted with a green background). Most of the properties you will find there are fairly self-explanatory, but there are a few that need a closer look:
 
@@ -60,15 +60,15 @@ When creating data definitions, you can also customize the appearance of the inp
 
 ![Figure 5.3: Data field properties.](../../images/05-data-definition-field-properties.png)
 
-In addition to dragging the fields around to create your desired forms, you can stack inputs within inputs, by dragging a field within another field. Organize your data into unlimited levels of hierarchy, creating the clearest, most logical data model easily. There is also a duplicate button on each field (the middle button), allowing you to easily clone any field as many times as you need.
+In addition to dragging the fields around to create your desired forms, you can nest inputs within inputs, by dragging a field onto another field. You can organize your data into unlimited levels of hierarchy, creating the clearest, most logical data model rapidly. There is also a duplicate button on each field (the middle button), allowing you to easily clone any field as many times as you need.
 
-That really covers the basic tools that users of `list.it` need to get rolling with an unlimited array of custom types. But just like we talked about at the beginning, most users will probably want to use a host of pre-defined data types already. A number of data definitions ship with the portal to help you get started: *To Do*, *Issues*, *Meeting Minutes*, and *Contacts*. Use these on their own to generate new data lists, or tweak them to fit your use case. All that's left to do is build a new data list, and let your users play with it.
+That really covers the basic tools that users of `list.it` need to get rolling with an unlimited array of custom types. But just like we talked about in the beginning, most users will probably want to use a host of pre-defined data types. A number of data definitions ship with the portal to help you get started: *To Do*, *Issues*, *Meeting Minutes*, and *Contacts*. Use these on their own to generate new data lists, or tweak them to fit your use case. All that's left to do is build a new data list, and let your users play with it.
 
 ## Creating Data Lists
 
 Building out new lists really isn't all that different from creating new pieces of web content. Just as you can create new Web Content Structures to control the input of a particular type of web content, you can use Data List Definitions to control the input of new list types. Similarly, just as you simply create a new piece of web content, selecting the Structure you would like to use with it, `list.it` users (we'll call them *Listies*) will choose the Definition they want to use when creating a new list. With a data definition in place, all that remains is to create a new data list to capture the information we're going after. This is the easiest step in creating the list, with only a few clicks between a data definition and robust data entry and delivery.
 
-If we wanted to create a new volunteer list with the "Volunteer Sign-Up" definition:
+If we want to create a new volunteer list with the "Volunteer Sign-Up" definition:
 
 1.  From the *Content* section of the Control Panel, select Dynamic Data Lists.
 2.  Click on *Add* to create a new list based on a data definition, which in our case will be the job post.
@@ -76,13 +76,13 @@ If we wanted to create a new volunteer list with the "Volunteer Sign-Up" definit
 4.  Last, and most importantly, click *Select* under the *Data Defition* section -- this is where you set the data model that drives this list.
 5.  Choose the *Volunteer Sign-Up* data definition you created, then click *Save*.
 
-Now that you've created your brand now volunteer list, you can pester everyone you know to sign up. But what would it look like for them to add an entry to this list? Using a data definition you've previously created (or selected), the appropriate form will appear on the page.
+Now that you've created your brand new volunteer list, you can pester everyone you know to sign up. But what would it look like for them to add an entry to this list? Using a data definition you've previously created (or selected), the appropriate form will appear on the page.
 
 ![Figure 5.4: Entering a new data record.](../../images/05-ddl-add-record.png)
 
-Now, this example here is some stodgy old job posting that radically cool *Listies* would never come up with, but it is a good example. Just looking at the form precisely recalls the way it looked when you first defined it. And that's as it should be: build the data type the way you want it, and have it appear consistently to your end users.
+Now, this example here is some stodgy old job posting that radically cool *Listies* would never come up with, but it is a good example. Just looking at the form precisely recalls the way it looked when you first defined it. And that's as it should be: build the data type the way you want, and have the form appear consistently to your end users.
 
-But how will this data appear? How will my awesome, new Volunteer Sign-Up sheet or that boring Jobs Listing appear? The answers to these pressing, burning questions bring us to the mecca that is the display side of this equation.
+But how will this data appear? How will my awesome, new Volunteer Sign-Up sheet or that boring Jobs Listing look? The answers to these pressing, burning questions bring us to the mecca that is the display side of this equation.
 
 ### Using Default Displays
 
@@ -102,19 +102,19 @@ If you need more customizability with the display of the list or the data entry 
 
 ![Figure 5.6: The spreadsheet view](../../images/05-ddl-spreadsheet-view.png)
 
-Now, as useful as this default display is, and it's certainly useful for my To Do list and my Memo notes, it can be an awkward way to ask my Volunteers to sign up. In fact, any time I want other Listies to interact with my lists and contribute responses, I really just want a simple form to show them. They don't need to see the full range of responses to what others have said. And in some cases, it can be hazardous to your health for everyone to see the responses. Then you don't have to explain why your sister-in-law won't work with your brother on the same task because of his B.O. problem.
+Now, as useful as this default display is, and it's certainly useful for my to do list and my memo notes, it can be an awkward way to ask my volunteers to sign up. In fact, any time I want other Listies to interact with my lists and contribute responses, I really just want a simple form to show them. They don't need to see the full range of responses. And in some cases, it can be hazardous to your health for everyone to see the responses. Then you don't have to explain why your sister-in-law won't work with your brother on the same task because of his B.O. problem.
 
 ### Using Data List Forms
 
 For those moments you just don't want others to see your lists in the standard Dynamic Data List Display, Liferay provides the Dynamic Data List Forms portlet. Unlike the data list display, the forms portlet is tailored to entering new records. When you deploy that data list for your users to sign up for a retreat, or your family members to volunteer to help you move, using the data list form allows you to simplify the sign-up process and hide the contents of the list.
 
-Using the Dynamic Data List Form is exactly the same as using the Web Content Display portlet: just set it up, point it to a list (either existing or new), and let it go. However, unlike the Web Content Display portlet, the Dynamic Data List Forms portlet may not be installed already in your portlet. If not, just head over to *Plugins Installation* in the *Server Administration* section of your Control Panel. You should be able to find it there, install it, and deploy away.
+Using the Dynamic Data List Form is exactly the same as using the Web Content Display portlet: just set it up, point it to a list (either existing or new), and let it go. However, unlike the Web Content Display portlet, the Dynamic Data List Forms portlet may not be installed already in your portal. If not, just head over to *Plugins Installation* in the *Server Administration* section of your Control Panel. You should be able to find it there, install it, and deploy away.
 
 If you're not a Listie, and you happen to be deploying custom lists in an environment that requires approval from other users, then it's not enough to just create the list and display a form. What you need is a real integration with Workflow. Now, we talk so much about Workflow in other places, that we won't bore you with the details here, but you should know that Workflow integrates smoothly with Dynamic Data Lists.
 
 ### Using Workflow
 
-Liferay integrates the powerful features of workflow and the data capabilities of dynamic data lists in *Kaleo Forms*. Workflow is not directly enabled in the dynamic data list portlets, instead allowing you to build custom forms backed by a data list. You can then deploy custom workflows to the form and its data. Though Kaleo Forms is only available in Enterprise Edition, you can still apply a workflow to a list when creating it. See the section on Workflow for more information.
+Liferay integrates the powerful features of workflow and the data capabilities of dynamic data lists in *Kaleo Forms*. Workflow is not directly enabled in the dynamic data list portlets by default, instead allowing you to focus on building custom forms backed by a data list. You can then deploy custom workflows to the form and its data. Though Kaleo Forms is only available in Enterprise Edition, you can still apply a workflow to a list when creating it. See the section on Workflow for more information.
 
 If you are a Listie, or a `list.it` developer, then you're less interested in the intricacies of workflow, and more excited about showing your lists to the world. That is, in fact, the reason you created `list.it` in the first place, right?
 
