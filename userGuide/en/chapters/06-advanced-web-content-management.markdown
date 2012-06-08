@@ -81,85 +81,10 @@ You can grant or deny permissions based on Roles, and this is the recommended wa
 
 Now that you understand what structures are used for, you need to understand the other half of Liferay's web content management system: templates. 
 
-## Advanced Publishing Options [](id=lp-6-1-ugen03-advanced-publishing-options-0)
-
-As we discussed above, as your site becomes larger and more complex, management of the content becomes more challenging. We've gone over Liferay management tools that help you create content quickly and in an orderly fashion. You created a simple announcement with Liferay's structure editor that allows you to quickly design a structure and prepare it for the template designers. Then you applied a template to the structure. You know how to display content using the Web Content Display portlet. Now, you're ready to take advantage of Liferay's advanced publishing options.
-
-If a web site isn't properly managed, it can quickly become out of date, and that drives viewers away. If people are finding your site because of search engines, you don't want them presented with outdated (and now inaccurate) web content.
-
-You also want your content to be found easily by your users. This is done through tags and categories. 
-
-Additionally, you may want to create content and send it through a review and approve process weeks before you want it displayed on the web site. Liferay gives you this flexibility with the *Schedule* and *Workflow* features.  
-
-### Scheduling Web Content [](id=lp-6-1-ugen03-scheduling-web-content-0)
-
-Liferay's WCM lets you define when your content goes live. You can determine when the content is displayed, expired, and/or reviewed. This is an excellent to way to keep your site current and free from outdated (and perhaps incorrect) information. The scheduler is built right into the form that your users make use of to add web content, in the same column as the structure and template selectors.
-
-![Figure 3.15: Schedule for Publishing Content](../../images/04-web-content-schedule.png)
-
-**Display Date:** Sets (within a minute) when content will be displayed.
-**Expiration Date:** Sets a date to expire the content. The default is one year.
-**Never Auto Expire:** Sets your content to never expire.
-**Review Date:** Sets a content review date. 
-**Never Review:** Sets the content to never be reviewed.
-
-As you can see, the scheduling feature in Liferay Portal gives you great control in managing when, and for how long, your web content is displayed on your web site. Additionally, you have the ability to determine when your content should be reviewed for accuracy and/or relevance. This makes it possible to manage your growing inventory of content. 
-
-In addition to controlling when content displays, you can use the Display Page feature to control where content displays.
-
-### Display Page [](id=lp-6-1-ugen03-display-page-0)
-
-If you've been using Liferay for a while, or you've just spent a little bit of time with this guide, you might have noticed something about how Liferay handles web content--content is never tied directly to a page. While this can be useful (because it means that you don't have to recreate content if you want to display the same thing on multiple pages), it also means that you don't have a static URL for any web content, which is bad for search engine optimization.
-
-To fix this issue, Liferay has introduced the concept of Display Pages and Canonical URLs. Each web content entry on the portal has a canonical URL, which is the official location of the content that is referenced any time the content is displayed. A Display Page can be any page with an asset publisher set to its default settings. You can create the page yourself, or use the *Content Display Page* page template included with Liferay.
-
-So right now you're thinking "Wait, you just told me that each Web Content item has its own URL, and that this is somehow related to pages where we display a whole bunch of content on the same page?" Yes. That's exactly what I said. Just watch--create a display page somewhere on your portal, using the Content Display Page template. Now click on *Display Page*, and select the page you just created as the display page for the content. 
-
-![Figure 3.16: Selecting a Display Page](../../images/04-web-content-display-page.png)
-
-You can now click the link to display the content, and the canonical URL for content shows in your browser's address bar. You can create your own custom display page, and any additional portlets that you place on the page are displayed along with the content when you access it via the canonical URL. 
-
-![Figure 3.17: The Canonical URL](../../images/04-web-content-canonical-url.png)
-
-Let's move on to tags and categories. 
-
-### Tags and Categories [](id=lp-6-1-ugen03-tags-and-categories-0)
-
-Tags are keywords that are attached to web content in order to help users find content. Categories are hierarchical structures of content that are defined by administrators. Tags and categories make it easier for your users to find content through search or navigation.
-
-By assigning a tag to web content, you define metadata about that content. This is then used by Liferay's search engine to score the results of a search, enabling users to find content that is most relevant to their search. Tags can be created on the fly by creators of content, and it's important to tag content whenever it is created. If you don't tag content, all the search engine has to go on is the full text of the content (if you've made your content indexable), and that might not produce the most optimal results.
-
-Tagging also helps with navigation. Liferay Portal has two portlets specifically designed for navigating content using tags: Tag Cloud and Tag Navigation. If you add either of these to a page, you can use them to show the topics contained in your content.
-
-Tags can be added on the fly or they can be selected from the existing library of tags. For most of the portal, users tag content, but for web content, only the content creator tags the content, because there is no user interface for regular users to tag web content.
-
-It is important that you both tag and categorize your content when you enter it.
-
-Categories are a little bit different, and new users generally ask a valid question when presented with tags and categories: what's the difference? Categories are defined by someone with administrative access to the content. They are hierarchical, tree-like structures that users can use to find content. Categories are different from tags in that they're never created by end users. Instead, categories define how your content is organized from the point of view of the owner of the content. A good example of categories might be the table of contents of a book: it shows the hierarchical structure and organization for all of the content within that book. This shows that the structure of the book has been planned ahead of time by the author. Categories do the same thing as the table of contents. 
-
-By contrast, tags are like the index of a book: they show where many different topics are mentioned within the book in alphabetical order. When a search is done throughout the book, even the author might be surprised at how many times he or she mentions a particular topic outside of its category. So both ways of organizing content are important, especially if your users will be using search to find content.
-
-Tagging and categorizing web content is easy. You can do it at the bottom of the same form you use to add content. If you open the *Categorization* section of the form, you'll be presented with an interface for adding tags and categories.
-
-![Figure 3.18: Tagging and categorizing content can be done at the same time you create it.](../../images/04-web-content-categorization.png)
-
-The control panel contains an interface for managing tags and categories for each site in the portal. This interface can be used to manage all your tags and categories in one place. We'll look at this interface in the next chapter. 
-
-Next, we'll look at how to configure the way pages are accessed by mobile devices.
 
 ## Leveraging Liferay's multi-site capabilities
 
-### Backing up and Restoring Pages [](id=lp-6-1-ugen02-backing-up-and-restoring-pages-0)
 
-Next to the *Add Page* button in the Manage Site Pages screen are two buttons labeled *Export* and *Import*. The Export button exports the pages you create into a single file, called a LAR (Liferay Archive). You can then import this file into any server running Liferay to re-create the pages. If you have a LAR that you would like to import, use the *Import* button. Exporting and Importing LARs is a great way to take content from one environment (say, a development or QA environment) and move it all in one shot to your production server. Note that you should not make it a regular process to do this. If you want to regularly move pages from one server to another, you should use Liferay's staging environment, which is covered in chapter 3. 
-
-LARs are also a good way to back up your site's content. You can export them to a specific location on your server which is backed up, and if you ever have to restore your site, all you need to do is import the latest LAR file. One limitation on LAR files, however, is that they are version dependent, so you can't use an export from an old version of Liferay and import it into a newer version.
-
-Let's be good administrators and export a LAR file for backup purposes. Click on the *Export* button and then name the file `nosesterv1.lar`. Use the check boxes to determine what you'd like to export. For this initial export, select everything. Note that if you select the *More Options* link, the list expands to include data from many of Liferay's applications, including the Documents and Media Library, Message Boards, and Web Content. You can also export the theme you're using.
-
-Once you click *Export*, your browser prompts you to save the file. Once you have the file, you can copy it to a backup location for safekeeping or import it into another installation of Liferay Portal. If you must rebuild or wish to revert back to this version of your site, you can import this file by clicking the *Import* button from the Manage Site Pages dialog box, browsing to it, and selecting it. 
-
-Next, we'll look at the options on the right side menu, starting with Look and Feel. 
 
 ## Page Templates and Site Templates [](id=lp-6-1-ugen02-page-templates-and-site-templates-0)
 
@@ -352,19 +277,19 @@ For page templates, the process very similar:
 
 The page template can now be imported normally to this new environment.
 
-## Allowing users to customize site pages  [](id=lp-6-1-ugen02-page-customizations-0)
+### Backing up and Restoring Pages [](id=lp-6-1-ugen02-backing-up-and-restoring-pages-0)
 
-Page Customizations are a new feature in Liferay 6.1. With Page Customizations, any user with the appropriate permissions can create personalized versions of any public page that has customizations enabled. Customizations are based on the rows and columns of a page layout. Administrators can activate or deactivate customizations for any row or column on any page. When users customize a page, they have the option to use either their version or the default version of a page. Users can't see alternate versions of pages other than their own.
+Next to the *Add Page* button in the Manage Site Pages screen are two buttons labeled *Export* and *Import*. The Export button exports the pages you create into a single file, called a LAR (Liferay Archive). You can then import this file into any server running Liferay to re-create the pages. If you have a LAR that you would like to import, use the *Import* button. Exporting and Importing LARs is a great way to take content from one environment (say, a development or QA environment) and move it all in one shot to your production server. Note that you should not make it a regular process to do this. If you want to regularly move pages from one server to another, you should use Liferay's staging environment, which is covered in chapter 3. 
 
-![Figure 2.6: Setting Customizable Columns](../../images/04-web-content-personal-customization.png)
+LARs are also a good way to back up your site's content. You can export them to a specific location on your server which is backed up, and if you ever have to restore your site, all you need to do is import the latest LAR file. One limitation on LAR files, however, is that they are version dependent, so you can't use an export from an old version of Liferay and import it into a newer version.
 
-When an administrator activates Page Customizations for a page, any portlets that are in a *Customizable* row or column can be moved around the page or removed from the page. Users can add new portlets of their own choosing to these columns of the page. If at any time users determine that they don't like their customizations, they can click *Reset My Customizations* to revert their pages back to the default.
+Let's be good administrators and export a LAR file for backup purposes. Click on the *Export* button and then name the file `nosesterv1.lar`. Use the check boxes to determine what you'd like to export. For this initial export, select everything. Note that if you select the *More Options* link, the list expands to include data from many of Liferay's applications, including the Documents and Media Library, Message Boards, and Web Content. You can also export the theme you're using.
 
-The administrator of the "customizable" page, will have two different views: the *default page* view and the *customized page*. The changes he makes in the *default page* view will affect all users, whereas the changes he makes in the *customized page* view will only affect himself as if he were any other regular user customizing this page. Changes made by the administrator to a not customizable section in the *default view* will be effective immediately for any user. However, if changes are made to a customizable section, the changes made by the administrator will *not* overwrite the users' changes. For this reason, users can view the *default page* and *reset his customizations* from the bar at the top.
+Once you click *Export*, your browser prompts you to save the file. Once you have the file, you can copy it to a backup location for safekeeping or import it into another installation of Liferay Portal. If you must rebuild or wish to revert back to this version of your site, you can import this file by clicking the *Import* button from the Manage Site Pages dialog box, browsing to it, and selecting it. 
 
-In order to allow users to customize a page, these users need to have permission to *Customize* pages (which can be fond under the Site section when assigning permissions to roles). This can be achieved assigning this permission to a role and then assigning this role to the users we want to be able to customize pages. For example, if we want any logged user to be able to customize our customizable pages, we could assign the Customize permission to the role *User* and if we want any member of a site to be able to customize the customizable pages of its sites, we would assign the Customize permission to the role *Site Member*.
+Next, we'll look at the options on the right side menu, starting with Look and Feel. 
 
-Now that you know how to configure pages, let's look at the settings for the site as a whole.
+## Allowing users to customize site pages 
 
 ### Customizing the Look and Feel [](id=lp-6-1-ugen02-customizing-the-look-and-feel-0)
 
@@ -433,6 +358,20 @@ Now, select the *2 Columns (70/30)* layout and click *Save*. Once saved, you'll 
 Sometimes a particular layout is *almost* what you want, but not quite. In this case, use the Nested Portlets portlet to embed a layout inside another layout. This portlet is a container for other portlets. It lets you select from any of the layouts installed in Liferay, just like the layouts for a page. This gives you virtually unlimited options for laying out your pages.
 
 The next option in the *Manage* menu is page customizations.  
+
+### Page customization [](id=lp-6-1-ugen02-page-customizations-0)
+
+Page Customizations are a new feature in Liferay 6.1. With Page Customizations, any user with the appropriate permissions can create personalized versions of any public page that has customizations enabled. Customizations are based on the rows and columns of a page layout. Administrators can activate or deactivate customizations for any row or column on any page. When users customize a page, they have the option to use either their version or the default version of a page. Users can't see alternate versions of pages other than their own.
+
+![Figure 2.6: Setting Customizable Columns](../../images/04-web-content-personal-customization.png)
+
+When an administrator activates Page Customizations for a page, any portlets that are in a *Customizable* row or column can be moved around the page or removed from the page. Users can add new portlets of their own choosing to these columns of the page. If at any time users determine that they don't like their customizations, they can click *Reset My Customizations* to revert their pages back to the default.
+
+The administrator of the "customizable" page, will have two different views: the *default page* view and the *customized page*. The changes he makes in the *default page* view will affect all users, whereas the changes he makes in the *customized page* view will only affect himself as if he were any other regular user customizing this page. Changes made by the administrator to a not customizable section in the *default view* will be effective immediately for any user. However, if changes are made to a customizable section, the changes made by the administrator will *not* overwrite the users' changes. For this reason, users can view the *default page* and *reset his customizations* from the bar at the top.
+
+In order to allow users to customize a page, these users need to have permission to *Customize* pages (which can be fond under the Site section when assigning permissions to roles). This can be achieved assigning this permission to a role and then assigning this role to the users we want to be able to customize pages. For example, if we want any logged user to be able to customize our customizable pages, we could assign the Customize permission to the role *User* and if we want any member of a site to be able to customize the customizable pages of its sites, we would assign the Customize permission to the role *Site Member*.
+
+Now that you know how to configure pages, let's look at the settings for the site as a whole.
 
 ### Configuring Site Settings [](id=lp-6-1-ugen02-configuring-site-settings-0)
 
