@@ -153,6 +153,16 @@ A **Link to Page** is a portal page which functions as an immediate redirect to 
 
 Once you've created pages and populated them with content, Liferay provides a way for you to back them up to separate files. Let's see how that works. 
 
+### Backing up and Restoring Pages [](id=lp-6-1-ugen02-backing-up-and-restoring-pages-0)
+
+Next to the *Add Page* button in the Manage Site Pages screen are two buttons labeled *Export* and *Import*. The Export button exports the pages you create into a single file, called a LAR (Liferay Archive). You can then import this file into any server running Liferay to re-create the pages. If you have a LAR that you would like to import, use the *Import* button. Exporting and Importing LARs is a great way to take content from one environment (say, a development or QA environment) and move it all in one shot to your production server. Note that you should not make it a regular process to do this. If you want to regularly move pages from one server to another, you should use Liferay's staging environment, which is covered in chapter 3. 
+
+LARs are also a good way to back up your site's content. You can export them to a specific location on your server which is backed up, and if you ever have to restore your site, all you need to do is import the latest LAR file. One limitation on LAR files, however, is that they are version dependent, so you can't use an export from an old version of Liferay and import it into a newer version.
+
+Let's be good administrators and export a LAR file for backup purposes. Click on the *Export* button and then name the file `nosesterv1.lar`. Use the check boxes to determine what you'd like to export. For this initial export, select everything. Note that if you select the *More Options* link, the list expands to include data from many of Liferay's applications, including the Documents and Media Library, Message Boards, and Web Content. You can also export the theme you're using.
+
+Once you click *Export*, your browser prompts you to save the file. Once you have the file, you can copy it to a backup location for safekeeping or import it into another installation of Liferay Portal. If you must rebuild or wish to revert back to this version of your site, you can import this file by clicking the *Import* button from the Manage Site Pages dialog box, browsing to it, and selecting it. 
+
 ### Site Content [](id=lp-6-1-ugen02-site-content-0)
 
 Liferay 6.1 makes it easier to access Web Content management without using the control panel. You can now click *Manage* and then *Site Content* to access the same Web Content controls that are featured in the control panel right from your portal page. 
