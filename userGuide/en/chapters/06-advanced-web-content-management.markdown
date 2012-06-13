@@ -81,14 +81,7 @@ You can grant or deny permissions based on Roles, and this is the recommended wa
 
 Now that you understand what structures are used for, you need to understand the other half of Liferay's web content management system: templates. 
 
-
 ## Leveraging Liferay's multi-site capabilities
-
-
-
-## Page Templates and Site Templates [](id=lp-6-1-ugen02-page-templates-and-site-templates-0)
-
-*Page Templates* and *Site Templates* are invaluable tools for building similar pages on larger portals. As you continue to add pages to sites in your portal, you'll notice repeatable patterns in the designs of those pages. Page templates enable you to preconfigure a single page and then apply it to any new page that you create. Site Templates allow you to do the same thing, but on the scale of a site--if you have multiple sites that use a similar structure of pages, you can create a single site template and use it to create as many sites as desired. For a full explanation of Page Templates and Site Templates, see chapter 12. 
 
 ### Using templates [](id=lp-6-1-ugen03-using-templates-0)
 
@@ -165,8 +158,6 @@ When this template is rendered, it looks something like this:
 ![Figure 3.13: Initial View](../../images/04-web-content-adv-example1.png)
 
 ![Figure 3.14: After Clicking "Read More"](../../images/04-web-content-adv-example2.png)
-
-Of course, there is much, much more you can do with structures and templates. Check out the Liferay Wiki ([http://wiki.liferay.com](http://wiki.liferay.com/)) for further information and examples.
 
 ### Assigning template permissions [](id=lp-6-1-ugen03-assigning-template-permissions-0)
 
@@ -252,8 +243,6 @@ Note that by default, when a site administrator creates a page based on a page t
 
 If staging has been enabled, changes to the page template are automatically propagated to the staged page. These changes still need to be approved before the page is published to live. For this reason, the automatic propagation of page template changes to the staged page cannot be turned off and the *Automatically apply changes done to the page template* checkbox does not appear.
 
-Now that we've looked at site and page templates, let's discuss how to set up and manage user groups.
-
 ![EE Only Feature]
 ### Exporting and Importing Site Templates and Page Templates
 
@@ -277,219 +266,7 @@ For page templates, the process very similar:
 
 The page template can now be imported normally to this new environment.
 
-Next, we'll look at the options on the right side menu, starting with Look and Feel. 
-
 ## Allowing users to customize site pages 
-
-### Customizing the Look and Feel [](id=lp-6-1-ugen02-customizing-the-look-and-feel-0)
-
-When you open the Manage Site Pages dialog box it defaults to the Look and Feel tab. On this tab, you're presented with an interface that allows you to choose a theme for the current site. Themes can transform the entire look of the portal. They are created by developers and are easily installed using the Liferay Marketplace. Since we don't have any themes beyond the default one installed yet, we'll use the default theme for our pages.  
-
-![Figure 2.5: Look and Feel Interface](../../images/04-look-and-feel.png)
-
-Many themes include more than one color scheme. This allows you to keep the existing look and feel while giving your site a different flavor. Change the color scheme from blue to green by selecting *Green* under *Color Schemes*. If you now go back to the site (by clicking *Back to nosester.com* in the top left corner of the control panel), you'll see that some parts of the page are now tinged in a greenish hue. 
-
-If you apply a color scheme to a set of public or private pages it is, by default, applied to each page in the set. If, however, you open the Manage Pages dialog box for a particular page, you can select *Define a specific look and feel for this page* to make the color scheme apply to this page only. You can use this feature to choose a different color scheme for a particular page than the one defined for the set of public or private pages to which it belongs. 
-
-There are a few more configurable settings for your theme. You can switch the bullet style between dots and arrows and you can choose whether or not to show portlet borders by default.
-
-Also notice that themes can apply to regular browsers or mobile devices. You could create another site for mobile users attached to the [http://m.nosester.com](http://m.nosester.com) address and serve up a page designed for the smaller screens on phones.
-
-The *CSS* section allows you to enter custom CSS that will also be served up by your theme. In this way, you can tweak a theme in real time by adding new styles or overriding existing ones. 
-
-The next option configures the logo that appears for your site. 
-
-### Using a custom logo [](id=lp-6-1-ugen02-using-a-custom-logo-0)
-
-If you want to use your own logo for a specific site, use the Logo tab. Adding a custom logo is easy: select the Logo tab and browse to the location of your logo. Make sure that your logo fits the space in the top left corner of the theme you're using for your web site. If you don't, you could wind up with a site that's difficult to navigate, as other page elements are pushed aside to make way for the logo.
-
-In the logo tab, you can also choose whether or not to display the site name on the site. If you check the box labeled *Show Site Name* the site name will appear in the top right corner of the page. This option is enabled by default, and cannot be disabled if the *Allow Site Administrators to set their own logo* option is disabled in *Portal Settings*. It is also not available on the default community -- only newly created communities and user pages have the option to have the name display.
-
-When you click on a specific page, some other options become available to you. 
-
-### Changing options for individual pages [](id=lp-6-1-ugen02-changing-options-for-individual-pages-0)
-
-When you select a single page, some different options appear. Let's look at what these do. 
-
-**Details:** lets you name the page for any localizations you need. You can also set the HTML title that appears in the browser window for the page. Finally, you can set an easy to remember, friendly URL for the page. 
-
-**SEO:** provides several means of optimizing the data the page provides to an indexer that's crawling the page. You can set the various meta tags for description, keywords, and robots. There's also a separate Robots section that lets you tell indexing robots how frequently the page is updated and how it should be prioritized. If the page is localized, you can select a box to make Liferay generate canonical links by language. If you want to set some of these settings for the entire site, you can specify them from the Sitemaps and Robots tabs of the Manage Site Settings dialog box (see below).
-
----
-
-![tip](../../images/01-tip.png) In previous versions of Liferay, it was possible that a single page could be indexed multiple times. In Liferay 6.1, to improve search ratings for your pages, all URLs that direct to the same page will only create one entry in the index. So, for example while previously the simple URL *http://www.nosester.com/web/guest/blog/-/blogs/thenose* and different versions of the URL which provided additional information about the referring page and what not, like *http://www.nosester.com/web/guest/blog/-/blogs/thenose?redirect_33&...* would have different entries in the index, now there is only one. From the search engines point of view, this will make your pages rank higher, since, for example, any references to any variations of a specific URL will be considered references to the one page.] 
-
----
-
-**Look and Feel:** lets you set a page-specific theme. 
-
-**Layout:** lets you specify how portlets are arranged on a page. Choose from the available installed templates to modify the layout. It's very easy for developers to define custom layouts and add them to the list, and this is covered in both the *Liferay Developer's Guide* and in [*Liferay in Action*](http://manning.com/sezov).  
-
-**JavaScript:** gives you the ability to paste custom JavaScript code to be executed on this page. 
-
-**Custom fields:** If custom fields have been defined for pages (which can be done from the *Custom Fields* page of the control panel), they appear here. These are metadata about the page, and can be anything you like, such as author or creation date. 
-
-**Advanced:** contains several optional features. You can set a query string to provide parameters to the page. This can become useful to web content templates, which you'll see in the next chapter. You can set a target for the page so that it either pops up in a particularly named window or appears in a frameset. And you can set an icon for the page that appears in the navigation menu. 
-
-**Mobile Rule Groups:** allows you to apply rules for how this page should be rendered for various mobile devices. You can set these up in the *Mobile Device Rules* section of the control panel. 
-
-**Customization Settings:** lets you mark specific sections of the page that you want users to be able to customize.
-
-Note that the *Manage &rarr; Page Layout* menu directs you to the same Layout tab that's in *Manage &rarr; Page*. 
-
-### Modifying Page Layouts [](id=lp-6-1-ugen02-modifying-page-layouts-0)
-
-Page layouts allow you to arrange your pages so that the content appears the way you want it to. Liferay comes with many layouts already defined. Developers can create more and they can be deployed to your portal for your use.
-
-In order to prepare for the portlets we'll soon be adding, let's change the layout of the Collaboration page. To access layouts, select *Manage &rarr; Page Layout* from the Dockbar.
-
-Now, select the *2 Columns (70/30)* layout and click *Save*. Once saved, you'll return to the page and it'll seem as though nothing has happened. Once we start adding portlets, however, you'll notice that the page is now equally divided into two columns. You can stack portlets on top of each other in these columns. There are, of course, more complicated layouts available, and you can play around with them to get the layout that you want.
-
-Sometimes a particular layout is *almost* what you want, but not quite. In this case, use the Nested Portlets portlet to embed a layout inside another layout. This portlet is a container for other portlets. It lets you select from any of the layouts installed in Liferay, just like the layouts for a page. This gives you virtually unlimited options for laying out your pages.
-
-The next option in the *Manage* menu is page customizations.  
-
-### Page customization [](id=lp-6-1-ugen02-page-customizations-0)
-
-Page Customizations are a new feature in Liferay 6.1. With Page Customizations, any user with the appropriate permissions can create personalized versions of any public page that has customizations enabled. Customizations are based on the rows and columns of a page layout. Administrators can activate or deactivate customizations for any row or column on any page. When users customize a page, they have the option to use either their version or the default version of a page. Users can't see alternate versions of pages other than their own.
-
-![Figure 2.6: Setting Customizable Columns](../../images/04-web-content-personal-customization.png)
-
-When an administrator activates Page Customizations for a page, any portlets that are in a *Customizable* row or column can be moved around the page or removed from the page. Users can add new portlets of their own choosing to these columns of the page. If at any time users determine that they don't like their customizations, they can click *Reset My Customizations* to revert their pages back to the default.
-
-The administrator of the "customizable" page, will have two different views: the *default page* view and the *customized page*. The changes he makes in the *default page* view will affect all users, whereas the changes he makes in the *customized page* view will only affect himself as if he were any other regular user customizing this page. Changes made by the administrator to a not customizable section in the *default view* will be effective immediately for any user. However, if changes are made to a customizable section, the changes made by the administrator will *not* overwrite the users' changes. For this reason, users can view the *default page* and *reset his customizations* from the bar at the top.
-
-In order to allow users to customize a page, these users need to have permission to *Customize* pages (which can be fond under the Site section when assigning permissions to roles). This can be achieved assigning this permission to a role and then assigning this role to the users we want to be able to customize pages. For example, if we want any logged user to be able to customize our customizable pages, we could assign the Customize permission to the role *User* and if we want any member of a site to be able to customize the customizable pages of its sites, we would assign the Customize permission to the role *Site Member*.
-
-Now that you know how to configure pages, let's look at the settings for the site as a whole.
-
-### Configuring Site Settings [](id=lp-6-1-ugen02-configuring-site-settings-0)
-
-As with Site Pages, you can access Site Settings through the control panel or directly from the site using the Dockbar (*Manage* &rarr; *Site Settings*). 
-
-![Figure 2.7: Site Settings](../../images/web-content-site-settings.png)
-
-You'll find options to specify details and metadata about your site, set up friendly URLs and virtual hosts, configure search engine optimization settings, turn staging on or off, and specify a Google Analytics ID. Let's take a closer look. 
-
-**Details:** allows an administrator to change the description and membership type of a site, and also to specify tags and categories for the site. The membership type can be set as open, restricted, or private based on the privacy needs of the site. Users can join and leave an open site at will. To join a restricted site, a user has to be added by the site administrator, but can request to be added through the Sites section of the control panel. A private site is like a restricted site, but doesn't appear in the Sites section of the control panel for users who aren't members.  
-
-**Pages:** From Site Settings, click on *Pages* to manage some basic features of the pages on a site. If no pages have been defined yet, you can set site templates for the public or private pages. If pages already exist, links are provided to view them. You can also change the site's application adapter, which is a special type of hook plugin that customizes out of the box functionality for specific sites. 
-
-**Site URL:** Set the virtual host for your site and/or a friendly URL here. The *Friendly URL* option lets you manage the path to your site in the portal's URL. This needs to be a unique name, of course. Having a human-readable friendly URL assists indexing bots, and is critical to good search engine optimization. 
-
-*Virtual Hosts* make web navigation much easier for your users by connecting a domain name to a site. This tab allows you to define a domain name (i.e., www.mycompany.com) for your site. This can be a full domain or a subdomain. This enables you to host a number of web sites as separate sites on one Liferay server.
-
-For instance, if we set this up for Nose-ster's Development Network, users in that site could use developers.nosester.com to get to their site, provided that Nose-ster's network administrators created the domain name and pointed it to the Liferay server.
-
-To set this up, the DNS name *developers.nosester.com* should point to your portal's IP address first. Then enter http://developers.noseter.com in the Virtual Host tab for the Developers site. This helps users quickly access their site without having to recall an extended URL.
-
-**Site Template:** If you've created the site from a site template, this section displays information about the link between the site template and the site. Specifically, you can see which site template was used and whether or not it allows modifications to the pages inherited from it by site administrators. If you're not using site templates for this site, you can safely ignore this section.
-
-**Sitemap:** lets you send a sitemap to some search engines so they can crawl your site. It uses the sitemap protocol, which is an industry standard. You can publish your site to Yahoo or Google, and their web crawlers will use the sitemap to index your site. Liferay Portal makes this very simple for administrators by generating the sitemap XML automatically for all public web sites.
-
-By selecting one of the search engine links, the sitemap will be sent to them. It's only necessary to do this once per site. The search engine crawler will periodically crawl the sitemap once you've made the initial request.
-
-If you're interested in seeing what is being sent to the search engines, select the *Preview* link to see the generated XML.
-
-**Robots:** If you're using virtual hosting for this site, you can configure `robots.txt` rules for the domain. The Robots page gives you the option to configure your `robots.txt` for both public and private pages on a site. If you don't have Virtual Hosting set up, this tab is rather boring. 
-
-**Staging:** enables you to edit and revise a page behind the scenes, and then publish changes to your site once they have been completed and reviewed. For a full explanation of Staging, see Chapter 3: Managing Content.
-
-**Analytics:** allows you to integrate your pages with Google Analytics. Liferay provides seamless integration with Google Analytics, allowing you to place your ID in one place, and then it will get inserted automatically on every page. This enables you to focus your efforts on building the page, rather than remembering to put the code everywhere. Google Analytics is a free service which lets you do all kinds of traffic analysis on your site, so you can see who visits, where visitors are from, and what pages they most often visit. This helps you to tweak your site so that you can provide the most relevant content to your users.
-
-Next in the menu is Site Memberships, which is covered in chapter 12. There, you'll learn how to administer a Liferay portal and define users and permissions. 
-
-## Advanced Publishing Options [](id=lp-6-1-ugen03-advanced-publishing-options-0)
-
-As we discussed above, as your site becomes larger and more complex, management of the content becomes more challenging. We've gone over Liferay management tools that help you create content quickly and in an orderly fashion. You created a simple announcement with Liferay's structure editor that allows you to quickly design a structure and prepare it for the template designers. Then you applied a template to the structure. You know how to display content using the Web Content Display portlet. Now, you're ready to take advantage of Liferay's advanced publishing options.
-
-If a web site isn't properly managed, it can quickly become out of date, and that drives viewers away. If people are finding your site because of search engines, you don't want them presented with outdated (and now inaccurate) web content.
-
-You also want your content to be found easily by your users. This is done through tags and categories. 
-
-Additionally, you may want to create content and send it through a review and approve process weeks before you want it displayed on the web site. Liferay gives you this flexibility with the *Schedule* and *Workflow* features.  
-
-### Scheduling Web Content [](id=lp-6-1-ugen03-scheduling-web-content-0)
-
-Liferay's WCM lets you define when your content goes live. You can determine when the content is displayed, expired, and/or reviewed. This is an excellent to way to keep your site current and free from outdated (and perhaps incorrect) information. The scheduler is built right into the form that your users make use of to add web content, in the same column as the structure and template selectors.
-
-![Figure 3.15: Schedule for Publishing Content](../../images/04-web-content-schedule.png)
-
-**Display Date:** Sets (within a minute) when content will be displayed.
-**Expiration Date:** Sets a date to expire the content. The default is one year.
-**Never Auto Expire:** Sets your content to never expire.
-**Review Date:** Sets a content review date. 
-**Never Review:** Sets the content to never be reviewed.
-
-As you can see, the scheduling feature in Liferay Portal gives you great control in managing when, and for how long, your web content is displayed on your web site. Additionally, you have the ability to determine when your content should be reviewed for accuracy and/or relevance. This makes it possible to manage your growing inventory of content. 
-
-In addition to controlling when content displays, you can use the Display Page feature to control where content displays.
-
-### Display Page [](id=lp-6-1-ugen03-display-page-0)
-
-If you've been using Liferay for a while, or you've just spent a little bit of time with this guide, you might have noticed something about how Liferay handles web content--content is never tied directly to a page. While this can be useful (because it means that you don't have to recreate content if you want to display the same thing on multiple pages), it also means that you don't have a static URL for any web content, which is bad for search engine optimization.
-
-To fix this issue, Liferay has introduced the concept of Display Pages and Canonical URLs. Each web content entry on the portal has a canonical URL, which is the official location of the content that is referenced any time the content is displayed. A Display Page can be any page with an asset publisher set to its default settings. You can create the page yourself, or use the *Content Display Page* page template included with Liferay.
-
-So right now you're thinking "Wait, you just told me that each Web Content item has its own URL, and that this is somehow related to pages where we display a whole bunch of content on the same page?" Yes. That's exactly what I said. Just watch--create a display page somewhere on your portal, using the Content Display Page template. Now click on *Display Page*, and select the page you just created as the display page for the content. 
-
-![Figure 3.16: Selecting a Display Page](../../images/04-web-content-display-page.png)
-
-You can now click the link to display the content, and the canonical URL for content shows in your browser's address bar. You can create your own custom display page, and any additional portlets that you place on the page are displayed along with the content when you access it via the canonical URL. 
-
-![Figure 3.17: The Canonical URL](../../images/04-web-content-canonical-url.png)
-
-Let's move on to tags and categories. 
-
-### Tags and Categories [](id=lp-6-1-ugen03-tags-and-categories-0)
-
-Tags are keywords that are attached to web content in order to help users find content. Categories are hierarchical structures of content that are defined by administrators. Tags and categories make it easier for your users to find content through search or navigation.
-
-By assigning a tag to web content, you define metadata about that content. This is then used by Liferay's search engine to score the results of a search, enabling users to find content that is most relevant to their search. Tags can be created on the fly by creators of content, and it's important to tag content whenever it is created. If you don't tag content, all the search engine has to go on is the full text of the content (if you've made your content indexable), and that might not produce the most optimal results.
-
-Tagging also helps with navigation. Liferay Portal has two portlets specifically designed for navigating content using tags: Tag Cloud and Tag Navigation. If you add either of these to a page, you can use them to show the topics contained in your content.
-
-Tags can be added on the fly or they can be selected from the existing library of tags. For most of the portal, users tag content, but for web content, only the content creator tags the content, because there is no user interface for regular users to tag web content.
-
-It is important that you both tag and categorize your content when you enter it.
-
-Categories are a little bit different, and new users generally ask a valid question when presented with tags and categories: what's the difference? Categories are defined by someone with administrative access to the content. They are hierarchical, tree-like structures that users can use to find content. Categories are different from tags in that they're never created by end users. Instead, categories define how your content is organized from the point of view of the owner of the content. A good example of categories might be the table of contents of a book: it shows the hierarchical structure and organization for all of the content within that book. This shows that the structure of the book has been planned ahead of time by the author. Categories do the same thing as the table of contents. 
-
-By contrast, tags are like the index of a book: they show where many different topics are mentioned within the book in alphabetical order. When a search is done throughout the book, even the author might be surprised at how many times he or she mentions a particular topic outside of its category. So both ways of organizing content are important, especially if your users will be using search to find content.
-
-Tagging and categorizing web content is easy. You can do it at the bottom of the same form you use to add content. If you open the *Categorization* section of the form, you'll be presented with an interface for adding tags and categories.
-
-![Figure 3.18: Tagging and categorizing content can be done at the same time you create it.](../../images/04-web-content-categorization.png)
-
-The control panel contains an interface for managing tags and categories for each site in the portal. This interface can be used to manage all your tags and categories in one place. We'll look at this interface in the next chapter. 
-
-Next, we'll look at how to configure the way pages are accessed by mobile devices.
-
-### Assigning Permissions [](id=lp-6-1-ugen03-assigning-permissions-0)
-
-Permissions in Liferay WCM work the same way they do everywhere else in Liferay. By default, content is viewable by Anyone (Guest Role). You can limit viewable permissions by selecting any Role from the drop-down or in the list. Additionally, Liferay Portal provides the ability to customize permissions in more detail. Select the *More Options* link next to the drop down button, and you'll find the different activities you can grant or deny to your web content.
-
-![Figure 3.4: Permissions for Web Content](../../images/04-web-content-content-permissions.png)
-
-For this piece of web content, we don't need to change anything. After you're finished with permissions, click *Save*. This saves the content in draft form. Once you're satisfied with your changes, select *Publish*. This makes the content available for display, but we still have some work to do to enable users to see it. In Liferay WCM, all content resides in a container, which is one of two portlets: Web Content Display or Web Content List. By far the most frequently used is the *Web Content Display* portlet. 
-
-### Localization [](id=lp-6-1-ugen03-localization-0)
-
-Previous versions of Liferay had the ability to create and manage different translations of your web content, but with Liferay 6.1 we've added several improvements. 
-
-When you create a new piece of Web Content, you have the ability to choose a default language. If you click *Change* you can select your default language from a large number of languages that Liferay supports. Before you can create a translation, you must finish creating the content in your default language and save it. Once you've done that, editing the content provides you with the option to *Add Translation*.
-
-![Figure 3.5: Adding a translation](../../images/04-web-content-content-translation.png)
-
-After you click *Add Translation*, you can select a language, either by scrolling through the list or by entering the language you want to use in the search box. When you select a language, a lightbox opens within your browser window, enabling you to easily compare the original with the new translation. Once you are done with the translation, click *Save*, and the translation is added to the list of *Available Translations*. 
-
-![Figure 3.6: Adding a translation](../../images/04-web-content-content-translation-2.png)
-
-The ability to completely delete a translation in one step has also been added. Instead of simply disabling a translation or having to go through a multistep process to remove it, you can now simply open the translation that you don't want and click *Remove Translation*.
-
-When you create a new web content structure, each field you create has a *Localizable* checkbox displayed next to it. This enables you to control what can and can't be changed in the translation process. For example, if you don't want images or content titles to be changed when the content is translated, you can make sure that those fields aren't listed as localizable. When you follow the steps above to localize content, only fields within the structure that had the *Localizable* box checked appear within the translation window.
-
-Let's go back to the page where we want the content displayed and add the Web Content Display portlet (in this case, the Welcome page).
 
 ## Staging page publication [](id=lp-6-1-ugen03-staging-and-workflow-0)
 
@@ -599,8 +376,6 @@ Let's finish our discussion of staging by outlining a few more features.
 
 You can enable staging on an individual site basis, depending on your needs. This makes it easy to put strict controls in place for your public web site, but to open things up for individual sites that don't need such strict controls. Liferay's staging environment is extremely easy to use and makes maintaining a content-rich web site a snap. 
 
-Let's go one step further by introducing workflow into the mix.
-
 ## Creating teams for advanced site membership management
 
 ## Creating sites for mobile devices [](id=lp-6-1-ugen03-mobile-device-rules-0)
@@ -611,7 +386,7 @@ Mobile device rules allow you to configure sets of rules and use those rules to 
 
 Both sites and individual pages can be configured with any number of rule groups. A rule group is designed to describe a group of devices. It can contain one or more rules which describe a category of devices, such as all android devices or all iOS tablets. Rule groups can be prioritized to determine which one will be applied to a given page request. You can define as many rules as you need to classify all the devices you want to take actions on.
 
-In order to configure mobile device rules, you must install the wurlf-web plugin. This plugin enables Liferay to detect which mobile device or operating system is being used for any given request. To install the plugin, navigate to the Plugins Installation section of the control panel, located under the Server heading. Then search for the wurlf-web plugin and click *Install*. 
+In order to configure mobile device rules, you must install the wurlf-web plugin. This plugin enables Liferay to detect which mobile device or operating system is being used for any given request. To install the plugin, navigate to the Plugins Installation section of the control panel, located under the Server heading. Then search for the wurlf-web plugin and click *Install*.
 
 Alternatively, if you have a working copy of Liferay's plugin repository, you can install the plugin manually. The plugin is available from Liferay's public SVN repository at [http://svn.liferay.com/repos/public/plugins/trunk/webs/wurfl-web/](http://svn.liferay.com/repos/public/plugins/trunk/webs/wurfl-web/) or from Liferay's public Github repository at [https://github.com/liferay/liferay-plugins/tree/master/webs/wurfl-web](https://github.com/liferay/liferay-plugins/tree/master/webs/wurfl-web). Once you have checked out or cloned the repository, navigate to the plugins root directory and create a `build.username.properties` file. Add the line `app.server.dir = <path-to-app-server>`, replacing `<path-to-app-server>` with the path to the application server running Liferay on your machine. Then navigate to the wurlf-web directory and execute the ant deploy target.
 
@@ -631,3 +406,20 @@ You can add actions to a rule group from the Site Pages page of the control pane
 
 To add actions to a selected rule group, use the *Actions* &rarr; *Manage Actions* button and then click *Add Action*. By default, there are four kinds of actions that be configured for mobile rule groups: layout template modifications, theme modifications, simple redirects, and site redirects. Layout template modifications let you change the way portlets are arranged on pages delivered to mobile devices and themes modifications let you select a specific look and feel. If it makes more sense for you to create separate mobile versions of certain sites or pages you can use a redirect to make sure that mobile devices users get to the right page. To define a simple redirect, you need to specify a URL. To define a site redirect, you only need to specify the site name and page name of the page you're redirecting to. Like mobile device rules, mobile device actions are designed to be extensible. Your developers can define custom actions in addition to the four actions provided by default. Next, let's discuss Liferay's asset publisher, which you can use to publish many different kinds of portal content.
 
+### Backing up and Restoring Pages [](id=lp-6-1-ugen02-backing-up-and-restoring-pages-0)
+
+Next to the *Add Page* button in the Manage Site Pages screen are two buttons labeled *Export* and *Import*. The Export button exports the pages you create into a single file, called a LAR (Liferay Archive). You can then import this file into any server running Liferay to re-create the pages. If you have a LAR that you would like to import, use the *Import* button. Exporting and Importing LARs is a great way to take content from one environment (say, a development or QA environment) and move it all in one shot to your production server. Note that you should not make it a regular process to do this. If you want to regularly move pages from one server to another, you should use Liferay's staging environment, which is covered in chapter 3. 
+
+LARs are also a good way to back up your site's content. You can export them to a specific location on your server which is backed up, and if you ever have to restore your site, all you need to do is import the latest LAR file. One limitation on LAR files, however, is that they are version dependent, so you can't use an export from an old version of Liferay and import it into a newer version.
+
+Let's be good administrators and export a LAR file for backup purposes. Click on the *Export* button and then name the file `nosesterv1.lar`. Use the check boxes to determine what you'd like to export. For this initial export, select everything. Note that if you select the *More Options* link, the list expands to include data from many of Liferay's applications, including the Documents and Media Library, Message Boards, and Web Content. You can also export the theme you're using.
+
+Once you click *Export*, your browser prompts you to save the file. Once you have the file, you can copy it to a backup location for safekeeping or import it into another installation of Liferay Portal. If you must rebuild or wish to revert back to this version of your site, you can import this file by clicking the *Import* button from the Manage Site Pages dialog box, browsing to it, and selecting it. 
+
+## Summary [](id=summ-25)
+
+This chapter has been your guide to Liferay Web Content Management. We've seen how Liferay manages both simple content and advanced content with structures and templates. These powerful tools enable you to handle easily any type and amount of material that you'd like to publish on the web. 
+
+Liferay WCM also includes a powerful staging environment, allowing you to stage content locally on the same server or remotely to another server. You can publish your site when you want it, on the schedule you choose. You can even create different variations of your site that can be worked on simultaneously. 
+
+Whether your site is small and static or large and dynamic, Liferay's WCM enables you to plan and manage it. With tools such as the WYSIWYG editor, structures, and templates, you can quickly add and edit content. With the Web Content Display and Asset Publisher, you can rapidly select and configure what and how your content is displayed. And by using Liferay's integrated workflow, you can set up custom publishing rules to fit your organization. You will find that managing your site becomes far easier when using Liferay's Web Content Management system.

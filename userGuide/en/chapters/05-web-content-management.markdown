@@ -7,10 +7,8 @@ In this chapter, we'll cover the following topics:
 - Features of Liferay WCM 
 - Simple content creation 
 - Publishing content 
-- Structures and Templates 
-- Permissions 
-- Tags and Categories 
-- Staging and Workflow 
+- Workflow 
+- Site memberships
 
 As you'll see, Liferay's WCM is a full-featured solution for managing your web site. We'll start with an overview of what it has to offer, and then we'll dive down into its features. 
 
@@ -34,7 +32,7 @@ Liferay's WCM has a host of features the makes managing the content of your site
 
 -   **WYSIWYG Editor:** A complete HTML editor that allow you to modify fonts, add color, insert images and much more.
 
--   **Structure Editor:** Easily add and remove fields you want available to content creators and then dynamically move them around. This editor includes an entire suite of form controls you can drag and drop onto your structure.
+-   **Structure Editor:** Easily add and remove fields you want available to content creators and then dynamically move them around. This editor includes an entire suite of form controls you can drag and drop onto your structure. 
 
 -   **Template Editor:** Import template script files that inform the system how to display the content within the fields determined by the structure.
 
@@ -46,45 +44,13 @@ Liferay's WCM has a host of features the makes managing the content of your site
 
 -   **Workflow Integration:** Run your content through an approval or review process.
 
--   **Staging:** Use a separate staging server or stage your content locally so you can keep your changes separate from the live site. 
+-   **Staging:** Use a separate staging server or stage your content locally so you can keep your changes separate from the live site.
 
 Liferay's Web Content Management is a powerful and robust tool for creating and organizing content on your web site. Now that you've seen the basics of what you can do with Liferay's WCM, let's apply some of these concepts and create some content.
 
+
 ## Creating sites and managing pages [](id=building-a-site-with-liferay-s-w-3)
 
-You've just been assigned the task to build a web site for an innovative new social networking site called Nose-ster. You've decided to take advantage of Liferay Portal and its rapid deployment features as well as its ability to get a fully functional, content-rich web site with integrated social features up and running in little time.
-
-We'll walk through the creation of Nose-ster's web site, starting by creating and publishing some simple content using Liferay's built-in WYSIWYG editor. We'll then take advantage of Liferay's robust structure editor. We'll use templates to display the content and then explore some of the advanced publishing features such as the built-in workflow and Asset Publisher.
-
-### Creating content the simple way [](id=lp-6-1-ugen03-creating-content-the-simple-way-0)
-
-As we've stated above, content is the reason web sites exist. Liferay Portal has made it easier than ever to get content published to your site. Because Liferay Portal is so flexible, you can use basic authoring tools right away or take advantage of the more advanced features. It's adaptable to your needs.
-
-We'll begin by creating simple content using Liferay's WYSIWYG Editor and then we'll publish it to the home page of Nose-ster's web site. This a fast and straightforward process that demonstrates how easy it is to create and publish content onto your Liferay Portal. So let's get familiar with the Web Content section of the control panel so we can create and publish our first pieces of content.
-
-![Figure 3.1: Choosing a Site in the Content Section](../../images/04-web-content-context-dropdown.png)
-
-When you manage web content from the control panel, you can select the location where the content resides. For instance, you can add content that's available to a specific site or globally across the portal. The Content section of the control panel displays as its heading the name of the site you're currently working on. This heading is clickable: you can change where you're working by using the drop down attached to the heading. We will add our first piece of content to the *Nose-ster* site, which we defined earlier in the chapter as the default site.
-
-#### Rich, WYSIWYG Editing [](id=lp-6-1-ugen03-rich-wysiwyg-editing-0)
-
-Once you have the Nose-ster site selected, click on the *Web Content* link in the control panel. Next, click the *Add* button under the *Web Content* tab. This is a highly customizable form that by default has two fields: a title and a powerful WYSIWYG editor. We could customize this form to contain whatever fields our content needs, but let's keep things simple for now. We'll cover more advanced features such as structures, templates, and content scheduling later in this chapter.
-
-For now, type the words *Welcome to Nose-ster* in the *Name* field. Notice that content can be localized in whatever language you want. If you click the *localize* check box, two select boxes appear which allow you to pick the language you're working in and the language that is the default. You can enter translations of your content for any language in the list. The screenshot below shows this interface but for now, we won't be using it, so you can leave it unchecked. In the content field, add a short sentence announcing that the web site is up and running.
-
-![Figure 3.2: The Web Content Editor](../../images/04-web-content-wysiwyg.png)
-
-Getting a new web site up and running is an exciting step for anyone, whether it is a large corporation or a small non-profit charity. To celebrate this momentous achievement at Nose-ster, let's give our announcement some of the pomp and circumstance we think it deserves!
-
-Using the editor, select all the text and then change the style to Heading 1 and the color to dark blue.
-
-You could insert an image here as well as more text with a different style, as demonstrated in the screenshot below. You can also add bullets, numbering, links to another site, or custom images. You can even add an emoticon. Let's add a smiley face at the end of our announcement.
-
-![Figure 3.3: Customizing Content](../../images/04-web-content-example2.png)
-
-The WYSIWYG editor is a flexible tool that gives you the ability to add text, images, tables, links, and more. Additionally, you can modify the display to match the purpose of the content. Plus it's integrated with the rest of Liferay Portal: for example, when you upload an image to be added to a page, that image can be viewed and manipulated in the Documents and Media portlet.
-
-If you're HTML savvy, Liferay WCM doesn't leave you out in the cold. You can click the *Source* button and write your own HTML if you wish.
 
 ###Managing Pages in Liferay Portal [](id=managing-pages-in-liferay-portal)
 
@@ -97,11 +63,9 @@ This chapter covers all aspects of Liferay WCM, including:
 - Page types 
 - Layouts 
 - Page and content permissions
-- Importing and exporting content 
 - Content creation and editing 
 - Staging 
-- Content publishing 
-- Structures and templates 
+- Content publishing
 - WCM Workflow 
 - Asset publisher
 
@@ -153,15 +117,232 @@ A **Link to Page** is a portal page which functions as an immediate redirect to 
 
 Once you've created pages and populated them with content, Liferay provides a way for you to back them up to separate files. Let's see how that works. 
 
-### Backing up and Restoring Pages [](id=lp-6-1-ugen02-backing-up-and-restoring-pages-0)
+Next, we'll look at the options on the right side menu, starting with Look and Feel. 
 
-Next to the *Add Page* button in the Manage Site Pages screen are two buttons labeled *Export* and *Import*. The Export button exports the pages you create into a single file, called a LAR (Liferay Archive). You can then import this file into any server running Liferay to re-create the pages. If you have a LAR that you would like to import, use the *Import* button. Exporting and Importing LARs is a great way to take content from one environment (say, a development or QA environment) and move it all in one shot to your production server. Note that you should not make it a regular process to do this. If you want to regularly move pages from one server to another, you should use Liferay's staging environment, which is covered in chapter 3. 
+### Customizing the Look and Feel [](id=lp-6-1-ugen02-customizing-the-look-and-feel-0)
 
-LARs are also a good way to back up your site's content. You can export them to a specific location on your server which is backed up, and if you ever have to restore your site, all you need to do is import the latest LAR file. One limitation on LAR files, however, is that they are version dependent, so you can't use an export from an old version of Liferay and import it into a newer version.
+When you open the Manage Site Pages dialog box it defaults to the Look and Feel tab. On this tab, you're presented with an interface that allows you to choose a theme for the current site. Themes can transform the entire look of the portal. They are created by developers and are easily installed using the Liferay Marketplace. Since we don't have any themes beyond the default one installed yet, we'll use the default theme for our pages.  
 
-Let's be good administrators and export a LAR file for backup purposes. Click on the *Export* button and then name the file `nosesterv1.lar`. Use the check boxes to determine what you'd like to export. For this initial export, select everything. Note that if you select the *More Options* link, the list expands to include data from many of Liferay's applications, including the Documents and Media Library, Message Boards, and Web Content. You can also export the theme you're using.
+![Figure 2.5: Look and Feel Interface](../../images/04-look-and-feel.png)
 
-Once you click *Export*, your browser prompts you to save the file. Once you have the file, you can copy it to a backup location for safekeeping or import it into another installation of Liferay Portal. If you must rebuild or wish to revert back to this version of your site, you can import this file by clicking the *Import* button from the Manage Site Pages dialog box, browsing to it, and selecting it. 
+Many themes include more than one color scheme. This allows you to keep the existing look and feel while giving your site a different flavor. Change the color scheme from blue to green by selecting *Green* under *Color Schemes*. If you now go back to the site (by clicking *Back to nosester.com* in the top left corner of the control panel), you'll see that some parts of the page are now tinged in a greenish hue. 
+
+If you apply a color scheme to a set of public or private pages it is, by default, applied to each page in the set. If, however, you open the Manage Pages dialog box for a particular page, you can select *Define a specific look and feel for this page* to make the color scheme apply to this page only. You can use this feature to choose a different color scheme for a particular page than the one defined for the set of public or private pages to which it belongs. 
+
+There are a few more configurable settings for your theme. You can switch the bullet style between dots and arrows and you can choose whether or not to show portlet borders by default.
+
+Also notice that themes can apply to regular browsers or mobile devices. You could create another site for mobile users attached to the [http://m.nosester.com](http://m.nosester.com) address and serve up a page designed for the smaller screens on phones.
+
+The *CSS* section allows you to enter custom CSS that will also be served up by your theme. In this way, you can tweak a theme in real time by adding new styles or overriding existing ones. 
+
+The next option configures the logo that appears for your site. 
+
+### Using a custom logo [](id=lp-6-1-ugen02-using-a-custom-logo-0)
+
+If you want to use your own logo for a specific site, use the Logo tab. Adding a custom logo is easy: select the Logo tab and browse to the location of your logo. Make sure that your logo fits the space in the top left corner of the theme you're using for your web site. If you don't, you could wind up with a site that's difficult to navigate, as other page elements are pushed aside to make way for the logo.
+
+In the logo tab, you can also choose whether or not to display the site name on the site. If you check the box labeled *Show Site Name* the site name will appear in the top right corner of the page. This option is enabled by default, and cannot be disabled if the *Allow Site Administrators to set their own logo* option is disabled in *Portal Settings*. It is also not available on the default community -- only newly created communities and user pages have the option to have the name display.
+
+When you click on a specific page, some other options become available to you. 
+
+### Changing options for individual pages [](id=lp-6-1-ugen02-changing-options-for-individual-pages-0)
+
+When you select a single page, some different options appear. Let's look at what these do. 
+
+**Details:** lets you name the page for any localizations you need. You can also set the HTML title that appears in the browser window for the page. Finally, you can set an easy to remember, friendly URL for the page. 
+
+**SEO:** provides several means of optimizing the data the page provides to an indexer that's crawling the page. You can set the various meta tags for description, keywords, and robots. There's also a separate Robots section that lets you tell indexing robots how frequently the page is updated and how it should be prioritized. If the page is localized, you can select a box to make Liferay generate canonical links by language. If you want to set some of these settings for the entire site, you can specify them from the Sitemaps and Robots tabs of the Manage Site Settings dialog box (see below).
+
+---
+
+![tip](../../images/01-tip.png) In previous versions of Liferay, it was possible that a single page could be indexed multiple times. In Liferay 6.1, to improve search ratings for your pages, all URLs that direct to the same page will only create one entry in the index. So, for example while previously the simple URL *http://www.nosester.com/web/guest/blog/-/blogs/thenose* and different versions of the URL which provided additional information about the referring page and what not, like *http://www.nosester.com/web/guest/blog/-/blogs/thenose?redirect_33&...* would have different entries in the index, now there is only one. From the search engines point of view, this will make your pages rank higher, since, for example, any references to any variations of a specific URL will be considered references to the one page.] 
+
+---
+
+**Look and Feel:** lets you set a page-specific theme. 
+
+**Layout:** lets you specify how portlets are arranged on a page. Choose from the available installed templates to modify the layout. It's very easy for developers to define custom layouts and add them to the list, and this is covered in both the *Liferay Developer's Guide* and in [*Liferay in Action*](http://manning.com/sezov).  
+
+**JavaScript:** gives you the ability to paste custom JavaScript code to be executed on this page. 
+
+**Custom fields:** If custom fields have been defined for pages (which can be done from the *Custom Fields* page of the control panel), they appear here. These are metadata about the page, and can be anything you like, such as author or creation date. 
+
+**Advanced:** contains several optional features. You can set a query string to provide parameters to the page. This can become useful to web content templates, which you'll see in the next chapter. You can set a target for the page so that it either pops up in a particularly named window or appears in a frameset. And you can set an icon for the page that appears in the navigation menu. 
+
+**Mobile Rule Groups:** allows you to apply rules for how this page should be rendered for various mobile devices. You can set these up in the *Mobile Device Rules* section of the control panel. 
+
+**Customization Settings:** lets you mark specific sections of the page that you want users to be able to customize.
+
+Note that the *Manage &rarr; Page Layout* menu directs you to the same Layout tab that's in *Manage &rarr; Page*. 
+
+### Modifying Page Layouts [](id=lp-6-1-ugen02-modifying-page-layouts-0)
+
+Page layouts allow you to arrange your pages so that the content appears the way you want it to. Liferay comes with many layouts already defined. Developers can create more and they can be deployed to your portal for your use.
+
+In order to prepare for the portlets we'll soon be adding, let's change the layout of the Collaboration page. To access layouts, select *Manage &rarr; Page Layout* from the Dockbar.
+
+Now, select the *2 Columns (70/30)* layout and click *Save*. Once saved, you'll return to the page and it'll seem as though nothing has happened. Once we start adding portlets, however, you'll notice that the page is now equally divided into two columns. You can stack portlets on top of each other in these columns. There are, of course, more complicated layouts available, and you can play around with them to get the layout that you want.
+
+Sometimes a particular layout is *almost* what you want, but not quite. In this case, use the Nested Portlets portlet to embed a layout inside another layout. This portlet is a container for other portlets. It lets you select from any of the layouts installed in Liferay, just like the layouts for a page. This gives you virtually unlimited options for laying out your pages.
+
+The next option in the *Manage* menu is page customizations.  
+
+### Page customization [](id=lp-6-1-ugen02-page-customizations-0)
+
+Page Customizations are a new feature in Liferay 6.1. With Page Customizations, any user with the appropriate permissions can create personalized versions of any public page that has customizations enabled. Customizations are based on the rows and columns of a page layout. Administrators can activate or deactivate customizations for any row or column on any page. When users customize a page, they have the option to use either their version or the default version of a page. Users can't see alternate versions of pages other than their own.
+
+![Figure 2.6: Setting Customizable Columns](../../images/04-web-content-personal-customization.png)
+
+When an administrator activates Page Customizations for a page, any portlets that are in a *Customizable* row or column can be moved around the page or removed from the page. Users can add new portlets of their own choosing to these columns of the page. If at any time users determine that they don't like their customizations, they can click *Reset My Customizations* to revert their pages back to the default.
+
+The administrator of the "customizable" page, will have two different views: the *default page* view and the *customized page*. The changes he makes in the *default page* view will affect all users, whereas the changes he makes in the *customized page* view will only affect himself as if he were any other regular user customizing this page. Changes made by the administrator to a not customizable section in the *default view* will be effective immediately for any user. However, if changes are made to a customizable section, the changes made by the administrator will *not* overwrite the users' changes. For this reason, users can view the *default page* and *reset his customizations* from the bar at the top.
+
+In order to allow users to customize a page, these users need to have permission to *Customize* pages (which can be fond under the Site section when assigning permissions to roles). This can be achieved assigning this permission to a role and then assigning this role to the users we want to be able to customize pages. For example, if we want any logged user to be able to customize our customizable pages, we could assign the Customize permission to the role *User* and if we want any member of a site to be able to customize the customizable pages of its sites, we would assign the Customize permission to the role *Site Member*.
+
+Now that you know how to configure pages, let's look at the settings for the site as a whole.
+
+### Configuring Site Settings [](id=lp-6-1-ugen02-configuring-site-settings-0)
+
+As with Site Pages, you can access Site Settings through the control panel or directly from the site using the Dockbar (*Manage* &rarr; *Site Settings*). 
+
+![Figure 2.7: Site Settings](../../images/web-content-site-settings.png)
+
+You'll find options to specify details and metadata about your site, set up friendly URLs and virtual hosts, configure search engine optimization settings, turn staging on or off, and specify a Google Analytics ID. Let's take a closer look. 
+
+**Details:** allows an administrator to change the description and membership type of a site, and also to specify tags and categories for the site. The membership type can be set as open, restricted, or private based on the privacy needs of the site. Users can join and leave an open site at will. To join a restricted site, a user has to be added by the site administrator, but can request to be added through the Sites section of the control panel. A private site is like a restricted site, but doesn't appear in the Sites section of the control panel for users who aren't members.  
+
+**Pages:** From Site Settings, click on *Pages* to manage some basic features of the pages on a site. If no pages have been defined yet, you can set site templates for the public or private pages. If pages already exist, links are provided to view them. You can also change the site's application adapter, which is a special type of hook plugin that customizes out of the box functionality for specific sites. 
+
+**Site URL:** Set the virtual host for your site and/or a friendly URL here. The *Friendly URL* option lets you manage the path to your site in the portal's URL. This needs to be a unique name, of course. Having a human-readable friendly URL assists indexing bots, and is critical to good search engine optimization. 
+
+*Virtual Hosts* make web navigation much easier for your users by connecting a domain name to a site. This tab allows you to define a domain name (i.e., www.mycompany.com) for your site. This can be a full domain or a subdomain. This enables you to host a number of web sites as separate sites on one Liferay server.
+
+For instance, if we set this up for Nose-ster's Development Network, users in that site could use developers.nosester.com to get to their site, provided that Nose-ster's network administrators created the domain name and pointed it to the Liferay server.
+
+To set this up, the DNS name *developers.nosester.com* should point to your portal's IP address first. Then enter http://developers.noseter.com in the Virtual Host tab for the Developers site. This helps users quickly access their site without having to recall an extended URL.
+
+**Site Template:** If you've created the site from a site template, this section displays information about the link between the site template and the site. Specifically, you can see which site template was used and whether or not it allows modifications to the pages inherited from it by site administrators. If you're not using site templates for this site, you can safely ignore this section.
+
+**Sitemap:** lets you send a sitemap to some search engines so they can crawl your site. It uses the sitemap protocol, which is an industry standard. You can publish your site to Yahoo or Google, and their web crawlers will use the sitemap to index your site. Liferay Portal makes this very simple for administrators by generating the sitemap XML automatically for all public web sites.
+
+By selecting one of the search engine links, the sitemap will be sent to them. It's only necessary to do this once per site. The search engine crawler will periodically crawl the sitemap once you've made the initial request.
+
+If you're interested in seeing what is being sent to the search engines, select the *Preview* link to see the generated XML.
+
+**Robots:** If you're using virtual hosting for this site, you can configure `robots.txt` rules for the domain. The Robots page gives you the option to configure your `robots.txt` for both public and private pages on a site. If you don't have Virtual Hosting set up, this tab is rather boring. 
+
+**Staging:** enables you to edit and revise a page behind the scenes, and then publish changes to your site once they have been completed and reviewed. For a full explanation of Staging, see Chapter 3: Managing Content.
+
+**Analytics:** allows you to integrate your pages with Google Analytics. Liferay provides seamless integration with Google Analytics, allowing you to place your ID in one place, and then it will get inserted automatically on every page. This enables you to focus your efforts on building the page, rather than remembering to put the code everywhere. Google Analytics is a free service which lets you do all kinds of traffic analysis on your site, so you can see who visits, where visitors are from, and what pages they most often visit. This helps you to tweak your site so that you can provide the most relevant content to your users.
+
+Next in the menu is Site Memberships, which is covered in chapter 12. There, you'll learn how to administer a Liferay portal and define users and permissions. 
+
+
+You've just been assigned the task to build a web site for an innovative new social networking site called Nose-ster. You've decided to take advantage of Liferay Portal and its rapid deployment features as well as its ability to get a fully functional, content-rich web site with integrated social features up and running in little time.
+
+We'll walk through the creation of Nose-ster's web site, starting by creating and publishing some simple content using Liferay's built-in WYSIWYG editor. We'll then take advantage of Liferay's robust structure editor. We'll use templates to display the content and then explore some of the advanced publishing features such as the built-in workflow and Asset Publisher.
+
+### Creating content the simple way [](id=lp-6-1-ugen03-creating-content-the-simple-way-0)
+
+As we've stated above, content is the reason web sites exist. Liferay Portal has made it easier than ever to get content published to your site. Because Liferay Portal is so flexible, you can use basic authoring tools right away or take advantage of the more advanced features. It's adaptable to your needs.
+
+We'll begin by creating simple content using Liferay's WYSIWYG Editor and then we'll publish it to the home page of Nose-ster's web site. This is a fast and straightforward process that demonstrates how easy it is to create and publish content onto your Liferay Portal instance. Let's learn about the Web Content section of the control panel so we can create and publish our first pieces of content.
+
+![Figure 3.1: Choosing a Site in the Content Section](../../images/04-web-content-context-dropdown.png)
+
+When you manage web content from the control panel, you can select the location where the content resides. For instance, you can add content that's available to a specific site or globally across the portal. The Content section of the control panel displays as its heading the name of the site you're currently working on. This heading is called the context menu selector: you can change the scope of where you'd like to view, edit, or create content by using the drop-down selector attached to the heading. We will add our first piece of content to the *Nose-ster* site, which we defined earlier in the chapter as the default site.
+
+#### Rich, WYSIWYG Editing [](id=lp-6-1-ugen03-rich-wysiwyg-editing-0)
+
+Once you have the Nose-ster site selected, click on the *Web Content* link in the control panel. Next, click the *Add* button under the *Web Content* tab. This is a highly customizable form that by default has two fields: a title and a powerful WYSIWYG editor. We could customize this form to contain whatever fields our content needs, but let's keep things simple for now. We'll cover more advanced features such as structures, templates, and content scheduling later in this chapter.
+
+For now, type the words *Welcome to Nose-ster* in the *Name* field. Notice that content can be localized in whatever language you want. If you click on the *localize* check box, two select boxes appear which allow you to pick the language you're working in and the language that is the default. You can enter translations of your content for any language in the list. The screenshot below shows this interface but for now, we won't be using it, so you can leave it unchecked. In the content field, add a short sentence announcing that the web site is up and running.
+
+![Figure 3.2: The Web Content Editor](../../images/04-web-content-wysiwyg.png)
+
+Getting a new web site up and running is an exciting step for anyone, whether it is a large corporation or a small non-profit charity. To celebrate this momentous achievement at Nose-ster, let's give our announcement some of the pomp and circumstance we think it deserves!
+
+Using the editor, select all the text and then change the style to Heading 1 and the color to dark blue.
+
+You could insert an image here as well as more text with a different style, as demonstrated in the screenshot below. You can also add bullets, numbering, links to another site, or custom images. You can even add an emoticon. Let's add a smiley face at the end of our announcement.
+
+![Figure 3.3: Customizing Content](../../images/04-web-content-example2.png)
+
+The WYSIWYG editor is a flexible tool that gives you the ability to add text, images, tables, links, and more. Additionally, you can modify the display to match the purpose of the content. Plus it's integrated with the rest of Liferay Portal: for example, when you upload an image to be added to a page, that image can be viewed and manipulated in the Documents and Media portlet.
+
+If you're HTML savvy, Liferay WCM doesn't leave you out in the cold. You can click the *Source* button and write your own HTML if you wish.
+
+## Advanced Publishing Options [](id=lp-6-1-ugen03-advanced-publishing-options-0)
+
+As we discussed above, as your site becomes larger and more complex, management of the content becomes more challenging. We've gone over Liferay management tools that help you create content quickly and in an orderly fashion. You created a simple announcement with Liferay's structure editor that allows you to quickly design a structure and prepare it for the template designers. Then you applied a template to the structure. You know how to display content using the Web Content Display portlet. Now, you're ready to take advantage of Liferay's advanced publishing options.
+
+If a web site isn't properly managed, it can quickly become out of date, and that drives viewers away. If people are finding your site because of search engines, you don't want them presented with outdated (and now inaccurate) web content.
+
+You also want your content to be found easily by your users. This is done through tags and categories. 
+
+Additionally, you may want to create content and send it through a review and approve process weeks before you want it displayed on the web site. Liferay gives you this flexibility with the *Schedule* and *Workflow* features.  
+
+### Scheduling Web Content [](id=lp-6-1-ugen03-scheduling-web-content-0)
+
+Liferay's WCM lets you define when your content goes live. You can determine when the content is displayed, expired, and/or reviewed. This is an excellent to way to keep your site current and free from outdated (and perhaps incorrect) information. The scheduler is built right into the form that your users make use of to add web content, in the same column as the structure and template selectors.
+
+![Figure 3.15: Schedule for Publishing Content](../../images/04-web-content-schedule.png)
+
+**Display Date:** Sets (within a minute) when content will be displayed.
+**Expiration Date:** Sets a date to expire the content. The default is one year.
+**Never Auto Expire:** Sets your content to never expire.
+**Review Date:** Sets a content review date. 
+**Never Review:** Sets the content to never be reviewed.
+
+As you can see, the scheduling feature in Liferay Portal gives you great control in managing when, and for how long, your web content is displayed on your web site. Additionally, you have the ability to determine when your content should be reviewed for accuracy and/or relevance. This makes it possible to manage your growing inventory of content. 
+
+In addition to controlling when content displays, you can use the Display Page feature to control where content displays.
+
+### Display Page [](id=lp-6-1-ugen03-display-page-0)
+
+If you've been using Liferay for a while, or you've just spent a little bit of time with this guide, you might have noticed something about how Liferay handles web content--content is never tied directly to a page. While this can be useful (because it means that you don't have to recreate content if you want to display the same thing on multiple pages), it also means that you don't have a static URL for any web content, which is bad for search engine optimization.
+
+As an improvement, Liferay has introduced the concept of Display Pages and Canonical URLs. Each web content entry on the portal has a canonical URL, which is the official location of the content that is referenced any time the content is displayed. A Display Page can be any page with an asset publisher configured to display any content associated with the page. When adding or editing web content articles, you can select a Display Page. However, only pages with a configured asset publisher are available for selection.
+
+To create a Display Page, you can create a page yourself, add an Asset Publisher portlet, and configure it yourself. Alternatively, you can use the *Content Display Page* page template included with Liferay. If you're creating a Display Page manually, once you've added an Asset Publisher portlet to the page, open its configuration window. Then check the *Set as the Default Asset Publisher for This Page* box.
+	
+You may now be thinking, "Wait, you just told me that each Web Content item has its own URL, and that this is somehow related to pages where we display a whole bunch of content on the same page?" Yes. That's exactly what I said. Just watch--create a display page called *My Web Content Display Page* somewhere on your portal, using the *Content Display Page* template. Now, on a different page, add a Web Content Display portlet. Click the *Add Web Content* button, enter a title and some content, click on *Display Page* at the right, and select the Display Page you just created. Then click *Publish*. 
+
+![Figure 3.16: Selecting a Display Page](../../images/04-web-content-display-page.png)
+
+In the Asset Publisher of the *My Web Content Display Page*, you can now click the *Read More* link to display the content. Notice that the canonical URL for content appears in your browser's address bar. If you create your own custom display page, any additional portlets that you place on the page are displayed along with the content when you access it via the canonical URL. If you used the *Content Display Page* page template for your Display page, it not only features a configured Asset Publisher portlet but also a Tags Navigation, a Categories Navigation, and a Search portlet. These tools help users to quickly identify relevant content. 
+
+![Figure 3.17: The Canonical URL](../../images/04-web-content-canonical-url.png)
+
+Let's move on to tags and categories. 
+
+### Tags and Categories [](id=lp-6-1-ugen03-tags-and-categories-0)
+
+Tags are keywords that are attached to web content in order to help users find content. Categories are hierarchical structures of content that are defined by administrators. Tags and categories make it easier for your users to find content through search or navigation.
+
+By assigning a tag to web content, you define metadata about that content. This is then used by Liferay's search engine to score the results of a search, enabling users to find content that is most relevant to their search. Tags can be created on the fly by creators of content, and it's important to tag content whenever it is created. If you don't tag content, all the search engine has to go on is the full text of the content (if you've made your content indexable), and that might not produce the most optimal results.
+
+Tagging also helps with navigation. Liferay Portal has two portlets specifically designed for navigating content using tags: Tag Cloud and Tag Navigation. If you add either of these to a page, you can use them to show the topics contained in your content.
+
+Tags can be added on the fly or they can be selected from the existing library of tags. For most of the portal, users tag content, but for web content, only the content creator tags the content, because there is no user interface for regular users to tag web content.
+
+It is important that you both tag and categorize your content when you enter it.
+
+Categories are a little bit different, and new users generally ask a valid question when presented with tags and categories: what's the difference? Categories are defined by someone with administrative access to the content. They are hierarchical, tree-like structures that users can use to find content. Categories are different from tags in that they're never created by end users. Instead, categories define how your content is organized from the point of view of the owner of the content. A good example of categories might be the table of contents of a book: it shows the hierarchical structure and organization for all of the content within that book. This shows that the structure of the book has been planned ahead of time by the author. Categories do the same thing as the table of contents. 
+
+By contrast, tags are like the index of a book: they show where many different topics are mentioned within the book in alphabetical order. When a search is done throughout the book, even the author might be surprised at how many times he or she mentions a particular topic outside of its category. So both ways of organizing content are important, especially if your users will be using search to find content.
+
+Tagging and categorizing web content is easy. You can do it at the bottom of the same form you use to add content. If you open the *Categorization* section of the form, you'll be presented with an interface for adding tags and categories.
+
+![Figure 3.18: Tagging and categorizing content can be done at the same time you create it.](../../images/04-web-content-categorization.png)
+
+The control panel contains an interface for managing tags and categories for each site in the portal. This interface can be used to manage all your tags and categories in one place. We'll look at this interface in the next chapter. 
+
+Next, we'll look at how to configure the way pages are accessed by mobile devices.
+
+## Page Templates and Site Templates [](id=lp-6-1-ugen02-page-templates-and-site-templates-0)
+
+*Page Templates* and *Site Templates* are invaluable tools for building similar pages on larger portals. As you continue to add pages to sites in your portal, you'll notice repeatable patterns in the designs of those pages. Page templates enable you to preconfigure a single page and then apply it to any new page that you create. Site Templates allow you to do the same thing, but on the scale of a site--if you have multiple sites that use a similar structure of pages, you can create a single site template and use it to create as many sites as desired. For a full explanation of Page Templates and Site Templates, see chapter 6. 
 
 ### Site Content [](id=lp-6-1-ugen02-site-content-0)
 
@@ -189,6 +370,70 @@ You can manage the following kinds of content:
 For details about Liferay's social collaboration suite, see chapter 4. 
 
 ## Authoring content [](id=creating-the-nose-ster-pages)
+
+## Building a Site with Liferay's WCM [](id=building-a-site-with-liferay-s-w-3)
+
+You've just been assigned the task to build a web site for a an innovative new social networking site called Nose-ster. You've decided to take advantage of Liferay Portal and its rapid deployment features as well as its ability to get a fully functional, content-rich web site with integrated social features up and running in little time.
+
+We'll walk through the creation of Nose-ster's web site, starting by creating and publishing some simple content using Liferay's built-in WYSIWYG editor. We'll then take advantage of Liferay's robust structure editor. We'll use templates to display the content and then explore some of the advanced publishing features such as the built-in workflow and Asset Publisher.
+
+### Creating content the simple way [](id=lp-6-1-ugen03-creating-content-the-simple-way-0)
+
+As we've stated above, content is the reason web sites exist. Liferay Portal has made it easier than ever to get content published to your site. Because Liferay Portal is so flexible, you can use basic authoring tools right away or take advantage of the more advanced features. It's adaptable to your needs.
+
+We'll begin by creating simple content using Liferay's WYSIWYG Editor and then we'll publish it to the home page of Nose-ster's web site. This is a fast and straightforward process that demonstrates how easy it is to create and publish content on your Liferay Portal instance. Let's learn about the Web Content section of the control panel so we can create and publish our first pieces of content.
+
+![Figure 3.1: Choosing a Site in the Content Section](../../images/04-web-content-context-dropdown.png)
+
+When you manage web content from the control panel, you can select the location where the content resides. For instance, you can add content that's available to a specific site or globally across the portal. The Content section of the control panel displays as its heading the name of the site you're currently working on. This heading is called the context menu selector: you can change the scope of where you'd like to view, edit, or create content by using the drop-down selector attached to the heading. We will add our first piece of content to the *Nose-ster* site, which we defined earlier in the chapter as the default site.
+
+##### Rich, WYSIWYG Editing [](id=lp-6-1-ugen03-rich-wysiwyg-editing-0)
+
+Once you have the Nose-ster site selected, click on the *Web Content* link in the control panel. Next, click the *Add* button under the *Web Content* tab. This is a highly customizable form that by default has two fields: a title and a powerful WYSIWYG editor. We could customize this form to contain whatever fields our content needs, but let's keep things simple for now. We'll cover more advanced features such as structures, templates, and content scheduling later in this chapter.
+
+For now, type the words *Welcome to Nose-ster* in the *Name* field. Notice that content can be localized in whatever language you want. If you click on the *localize* checkbox, two select boxes appear which allow you to pick the language you're working in and the language that is the default. You can enter translations of your content for any language in the list. The screenshot below shows this interface but for now, we won't be using it, so you can leave it unchecked. In the content field, add a short sentence announcing that the web site is up and running.
+
+![Figure 3.2: The Web Content Editor](../../images/04-web-content-wysiwyg.png)
+
+Getting a new web site up and running is an exciting step for anyone, whether it is a large corporation or a small non-profit charity. To celebrate this momentous achievement at Nose-ster, let's give our announcement some of the pomp and circumstance we think it deserves!
+
+Using the editor, select all the text and then change the style to Heading 1 and the color to dark blue.
+
+You could insert an image here as well as more text with a different style, as demonstrated in the screenshot below. You can also add bullets, numbering, links to another site, or custom images. You can even add an emoticon. Let's add a smiley face at the end of our announcement.
+
+![Figure 3.3: Customizing Content](../../images/04-web-content-example2.png)
+
+The WYSIWYG editor is a flexible tool that gives you the ability to add text, images, tables, links, and more. Additionally, you can modify the display to match the purpose of the content. Plus it's integrated with the rest of Liferay Portal: for example, when you upload an image to be added to a page, that image can be viewed and manipulated in the Documents and Media portlet.
+
+If you're HTML savvy, Liferay WCM doesn't leave you out in the cold. You can click the *Source* button and write your own HTML if you wish.
+
+##### Assigning Permissions [](id=lp-6-1-ugen03-assigning-permissions-0)
+
+Permissions in Liferay WCM work the same way they do everywhere else in Liferay. By default, content is viewable by Anyone (Guest Role). You can limit viewable permissions by selecting any Role from the drop-down or in the list. Additionally, Liferay Portal provides the ability to customize permissions in more detail. Select the *More Options* link next to the drop down button, and you'll find the different activities you can grant or deny to your web content.
+
+![Figure 3.4: Permissions for Web Content](../../images/04-web-content-content-permissions.png)
+
+For this piece of web content, we don't need to change anything. After you're finished with permissions, click *Save*. This saves the content in draft form. Once you're satisfied with your changes, select *Publish*. This makes the content available for display, but we still have some work to do to enable users to see it. In Liferay WCM, all content resides in a container, which is one of two portlets: Web Content Display or Web Content List. By far the most frequently used is the *Web Content Display* portlet. 
+
+##### Localization [](id=lp-6-1-ugen03-localization-0)
+
+Previous versions of Liferay had the ability to create and manage different translations of your web content, but with Liferay 6.1 we've added several improvements. 
+
+When you create a new piece of Web Content, you have the ability to choose a default language. If you click *Change*, you can select your default language from a large number of languages that Liferay supports. Before you can create a translation, you must finish creating the content in your default language and save it. Once you've done that, editing the content provides you with the option to *Add Translation*.
+
+![Figure 3.5: Adding a translation](../../images/04-web-content-content-translation.png)
+
+After you click *Add Translation*, you can select a language, either by scrolling through the list or by entering the language you want to use in the search box. When you select a language, a lightbox opens within your browser window, enabling you to easily compare the original with the new translation. Once you are done with the translation, click *Save*, and the translation is added to the list of *Available Translations*. 
+
+![Figure 3.6: Adding a translation](../../images/04-web-content-content-translation-2.png)
+
+The ability to completely delete a translation in one step has also been added. Instead of simply disabling a translation or having to go through a multistep process to remove it, you can now simply open the translation that you don't want and click *Remove Translation*.
+
+When you create a new web content structure, each field you create has a *Localizable* checkbox displayed next to it. This enables you to control what can and can't be changed in the translation process. For example, if you don't want images or content titles to be changed when the content is translated, you can make sure that those fields aren't listed as localizable. When you follow the steps above to localize content, only fields within the structure that had the *Localizable* box checked appear within the translation window.
+
+Let's go back to the page where we want the content displayed and add the Web Content Display portlet (in this case, the Welcome page).
+
+## Creating the Nose-ster pages [](id=creating-the-nose-ster-pages)
 
 There are a lot of other things you can do beyond placing portlets on a page. So let's start working on the Nose-ster site. You can do this by going up to the Dockbar and clicking *Go to &rarr; Nose-ster*.
 
@@ -289,7 +534,7 @@ When you publish your content this way, it becomes available immediately (unless
 
 Note: if you want to view your page the way your users will see it (i.e., without all those portlet controls and icons), go up to the Dockbar and select *Toggle Edit Controls*. This makes all those extra controls you see as a portal administrator disappear. If you need to use those controls again, just select *Toggle Edit Controls* again. 
 
-That's pretty much all there is to simple content creation. Whole sites have been created this way. But if you want to take advantage of the full power of Liferay's WCM, you'll want to use structures and templates. Next, we'll see how they work and how you can use them to make your site more dynamic. 
+That's pretty much all there is to simple content creation. Whole sites have been created this way. But if you want to take advantage of the full power of Liferay's WCM, you'll want to use structures and templates. Next, we'll see how they work and how you can use them to make your site more dynamic.
 
 ### Using the Asset Publisher Portlet [](id=lp-6-1-ugen03-using-the-asset-publisher-portlet-0)
 
@@ -323,7 +568,7 @@ Most of the time, however, you'll likely be using the Asset Publisher to select 
 
 #### Selecting assets dynamically [](id=lp-6-1-ugen03-selecting-assets-dynamically-0)
 
-Asset Publisher's default behavior is to select assets dynamically according to rules that you give it. These rules can be stacked on top of each other so that they compliment each other to create a nice, refined query for your content. You have the following options for creating these rules:
+The Asset Publisher's default behavior is to select assets dynamically according to rules that you give it. These rules can be stacked on top of each other so that they compliment each other to create a nice, refined query for your content. You have the following options for creating these rules:
 
 **Scope:** Choose the sites or organizations from which the content should be selected.
 
@@ -357,7 +602,7 @@ The Display Settings section gives you precise control over the display of your 
 
 #### Other Settings [](id=lp-6-1-ugen03-other-settings-0)
 
-**Asset Link Behavior:** When the link to the asset is clicked, it can be displayed in the Asset Publisher or in the portlet to which the asset belongs, such as the Blogs or Message Boards.
+**Asset Link Behavior:** The default value is *Show Full Content*. With this value selected, when the link to an asset is clicked, the full asset is displayed in the current Asset Publisher. If the value *View in a Specific Portlet* is selected, clicking on an asset causes that asset to be displayed in the portlet to which the asset belongs. For example, a blog entry would be displayed in the Blogs portlet where it was created. Likewise, a forum post would be displayed in the Message Boards porlet where it was created. Similarly, a generic Web Content article would be displayed in the Asset Publisher of its configurated Display Page. See the above secton on Display Pages for more information.
 
 **Maximum Items to Display:** You can display 1-100 items.
 
@@ -424,368 +669,29 @@ In a real world situation, you obviously wouldn't want the person who created th
 
 ## Site memberships [](id=administering-liferay-portal)
 
-You know how all these retailers want to advertise themselves as a "one stop shop" for whatever it is that you want? The idea is that they have so much stuff that chances are that whatever you're looking for is there. Liferay's control panel is something like this. If you want to create users, sites, organizations, configure permissions and plugins, and pretty much anything else, you'll do it with the control panel. The nice thing about the control panel is that it makes all this very easy to do. This chapter takes all the concepts you learned about Liferay in chapter 1 (sites, organizations, and more) and makes them concrete. Here, you'll learn how to create and manage every aspect of Liferay's configuration. 
+ View Members
+ Add Members 
+ Add Site Roles to 
+ View Teams
 
-This chapter covers the following activities:
+ Summary 
+ Users 
+ Organizations 
+ User Groups 
 
--   Using the control panel to manage users, organizations, sites, user groups, roles, and teams
+## Summary [](id=summ-24)
 
--   Using the control panel to manage password policies, authentication settings, mail host names, email notifications, display settings, and monitoring
+Pages in Liferay are as flexible as pages you'd create manually without a portal. Using a point and click interface, you can define your site any way you want. You can create and remove pages, export and import them, set their layouts, define how they are indexed by search engines, and more. You've also been introduced to Liferay's concept of sites. Again, using a point and click interface, you can create multiple web sites and define how users can access them, whether they are linked to a domain name, and create all of their pages. 
 
--   Using the control panel to manage server administration, portal instances, plugins, and updates
+You now understand how to manage pages in Liferay Portal. It's time to move on to adding content to those pages. Liferay's Web Content Management (WCM) is a highly powerful, yet flexible, set of tools that enables you to successfully manage your web site.
 
-Let's begin our examination of Liferay's control panel by looking at how to manage and organize users in Liferay Portal.
+You'll soon discover that Liferay's WCM is easy to learn and highly configurable. If you already have experience with WCM, you'll see some new features and improvements to old ones. If you're new to Liferay's WCM, then you'll be surprised at how fast you will be adding, editing, and scheduling content on your site. Once you're familiar with portlets such as Web Content Display and Asset Publisher, your ability to manage an immense site with a large amount of content will simply amaze you.
 
-## Managing Users, User Groups, Organizations, Sites, Teams, and Roles [](id=managing-users-user-groups-organizations-sites-teams-and-roles)
+We'll be using Liferay's WCM to publish simple pieces of content, develop templates to define how content is to be displayed, set up a workflow for content to be approved, schedule when content is to be published and much, much more.
 
-The Portal section of the control panel is used for most administrative tasks. You'll find there an interface for the creation and maintenance of
 
-- Users, User Groups, and Organizations
 
-- Sites and Teams
 
-- Site Templates
 
-- Page Templates
 
-- Roles
-
-Additionally, you can configure many server settings, including:
-
-- Password Policies
-
-- Portal Settings
-
-- Custom Fields
-
-- Monitoring
-
-- Plugins Configuration
-
-You'll use the Portal section of the control panel to create your portal structure, implement security, and administer your users. Configurable portal settings include mail host names, email notifications, and authentication options including single sign-on and LDAP integration. Note that only users with the administrator role, which is a portal scoped role, have permission to view this section of the control panel. You can, of course, grant custom roles permissions to one or more sections.
-
-### Adding users [](id=lp-6-1-ugen12-adding-users-0)
-
-Let's add a user account for yourself and configure this account so that it has the same administrative access as the default administrator account. Go up to the Dockbar, mouse over *Go to* and click *Control Panel*. Then open the *Users and Organizations* page under the *Portal* category. Click the *Add* button and select *User*. Fill out the Add User form using your name and email address. When you are finished, click *Save*.
-
-![Figure 12.1: The Add User Screen](../../images/01-add-user-screen.png)
-
-After you submit the form, the page reloads with a message saying that the save was successful. An expanded form appears that allows you to fill out a lot more information about the user. You don't have to fill anything else out right now. Just note that when the user ID was created, a password was automatically generated and, if Liferay was correctly installed (see chapter 11), an email message with the password in it was sent to the user. This, of course, requires that Liferay can properly communicate with your SMTP mail server.
-
-![Figure 12.2: Liferay's User Account Editor](../../images/01-user-account-editor.png)
-
-If you haven't yet set up your mail server, you'll need to use this page to change the default password for the user ID to something you can remember. You can do this by clicking on the *Password* link in the box on the right, entering the new password in the two fields, and clicking *Save*. Next, you should give your user account the same administrative rights as the default administrator's account. This allows you to perform administrative tasks with your own ID instead of having to use the default ID. It also helps to make your portal more secure by deleting or disabling the default ID.
-
-Click the *Roles* link. The control panel's Roles page shows the roles to which your ID is currently assigned. You should have one role: Power User. By default, all users are assigned the Power User role. You can give this role certain permissions if you wish or disable it altogether. You can also define the default roles a new user receives. We'll see how to do this later.
-
-To make yourself an Administrator, click the *Select* link. A dialog box pops up with a list of all the roles in the system. Select the Administrator role from the list. The dialog box disappears and the role is added to the list of roles associated with your account. Next, click the *Save* button, which is at the bottom of the blue bar of links on the right. You are now an administrator of the portal. Log out of the portal and then log back in with your own user ID.
-
-We'll next look at some aspects of user management. 
-
-### User management [](id=lp-6-1-ugen12-user-management-0)
-
-If you click the *Users* link on the left menu of the control panel, there are now two users in the list of users. If you want to change something about a particular user, you can click the *Actions* button next to that user.
-
-**Edit User:** takes you back to the Edit User page, where you can modify anything about the user.
-
-**Permissions:** allows you to define which roles have permissions to edit the user.
-
-**Manage Pages:** allows you to edit the personal pages of a user.
-
-**Impersonate User:** opens another browser window which allows you to browse the site as if you were the user.
-
-**Deactivate:** deactivates the user's account.
-
-Note that most users can't perform most of the above actions. In fact, most users won't even have access to this section of the control panel. You can perform all of the above functions because you have administrative access.
-
-Let's look next at how to manage organizations. 
-
-### Managing organizations [](id=lp-6-1-ugen12-managing-organizations-0)
-
-Organizations are used to represent hierarchical structures such as those of companies, non-profit organizations, churches, schools, and clubs. They have been used to represent a sports league, with various sports (soccer, baseball, basketball, etc.) and their teams as sub-organizations. If you have a collection of users that fit into a hierarchical structure, you can model that as an organization.
-
-Your portal design might not need organizations or it might have one or several, depending on your portal's function. For example, a simple photo-sharing web site could be powered by sites only (see below for information on sites). On the other hand, organizations are useful for corporations or educational institutions since their users can be placed easily into a hierarchical structure. In fact, organizations in Liferay are designed to model any group hierarchy, from those of government agencies all the way down to those of small clubs. Of course, your portal can use both organizations and independent sites. For example, a corporation or educational institution could create a social networking site open to all portal users, even ones from separate organizations. 
-
-Organizations and suborganizations can be created in a hierarchy to unlimited levels, and users can be members of one or many organizations. These organizations can all reside in a single hierarchy or cut across different hierarchies. Note that the rights of an organization administrator apply both to his/her organization and to any child organizations. By default, members of child organizations are members of the parent organizations. This behavior can be customized in your portal's `portal-ext.properties` configuration file.
-
-Additionally, Organizations can be associated with roles. One application of this in a corporate setting might be an IT Security group. You could have a suborganizaton of your IT organization that handles security for all of the applications company-wide. If you grant the IT Security organization the same administrator role you just gave to your own ID, all members of the organization would have administrative access to the portal. Suppose now that a user in this organization later was hired by the Human Resources department. The simple act of removing the user from the IT Security organization also removes the user's administrative privileges, since the privilege came from the IT Security group's role. By adding the user to the HR organization, any roles the HR organization has (such as access to a benefits system in the portal) are transferred to the user. In this manner, you can design your portal to correspond with your existing organization chart, and users' permissions are granted according to their positions in the chart.
-
-Of course, this is only one way to design it. If you have more complex requirements, you can combine organizations with teams and scoped roles to assemble the sets of permissions you wish to grant to particular users. But we'll get to that. Let's first see how to manage organizations. 
-
-To add an organization, click the *Users and Organizations* link on the left side of the control panel. Then click the *Add* button and choose *Regular Organization*. 
-
-Does your organization need to have its own web site? Most organizations don't, but some do, and Liferay provides this ability by attaching a site to an organization. To attach a site when you create an organization, click the *Organization Site* tab at the right, and check the *Create Site* box. If you don't know right now if your organization needs a web site, that's fine: you can always add one later if the need arises. 
-
-![Figure 12.3: Adding an organization](../../images/01-add-organization-screen.png)
-
-**Name:** Enter a name for the organization.
-
-**Type:** Choose whether this is a regular organization or a location. A location cannot have any suborganizations.
-
-**Parent Organization:** Select an organization in the system to be the direct parent of the organization you are creating. Click the *Remove* button to remove the currently configured parent.
-
----
-
-![tip](../../images/01-tip.png) **Tip:** Note that you're already a member of any organizations that you create. By creating an organization, you become both a member and receive the Organization Owner role, which gives you full rights to the organization. You can, of course, add other users to this role to make them Organization Owners. 
-
----
-
-Fill out the information for your organization and click *Save*. As before with users, the form reappears and you can enter more information about the organization. Organizations can have multiple email addresses, postal addresses, web sites, and phone numbers associated with them. The Services link can be used to indicate the operating hours of the organization, if any.
-
-For now, click the *Back* button. This takes you back to the list of organizations.
-
-Click the *Actions* button next to the new organization you created. This shows the actions you can take to manipulate this organization.
-
-**Edit:** lets you specify details about the organization, including addresses, phone numbers, email addresses, and websites.
-
-**Manage Site:** lets you create and manage public and private pages for the organization's site.
-
-**Assign Organization Roles:** lets you assign organization-scoped roles to users. By default, Organizations are created with three roles: Organization Administrator, Organization User, and Organization Owner. You can assign one or more of these roles to users in the organization. All members of the organization automatically get the Organization User role so this role is hidden when you click Assign Organization Roles.
-
-**Assign Users:** lets you search and select users in the portal to be assigned to this organization as members.
-
-**Add User:** adds a new user in the portal and assigns the user as a member of this organization.
-
-**Add Regular Organization:** lets you add a child organization to this organization. This is how you create hierarchies of organizations with parent-child relationships.
-
-**Add Location:** lets you add a child Location, which is a special type of organization that cannot have any children added to it.
-
-**Delete:** deletes this organization from the portal. You must ensure that the organization has no users in it first.
-
-If you click the *View* button at the top of the Users and Organizations page and select *View Hierarchy* you can view both a list of users who are members of this organization and a list of all the suborganizations of this organization.
-
-We briefly mentioned sites during this discussion. Sites are another construct within the portal, and have different properties than organizations. Let's see how you can use them. 
-
-### Sites [](id=lp-6-1-ugen12-sites-0)
-
-As stated in chapter 1, a site is a set of pages that can be used to publish content or applications. Sites can be independent or they can be associated to one organization and act as the website of that organization.
-
-Liferay's sites can be used for a variety of purposes, from corporate websites to company intranets including small sites to collaborate among members of a team. To support all types of collaboration and social scenarios, Liferay's sites support three types of membership types:
-
-- Private: Users are not allowed to become members of the site. Site administrators can still manually select users and make them members of the site.
-- Restricted: Users are allowed to request members of the site and site administrators have to aprove the request. The request can be done from the *My Sites* application.
-- Open: Users are allowed to become members of the site at any time. This can be done from the *My Sites* portlet.
-
-In addition to these memberships, when a site is associated to an organization, all the users of that organization are automatically considered members of the site.
-
-Members of a site can be given additional privileges within the site by using Liferay's permission settings. It is also possible to assign different roles within the site to different members. This can be done through *site roles* which are defined equal for all sites or *teams* which are unique for each site.
-
-Liferay's Sites can have two hierarchies of pages: public pages and private pages. A site can have only public pages, only private pages or both. The main difference between the two hierarchies is that private pages can only be accessed by members of the site. For both of them it is possible to restrict access to them in finer detail for each page through the permission system. Public pages and private pages are accessed through a different URL and can have a different look and feel, but they share the same content.
-
-An example of using sites could be a corporate Intranet running Liferay which might have sites for all the organizations in the company: Sales, Marketing, Information Technology, Human Resources, and so on. But what about the corporate health and fitness center? That's something that everybody in the company, regardless of organization, may want to join. This makes it a good candidate for an open and independent site. Similarly, the home page for a corporate intranet should probably be placed in an open independent site so that any member of the portal can access it.
-
-For other kinds of web sites, you may want to use independent sites to bring people together who share a common interest. If you were building a photo sharing web site out of Liferay, you might have independent sites based on the types of photos people want to share. For example, those who enjoy taking pictures of landscapes could join a Landscapes site, and those who enjoy taking pictures of sunsets could join a Sunsets site. 
-
-Liferay always provides one default site, which is also known as the main site of the portal. This site does not have its own name, but rather takes the name of the portal. By default the portal name is *liferay.com*, but this value can be changed through the simple configuration of the setup wizard. The portal name can also be changed at any time through the control panel within *Portal Settings*.
-
----
-
-![tip](../../images/01-tip.png) **Tip:** Prior to Liferay 6.1, there were two ways of creating sites: organizations and communities. This situation has been simplified to provide more ease of use and allow for more flexibility. The main role of organizations is still or organize the users of the portal in a hierarchy but they can also have associated sites. Communities can still be created through independent sites, but the new name reflects the fact that sites can be used for many different purposes besides communities.
-
----
-
-Sites can be created through the control panel, like all administration operations in Liferay. To add a site, click the *Sites* link on the left side of the control panel in the Portal section, and then click *Add* in the toolbar. If there is at least one site template available, a dropdown menu will be shown allowing you to select a *Blank Site* or one of the site templates available. *Site templates* provide a preconfigured set of pages, applications and content that can be used as the basis of the site.
-
-The following figure shows the form that needs to be filled when creating a *Blank Site*.
-
-
-![Figure 12.4: Adding a Site](../../images/01-add-site-screen.png)
-
-**Name:** is the name of the site you wish to create.
-
-**Description:** describes the site's intended function.
-
-**Membership Type:** can be open, restricted, or private. An open site appears in the My Sites portlet and users can join and leave the site whenever they want. A restricted site is the same except that users can only request membership. A site administrator must then explicitly grant or deny users' requests to join. A private site does not appear in the My Sites portlet, and users must be added to it manually by a site administrator.
-
-**Active:** determines whether a site is active or inactive. Inactive sites are inaccessible but can be activated whenever a site administrator wishes.
-
-Once you've created a site, it appears in the Sites page of the control panel. Once the site has been created you can specify more details about the site, and these fall under three main categories: Basic Information, Search Engine Optimization, and Advanced.
-
-![Figure 12.5: Editing a Site](../../images/01-site-editor.png)
-
-**Details:** lets you edit the information you entered when you created the site and allows you to choose a site template for the public or private pages of your site. If you select a site template, leave the *Enable propagation of changes from the site template* box checked to automatically update your site if the associated site template changes. The update will only be done to pages which have not been changed within the specific site. If you uncheck this box but recheck it later, the template pages are then reapplied to your site, overwriting any changes that may have been made. Only users who have the permission "Unlink Site Template" will be able to disable the propagation of changes. When the propagation is enabled, the site template might prevent modification of all or certain pages to ensure that the propagation occurs.
-
-**Categorization:** allows you to apply categories and tags to the site.
-
-**Site URL:** lets you set friendly URLs and virtual hosts for your web site.
-
-**Site Template:** provides additional information about the site template associated to the pages of the site (if any).
-
-**Sitemap:** lets you use the sitemap protocol to notify search engines that your web site is available for crawling. 
-
-**Robots:** lets you use a `robots.txt` file to specify certain pages and links that you don't want to be indexed by search engines. You need to set a virtual host before you set a `robots.txt` file.
-
-**Staging:** lets you turn on either Local Live staging or Remote Live staging. To enable staging, the *Enable propagation of changes from the site template* box on the Details tab must be unchecked. With staging enabled, changes to the site template are automatically propagated to the staged site, not to the live site. The changes still must be approved before the site is published to live.
-
-**Analytics:** lets you set a Google Analytics ID that is used for your site. 
-
-When creating a site from a site template, the initial form provides a new option that lets you decide if you want to copy the pages from the template as public pages or as private pages. By default, the site is linked to the site template, and changes to the site template propagate to any site based on it. A checkbox appears that allows users to unlink the site template if the user has permission to do so.
-
-<!-- | TODO: Add screenshot of form used to create a site from a site template | -->
-
-Site templates are very powerful for managing many similiar sites. Let's look further at how they work. 
-
-
-
-### User Groups [](id=lp-6-1-ugen12-user-groups-0)
-
-User Groups are arbitrary groupings of users. These groups are created by portal administrators to group users together who don't necessarily share an obvious hierarchical attribute. Users can be assigned to multiple user groups. User Groups are most often used to achieve one of the following goals:
-
-- Simplify the assignment of several roles to a group of users. For example, in a University portal, a user group could be created to group all teachers independently of their organization to make it easier to assign one or several roles at once to all the teachers.
-- Simplify membership to one or more sites by specifying a group of users. Using the previous example, all teachers could be members of the sites *University Employees* and *Students and Teachers Collaboration Site* by adding the *Teachers* user group as a member.
-- Provide predefined public or private pages to the users that belong to the user group. For example, the *Teachers* user group could be created to ensure that the home page on all teachers' personal sites has the same layout and applications.
-
-Creating a user group is easy. Navigate to the control panel, click the *Users Groups* link, and then click the *Add* button. There are only two fields to fill out: Name and Description. Click *Save* and you will be redirected back to the *User Groups* page of the control panel.
-
-![Figure 12.11: Creating a New User Group](../../images/server-configuration-new-user-group.png)
-
-Note in the figure above how each user group may have a site, with public and private pages. This is a special type of site that determines the base pages on all user group members' personal sites. The user group site works in a similar way to Site Templates, except that in this case the the User Group Site pages are not copied for each user, but are rather shown dynamically along with any custom pages that the user may have on his/her personal site. For this reason, users are not allowed to make any modifications to the pages that are *inherited* from the user group. Alternatively the administrators of the user group can define certain areas as customizable, just like they can for regular sites. This allows users to decide which applications they want to place in certain areas of each page, as well as change their configuration.
-
-![Figure 12.12: User Group Actions](../../images/01-editing-a-user-group.png)
-
-As with the other resources in the portal, you can click the *Actions* button next to a user group to perform various operations on that group.
-
-**Edit:** allows you to modify the name or description of the user group.
-
-**Permissions:** lets you define which roles have permissions to view, edit, delete, assign members to the user group, etc.
-
-**Site Permissions:** lets you define which roles have permissions to manage the user group site, to specify who can administer its pages, export and import pages and portlet content, manage archived setups, and configure its applications. 
-
-**Manage Site Pages:** allows you to add pages to the user group site, import or export pages, organize the page hierarchy, modify the look and feel of the pages, add a logo, or access other options from the Manage Site interface.
-
-**Assign Members:** lets you search for and select users in the portal to be assigned to this user group as well as view the users currently belonging to the user group .
-
-**Delete:** deletes the user group.
-
-If your user group has a site, two options named **Go to the Site's Public Pages** and **Go to the Site's Private Pages** also appear as links in your user group's Actions menu. Clicking one of these links opens the user group's site in a new browser window. Any changes you make to the site are saved automatically. You can safely close the browser window when you're done.
-
-#### Creating and editing a User Group [](id=lp-6-1-ugen12-creating-and-editing-a-user-group-0)
-
-A user group's site can be administered from the control panel. Select *User Groups* from the control panel to see a list of existing user groups. To edit a user group, click on its name or description. You can also click on the *Actions* button to see the full list of actions that can be performed on a user group. When editing a user group, you can view its site, if it exists, by clicking the *Open Pages* link under Public Pages or Private Pages (read below for details on user group sites).
-
-As an example of how user group sites can be used, let's create a user group called *Bloggers* along with a simple template. We'll call the site template *Bloggers* too. It should contain a single *Blog* page with the Blogs and Recents Bloggers portlets on it. First, navigate to the User Groups page of the control panel. Then click *Add* and enter the name *Bloggers* for your user group, and optionally, a description. Click *Save* to create your user group.
-
-Our next step is to assign an existing user to the *Bloggers* group.
-
-#### Assigning Members to a User Group [](id=lp-6-1-ugen12-assigning-members-to-a-user-group-0)
-
-Navigate to *Users and Organizations* and create a new user called *Joe Bloggs*. Then navigate to the User Groups page of the control panel and click *Actions* &rarr; *Assign Members* next to the Bloggers group. Click the *Available* tab to see a list of users that can be assigned to the group.
-
-![Figure 12.13: Assigning Members to a User Group](../../images/01-adding-members-to-user-group.png)
-
-From that list, one or more users can be selected to be assigned as members of the user group.
-
-For example, by default, newly created users are given *Welcome* pages on the public pages portion of their personal sites. This Welcome page contains the Language, Search, and Blogs portlets. You can see the effect of the *Bloggers* site template on the public pages of Joe Bloggs's personal site in the figure above. When Joe Bloggs was added to the *Bloggers* group, he received a *Blogs* page with the *Blogs* and *Recent Bloggers* portlets.
-
-After the user group has been created and several users have been added to it, you can add all those users at once as members of a site in one step from the *Site Memberships* UI of the site. You can also use the user group when assigning a role to users from the roles management UI.
-
-The next section describes a more advanced usage of user groups: User Group Sites.
-
-#### User Group Sites [](id=lp-6-1-ugen12-user-group-sites-0)
-
-Liferay allows users to each have a personal site consisting of public and private pages. Permissions can be granted to allow users to customize their personal sites at will. Originally, the default configuration of those pages could only be determined by the portal administrator through the `portal-ext.properties` file and, optionally, by providing the configuration in a LAR file. You can still configure it like this, but it isn't very flexible or easy to use.
-
-By using User Group Sites, portal administrators can add pages to the personal sites of all the users who belong to the site in an easy and centralized way. All the user group site's public pages are shown as part of the user's public personal site. All the user group site's private pages are shown as part of the user's private site. If a user belongs to several user groups, all of its pages are made part of his public and private site. In an educational institution's portal, for example, teachers, staff, and students could get different default pages and applications on their personal sites.
-
-The pages that a user personal site *inherits* from a User Group still belong to the User Group and thus cannot be changed in any way by the users. What the user group administrators can do is define certain areas of the pages as customizable to allow the users to choose which applications and what configuration should be shown in those areas. If a user has permission to add custom pages to his/her personal site, besides those *inherited* from a user group, the custom pages are always shown last.
-
-Since the *inheritance* of pages is done dynamically, this new system introduced in Liferay 6.1 can scale to hundreds of thousands of users or even millions of them without an exponential impact in performance. Previous versions of Liferay used a different technique that required that the user group pages were copied to each user's personal site. For portals upgrading from previous versions of Liferay, you can keep the old behavior, but it has been left disabled by default. You can enable it by adding the following line to your portal-ext.properties file:
-
-	user.groups.copy.layouts.to.user.personal.site=true
-
-When this property is set to true, once the template pages have been copied to a user's personal site, the copies may be modified by the user. Changes done to the originals in the User Group will only affect new users added to the user group. Users with administrative privileges over their personal sites can modify the pages and their content provided that the *Allow Site Administrators to Modify the Pages Associated with This Site Template* box has been checked for the template. When a user is removed from a user group, the associated pages are removed from the user's personal site. Moreover, if a user is removed from a group and is subsequently added back, the group's template pages are copied to the user's site a second time. Note that if a user group's site is based on a site template and an administrator modifies the user group's site template after users have already been added to the group, those changes only take effect if the *Enable propagation of changes from the site template* box for the user group was checked.
-
----
-
-![tip](../../images/01-tip.png) **Tip:** Previous to Liferay 6.1, pages from different user groups could be combined on users' personal sites by using a naming convention. Liferay 6.1 simplifies the way user groups' sites work by disallowing page combination. Set the property *user.groups.copy.layouts.to.user.personal.site* to true if you depend on that functionality.
-
----
-
-You can create a user group's site manually or base it on a site template. To create a user group's site manually, use the *Actions* menu mentioned above and choose *Manage Site Pages*. You can add a new public or private page by selecting the appropriate tab and then clicking the *Add Page* button. Once the user group has at least one public or private page in place, you can go back to the *Actions* menu and click on the *Go to the Site's Public Pages* or *Go to the Site's Private Pages* link to open the user group's site in a new browser window. In the new window, you can add more pages and portlets and configure site settings.
-
-You can also base a user group's site on a template. When editing a user group, use the Public Pages and Private Pages drop down lists to select a site template. Leave the *Enable propagation of changes from the site template* box checked to automatically update users' personal sites if the associated site template changes. If you uncheck this box but recheck it later, the template pages are copied to the users' sites, overwriting any changes they may have made. You can allow users to make changes to the pages they receive from the user group by enabling the customization options on each page.
-
-This flexibility lets you achieve almost any desired configuration for a user's personal site without having to modify it directly. When a user is assigned to a user group, the configured site pages are copied directly to the user's personal site.
-
-Following with the example above, we will create a site for our sample user group. Edit the *Bloggers* group. Choose an existing Site Template from the drop down menu for the user group's public pages and click *Save*. After the page reloads you can click to see the pages and make any changes desired, add additional pages, etc.
-
-![Figure 12.14: Selecting a Template for the User Group Site](../../images/user-group-site-template-selected.png)
-
-Also, try visiting the public site of one of the users that belong to the user group. You will see how all of the pages in the user group appear as part of the user site, including the ones copied from the site template and the ones added afterwards.
-
-### Roles [](id=lp-6-1-ugen12-roles-0)
-
-Roles are groupings of users that share a particular function within the portal, according to a particular scope. Roles can be granted permissions to various functions within portlet applications. You can think of a role as a description of a function, such as Message Board Administrators. A role with that name is likely to have permissions relevant to the specific Message Board portlets delegated to it. Users who are placed in this role will inherit these permissions.
-
-The roles page of the control panel serves as a single interface which lets you create roles, assign permissions to them, and assign users to the roles. Roles can be scoped by portal, site, or organization. To create a role, click the *Roles* link, and then click the *Add* button. You can choose a Regular, Site, or Organization role. A regular role is a portal-scoped role. Make a selection and then type a name for your role, a title, and a description. The name field is required but the title and description are optional. If you enter a name and a title, the title will be displayed in the list of roles on the Roles page of the control panel. If you do not enter a title, the name will be displayed. When you have finished, click *Save*.
-
-![Figure 12.15: Roles Page and Role Actions Menu](../../images/01-roles-and-role-actions.png)
-
-After you save, Liferay redirects you to the list of roles. To see what functions you can perform on your new role, click the *Actions* button.
-
-**Edit:** lets you change the name, title, or description of the role.
-
-**Permissions:** allows you to define which users, user groups, or roles have permissions to edit the role.
-
-**Define Permissions:** defines what permissions this role grants. This is outlined in the next section.
-
-**Assign Members:** lets you search and select users in the portal to be assigned to this role. These users will inherit any permissions that have been assigned to this role.
-
-**View Users:** allows you to view the users who have been assigned to this role.
-
-**Delete:** permanently removes a role from the portal.
-
-Next, let's examine how to configure the permissions granted by different roles.
-
-#### Defining Permissions on a Role [](id=lp-6-1-ugen12-defining-permissions-on-a-role-0)
-
-Roles serve as repositories of permissions to be assigned to users who belong to them. So, to use a role, you need to assign members to it and define the permissions that you want to grant to members of the role.
-
-![Figure 12.16: Defining Permissions on a Role](../../images/01-defining-permissions-on-a-role.png)
-
-When you click the *Actions* button on portal-scoped role and select *Define Permissions*, you will be shown a list of all the permissions that have been defined for that role. Click the *Add Permissions* drop-down menu to see a list of the permissions that can be defined. As of Liferay version 6.1, these permissions fall into seven categories: Portal, Site Content, Site Application, Control Panel: Personal, Control Panel: Site, Control Panel: Portal, and Control Panel: Server. For non-portal scoped roles, you need to click on the *Options* link on individual portlets, then *Configuration*, then *Permissions* to assign permissions within the site or organization that owns the portlet. 
-
-Portal permissions cover portal-wide activities that comprise several categories, such as site, organization, location, password policy, etc. This allows you to create a role that, for example, can create new sites within the portal. This would allow you to grant users that particular permission without making them overall portal administrators.
-
-Site Content permissions cover the content that the installed portlets create. If you pick one of the portlets from this list, you'll get options for defining permissions on its content. For example, if you pick Message Boards, you'll see permissions for creating categories or threads, or deleting and moving topics.
-
-Site Application permissions affect the application as a whole. So, using our Message Boards example, an application permission might define who can add the Message Boards portlet to a page.
-
-The control panel permissions affect how the portlet appears to the user in the control panel. Some control panel portlets have a Configuration button, so you can define who gets to see that, as well as who gets to see an application in the control panel.
-
-![Figure 12.17: Message Board Content Permissions](../../images/01-message-board-content-permissions.png)
-
-Each possible action to which permissions can be granted is listed. To grant a permission, check the box next to it. If you want to limit the scope of the permission to a particular site, click the *Limit Scope* link, and then choose the site. Once you have chosen the permissions granted to this role, click *Save*. For a portal-scoped Message Boards Administrator role, you might grant content permissions for every action listed. After you click *Save*, you will see a list of all permissions that are currently granted to this role. From here, you can add more permissions or go back by clicking a link in the breadcrumb list or the *Return to Full Page* link.
-
-Roles are very powerful, and allow portal administrators to define various permissions in whatever combinations they like. This gives you as much flexibility as possible to build the site you have designed.
-
-#### Special Note about the Power Users Role [](id=lp-6-1-ugen12-special-note-about-the-power-users-role-0)
-
-Prior to Liferay 6.0, the default configurations of many Liferay portlets allowed power users, but not regular users, to access them. Liferay 6.0 and subsequent versions grant the same default permissions to both power users and regular users. This way, portal administrators are not forced to use the power users role. However, Liferay encourages those who do to create their own custom permissions for the role. 
-
----
-
-![tip](../../images/01-tip.png) Note: Prior to Liferay version 6.0, Power Users and Users did *not* have the same default permissions. So if are using Liferay 5.2 or a previous version, it's dangerous to remove the Power Users role from the default user associations: this could remove certain permissions that you expect to apply to all users. If you decide to remove the Power Users role from the default user associations anyway, you will probably want to modify the permissions on certain portlets to make them accessible to all users. To do this, see the section on Plugins Configuration below.
-
----
-
-Liferay 6.0 introduced a new feature to Liferay's permissions system: teams. Let's examine them next.
-
-### Teams [](id=lp-6-1-ugen12-teams-0)
-
-Teams don't appear as a link in the control panel because they exist *within* sites. Teams allow site administrators a greater degree of flexibility than was possible using just user groups and roles. They allow site administrators to create various sets of users and permissions for site-specific functions. Teams are the preferred method for collecting permissions within a single site. 
-
-If you create a team for one site, the permissions defined for it are not available to any other sites. In contrast, if you assigned a custom role to a user group, the role would be available portal-wide even though the specific permissions defined by it would only apply within the scope of a designated site. Furthermore, team members, unlike user group members, are guaranteed to be members of the desired site.
-
-To create a team within a site, first naviagte to the *Control Panel &rarr; Sites* page then and then select *Actions &rarr; Manage Memberships* for the site within which you want to create a team. Finally, click *View &rarr; Teams* and click the Add Team button.
-
-![Figure 12.18: Creating a Team within a Site](../../images/01-creating-a-team.png)
-
-After you've clicked the *Add Team* button and entered a name and a description, click *Save*. Your new team will appear in the list. To add members, simply click on *Actions &rarr; Assign Members*.
-
-Permission management for teams is handled at the individual portlet level, using the *Options &rarr; Configuration &rarr; Permissions* tab of the portlet itself. Remember that the portlet options link is the wrench symbol at the top of a portlet. This enables users who wouldn't have access to all of the necessary options in the control panel to manage permissions through teams.
-
-[Assigning Portlet Permissions to a Team](../../images/01-assigning-portlet-permissions-to-teams)
-
-To give a team access to a particular portlet function, access the *Permissions* tab of a portlet residing on a page, check the boxes corresponding to permissions you want to assign to the teams, and then click *Save*. That's it! Now your team is ready to perform their functions. Next, let's look at how to configure Liferay's portal settings.
 
