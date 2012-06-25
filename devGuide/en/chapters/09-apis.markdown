@@ -992,6 +992,521 @@ The previous snippet also demonstrates using the `trackbacks` attribute which is
 
 As we've demonstrated, the `ServiceContext` can be used to transfer lots of useful information for your services.
 
+## Using Message Bus [](id=lp-6-1-dgen09-using-message-bus-0)
+
+The Message Bus is a service level API used to exchange messages within Liferay. The Message Bus exchanges only String messages, providing loose coupling between message producers and consumers. For this reason, you won't have class loading issues. The Message Bus is located in portal-kernel, in the global class loader, making it accessible to every deployed webapp. Although, remote messaging is not supported, messages can be sent across a cluster using ClusterLink classes.
+
+Common uses for Message Bus include:
+
+- Sending search index write events
+- Sending subscription emails
+- Handling messages at scheduler endpoints
+- Running asynchronous processes
+
+You too can leverage Message Bus for sending messages between and within your plugins.
+
+In this section, you will learn about
+
+-	the Message Bus System
+-	Synchronous and Asynchronous messaging
+-	Dispatching messages *serially* and *in-parallel* to multiple listeners
+-	Java and JSON style message formats
+
+For starters, let's get a handle on the architecture of Liferay's Message Bus System.
+
+### The Message Bus System [](id=lp-6-1-dgen09-the-message-bus-system-0)
+
+The Message Bus system is comprised of the following:
+
+-	**Message Bus** - Manages transfer of messages from message *senders* to message *listeners*
+
+-	**Destinations** - Are addresses or endpoints to which *listeners* register to receive messages
+
+-	**Listeners** - Consume messages received at destinations. They receive all messages sent to their registered destinations.
+
+-	**Senders** - Invoke the Message Bus to send messages to destinations
+
+Your services can *send* messages to one or more destinations. And your services can *listen* to one or more destinations.
+
+The figure below depicts services sending messages to one or more destinations and services listening to one or more destinations. An individual service can be both a message sender and a message listener. In this figure, for example, both *Plugin 2 - Service 3* and *Plugin 5 - Service 7* send and listen for messages.
+
+![Figure 9.1: Example, Message Bus system](../../images/msg-bus-system.png)
+
+The Message Bus supports synchronous and asynchronous messaging:
+
+- 	**Synchronous messaging** - After sending a message, the sender blocks waiting for a response from a recipient
+
+- 	**Asynchronous messaging** - After sending a message, the sender is free to continue processing. The sender can be configured to receive a call-back or can simply "send and forget." We'll cover both synchronous and asynchronous messaging implementations in this section.
+
+	- **Call-back** - The sender can include a call-back destination key as the *response destination* for the message. The recipient (listener) can then send a *response* message back to the sender via this *response destination*.
+
+	- **"Send-and-Forget"** - The sender includes no call-back information in the message sent and simply continues with processing
+
+What's great is that your destinations, listeners, and mappings between them are all configurable via Spring in your plugin's `messaging-spring.xml` file.
+
+**Configuration** of Message Bus is done using the following files:
+
+-	`WEB-INF/src/META-INF/messaging-spring.xml` - Specifies your destinations, listeners, and their mappings to each other
+
+-	`WEB-INF/web.xml` - Holds a listing of deployment descriptors for your plugin. Be sure to add `messaging-spring.xml` to your list of Spring configurations in this file.
+
+---
+
+![note](../../images/tip-pen-paper.png)**Note:** Internal file `META-INF/messaging-core-spring.xml` of `portal-impl.jar` specifies the default Message Bus class, default asynchronous message sender class, and default synchronous message sender class for Liferay
+
+---
+
+**Message Types** include using either `Message` or `JSONObject` classes. Within Liferay core services, we typically serialize and deserialize in JSON. In our examples, we'll cover using both types of message classes.
+
+So far, we've introduced the Message Bus System including message types, destinations, senders, listeners, and approaches to sending messages. Next, we'll show you how easy it is to create your destinations, register listeners, and send your messages. To help demonstrate, we'll implemenet a business use-case.
+
+### Example Use-Case - Procurement process [](id=lp-6-1-dgen09-example-use-case---procurement-process-0)
+
+For our use-case, we'll consider a fictitious company Jungle Gyms R-Us. They distribute playground equipment, buying the equipment from manufacturers and selling the equipment to various retailers. We'll focus on the company's process for procuring new jungle gym equipment. Let's layout this process now.
+
+Jungle Gyms R-Us (Jungle Gyms) involves the following departments in their procurement process:
+
+-	*Procurement Department* - Scouts out the latest equipment deals of manufacturers
+
+-	*Finance Department* - Determines whether the equipment can be purchased based on budget
+
+-	*Legal Department* - Determines whether the equipment's safety ratings are acceptable
+
+-	*Warehouse Department* - Recieves the equipment, stores it, and prepares it for shipping 
+
+-	*Sales Department* - Builds relationships with prospective customers in order to sell them products
+
+The departments currently use email to exchange comments about new equipment purchases. But someone always seems to be left out of "the loop." For example, Sales will be "gung-ho" about getting their hands on the latest and greatest spring rider animals from Boingo-Boingo Industries, but they won't consider the failing safety reviews discovered by the Legal department, because the Legal department forgot to copy the Sales department in their email to Procurement. Tempers fly, feelings get hurt, and everybody avoids hanging out in the company breakroom for the next couple weeks.
+
+Liferay's [Workflow with Kaleo](http://www.liferay.com/documentation/liferay-portal/6.1/user-guide/-/ai/workflow-with-kal-3) would be appropriate for resolving this. But to help demonstrate the components and capabilities of the Message Bus system we'll resolve the Jungle Gym's communication woes using Message Bus.
+
+Here are the inter-department message exchanges we'll accomodate:
+
+| Message | &nbsp;Sender | &nbsp;Listener | &nbsp;Response | &nbsp;Response Listeners |
+--------- | ------------ | ------------ | ---------------- | -------------- |
+  Request permission to proceed with purchase | &nbsp;Procurement | &nbsp;Finance | &nbsp;required | &nbsp;Procurement |
+  Request permission to proceed with purchase | &nbsp;Procurement | &nbsp;Legal | &nbsp;required | &nbsp;Procurement |
+  Notify and solicit feedback on new purchase | &nbsp;Procurement | &nbsp;Warehouse | &nbsp;optional | &nbsp;Procurement, Sales |
+  Notify and solicit feedback on new purchase | &nbsp;Procurement | &nbsp;Sales | &nbsp;optional | &nbsp;Procurement, Warehouse |
+  Broadcast equipment news | &nbsp;Procurement | &nbsp;Employees | &nbsp;none | &nbsp;none |
+---
+
+Let's implement Procurement's request to Finance first.
+
+### Synchronous messaging [](id=lp-6-1-dgen09-synchronous-messaging-0)
+
+In our example, equipment purchases cannot proceed without approval from Finance and Legal departments. But, since these special offers from the manufacturers often only last for a couple hours, Procurement makes it their top priority to get approval as soon as possible. Let's implement their exchange using *synchronous* messaging.
+
+![Figure 9.2: Synchronous messaging](../../images/msg-bus-sync-msg.png)
+
+The following table, describes how we'll set things up.
+
+| &nbsp;Destination | |           |                 |
+  Key | &nbsp;Type | &nbsp;Sender | &nbsp;Receivers |
+----- | ---------- | ------------ | --------------- |
+  `jungle/finance/purchase` | &nbsp;synchronous | &nbsp;Procurement | &nbsp;Finance |
+  `jungle/finance/purchase/response` | &nbsp;synchronous | &nbsp;Finance | &nbsp;Procurement |
+  `jungle/legal/purchase` | &nbsp;synchronous | &nbsp;Procurement | &nbsp;Legal |
+  `jungle/legal/purchase/response` | &nbsp;synchronous | &nbsp;Legal | &nbsp;Procurement |
+---
+
+Notice we've planned for Finance to send its response messages to a destination on which Procurement will listen. This allows for a full-bodied response message to be sent back to Procurement in addition to the response object returned from sending the message.
+
+**Procurement Department *sends* a purchase approval request:**
+
+	Message message = new Message();
+	message.put("department", "Procurement");
+	message.put("partName", part.getName(Locale.US));
+
+	message.setResponseId("1111");
+	message.setResponseDestinationName("jungle/finance/purchase/response");
+
+	try {
+		String financeResponse = (String) MessageBusUtil.sendSynchronousMessage(
+			"jungle/finance/purchase", message, 10000);
+
+		System.out.println(
+			"Procurement received Finance sync response to purchase approval for " +
+			part.getName(Locale.US) + ": " + financeResponse);
+
+		message.setResponseId("2222");
+		message.setResponseDestinationName("jungle/legal/purchase/response");
+
+		String legalResponse = (String) MessageBusUtil.sendSynchronousMessage(
+			"jungle/legal/purchase", message, 10000);
+
+		System.out.println(
+			"Procurement received Legal sync response to purchase approval for " +
+			part.getName(Locale.US) + ": " + legalResponse);
+
+		if (financeResponse.contains("yes") && legalResponse.contains("yes")) {
+			sendPurchaseNotification(part, userId);
+		}
+	}
+	catch (MessageBusException e) {
+		e.printStackTrace();
+	}
+
+Note, the following about this *sender*:
+
+1.	Creates the message using Liferay's `Message` class
+2.	Stuffs the message with key/value pairs
+3.	Sets a response ID and response destination for listeners to use in replying back
+4.	Sends the message to the destination with a timeout value of 10,000 milliseconds
+5.	Blocks waiting for the response
+
+**Finance Department *listens* for purchase approval requests and *replies* back:**
+
+	public class FinanceMessagingImpl implements MessageListener {
+
+		public void receive(Message message) {
+			try {
+				doReceive(message);
+			}
+			catch (Exception e) {
+				_log.error("Unable to process message " + message, e);
+			}
+		}
+
+		protected void doReceive(Message message)
+			throws Exception {
+
+			String department = (String) message.get("department");
+			String partName = (String) message.get("partName");
+
+			System.out.println("Finance received purchase request for " +
+				partName + " from " + department);
+
+			Message responseMessage = MessageBusUtil.createResponseMessage(
+				message);
+
+			responseMessage.put("department", "Finance");
+			responseMessage.put("partName", partName);
+			responseMessage.setPayload("yes");
+
+			MessageBusUtil.sendMessage(
+				responseMessage.getDestinationName(), responseMessage);
+		}
+
+		private static Log _log =
+			LogFactoryUtil.getLog(FinanceMessagingImpl.class);
+	}
+
+Note the following about this *listener*:
+
+1.	Implements the `receive(Message message)` method of the `com.liferay.portal.kernel.messaging.MessageListener` interface
+2.	Extracts values from the `Message` parameter by *getting* values associated with known keys
+3.	Creates a `Message` based on the message received via `MessageBusUtil.createResponseMessage(message)`. Method `MessageBusUtil.createResponseMessage(message)` accesses the response destination name from the `message` variable and sets the destination of the response message.
+4.	Sets the *payload* of the response message
+5.	Sends the response `Message` to the response destination.
+
+The listener for the Legal Department could be implemented in a similar manner. So, we'll account for Legal Department related classes in our configuration.
+
+**Message Bus Configuration for the purchase approval request process:**
+
+In order for the Message Bus to direct messages from destinations to listeners, we must register the listeners by configuring the appropriate mappings in our plugin's `WEB-INF/src/META-INF/messaging-spring.xml` file. If you don't already have this file in your plugin then create it. Here is the configuration:
+
+	<?xml version="1.0"?>
+
+	<beans
+		default-destroy-method="destroy"
+		default-init-method="afterPropertiesSet"
+		xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+	>
+
+		<!-- Listeners -->
+
+		<bean id="messageListener.finance_listener" class="com.liferay.training.parts.messaging.impl.FinanceMessagingImpl" />
+		<bean id="messageListener.legal_listener" class="com.liferay.training.parts.messaging.impl.LegalMessagingImpl" />
+		<bean id="messageListener.procurement_listener" class="com.liferay.training.parts.messaging.impl.ProcurementMessagingImpl" />
+
+		<!-- Destinations -->
+
+		<bean id="destination.finance.purchase" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
+			<property name="name" value="jungle/finance/purchase" />
+		</bean>
+
+		<bean id="destination.finance.purchase.response" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
+			<property name="name" value="jungle/finance/purchase/response" />
+		</bean>
+
+		<bean id="destination.legal.purchase" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
+			<property name="name" value="jungle/legal/purchase" />
+		</bean>
+
+		<bean id="destination.legal.purchase.response" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
+			<property name="name" value="jungle/legal/purchase/response" />
+		</bean>
+
+		<!-- Configurator -->
+
+		<bean id="messagingConfigurator" class="com.liferay.portal.kernel.messaging.config.PluginMessagingConfigurator">
+			<property name="messageListeners">
+				<map key-type="java.lang.String" value-type="java.util.List">
+					<entry key="jungle/finance/purchase">
+						<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+							<ref bean="messageListener.finance_listener" />
+						</list>
+					</entry>
+					<entry key="jungle/finance/purchase/response">
+						<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+							<ref bean="messageListener.procurement_listener" />
+						</list>
+					</entry>
+					<entry key="jungle/legal/purchase">
+						<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+							<ref bean="messageListener.legal_listener" />
+						</list>
+					</entry>
+					<entry key="jungle/legal/purchase/response">
+						<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+							<ref bean="messageListener.procurement_listener" />
+						</list>
+					</entry>
+				</map>
+			</property>
+			<property name="destinations">
+				<list>
+					<ref bean="destination.finance.purchase"/>
+					<ref bean="destination.finance.purchase.response"/>
+					<ref bean="destination.legal.purchase"/>
+					<ref bean="destination.legal.purchase.response"/>
+				</list>
+			</property>
+		</bean>
+	</beans>
+
+The configuration specifies the following:
+
+-	*Listener beans* - Specify classes to handle messages
+-	*Destination beans* - Specify the class *type* and *key* names of the destinations
+-	*Configurator bean* - Maps listeners to their destinations
+
+Upon Finance sending its purchase approval request message for a new three-story spiral slide, the console reports Finance receiving the message, Procurement receiving the *callback* response from Finance, and Procurement receiving the *synchronous* response returned from sending the message:
+
+	Finance received purchase request for three-story spiral slide from Procurement
+	Procurement received Finance callback response to purchase approval for three-
+	story spiral slide: yes
+	Procurement received Finance sync response to purchase approval for three-story 
+	spiral slide: yes
+	Legal received purchase request for three-story spiral slide from Procurement
+	Procurement received Legal callback response to purchase approval for three-
+	story spiral slide: yes
+	Procurement received Legal sync response to purchase approval for three-story 
+	spiral slide: yes
+
+Whew! Jungle Gym has the cash to purchase this cool new slide and the Legal Department has no gripes about the slide's safety ratings!!
+
+Next, let's have Procurement notify the Sales and Warehouse departments to solicit their feedback.
+
+### Asynchronous messaging with callbacks [](id=lp-6-1-dgen09-asynchronous-messaging-with-callbacks-0)
+
+As a refresher, asynchronous messaging consists of sending a message and then continuing on with processing. Importantly, the sender does not block waiting for an immediate response. This leaves the sender free to continue on with other things. However, it is often important for the *listener* to have the means to optionally respond to the sender. This can be done using a call-back.
+
+The call-back model is appropriate for addressing Jungle Gym's needs for Procurement to notify Sales and Warehouse departments about incoming equipment while at the same time soliciting their feedback. To assure all three departments are in "the loop", any responses from Sales and Warehouse departments will be posted to a shared destination.
+
+The following table, describes how we'll set things up.
+
+| &nbsp;Destination | |            |                 |
+  Key | &nbsp;Type | &nbsp;Senders | &nbsp;Receivers |
+----- | ---------- | ------------ | --------------- |
+  jungle/purchase | &nbsp;async serial | &nbsp;Procurement |  &nbsp;Sales, Warehouse |
+  jungle/purchase/response | &nbsp;synchronous | &nbsp;Sales, Warehouse | &nbsp;Procurement |
+---
+
+The following image shows asynchronous messaging in which messages are dispatched *serially*.
+
+![Figure 9.3: Asynchronous messaging with *serial* dispatching](../../images/msg-bus-async-serial-msg.png)
+
+Let's package the message as a `JSONObject` and send it to the destination:
+
+	JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+	jsonObject.put("department", "Procurement");
+	jsonObject.put("partName", part.getName(Locale.US));
+	jsonObject.put("responseDestinationName", "jungle/purchase/response");
+
+	MessageBusUtil.sendMessage("jungle/purchase", jsonObject.toString());
+
+Then we'll have the Sales and Warehouse departments listen for and handle messages like this ...
+
+	public void receive(Message message) {
+
+		try {
+			doReceive(message);
+		}
+		catch (Exception e)
+		{
+			_log.error("Unable to process message " + message, e);
+		}
+	}
+
+	protected void doReceive(Message message)
+		throws Exception {
+
+		String payload = (String)message.getPayload();
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(payload);
+
+		String department = jsonObject.getString("department");
+		String partName = jsonObject.getString("partName");
+		String responseDestinationName = jsonObject.getString(
+						"responseDestinationName");
+
+		System.out.println("Warehouse received purchase notification for " +
+			partName + " from " + department);
+
+		jsonObject = JSONFactoryUtil.createJSONObject();
+
+		jsonObject.put("department", "Warehouse");
+		jsonObject.put("partName", partName);
+		jsonObject.put("comment", "Ugh! We're running out of space!!");
+
+		MessageBusUtil.sendMessage(
+			responseDestinationName, jsonObject.toString());
+	}
+
+This *listener* deserializes the `JSONObject` from the message in the following manner:
+
+1.	Gets the message *payload* and casts it to a `String`
+2.	Creates a `JSONObject` from the payload string
+3.	Gets values from the `JSONObject` using its *getter* methods
+
+Furthermore, this class demonstrates the Warehouse Department packaging up a response message and sending it back to the Procurement Department by:
+
+1.	Creating a `JSONObject`
+2.	Stuffing it with name/value pairs
+3.	Sending the response message to the response destination of the original message
+
+You've just used the `JSONObject` message type and have sent an *asynchronous* response message using a call-back. It's just that easy!
+
+The Sales department could be implemented the same way. Of course, Sales would put "Sales" as its department value and would likely have a different comment.
+
+Now, if you recall, we want Procurement, Sales, and the Warehouse departments to all be in "the loop" concerning their responses to the new playground equipment. So, let's leverage our destination *keys* and department names in handling these shared responses.
+
+Here is how the Warehouse may handle messages it receives:
+
+	public void receive(Message message) {
+
+		try {
+			if (message.getDestinationName().equals(
+					"jungle/purchase"))
+			{
+				doReceive(message);
+			}
+			else if (message.getDestinationName().equals(
+					"jungle/purchase/response"))
+			{
+				doReceiveResponse(message);
+			}
+		}
+		catch (Exception e)
+		{
+			_log.error("Unable to process message " + message, e);
+		}
+	}
+
+	protected void doReceiveResponse(Message message)
+		throws JSONException {
+
+		String payload = (String)message.getPayload();
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(payload);
+
+		String department = jsonObject.getString("department");
+
+		if (!department.equals("Warehouse")) {
+			System.out.println(
+				"Warehouse is in the loop on response from " + department);
+		}
+	}
+
+Note, in `receive(Message)`, we handle the messages differently depending on their destinations; messages to `jungle/purchase` are handled as Procurement's purchase notifications, while messages to `jungle/purchase/response` are treated as departmental responses to Procurement's purchase notifications. Importantly, the `doReceiveResponse(Message)` method checks that the response is from a department other than itself.
+
+Here are the configuration elements we added to the `messaging-spring.xml` from the previous section:
+
+- Listener beans
+
+		<bean id="messageListener.warehouse_listener" class="com.liferay.training.parts.messaging.impl.WarehouseMessagingImpl" />
+		<bean id="messageListener.sales_listener" class="com.liferay.training.parts.messaging.impl.SalesMessagingImpl" />
+
+- Destination beans - The purchase notifications will be sent to a *serial* destination and the responses will be sent to a *synchronous* destination.
+
+		<bean id="destination.purchase" class="com.liferay.portal.kernel.messaging.SerialDestination">
+			<property name="name" value="jungle/purchase" />
+		</bean>
+	
+		<bean id="destination.purchase.response" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
+			<property name="name" value="jungle/purchase/response" />
+		</bean>
+
+- Configuration bean listener map entries - Warehouse and Sales are registered to listen for the notifications from Procurement. All three of these departments are registered to listen for the inter-departmental responses. 
+
+		<entry key="jungle/purchase">
+			<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+				<ref bean="messageListener.warehouse_listener" />
+				<ref bean="messageListener.sales_listener" />
+			</list>
+		</entry>
+		<entry key="jungle/purchase/response">
+			<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+				<ref bean="messageListener.procurement_listener" />
+				<ref bean="messageListener.warehouse_listener" />
+				<ref bean="messageListener.sales_listener" />
+			</list>
+		</entry>
+
+- Configuration bean destination list references
+
+		<ref bean="destination.purchase"/>
+		<ref bean="destination.purchase.response"/>
+
+Lastly, let's remember to send news of these new products to *all* Jungle Gym employees. 
+
+### Asynchronous "Send and Forget" [](id=lp-6-1-dgen09-asynchronous-send-and-forget-0)
+
+In the "send and forget" model of asynchronous messaging, the sender simply sends out messages and continues processing. We'll apply this behavior to Jungle Gym's company wide notification of new products.
+
+Since Procurement is not expecting response messages from individual employees, there is no need for the employee's listener to package up a responses. But, we do however want everyone to get product news at the *same time*. So, instead of dispatching news to employees *serially* we'll dispatch *in parallel*.
+
+
+![Figure 9.4: Asynchronous messaging with *parallel* dispatching](../../images/msg-bus-async-parallel-msg.png)
+
+We'll specify a *parallel* destination type in our `messaging-spring.xml`:
+
+- Destination bean
+
+		<bean id="destination.employee.news" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+				<property name="name" value="jungle/employee/news" />
+		</bean>
+
+- Listener bean
+
+		<bean id="messageListener.employee_listener" class="com.liferay.training.parts.messaging.impl.EmployeeMessagingImpl" />
+	
+- Configuration bean listener map entry
+
+		<entry key="jungle/employee/news">
+			<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+				<ref bean="messageListener.employee_listener" />
+			</list>
+		</entry>
+
+- Configuration bean destination list reference
+
+		<ref bean="destination.employee.news"/>
+
+Congratulations! You've implemented inter-departmental communications for the procurement process of Jungle Gyms R-Us. Along the way you've exercised the following from Message Bus:
+
+-	Sender, listener, and destination components
+-	Synchronous and Asynchronous messaging schemes
+-	*Serial* and *in-parallel* message dispatching
+-	Java and JSON message types
+
+You're really getting the hang of Liferay's APIs. Way to go!
+
 ## Conclusion [](id=conclusi-4)
 
-Well, you've covered a lot of ground here in learning how to use the API locally and remotely, how to enable/disable remote services and access to them, and how to leverage ServiceContext objects in your use of Liferay services. Well done! Next, we'll take a look at some of the powerful frameworks of Liferay Portal, learn how they work and how you can leverage them.
+Well, you've covered a lot of ground here in learning how to use the API locally and remotely, how to enable/disable remote services and access to them, and how to leverage ServiceContext objects in your use of Liferay services. You've also rolled up your sleeves in working with Message Bus. Well done! Next, we'll take a look at some of the powerful frameworks of Liferay Portal, learn how they work and how you can leverage them.
