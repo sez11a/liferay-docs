@@ -1,4 +1,4 @@
-# Liferay Collaboration Suite [](id=liferay-collaboration-sui-4)
+# Collaboration Suite [](id=liferay-collaboration-sui-4)
 
 Liferay Portal ships with a robust suite of collaboration applications which you can use to build communities of users for your site. These applications provide all the features that you would expect of standalone versions outside of a portal setting. The difference with Liferay's collaboration suite, however, is that all of the applications share a common look and feel, security model and architecture. They inherit the strengths of being part of Liferay's development platform so you can use them in combination with Liferay's user management and content management features to build a well-integrated, feature-rich web site.
 
@@ -8,7 +8,7 @@ This chapter focuses on how to use Liferay's collaboration suite. We explain how
 -   Calendars
 -   Message Boards
 -   Wikis
-<!--
+<!--     Need text for Polls 
 -  Polls
 -->
 -   Chat
@@ -16,7 +16,7 @@ This chapter focuses on how to use Liferay's collaboration suite. We explain how
 
 We'll discuss how these features work together to facilitate information flow within your portal and provide an enhanced experience for your users.
 
-## Understanding Liferay's common configuration options [](id=understanding-liferay-s-common-configuration-options)
+### Understanding Liferay's common configuration options [](id=understanding-liferay-s-common-configuration-options)
 
 Just like siblings have common features inherited from their parents, applications that ship with Liferay also share common features. These are centered around scoping, sharing, permissions, and archives. So before we get into the nitty gritty of the applications themselves, it's best to cover these common features first, starting with the concept of scope.  
 
@@ -651,11 +651,11 @@ At the top of the portlet is a list of links which allow you to navigate around 
 
 The Wiki portlet is another full-featured Liferay application with all of the features you expect from a state of the art wiki. Next, we'll look at how Liferay handles live chat.
 
-<!--
-The Polls section & head ref goes here?
+<!--  The Polls section goes here  -->
 
-## Find out what others think or do using Polls
--->
+## Find out what others think or do using Polls [](id=lp-6-1-ugen07-find-out-what-others-think-or-do-using-polls-0)
+
+<!--   Need text  -->
 
 ## Staying in touch with the Chat [](id=ch-4)
 
