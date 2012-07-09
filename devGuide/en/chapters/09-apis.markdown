@@ -1042,7 +1042,7 @@ The Message Bus supports synchronous and asynchronous messaging:
 
 	- **"Send-and-Forget"** - The sender includes no call-back information in the message sent and simply continues with processing
 
-What's great is your destinations, listeners and mappings between them are all configurable via Spring in your plugin's `messaging-spring.xml` file.
+What's great is your destinations, listeners, and mappings between them are all configurable via Spring in your plugin's `messaging-spring.xml` file.
 
 **Configuration** of Message Bus is done using the following files:
 
