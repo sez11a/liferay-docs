@@ -85,7 +85,7 @@ Next, we'll step back for a moment and consider the security layers of Liferay's
 
 By default, a user connecting from the same machine Liferay is running on can access remote services so long as that user has permission to use those services in Liferay's permissions system. Of course, you are not really "remote" unless you are accessing services from a different machine; but we recommend using the API in a remote manner to trigger the security checks. Liferay has two layers of security when it comes to accessing its services remotely. The first layer of security only applies to clients invoking the API using a remote protocol. Invoking the API using a remote protocol, without having explicit rights to both layers, results in a remote exception being thrown and access being denied to those services. However, if you want to invoke the API using Java invocation, skip to the the paragraph that refers to the **second layer of security**.
 
-The **first layer of security** that a client needs to get through in order to call a method from the service layer is *invoker IP filtering*. For example, you may have a batch job which runs on another machine in your network. This job looks in a particular shared folder on your network and uploads documents to your site's Documents and Media portlet on a regular basis, using Liferay's web services. To enable this batch job to get through the IP filter, the portal administrator will need to set portal properties appropriately to allow the machine access to that particular type of service. For example, if the batch job uses the Axis web services to upload the documents, the portal administrator would need to add the IP address of the machine on which the batch job is running to the `axis.servlet.hosts.allowed` property. A typical entry might look like this:
+The **first layer of security** a client needs to get through to call a method from the service layer is *invoker IP filtering*. For example, you may have a batch job which runs on another machine in your network. This job looks in a particular shared folder on your network and uploads documents to your site's Documents and Media portlet on a regular basis, using Liferay's web services. To enable this batch job to get through the IP filter, the portal administrator will need to set portal properties appropriately to allow the machine access to that particular type of service. For example, if the batch job uses the Axis web services to upload the documents, the portal administrator would need to add the IP address of the machine on which the batch job is running to the `axis.servlet.hosts.allowed` property. A typical entry might look like this:
 
 	axis.servlet.hosts.allowed=192.168.100.100, 127.0.0.1, SERVER_IP
 
@@ -99,7 +99,7 @@ If the IP address of the machine on which the batch job is running is listed wit
 
 ---
 
-The **second layer of security** is Liferay's *security model* that it uses for every object in the portal. The user ID that accesses the services remotely must have the proper permission to operate on the objects it will be accessing. Otherwise, a remote exception will be thrown. The Portal Administrator will need to make use of Liferay's usual means of granting users access to these resources. For example, say that a Documents and Media Library folder called *Documents* has been set up in a site and that a role has been created called *Document Uploaders* which has the rights to add documents to this folder. Your batch job will be accessing Liferay's web services in order to upload documents into this folder. In order for this to work, you will have to call the web service using the user ID of a user that is a member of this group (or the user ID of a user that has individual rights to add documents to this folder). Otherwise, the user will be prevented from using the Web Service.
+The **second layer of security** is Liferay's *security model* that it uses for every object in the portal. The user ID that accesses the services remotely must have the proper permission to operate on the objects it will be accessing. Otherwise, a remote exception will be thrown. The Portal Administrator will need to make use of Liferay's usual means of granting users access to these resources. For example, say a Documents and Media Library folder called *Documents* has been set up in a site and a role has been created called *Document Uploaders* which has the rights to add documents to this folder. Your batch job will be accessing Liferay's web services to upload documents into this folder. In order for this to work, you will have to call the web service using the user ID of a user who is a member of this group (or the user ID of a user with individual rights to add documents to this folder). Otherwise, the user will be prevented from using the Web Service.
 
 ![Figure 8.2: Liferay SOA's second layer of security](../../images/soa-security-layer-2.png)
 
@@ -111,7 +111,7 @@ To call the AXIS web service using credentials, you would use the following URL 
 
 The user ID is the user's ID from the Liferay database. This may be obtained by logging in as the user and navigating to the *My Account* page of the control panel. On this page, the user ID appears below the user's profile picture and above the birthday field.
 
-For example, to get Organization data using a user that has the ID of *2* and a password of *test*, you would use the following URL:
+For example, to get Organization data using a user with the ID of *2* and a password of *test*, you would use the following URL:
 
 	http://2:test@localhost:8080/api/secure/axis/Portal_OrganizationService
 
@@ -149,7 +149,7 @@ Liferay's services also provide access via *Simple Object Access Protocol* (*SOA
 
 3. Add user `test` to the UserGroup
 
-Here are the SOAP related classes that we'll use:
+Here are the SOAP related classes we'll use:
 
     import com.liferay.portal.model.CompanySoap;
 	import com.liferay.portal.model.UserGroupSoap;
@@ -343,7 +343,7 @@ Some things to note about the URL:
 
 -	The screen name and password are passed in as credentials.
 
-- 	The name of the service (e.g. `Portal_UserGroupService`) is specified at the end of the URL. Remember that the service name can be found in the web service listing like the one we looked at previously.
+- 	The name of the service (e.g. `Portal_UserGroupService`) is specified at the end of the URL. Remember, the service name can be found in the web service listing like the one we looked at previously.
 
 The operations `getCompanyByVirtualHost()`,  `getUserIdByScreenName()`, `getUserUserGroups()`, `addUserGroup()` and `addUserGroupUsers()` are specified for the `-ServiceSOAP` classes `CompanyServiceSoap`, `UserServiceSoap` and  `UserGroupServiceSoap` in the WSDL files. And information on parameter types, parameter order, request type, response type, and return type are conveniently specified in the WSDL for each Liferay web service. It's all there for you!
 
@@ -419,7 +419,7 @@ For example, let's look the `DLAppService`:
 	public interface DLAppService {
 	...
 
-It contains the annotation that is found on portal startup. Notice the following lines in the console output when the debug log level is set:
+It contains the annotation found on portal startup. Notice the following lines in the console output when the debug log level is set:
 
 	10:55:06,595 DEBUG [JSONWebServiceConfigurator:121] Configure JSON web service actions
 	10:55:06,938 DEBUG [JSONWebServiceConfigurator:136] Configuring 820 actions in ... ms
@@ -534,7 +534,7 @@ This maps all the service methods of the class to URL class name `dla` instead o
 
 ##### Manual registration mode [](id=lp-6-1-dgen08-manual-registration-mode-0)
 
-Up to now, it is expected that most of the service methods are going to be exposed; that only specific methods are to be hidden (the *blacklist* approach). But sometimes you might need a different behavior: to explicitly specify only those methods that are to be exposed (*whitelist* approach). This is possible, too, using so-called *manual mode* on class-level annotation. Then, it is up to you annotate only those methods which are to be exposed.
+Up to now, it is expected most of the service methods are going to be exposed; that only specific methods are to be hidden (the *blacklist* approach). But sometimes you might need a different behavior: to explicitly specify only those methods that are to be exposed (*whitelist* approach). This is possible, too, using so-called *manual mode* on class-level annotation. Then, it is up to you annotate only those methods which are to be exposed.
 
 Then you can annotate only methods that have to be exposed.
 
@@ -556,7 +556,7 @@ JSON Web Services are enabled on Liferay Portal by default but can be easily dis
 
 #### Strict HTTP methods [](id=lp-6-1-dgen08-strict-http-methods-0)
 
-JSON Web Service services are, by default, mapped to either GET or POST HTTP methods. If a service method has name that starts with `get`, `is` or `has`, the service is assumed to be read-only and is bound to the GET method; otherwise it is bound to POST.
+JSON Web Service services are, by default, mapped to either GET or POST HTTP methods. If a service method has a name that starts with `get`, `is` or `has`, the service is assumed to be read-only and is bound to the GET method; otherwise it is bound to POST.
 
 By default, the portal does not check HTTP methods when invoking a service call; that is, the portal works in "non-strict http method" mode as services may be invoked using any HTTP method. If you need the strict mode, you can set it with portal property: 
 
@@ -594,7 +594,7 @@ It is important to understand how calls to service methods are matched, especial
 
 The general rule is that besides the method name, you must provide **all** parameters for that service method. Even if some parameter is to be `null`, you must still provide it.
 
-Note, however, that how parameters are provided (as part of the URL line, as request parameters, etc.) is not important nor is the order of the parameters.
+Note that how parameters are provided (as part of the URL line, as request parameters, etc.) is not important nor is the order of the parameters.
 
 An exception to the rule of *all* parameters being required, is when using numeric *hints* to match methods. Let's look at using hints next.
 
@@ -606,7 +606,7 @@ It is possible to add numeric hints that specify how many method arguments a ser
 
 Here, the `.2` is a hint, so only service methods with 2 arguments will be matched, others will be ignored for matching.
 
-One important difference when a hint is specified, is that now you do not have to specify all of the parameters. All missing arguments are treated as `null`. Therefore, the previous example may be called with ...
+One important difference when a hint is specified, is now you do not have to specify all of the parameters. All missing arguments are treated as `null`. Therefore, the previous example may be called with ...
 
 	/foo/get-bar.2/param1/123
 
@@ -624,7 +624,7 @@ When a method name is overloaded, the *best match* will be used: The method that
 
 #### Passing parameters as URL query [](id=lp-6-1-dgen08-passing-parameters-as-url-query-0)
 
-Parameters can be passed as request parameters, too. The difference is that parameter names are specified as is (e.g. camel-case) and are set equal to their argument values:
+Parameters can be passed as request parameters, too. The difference is parameter names are specified as is (e.g. camel-case) and are set equal to their argument values:
 
 	http://localhost:8080/api/secure/jsonws/dlapp/get-file-entries?repositoryId=10172&folderId=0
 
@@ -636,7 +636,7 @@ Parameters can be passed in a mixed way: some can be part of the URL path and so
 
 #### Sending NULL values [](id=lp-6-1-dgen08-sending-null-values-0)
 
-To pass a `null` value for an argument, simply prefix that parameter name with a dash `-`. For example: 
+To pass a `null` value for an argument, simply prefix the parameter name with a dash `-`. For example: 
 
 	.../dlsync/get-d-l-sync-update/company-id/10151/repository-id/10195/-last-access-date
 
@@ -676,7 +676,7 @@ As you see, it's a common upload form that invokes the `addFileEntry` method of 
 
 #### JSON RPC [](id=lp-6-1-dgen08-json-rpc-0)
 
-JSON Web Service may be invoked using [JSON RPC](http://json-rpc.org/). A good part of JSON RPC 2.0 specification is supported in Liferay JSON Web Services. One limitation is that parameters may be passed only as *named* parameters; positional parameters are not supported, as there are too many overloaded methods for convenient use of positional parameters.
+JSON Web Service may be invoked using [JSON RPC](http://json-rpc.org/). A good part of JSON RPC 2.0 specification is supported in Liferay JSON Web Services. One limitation is parameters may be passed only as *named* parameters; positional parameters are not supported, as there are too many overloaded methods for convenient use of positional parameters.
 
 Here is an example of invoking a JSON web service using JSON RPC:
 
@@ -771,7 +771,7 @@ Let's take a look a some returned values from calls to services. In fact, let's 
 
 		{"addedByLDAPImport":false,"companyId":10154,"description":"Created using JSON WS","name":"MyUserGroup33","parentUserGroupId":0,"userGroupId":13162}
 
-Notice that the JSON string returned represents the `UserGroup` object you just created. The object has been serialized into a JSON string. As a starting point for understanding JSON strings, go to [json.org](http://www.json.org/).
+Notice the JSON string returned represents the `UserGroup` object you just created. The object has been serialized into a JSON string. As a starting point for understanding JSON strings, go to [json.org](http://www.json.org/).
 
 To find out how to serialize Java objects, maps and lists, check out article [JSON Serialization](http://www.liferay.com/community/wiki/-/wiki/Main/JSON+Serialization) by Igor Spasi&#263;. 
 
@@ -866,9 +866,9 @@ If you are invoking the service from a servlet, a Struts action or any other fro
 				portletRequest);
 		BlogsEntryServiceUtil.addEntry(..., serviceContext);
 
-To see an example of how to populate a `ServiceContext` with information from a request object, check out the code of the `ServiceContextFactory.getInstance(...)` methods. Not only do the methods demonstrate setting parameters such as scope group ID, company ID, language ID, etc., but they also demonstrate accessing and populating more complex context parameters such as tags, categories, asset links, headers, and the attributes parameter. Note, by calling `ServiceContextFactory.getInstance(String className, PortletRequest portletRequest)`, you can assure that your expando bridge attributes are also set on the `ServiceContext`.
+To see an example of how to populate a `ServiceContext` with information from a request object, check out the code of the `ServiceContextFactory.getInstance(...)` methods. Not only do the methods demonstrate setting parameters such as scope group ID, company ID, language ID, etc., but they also demonstrate accessing and populating more complex context parameters such as tags, categories, asset links, headers, and the attributes parameter. Note, by calling `ServiceContextFactory.getInstance(String className, PortletRequest portletRequest)`, you can assure your expando bridge attributes are also set on the `ServiceContext`.
 
-You're not limited to using only Java with ServiceContext; you can use ServiceContext from other languages like JavaScript. In fact, since our API can be invoked from JavaScript, it is often required to pass the ServiceContext from JavaScript to the server, and this can be done in a very simple way -- by passing the ServiceContext as any other JavaScript object. There are plenty of examples of this in the JavaScript code of Liferay's portlets. Here is an example from `[liferay-portal]/portal-web/html/portlet/journal/js/main.js`that demonstrates using ServiceContext in calling the `updateStructure` method of the JournalStructure service:
+You're not limited to using only Java with ServiceContext; you can use ServiceContext from other languages like JavaScript. In fact, since our API can be invoked from JavaScript, it is often required to pass the ServiceContext from JavaScript to the server, and this can be done in a very simple way -- by passing the ServiceContext as any other JavaScript object. There are plenty of examples of this in the JavaScript code of Liferay's portlets. Here is an example from `[liferay-portal]/portal-web/html/portlet/journal/js/main.js` that demonstrates using ServiceContext in calling the `updateStructure` method of the JournalStructure service:
 
 	
 	var instance = this;
@@ -907,7 +907,7 @@ You're not limited to using only Java with ServiceContext; you can use ServiceCo
 		}
 	);
 
-Note, that the example above uses JSON to populate the ServiceContext.
+Note, the example above uses JSON to populate the ServiceContext.
 
 On the front-end, you can use Alloy UI and Liferay UI tags in your forms to extract information and automatically insert the corresponding data into your request object. As an example, see `portal-web/docroot/html/portlet/blogs/edit_entry.jsp`. Next, let's take a look at an example of accessing information from a `ServiceContext`.
 
@@ -1042,7 +1042,7 @@ The Message Bus supports synchronous and asynchronous messaging:
 
 	- **"Send-and-Forget"** - The sender includes no call-back information in the message sent and simply continues with processing
 
-What's great is that your destinations, listeners, and mappings between them are all configurable via Spring in your plugin's `messaging-spring.xml` file.
+What's great is your destinations, listeners and mappings between them are all configurable via Spring in your plugin's `messaging-spring.xml` file.
 
 **Configuration** of Message Bus is done using the following files:
 
@@ -1074,7 +1074,7 @@ Jungle Gyms R-Us (Jungle Gyms) involves the following departments in their procu
 
 -	*Warehouse Department* - Recieves the equipment, stores it, and prepares it for shipping 
 
--	*Sales Department* - Builds relationships with prospective customers in order to sell them products
+-	*Sales Department* - Builds relationships with prospective customers to sell them products
 
 The departments currently use email to exchange comments about new equipment purchases. But someone always seems to be left out of "the loop." For example, Sales will be "gung-ho" about getting their hands on the latest and greatest spring rider animals from Boingo-Boingo Industries, but they won't consider the failing safety reviews discovered by the Legal department, because the Legal department forgot to copy the Sales department in their email to Procurement. Tempers fly, feelings get hurt, and everybody avoids hanging out in the company breakroom for the next couple weeks.
 
