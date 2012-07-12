@@ -135,7 +135,7 @@ directory to convert the userGuide into complete English markdown, html, odt, an
         </copy>
     </target>
 
-    <target name="prepare-dist" depends="check-images, number-headers, number-images-dir" description="numbers the headers and images in the files, creates dist directory, copies images and overriding with language specific images">
+    <target name="prepare-dist" depends="check-images, number-images-dir" description="numbers the headers and images in the files, creates dist directory, copies images and overriding with language specific images">
         <echo message="... creating ${dist.dir}/${lang} directory"/>
         <mkdir dir="${dist.dir}/${lang}"/>
         <copy todir="${dist.dir}/${lang}/images">
@@ -262,9 +262,9 @@ directory to convert the userGuide into complete English markdown, html, odt, an
             <arg value="markdown"/>
             <arg value="-t"/>
             <arg value="odt"/>
-            <arg value="+RTS"/>
+            <!--<arg value="+RTS"/>
             <arg value="-K64m"/>
-            <arg value="-RTS"/>
+            <arg value="-RTS"/>-->
             <arg value="-smart"/>
             <arg value="-o"/>
             <arg value="${build.dir}/${lang}/${lang}-${doc.dir}.odt"/>

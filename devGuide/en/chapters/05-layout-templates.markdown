@@ -15,7 +15,7 @@ Let's get our "spatial relation" juices flowing as we create a custom layout tem
 
 Our Plugin SDK supports layout templates as plugins. And creating layout templates with Liferay Developer Studio is easier than ever.
 
-***Using Developer Studio:*** go to *File* &rarr; *New* &rarr; *Liferay Project* and do the following:
+In Developer Studio, go to *File* &rarr; *New* &rarr; *Liferay Project* and do the following:
 
 1. Fill in the *Project* and *Display* names
 3. Select the appropriate *Plugins SDK* and *Portal Runtime*
@@ -58,7 +58,7 @@ The SDK automatically appends "-layouttpl" to the project name. You can create m
 
 Here is a snapshot of files for a layout template project named "Columns 1 4 1" as shown in Developer Studio's *Package Explorer*.
 
-![Figure 5.2: Example layout template named "Columns 1 4 1" editor](../../images/layout-template-dirs.png)
+![Figure 5.2: Example layout template named "Columns 1 4 1" editor](../../images/layout-template-dirs.PNG)
 
 We'll discuss the project files next.
 
@@ -88,11 +88,9 @@ Now that you are familiar with the layout template's files and directory structu
 
 Deploy your layout templates from either of the following environments:
 
-- ***Using Developer Studio -*** Drag your layout template project onto your server
+- From *Developer Studio* - Drag your layout template project onto your server.
 
-- ***Using the terminal -*** Execute the following command from your your layout template project directory:
-
-		ant deploy
+- From *Terminal* - Execute `ant deploy` from your layout template project directory.
 
 Upon deploying your template, your server will output messages indicating that your template was read, registered and is now available for use.
 
@@ -114,7 +112,7 @@ Open your layout template's TPL file in Studio's *Layout Template Editor* to see
 
 Then click the triangle in the upper left corner of the editor to bring the Palette into view.
 
-![Figure 5.5: TPL file in *Layout Template Editor* with palette in view](../../images/layout-template-tpl-blank-with-palette.png)
+![Figure 5.5: TPL file in *Layout Template Editor* with palette in view](../../images/layout-template-tpl-blank-with-palette.PNG)
 
 From the palette you can drag rows, columns, and even existing templates onto your canvas.
 
@@ -165,7 +163,7 @@ Let's embed the *navigation portlet* and *search portlet* in the first and last 
 -	**Instanceable** - Whether multiple instances of the portlet can exist in the portal
 -	**Web Application Context** - The portlet's context (required for *custom* portlets only). Go to the portlet's *Look and Feel* &rarr; *Advanced Styling* to find the context in the Fully Qualified Portlet ID (FQPI). The context is the portion of the Portlet ID string that follows  `WAR_`. The *Web Application Context* in the following figure is *myhelloworldportlet*.
 
-![Figure 5.10: Fully Qualified Portlet ID (FQPI) for a custom portlet](../../images/layout-template-custom-portlet-look-n-feel.png)
+![Figure 5.10: Fully Qualified Portlet ID (FQPI) for a custom portlet](../../images/layout-template-custom-portlet-look-n-feel.PNG)
 
 The following table describes the portlets we'll embed in the layout:
 
@@ -212,7 +210,7 @@ Here is the TPL that implements embedding these portlets:
 
 The following figure shows a page with the portlets embedded in the "Columns 1 4 1" layout template.
 
-![Figure 5.11: Page with portlets embedded in layout template](../../images/layout-template-embed-portlets-visual.png)
+![Figure 5.11: Page with portlets embedded in layout template](../../images/layout-template-embed-portlets-visual.PNG)
 
 See how simple it is to embed portlets in your pages?
 
