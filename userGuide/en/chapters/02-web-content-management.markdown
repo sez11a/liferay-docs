@@ -241,11 +241,7 @@ If you're interested in seeing what is being sent to the search engines, select 
 
 **Analytics:** allows you to integrate your pages with Google Analytics. Liferay provides seamless integration with Google Analytics, allowing you to place your ID in one place, then it will get inserted automatically on every page. This enables you to focus your efforts on building the page, rather than remembering to put the code everywhere. Google Analytics is a free service which lets you do all kinds of traffic analysis on your site, so you can see who visits, where visitors are from and what pages they most often visit. This helps you to tweak your site so you can provide the most relevant content to your users.
 
-Now that you know how to configure sites, let's look at templates.
-
-### Page Templates and Site Templates [](id=lp-6-1-ugen02-page-templates-and-site-templates-0)
-
-*Page Templates* and *Site Templates* are invaluable tools for building similar pages on larger portals. As you continue to add pages to sites in your portal, you'll notice repeatable patterns in the designs of those pages. Page templates enable you to preconfigure a single page and then apply it to any new page you create. Site Templates allow you to do the same thing, but on the scale of a site--if you have multiple sites that use a similar structure of pages, you can create a single site template and use it to create as many sites as desired. For a full explanation of Page Templates and Site Templates, see chapter 2. 
+For more information on the advanced configuration of sites, including Page Templates and Site Templates, please see chapter 3. For now, let's move on to how you'd add content to pages. 
 
 ### Site Content [](id=lp-6-1-ugen02-site-content-0)
 

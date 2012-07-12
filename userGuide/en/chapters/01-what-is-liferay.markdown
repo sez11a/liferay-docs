@@ -140,7 +140,7 @@ If you're building an enterprise system, portals were designed in the first plac
 
 You get all this--not to mention the automatic Facebook and OpenSocial integration mentioned above--simply by using Liferay's development platform. It's a very powerful platform, and certainly worth your investigation. 
 
-### Customizing Liferay Portal to use as a base
+### A great integration platform [](id=lp-6-1-ugen01-a-great-integration-platform-0)
 
 Beyond using Liferay as a development platform for new applications, Liferay Portal has also been designed to be extended and modified. As an open source project, its source code is available, but Liferay Portal's developers have designed the product to be customized to make it easy to build whatever you want out of it. 
 
@@ -156,7 +156,17 @@ Using this construct, you can build anything from Facebook, to Yahoo Groups, to 
 
 In the second scenario, Liferay Portal lets you create completely separate instances of itself from the same installation. Users, groups, organizations, sites, and roles from each instance are kept completely separate. If a user registers for a user id on one instance, he or she would have to register as a new user on another instance as well. 
 
+<<<<<<< Updated upstream
 This lets you host many different, separate web sites from one Liferay Portal installation, which is a great alternative for web hosting companies or smaller organizations that want to share the cost of their web sites. Users of each instance have access to the same powerful content management, collaboration, social, and web development platform that they'd have if they were operating from a single, standalone installation. 
+=======
+This lets you host many different, separate web sites from one Liferay Portal installation. Users of each instance have access to the same powerful content management, collaboration, social, and web development platform that they'd have if they were operating from a single, standalone installation.
+
+## Extending and customizing Liferay for your own needs  [](id=lp-6-1-ugen01-extending-and-customizing-liferay-for-your-own-needs--0)
+
+Beyond using Liferay as a development platform for new applications, Liferay Portal has also been designed to be extended and modified. As an open source project, its source code is available, but Liferay Portal's developers have designed the product to make it easy to build whatever you want out of it. 
+
+Special software components called *hook* and *ext* plugins enable developers to change any aspect of Liferay's interface and behavior--without having to modify any of Liferay Portal's source code. This provides you all the benefits of the "build from scratch" strategy we mentioned earlier, but without all the effort to build from scratch. If you want to make a change to the user registration screens, add support for a proprietary single sign-on mechanism that you've written, revise the user interface for the message boards application, or anything else, you can make those customizations. And if you're a developer, we're sure you know that it's a whole lot easier to customize something that *almost* does things exactly the way you want than it is to write that feature from scratch. With Liferay Portal, you *can* have your cake and eat it too. 
+>>>>>>> Stashed changes
 
 ## Summary
 
