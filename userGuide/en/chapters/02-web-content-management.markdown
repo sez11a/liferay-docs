@@ -347,7 +347,7 @@ You'll soon discover that Liferay's WCM is easy to learn and highly configurable
 
 We'll be using Liferay's WCM to publish simple pieces of content, develop templates to define how content is to be displayed, set up a workflow for content to be approved, schedule when content is to be published and much, much more.
 
-<!-- Section iii of new outline   -->
+
 ## Authoring (basic) content [](id=building-a-site-with-liferay-s-w-3)
 
 You've been assigned the task to build a web site for a an innovative new social networking site called Nose-ster. You've decided to take advantage of Liferay Portal and its rapid deployment features as well as its ability to get a fully functional, content-rich web site with integrated social features up and running in little time.
@@ -362,7 +362,27 @@ We'll begin by creating simple content using Liferay's WYSIWYG Editor and then w
 
 ![Figure 2.12: Choosing a Site in the Content Section](../../images/04-web-content-context-dropdown.png)
 
-When you manage web content from the control panel you can select the location where the content resides. For instance, you can add content that's available to a specific site or globally across the portal. The Content section of the control panel displays as its heading the name of the site you're currently working on. This heading is called the context menu selector: you can change the scope of where you'd like to view, edit or create content by using the drop-down selector attached to the heading. We will add our first piece of content to the *Nose-ster* site, which we defined earlier in the chapter as the default site.
+When you manage web content from the control panel you can select the location where the content resides. For instance, you can add content that's available to a specific site or globally across the portal. The Content section of the control panel displays as its heading the name of the site you're currently working on. This heading is called the *context menu selector*: you can change the scope of where you'd like to view, edit or create content by using the drop-down selector attached to the heading. 
+
+##### Web Content Localization 
+
+When you create new web content, you see the *Default Language* setting at the top of the new Web Content form. Liferay now has an improved user interface to help translators convert content into multiple languages. When you add or edit web content, you now see a translators section where you can edit the default language of the content, add new translations and see previously added translations.
+
+![Figure 2.x: The improved localization interface is more versatile than ever.](../../images/localization-menu.png)
+
+In previous versions of Liferay you were unable to see the original language and the translations simultaneously. When you select a language now, a new popup appears that allows you to view both.
+
+![Figure 2.x: Easily switch between translations while working with web content.](../../images/localization-menu2.png)
+
+You can open and edit several translations at once to compare or review different versions. Plus, the first time you open the popup, it is preloaded with the default language. 
+
+The *Remove Translation* button at the bottom of the localization popup is a new option you can use when you want a direct way to delete a full translation. 
+
+When using complex structures, this popup will only show fields marked as *Localizable*.
+
+![Figure 2.x: Fields not checked as Localizable will not display in the pop-up window.](../../images/localizable-example.png)
+
+The New Web Content Localization feature makes translating more user-friendly then ever before. Immediately below this is Liferay's WYSIWYG Editor. Now, let's explore this feature by adding our first piece of content to the *Nose-ster* site, which we defined earlier in the chapter as the default site.
 
 ##### Rich, WYSIWYG Editing [](id=lp-6-1-ugen03-rich-wysiwyg-editing-0)
 
@@ -384,15 +404,128 @@ The WYSIWYG editor is a flexible tool that gives you the ability to add text, im
 
 If you're HTML savvy, Liferay WCM doesn't leave you out in the cold. You can click the *Source* button and write your own HTML if you wish.
 
-##### Assigning Permissions [](id=lp-6-1-ugen03-assigning-permissions-0)
+On the right of the New Web Content form is a Content menu. Each option opens to a new form that allows you to better manage your web content.
 
-Permissions in Liferay WCM work the same way they do everywhere else in Liferay. By default, content is viewable by Anyone (Guest Role). You can limit viewable permissions by selecting any Role from the drop-down or in the list. Additionally, Liferay Portal provides the ability to customize permissions in more detail. Select the *More Options* link next to the drop down button and you'll find the different activities you can grant or deny to your web content.
+**Abstract:** lets you to create a brief summary of the web content. You can also include a small image file to go along with the summary.
+
+**Categorization:** specifies the content type from a list of options. They are Announcements, Blogs, General, News, Press Release, and Test. You can also create tags to make the content easier to find in a search.
+
+**Schedule:** customizes the date and time your content publishes and/or expires.
+
+**Display Page:** lets you determine where the web conents will be displayed when linked from other pages.  
+
+
+**Related Assets:** enables you to connect any number of assets within a site or across the portal, even if they don’t share any tags and aren’t in the same category. You can connect your content to a Blogs Entry, Message Boards Message, Web Content, Calendar Event, Bookmarks Entry, Documents and Media Document, and a Wiki Page.
+
+**Permissions:** customize who has access to the content. By default, content is viewable by Anyone (Guest Role). You can limit viewable permissions by selecting any Role from the drop-down or in the list. Additionally, Liferay Portal provides the ability to customize permissions in more detail. Select the *More Options* link next to the drop down button and you'll find the different activities you can grant or deny to your web content.
 
 ![Figure 2.15: Permissions for Web Content](../../images/04-web-content-content-permissions.png)
 
-For this piece of web content, we don't need to change anything. After you're finished with permissions, click *Save*. This saves the content in draft form. Once you're satisfied with your changes, select *Publish*. This makes the content available for display but we still have some work to do to enable users to see it. In Liferay WCM, all content resides in a container, which is one of two portlets: Web Content Display or Web Content List. By far the most frequently used is the *Web Content Display* portlet. Let's look at how it works. 
+**Custom fields:** customize metadata about the web content and can be anything you like, such as author or creation date. If custom fields have been defined for web content (which can be done from the *Custom Fields* page of the control panel), they appear here. 
 
-<!-- Section iv of new outline -->
+For more information on Custom Fields see the Custom Fields section in chapter 16.
+
+When you finish creating your content, you have three options. Click the *Save as Draft* button to hold your changes without publishing the content, click *Publish* to display the content in the portal or *Cancel* to discontinue content creation.
+
+For this piece of web content, we don't need to change anything. After you're finished with permissions, click *Save*. This saves the content in draft form. Once you're satisfied with your changes, select *Publish*. This makes the content available for display but we still have some work to do to enable users to see it. In Liferay WCM, all content resides in a container, which is one of two portlets: Web Content Display or Web Content List. By far the most frequently used is the *Web Content Display* portlet. Let's look at how it works.
+
+
+ 
+New Web Content Localization UI
+Web Content Default Display Pages
+
+<!-- this section moved above
+##### Assigning Permissions [](id=lp-6-1-ugen03-assigning-permissions-0)
+-->
+
+<!-- New section on localization  -->
+
+
+
+
+
+
+<!-- New section on Display pages   -->
+
+
+For further information on this feature, see the Display Page section under Using the Asset Publisher in chapter 5.
+
+
+Web Content Default Display Pages 
+
+A new feature in Liferay 6.1 is the ability to determine where the web conents will be displayed when linked from other pages. We have added the concept of Canonical URL, which is a unique URL for the articles that will redirect the visitor to the default display page of the article. 
+
+	The best way to explain this is with a real use case. Imagine you have a news paper and you have a sports section and a technology section. You add a Sports page and a Tech page to your site, each one with a especific banner and look and feel. 
+
+	Now you want that all your sports articles are shown in its page and the same for tech, but you know that in Liferay, articles are not related to pages: you can add an article as many times as you need in different web content displays portlets or in configured asset publishers, and this continues beign like that: you can add it in all the places you want, but the problem is that in case you have a “View in context” link where will you show your article? That's where default display page comes into the game: for each article we define the default display page and it will be shown there. 
+	
+	Many questions up to now, I guess: How to create a display page?  What happens when a web content is given a DDP?
+
+How to create a display page
+
+There are two ways of creating a display page: with a web content display page template or manually.
+
+Using “Content Display Page” template: adding this kind of pages will automatically create everything you need for you.
+
+Manually: to do this manually you need to do two things
+                      1) Add an asset publisher to a page
+                      2) Configure it to be the Default Asset Publisher of the page, so in case there are several asset publishers in the same page, the system knows where to show the content. You can do that click on your asset publisher – configuration – display settings - “Set as the Default Asset Publisher for This Page”
+
+Default Display Pages in Action
+
+	Once you've given an article its default display page direct links will redirect the user to its default display page. To achieve this you can add an asset publisher to another page (say the “home” page of the newspaper) and configure it to “show in a specific portlet”. If you click on the link, you'll be redirected to the DDP of each article. 
+
+	Apart from that, you now see that the link is something like this
+		www.mysite.com/my-article
+	This is the canonical Url and it's a really good improvement for SEO, because it doesn't have information of the page, so it can't change in case you decide the content to be shown in any other page.
+	
+	Now, in our use case, imagine you have 100 sports articles and 100 tech articles. In previous versions you'd need to create a page for each article to show it: now with only one sports page  and one tech page, you can show all articles in the same way. Cool! :)
+	
+	This feature is used in search results, in related assets and in asset publishers.
+
+
+
+
+
+<!--- New expaneded section on Related Assets    -->
+
+For each asset, in its edit content view, there's a section called *Related Assets* where you can choose one of the asset types and then select a concrete entry of the type you choosed. You can add as many entries as you want. 
+	
+![Figure 2.x: Assets can be connected to many different types of content in the portal.](../../images/related-assets.png)
+	
+The entries you select as related assets will appear in the main view of every asset:
+
+![Figure 2.x: Caption.](../../images/related-assets-link.png)
+
+The links that appear are clickable and they will lead you to see the related content on its context.
+
+<!--
+Message for the GUI?:
+This application displays related assets when users click on an asset in the page.
+-->
+
+###### The Related Assets portlet
+
+To display the relationships between assets, we have created the Related Assets portlet.
+
+When you add the portlet to a page, it will show the related assets of the asset being shown in full view in the current page.
+	
+You can add as many related assets portlet to every page as you need.
+	
+This portlet is a modification/extension of the asset publisher, which allows you to configure it to achieve further filtering. For example you can add three Related assets portlets to a page and configure one to show only blog entries, the second one to show only images and the third one to show only documents. When you access the page, you'll see Related Blogs, Related Images and Related Documents.
+
+
+
+
+
+
+
+
+
+
+**********************************************************************************************************
+**********************************************************************************************************
+
 ## Publishing (basic) content [](id=lp-6-1-ugen03-publishing-content-with-the-web-content-display-portlet-0)
 
 Now that we've created and published our first piece of web content for Nose-ster, it's time to display it. First, add the *Web Content Display* portlet to our Welcome page by selecting *Add &rarr; Web Content Display* from the Dockbar.
