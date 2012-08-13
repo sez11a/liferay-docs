@@ -406,15 +406,96 @@ If you're HTML savvy, Liferay WCM doesn't leave you out in the cold. You can cli
 
 On the right of the New Web Content form is a Content menu. Each option opens to a new form that allows you to better manage your web content.
 
-**Abstract:** lets you to create a brief summary of the web content. You can also include a small image file to go along with the summary.
+![Figure 2.x: The Content menu allows you to manage your content from one spot.](../../images/wcm-abstract.png)
+
+**Abstract:** lets you to create a brief summary of the web content. You can pair the summary text with a small image file.
 
 **Categorization:** specifies the content type from a list of options. They are Announcements, Blogs, General, News, Press Release, and Test. You can also create tags to make the content easier to find in a search.
 
 **Schedule:** customizes the date and time your content publishes and/or expires.
 
-**Display Page:** lets you determine where the web conents will be displayed when linked from other pages.  
+**Display Page:** lets you determine where the web conents will be displayed when linked from other pages. We have added the concept of the Canonical URL, which is a unique URL for the articles that will redirect the visitor to the default display page of the article. 
+
+Imagine you have a news paper and you have a sports section and a technology section. You add a Sports page and a Tech page to your site, each one with a especific banner and look and feel. 
+
+Now you want that all your sports articles are shown in its page and the same for tech, but you know that in Liferay, articles are not related to pages: you can add an article as many times as you need in different web content displays portlets or in configured asset publishers, and this continues beign like that: you can add it in all the places you want, but the problem is that in case you have a “View in context” link where will you show your article? That's where default display page comes into the game: for each article we define the default display page and it will be shown there. 
+	
+Many questions up to now, I guess: How to create a display page?  What happens when a web content is given a DDP?
+
+How to create a display page
+
+There are two ways of creating a display page: with a web content display page template or manually.
+
+Using “Content Display Page” template: adding this kind of pages will automatically create everything you need for you.
+
+Manually: to do this manually you need to do two things
+    1) Add an asset publisher to a page
+    2) Configure it to be the Default Asset Publisher of the page, so in case there are several asset publishers in the same page, the system knows where to show the content. You can do that by clicking on your asset publisher – configuration – display settings - “Set as the Default Asset Publisher for This Page”
+
+Default Display Pages in Action
+
+Once you've given an article its default display page, direct links will redirect the user to its default display page. To achieve this you can add an asset publisher to another page (say the “home” page of the newspaper) and configure it to “show in a specific portlet”. If you click on the link, you'll be redirected to the DDP of each article. 
+
+Apart from that, you now see that the link is something like this
+		www.mysite.com/my-article
+This is the canonical Url and it's a really good improvement for SEO, because it doesn't have information of the page, so it can't change in case you decide the content to be shown in any other page.
+	
+Now, in our use case, imagine you have 100 sports articles and 100 tech articles. In previous versions you'd need to create a page for each article to show it: now with only one sports page  and one tech page, you can show all articles in the same way. Cool! :)
+	
+This feature is used in search results, in related assets and in asset publishers. 
+
+
+
+
+
+
+
 
 **Related Assets:** enables you to connect any number of assets within a site or across the portal, even if they don’t share any tags and aren’t in the same category. You can connect your content to a Blogs Entry, Message Boards Message, Web Content, Calendar Event, Bookmarks Entry, Documents and Media Document, and a Wiki Page.
+
+Each asset has a section called *Related Assets*, in its edit content view, where you select one of the asset types and then select a specific entry of that type. You can add as many entries as you want. 
+	
+![Figure 2.x: Assets can be connected to many different types of content in the portal.](../../images/related-assets-menu.png)
+	
+The entries you select as related assets will appear in the main view of every asset:
+
+![Figure 2.x: Caption.](../../images/related-assets-link.png)
+
+The links that appear are clickable and they lead you to the related content on its context.
+
+<!--
+Message for the GUI?:
+This application displays related assets when users click on an asset in the page.
+-->
+
+###### The Related Assets portlet
+
+The *Related Assets* portlet displays the relationships between assets. When you add the portlet to a page, it will show the related assets of the asset being shown in the current page. You can add as many related assets portlet to every page as you need.
+	
+This portlet is a modification/extension of the asset publisher, which allows you to configure it to achieve further filtering. For example you can add three Related assets portlets to a page and configure one to show only blog entries, the second one to show only images and the third one to show only documents. When you access the page, you'll see Related Blogs, Related Images and Related Documents.
+
+To do this, go to the Asset Publisher portlet and select the Configuration icon (wrench) in the upper right corner of the portlet. Under the *Setup* tab, filter the options using the *Asset Type* menu.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 **Permissions:** customize who has access to the content. By default, content is viewable by Anyone (Guest Role). You can limit viewable permissions by selecting any Role from the drop-down or in the list. Additionally, Liferay Portal provides the ability to customize permissions in more detail. Select the *More Options* link next to the drop down button and you'll find the different activities you can grant or deny to your web content.
 
@@ -431,7 +512,7 @@ For this piece of web content, we don't need to change anything. After you're fi
 
  
 
-Web Content Default Display Pages
+
 
 <!-- this section moved above
 ##### Assigning Permissions [](id=lp-6-1-ugen03-assigning-permissions-0)
@@ -452,13 +533,13 @@ For further information on this feature, see the Display Page section under Usin
 
 Web Content Default Display Pages 
 
-A new feature in Liferay 6.1 is the ability to determine where the web conents will be displayed when linked from other pages. We have added the concept of Canonical URL, which is a unique URL for the articles that will redirect the visitor to the default display page of the article. 
+A new feature in Liferay 6.1 is the ability to determine where the web conents will be displayed when linked from other pages. We have added the concept of the Canonical URL, which is a unique URL for the articles that will redirect the visitor to the default display page of the article. 
 
-	The best way to explain this is with a real use case. Imagine you have a news paper and you have a sports section and a technology section. You add a Sports page and a Tech page to your site, each one with a especific banner and look and feel. 
+The best way to explain this is with a real use case. Imagine you have a news paper and you have a sports section and a technology section. You add a Sports page and a Tech page to your site, each one with a especific banner and look and feel. 
 
-	Now you want that all your sports articles are shown in its page and the same for tech, but you know that in Liferay, articles are not related to pages: you can add an article as many times as you need in different web content displays portlets or in configured asset publishers, and this continues beign like that: you can add it in all the places you want, but the problem is that in case you have a “View in context” link where will you show your article? That's where default display page comes into the game: for each article we define the default display page and it will be shown there. 
+Now you want that all your sports articles are shown in its page and the same for tech, but you know that in Liferay, articles are not related to pages: you can add an article as many times as you need in different web content displays portlets or in configured asset publishers, and this continues beign like that: you can add it in all the places you want, but the problem is that in case you have a “View in context” link where will you show your article? That's where default display page comes into the game: for each article we define the default display page and it will be shown there. 
 	
-	Many questions up to now, I guess: How to create a display page?  What happens when a web content is given a DDP?
+Many questions up to now, I guess: How to create a display page?  What happens when a web content is given a DDP?
 
 How to create a display page
 
@@ -467,51 +548,25 @@ There are two ways of creating a display page: with a web content display page t
 Using “Content Display Page” template: adding this kind of pages will automatically create everything you need for you.
 
 Manually: to do this manually you need to do two things
-                      1) Add an asset publisher to a page
-                      2) Configure it to be the Default Asset Publisher of the page, so in case there are several asset publishers in the same page, the system knows where to show the content. You can do that click on your asset publisher – configuration – display settings - “Set as the Default Asset Publisher for This Page”
+    1) Add an asset publisher to a page
+    2) Configure it to be the Default Asset Publisher of the page, so in case there are several asset publishers in the same page, the system knows where to show the content. You can do that click on your asset publisher – configuration – display settings - “Set as the Default Asset Publisher for This Page”
 
 Default Display Pages in Action
 
-	Once you've given an article its default display page direct links will redirect the user to its default display page. To achieve this you can add an asset publisher to another page (say the “home” page of the newspaper) and configure it to “show in a specific portlet”. If you click on the link, you'll be redirected to the DDP of each article. 
+Once you've given an article its default display page direct links will redirect the user to its default display page. To achieve this you can add an asset publisher to another page (say the “home” page of the newspaper) and configure it to “show in a specific portlet”. If you click on the link, you'll be redirected to the DDP of each article. 
 
-	Apart from that, you now see that the link is something like this
+Apart from that, you now see that the link is something like this
 		www.mysite.com/my-article
-	This is the canonical Url and it's a really good improvement for SEO, because it doesn't have information of the page, so it can't change in case you decide the content to be shown in any other page.
+This is the canonical Url and it's a really good improvement for SEO, because it doesn't have information of the page, so it can't change in case you decide the content to be shown in any other page.
 	
-	Now, in our use case, imagine you have 100 sports articles and 100 tech articles. In previous versions you'd need to create a page for each article to show it: now with only one sports page  and one tech page, you can show all articles in the same way. Cool! :)
+Now, in our use case, imagine you have 100 sports articles and 100 tech articles. In previous versions you'd need to create a page for each article to show it: now with only one sports page  and one tech page, you can show all articles in the same way. Cool! :)
 	
-	This feature is used in search results, in related assets and in asset publishers.
+This feature is used in search results, in related assets and in asset publishers. 
 
 
 
 
 
-<!--- New expaneded section on Related Assets    -->
-
-For each asset, in its edit content view, there's a section called *Related Assets* where you can choose one of the asset types and then select a concrete entry of the type you choosed. You can add as many entries as you want. 
-	
-![Figure 2.x: Assets can be connected to many different types of content in the portal.](../../images/related-assets-menu.png)
-	
-The entries you select as related assets will appear in the main view of every asset:
-
-![Figure 2.x: Caption.](../../images/related-assets-link.png)
-
-The links that appear are clickable and they will lead you to see the related content on its context.
-
-<!--
-Message for the GUI?:
-This application displays related assets when users click on an asset in the page.
--->
-
-###### The Related Assets portlet
-
-To display the relationships between assets, we have created the Related Assets portlet.
-
-When you add the portlet to a page, it will show the related assets of the asset being shown in full view in the current page.
-	
-You can add as many related assets portlet to every page as you need.
-	
-This portlet is a modification/extension of the asset publisher, which allows you to configure it to achieve further filtering. For example you can add three Related assets portlets to a page and configure one to show only blog entries, the second one to show only images and the third one to show only documents. When you access the page, you'll see Related Blogs, Related Images and Related Documents.
 
 
 
