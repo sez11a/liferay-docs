@@ -95,9 +95,9 @@ Below each field is a button labeled *Edit Options*. This contains several other
 
 For the Nose-ster structure, type something in the *Instructions for the User* field that helps users know what to put into the Body element (example: *this is an HTML Text area for the body of your content*). Also enable the *Display as Tooltip* box. Now, when users hover over the Help icon near your title, your instructions are displayed. 
 
-#### Structure Default Values 
+##### Structure Default Values 
 
-Another powerful way to manage structures is by using Default Values. New for Liferay 6.1, the idea is you can create one structure that uses common data for multiple articles. 
+Another powerful way to manage structures is by using Default Values. New for Liferay 6.1, this feature allows you to create one structure that uses common data for multiple articles. 
 
 Say you want all sports articles to have the same display page (sports page), the same categories (sports, news) or the same set of tags. Instead of adding them for each article, or wondering if your users are adding that information to every web content, you add it once for every sports article by creating a structure using the structure default values.
 
@@ -105,7 +105,7 @@ In the Control Panel go to Web Content and click the *Structures* tab to see the
 
 ![Figure 3.x: Edit structure default values in the XML Schema Defintion section of the form.](../../images/structure-default-values.png)  
 
-Under XML Schema Definition you can use the *Add Row* button to create different types of fields for the structure. The *Launch Editor* button allows you to edit the XML code for the structure. Cick on *Save and Edit Defaults* when you're done. Every web content you create with this structure will be preloaded with the data you inserted.
+Under XML Schema Definition you can use the *Add Row* button to create different types of fields for the structure. The *Launch Editor* button allows you to edit the XML code for the structure. Cick *Save and Edit Defaults* when you're done. Every web content you create with this structure will be preloaded with the data you inserted.
 
 As with everything else in Liferay, you can set permissions on structures. Let's see how you'd do that. 
 
