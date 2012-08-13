@@ -95,6 +95,18 @@ Below each field is a button labeled *Edit Options*. This contains several other
 
 For the Nose-ster structure, type something in the *Instructions for the User* field that helps users know what to put into the Body element (example: *this is an HTML Text area for the body of your content*). Also enable the *Display as Tooltip* box. Now, when users hover over the Help icon near your title, your instructions are displayed. 
 
+Structure Default Values 
+
+Another powerful way to manage structures is by using Default Values. Structure Default Values are new for Liferay 6.1. The idea is you create one structure that uses common data for all related articles. 
+
+Say you want all sports articles to have the same display page (sports page), the same categories (sports, news) or the same set of tags. Instead of adding them for every single article or wondering if your users are adding that information to every web content, you add it once for all sports articles by creating a structure using the structure default values.
+
+To achieve this, go to Web Content in the Control Panel. Click on the Structures tab to see the structures list. Select the desired structure to view a window like the one below.
+
+![Figure 3.x: Structure Elements](../../images/structure-default-values.png)  
+
+Under XML Schema Definition you can use the *Add Row* button to create different types of fields for the structure. The *Launch Editor* button allows you to edit the XML code for the structure. Cick on *Save and Edit Defaults* when you're done. Every web content you create with that structure will be preloaded with the data you inserted.
+
 As with everything else in Liferay, you can set permissions on structures. Let's see how you'd do that. 
 
 ##### Assigning Permissions [](id=lp-6-1-ugen03-assigning-permissions-1)
