@@ -491,7 +491,7 @@ Default Display Pages in Action
 
 For each asset, in its edit content view, there's a section called *Related Assets* where you can choose one of the asset types and then select a concrete entry of the type you choosed. You can add as many entries as you want. 
 	
-![Figure 2.x: Assets can be connected to many different types of content in the portal.](../../images/related-assets.png)
+![Figure 2.x: Assets can be connected to many different types of content in the portal.](../../images/related-assets-menu.png)
 	
 The entries you select as related assets will appear in the main view of every asset:
 
