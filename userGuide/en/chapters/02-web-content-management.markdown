@@ -336,9 +336,6 @@ Let's say we wanted to create a page only for administrators to see. We can do t
 
 Congratulations! You've just changed the permissions for this page so only site administrators can view it. Any users you add to this role can now see the page. Other users, even members of this site, won't have permission to see it.
 
-<!-- 
-## Summary [](id=summ-24)
--->
 Pages in Liferay are as flexible as pages you'd create manually without a portal. Using a point and click interface, you can define your site any way you want. You can create and remove pages, export and import them, set their layouts, define how they are indexed by search engines and more. You've also been introduced to Liferay's concept of sites. Again, using a point and click interface, you can create multiple web sites and define how users can access them, whether they are linked to a domain name and create all of their pages. 
 
 You now understand how to manage pages in Liferay Portal. It's time to move on to adding content to those pages. Liferay's Web Content Management (WCM) is a highly powerful, yet flexible, set of tools that enables you to successfully manage your web site.
@@ -346,7 +343,6 @@ You now understand how to manage pages in Liferay Portal. It's time to move on t
 You'll soon discover that Liferay's WCM is easy to learn and highly configurable. If you already have experience with WCM, you'll see some new features and improvements to old ones. If you're new to Liferay's WCM, then you'll be surprised at how fast you will be adding, editing and scheduling content on your site. Once you're familiar with portlets such as Web Content Display and Asset Publisher, your ability to manage an immense site with a large amount of content will simply amaze you.
 
 We'll be using Liferay's WCM to publish simple pieces of content, develop templates to define how content is to be displayed, set up a workflow for content to be approved, schedule when content is to be published and much, much more.
-
 
 ## Authoring (basic) content [](id=building-a-site-with-liferay-s-w-3)
 
@@ -364,9 +360,14 @@ We'll begin by creating simple content using Liferay's WYSIWYG Editor and then w
 
 When you manage web content from the control panel you can select the location where the content resides. For instance, you can add content that's available to a specific site or globally across the portal. The Content section of the control panel displays as its heading the name of the site you're currently working on. This heading is called the *context menu selector*: you can change the scope of where you'd like to view, edit or create content by using the drop-down selector attached to the heading. 
 
-##### Web Content Localization 
+##### Rich, WYSIWYG Editing [](id=lp-6-1-ugen03-rich-wysiwyg-editing-0)
 
-When you create new web content, you see the *Default Language* setting at the top of the new Web Content form. Liferay now has an improved user interface to help translators convert content into multiple languages. When you add or edit web content, you now see a translators section where you can edit the default language of the content, add new translations and see previously added translations.
+Once you have the Nose-ster site selected, click on the *Web Content* link in the control panel. Next, click the *Add* button under the *Web Content* tab. This is a highly customizable form that by default has two fields: a title and a powerful WYSIWYG editor. We could customize this form to contain whatever fields our content needs but let's keep things simple for now. We'll cover more advanced features such as structures, templates and content scheduling later in this chapter.
+
+<!-- New section on localization  -->
+###### New Web Content Localization
+ 
+Notice that content can be localized in whatever language you want. Liferay has an improved user interface to help translators convert text into multiple languages. When you add or edit web content, you now see a translators section where you can edit the default language of the content, add new translations and see previously added translations.
 
 ![Figure 2.x: The improved localization interface is more versatile than ever.](../../images/localization-menu.png)
 
@@ -382,13 +383,12 @@ When using complex structures, this popup will only show fields marked as *Local
 
 ![Figure 2.x: Fields not checked as Localizable will not display in the pop-up window.](../../images/localizable-example.png)
 
-The New Web Content Localization feature makes translating more user-friendly then ever before. Immediately below this is Liferay's WYSIWYG Editor. Now, let's explore this feature by adding our first piece of content to the *Nose-ster* site, which we defined earlier in the chapter as the default site.
+The New Web Content Localization feature makes translating more user-friendly then ever before. Immediately below this is Liferay's WYSIWYG Editor. Let's explore this feature by adding our first piece of content to the *Nose-ster* site, which we defined earlier in the chapter as the default site. 
 
-##### Rich, WYSIWYG Editing [](id=lp-6-1-ugen03-rich-wysiwyg-editing-0)
+<!-- Back to the editor  -->
+###### Using the WYSIWYG Editor
 
-Once you have the Nose-ster site selected, click on the *Web Content* link in the control panel. Next, click the *Add* button under the *Web Content* tab. This is a highly customizable form that by default has two fields: a title and a powerful WYSIWYG editor. We could customize this form to contain whatever fields our content needs but let's keep things simple for now. We'll cover more advanced features such as structures, templates and content scheduling later in this chapter.
-
-For now, type the words *Welcome to Nose-ster* in the *Name* field. Notice that content can be localized in whatever language you want. If you click on the *localize* checkbox, two select boxes appear which allow you to pick the language you're working in and the default language. You can enter translations of your content for any language in the list. The screenshot below shows this interface but for now, we won't be using it, so you can leave it unchecked. In the content field, add a short sentence announcing the web site is up and running.
+Type the words *Welcome to Nose-ster* in the *Title* field. In the content field, add a short sentence announcing the web site is up and running.
 
 ![Figure 2.13: The Web Content Editor](../../images/04-web-content-wysiwyg.png)
 
@@ -414,7 +414,6 @@ On the right of the New Web Content form is a Content menu. Each option opens to
 
 **Display Page:** lets you determine where the web conents will be displayed when linked from other pages.  
 
-
 **Related Assets:** enables you to connect any number of assets within a site or across the portal, even if they don’t share any tags and aren’t in the same category. You can connect your content to a Blogs Entry, Message Boards Message, Web Content, Calendar Event, Bookmarks Entry, Documents and Media Document, and a Wiki Page.
 
 **Permissions:** customize who has access to the content. By default, content is viewable by Anyone (Guest Role). You can limit viewable permissions by selecting any Role from the drop-down or in the list. Additionally, Liferay Portal provides the ability to customize permissions in more detail. Select the *More Options* link next to the drop down button and you'll find the different activities you can grant or deny to your web content.
@@ -431,14 +430,14 @@ For this piece of web content, we don't need to change anything. After you're fi
 
 
  
-New Web Content Localization UI
+
 Web Content Default Display Pages
 
 <!-- this section moved above
 ##### Assigning Permissions [](id=lp-6-1-ugen03-assigning-permissions-0)
 -->
 
-<!-- New section on localization  -->
+
 
 
 
