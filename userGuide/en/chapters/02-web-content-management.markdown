@@ -429,15 +429,17 @@ There are two ways of creating a display page: with a web content display page t
 Using “Content Display Page” template: adding this kind of pages will automatically create everything you need for you.
 
 Manually: to do this manually you need to do two things
-    1) Add an asset publisher to a page
-    2) Configure it to be the Default Asset Publisher of the page, so in case there are several asset publishers in the same page, the system knows where to show the content. You can do that by clicking on your asset publisher – configuration – display settings - “Set as the Default Asset Publisher for This Page”
+1) Add an asset publisher to a page
+2) Configure it to be the Default Asset Publisher of the page, so in case there are several asset publishers in the same page, the system knows where to show the content. You can do that by clicking on your asset publisher – configuration – display settings - “Set as the Default Asset Publisher for This Page”
 
 Default Display Pages in Action
 
 Once you've given an article its default display page, direct links will redirect the user to its default display page. To achieve this you can add an asset publisher to another page (say the “home” page of the newspaper) and configure it to “show in a specific portlet”. If you click on the link, you'll be redirected to the DDP of each article. 
 
 Apart from that, you now see that the link is something like this
-		www.mysite.com/my-article
+
+www.mysite.com/my-article
+
 This is the canonical Url and it's a really good improvement for SEO, because it doesn't have information of the page, so it can't change in case you decide the content to be shown in any other page.
 	
 Now, in our use case, imagine you have 100 sports articles and 100 tech articles. In previous versions you'd need to create a page for each article to show it: now with only one sports page  and one tech page, you can show all articles in the same way. Cool! :)
@@ -453,6 +455,8 @@ This feature is used in search results, in related assets and in asset publisher
 
 **Related Assets:** enables you to connect any number of assets within a site or across the portal, even if they don’t share any tags and aren’t in the same category. You can connect your content to a Blogs Entry, Message Boards Message, Web Content, Calendar Event, Bookmarks Entry, Documents and Media Document, and a Wiki Page.
 
+
+
 Each asset has a section called *Related Assets*, in its edit content view, where you select one of the asset types and then select a specific entry of that type. You can add as many entries as you want. 
 	
 ![Figure 2.x: Assets can be connected to many different types of content in the portal.](../../images/related-assets-menu.png)
@@ -464,7 +468,7 @@ The entries you select as related assets will appear in the main view of every a
 The links that appear are clickable and they lead you to the related content on its context.
 
 <!--
-Message for the GUI?:
+Message for the GUI
 This application displays related assets when users click on an asset in the page.
 -->
 
@@ -548,8 +552,8 @@ There are two ways of creating a display page: with a web content display page t
 Using “Content Display Page” template: adding this kind of pages will automatically create everything you need for you.
 
 Manually: to do this manually you need to do two things
-    1) Add an asset publisher to a page
-    2) Configure it to be the Default Asset Publisher of the page, so in case there are several asset publishers in the same page, the system knows where to show the content. You can do that click on your asset publisher – configuration – display settings - “Set as the Default Asset Publisher for This Page”
+1) Add an asset publisher to a page
+2) Configure it to be the Default Asset Publisher of the page, so in case there are several asset publishers in the same page, the system knows where to show the content. You can do that click on your asset publisher – configuration – display settings - “Set as the Default Asset Publisher for This Page”
 
 Default Display Pages in Action
 
@@ -577,8 +581,6 @@ This feature is used in search results, in related assets and in asset publisher
 
 
 
-**********************************************************************************************************
-**********************************************************************************************************
 
 ## Publishing (basic) content [](id=lp-6-1-ugen03-publishing-content-with-the-web-content-display-portlet-0)
 
