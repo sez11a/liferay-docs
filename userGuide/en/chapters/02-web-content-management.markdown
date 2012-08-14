@@ -442,7 +442,7 @@ www.mysite.com/my-article
 
 This is the canonical Url and it's a really good improvement for SEO, because it doesn't have information of the page, so it can't change in case you decide the content to be shown in any other page.
 	
-Now, in our use case, imagine you have 100 sports articles and 100 tech articles. In previous versions you'd need to create a page for each article to show it: now with only one sports page  and one tech page, you can show all articles in the same way. Cool! :)
+Now, in our use case, imagine you have 100 sports articles and 100 tech articles. In previous versions you'd need to create a page for each article to show it: now with only one sports page  and one tech page, you can show all articles in the same way. Cool!
 	
 This feature is used in search results, in related assets and in asset publishers. 
 
@@ -563,7 +563,7 @@ Apart from that, you now see that the link is something like this
 		www.mysite.com/my-article
 This is the canonical Url and it's a really good improvement for SEO, because it doesn't have information of the page, so it can't change in case you decide the content to be shown in any other page.
 	
-Now, in our use case, imagine you have 100 sports articles and 100 tech articles. In previous versions you'd need to create a page for each article to show it: now with only one sports page  and one tech page, you can show all articles in the same way. Cool! :)
+Now, in our use case, imagine you have 100 sports articles and 100 tech articles. In previous versions you'd need to create a page for each article to show it: now with only one sports page  and one tech page, you can show all articles in the same way. Cool! 
 	
 This feature is used in search results, in related assets and in asset publishers. 
 
