@@ -93,7 +93,7 @@ Once you've set up your filter rules for dynamically selecting your content, you
 
 You can display the content returned by the filters above in order by title, create date, modified date, view count and more in ascending or descending order. For instance, you may have a series of "How To" articles that you want displayed in descending order based on whether the article was tagged with the *hammer* tag. Or, you may want a series of video captures to display in ascending order based on a category called *birds*. You can also group by *Asset*, *Type* or *Vocabularies*. Vocabularies are groups of categories defined by administrators in the *Categories* section of the control panel. 
 
-There are a several new enhancements to Liferay's vocabularies and categories. The three main features are targeted vocabularies, single/multi-valued vocabularies and separated widgets for every vocabulay.
+There are a several new enhancements to Liferay's vocabularies and categories. The three main features are targeted vocabularies, single/multi-valued vocabularies and separated widgets for every vocabulary.
 	
 ##### Targeted Vocabularies []()
 
@@ -115,7 +115,7 @@ You can select multi-valued vocabularies using checkboxes and single-valued voca
 
 The third important improvement is now every vocabulary has its own separated widget. This allows users to easily select the categories they are interested in.
 
-![Figure 5.x: Now that vocabularies have their own widgets, it's easy to select avaialable  categories.](../../images/separated-widgets.png)
+![Figure 5.x: Now that vocabularies have their own widgets, it's easy to select available  categories.](../../images/separated-widgets.png)
 
 In the *Ordering and Grouping* section of the Asset Publisher, you have great control over how content is ordered and grouped in the list, but this is only one aspect of how your content will be displayed. You can refine the display through many other display settings.
 
