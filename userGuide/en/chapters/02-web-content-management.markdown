@@ -398,7 +398,7 @@ Using the editor, select all the text and then change the style to *Heading 1* a
 
 You could insert an image here or even more text with a different style, as demonstrated in the screenshot below. You can also add bullets, numbering, links to another site or custom images. You can even add an emoticon. Let's add a smiley face at the end of our announcement.
 
-![Figure 2.14: View your content changes dirrectly in the editor.](../../images/04-web-content-example2.png)
+![Figure 2.14: View your content changes directly in the editor.](../../images/04-web-content-example2.png)
 
 The WYSIWYG editor is a flexible tool that gives you the ability to add text, images, tables, links and more. Additionally, you can modify the display to match the purpose of the content. Plus it's integrated with the rest of Liferay Portal: for example, when you upload an image to be added to a page, that image can be viewed and manipulated in the Documents and Media portlet.
 
@@ -424,7 +424,7 @@ You can add an article as often as you like in different web content displays po
 
 There are two ways of creating a display page. You can configure a *Content Display Page* template, which  automatically creates everything you need, or you can create one manually. The Content Display Page template is found under *Page Templates* in the Portal section of the Control Panel.
 
-To create a display page manually, follow these two steps. First, you need to add an Asset Publisher to a page. Secondly, you need to configure it to be the Default Asset Publisher of the page. That way if several asset publishers are in the same page, the system knows where to show the content. You set this up by clicking Configuration on your asset publisher. Under the *Setup* tab, navigate to *Display Settings* and check the checkbox labelled *Set as the Default Asset Publisher for This Page*.
+To create a display page manually, follow these two steps. First, you need to add an Asset Publisher to a page. Secondly, you need to configure it to be the Default Asset Publisher of the page. That way if several asset publishers are in the same page, the system knows where to show the content. You set this up by clicking Configuration on your asset publisher. Under the *Setup* tab, navigate to *Display Settings* and check the checkbox labeled *Set as the Default Asset Publisher for This Page*.
 
 Once you've given an article its default display page, the article's links will redirect the user to its default display page. To achieve this add an asset publisher to another page, like the Home page of the newspaper, and configure it to *View in a Specific Portlet*. This setting is found in the *Asset Link Behavior* menu under Display Settings. If you click on the link, you'll be redirected to the Default Display Page of each article. 
 
