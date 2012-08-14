@@ -99,15 +99,15 @@ There are a several new enhancements to Liferay's vocabularies and categories. T
 
 Targeted Vocabularies allow you to decide which assets can see each vocabulary by defining target rules, and which vocabularies are required for each asset. 
 
-![Figure 5.x: You can target vocabularies by checking the Allow Multiple Categories checkbox and then selecting the Asset Types.](../../images/x-x-x.png)
+![Figure 5.x: You can target vocabularies by checking the Allow Multiple Categories checkbox and then selecting the Asset Types.](../../images/targeted-vocabularies.png)
 
 In the screenshot above, notice the vocabulary titled Topic is configured to be available for Blogs and Web Content, but it is not required. It is mandatory, however, for Documents and Media Documents.
 	
-##### Single And Multi-valued Vocabularies []()
+##### Single and Multi-valued Vocabularies []()
 
 You can now decide if the user can choose one or more categories from the same vocabulary to categorize an asset. If a vocabulary is single-valued you can only choose one, and if it allows more, you can choose several categories.
 
-![Figure 5.x: The multi-valued vocabularies, on the left, have checkboxes. Single-valued vocabularies have radio buttons.](../../images/x-x-x.png)
+![Figure 5.x: The multi-valued vocabularies, on the left, have checkboxes. Single-valued vocabularies have radio buttons.](../../images/multi-valued-vocabularies.png)
 
 You can select multi-valued vocabularies using checkboxes and single-valued vocabularies using radio buttons.
 	
@@ -115,7 +115,7 @@ You can select multi-valued vocabularies using checkboxes and single-valued voca
 
 The third important improvement is now every vocabulary has its own separated widget. This allows users to easily select the categories they are interested in.
 
-![Figure 5.x: You can filter by tags and categories, and you can set up as many filter rules as you need.](../../images/x-x-x.png)
+![Figure 5.x: Now that vocabularies have their own widgets, it's easy to select avaialable  categories.](../../images/separated-widgets.png)
 
 In the *Ordering and Grouping* section of the Asset Publisher, you have great control over how content is ordered and grouped in the list, but this is only one aspect of how your content will be displayed. You can refine the display through many other display settings.
 
