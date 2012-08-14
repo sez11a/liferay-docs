@@ -436,7 +436,7 @@ This is the canonical URL and it's a nice enhancement for Search Engine Optimiza
 	
 Imagine you have 100 sports articles and 100 tech articles. In previous versions of Liferay you'd need to create a (display?) page for each article to show it. Now with only one sports page and one tech page, you can show all articles in a consistent way. 
 	
-This feature is used in search results, in related assets and in asset publishers. 
+This feature is used in search results, in related assets and in asset publishers. For more information on Liferay's Display Pages, see Chapter 5.
 
 **Related Assets:** enables you to connect any number of assets within a site or across the portal, even if they don't share any tags and aren't in the same category. You can connect your content to a Blogs Entry, Message Boards Message, Web Content, Calendar Event, Bookmarks Entry, Documents and Media Document, and a Wiki Page.
 
