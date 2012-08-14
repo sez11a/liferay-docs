@@ -344,6 +344,9 @@ You'll soon discover that Liferay's WCM is easy to learn and highly configurable
 
 We'll be using Liferay's WCM to publish simple pieces of content, develop templates to define how content is to be displayed, set up a workflow for content to be approved, schedule when content is to be published and much, much more.
 
+<!-- 
+Start of test to locate special character that's interferring with ant compile
+
 ## Authoring (basic) content [](id=building-a-site-with-liferay-s-w-3)
 
 You've been assigned the task to build a web site for a an innovative new social networking site called Nose-ster. You've decided to take advantage of Liferay Portal and its rapid deployment features as well as its ability to get a fully functional, content-rich web site with integrated social features up and running in little time.
@@ -560,7 +563,8 @@ Default Display Pages in Action
 Once you've given an article its default display page direct links will redirect the user to its default display page. To achieve this you can add an asset publisher to another page (say the “home” page of the newspaper) and configure it to “show in a specific portlet”. If you click on the link, you'll be redirected to the DDP of each article. 
 
 Apart from that, you now see that the link is something like this
-		www.mysite.com/my-article
+
+www.mysite.com/my-article
 This is the canonical Url and it's a really good improvement for SEO, because it doesn't have information of the page, so it can't change in case you decide the content to be shown in any other page.
 	
 Now, in our use case, imagine you have 100 sports articles and 100 tech articles. In previous versions you'd need to create a page for each article to show it: now with only one sports page  and one tech page, you can show all articles in the same way. Cool! 
@@ -574,9 +578,9 @@ This feature is used in search results, in related assets and in asset publisher
 
 
 
+end of test to locate special character
 
-
-
+--> 
 
 
 
