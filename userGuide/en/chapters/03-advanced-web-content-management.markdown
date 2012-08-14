@@ -95,11 +95,11 @@ Below each field is a button labeled *Edit Options*. This contains several other
 
 For the Nose-ster structure, type something in the *Instructions for the User* field that helps users know what to put into the Body element (example: *this is an HTML Text area for the body of your content*). Also enable the *Display as Tooltip* box. Now, when users hover over the Help icon near your title, your instructions are displayed. 
 
-##### Structure Default Values 
+##### Structure Default Values []()
 
 New for Liferay 6.1 is the *Structure Default Values* feature. This allows you to create one structure that uses common data for multiple articles. 
 
-Say you want all sports articles to have the same display page (sports page), the same categories (sports, news) or the same set of tags. Instead of adding them for each article, or wondering if your users are adding them to every web content, you add it once for every sports article by creating default values for the structure.
+Returning to our newspaper scenario again, let's say you want all sports articles to have the same display page (sports page), the same categories or the same set of tags. Instead of adding them for each article, or wondering if your users are adding them to every web content, you add it once for every sports article by creating default values for the structure.
 
 In the Control Panel go to *Web Content* and click the *Structures* tab to see the structures list. Select the desired structure to view a window like the one below. This form allows you to manage the structure settings.
 
