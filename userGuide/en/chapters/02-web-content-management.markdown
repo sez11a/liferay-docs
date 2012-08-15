@@ -366,25 +366,7 @@ Once you have the Nose-ster site selected, click on the *Web Content* link in th
 
 #### New Web Content Localization []()
  
-Notice that content can be localized in whatever language you want. Liferay has an improved user interface to help translators convert text into multiple languages. When you add or edit web content, you now see a translators section where you can edit the default language of the content, add new translations and see previously added translations.
-
-![Figure 2.x: The improved localization interface is more versatile than ever.](../../images/localization-menu.png)
-
-In previous versions of Liferay you were unable to see the original language and the translations simultaneously. When you select a language now, a new popup appears that allows you to view both.
-
-![Figure 2.x: Easily switch between translations while working with web content.](../../images/localization-menu2.png)
-
-You can open and edit several translations at once to compare or review different versions. Plus, the first time you open the popup, it is preloaded with the default language. 
-
-The *Remove Translation* button at the bottom of the localization popup is a new option you can use when you want a direct way to delete a full translation. 
-
-When using complex structures, this popup will only show fields marked as *Localizable*.
-
-![Figure 2.x: Fields not checked as Localizable will not display in the pop-up window.](../../images/localizable-example.png)
-
-The New Web Content Localization feature makes translating more user-friendly then ever before. Immediately below this is Liferay's WYSIWYG Editor. Let's explore this feature by adding our first piece of content to the *Nose-ster* site, which we defined earlier in the chapter as the default site. 
-
-<!-- Back to the editor  -->
+Notice that content can be localized using an array of different languages. Liferay has an improved user interface to help translators convert text into multiple languages. For further information, see the Localization section of Using Page Templates in Chapter 3.
 
 #### Using the WYSIWYG Editor []()
 
