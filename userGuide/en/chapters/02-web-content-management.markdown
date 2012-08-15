@@ -364,7 +364,7 @@ When you manage web content from the Control Panel you can select the location w
 
 Once you have the Nose-ster site selected, click on the *Web Content* link in the Control Panel. Next, click the *Add* button under the *Web Content* tab. This is a highly customizable form that by default has two fields: a title and a powerful WYSIWYG editor. We could customize this form to contain whatever fields our content needs but let's keep things simple for now. We'll cover more advanced features such as structures, templates and content scheduling later in this chapter.
  
-Notice that content can be localized using an array of different languages. Liferay has an improved user interface to help translators convert their text. For further information, see the Localization section of Using Page Templates in chapter 3.
+Notice that content can be localized using an array of different languages. Liferay has an improved user interface to assist translators when converting text. For further information, see the Localization section of Using Page Templates in chapter 3.
 
 Type the words *Welcome to Nose-ster* in the *Title* field. In the *Content* field, add a short sentence announcing the web site is up and running.
 

@@ -22,9 +22,9 @@ When new users log in to `list.it`, they are going to want to build a few lists 
 
 If none of the built-in data definitions suits your needs, you can define your own. Perhaps we want to allow our `list.it` users (who would probably call themselves "list-ers" or "list-ies") to create their own data types for lists they create. In this case, they would need to have unfettered access to the content of their private user site where they can create a new data type.
 
-Using data lists to outline a new data model is as simple as point and click. You now have a `list.it` account and have been dying to bug your friends and family to sign up for "volunteer" work: helping you move into a new apartment. Using an intuitive visual editor, you can quickly draw up the skeleton for that volunteer list in minutes. Since data lists exemplify a unique type of content for your site, you can find them in the content section of the control panel, selecting *Go To &rarr; Control Panel &rarr; Content &rarr; Dynamic Data Lists* or *Manage &rarr; Site Content &rarr; Dynamic Data Lists*. Within the dynamic data lists section, you can either create a new data type (*Manage Data Definitions*) or a new list from an existing data type.
+Using data lists to outline a new data model is as simple as point and click. You now have a `list.it` account and have been dying to bug your friends and family to sign up for "volunteer" work: helping you move into a new apartment. Using an intuitive visual editor, you can quickly draw up the skeleton for that volunteer list in minutes. Since data lists exemplify a unique type of content for your site, you can find them in the content section of the Control Panel, selecting *Go To &rarr; Control Panel &rarr; Content &rarr; Dynamic Data Lists* or *Manage &rarr; Site Content &rarr; Dynamic Data Lists*. Within the dynamic data lists section, you can either create a new data type (*Manage Data Definitions*) or a new list from an existing data type.
 
-![Figure 9.1: Data Lists in the control panel.](../../images/05-ddl-control-panel.png)
+![Figure 9.1: Data Lists in the Control Panel.](../../images/05-ddl-control-panel.png)
 
 If you have a new data type, you need to create a definition for it first. Click *Manage Data Definitions* and click the *Add* button. The first thing you should enter is a name for the definition and a description. Call it *Volunteer Sign-Up*. When creating a new data definition, you have a palette of fields to lay out, as well as a blank canvas to construct the definition. The interface looks similar to creating and editing web content structures covered previously. Let's explore the different data types at our disposal:
 
@@ -126,7 +126,7 @@ Lists are published in the portal through the Dynamic Data List Display portlet.
 
 This isn't all that exciting, but it allows users to see the list's contents, and if they have permission, to add and/or edit list items. Within a site like `list.it`, this type of interaction is used for display-only lists that the user chooses to expose to others, or for the user's own private lists. But you can improve the display. You can show the data in a spreadsheet, so you can view the responses to your Volunteer Sign-Up in a comfortable, easy-to-read format. The Dynamic Data List Display portlet provides an easy way for a user (such as a member of a site) to interact with whatever list is active and available.
 
-While it's possible to ask everyone to contribute to the data list within the control panel, it's much better to give them a simple way to access the list. Liferay provides the Dynamic Data List Display portlet to ease the integration of your new list onto your site. With your list in hand, head over to the page you want and add the portlet. It works much like the Web Content Display portlet: use the gear icon to select a list for display or use the pen/paper icon to add a new list. The default display spills out the contents of the list, but can be configured to use a different display template, which is explored later in this chapter. The two important configuration options to consider are:
+While it's possible to ask everyone to contribute to the data list within the Control Panel, it's much better to give them a simple way to access the list. Liferay provides the Dynamic Data List Display portlet to ease the integration of your new list onto your site. With your list in hand, head over to the page you want and add the portlet. It works much like the Web Content Display portlet: use the gear icon to select a list for display or use the pen/paper icon to add a new list. The default display spills out the contents of the list, but can be configured to use a different display template, which is explored later in this chapter. The two important configuration options to consider are:
 
 **Editable:** allows users that have permission to add new entries to the list. By default, this is disabled and when enabled, administrators are the only ones with add permission. To easily grant access to other users, edit the permissions on the list you'd like to grant access to, and grant the `Add Record` permission.
 
@@ -168,7 +168,7 @@ From the Dockbar:
 3. Find your data definition in the list, then click *Actions &rarr; Manage Templates*
 4. Now you can click on *Add List Template* to create a new template.
 
-From the control panel:
+From the Control Panel:
 
 1. Navigate to *Dynamic Data Lists &rarr; Manage Data Definitions*.
 2. Find your data definition in the list, then click *Actions &rarr; Manage Templates*

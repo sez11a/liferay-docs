@@ -195,7 +195,7 @@ In a similar fashion to databases, you have two ways to configure your mail serv
 -   Use your application server's mail session.
 -   Use the built-in mail session.
 
-To use your application server's mail session, you must create it in your application server and it should point to your mail server. Once you've done that, you're ready to point Liferay to it. You can do this through the configuration file or through Liferay's control panel after it's been installed. 
+To use your application server's mail session, you must create it in your application server and it should point to your mail server. Once you've done that, you're ready to point Liferay to it. You can do this through the configuration file or through Liferay's Control Panel after it's been installed. 
 
 Let's look next at this configuration file and, if you're choosing not to use the setup wizard, show you how to get Liferay connected to your database and your mail server. 
 
@@ -239,7 +239,7 @@ If you want to use your application server's connection pool, you will have to c
 
 	jdbc.default.jndi.name=jdbc/LiferayPool
 
-For mail, you can use Liferay's control panel to create the configuration and this is the recommended way. Go to *Control Panel &rarr; Server Administration &rarr; Mail* and enter your settings for your mail session settings. If, however, you're setting up a lot of Liferay machines and they're all going to have similar mail configurations, it's easier to do the configuration once and then copy the configuration file to multiple machines. In this case, you'll want to use the `portal-ext.properties` file. To use the built-in mail session, use the following properties and customize their values for your environment: 
+For mail, you can use Liferay's Control Panel to create the configuration and this is the recommended way. Go to *Control Panel &rarr; Server Administration &rarr; Mail* and enter your settings for your mail session settings. If, however, you're setting up a lot of Liferay machines and they're all going to have similar mail configurations, it's easier to do the configuration once and then copy the configuration file to multiple machines. In this case, you'll want to use the `portal-ext.properties` file. To use the built-in mail session, use the following properties and customize their values for your environment: 
 
     mail.session.mail.pop3.host=localhost
     mail.session.mail.pop3.password=

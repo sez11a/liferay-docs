@@ -94,15 +94,15 @@ As your enterprise builds its own library of portlets for internal use, you can 
 
 You can create your plugin repository in two ways:
 
-1.  Use the Software Catalog in the control panel to create the repository by using its graphical interface and an HTTP server.
+1.  Use the Software Catalog in the Control Panel to create the repository by using its graphical interface and an HTTP server.
 
 2.  Create an XML file using the Liferay Plugin Repository DTD (`http://www.liferay.com/dtd/liferay-plugin-repository_6_0_0.dtd`) and an HTTP server.
 
-Both methods have their benefits. The first method allows users to upload their plugins to an HTTP server to which they have access. They can then register their plugins with the repository by adding a link to it via the control panel's graphical user interface. Liferay will then generate the XML necessary to connect the repository to a control panel running on another instance of Liferay. This XML file can then be placed on an HTTP server and its URL can be added to the Plugin Installer, making the portlets in this repository available to the server running Liferay.
+Both methods have their benefits. The first method allows users to upload their plugins to an HTTP server to which they have access. They can then register their plugins with the repository by adding a link to it via the Control Panel's graphical user interface. Liferay will then generate the XML necessary to connect the repository to a Control Panel running on another instance of Liferay. This XML file can then be placed on an HTTP server and its URL can be added to the Plugin Installer, making the portlets in this repository available to the server running Liferay.
 
-The second method does not require an instance of Liferay to be running. You can upload plugins to an HTTP server of your choice, then create an XML file called `liferay-plugin-repository.xml` manually. If you make this file available on an HTTP server (it can be the same one which is storing the plugins or a different one), you can connect the repository to a Plugin Installer in the control panel running on an instance of Liferay.
+The second method does not require an instance of Liferay to be running. You can upload plugins to an HTTP server of your choice, then create an XML file called `liferay-plugin-repository.xml` manually. If you make this file available on an HTTP server (it can be the same one which is storing the plugins or a different one), you can connect the repository to a Plugin Installer in the Control Panel running on an instance of Liferay.
 
-We will first look at creating a plugin repository using the Software Catalog in the control panel.
+We will first look at creating a plugin repository using the Software Catalog in the Control Panel.
 
 ### Software Catalog [](id=lp-6-1-ugen15-the-software-catalog-0)
 
@@ -110,7 +110,7 @@ You will want to use the Software Catalog if you will have multiple users submit
 
 ![Figure 12.8: The Software Catalog with Nothing Installed](../../images/marketplace-software-catalog.png)
 
-Each site in your portal can have an instance of the Software Catalog. The control panel presents you with the software catalog for whichever site you are working on. This means different sites can have different software repositories, so you can host several software repositories on the same instance of Liferay if you wish, they just have to be in different sites. Choose the site that will host the plugin repository and go to the control panel. You will see at the top of the screen a message that says “Content for [Site], where [Site] is the site you were on when you selected the control panel from the dockbar. If you want to administer the software catalog for a different site, you can select it from the selection box.
+Each site in your portal can have an instance of the Software Catalog. The Control Panel presents you with the software catalog for whichever site you are working on. This means different sites can have different software repositories, so you can host several software repositories on the same instance of Liferay if you wish, they just have to be in different sites. Choose the site that will host the plugin repository and go to the Control Panel. You will see at the top of the screen a message that says “Content for [Site], where [Site] is the site you were on when you selected the Control Panel from the dockbar. If you want to administer the software catalog for a different site, you can select it from the selection box.
 
 ![Figure 12.9: Populated Software Catalog from liferay.com](../../images/marketplace-populated-software-catalog.png)
 
@@ -274,13 +274,13 @@ How can you do this? The Software Catalog is also available as a portlet. You ca
 
 ### Manually Creating A Software Catalog [](id=lp-6-1-ugen15-manually-creating-a-software-catalog-0)
 
-If you do not wish to use the control panel to create your software catalog, you can create it manually by manually typing out the XML file that the Software Catalog section of the control panel would normally generate. Note that if you do this, you will not be able to use the Software Catalog portlet as a graphical user interface to your software that end users can use to download your software manually: you will have to build this yourself. Keep in mind many instances of Liferay Portal sit behind a firewall without access to the Internet. Because of this, if you are making your software available to Internet users, some of them will have to download it manually anyway, because their installations are firewalled. In this case, the Software Catalog portlet is the easiest way to provide a user interface for downloading your software.
+If you do not wish to use the Control Panel to create your software catalog, you can create it manually by manually typing out the XML file that the Software Catalog section of the Control Panel would normally generate. Note that if you do this, you will not be able to use the Software Catalog portlet as a graphical user interface to your software that end users can use to download your software manually: you will have to build this yourself. Keep in mind many instances of Liferay Portal sit behind a firewall without access to the Internet. Because of this, if you are making your software available to Internet users, some of them will have to download it manually anyway, because their installations are firewalled. In this case, the Software Catalog portlet is the easiest way to provide a user interface for downloading your software.
 
 If you still wish to use a text editor to create your software catalog, you can. To manually create a software catalog, obtain the DTD for the XML file from Liferay's source code. You will find this DTD in the *definitions* folder in the Liferay source. It is a file called `liferay-plugin-package_6_0_0.dtd`. Use this DTD with a validating XML editor (a good, free choice is jEdit with all the XML plugins) to create your software catalog manually.
 
 ### Connecting to a Software Catalog [](id=lp-6-1-ugen15-connecting-to-a-software-catalog-0)
 
-If there is a software catalog of plugins you would like to point your instance of Liferay to, all you need is the URL to the catalog. Once you have the URL, go to the Plugin Installer in your control panel and click the *Configuration* tab. You will see there are two fields in which you can enter URLs to plugin repositories: *Trusted Plugin Repositories* and *Untrusted Plugin Repositories*. Currently, the only difference between the two is to provide a visual cue for administrators as to which repositories are trusted and untrusted.
+If there is a software catalog of plugins you would like to point your instance of Liferay to, all you need is the URL to the catalog. Once you have the URL, go to the Plugin Installer in your Control Panel and click the *Configuration* tab. You will see there are two fields in which you can enter URLs to plugin repositories: *Trusted Plugin Repositories* and *Untrusted Plugin Repositories*. Currently, the only difference between the two is to provide a visual cue for administrators as to which repositories are trusted and untrusted.
 
 Enter the URL to the repository to which you wish to connect in one of the fields and click *Save*. The portlet will connect to the repository and items from this repository will be shown in the list. 
 
@@ -302,7 +302,7 @@ Liferay's Knowledge Base portlet provides a means for creating and organizing ar
 
 ### Knowledge Base Display Portlet [](id=lp-6-1-ugen04-knowledge-base-display-portlet-0)
 
-The Knowledge Base app actually consists of four portlets that can be placed on site pages as well as one that adds a page to the control panel. The four portlets that can be placed on a page are Knowledge Base (Display), Knowledge Base Search, Knowledge Base Article and Knowledge Base Section. When placed on a page, the Knowledge Base display portlet presents many of the same options to an administrator that are available from the Knowledge Base page of the control panel.
+The Knowledge Base app actually consists of four portlets that can be placed on site pages as well as one that adds a page to the Control Panel. The four portlets that can be placed on a page are Knowledge Base (Display), Knowledge Base Search, Knowledge Base Article and Knowledge Base Section. When placed on a page, the Knowledge Base display portlet presents many of the same options to an administrator that are available from the Knowledge Base page of the Control Panel.
 
 ![Figure 12.12: Knowledge Base Display Portlet](../../images/liferay-collaboration-kb-display-portlet.png)
 
@@ -316,21 +316,21 @@ You can use the four links at the top of the Knowledge Base display portlet to c
 
 *My Subscriptions:* shows you a list of articles you are subscribed to.
 
-The *Add Article* button is available from the Knowledge Base Home or Administrator view of the Knowledge Base display portlet or from the Articles tab of the Knowledge Base page of the control panel. Use this button to create an article for the knowledge base. When creating an article, you can use the same WYSIWYG editor you used to create wiki pages. Articles, however, are not the same as wiki pages: they must be created in HTML, not MediaWiki or Creole. Click the *Source* button in the editor to view the HTML source of what you've written or write some HTML yourself.
+The *Add Article* button is available from the Knowledge Base Home or Administrator view of the Knowledge Base display portlet or from the Articles tab of the Knowledge Base page of the Control Panel. Use this button to create an article for the knowledge base. When creating an article, you can use the same WYSIWYG editor you used to create wiki pages. Articles, however, are not the same as wiki pages: they must be created in HTML, not MediaWiki or Creole. Click the *Source* button in the editor to view the HTML source of what you've written or write some HTML yourself.
 
 ![Figure 12.13: New Knowledge Base Article](../../images/liferay-collaboration-kb-new-article.png)
 
 In addition to entering a title and creating content for your article, you can use the editor to add attachments, add tags and set permissions. By default, view permission is granted to the guest role, meaning anyone can view your article. After you're done using the editor, you can save it as draft and continue working on it later or you can submit it for publication. Your article may need to be approved before being published, depending on the workflow defined for your portal.
 
-You can find the *Permissions* button next to the Add Article button in the Knowledge Base display portlet or on the Knowledge Base page of the control panel. Click this button to define permissions that apply to the Knowledge Base display portlet generally, not to particular articles. Here, you can define which roles can add articles and templates, which are granted knowledge base administrator privileges, which can change permissions on articles, which can subscribe to articles and which can view templates. 
+You can find the *Permissions* button next to the Add Article button in the Knowledge Base display portlet or on the Knowledge Base page of the Control Panel. Click this button to define permissions that apply to the Knowledge Base display portlet generally, not to particular articles. Here, you can define which roles can add articles and templates, which are granted knowledge base administrator privileges, which can change permissions on articles, which can subscribe to articles and which can view templates. 
 
 ![Figure 12.14: Knowledge Base Permissions](../../images/liferay-collaboration-kb-permissions.png)
 
-Users may need to be granted access to the knowledge base page of the control panel in order to exercise some of the above permissions. For example, suppose the user role has been granted the Add Article and the View Templates permissions. A user will be able to add articles from the knowledge base display portlet but will need access to the knowledge base page of the control panel in order to view templates. Note that the Knowledge Base (Display) permissions are distinct from the Knowledge Base (Admin) portlet. The display permissions define what a user can do with the Knowledge Base display portlet on a page while the admin permissions define what a user can do on the Knowledge Base page of the control panel.
+Users may need to be granted access to the knowledge base page of the Control Panel in order to exercise some of the above permissions. For example, suppose the user role has been granted the Add Article and the View Templates permissions. A user will be able to add articles from the knowledge base display portlet but will need access to the knowledge base page of the Control Panel in order to view templates. Note that the Knowledge Base (Display) permissions are distinct from the Knowledge Base (Admin) portlet. The display permissions define what a user can do with the Knowledge Base display portlet on a page while the admin permissions define what a user can do on the Knowledge Base page of the Control Panel.
 
 ### Knowledge Base Page of the Control Panel [](id=lp-6-1-ugen04-knowledge-base-page-of-the-control-panel-0)
 
-The Knowledge Base page of the control panel has two tabs: one for articles and one for templates. The articles tab shows all the articles in the knowledge base and lets you perform actions on them. The templates tab shows all the templates defined in the knowledge base and lets you perform actions on them.
+The Knowledge Base page of the Control Panel has two tabs: one for articles and one for templates. The articles tab shows all the articles in the knowledge base and lets you perform actions on them. The templates tab shows all the templates defined in the knowledge base and lets you perform actions on them.
 
 ![Figure 12.15: Knowledge Base Control Panel Page](../../images/liferay-collaboration-kb-control-panel.png)
 
@@ -348,13 +348,13 @@ Administrators can perform the following actions on an article:
 
 *Delete:* lets you remove an article from the knowledge base.
 
-These actions are similar to the ones that can be performed from the Administrator view of the Knowledge Base display portlet. However, the Knowledge Base display portlet is intended to be placed on a page for the end user so an additional action is available: *RSS* is a link to an RSS feed of an article. Also, the *View* action is only available from the control panel since the Knowledge Base Article portlet can be used to display an article on a page.
+These actions are similar to the ones that can be performed from the Administrator view of the Knowledge Base display portlet. However, the Knowledge Base display portlet is intended to be placed on a page for the end user so an additional action is available: *RSS* is a link to an RSS feed of an article. Also, the *View* action is only available from the Control Panel since the Knowledge Base Article portlet can be used to display an article on a page.
 
-The templates tab of the Knowledge Base page of the control panel allows administrators to create templates to facilitate the creation of articles. A template basically functions like a starting point for the creation of certain types of articles. Click the *Add Template* button on the Templates tab of the Knowledge Base page of the control panel to create a new template. 
+The templates tab of the Knowledge Base page of the Control Panel allows administrators to create templates to facilitate the creation of articles. A template basically functions like a starting point for the creation of certain types of articles. Click the *Add Template* button on the Templates tab of the Knowledge Base page of the Control Panel to create a new template. 
 
 ![Figure 12.16: Adding a New Template From the Control Panel](../../images/liferay-collaboration-kb-new-template.png)
 
-Navigate back to the templates tab of the Knowledge Base page of the control panel. You can perform the following actions on a template:
+Navigate back to the templates tab of the Knowledge Base page of the Control Panel. You can perform the following actions on a template:
 
 *View:* displays a template. From here, you can use the template to create an article, edit the template, modify the permissions on the template or delete it. 
 
@@ -390,7 +390,7 @@ Wikis often have deeply nested articles that can be hard to find by browsing. Li
 
 ![Figure 12.19: Knowledge Base Search Portlet](../../images/liferay-collaboration-kb-search-portlet.png)
 
-You can also use the Categories Navigation portlet in conjunction with the Knowledge Base display portlet. When both of these portlets are placed on a page you can select a topic in the Categories Navigation portlet and the Knowledge Base display portlet will show all of the articles that match the topic. You can create topics from the Categories page of the control panel.
+You can also use the Categories Navigation portlet in conjunction with the Knowledge Base display portlet. When both of these portlets are placed on a page you can select a topic in the Categories Navigation portlet and the Knowledge Base display portlet will show all of the articles that match the topic. You can create topics from the Categories page of the Control Panel.
 
 ![Figure 12.20: Knowledge Base Category Navigation Portlet](../../images/liferay-collaboration-kb-catnavandkbdisplay-portlets.png)
 

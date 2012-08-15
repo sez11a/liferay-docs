@@ -29,7 +29,7 @@ Unless otherwise noted, these portlets are all provided with minimal configurati
 
 The social portlets are all included with the Liferay Community Edition distribution, but need to be installed separately for Enterprise Edition. If you're using Liferay Enterprise Edition, or had previously removed the social portlets from Community Edition, you can use Liferay's plugin installer to easily add social features to your portal.
 
-If you're logged in as an administrator, go to the control panel and click on *Plugins Installation* in the *Server* section. From here, click on *Install More Portlets* and search for *Social Networking*. Once the results come up, select the latest version of the Social Networking Portlet and click *Install*. Once the install process finishes, you can start using the social networking portlets. 
+If you're logged in as an administrator, go to the Control Panel and click on *Plugins Installation* in the *Server* section. From here, click on *Install More Portlets* and search for *Social Networking*. Once the results come up, select the latest version of the Social Networking Portlet and click *Install*. Once the install process finishes, you can start using the social networking portlets. 
 
 ### Using social networking on public pages [](id=lp-6-1-ugen08-using-social-networking-on-public-pages-0)
 
@@ -77,7 +77,7 @@ To get started with Liferay's social features, let's set up the public pages of 
 
 Before we start adding portlets to pages, we should configure Liferay so that everyone (or some subset of everyone) has the same social features. We have two ways to do this with advantages and disadvantages to each.
 
-**User Groups:** Placing users into a group enables you to create a user group site for them. The pages and portlets defined by the user group site are copied to members' personal sites. With the user group site, you can control whether users can modify pages and you can push changes out to users in the future. Once the site template is assigned to a user group, you can set the *Default User Associations* to have all users be the member of a particular group in *Portal Settings* in the control panel. The advantage of this is that it can be managed entirely through the GUI and it's easy to configure. If you base your user group's site on a template, you can use the *Enable propagation of changes from the site template* option to manage all user pages simply by changing the template. This is the recommended way to manage personal pages across the portal. For more information on user group sites, see chapter 15.
+**User Groups:** Placing users into a group enables you to create a user group site for them. The pages and portlets defined by the user group site are copied to members' personal sites. With the user group site, you can control whether users can modify pages and you can push changes out to users in the future. Once the site template is assigned to a user group, you can set the *Default User Associations* to have all users be the member of a particular group in *Portal Settings* in the Control Panel. The advantage of this is that it can be managed entirely through the GUI and it's easy to configure. If you base your user group's site on a template, you can use the *Enable propagation of changes from the site template* option to manage all user pages simply by changing the template. This is the recommended way to manage personal pages across the portal. For more information on user group sites, see chapter 15.
 
 **Portal Properties Configuration:** The legacy way to do this is with the configuration file. You can specify a default layout and portlets for personal pages in your `portal-ext.properties` file. If you don't want users to be able to modify their own pages, you should set the layouts to be static by adding the following line to your `portal-ext.properties` file:
 
@@ -85,7 +85,7 @@ Before we start adding portlets to pages, we should configure Liferay so that ev
     
 Note that this method applies changes to all users' personal sites. However, it does not provide as much maintainability or customization options as user group sites do. User group sites allow you to choose what's modifiable by the user. For more information on the `portal-ext.properties` method, see *Default User Private Layouts* and *Default User Public Layouts* in chapter 20.
     
-Because it's the recommended method, we'll use the user group method to create the layouts. As an administrator, go to the control panel and select *Site Templates* from under the *Portal* section. Click *Add* and fill out the form. We'll call our new site template *Social Layout*. Click *Save*.
+Because it's the recommended method, we'll use the user group method to create the layouts. As an administrator, go to the Control Panel and select *Site Templates* from under the *Portal* section. Click *Add* and fill out the form. We'll call our new site template *Social Layout*. Click *Save*.
 
 ![Figure 8.7: Creating the Site Template](../../images/social-networking-site-template.png)
 
@@ -99,7 +99,7 @@ Once you've created the template, choose *Actions &rarr; Manage Pages* for *Soci
 
 ![Figure 8.8: Social Profile Site Template](../../images/social-networking-profile-template.png)
 
-Back in the control panel, select *Users and Organizations* from the *Portal* section. Once there click *Add &rarr; User Group*. Name the group *Social Users*. When creating a user group, you have the option to set a user group site; use this option and select the Social Layout template for your Public Pages.
+Back in the Control Panel, select *Users and Organizations* from the *Portal* section. Once there click *Add &rarr; User Group*. Name the group *Social Users*. When creating a user group, you have the option to set a user group site; use this option and select the Social Layout template for your Public Pages.
 
 Now go to *Portal Settings* and select *Users* from the submenu. From the Users page, go to the *Default User Associations* tab and enter *Social Users* in the User Groups section. Now all users on the portal get a Social Profile page. Now the question is, how do we encourage users to visit each others fancy new profile pages?
 
@@ -150,7 +150,7 @@ The User Statistics portlet displays a list of users ranked by an amalgamation o
 
 The **Group Statistics** portlet provides some more advanced data analytics. If you add it to a page, and click on the configuration icon, you see that by default, it will display one metric *Activities on Assets*. You can click the *plus* button to add additional slots, and choose from the dozen or so metrics available for each slot, covering virtually any action that a user can perform on content on the portal. If you decide that you're displaying too many metrics, you can click the *minus* button for a particular slot on the configuration view to remove it.
 
-There are a wide-ranging number of actions that you can provide social credit for. Users can receive credit for everything from subscribing to a blog to writing wiki articles. You can easily tweak the numbers in the control panel if it becomes clear that certain activities are weighted too high or too low.
+There are a wide-ranging number of actions that you can provide social credit for. Users can receive credit for everything from subscribing to a blog to writing wiki articles. You can easily tweak the numbers in the Control Panel if it becomes clear that certain activities are weighted too high or too low.
 
 Social Activity can be an invaluable tool for portals that are heavily driven by community-created content. It allows you to easily recognize users who are major contributors and it indicates to new users whose advice will be most trustworthy. Social Activity is easy to set up and can be configured differently for each site, increasing the flexibility of your portal.
 
@@ -356,7 +356,7 @@ As you can see, OAuth is easy to configure and offers users the freedom to secur
 
 ### Creating and editing OpenSocial gadgets [](id=lp-6-1-ugen08-creating-and-editing-opensocial-gadgets-0)
 
-OpenSocial gadgets are XML documents, so as part of Liferay's OpenSocial integration, a gadget editor is included. The gadget editor is a complete development environment for gadgets providing syntax highlighting, a preview function, undo/redo options, and built in tabs for working on multiple gadgets at once. You can also organize and manage gadgets through a simple file manager embedded into the portlet. To access the gadget editor, go to the control panel and click on *OpenSocial Gadget Editor* in the *Content* section.
+OpenSocial gadgets are XML documents, so as part of Liferay's OpenSocial integration, a gadget editor is included. The gadget editor is a complete development environment for gadgets providing syntax highlighting, a preview function, undo/redo options, and built in tabs for working on multiple gadgets at once. You can also organize and manage gadgets through a simple file manager embedded into the portlet. To access the gadget editor, go to the Control Panel and click on *OpenSocial Gadget Editor* in the *Content* section.
 
 Once you have created and saved a gadget using the editor, click on the wrench next to the file to rename, delete, publish or get the URL for your gadget. If you want to display your gadget somewhere, click *Publish* to choose a category and display your gadget in the application menu or click *Show URL* to get a URL to display your gadget on any site that supports OpenSocial.
 

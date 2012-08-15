@@ -14,7 +14,7 @@ Let's look at Kaleo Forms first.
 
 #### Kaleo Forms [](id=lp-6-1-ugen06-kaleo-forms-0)
 
-Add the Workflow Forms portlet to a page. The initial state, the *Summary* tab displays the same information you might have seen in *My Workflow Tasks* in the control panel. Any forms available for processing through the workflow can be initiated through the *Submit New* button, as the below image indicates. 
+Add the Workflow Forms portlet to a page. The initial state, the *Summary* tab displays the same information you might have seen in *My Workflow Tasks* in the Control Panel. Any forms available for processing through the workflow can be initiated through the *Submit New* button, as the below image indicates. 
 
 ![Figure 11.1: Kaleo Forms give you a convenient way to manage all available workflows in the portal. ](../../images/kaleo-forms-initial-view.png)
 

@@ -39,7 +39,7 @@ And off you go, two floors down, to the far end of the building where, as you ap
 
 "And I lost access to a wiki," Dick says helpfully. 
 
-"It was probably due to some site membership change. Let's take a look at the audit portlet in the control panel and see what happened." 
+"It was probably due to some site membership change. Let's take a look at the audit portlet in the Control Panel and see what happened." 
 
 When in the course of human events it becomes necessary to see what users are doing on your portal, you'll find Liferay makes this easy. If you're a Liferay Enterprise Edition customer, you have access to two plugins--a hook and a portlet--that, in combination with some settings in `portal-ext.properties`, enable you to see all the activity that occurs in your portal. Using this, you can quickly find out what changes were made and by whom. If you've delegated permission granting to any group of people, this is an essential feature you're likely to use. 
 
@@ -59,9 +59,9 @@ Once you've decided if you're going to use one or both of the two settings above
 
 ### Using audit events [](id=using-audit-events)
 
-Now that you're capturing audit events, it's easy to use them to view activities in your portal. Navigate to the control panel and you'll find a new entry in the *Portal* section labeled *Audit Reports* (see figure 17.1). 
+Now that you're capturing audit events, it's easy to use them to view activities in your portal. Navigate to the Control Panel and you'll find a new entry in the *Portal* section labeled *Audit Reports* (see figure 17.1). 
 
-![Figure 17.1: Once the Audit Reports plugins are installed, an entry appears in the control panel.](../../images/control-panel-audit-reports.png)
+![Figure 17.1: Once the Audit Reports plugins are installed, an entry appears in the Control Panel.](../../images/control-panel-audit-reports.png)
 
 Clicking the entry shows you a list of the events Liferay has already captured (see figure 17.2), along with an interface for searching for events. You can browse the list if you want, but it's likely you'll need to use the search to find what you're looking for. 
 
@@ -161,7 +161,7 @@ This problem can be solved in Liferay by putting Google's code into a custom the
 
 Because of this, support for Google Analytics has been built into Liferay, and can be turned on through a simple user interface. This allows Liferay administrators to make use of Google Analytics on a community by community basis and turn it on and off when needed.
 
-To enable Google Analytics support, go to *Site Settings* in the control panel, and then select *Analytics* on the right. You'll see a very simple form, pictured below. 
+To enable Google Analytics support, go to *Site Settings* in the Control Panel, and then select *Analytics* on the right. You'll see a very simple form, pictured below. 
 
 ![Figure 17.6: Setting up Google Analytics for your site is very easy: sign up for the ID and then enter it into this field. ](../../images/maintaining-google-analytics.png)
 
@@ -207,9 +207,9 @@ But what about maintenance while your server is running? Liferay lets you view a
 
 ### Liferay's Logging System [](id=liferay-s-logging-syst-5)
 
-Liferay uses Log4j extensively to implement logging for nearly every class in the portal. If you need to debug something specific while the system is running, you can use the control panel to set logging levels by class dynamically.
+Liferay uses Log4j extensively to implement logging for nearly every class in the portal. If you need to debug something specific while the system is running, you can use the Control Panel to set logging levels by class dynamically.
 
-To view the log levels, go to the control panel, click *Server Administration* in the Server section, and then click the *Log Levels* tab.
+To view the log levels, go to the Control Panel, click *Server Administration* in the Server section, and then click the *Log Levels* tab.
 
 A paginated list of logging categories appears. These categories correspond to Liferay classes that have log messages in them. By default, all categories are set to display messages only if there is an error that occurs in the class. This is why you see ERROR displayed in all of the drop-down list boxes on the right side of the portlet.
 
@@ -231,7 +231,7 @@ You would then use this `_log` variable to create log messages in your code for 
 
 	_log.error("Reindexing " + node.getName(), e1);
 
-To enable your logging messages to appear in your server's log file via the control panel, click the *Add Category* tab on the same *Log Levels* page.
+To enable your logging messages to appear in your server's log file via the Control Panel, click the *Add Category* tab on the same *Log Levels* page.
 
 ![Figure 17.8: Adding your own logging classes is as simple as specifying it in this field.](../../images/maintaining-add-log-category.png) 
 
