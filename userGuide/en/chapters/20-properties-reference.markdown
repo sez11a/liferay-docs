@@ -1,6 +1,6 @@
 # Properties Reference [](id=configuring-liferay-s-properties)
 
-Liferay is configured by a combination of settings that are stored in the database (configured by the use of the control panel) and settings which are stored in properties (text) files. These files can be modified to change Liferay's behavior in certain ways. In this chapter we discuss the main configuration file, which is stored in the Liferay Home directory, and is called `portal-ext.properties` if you've got a custom file, or `portal-setup-wizard.properties` if you've used Liferay's setup wizard. This chapter has a wide-ranging set of topics since you can make many different kinds of customizations. We list a few of these below.
+Liferay is configured by a combination of settings that are stored in the database (configured by the use of the Control Panel) and settings which are stored in properties (text) files. These files can be modified to change Liferay's behavior in certain ways. In this chapter we discuss the main configuration file, which is stored in the Liferay Home directory, and is called `portal-ext.properties` if you've got a custom file, or `portal-setup-wizard.properties` if you've used Liferay's setup wizard. This chapter has a wide-ranging set of topics since you can make many different kinds of customizations. We list a few of these below.
 
 -   Changing Portal Defaults
 
@@ -43,7 +43,7 @@ Each portal instance can have its own overriden property file following the conv
 
 The read order will now be: `portal.properties`, then `portal-ext.properties` and then `portal-liferay.com.properties`.
 
-Note that not all properties can have different values per company. This functionality is only available for legacy reasons. The preferred way to configure a portal instance is through the control panel.
+Note that not all properties can have different values per company. This functionality is only available for legacy reasons. The preferred way to configure a portal instance is through the Control Panel.
 
 	include-and-override=portal-${easyconf:companyId}.properties
 	include-and-override=${liferay.home}/portal-${easyconf:companyId}.properties
@@ -3511,7 +3511,7 @@ Set the maximum number of sites that will be shown in the navigation menus. A la
 
 	control.panel.navigation.max.sites=100
 
-Set the name of a class that implements `com.liferay.portlet.ControlPanelEntry`. This class denotes the default value of of the element `control-panel-entry-class` in `liferay-portlet.xml` and is called by the control panel to decide whether the portlet should be shown to a specific user in a specific context.
+Set the name of a class that implements `com.liferay.portlet.ControlPanelEntry`. This class denotes the default value of of the element `control-panel-entry-class` in `liferay-portlet.xml` and is called by the Control Panel to decide whether the portlet should be shown to a specific user in a specific context.
 
 	control.panel.default.entry.class=com.liferay.portlet.DefaultControlPanelEntry
 
@@ -5812,7 +5812,7 @@ Set any of these to `false` to disable the portlet from being searched by the Se
 
 ## Sites Admin Portlet [](id=sites-admin-portlet)
 
-Set this to `true` to allow site members to see the Sites Admin portlet and the sites he is a member of in the control panel. Setting this to `false` will only allow administrators to see this portlet in the control panel.
+Set this to `true` to allow site members to see the Sites Admin portlet and the sites he is a member of in the Control Panel. Setting this to `false` will only allow administrators to see this portlet in the Control Panel.
 
 	sites.control.panel.members.visible=true
 

@@ -70,7 +70,7 @@ This is just the web content portion of Liferay's content management system. Lif
 
 It's rare to find in an open source project a full-featured content management system. Most of the time, you'll find web content management systems and file-based content management systems as separate projects. Liferay Portal, however, provides you with both. As shown above, the web content management system is as robust as any other you'll find, and its file-based content management system is the same.  
 
-Liferay Portal keeps the UI of its file-based content management system in an application called *Documents and Media Library*. This application resides in the control panel or can be added to any page, and, as shown below, looks very much like the file manager that you're already familiar with from your operating system. 
+Liferay Portal keeps the UI of its file-based content management system in an application called *Documents and Media Library*. This application resides in the Control Panel or can be added to any page, and, as shown below, looks very much like the file manager that you're already familiar with from your operating system. 
 
 ![Figure 1.4: Liferay Portal's Documents and Media library was purposefully designed to be familiar to anyone who uses a computer. ](../../images/01-docs-and-media.png)
 

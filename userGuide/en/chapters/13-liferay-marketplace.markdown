@@ -14,7 +14,7 @@ This chapter covers the following topics:
 - Installing Plugins Manually
 - Plugin Troubleshooting and Configuration Issues
 
-In a nutshell, the Liferay Marketplace is a repository for applications built on the Liferay Platform. You can find and download applications directly from the Marketplace on the web or use an existing Liferay installation to access and install applications onto the running Liferay web site. Once installed, you can manage the applications through Liferay's control panel. 
+In a nutshell, the Liferay Marketplace is a repository for applications built on the Liferay Platform. You can find and download applications directly from the Marketplace on the web or use an existing Liferay installation to access and install applications onto the running Liferay web site. Once installed, you can manage the applications through Liferay's Control Panel. 
 
 ## Marketplace Concepts: Users, Companies and Apps [](id=lp-6-1-ugen09-marketplace-concepts-users-companies-and-apps-0)
 
@@ -26,7 +26,7 @@ There are two ways to access the Marketplace.
 
 1. Via the website--Using your favorite browser, you can navigate to the marketplace at [http://liferay.com/marketplace](http://liferay.com/marketplace).
 
-2. Via Liferay--If you have a site up and running based on Liferay, you can use the Marketplace section of the control panel to access Marketplace content.
+2. Via Liferay--If you have a site up and running based on Liferay, you can use the Marketplace section of the Control Panel to access Marketplace content.
 
 ### The Basics [](id=lp-6-1-ugen09-the-basics-0)
 
@@ -76,7 +76,7 @@ The Purchased tab lists the apps you have purchased. From this screen, you can f
 
 ![Figure 13.4: Purchased Apps](../../images/marketplace-purchased-apps.png)
 
-If possible, it's best to log into your portal instance and install purchased applications through the My Marketplace link in the control panel. This will provide your portal instance with automatic update notices should they become available. If you download applications this way, they can be hot-deployed.
+If possible, it's best to log into your portal instance and install purchased applications through the My Marketplace link in the Control Panel. This will provide your portal instance with automatic update notices should they become available. If you download applications this way, they can be hot-deployed.
  
 The Apps tab lists apps you have authored and uploaded, showing you details such as the number of downloads, the current price and other relevant information. From here you can manage the apps you have created (please see the Marketplace chapter of the Developer Guide for details on this topic).
  
@@ -155,19 +155,19 @@ Please see the later section *Installing Plugins Manually* To learn more about h
 
 ### Installing through the Control Panel [](id=lp-6-1-ugen09-installing-through-the-control-panel-0)
 
-The easiest way to install an app is to do so from your Liferay control panel. This requires that you have already installed Liferay on your local machine and that you can log in as an administrator. Once you are logged in as an administrator, click the *Go to* menu on the Dockbar and choose *Control Panel*.
+The easiest way to install an app is to do so from your Liferay Control Panel. This requires that you have already installed Liferay on your local machine and that you can log in as an administrator. Once you are logged in as an administrator, click the *Go to* menu on the Dockbar and choose *Control Panel*.
 
 ![Figure 13.12: Marketplace from the Control Panel](../../images/marketplace-control-panel-entries.png)
  
-Click on either the *Store* or the *Purchased* link in the Marketplace category at the upper-left. Before you can access Marketplace via the control panel, you need to associate your `liferay.com` login credentials with your local administrator account. Enter your `liferay.com` email address and password so your Liferay installation can connect to the `liferay.com` Marketplace.
+Click on either the *Store* or the *Purchased* link in the Marketplace category at the upper-left. Before you can access Marketplace via the Control Panel, you need to associate your `liferay.com` login credentials with your local administrator account. Enter your `liferay.com` email address and password so your Liferay installation can connect to the `liferay.com` Marketplace.
 
 ![Figure 13.13: Marketplace Login Screen](../../images/marketplace-login.png)
  
 ![tip](../../images/01-tip.png) Note: Any local user with administrative privileges can use the Marketplace to browse and install apps from the Marketplace, by entering their `liferay.com` credentials in the above login screen.  This allows multiple administrators to manage the apps installed on the local Liferay instance.  Once a link is established between a local administrator account and a `liferay.com` account, there is no way to undo this, short of re-installing Liferay.
  
-Once you've successfully linked the accounts, you will be presented with the same Marketplace screens as you would have if you were directly accessing the Marketplace. You will be able to browse, search, and install directly from the Marketplace. Click on the *Store* link under the Marketplace heading in the control panel to browse the apps available from the `liferay.com` Marketplace. Browse to the app you wish to install, click the *Purchase* button, and then the *Buy* button on the next screen. The app will be downloaded and deployed to your local Liferay installation.
+Once you've successfully linked the accounts, you will be presented with the same Marketplace screens as you would have if you were directly accessing the Marketplace. You will be able to browse, search, and install directly from the Marketplace. Click on the *Store* link under the Marketplace heading in the Control Panel to browse the apps available from the `liferay.com` Marketplace. Browse to the app you wish to install, click the *Purchase* button, and then the *Buy* button on the next screen. The app will be downloaded and deployed to your local Liferay installation.
  
-All apps that you've bought are listed on the *Purchased* page of the Marketplace control panel. Clicking on the *Purchased* link will show you a list of those apps which you have downloaded in the past, including apps you may have purchased/downloaded while using other Liferay installations.
+All apps that you've bought are listed on the *Purchased* page of the Marketplace Control Panel. Clicking on the *Purchased* link will show you a list of those apps which you have downloaded in the past, including apps you may have purchased/downloaded while using other Liferay installations.
 
 ![Figure 13.14: Purchased Apps](../../images/marketplace-purchased-apps-control-panel.png)
  
@@ -231,7 +231,7 @@ Web plugins are regular Java EE web modules designed to work with Liferay. Lifer
 
 ### Installing Plugins from Repositories [](id=lp-6-1-ugen15-installing-plugins-from-repositories-0)
 
-Liferay Portal has a section of the control panel called Plugins Installation, which you can find under the Server heading. This section not only allows you to see what plugins are installed in your portal, but also it enables you to run the search indexer on those portlets that support it and install new portlets.
+Liferay Portal has a section of the Control Panel called Plugins Installation, which you can find under the Server heading. This section not only allows you to see what plugins are installed in your portal, but also it enables you to run the search indexer on those portlets that support it and install new portlets.
 
 Use the dockbar's *Go to* menu to select *Control Panel*. Under the Server heading, select *Plugins Installation*. You should now see the page which allows you to configure and install portlets.
 
@@ -269,7 +269,7 @@ Installing plugins manually is almost as easy as installing plugins via the Plug
 
 -   For security reasons, you do not want to allow portal administrators to install plugins from the Internet before they are evaluated.
 
-You can still use the control panel to install plugins that are not available from the online repositories. This is by far the easiest way to install plugins.
+You can still use the Control Panel to install plugins that are not available from the online repositories. This is by far the easiest way to install plugins.
 
 If your server is firewalled, you will not see any plugins displayed in the Portlet Plugins or Theme Plugins tabs. Instead, you will need to click the *Upload File* tab. This gives you a simple interface for uploading a `.war` file containing a plugin to your Liferay Portal.
 
@@ -279,7 +279,7 @@ Click the *Browse* button and navigate your file system to find the portlet or t
 
 That's all the information the Plugin Installer needs in order to deploy your portlet, theme, layout template, hook or web module. Click the *Install* button and your plugin will be uploaded to the server and deployed. If it is a portlet, you should see it in the *Add Content* window. If it is a theme, it will be available on the *Look and Feel* tab in the page definition.
 
-If you do not wish to use the Update Manager or Plugin Installer to deploy plugins, you can also deploy them at the operating system level. The first time Liferay starts, it creates a *hot deploy* folder which is, by default, created inside the Liferay Home folder. This folder generally resides one directory up from where your application server is installed, though it may be elsewhere depending on which application server you are running. To find out where the Liferay Home folder is for your application server, please see the section on your server in chapter 1. The first time Liferay is launched, it will create a folder structure in Liferay Home to house various configuration and administrative data. One of the folders it creates is called *deploy*. If you copy a portlet or theme plugin into this folder, Liferay will deploy it and make it available for use just as though you'd installed it via the Plugin Installer in the control panel. In fact, this is what the Plugin Installer is doing behind the scenes.
+If you do not wish to use the Update Manager or Plugin Installer to deploy plugins, you can also deploy them at the operating system level. The first time Liferay starts, it creates a *hot deploy* folder which is, by default, created inside the Liferay Home folder. This folder generally resides one directory up from where your application server is installed, though it may be elsewhere depending on which application server you are running. To find out where the Liferay Home folder is for your application server, please see the section on your server in chapter 1. The first time Liferay is launched, it will create a folder structure in Liferay Home to house various configuration and administrative data. One of the folders it creates is called *deploy*. If you copy a portlet or theme plugin into this folder, Liferay will deploy it and make it available for use just as though you'd installed it via the Plugin Installer in the Control Panel. In fact, this is what the Plugin Installer is doing behind the scenes.
 
 You can change the defaults for this directory structure so it is stored anywhere you like by modifying the appropriate properties in your `portal-ext.properties` file. Please see the above section on the `portal-ext.properties` file for more information.
 
@@ -375,11 +375,11 @@ Remember, if you are on a Windows system, use forward slashes instead of back sl
 
 Save the file and then restart your container. Now plugins should install correctly.
 
-Instead of changing the hot deploy destination directory in your `portal-ext.properties` file, you can do it via the Plugin Installer. To change the setting this way, navigate to the Plugins Installation page of the control panel, click the *Install More [Plugins]* button. This will bring you to the Plugin Installer page. Next, click on the *Configuration* tab of the Plugin Installer page. There are a number of settings you can change on this tab, including the default folders for hot deploy, where Liferay should look for plugin repositories and so on.
+Instead of changing the hot deploy destination directory in your `portal-ext.properties` file, you can do it via the Plugin Installer. To change the setting this way, navigate to the Plugins Installation page of the Control Panel, click the *Install More [Plugins]* button. This will bring you to the Plugin Installer page. Next, click on the *Configuration* tab of the Plugin Installer page. There are a number of settings you can change on this tab, including the default folders for hot deploy, where Liferay should look for plugin repositories and so on.
 
 ![Figure 13.22: Changing the Hot Deploy Destination Directory](../../images/marketplace-plugin-installer-configuration.png)
 
-The setting to change is the field labeled *Destination Directory*. Change this to the full path to your container's auto deploy folder from the root of your file system. When you are finished, click the *Save* button at the bottom of the form. The setting will now take effect without your having to restart your container. Note the setting in the control panel overrides the setting in the properties file.
+The setting to change is the field labeled *Destination Directory*. Change this to the full path to your container's auto deploy folder from the root of your file system. When you are finished, click the *Save* button at the bottom of the form. The setting will now take effect without your having to restart your container. Note the setting in the Control Panel overrides the setting in the properties file.
 
 If you are having hot deploy trouble in Liferay versions 4.3.5 and greater, it is possible the administrator of your application server has changed the default folder for auto deploy in your application server. In this case, you would want to set `auto.deploy.dest.dir` to the customized folder location as you would with older versions of Liferay. In Liferay 4.3.5 and greater, this setting still exists but is blank. Add the property to your `portal-ext.properties` file and set its value to the fully qualified path to the auto deploy folder configured in your application server.
 
@@ -427,10 +427,10 @@ Experienced WebSphere system administrators can further automate this by writing
 
 #### Changing the Configuration Options in Multiple Places [](id=lp-6-1-ugen15-changing-the-configuration-options-in-multiple-places-0)
 
-Sometimes, especially during development when several people have administrative access to the server at the same time, the auto deploy folder location may inadvertently be customized in both the `portal-ext.properties` file and in the control panel. If this happens, the value in the control panel takes precedence over the value in the properties file. If you go into the control panel and change the value to the correct setting, plugin deployment will start working again.
+Sometimes, especially during development when several people have administrative access to the server at the same time, the auto deploy folder location may inadvertently be customized in both the `portal-ext.properties` file and in the Control Panel. If this happens, the value in the Control Panel takes precedence over the value in the properties file. If you go into the Control Panel and change the value to the correct setting, plugin deployment will start working again.
 
 ## Summary [](id=summ-31)
 
-In this chapter, we introduced Liferay Marketplace, your one-stop shop for browsing and downloading Liferay-compatible applications. We looked at how to browse, purchase, download, and install apps. You can do this either through [liferay.com/marketplace](liferay.com/marketplace) or through Liferay Portal's control panel. When you purchase apps, you can do so via your personal account or on your company's behalf. For information about developing and uploading apps to Liferay Marketplace, please see the Marketplace chapter of the Liferay Developer guide at [http://www.liferay.com/marketplace/developer-guide](http://www.liferay.com/marketplace/developer-guide).
+In this chapter, we introduced Liferay Marketplace, your one-stop shop for browsing and downloading Liferay-compatible applications. We looked at how to browse, purchase, download, and install apps. You can do this either through [liferay.com/marketplace](liferay.com/marketplace) or through Liferay Portal's Control Panel. When you purchase apps, you can do so via your personal account or on your company's behalf. For information about developing and uploading apps to Liferay Marketplace, please see the Marketplace chapter of the Liferay Developer guide at [http://www.liferay.com/marketplace/developer-guide](http://www.liferay.com/marketplace/developer-guide).
 
 After discussing Liferay Marketplace, we discussed general plugin management. We covered Liferay portlet plugins as well as layout, theme, hook, Ext, and web plugins. Finally, we looked at how to manually deploy plugins to Liferay and discussed some configuration issues.

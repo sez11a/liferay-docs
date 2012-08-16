@@ -13,7 +13,7 @@ We introduced Kaleo workflow in chapter 2, where we discussed how to set up an a
 
 ## Enabling workflow [](id=installati-3)
 
-Liferay's Kaleo workflow engine ships with CE versions of Liferay. If you have EE or if you uninstalled it, the plugin can be installed through the Liferay marketplace. The name is `kaleo-web` and you'll find it in the list of web plugins. Installing the plugin adds a number of new options to the control panel: 
+Liferay's Kaleo workflow engine ships with CE versions of Liferay. If you have EE or if you uninstalled it, the plugin can be installed through the Liferay marketplace. The name is `kaleo-web` and you'll find it in the list of web plugins. Installing the plugin adds a number of new options to the Control Panel: 
 
 -   My Workflow Tasks
 -   Workflow Configuration
@@ -51,7 +51,7 @@ First you define the schema. For Liferay workflows using Kaleo, `liferay-worklow
 	http://www.liferay.com/dtd/liferay-workflow-definition_6_1_0.xsd"
     >
 
-Next you define a name and description for the workflow. This appears in the control panel when users choose and configure workflows.
+Next you define a name and description for the workflow. This appears in the Control Panel when users choose and configure workflows.
 
     <name>Single Approver</name>
     <description>A single approver can approve a workflow
@@ -347,11 +347,11 @@ A portal administrator can create a default workflow definition scheme for each 
 
 ## Configuring assets to use workflow process definitions [](id=using-workflow-in-the-control-panel)
 
-Most of your workflow configuration is done via the control panel. Everything you need to do in the portal can be done through simple GUI controls.
+Most of your workflow configuration is done via the Control Panel. Everything you need to do in the portal can be done through simple GUI controls.
 
 ![Figure 10.3: Adding a Workflow Definition](../../images/kaleo-workflow-new-definition-control-panel.png)
 
-You can find the Workflow section under the Portal heading in the control panel. There are three options under Workflow: *Definitions*, *Default Configuration* and *Submissions*.
+You can find the Workflow section under the Portal heading in the Control Panel. There are three options under Workflow: *Definitions*, *Default Configuration* and *Submissions*.
 
 If you created a new workflow definition, you need to add it so it can be used in the portal. Click *Definitions*. By default, only the Single Approver workflow appears here. Clicking *Add* allows you to enter a title for a new workflow definition and upload the XML file. Once you add a file here, it's added to the portal and is immediately available for use.
 
@@ -369,7 +369,7 @@ Using the context selector drop-down menu in the control canel, you can select a
 
 ### My Workflow Tasks [](id=lp-6-1-ugen06-my-workflow-tasks-0)
 
-My Workflow Tasks is a personalized version of the Workflow Tasks and it's found in your personal section of the control panel. Here are specific tasks which have been assigned to you or assigned to a role of which you are a member. You can also view your completed tasks.
+My Workflow Tasks is a personalized version of the Workflow Tasks and it's found in your personal section of the Control Panel. Here are specific tasks which have been assigned to you or assigned to a role of which you are a member. You can also view your completed tasks.
 
 ![Figure 10.5: My Workflow Tasks Page](../../images/kaleo-workflow-my-tasks.png)
 
@@ -377,7 +377,7 @@ It's here workflow users review and approve content. By clicking on the actions 
 
 ### My Submissions [](id=lp-6-1-ugen06-my-submissions-0)
 
-My Submissions is found under your user's personal information in the control panel. From this screen you can view any assets  you have submitted to review. Those currently under review are listed under the *Pending* tab and those that have been reviewed are listed under the *Completed* tab.
+My Submissions is found under your user's personal information in the Control Panel. From this screen you can view any assets  you have submitted to review. Those currently under review are listed under the *Pending* tab and those that have been reviewed are listed under the *Completed* tab.
 
 ![Figure 10.6: The My Submissions Page](../../images/kaleo-workflow-my-submissions.png)
 
@@ -387,9 +387,9 @@ Besides viewing your work, you can also withdraw a submission from the review pr
 
 Before workflow can be used, you must define which types of assets on the portal are workflow-enabled. If you have created additional definitions, you must also choose the workflow definition to use for each asset that is workflow-enabled.
 
-![Figure 10.7: You can select which site to work on by using the drop-down menu in the Content section of the control panel.](../../images/kaleo-workflow-control-panel-context-selector.png)
+![Figure 10.7: You can select which site to work on by using the drop-down menu in the Content section of the Control Panel.](../../images/kaleo-workflow-control-panel-context-selector.png)
 
-To demonstrate how this works, we'll create a press release. Press releases should be posted in the *Newsroom* section of the web site, so before setting specific workflow configuration options or creating content, create the Newsroom site and switch to it in the control panel. In Workflow Configuration, set Web Content to use the Single Approver workflow.
+To demonstrate how this works, we'll create a press release. Press releases should be posted in the *Newsroom* section of the web site, so before setting specific workflow configuration options or creating content, create the Newsroom site and switch to it in the Control Panel. In Workflow Configuration, set Web Content to use the Single Approver workflow.
 
 Next, create two users, a Content Creator and a Content Reviewer. The Content Creator logs in and creates a new press release for Nose-ster and clicks *Submit for Publication*. This triggers the workflow process and notifies the Content Reviewer. When the Content Reviewer logs in, he or she can assign the workflow task to him- or herself and approve the content.
 
