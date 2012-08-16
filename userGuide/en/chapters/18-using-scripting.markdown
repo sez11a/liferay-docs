@@ -1,6 +1,6 @@
 # Using Scripting for Advanced Flexibility [](id=lp-6-1-ugen18-using-scripting-for-advanced-flexibility-0)
 
-Liferay provides a robust script engine that can be used to interpret scripts in Beanshell, Javascript, Groovy, Python and Ruby. The script engine came out of Liferay's involvement with the Romulus project (http://www.ict-romulus.eu). It was originally developed to support non Java-based portlets, but has now been extended to handle a lot more. For example, when Liferay's workflow framework was introduced, the script engine was leveraged to support the execution of scripts from within a workflow module. A script console is now included in the Server Administration portlet in the control panel. It allows system administrators an easy way to execute scripts to perform repetitive user maintenance operations, bulk manipulations using the Liferay API to ensure consistency, or even system level operations.
+Liferay provides a robust script engine that can be used to interpret scripts in Beanshell, Javascript, Groovy, Python and Ruby. The script engine came out of Liferay's involvement with the Romulus project (http://www.ict-romulus.eu). It was originally developed to support non Java-based portlets, but has now been extended to handle a lot more. For example, when Liferay's workflow framework was introduced, the script engine was leveraged to support the execution of scripts from within a workflow module. A script console is now included in the Server Administration portlet in the Control Panel. It allows system administrators an easy way to execute scripts to perform repetitive user maintenance operations, bulk manipulations using the Liferay API to ensure consistency, or even system level operations.
 
 This chapter helps you to understand Liferay's script engine and covers the following topics: 
 
@@ -121,9 +121,9 @@ Lastly, Liferay provides Python support based on Jython and the previous example
 
 As you can see, Liferay's services can be accessed from any of these languages. Let's look at some practical examples of how you'd use this. 
 		
-## Running scripts from the control panel [](id=running-scripts-from-the-control-panel)
+## Running scripts from the Control Panel [](id=running-scripts-from-the-control-panel)
 
-To see a very simple example of the script console in action, log into the portal as an administrator and navigate to the control panel &rarr; Server Administration &rarr; Script. Change the script type to Groovy and modify the current code to look like the following:
+To see a very simple example of the script console in action, log into the portal as an administrator and navigate to the Control Panel &rarr; Server Administration &rarr; Script. Change the script type to Groovy and modify the current code to look like the following:
  
 	number = com.liferay.portal.service.UserLocalServiceUtil.getUsersCount(); 
 	out.println(number); 
@@ -350,7 +350,7 @@ If you're adding your utility to a Service Builder enabled plugin, then you'll a
 	
 Save all of the changes you've made and deploy the hook. Once the hook has been deployed successfully, the `ScriptUtil` can be used in your script engine code. 
 
-To see the `ScriptUtil` code in action, navigate back to the *control panel* &rarr; *Server Administration* &rarr; *Script*. Change the script type to Groovy and enter the following script: 
+To see the `ScriptUtil` code in action, navigate back to the *Control Panel* &rarr; *Server Administration* &rarr; *Script*. Change the script type to Groovy and enter the following script: 
 
 	myUtil = 
 		com.liferay.portal.kernel.bean.PortletBeanLocatorUtil.locate("script-utils-hook",

@@ -99,7 +99,7 @@ Liferay starting with version 5.2.3 supports database sharding for different por
 
 This allows you to split up your database by various types of data that might be in it. For example, some implementations of sharding a database split up the users: those with last names beginning with A to D go in one database; E to I go in another; etc. When users log in, they are directed to the instance of the application that is connected to the database that corresponds to their last names. In this manner, processing is split up evenly, and the amount of data the application needs to sort through is reduced.
 
-By default, Liferay allows you to support sharding through different portal instances, using the *round robin shard selector*. This is a class which serves as the default algorithm for sharding in Liferay. Using this algorithm, Liferay selects from several different portal instances and evenly distributes the data across them. Alternatively, you can use the manual shard selector. In this case, you'd need to use the UI provided in the control panel to configure your shards. 
+By default, Liferay allows you to support sharding through different portal instances, using the *round robin shard selector*. This is a class which serves as the default algorithm for sharding in Liferay. Using this algorithm, Liferay selects from several different portal instances and evenly distributes the data across them. Alternatively, you can use the manual shard selector. In this case, you'd need to use the UI provided in the Control Panel to configure your shards. 
 
 Of course, if you wish to have your developers implement your own sharding algorithm, you can do that. This is a great use of the Ext plugin. You can select which algorithm is active via the `portal-ext.properties` file:
 
@@ -122,7 +122,7 @@ Enabling sharding is easy. You'll need to make sure you are using Liferay's data
     jdbc.two.password=
     shard.available.names=default,one,two
 
-Once you do this, you can set up your DNS so several domain names point to your Liferay installation (e.g., abc1.com, abc2.com, abc3.com). Next, go to the control panel and click *Portal Instances* in the Server category. Create two to three instances bound to the DNS names you have configured.
+Once you do this, you can set up your DNS so several domain names point to your Liferay installation (e.g., abc1.com, abc2.com, abc3.com). Next, go to the Control Panel and click *Portal Instances* in the Server category. Create two to three instances bound to the DNS names you have configured.
 
 If you're using the RoundRobinShardSelector class, Liferay automatically enters data into each instance one by one. If you're using the `ManualShardSelector` class, you'll have to specify a shard for each instance using the UI.
 
@@ -193,7 +193,7 @@ This store creates a folder structure based on primary keys in the Liferay datab
 
 The first folder is the company ID to which the site belongs. The second folder is the group ID of the site where the document resides. The third is the ID of the document itself, and finally the file name of the document is renamed to a version number for storing multiple versions of the document. 
 
-As you can see, this binds your documents very closely to Liferay, and may not be exactly what you want. But if you've been using the default settings for a while and need to migrate your documents, Liferay provides a migration utility in the control panel in *Server Administration* &rarr; *Data Migration*. Using this utility, you can move your documents very easily from one store implementation to another. 
+As you can see, this binds your documents very closely to Liferay, and may not be exactly what you want. But if you've been using the default settings for a while and need to migrate your documents, Liferay provides a migration utility in the Control Panel in *Server Administration* &rarr; *Data Migration*. Using this utility, you can move your documents very easily from one store implementation to another. 
 
 Speaking of other store implementations, let's look at some others Liferay provides. 
 
@@ -327,7 +327,7 @@ You can now hot deploy the `solr-web` plugin to all your nodes. See the next sec
 
 Once the plugin is hot deployed, your Liferay server's search is automatically upgraded to use Solr. It's likely, however, that initial searches will come up with nothing: this is because you need to reindex everything using Solr.
 
-Go to the control panel. In the *Server* section, click *Server Administration*. Click the *Execute* button next to *Reindex all search indexes* at the bottom of the page. Liferay will begin sending indexing requests to Solr for execution. Once Solr has indexed all your data, you'll have a search server running independently of all your Liferay nodes.
+Go to the Control Panel. In the *Server* section, click *Server Administration*. Click the *Execute* button next to *Reindex all search indexes* at the bottom of the page. Liferay will begin sending indexing requests to Solr for execution. Once Solr has indexed all your data, you'll have a search server running independently of all your Liferay nodes.
 
 Installing the plugin to your nodes has the effect of overriding any calls to Lucene for searching. All Liferay's search boxes will now use Solr as the search index. This is ideal for a clustered environment, as it allows all your nodes to share one search server and one search index, and this search server operates independently of all your nodes. If, however, you don't have the server hardware upon which to install a separate search server, you can sync the search indexes between all your nodes, as is described next. 
 

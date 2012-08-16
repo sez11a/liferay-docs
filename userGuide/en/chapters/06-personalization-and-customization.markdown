@@ -46,7 +46,7 @@ Begin by downloading and installing the Sample Drools Portlet. The Sample Drools
 
 After installation is complete, add the portlet to a page. Initially, the portlet indicates the name of the currently logged in user and a message that says there are no results. To see results in the portlet we'll need to create and tag assets in the community to which you added the portlet. 
 
-Log in as an administrative user and navigate to the Control Panel. Once in the Control Panel, add a new Web Content entry to your community. Before publishing the Web Content entry, tag the article with *west coast symposium*. While still in the control panel, navigate to *My Account* and select the Address link on the right side of the screen. Enter a Canadian, Mexican, or US based address and save the record. Now, navigate back to the liferay.com community and the Web Content should be displayed in the Sample Drools Portlet.
+Log in as an administrative user and navigate to the Control Panel. Once in the Control Panel, add a new Web Content entry to your community. Before publishing the Web Content entry, tag the article with *west coast symposium*. While still in the Control Panel, navigate to *My Account* and select the Address link on the right side of the screen. Enter a Canadian, Mexican, or US based address and save the record. Now, navigate back to the liferay.com community and the Web Content should be displayed in the Sample Drools Portlet.
 
 The default rule that's being evaluated displays a list of assets based on the current user's address. For example, if the current user's country is set to Canada, Mexico, or the United States, the Sample Drools Portlet displays a list of assets that have been tagged with the *west coast symposium* tag.
 
