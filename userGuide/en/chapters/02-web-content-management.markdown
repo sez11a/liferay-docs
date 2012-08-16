@@ -394,27 +394,25 @@ On the right of the New Web Content form is a menu of options that allows you to
 
 **Display Page:** lets you determine where the web contents will be displayed when linked from other pages. New to Liferay is the concept of the Canonical URL, which is a unique URL for the articles that will redirect the visitor to the default display page of the article. 
 
-Imagine you have a newspaper with a sports section and a technology section. You add a Sports page and a Tech page to your site, each one with a specific banner and look and feel. You want your articles to appear in the appropriate pages, but you know that in Liferay, articles are not related to pages. 
+Imagine you have a newspaper with a sports section and a technology section. You add a Sports page and a Tech page to your site, each one with a specific banner and look and feel. You want the articles to appear in the appropriate pages, but you know in Liferay articles are not related to pages. You can add an article as often as you like in different web content display portlets or in configured Asset Publishers. But if you have a *View in context* link where will you show your article? This is where the default display page comes in. Each article defined with a default display page will be shown with other related articles in the same display page. 
 
-You can add an article as often as you like in different web content displays portlets or in configured asset publishers. But if you have a *View in context* link where will you show your article? This is where default display page comes in. For each article we define the default display page and there they will be shown. 
+Imagine you have 100 sports articles and 100 tech articles. In previous versions of Liferay you'd need to create a (display?) page for each article to show it. Now with only one sports page and one tech page, you can show all articles in one place in a consistent fashion. 
 
 ##### Creating a display page
 
 There are two ways of creating a display page. You can configure a *Content Display Page* template, which  automatically creates everything you need, or you can create one manually. The Content Display Page template is found under *Page Templates* in the Portal section of the Control Panel.
 
-To create a display page manually, follow these two steps. First, you need to add an Asset Publisher to a page. Secondly, you need to configure it to be the Default Asset Publisher of the page. That way if several asset publishers are in the same page, the system knows where to show the content. You set this up by clicking Configuration on your asset publisher. Under the *Setup* tab, navigate to *Display Settings* and check the checkbox labeled *Set as the Default Asset Publisher for This Page*.
+To create a display page manually, add an Asset Publisher to a page. Then configure it to be the Default Asset Publisher of the page. This directs the system where to display the content if several Asset Publishers are in the same page. Set this up by clicking Configuration on your Asset Publisher. Under the *Setup* tab, navigate to *Display Settings* and check the checkbox labeled *Set as the Default Asset Publisher for This Page*.
 
-Once you've given an article its default display page, the article's links will redirect the user to its default display page. To achieve this add an asset publisher to another page, like the Home page of the newspaper, and configure it to *View in a Specific Portlet*. This setting is found in the *Asset Link Behavior* menu under Display Settings. If you click on the link, you'll be redirected to the Default Display Page of each article. 
+Once you've given an article its default display page, the article's links will redirect the user to its default display page. To see how this works add an Asset Publisher to another page, like the Home page of the newspaper, and configure it to *View in a Specific Portlet*. This setting is found in the *Asset Link Behavior* menu under Display Settings. If you click on the link, you'll be redirected to the Default Display Page of the article. 
 
-You now see that the link is something like this:
+You now see that the link looks something like this:
 
 www.mysite.com/my-article
 
-This is the canonical URL and it's a nice enhancement for Search Engine Optimization, because it doesn't have information of the page, so it can't change in case you decide the content to be shown in any other page.
+This is an example of a canonical URL and it's a nice enhancement for SEO because it helps guide search engines to the most relevant pages and discard pages not as relevant. And if you decide to move the content to another page in the future, the URL makes it easier for search engines to find it.
 	
-Imagine you have 100 sports articles and 100 tech articles. In previous versions of Liferay you'd need to create a (display?) page for each article to show it. Now with only one sports page and one tech page, you can show all articles in a consistent way. 
-	
-This feature is used in search results, in related assets and in asset publishers. For more information on Liferay's Display Pages, see chapter 5.
+This feature is used in search results, in related assets and in Asset Publishers. For more information on Liferay's Display Pages, see chapter 5.
 
 **Related Assets:** enables you to connect any number of assets within a site or across the portal, even if they don't share any tags and aren't in the same category. You can connect your content to a Blogs Entry, Message Boards Message, Web Content, Calendar Event, Bookmarks Entry, Documents and Media Document, and a Wiki Page.
 
@@ -422,9 +420,9 @@ This feature is used in search results, in related assets and in asset publisher
 
 ##### The Related Assets portlet []()
 
-The *Related Assets* portlet displays the relationships between assets. When you add the portlet to a page, it shows the related assets of the asset being shown in the current page. You can add as many related asset portlets to every page as you need.
+The *Related Assets* portlet displays the relationships between assets. When you add the portlet to a page, it shows the related assets of the asset being shown in the current page. You can add as many related asset portlets as you desire to every page.
 	
-This portlet is an extension of the asset publisher, which allows you to configure it to achieve further filtering. For example you can add three Related Assets portlets to a page and configure one to show only blog entries, the second one to show only images and the third one to show only documents. When you access the page, you'll see portlets displaying Related Blogs, Related Images and Related Documents.
+This portlet is an extension of the Asset Publisher, which allows you to configure it to achieve further filtering. For example you can add three Related Assets portlets to a page and configure one to show only blog entries, the second one to show only images and the third one to show only documents. When you access the page, you'll see portlets displaying Related Blogs, Related Images and Related Documents.
 
 To do this, go to the Asset Publisher portlet and select the Configuration icon (wrench) in the upper right corner of the portlet. Under the Setup tab, set the filter options using the *Asset Type* menu.
 
