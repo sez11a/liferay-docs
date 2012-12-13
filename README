@@ -1,5 +1,8 @@
 Documentation Repository Contents
 =================================
+
+FOO
+
 This repository is intended for storage of Liferay product documentation.
 Documents are to be comprised of chapter source files in Markdown format.
 Images referenced in the documents are to be stored in the appropriate images
