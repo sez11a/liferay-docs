@@ -470,6 +470,10 @@ public class PortalPropertiesParser implements XMLReader {
 				}
 			}
 
+			if (propertyData.descriptionParagraphs.isEmpty()) {
+				propertyData.descriptionParagraphs.add("");
+			}
+
 			propertyDataList.add(propertyData);
 			propertyData = new PropertyData();
 
