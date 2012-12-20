@@ -380,7 +380,6 @@ public class PortalPropertiesParser implements XMLReader {
 
 			propertyData.name = line.substring(0, equalNdx);
 			System.out.println(propertyData.name);
-			System.out.println(_overrideValues[0]);
 			propertyData.anchor = nameToAnchor(propertyData.name + '+' + i);
 			propertyData.hidden = hidden;
 			propertyData.prefix = _makePrefix(
@@ -401,8 +400,30 @@ public class PortalPropertiesParser implements XMLReader {
 				i++;
 				value += lines[i].trim();
 			}
+			
+			StringBuffer defaultValue = new StringBuffer(value);
+			
+			if (defaultValue.length() > 80) {
+				List<String> dvs = Arrays.asList(defaultValue.toString().split(","));
+				Iterator<String> dvsIter = dvs.iterator();
+				defaultValue = new StringBuffer();
+				
+				while (dvsIter.hasNext()) {
+					String dvsValue = dvsIter.next();
+					if (dvsValue.startsWith(" ") &&
+						dvsValue.length() > 1) {
 
-			propertyData.value = value;
+						dvsValue = dvsValue.substring(1);
+					}
+
+					defaultValue.append(dvsValue);
+					if (dvsIter.hasNext()) {
+						defaultValue.append(",\n");
+					}
+				}
+			}
+
+			propertyData.value = defaultValue.toString();
 
 			// check previous property for alternative values
 			if (propertyData.descriptionParagraphs.isEmpty()) {
