@@ -418,7 +418,7 @@ public class PortalPropertiesParser implements XMLReader {
 
 					defaultValue.append(dvsValue);
 					if (dvsIter.hasNext()) {
-						defaultValue.append(",\n");
+						defaultValue.append(",\n\n");
 					}
 				}
 			}
