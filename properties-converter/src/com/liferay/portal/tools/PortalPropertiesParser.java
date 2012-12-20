@@ -361,6 +361,10 @@ public class PortalPropertiesParser implements XMLReader {
 			if (equalNdx == -1) {
 				continue;
 			}
+			
+			if (line.trim().matches("#[\\s]+[\\S].*")) {
+				continue;
+			}
 
 			propertyData.name = line.substring(0, equalNdx);
 			propertyData.anchor = nameToAnchor(propertyData.name + '+' + i);
