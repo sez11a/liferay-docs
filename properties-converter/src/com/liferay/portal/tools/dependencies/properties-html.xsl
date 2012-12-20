@@ -160,34 +160,57 @@
 			</xsl:for-each>
 		</div>
 
-		<xsl:if test="@hidden='false'">
-			<div class="value">
-				Default value:
-				<pre>
-					<xsl:value-of select="value" />
-				</pre>
-			</div>
-		</xsl:if>
-		<xsl:if test="@hidden='true'">
-			<div class="value hidden">
-				Default value (not active):
-				<pre>
-					<xsl:value-of select="value" />
-				</pre>
-			</div>
-		</xsl:if>
+	<xsl:choose>
 
-		<xsl:if test="count(value[@alt='true']) > 0">
-			<div class="value alt">
-				Example values:
+		<xsl:when test="@override='true'">
+		
+			<div class="value override">
+				Examples:
 				<pre>
+					<xsl:value-of select="value" /><br />
 					<xsl:for-each select="value[@alt='true']">
 						<xsl:value-of select="." />
 						<br />
 					</xsl:for-each>
 				</pre>
 			</div>
-		</xsl:if>
+				
+		</xsl:when>
+
+		<xsl:otherwise>
+
+			<xsl:if test="@hidden='false'">
+				<div class="value">
+					Default value:
+					<pre>
+						<xsl:value-of select="value" />
+					</pre>
+				</div>
+			</xsl:if>
+			<xsl:if test="@hidden='true'">
+				<div class="value hidden">
+					Default value (not active):
+					<pre>
+						<xsl:value-of select="value" />
+					</pre>
+				</div>
+			</xsl:if>
+
+			<xsl:if test="count(value[@alt='true']) > 0">
+				<div class="value alt">
+					Example values:
+					<pre>
+						<xsl:for-each select="value[@alt='true']">
+							<xsl:value-of select="." />
+							<br />
+						</xsl:for-each>
+					</pre>
+				</div>
+			</xsl:if>
+
+		</xsl:otherwise>
+
+	</xsl:choose>
 
 	</xsl:template>
 
