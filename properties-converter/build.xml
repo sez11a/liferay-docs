@@ -10,6 +10,7 @@
 	<property name="properties.file" value="portal.properties" />
 	<property name="destination.html" value="properties-doc.html" />
 	<property name="title" value="Portal Properties" />
+	<property name="override-property-1" value="include-and-override" />
 
 	<path id="lib.classpath">
 		<fileset dir="${lib.dir}" includes="*.jar" />
@@ -59,6 +60,7 @@
 			<arg value="${destination.html}" />
 			<arg value="false" />
 			<arg value="${title}" />
+			<arg value="${override-property-1}" />
 		</java>
 	</target>
 

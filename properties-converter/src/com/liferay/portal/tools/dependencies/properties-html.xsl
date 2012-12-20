@@ -1,7 +1,9 @@
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	
-	<xsl:param name="title">Portal Properties</xsl:param>
+
+	<xsl:param name="title">
+		Portal Properties
+	</xsl:param>
 
 	<xsl:output method="html" indent="yes" />
 
@@ -28,7 +30,7 @@
 			</style>
 			<body>
 				<h1>
-					<xsl:value-of select="$title"/>
+					<xsl:value-of select="$title" />
 				</h1>
 
 				<xsl:call-template name="toc">
@@ -45,7 +47,7 @@
 
 	<xsl:template name="toc">
 		<xsl:param name="fullToc" />
-		TOC
+		Table of Contents
 		<ul id="toc">
 			<xsl:for-each select="properties/section">
 				<li>
@@ -114,7 +116,11 @@
 		</div>
 
 		<div class="description">
-			<xsl:value-of select="description" />
+			<xsl:for-each select="paragraph">
+				<p>
+					<xsl:value-of select="." />
+				</p>
+			</xsl:for-each>
 		</div>
 
 		<xsl:if test="@hidden='false'">
@@ -147,37 +153,64 @@
 		</h3>
 
 		<div class="description">
-			<xsl:value-of select="description" />
+			<xsl:for-each select="paragraph">
+				<p>
+					<xsl:value-of select="." />
+				</p>
+			</xsl:for-each>
 		</div>
 
-		<xsl:if test="@hidden='false'">
-			<div class="value">
-				Default value:
-				<pre>
-					<xsl:value-of select="value" />
-				</pre>
-			</div>
-		</xsl:if>
-		<xsl:if test="@hidden='true'">
-			<div class="value hidden">
-				Default value (not active):
-				<pre>
-					<xsl:value-of select="value" />
-				</pre>
-			</div>
-		</xsl:if>
+	<xsl:choose>
 
-		<xsl:if test="count(value[@alt='true']) > 0">
-			<div class="value alt">
-				Other sample values:
+		<xsl:when test="@override='true'">
+		
+			<div class="value override">
+				Examples:
 				<pre>
+					<xsl:value-of select="value" /><br />
 					<xsl:for-each select="value[@alt='true']">
 						<xsl:value-of select="." />
 						<br />
 					</xsl:for-each>
 				</pre>
 			</div>
-		</xsl:if>
+				
+		</xsl:when>
+
+		<xsl:otherwise>
+
+			<xsl:if test="@hidden='false'">
+				<div class="value">
+					Default value:
+					<pre>
+						<xsl:value-of select="value" />
+					</pre>
+				</div>
+			</xsl:if>
+			<xsl:if test="@hidden='true'">
+				<div class="value hidden">
+					Default value (not active):
+					<pre>
+						<xsl:value-of select="value" />
+					</pre>
+				</div>
+			</xsl:if>
+
+			<xsl:if test="count(value[@alt='true']) > 0">
+				<div class="value alt">
+					Example values:
+					<pre>
+						<xsl:for-each select="value[@alt='true']">
+							<xsl:value-of select="." />
+							<br />
+						</xsl:for-each>
+					</pre>
+				</div>
+			</xsl:if>
+
+		</xsl:otherwise>
+
+	</xsl:choose>
 
 	</xsl:template>
 
