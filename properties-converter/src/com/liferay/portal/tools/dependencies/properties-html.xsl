@@ -165,7 +165,7 @@
 		<xsl:when test="@override='true'">
 		
 			<div class="value override">
-				Examples:
+				Default value(s):
 				<pre>
 					<xsl:value-of select="value" /><br />
 					<xsl:for-each select="value[@alt='true']">
