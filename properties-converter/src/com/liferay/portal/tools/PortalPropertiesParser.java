@@ -360,7 +360,9 @@ public class PortalPropertiesParser implements XMLReader {
 					}
 
 					paragraph += line.substring(1);
-					if (!lines[i + 1].matches("[\\s]*?#[\\s][^\\s].*")) {
+					if ((i + 1) < lines.length &&
+						!lines[i + 1].matches("[\\s]*?#[\\s][^\\s].*")) {
+
 						propertyData.descriptionParagraphs.add(paragraph);
 						paragraph = "";
 					}
