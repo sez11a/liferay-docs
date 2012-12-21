@@ -4,13 +4,12 @@
 
 	<property name="project.dir" value="." />
 	<property name="classes.dir" value="${project.dir}/classes" />
-	<property name="dist.dir" value="${project.dir}/dist" />
 	<property name="lib.dir" value="${project.dir}/lib" />
 	<property name="src.dir" value="${project.dir}/src" />
 	<property name="properties.file" value="portal.properties" />
 	<property name="destination.html" value="properties-doc.html" />
 	<property name="title" value="Portal Properties" />
-	<property name="override-property-1" value="include-and-override" />
+	<property name="override.properties" value="include-and-override" />
 
 	<path id="lib.classpath">
 		<fileset dir="${lib.dir}" includes="*.jar" />
@@ -20,10 +19,9 @@
 		<pathelement path="${classes.dir}" />
 		<path refid="lib.classpath" />
 	</path>
-	
+
 	<target name="clean" description="cleans up" >
 		<delete dir="${classes.dir}" />
-		<delete dir="${dist.dir}" />
 	</target>
 
 	<target name="compile" description="compiles the code">
@@ -43,9 +41,8 @@
 		<javac classpathref="${javac.classpathref}" destdir="${javac.destdir}" includeAntRuntime="false" srcdir="${javac.srcdir}" />
 	</target>
 
-	<target name="dist" depends="compile" description="compiles the code and creates a runnable JAR file for the project">
-		<mkdir dir="${dist.dir}" />
-		<jar destfile="${dist.dir}/properties-converter.jar" filesetmanifest="mergewithoutmain">
+	<target name="lib" depends="compile" description="compiles the code and creates a runnable JAR file for the project">
+		<jar destfile="${lib.dir}/properties-converter.jar" filesetmanifest="mergewithoutmain">
 			<manifest>
 				<attribute name="Main-Class" value="com.liferay.portal.tools.PortalPropertiesParser" />
 				<attribute name="Class-Path" value="." />
@@ -60,7 +57,7 @@
 			<arg value="${destination.html}" />
 			<arg value="false" />
 			<arg value="${title}" />
-			<arg value="${override-property-1}" />
+			<arg value="${override.properties}" />
 		</java>
 	</target>
 
