@@ -86,15 +86,8 @@ public class PortalPropertiesParser implements XMLReader {
 		StreamResult result = new StreamResult(destinationHtml);
 
 		transformer.setParameter("title", args[3]);
-		
-		for (int i = 4; i < 20; i++) {
-			try {
-				transformer.setParameter("override-property-" + i, args[i]);
-				_overrideValues[i - 4] = args[i];
-			} catch (ArrayIndexOutOfBoundsException oob) {
-				break;
-			}
-		}
+
+		_overrideProperties = Arrays.asList(args[4].split(","));
 
 		transformer.transform(saxSource, result);
 
@@ -382,19 +375,13 @@ public class PortalPropertiesParser implements XMLReader {
 
 			propertyData.name = line.substring(0, equalNdx);
 			System.out.println(propertyData.name);
-			System.out.println(_overrideValues[0]);
 			propertyData.anchor = nameToAnchor(propertyData.name + '+' + i);
 			propertyData.hidden = hidden;
 			propertyData.prefix = _makePrefix(
 				propertyData.name, PARAM_MIN_LEFT, PARAM_DEEP_RIGHT);
-			
-			for (int j = 0; j < 16; j++) {
-				if (propertyData.name.equals(_overrideValues[j])) {
-					System.out.println("propertyData.name.equals(_overrideValues[j])");
-					propertyData.override = true;
-				} else {
-					break;
-				}
+
+			if (_overrideProperties.contains(propertyData.name)) {
+				propertyData.override = true;
 			}
 
 			String value = line.substring(equalNdx + 1);
@@ -662,6 +649,6 @@ public class PortalPropertiesParser implements XMLReader {
 	private boolean _generateFullToc = false;
 	private String _namespaceURI = "";
 	
-	private static String[] _overrideValues = new String[20];
+	private static List<String> _overrideProperties;
 
 }
