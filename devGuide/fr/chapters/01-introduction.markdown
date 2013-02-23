@@ -1,5 +1,7 @@
 
-# Introduction 
+# Introduction [](id=introduct-12)
+
+Bonjour!
 
 Welcome to the Liferay's Developers Guide, the official guide for all developers
 that want to develop a portal based on Liferay or that want to develop an
@@ -35,7 +37,7 @@ developing applications for Liferay
 
 Let's get started and look at developing applications for Liferay.
 
-## Developing applications for Liferay 
+## Developing applications for Liferay [](id=developing-applications-for-lifer-3)
 
 According to Wikipedia "A web application is an application that is accessed
 over a network such as the Internet or an intranet." A portal application is a
@@ -64,7 +66,7 @@ as portlets or regular Java web applications.
 
 The following sections describe these options in more detail.
 
-### Portlets  
+### Portlets  [](id=lp-6-1-dgen01-portlets--0)
 
 Portlets are small web applications written in Java that run in a portion of a
 web page. The heart of any portal implementation is its portlets, because they
@@ -80,7 +82,7 @@ pieces that can be arranged dynamically on a page. Portlets can be written using
 any of the java web frameworks that support portlets development, including
 Liferay's specific frameworks: MVCPortlet or AlloyPortlet.
 
-### OpenSocial Gadgets 
+### OpenSocial Gadgets [](id=lp-6-1-dgen01-opensocial-gadgets-0)
 
 Like portlets, OpenSocial Gadgets provide a standard way to develop applications
 for a portal environment. From a technology perspective, one key difference is
@@ -125,7 +127,7 @@ create a plugin (that is a `.war` file) in order to deploy it. All you need to
 do is make that XML file accessible within the same server or another server and
 let Liferay know the URL.
 
-### Reusing existing web applications  
+### Reusing existing web applications  [](id=lp-6-1-dgen01-reusing-existing-web-applications--0)
 
 Sometimes you don't start from scratch, because you have an existing application
 which however has not been implemented using Portlets or OpenSocial Gadgets.
@@ -158,7 +160,7 @@ example, by using the control panel or by copying it to the deploy directory).
 As a result, Liferay automatically creates a portlet that integrates your
 application using an IFrame.
 
-### Supported Technologies  
+### Supported Technologies  [](id=lp-6-1-dgen01-supported-technologies--0)
 
 Liferay, as a platform, strives to provide compatibility with all Java
 technologies that a developer may want to use to develop their own applications.
@@ -205,7 +207,7 @@ caching, connections to remote services, and much more. Liferay does not impose
 specific requirements on the use of any of those frameworks so that portal
 developers can choose the best tools for their projects.
 
-## Extending and customizing Liferay 
+## Extending and customizing Liferay [](id=extending-and-customizing-lifer-3)
 
 Liferay provides many out-of-the-box features, including a fully featured
 content management system, a social collaboration suite and several productivity
@@ -218,7 +220,7 @@ types of customization. Yet, it is possible to combine several plugin types,
 such as Themes and Layout Templates, into a single WAR file. The following
 sections describe each type of plugin and how they may be used.
 
-### Customizing the look and feel: Themes 
+### Customizing the look and feel: Themes [](id=lp-6-1-dgen01-customizing-the-look-and-feel-themes-0)
 
 Themes allow the look of the Liferay portal to be changed using a combination of
 CSS and Velocity templates. In many cases, it is possible to adapt the default
@@ -228,13 +230,13 @@ a subset of the required templates and rely on the remaining templates to be
 copied from the default theme at deployment. Like portlets, themes are
 hot-deployed as plugins into a Liferay instance.
 
-### Adding new predefined page layouts: Layout Templates  
+### Adding new predefined page layouts: Layout Templates  [](id=lp-6-1-dgen01-adding-new-predefined-page-layouts-layout-templates--0)
 
 Layouts are similar to themes, except that they change the *arrangement* of
 portlets on a page rather than their look and feel. Layout templates are also
 written in Velocity and are hot-deployable.
 
-### Customizing or extending the out of the box functionality: Hook plugins  
+### Customizing or extending the out of the box functionality: Hook plugins  [](id=lp-6-1-dgen01-customizing-or-extending-the-out-of-the-box-functionality-h-0)
 
 Hook plugins are the recommended method of customizing the the core
 functionality of Liferay at many predefined extension points. Hook plugins can
@@ -246,7 +248,7 @@ templates used by any of the default portlets, allowing you to customize the
 appearance of the portlets as desired. Best of all, hooks are hot-deployable
 plugins just like portlets.
 
-### Advanced customization: Ext plugins  
+### Advanced customization: Ext plugins  [](id=lp-6-1-dgen01-advanced-customization-ext-plugins--0)
 
 Ext plugins provide the largest degree of flexibility in modifying the Liferay
 core, and allow replacing essentially any class with custom implementations.
@@ -272,7 +274,7 @@ plugins should not be combined with other types of plugins.
 
 ---
 
-## Choosing the best tool for the job 
+## Choosing the best tool for the job [](id=choosing-the-best-tool-for-the-j-3)
 
 The Java ecosystem is well known for providing a wide variety of options for
 almost any type of developer work that must be done. This is a great advantage
@@ -318,8 +320,8 @@ repeat the steps described in the guide using the Liferay IDE.
 developers prefer one of the alternatives to Apache Ant. The most popular of
 these alternatives is Maven. To support developers that want to use Maven we
 have *mavenized* Liferay artifacts so that they can easily be referenced in your
-`pom.xml`. We have a chapter *Developing plugins using Maven* dedicated to just
-that topic.
+`pom.xml`. We are in the process of writing a chapter about using Maven for
+Liferay development and will be adding it to this guide in the future.
 
 **What if I don't like Eclipse and prefer to use Netbeans, IntelliJ IDEA or
 other another IDE?** There are many IDEs out there and each one has its

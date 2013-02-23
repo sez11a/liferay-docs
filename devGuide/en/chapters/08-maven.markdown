@@ -106,7 +106,7 @@ To create a repository using Nexus, do the following:
 2. Click on *Repositories* and navigate to *Add...* &rarr; *Hosted Repository*.
 
     ![Figure 8.1: Adding a repository to hold your Liferay artifacts is easy
-    with Nexus OSS.](../../images/maven-nexus-create-repo.png)
+    with Nexus OSS.](../images/maven-nexus-create-repo.png)
 
     Note: To learn more about each type of Nexus repository, read Sonatype's
     *Managing Repositories* at [http://www.sonatype.com/books/nexus-book/reference/confignx-sect-manage-repo.html](http://www.sonatype.com/books/nexus-book/reference/confignx-sect-manage-repo.html).
@@ -156,7 +156,7 @@ access them for retrieving and installing artifacts.
 
 ---
 
- ![note](../../images/tip-pen-paper.png)**Note:** You're only required to
+ ![note](../images/tip-pen-paper.png)**Note:** You're only required to
  configure a repository server if you're installing downloaded Liferay CE/EE
  artifacts from a zip file or if you want to share artifacts (e.g., Liferay
  artifacts and/or your plugins) with others. If you are automatically installing
@@ -245,7 +245,7 @@ Liferay Maven EE artifacts, follow these steps:
 field and select the *Development* value in the second field.
 
     ![Figure 8.2: You can download the Liferay Maven EE artifacts from the
-    Liferay Customer Portal.](../../images/maven-customer-portal.png)
+    Liferay Customer Portal.](../images/maven-customer-portal.png)
 
 5. Click *Download* from under the desired *Liferay Portal \<Version\> Maven*.
 
@@ -261,7 +261,7 @@ example, if you want Maven artifacts for Liferay Portal 6.1.1 CE GA2, select
 version *6.1.1 GA2*.
 
     ![Figure 8.3: After selecting the Liferay version, simply select the Liferay
-    Portal Maven zip file to download.](../../images/maven-select-download.png)
+    Portal Maven zip file to download.](../images/maven-select-download.png)
 
 3. Select the desired zip file. The zip files use naming convention
 *liferay-portal-maven-\<version\>-\<date\>.zip*.
@@ -351,13 +351,13 @@ repository's ID and URL, respectively.
     of your Nexus OSS server and select your repository.
 
     ![Figure 8.4: You can easily navigate to your Liferay release repository in
-    Nexus.](../../images/maven-select-repository2.png)
+    Nexus.](../images/maven-select-repository2.png)
 
     Notice a window appears below displaying the Liferay artifacts now deployed
     to your repository.
 
     ![Figure 8.5: Your repository server now provides access to your Liferay
-    Maven artifacts.](../../images/maven-verify-deployment2.png)
+    Maven artifacts.](../images/maven-verify-deployment2.png)
 
 Congratulations! You've downloaded the Liferay artifacts, installed them to your
 local repository, and deployed them to your release repository server for
@@ -522,7 +522,7 @@ Archetype tool steps to generate all kinds of Liferay plugin projects.
 
 ---
 
- ![note](../../images/tip-pen-paper.png)**Note:** Make sure Maven is installed and that
+ ![note](../images/tip-pen-paper.png)**Note:** Make sure Maven is installed and that
  its executable is in your path environment variable. 
 
 ---
@@ -598,7 +598,7 @@ se, as older archetype versions are compatible with updated Liferay bundles.
     The snapshot below illustrates choosing the archetype version:
 
     ![Figure 8.6: You are prompted by Maven Archetype to input the version of
-    the archetype to generate.](../../images/maven-archetype-version.png)
+    the archetype to generate.](../images/maven-archetype-version.png)
 
 6. Enter values for the *groupId*, *artifactId*, *version*, and *package*
 coordinates (properties) of your project. For more information on defining Maven
@@ -616,7 +616,7 @@ coordinates, see
 
     ![Figure 8.7: When creating your portlet plugin, you must enter your
     *groupId*, *artifactId*, *version*, and *package*
-    properties.](../../images/maven-portlet-plugin-settings.png)
+    properties.](../images/maven-portlet-plugin-settings.png)
 
 6. Enter the letter *Y* to confirm your coordinates.
 
@@ -630,7 +630,7 @@ coordinates, see
     plugin is installed there as well.
     
     ![Figure 8.8: Your archetype and its dependencies are now available in
-    your local repository.](../../images/maven-public-plugin.png)
+    your local repository.](../images/maven-public-plugin.png)
 
 You can use Maven's Archetype tool to generate other types of plugins in the
 same manner.
@@ -699,7 +699,7 @@ Liferay version and your Liferay Portal's deploy directory path.
 
     ---
     
-     ![note](../../images/tip-pen-paper.png)**Note:** If you get the following
+     ![note](../images/tip-pen-paper.png)**Note:** If you get the following
      error executing `mvn liferay:deploy`, check to see if you're executing the
      command from your plugin's directory (e.g. `sample-portlet`).
     
@@ -734,7 +734,7 @@ plugin's `pom.xml`.
 
     ![Figure 8.9: Select the *Summary* tab of your repository to see how to
     specify it for distribution management in your plugin's
-    POM.](../../images/maven-repository-summary.png)
+    POM.](../images/maven-repository-summary.png)
 
 Note, since we created the plugin as a snapshot, we must deploy it to a snapshot
 repository. You can also deploy a plugin as a release, but the plugin's POM
@@ -743,7 +743,7 @@ snapshot version (e.g., `<version>1.0-SNAPSHOT</version>`).
 
 ---
 
- ![note](../../images/tip-pen-paper.png)**Note:** You'll use the following three
+ ![note](../images/tip-pen-paper.png)**Note:** You'll use the following three
  build phases in developing plugins with Maven:
 
  - Maven's *compile* phase results in explicit dependencies being downloaded to
@@ -793,7 +793,7 @@ projects with Maven* section.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip**: As you use Maven's Archetype
+ ![tip](../images/tip-pen-paper.png)**Tip**: As you use Maven's Archetype
  tool to generate your portlet project, you can filter on group ID "liferay", or
  even group ID / artifact ID combination "liferay:portlet", to find the Liferay
  portlet archetypes.
@@ -879,7 +879,7 @@ projects with Maven* section.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip**: As you use Maven's Archetype
+ ![tip](../images/tip-pen-paper.png)**Tip**: As you use Maven's Archetype
  tool to generate your theme project, you can filter on group ID "liferay", or
  even group ID / artifact ID combination "liferay:theme", to find the Liferay
  theme archetypes.
@@ -974,7 +974,7 @@ projects with Maven* section.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip**: As you use Maven's Archetype
+ ![tip](../images/tip-pen-paper.png)**Tip**: As you use Maven's Archetype
  tool to generate your hook project, you can filter on group ID "liferay", or
  even group ID / artifact ID combination "liferay:hook", to find the Liferay
  hook archetypes.
@@ -1038,7 +1038,7 @@ plugin projects with Maven* section.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip**: As you use Maven's Archetype
+ ![tip](../images/tip-pen-paper.png)**Tip**: As you use Maven's Archetype
  tool to generate your layout template project, you can filter on group ID
  "liferay", or even group ID / artifact ID combination "liferay:layout", to find
  the Liferay layout template archetypes.

@@ -30,7 +30,7 @@ Next, go through the following steps to setup your new hook:
 3. Select the *Hook* Plugin Type
 4. Click *Finish*
 
-![Figure 6.1: Creating your hook plugin](../../images/06-hooks-1.png)
+![Figure 6.1: Creating your hook plugin](../images/06-hooks-1.png)
 
 Notice the Plugins SDK automatically adds "hook" to the project name after its creation. When creating a new plugin in Developer Studio, we can either create a completely new plugin or add a new plugin to an existing plugin project.
 
@@ -48,7 +48,7 @@ You should get a BUILD SUCCESSFUL message from Ant, and there will now be a new 
 
 ***Using Developer Studio:*** Simply drag your hook project onto your server.
 
-![Figure 6.2: Deploying your hook plugin](../../images/06-hooks-4.png)
+![Figure 6.2: Deploying your hook plugin](../images/06-hooks-4.png)
 
 Upon deploying your hook, your server will output messages indicating your hook was read, registered and is now available for use.
 
@@ -58,7 +58,7 @@ Upon deploying your hook, your server will output messages indicating your hook 
 
 If at any time you need to redeploy this plugin while in Developer Studio, right click your plugin's icon located underneath your server and select *Redeploy*.
 
-![Figure 6.3: Redeploying your hook plugin](../../images/06-hooks-2.png)
+![Figure 6.3: Redeploying your hook plugin](../images/06-hooks-2.png)
 
 Unlike our previous portlets and themes examples, the hook plugin does not do anything yet. After a few edits and file additions, you will have a fully functional hook plugin!
 
@@ -83,7 +83,7 @@ In order to create a useful hook, we will need to edit existing files and create
 
 In Developer Studio, the hook structure can be viewed in the *Package Explorer* as shown below:
 
-![Figure 6.4: Package Explorer view of hook plugin](../../images/06-hooks-3.png)
+![Figure 6.4: Package Explorer view of hook plugin](../images/06-hooks-3.png)
 
 In the next section, we'll take a look at how a hook can override web resources, and we'll demonstrate replacing a portal JSP using a hook.
 
@@ -544,7 +544,7 @@ First, inside `example-hook/docroot/WEB-INF/src/com/liferay/sample/hook` create 
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Note:** the wrapper class (`MyUserLocalServiceImpl` in this example) will be loaded in the hook's class loader. That means that it will have access to any other class included within the same WAR file; but it *won't* have access to *internal* classes of Liferay.
+ ![tip](../images/tip-pen-paper.png)**Note:** the wrapper class (`MyUserLocalServiceImpl` in this example) will be loaded in the hook's class loader. That means that it will have access to any other class included within the same WAR file; but it *won't* have access to *internal* classes of Liferay.
 
 ---
 
@@ -580,7 +580,7 @@ In addition to the capabilities of hooks already discussed thus far, you can als
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip:** As always, please check the DTD of each Liferay XML file you modify for the elements and attributes that can be included in the XML and the specified order for those elements.
+ ![tip](../images/tip-pen-paper.png)**Tip:** As always, please check the DTD of each Liferay XML file you modify for the elements and attributes that can be included in the XML and the specified order for those elements.
 
 ---
 

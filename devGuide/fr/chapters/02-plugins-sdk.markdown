@@ -1,4 +1,4 @@
-# The Plugins SDK 
+# The Plugins SDK [](id=the-plugins-s-3)
 
 Java developers have a wide variety of tools and development environments.
 Liferay makes every effort to remain tool agnostic, so that you can choose the
@@ -11,7 +11,7 @@ plugin for eclipse that simplifies development for Liferay.
 
 ---
 
- ![tip](../images/tip-pen-paper.png)**Tip**: If you are an Eclipse user and
+ ![tip](../../images/tip-pen-paper.png)**Tip**: If you are an Eclipse user and
  prefer to start working with it from be very beginning, you can read that
  chapter first before reading the rest of the guide.
 
@@ -29,7 +29,7 @@ Apache Ant targets are available.
 
 Setting up the Plugins SDK is easy. Let's get to it.
 
-## Installing the SDK 
+## Installing the SDK [](id=installing-the-sdk)
 
 Setting up your environment for Liferay development is straightforward. First,
 you will need Liferay Portal. If you have yet to install Liferay with an
@@ -42,7 +42,7 @@ by Liferay Portal for development, our examples use Tomcat.
 
 ---
 
- ![note](../images/tip-pen-paper.png)**Note:** In Liferay Developer Studio,
+ ![note](../../images/tip-pen-paper.png)**Note:** In Liferay Developer Studio,
  the SDK is already installed and ready to use. Liferay Portal Enterprise
  Edition (EE) comes with Liferay Developer Studio and much more (see [CE vs
  EE](http://www.liferay.com/downloads/liferay-portal/overview)). Download a
@@ -69,7 +69,7 @@ applications in folders with spaces in their name.
 
 ---
 
- ![tip](../images/tip-pen-paper.png)**Tip**: By default Liferay Portal
+ ![tip](../../images/tip-pen-paper.png)**Tip**: By default Liferay Portal
  Community Edition comes bundled with many plugins. It's common to remove them
  to speed up the server start-up. To do this, in the
  `liferay-portal-[version]/tomcat-[tomcat-version]/webapps` directory, delete
@@ -80,7 +80,7 @@ applications in folders with spaces in their name.
 Now that you have Plugins SDK installed, let's configure Apache Ant for use in
 developing your plugins.
 
-### Ant Configuration 
+### Ant Configuration [](id=lp-6-1-dgen02-ant-configuration-0)
 
 Building projects in the Plugins SDK requires that you have Ant (version 1.7 or
 higher) installed on your machine. Download the latest version of Ant from
@@ -119,7 +119,7 @@ Now that you have Apache Ant setup, let's configure the Plugins SDK for
 environment - specifically your Liferay Portal and application server
 environment.
 
-### Plugins SDK Configuration 
+### Plugins SDK Configuration [](id=lp-6-1-dgen02-plugins-sdk-configuration-0)
 
 Now that all the proper tools are in place, we must configure the Plugins SDK to
 be able to deploy into your Liferay instance. You will notice that the Plugins
@@ -151,7 +151,7 @@ Save the file.
 
 Next, let's consider the structure of the Plugins SDK.
 
-## Structure of the SDK 
+## Structure of the SDK [](id=structure-of-the-s-3)
 
 Each folder in the Plugins SDK contains scripts for creating new plugins of that
 type. Here is the directory structure of the Plugins SDK:
@@ -225,7 +225,7 @@ guidelines.
 Next, let's learn how to use the Plugins SDK to create a plugin that extends
 another plugin.
 
-## Creating Plugins to extend Plugins 
+## Creating Plugins to extend Plugins [](id=lp-6-1-dgen02-creating-plugins-to-extend-plugins-0)
 
 For Liferay plugins, it's possible to create a new plugin that extends an
 existing one. This allows you to utilize all the features of the existing plugin
@@ -276,7 +276,7 @@ plugins SDK) which combines the original one with your changes.
 
 Next, let's consider some best practices for developing plugins using the SDK.
 
-## Best Practices 
+## Best Practices [](id=best-practices)
 
 The Plugins SDK can house all of your plugin projects enterprise-wide, or you
 can have separate Plugins SDK projects for each plugin. For example, if you have
@@ -297,7 +297,7 @@ projects.
 Next, we'll discuss an alternative solution for developing and managing plugins:
 Maven.
 
-## Maven alternative
+## Maven alternative [](id=maven-alternative)
 
 As an alternative to developing plugins using the SDK, you can leverage the
 Apache Maven build management framework. You'll be happy to know that we have
@@ -307,7 +307,7 @@ portlets, themes, and layout templates.
 To find out more, read the *Developing plugins using Maven* chapter of this
 guide. 
 
-## Summary
+## Summary [](id=lp-6-1-dgen02-summary-0)
 
 Now that you have your Plugins SDK configured, know the directory structure and
 available targets, and have learned some best practices, you are ready to start
