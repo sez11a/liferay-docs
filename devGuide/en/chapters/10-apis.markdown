@@ -112,7 +112,7 @@ This JSP code invokes static method `getOrganizationStatsUsers()` on the
 
 ---
 
- ![note](../../images/tip-pen-paper.png)**Note:** Invoking the services in this
+ ![note](../images/tip-pen-paper.png)**Note:** Invoking the services in this
  way avoids permission checks. So, if you want to ensure permission checks are
  performed, even from a local context, then you should use the remote variant of
  the API.
@@ -177,11 +177,11 @@ with allowable hosts for the service, then that machine is allowed to connect to
 Liferay's web services, pass in the appropriate user credentials, and upload the
 documents.
 
-![Figure 8.1:  Liferay SOA's first layer of security](../../images/soa-security-layer-1.png)
+![Figure 8.1:  Liferay SOA's first layer of security](../images/soa-security-layer-1.png)
 
 ---
 
- ![note](../../images/tip-pen-paper.png)**Note:** The `portal.properties` file
+ ![note](../images/tip-pen-paper.png)**Note:** The `portal.properties` file
  resides on the portal host machine and is controlled by the portal
  administrator. Portal administrators can configure security settings for the
  Axis Servlet, the Liferay Tunnel Servlet, the Spring Remoting Servlet, the JSON
@@ -205,7 +205,7 @@ the user ID of a user who is a member of this group (or the user ID of a user
 with individual rights to add documents to this folder). Otherwise, the user
 will be prevented from using the Web Service.
 
-![Figure 8.2: Liferay SOA's second layer of security](../../images/soa-security-layer-2.png)
+![Figure 8.2: Liferay SOA's second layer of security](../images/soa-security-layer-2.png)
 
 The remote services allow specifying the user credentials using HTTP Basic
 authentication. Since those credentials are specified unencrypted, it is
@@ -230,7 +230,7 @@ password of *test*, you would use the following URL:
 
 ---
 
- ![note](../../images/tip-pen-paper.png)**Note:** In old Liferay versions you
+ ![note](../images/tip-pen-paper.png)**Note:** In old Liferay versions you
  could access those services by using `http://localhost:8080/tunnel-web/axis`.
  However, this path has changed in Liferay 6.1. When you enter it, you're
  redirected to the new one.
@@ -307,11 +307,11 @@ format `http://[host]:[port]/api/axis` for your services that do not require
 user authentication. For demonstration, we're using *secure* services. Here are
 the web services for `UserGroup`:
 
-![Figure 8.3: UserGroup Web Service listing](../../images/wsdl-summary-listing.png)
+![Figure 8.3: UserGroup Web Service listing](../images/wsdl-summary-listing.png)
 
 ---
 
- ![note](../../images/tip-pen-paper.png)**Note:** Liferay's developers use a
+ ![note](../images/tip-pen-paper.png)**Note:** Liferay's developers use a
  tool called Service Builder to expose their services via SOAP automatically. If
  you are interested in using this tool for your own services, find out more
  about Service Builder in chapter *Liferay Frameworks*.
@@ -322,7 +322,7 @@ Each web service is listed with its name, operations, and a link to its WSDL
 file. The WSDL is written in XML and provides a model for describing and
 locating the web service.
 
-![Figure 8.4: WSDL Excerpt for the addUserGroup operation of UserGroup](../../images/wsdl-for-user-group-service.png)
+![Figure 8.4: WSDL Excerpt for the addUserGroup operation of UserGroup](../images/wsdl-for-user-group-service.png)
 
 As you'll see in the example in the next section, you pass in the WSDL URL along
 with your login credentials to the SOAP service locator for your service.
@@ -339,7 +339,7 @@ consume in your client code. For the purposes of the client we're going to
 build, we'll want to add a *Web Service Client* for the portal's Company, User,
 and UserGroup services.
 
-![Figure 8.5: New Web Service Client](../../images/api-new-web-svc-client.png)
+![Figure 8.5: New Web Service Client](../images/api-new-web-svc-client.png)
 
 When creating each client, you will need to enter the service definition (WSDL)
 for the desired service.
@@ -347,7 +347,7 @@ for the desired service.
 For example:
 	http://localhost:8080/api/axis/Portal_UserService?wsdl
 
-![Figure 8.6: Service Definition](../../images/api-web-svc-wsdl.png)
+![Figure 8.6: Service Definition](../images/api-web-svc-wsdl.png)
 
 With the WSDL specified, Eclipse automatically adds the auxiliary files and
 libraries required to consume that web service!
@@ -1139,7 +1139,7 @@ and are ignored during matching.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip:** Use inner parameters with object
+ ![tip](../images/tip-pen-paper.png)**Tip:** Use inner parameters with object
  parameters to set inner content of created parameter instances!
 
 ---
@@ -1694,7 +1694,7 @@ and services listening to one or more destinations. An individual service can be
 both a message sender and a message listener. In this figure, for example, both
 *Plugin 2 - Service 3* and *Plugin 5 - Service 7* send and listen for messages.
 
-![Figure 9.1: Example, Message Bus system](../../images/msg-bus-system.png)
+![Figure 9.1: Example, Message Bus system](../images/msg-bus-system.png)
 
 The Message Bus supports synchronous and asynchronous messaging:
 
@@ -1728,7 +1728,7 @@ this file.
 
 ---
 
- ![note](../../images/tip-pen-paper.png)**Note:** Internal file
+ ![note](../images/tip-pen-paper.png)**Note:** Internal file
  `META-INF/messaging-core-spring.xml` of `portal-impl.jar` specifies the default
  Message Bus class, default asynchronous message sender class, and default
  synchronous message sender class for Liferay
@@ -1806,7 +1806,7 @@ often only last for a couple hours, Procurement makes it their top priority to
 get approval as soon as possible. Let's implement their exchange using
 *synchronous* messaging.
 
-![Figure 9.2: Synchronous messaging](../../images/msg-bus-sync-msg.png)
+![Figure 9.2: Synchronous messaging](../images/msg-bus-sync-msg.png)
 
 The following table, describes how we'll set things up.
 
@@ -2058,7 +2058,7 @@ The following table, describes how we'll set things up.
 The following image shows asynchronous messaging in which messages are
 dispatched *serially*.
 
-![Figure 9.3: Asynchronous messaging with *serial* dispatching](../../images/msg-bus-async-serial-msg.png)
+![Figure 9.3: Asynchronous messaging with *serial* dispatching](../images/msg-bus-async-serial-msg.png)
 
 Let's package the message as a `JSONObject` and send it to the destination:
 
@@ -2236,7 +2236,7 @@ do however want everyone to get product news at the *same time*. So, instead of
 dispatching news to employees *serially* we'll dispatch *in parallel*.
 
 
-![Figure 9.4: Asynchronous messaging with *parallel* dispatching](../../images/msg-bus-async-parallel-msg.png)
+![Figure 9.4: Asynchronous messaging with *parallel* dispatching](../images/msg-bus-async-parallel-msg.png)
 
 We'll specify a *parallel* destination type in our `messaging-spring.xml`:
 

@@ -92,7 +92,7 @@ automatically be generated for these attributes.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip:** Always consider adding two
+ ![tip](../images/tip-pen-paper.png)**Tip:** Always consider adding two
  `long` fields called *groupId* and *companyId* to your data models. These two
  fields will allow your portlet to support the multi-tenancy features of Liferay
  so that each organization (for each portal instance) can have its own
@@ -111,7 +111,7 @@ terminal window.
 By default, the file opens up in the *Service Builder Editor*. Make sure you are
 in *Overview* mode. Then, select *Build Services*.
 
-![Figure 10.1: *Overview* mode in editor](../../images/10-frameworks-1.png)
+![Figure 10.1: *Overview* mode in editor](../images/10-frameworks-1.png)
 
 You should receive a message in your console stating BUILD SUCCESSFUL along with
 a list of generated files. An overview of these files can be found later on in
@@ -124,12 +124,12 @@ given a graph structured background onto which we can add entities and
 relationships from the *Palette* available on the right hand side of the editor.
 Here is a view of the editor in *Diagram* mode:
 
-![Figure 10.2: *Diagram* mode in editor](../../images/10-frameworks-2.png)
+![Figure 10.2: *Diagram* mode in editor](../images/10-frameworks-2.png)
 
 Lastly, select *Source* mode to edit the XML source directly. Here is an example
 `service.xml` shown in *Source* the editor's mode:
 
-![Figure 10.3: *Source* mode in editor](../../images/10-frameworks-3.png)
+![Figure 10.3: *Source* mode in editor](../images/10-frameworks-3.png)
 
 Developer Studio offers many options to help automate creating interfaces and
 classes for your database persistence and service layers.
@@ -358,7 +358,7 @@ conflicts between roles that have the same name but are from different portlets
 
 ---
 
- ![note](../../images/tip-pen-paper.png)**Note:** Each role named in a portlet's
+ ![note](../images/tip-pen-paper.png)**Note:** Each role named in a portlet's
  `<security-role-ref>` element is given permission to add the portlet to a page.
 
 ---
@@ -1113,7 +1113,7 @@ for a tag or create a new tag, and select a existing category.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip:** If you are using Liferay's Alloy
+ ![tip](../images/tip-pen-paper.png)**Tip:** If you are using Liferay's Alloy
  Form taglibs, creating fields to enter tags and categories is even simpler. You
  just need to use <aui:input name="tags" type="assetTags" /> and <aui:input
  name="categories" type="assetCategories" /> respectively.

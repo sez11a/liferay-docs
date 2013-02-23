@@ -63,7 +63,7 @@ Next, go through the following steps to setup your new Ext plugin:
 3. Select *Ext* for your Plugin type
 4. Click *Finish*
 
-![Figure 7.1: Creating an Ext plugin](../../images/07-ext-plugins-1.png)
+![Figure 7.1: Creating an Ext plugin](../images/07-ext-plugins-1.png)
 
 Notice the Plugins SDK automatically adds "-ext" to the project name after its
 creation. When creating a new plugin in Developer Studio, we can either create a
@@ -111,7 +111,7 @@ structure:
 You can also view and edit `example-ext` using Developer Studio's *Package
 Explorer*:
 
-![Figure 7.2: The Ext plugin's Package Explorer](../../images/07-ext-plugins-2.png)
+![Figure 7.2: The Ext plugin's Package Explorer](../images/07-ext-plugins-2.png)
 
 The most significant directories in this structure are the ones inside the
 `docroot/WEB-INF` directory. In particular, you should be familiar with the
@@ -181,7 +181,7 @@ not assured and therefore could lead to unintended system behavior.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip:** After creating an Ext plugin,
+ ![tip](../images/tip-pen-paper.png)**Tip:** After creating an Ext plugin,
  remove all of the files added by default that are not necessary for the
  extension. This is important because Liferay keeps track of the files deployed
  by each Ext plugin. To avoid collisions, it won't allow deploying two Ext
@@ -263,7 +263,7 @@ property value.
 
 ---
 
- ![note](../../images/tip-pen-paper.png)**Note:** Some Liferay bundles, come
+ ![note](../images/tip-pen-paper.png)**Note:** Some Liferay bundles, come
  installed with a sample website for a fictional company called 7-Cogs. This
  sample website is useful for showcasing certain features of Liferay. However,
  once you've removed it, you don't want the Ant targets to reinstall it every
@@ -302,7 +302,7 @@ terminal.
 ***In Developer Studio:*** Simply drag your `example-ext` project from your
 *Package Explorer* onto your server.
 
-![Figure 7.3: Drag-and-drop plugin onto server](../../images/07-ext-plugins-7.png)
+![Figure 7.3: Drag-and-drop plugin onto server](../images/07-ext-plugins-7.png)
 
 ***In the terminal:*** Open a terminal window in your `ext/example-ext`
 directory and enter either of these commands:
@@ -313,7 +313,7 @@ directory and enter either of these commands:
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip:** The `direct-deploy` target
+ ![tip](../images/tip-pen-paper.png)**Tip:** The `direct-deploy` target
  deploys all the plugin changes directly to the appropriate directories in the
  Liferay application. If instead you deploy the plugin using the `deploy`
  target, the Liferay server needs to apply the changes from the resulting `.war`
@@ -350,7 +350,7 @@ process. You can do so in Liferay IDE/Studio or in the terminal.
 ***Using Developer Studio:*** While selecting the Liferay server in the
 *Servers* view, select the server's *Publish* option
 
-![Figure 7.4: How to publish the Ext Plugin](../../images/07-ext-plugins-3.png)
+![Figure 7.4: How to publish the Ext Plugin](../images/07-ext-plugins-3.png)
 
 ***Using the terminal:*** Restart the Liferay server
 
@@ -359,7 +359,7 @@ as an administrator and go to *Control Panel &rarr; Users and Organizations*.
 Edit an existing user and verify that the right navigation menu only shows the
 five sections that were referenced from the `users.form.update.main` property.
 
-![Figure 7.5: You should see these five sections under the User Information heading](../../images/ext-plugin-five-sections.png)
+![Figure 7.5: You should see these five sections under the User Information heading](../images/ext-plugin-five-sections.png)
 
 Once you've applied this simple modification to Liferay, we'll proceed with a
 slightly more complex customization. This will give us an opportunity to learn
@@ -531,26 +531,26 @@ working from Liferay IDE/Studio or the terminal:
 	1. Remove the plugin from the server: While selecting the Ext plugin in the
 	*Servers* view, select the plugin's *Remove* option
 
-		![Figure 7.6: Removing Ext Plugin from the server](../../images/07-ext-plugins-4.png)
+		![Figure 7.6: Removing Ext Plugin from the server](../images/07-ext-plugins-4.png)
 
 	2. Clean the application server: While selecting the Ext plugin project in
 	the *Package Explorer* view, select the plugin's *Liferay* &rarr; *Clean App
 	Server...* option
 
-		![Figure 7.7: How to clean app server](../../images/07-ext-plugins-5.png)
+		![Figure 7.7: How to clean app server](../images/07-ext-plugins-5.png)
 
 	3.	Start the Liferay server
 
-		![Figure 7.8: Start the Liferay server](../../images/07-ext-plugins-6.png)
+		![Figure 7.8: Start the Liferay server](../images/07-ext-plugins-6.png)
 
 	4.	Drag-and-drop the Ext plugin to the Liferay server
 
-		![Figure 7.9: Drag-and-drop plugin onto server](../../images/07-ext-plugins-7.png)
+		![Figure 7.9: Drag-and-drop plugin onto server](../images/07-ext-plugins-7.png)
 
 	5. While selecting the Liferay server in the *Servers* view, select the
 	server's *Publish* option
 
-		![Figure 7.10: Publish your server](../../images/07-ext-plugins-8.png)
+		![Figure 7.10: Publish your server](../images/07-ext-plugins-8.png)
 
 -	***From the terminal:***
 	
@@ -573,7 +573,7 @@ the option to redeploy.
 - ***Using Developer's Studio:*** Right click your plugin located underneath
 your server and select *Redeploy*.
 
-	![Figure 7.11: How to redeploy your Ext plugin](../../images/07-ext-plugins-9.png)
+	![Figure 7.11: How to redeploy your Ext plugin](../images/07-ext-plugins-9.png)
 
 - ***Using the terminal:*** Redeploy and publish the plugin as you initially
 did, as described in section *Initial deployment*.
@@ -581,7 +581,7 @@ did, as described in section *Initial deployment*.
 After your `example-ext` plugin is published on Liferay Portal, you can see the
 *basic* details page by choosing to add a user or view an existing user.
 
-![Figure 7.12: You should only see user fields for screen name, email address, first name, and last name](../../images/ext-plugin-user-basic-details.png)
+![Figure 7.12: You should only see user fields for screen name, email address, first name, and last name](../images/ext-plugin-user-basic-details.png)
 
 After you've completed developing your Ext plugin, you'll want to package it up
 for distribution and production.
@@ -595,7 +595,7 @@ file for distribution and production deployment.
 *Package Explorer* view, select the project's *Liferay* &rarr; *SDK* &rarr;
 *war* option
 
-![Figure 7.13: Accessing the *war* option](../../images/07-ext-plugins-10.png)
+![Figure 7.13: Accessing the *war* option](../images/07-ext-plugins-10.png)
 
 -	***Using the terminal:***
 
@@ -839,7 +839,7 @@ when a new version of Liferay is released.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip:** This is a very advanced
+ ![tip](../images/tip-pen-paper.png)**Tip:** This is a very advanced
  technique that, especially if abused, may have a high impact on the
  maintainability of your code. Try to look for alternatives and if you confirm
  that this is your only alternative try to apply it only for the short term and
@@ -920,7 +920,7 @@ automated and thus relatively easy.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip:** When migrating an extension
+ ![tip](../images/tip-pen-paper.png)**Tip:** When migrating an extension
  environment, it's worth considering if all or at least some of the extension
  environment's features can be moved into other types of plugins such as
  portlets and hooks. Portlets and hooks are designed to meet specific needs and

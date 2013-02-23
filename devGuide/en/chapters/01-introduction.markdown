@@ -109,7 +109,7 @@ Library* portlet and copying the URL is enough. Once you have the URL, you can
 go to the *Control Panel* &rarr; *OpenSocial Gadget Publisher*, click the
 *Publish Gadget* button and enter the URL as shown in the following screenshot:
 
-![Figure 1.1: Publish a new Gadget](../../images/open-social-gadget-new-ctrl-panel.png)
+![Figure 1.1: Publish a new Gadget](../images/open-social-gadget-new-ctrl-panel.png)
 
 After this is done, the gadget will appear as an application that page
 administrators can add to their pages.
@@ -262,7 +262,7 @@ plugins should not be combined with other types of plugins.
 
 ---
 
- ![note](../../images/tip-pen-paper.png)**Note:** If you have developed for
+ ![note](../images/tip-pen-paper.png)**Note:** If you have developed for
  Liferay 5.2 or before, you may be familiar with what was known as the
  *Extension Environment*. Ext plugins were introduced in Liferay 6.0 to replace
  the extension environment in order to simplify development. It is possible to

@@ -11,7 +11,7 @@ plugin for eclipse that simplifies development for Liferay.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip**: If you are an Eclipse user and
+ ![tip](../images/tip-pen-paper.png)**Tip**: If you are an Eclipse user and
  prefer to start working with it from be very beginning, you can read that
  chapter first before reading the rest of the guide.
 
@@ -42,7 +42,7 @@ by Liferay Portal for development, our examples use Tomcat.
 
 ---
 
- ![note](../../images/tip-pen-paper.png)**Note:** In Liferay Developer Studio,
+ ![note](../images/tip-pen-paper.png)**Note:** In Liferay Developer Studio,
  the SDK is already installed and ready to use. Liferay Portal Enterprise
  Edition (EE) comes with Liferay Developer Studio and much more (see [CE vs
  EE](http://www.liferay.com/downloads/liferay-portal/overview)). Download a
@@ -69,7 +69,7 @@ applications in folders with spaces in their name.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip**: By default Liferay Portal
+ ![tip](../images/tip-pen-paper.png)**Tip**: By default Liferay Portal
  Community Edition comes bundled with many plugins. It's common to remove them
  to speed up the server start-up. To do this, in the
  `liferay-portal-[version]/tomcat-[tomcat-version]/webapps` directory, delete

@@ -57,7 +57,7 @@ Next, go through the following steps to setup your new theme:
 3. Select *Theme* for your Plugin type
 4. Click *Finish*
 
-![Figure 4.1: Creating your theme plugin](../../images/05-themes-1.png)
+![Figure 4.1: Creating your theme plugin](../images/05-themes-1.png)
 
 When creating a new plugin in Developer Studio, we can either create a
 completely new plugin or add a new plugin to an existing plugin project.
@@ -102,7 +102,7 @@ to use.
 ***To deploy in Developer Studio:*** Click and drag your theme project onto your
 server.
 
-![Figure 4.2: Drag and drop your theme onto the server](../../images/05-themes-6.png)
+![Figure 4.2: Drag and drop your theme onto the server](../images/05-themes-6.png)
 
 Upon deploying your plugin, your server will output messages indicating your
 plugin is read, registered, and now available for use.
@@ -181,7 +181,7 @@ modifications. For example, to customize the navigation, you would copy
 folder first). You can then open this file and customize it to your liking. Here
 is a snapshot of your *Package Explorer* located in Developer Studio.
 
-![Figure 4.3: The theme's Package Explorer](../../images/05-themes-3.png)
+![Figure 4.3: The theme's Package Explorer](../images/05-themes-3.png)
 
 For custom styles, create a folder named `css` inside your `_diffs` folder and
 place a single file there called `custom.css`. This is where you would put all
@@ -198,7 +198,7 @@ Whenever you make modifications to your theme in Developer Studio, redeploy it
 by right clicking your theme located underneath your server, and selecting
 *Redeploy*.
 
-![Figure 4.4: How to redeploy your theme plugin](../../images/05-themes-2.png)
+![Figure 4.4: How to redeploy your theme plugin](../images/05-themes-2.png)
 
 If you are using the terminal window, redeploy it by opening a terminal in
 `themes/deep-blue-theme` and enter this command:
@@ -210,7 +210,7 @@ your changes.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip:** If you wish to see changes even
+ ![tip](../images/tip-pen-paper.png)**Tip:** If you wish to see changes even
  more quickly, it is also possible to modify your theme directly in your Liferay
  bundle. In our example, `custom.css` is located in
  `liferay-portal-[version]/tomcat-[tomcat-version]/webapps/deep-blue-theme/css`.
@@ -241,7 +241,7 @@ extension to Yahoo's YUI3 framework. Developers can take advantage of the full
 power of either of these frameworks in their themes. Inside of your theme's
 `main.js` file, you will find definitions for three JavaScript callbacks:
 
-![Figure 4.5: Content of main.js](../../images/05-themes-4.png)
+![Figure 4.5: Content of main.js](../images/05-themes-4.png)
 
 -   **AUI().ready(fn);**
 
@@ -355,15 +355,15 @@ The portal administrator can input a slogan and activate it for the portal via
 the *Look and Feel* section of the *Manage Site Pages* panel (see the *Creating
 sites and managing pages* section of [Using Liferay Portal](http://www.liferay.com/documentation/liferay-portal/6.1/user-guide/-/ai/managing-pages-in-liferay-port-1)).
 
-![Figure 4.6: Setting the footer display slogan in the *Look and Feel* of  the site's page settings.](../../images/themes-custom-configurable-setting.png)
+![Figure 4.6: Setting the footer display slogan in the *Look and Feel* of  the site's page settings.](../images/themes-custom-configurable-setting.png)
 
 Then, when the portal administrator saves these settings, the site's pages
 display the new footer containing the slogan.
 
-![Figure 4.7: The slogan displayed in the page footer.](../../images/themes-custom-configurable-setting-displayed.png)
+![Figure 4.7: The slogan displayed in the page footer.](../images/themes-custom-configurable-setting-displayed.png)
 
 
- ![note](../../images/tip-pen-paper.png)**Note:** A language properties hook
+ ![note](../images/tip-pen-paper.png)**Note:** A language properties hook
  should be used to properly display configurable theme settings, such as the
  slogan text area and footer checkbox from the previous example. For details, 
  see the [Overriding a *Language.properties* File](https://www.liferay.com/documentation/liferay-portal/6.1/development/-/ai/overriding-a-%3Cem%3Elanguage-properties-lt-em-gt-fi-1)
@@ -482,7 +482,7 @@ By default, themes are based on the **_styled** theme, which provides only basic
 styling of portlets. If you open the `build.xml` file in your theme's directory
 using the Build Application Configuration Editor , you will see the following:
 
-![Figure 4.8: Content of build.xml](../../images/05-themes-5.png)
+![Figure 4.8: Content of build.xml](../images/05-themes-5.png)
 
 The `theme.parent` property determines which built-in theme your theme will
 inherit from. In addition to the **_styled** theme, you may also choose to
