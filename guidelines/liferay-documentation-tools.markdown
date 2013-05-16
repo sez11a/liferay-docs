@@ -169,6 +169,133 @@ Liferay.com. Then, remove the newer header ID from the other header and run ...
 Below are some tips for some constructs that are unique to Liferay
 documentation. 
 
+### Ordered Lists
+
+Explicitly number your lists like so ...
+
+    1. First step.
+    2. Second step.
+    3. Third step.
+
+List items (steps) can have multiple paragraphs, images, code blocks, etc. But
+all text blocks following a step's first paragraph, **must** be indented *4
+spaces* from the start of the step number. Otherwise, the continuous numbering
+is disrupted and the step that follows restarts at `1`.
+
+**Good steps (Markdown source) ...**
+
+    1. First step.
+
+        This paragraph supports step 1.
+
+    2. Second step.
+
+        Another paragraph and an image.
+
+        ![liferay-cube image](./images/liferay-cube.png)
+
+    3. Third step.
+
+        ---
+
+        ![note](./images/tip.png) A sidebar note.
+
+        ---
+
+    3. Finally! The third and final step. Code must be indented 4 spaces more.
+    Let's see a good code block ...
+
+            System.out.println("This code is mono-spaced");
+
+**Resulting HTML from *Good steps***
+
+1. First step.
+
+    This paragraph supports step 1.
+
+2. Second step.
+
+    Another paragraph and an image.
+
+    ![liferay-cube image](./images/liferay-cube.png)
+
+3. Third step.
+
+    ---
+
+    ![note](./images/tip.png) A sidebar note.
+
+    ---
+
+4. Finally! The fourth and final step. Code must be indented 4 spaces more.
+Let's see a good code block ...
+
+        System.out.println("This code is mono-spaced");
+
+All is well in the *Good steps*. Let's consider what NOT to do by way of
+example--the *Bad steps*.
+
+**Bad steps (Markdown source) ...**
+
+    1. First step.
+
+    This paragraph is not indented the full 4 spaces from the step number.
+
+    2. Second step.
+
+        Another paragraph and an image.
+
+    ![liferay-cube image](./images/liferay-cube.png)
+
+    3. Third step.
+
+    ---
+
+    ![note](./images/tip.png) This note disrupts continuous numbering.
+
+    ---
+
+    4. Finally! The fourth and final step. But the code is not monospace as it
+    needs to be indented 4 more spaces ...
+
+        System.out.println("Code should be mono-spaced");
+
+**Resulting HTML from *Bad steps* ...**
+
+1. First step.
+
+This paragraph is not indented 4 spaces from the step number.
+
+2. Second step.
+
+    Another paragraph and even the image and notes below are good.
+
+![liferay-cube image](./images/liferay-cube.png)
+
+3. Third step. 
+
+---
+
+![note](./images/tip.png) This sidebar note disrupts continuous numbering
+because it is not indented 4 spaces.
+
+---
+
+4. Finally! The fourth and final step. But the code is not monospace as it
+needs to be indented 4 more spaces ...
+
+    System.out.println("Code should be mono-spaced");
+
+Well, there you have it--the do's and don'ts of ordered lists.
+
+**Important:** Before you send a pull request, view your Markdown file converted
+to HTML, using your editor's Pegdown converter or by viewing your document
+blob on Github. That way you can be sure any ordered lists you have, preserve
+their consinutous numbering. 
+
+Next, let's learn about creating sidebar text.
+
+
 ### Sidebars
 
 Our documentation frequently has sidebars, which are for ancillary information
@@ -182,9 +309,23 @@ sidebar with two horizontal rules, like so:
 
 	---
 
+Here is a sidebar rendered in Github ...
+
+---
+
+![tip](./images/tip.png) Your sidebar text goes here.
+
+---
+
 **Important:** Make sure that your horizontal rules have empty lines above and
 below them so that they do not trigger new headers to be created during
 conversion to HTML. 
+
+Leave a space between the closing parenthesis and your sidebar text. That way,
+formatting (e.g., bold, italics, etc.) will be rendered properly by Github for
+the leading text. Otherwise, you'll see the markdown characters.
+
+![Leave a space between the closing `)` and the text of your sidebar (e.g., `![note](../../images/06-hooks-1.png) **Note:**`)`.](./images/badSideNoteFormatting.png)
 
 If you're using jEdit, you can make this easy with the SuperAbbrevs plugin.
 Create an abbreviation by going to *Plugins* -> *Plugin Options* ->
@@ -235,28 +376,24 @@ We can do the same in Markdown using the HTML code for this character, which is
 ### Tables
 
 Because Pegdown does not support the [Pandoc extension table
-syntac](http://johnmacfarlane.net/pandoc/README.html#tables), we use a table
+syntax](http://johnmacfarlane.net/pandoc/README.html#tables), we use a table
 syntax similar to
-[MultiMarkdown](http://fletcher.github.com/peg-multimarkdown/mmd-manual.pdf).
+[MultiMarkdown](http://fletcher.github.com/peg-multimarkdown/mmd-manual.pdf),
+that supports the following features:
 
-Supported Features:
-
-* Column span (cells can span multiple columns)
 * Cell content alignment (left, right, or center)
-* Cells can contain links, code, images, and text that is plain, bold, italicized, double-quoted, or single-quoted
-* Cells can contain strong text, emphasized text, double/single quotes, code, links, and images.
+* Cells containing links, code, images, and text that is plain, bold, italicized, double-quoted, or single-quoted
+* Cells containing strong text, emphasized text, double/single quotes, code, links, and images
 * Left alignment (default) with `:--- `
 * Right alignment with `: ---:`
 * Center alignment with `:---:`
 
+Here is MultiMarkdown-like source for an example table:
 
-Here is an example table in Markdown using MultiMarkdown-like syntax:
+    **Table Heading (outside of table)**
 
-
-	|         |          |  &nbsp;Type/Example Grouping      ||
 	  Column1 |  &nbsp;Column2 | &nbsp;Type  | &nbsp;Example  |
 	--------- | :--------------| :---------: | -------------: |
-	  foo     | bar            | cell spans multiple columns ||
 	  foo     | bar            | strong       | **powerful** |
 	  foo     | bar            | italics        | *emphasized* |
 	  foo     | bar            | double quotes | "Hey you!" |
@@ -264,42 +401,53 @@ Here is an example table in Markdown using MultiMarkdown-like syntax:
 	  foo     | bar            | code          | `System.out.println()` |
 	  foo     | bar            | link          | [Liferay.com](http://liferay.com) |
 	  foo     | bar            | image         | ![tip](../../images/tip-pen-paper.png)|
-	---
 
-![The example table converted using Pegdown](images/mmdTablePegdownHTML.png)
+Here is the table rendered in Github ...
+
+**Table Heading (outside of table)**
+
+  Column1 |  &nbsp;Column2 | &nbsp;Type  | &nbsp;Example  |
+--------- | :--------------| :---------: | -------------: |
+  foo     | bar            | strong       | **powerful** |
+  foo     | bar            | italics        | *emphasized* |
+  foo     | bar            | double quotes | "Hey you!" |
+  foo     | bar            | single quotes | 'yes' |
+  foo     | bar            | code          | `System.out.println()` |
+  foo     | bar            | link          | [Liferay.com](http://liferay.com) |
+  foo     | bar            | image         | ![tip](./images/tip.png)|
 
 Table Limitations:
 
-* Headings are left-aligned
 * Grid tables (tables with grid lines) are not supported
 * Table captions are not supported
 * The period character ( '.') cannot be used in an alignment/divider line
-* Only a single newline separates the last table row from the next paragraph
-
 
 Table Syntax Requirements:
 
-* There must be at least one | per line
-* The *separator* line must contain only |,-,:, or spaces
-* Cell content must be on one line only
-* Columns are separated by |
-* The first line of the table, and the alignment/divider line, must start at the
-  beginning of the line
+* There must be at least one '|' character per line.
+* The *separator* line must contain only |, -, :, or space characters.
+* Cell content must be on one line only.
+* Columns are separated by the '|' character.
 
+Table Options
 
-Table Suggestions
+* You can pad out cell text using non-breaking spaces (i.e. `&nbsp;`) to the
+  left and/or right of the cell text.
+* You can use a horizontal rule to help separate the end of the table from
+  paragraphs or tables that follow.
 
-* Pad out cell text using non-breaking spaces (i.e. `&nbsp;`) to the left and/or
-  right of the cell text
-* Use a horizontal rule to separate the end of the table from the next paragraph
+---
 
-**Important** - Pandoc does not support MultiMarkdown table syntax. If you use
-Pandoc to build a document for test purposes, you'll notice that the table does
-not get converted as you would expect. If you are using Pandoc to convert a
-document for a final product (e.g. ePub), you'll need to temporarily change the
-table syntax to follow the Pandoc extension.
+ ![important](./images/tip.png) **Important:** - Pandoc does not 
+support MultiMarkdown table syntax. If you use Pandoc to build a document for
+test purposes, you'll notice that the table does not get converted as you would
+expect. If you are using Pandoc to convert a document for a final product
+(e.g. ePub), you'll need to temporarily change the table syntax to follow the
+Pandoc extension.
 
-![The example table converted using Pandoc](images/mmdTablePandocHTML.png)
+ ![The example table converted using Pandoc](images/mmdTablePandocHTML.png)
+
+---
 
 ### Markdown Metadata 
 
