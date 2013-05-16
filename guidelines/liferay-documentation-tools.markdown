@@ -321,11 +321,11 @@ Here is a sidebar rendered in Github ...
 below them so that they do not trigger new headers to be created during
 conversion to HTML. 
 
-**Tip:** Leave a space between the closing parenthesis and your sidebar text.
-That way, formatting (e.g., bold, italics, etc.) will be rendered properly by
-Github for the leading text. Otherwise, you'll see the markdown characters.
+Leave a space between the closing parenthesis and your sidebar text. That way,
+formatting (e.g., bold, italics, etc.) will be rendered properly by Github for
+the leading text. Otherwise, you'll see the markdown characters.
 
-![Leave a space between the closing `)` and the text of your sidebar (e.g., `![note](../../images/06-hooks-1.png) **Note:**`).](./images/badSideNoteFormatting.png)
+![Leave a space between the closing `)` and the text of your sidebar (e.g., `![note](../../images/06-hooks-1.png) **Note:**`)`.](./images/badSideNoteFormatting.png)
 
 If you're using jEdit, you can make this easy with the SuperAbbrevs plugin.
 Create an abbreviation by going to *Plugins* -> *Plugin Options* ->
