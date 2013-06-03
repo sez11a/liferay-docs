@@ -6,11 +6,15 @@ directly through a Java invocation, or through web services. This chapter
 provides an overview of several essential Liferay APIs available to you for use
 in developing your Liferay Portal. 
 
+<!--Here and throughout the chapter I see "APIs" and "API". Is it singular or
+plural or doesn't it matter? I know there are many packages one could import,
+but is it allf rom on API, or is each one its own API?-->
+
 Liferay comes with a host of APIs that provide powerful portal and portlet
 services. The following table shows you the entities for which services are
 available:
 
- Portal Services      | Portlet Services              |
+Portal Services      | Portlet Services              |
 --------------------- | ----------------------------- |
  *User*               | *Documents and Media Library* |
  *Organization*       | *Blogs*                       |
@@ -29,84 +33,103 @@ The APIs can be called from within portlet or non-portlet code. You can make
 calls to the APIs *locally* from within the portal or *remotely* outside of the
 portal's *Java virtual machine* (*JVM*).
 
-This chapter covers the following topics:
+This chapter covers the following topics: 
 
-- *Invoking the API locally:* Using Liferay services locally, from the same JVM
-as the portal.
-	
-- *Invoking the API remotely:* Using Liferay services in a *remote* manner. This
-can involve invoking the API from outside of the portal's JVM, from machines
-other than the portal host, or even from the portal host itself.
+- Finding Services
 
-- *Service Security:* Leveraging the service security layers provided in
-Liferay's service oriented architecture (SOA).
+- Invoking the API Locally
 
-- *SOAP Web Services:* Consuming services via Liferay's SOAP interface.
+- Invoking the API Remotely
 
-- *JSON Web Services:* Consuming services via Liferay's JSON service interface.
+- Service Security Layers
 
-- *Service Context:* Understanding what the service context is, how it can be
-used in services, and how to use it in calling services.
+- SOAP Web Services
 
-- *Using Message Bus:* Exchanging string messages within Liferay using the
-Message Bus.
+- JSON Web Services
 
-- *Device Detection:* Detecting the capabilities of a device that is making
-requests to a portal.
+- Service Context
 
-First, let's consider invoking Liferay's services locally.
+- Using Message Bus
 
-## Invoking the API locally 
+- Device Detection
+
+Before learning to invoke an API, you need to know where to find Liferay APIs. 
+
+<!--I know it's more than wordsmithing and formatting, but it seems important to
+elevate the Findining Services content since it's ncessary whether you'll
+invoke locally or remotely. Russ -->
+
+## Finding Services 
+
+You can find Liferay's services by searching for them in the Javados:
+[http://docs.liferay.com/portal/6.1/javadocs/](http://docs.liferay.com/portal/6.1/javadocs/).
+Below we'll show you how to search for portal services and portlet services.
+
+Let's start by finding a portal service. 
+
+### Finding Portal Services
+
+You can find service APIs and their classes by looking them up in the Liferay
+Portal Javadocs. Here's how you find the *Organization* services: 
+
+1. In your browser, open up the Javadocs:
+[http://docs.liferay.com/portal/6.1/javadocs/](http://docs.liferay.com/portal/6.1/javadocs/) 
+
+2. Under *Portal Services*, click the link for the `com.liferay.portal.service`
+   package, since the services for the Organization entity belong to the
+*Portal* scope. 
+
+<!--I changed this based on navigating to the link specified and looking for the
+link. There was no Packages frame, but there was a Portal Services frame
+with the com.liferay.portal.service link Russ -->
+
+3. Find and click on the `-ServiceUtil` class (in this case,
+`OrganizationLocalServiceUtil`) in the *Class Summary* table or the *Classes*
+list at the bottom of the page. 
+
+That was easy! What if you want to find portlet services? 
+
+### Finding Portlet Services
+
+Searching for one of Liferay's built-in portlet services is also easy. Instead
+of clicking the link for the service package of the *portal*, click on the link
+for the service package of the *portlet*. The portlet service packages use the
+naming convention `com.liferay.portlet.[portlet-name].service`, where
+`[portlet-name]` is replaced with the actual name of the portlet. 
+
+Here's how you find services for a user's *blogs* statistics:
+
+1. In your browser, open up the Javadocs:
+[http://docs.liferay.com/portal/6.1/javadocs/](http://docs.liferay.com/portal/6.1/javadocs/)
+
+2. Under *Portlet Services*, click on the link for the
+`com.liferay.portlet.blogs.service` package in the, since the services are a
+part of the *blogs portlet*. 
+
+<!--I changed this based on navigating to the link specified and looking for the
+link. There was no Packages frame, but there was a Portlet Services frame
+with the com.liferay.portlet.blogs.service link. Russ -->
+
+3. Find and click on the `-ServiceUtil` class (in this case
+`BlogsStatsUserLocalServiceUtil`) in the *Class Summary* table or the *Classes*
+list. 
+
+Now you're ready to invoke Liferay services.
+
+## Invoking the API Locally 
 
 Each service provides a local interface to clients running in the same JVM as
-the portal. There are two ways to invoke the methods of a service API:
+Liferay Portal. There are two ways to invoke a service API's methods: 
 
-- By using Spring injection, if your app is using Spring and has access to the
-portal context.
+- Spring injection: If your application uses Spring and has access to the portal
+context. 
 
-- By using `-ServiceUtil` classes. These classes hide complexity of the service
-implementations and may be a good option if you are not familiar with Spring.
+- `-ServiceUtil` classes: These classes mask the complexity of service
+implementations. This is a good option if you're not familiar with Spring. 
 
-We'll demonstrate invoking a service via its `-ServiceUtil`. But first, how do
-we find services? ... By looking them up in the Liferay Portal Javadocs.
-
-For example, here is how you look up the Organization services:
-
-1. In your browser, open up the Javadocs at
-[http://docs.liferay.com/portal/6.1/javadocs/](http://docs.liferay.com/portal/6.1/javadocs/).
-
-2. Click on the link for the `com.liferay.portal.service` package in the
-*Packages* frame, since the services for the Organization entity belong to the
-*portal*.
-
-3. Find and click on the `-ServiceUtil` class (in this case
-`OrganizationLocalServiceUtil`) in the class summary table or the list of
-classes.
-
-It's just that easy!
-
-Similarly, if you want to search for one of Liferay's built-in portlet services,
-no problem. But, when looking up the package, instead of clicking on the link
-for the service package of the *portal*, click on the link for the service
-package of the *portlet*. The portlet service packages use the naming convention
-`com.liferay.portlet.[portlet-name].service`, where `[portlet-name]` is replaced
-with the actual name of the portlet.
-
-For example, here is how you look up services for user blogs statistics:
-
-1. In your browser, open up the Javadocs at
-[http://docs.liferay.com/portal/6.1/javadocs/](http://docs.liferay.com/portal/6.1/javadocs/).
-
-2. Click on the link for the `com.liferay.portlet.blogs.service` package in the
-*Packages* frame, since the services are a part of the *blogs portlet*.
-
-3. Find and click on the `-ServiceUtil` class (in this case
-`BlogsStatsUserLocalServiceUtil`) in the class summary table or the list of
-classes.
-
-So, now that you know how to look up the service classes, let's look at the
-following JSP code snippet that demonstrates how to get a list of the most
-recent bloggers from an organization.
+Let's invoke a service using its `-ServiceUtil` class. The following JSP code
+snippet demonstrates how to get a list of the most recent bloggers from an
+organization. 
 
     <%@ page import="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil" %>
     <%@ page import="com.liferay.portlet.blogs.util.comparator.StatsUserLastPostDateComparator" %>
@@ -116,454 +139,470 @@ recent bloggers from an organization.
         organizationId, 0, max, new StatsUserLastPostDateComparator());
     %>
 
-This JSP code invokes static method `getOrganizationStatsUsers()` on the
-`-LocalServiceUtil` class `BlogsStatsUserLocalServiceUtil`.
+This JSP code invokes the static method `getOrganizationStatsUsers()` from the
+`-LocalServiceUtil` class `BlogsStatsUserLocalServiceUtil`. 
 
 ---
 
- ![note](../../images/tip-pen-paper.png)**Note:** Invoking the services in this
- way avoids permission checks. So, if you want to ensure permission checks are
- performed, even from a local context, then you should use the remote variant of
- the API.
+![note](../../images/tip-pen-paper.png)**Note:** Permission checks are not
+performed when you invoke services locally (i.e., from the same JVM that's
+Liferay Portal runs on). To ensure permission checks are performed, use the
+remote variant of the API, even from a local context. 
 
 ---
 
-We'll look at invoking services remotely, next.
+Next, find out how you can invoke Liferay's service APIs remotely. 
 
-## Invoking the API remotely 
+## Invoking the API Remotely 
 
-Liferay services can also be invoked in a *remote* manner. The services API is
-available to *remote* clients -- clients running outside of the portal JVM or
-clients running on a remote machines. One key aspect of this API is that it
-includes security checks. Unless a developer wants to avoid permission checking,
-he should develop his client (whether it be local or remote) to always use this
-front-end layer.
+*Remote* clients run outside of the portal JVM or on a remote machine, but they
+can still access Liferay's service APIs. The main benefit of remotely accessing
+service APIs is that security checks are performed. Unless you want to avoid
+permission checking, develop your client (even if it's local) so it triggers the
+front-end security layer.
+
+<!-- I don't understand the second half of the last sentence in the paragraph
+above. I might have messed up the intent. Russ -->
 
 Liferay's API follows a Service Oriented Architecture
 [(SOA)](http://en.wikipedia.org/wiki/Service-oriented_architecture). The API
-supports Java invocation plus a variety of protocols including SOAP, JSON over
-HTTP, Burlap, Hessian, ... etc. A limited set of *RESTful* web services, based
-on the AtomPub protocol, is also supported -- see the [Portal Atom
+supports Java invocation and a variety of protocols including SOAP, JSON over
+HTTP, Burlap, Hessian, and more. A limited set of *RESTful* web services, based
+on the AtomPub protocol, are also supported--see the [Portal Atom
 Collections](http://www.liferay.com/community/wiki/-/wiki/Main/Portal+Atom+Collections)
-wiki by Igor Spasi&#263; for more details. Note too, if you want to use the API
+wiki by Igor Spasi&#263; for more details. You can also use the API
 through Remote Procedure Calls
-([RPC](http://en.wikipedia.org/wiki/Remote_procedure_call)), you can do so. You
-have plenty of good options for leveraging Liferay's API.
+([RPC](http://en.wikipedia.org/wiki/Remote_procedure_call)). You have many good 
+options for leveraging Liferay's API. 
 
-Next, we'll step back for a moment and consider the security layers of Liferay's
-*service oriented* architecture and how they can be configured.
+Let's step back now and discuss the security layers of Liferay's *service
+oriented* architecture and how you can configure them. 
 
 ## Service Security Layers 
 
-By default, a user connecting from the same machine Liferay is running on can
-access remote services so long as that user has permission to use those services
-in Liferay's permissions system. Of course, you are not really "remote" unless
-you are accessing services from a different machine; but we recommend using the
-API in a remote manner to trigger the security checks. Liferay has two layers of
-security when it comes to accessing its services remotely. The first layer of
-security only applies to clients invoking the API using a remote protocol.
-Invoking the API using a remote protocol, without having explicit rights to both
-layers, results in a remote exception being thrown and access being denied to
-those services. However, if you want to invoke the API using Java invocation,
-skip to the the paragraph that refers to the **second layer of security**.
+Even if they're connecting from the same machine Liferay is running on, a user
+with the proper permissions in Liferay's permissions system can access remote
+services. You're not really *remote* unless you're accessing services from a
+different machine, but using the API in a remote manner triggers important
+security checks. 
 
-The **first layer of security** a client needs to get through to call a method
-from the service layer is *invoker IP filtering*. For example, you may have a
-batch job which runs on another machine in your network. This job looks in a
+Liferay has two layers of security that come into play when accessing its
+services remotely. Clients invoking the API using a remote protocol will
+encounter both layers, while those using a Java invocation will only encounter
+the second. 
+
+<!--Tried to make the above more explicit, but I might have gotten it wrong.
+Russ -->
+
+The *first layer of security* a client encounters when calling a method from the
+service layer is called *invoker IP filtering*. Imagine you have have a batch
+job which runs on another machine in your network. This job looks in a
 particular shared folder on your network and uploads documents to your site's
-Documents and Media portlet on a regular basis, using Liferay's web services. To
-enable this batch job to get through the IP filter, the portal administrator
-will need to set portal properties appropriately to allow the machine access to
-that particular type of service. For example, if the batch job uses the Axis web
-services to upload the documents, the portal administrator would need to add the
-IP address of the machine on which the batch job is running to the
-`axis.servlet.hosts.allowed` property. A typical entry might look like this:
+*Documents and Media* portlet on a regular basis, using Liferay's web services.
+To get your batch job through the IP filter, the portal administrator has to set
+portal properties appropriately, allowing the machine access to that particular
+service type. If your batch job uses the Axis web services to upload the
+documents, the portal administrator must add the IP address of the machine on
+which the batch job is running to the `axis.servlet.hosts.allowed` property. A
+typical entry might look like this:
 
-	axis.servlet.hosts.allowed=192.168.100.100, 127.0.0.1, SERVER_IP
+    axis.servlet.hosts.allowed=192.168.100.100, 127.0.0.1, SERVER_IP
 
 If the IP address of the machine on which the batch job is running is listed
-with allowable hosts for the service, then that machine is allowed to connect to
-Liferay's web services, pass in the appropriate user credentials, and upload the
-documents.
+with allowable hosts for the service, it's allowed to connect to Liferay's web
+services, pass in the appropriate user credentials, and upload the documents. 
 
-![Figure 8.1:  Liferay SOA's first layer of security](../../images/soa-security-layer-1.png)
-
----
-
- ![note](../../images/tip-pen-paper.png)**Note:** The `portal.properties` file
- resides on the portal host machine and is controlled by the portal
- administrator. Portal administrators can configure security settings for the
- Axis Servlet, the Liferay Tunnel Servlet, the Spring Remoting Servlet, the JSON
- Servlet, the JSON Web Service Servlet, and the WebDAV Servlet. The
- [Properties Reference](http://www.liferay.com/documentation/liferay-portal/6.1/user-guide/-/ai/configuring-liferay-s-properti-1)
- chapter of *Using Liferay Portal* describes these properties.
+![Figure 10.1:  Liferay SOA's first layer of security](../../images/soa-security-layer-1.png)
 
 ---
 
-The **second layer of security** is Liferay's *security model* that it uses for
-every object in the portal. The user ID that accesses the services remotely must
-have the proper permission to operate on the objects it will be accessing.
-Otherwise, a remote exception will be thrown. The Portal Administrator will need
-to make use of Liferay's usual means of granting users access to these
-resources. For example, say a Documents and Media Library folder called
-*Documents* has been set up in a site and a role has been created called
-*Document Uploaders* which has the rights to add documents to this folder. Your
-batch job will be accessing Liferay's web services to upload documents into this
-folder. In order for this to work, you will have to call the web service using
-the user ID of a user who is a member of this group (or the user ID of a user
-with individual rights to add documents to this folder). Otherwise, the user
-will be prevented from using the Web Service.
+![note](../../images/tip-pen-paper.png)**Note:** The `portal.properties` file
+resides on the portal host machine and is controlled by the portal
+administrator. Portal administrators can configure security settings for the
+*Axis Servlet*, the *Liferay Tunnel Servlet*, the *Spring Remoting Servlet*, the
+*JSON Servlet*, the *JSON Web Service Servlet*, and the *WebDAV Servlet*. The
+[Properties
+Reference](http://www.liferay.com/documentation/liferay-portal/6.1/user-guide/-/ai/configuring-liferay-s-properti-1)
+chapter of *Using Liferay Portal* describes these properties. 
 
-![Figure 8.2: Liferay SOA's second layer of security](../../images/soa-security-layer-2.png)
+---
 
-The remote services allow specifying the user credentials using HTTP Basic
-authentication. Since those credentials are specified unencrypted, it is
-recommended to use HTTPS whenever accessing these services from or through an
-untrusted network. Most HTTP clients allow specifying the basic authentication
-credentials in the URL which is very handy when doing tests.
+Liferay's *security model* is the *second layer of security* that's triggered
+when services are remotely invoked, and it's used for every object in the
+portal. The user ID accessing the services remotely must have the proper
+permission to operate on the objects it's trying to access. A remote exception
+is thrown if the user ID isn't permitted. The Portal Administrator grants users
+access to these resources. For example, imagine you created a *Documents and
+Media Library* folder called `Documents` in a site and created a role called
+*Document Uploaders*, which has the rights to add documents to your new folder.
+Your batch job accesses Liferay's web services to upload documents into the
+folder. For this to work, you have to call the web service using a user ID of a
+member of this group (or the user ID of a user with individual rights to add
+documents to this folder). If you don't, you won't be allowed to use the Web
+Service. 
 
-To call the AXIS web service using credentials, you would use the following URL
-syntax:
+![Figure 10.2: Liferay SOA's second layer of security](../../images/soa-security-layer-2.png)
 
-	http://" + userIdAsString + ":" + password + "@[server.com]:[port]/api/secure/axis/" + serviceName
+With remote services, you can specify the user credentials using HTTP Basic
+authentication. Those credentials are specified unencrypted; it's recommended to
+use HTTPS whenever accessing these services from or through an untrusted
+network. Most HTTP clients let you specify the Basic authentication credentials
+in the URL--this is very handy for testing.
+
+You'd use the following syntax to call the *AXIS* web service using credentials:
+
+    http://" + userIdAsString + ":" + password + "@[server.com]:[port]/api/secure/axis/" + serviceName
 
 The user ID is the user's ID from the Liferay database. This may be obtained by
 logging in as the user and navigating to the *My Account* page of the control
 panel. On this page, the user ID appears below the user's profile picture and
 above the birthday field.
 
-For example, to get Organization data using a user with the ID of *2* and a
-password of *test*, you would use the following URL:
+Let's pretend there's a user whose ID is *2* and whose password is *test*. You
+can get Organization data with the following URL: 
 
-	http://2:test@localhost:8080/api/secure/axis/Portal_OrganizationService
-
----
-
- ![note](../../images/tip-pen-paper.png)**Note:** In old Liferay versions you
- could access those services by using `http://localhost:8080/tunnel-web/axis`.
- However, this path has changed in Liferay 6.1. When you enter it, you're
- redirected to the new one.
+    http://2:test@localhost:8080/api/secure/axis/Portal_OrganizationService
 
 ---
 
-The authorization type specified for your portal's company dictates the
-authorization type you must use to access your web service. The portal
-administrator can set the security authentication type to either of the
-following:
+![note](../../images/tip-pen-paper.png)**Note:** Older Liferay versions let you
+access services with `http://localhost:8080/tunnel-web/axis`. This path has
+changed in Liferay 6.1; if you enter it you'll be redirected to the new one. 
 
-- screen name
-- user ID
-- email address
+---
 
-It is important to note here how *Password Policies* (see chapter
+The authentication type specified for your Liferay Portal instance dictates the
+authentication type you'll use to access your web service. The portal
+administrator can set the portal's authentication type to any of the following: 
+
+<!--Not sure which is better here, authentication type or authorization type.
+I went with authentication. Russ -->
+
+- *screen name*
+- *user ID*
+- *email address*
+
+Your Liferay Portal *Password Policies* (see chapter
 [Management](https://www.liferay.com/documentation/liferay-portal/6.1/user-guide/-/ai/administering-liferay-port-1)
-of *Using Liferay Portal*) can be used in combination with this feature. If the
-portal is enforcing password policies on its users (requiring them to change
-their passwords on a periodic basis, etc.), any administrative ID which accesses
-Liferay's web services in a batch job will have its password expire too.
+of *Using Liferay Portal*) are an important consideration, since they'll be
+enforced on your administrative ID as well. If the portal is enforcing password
+policies on its users (e.g., requiring them to change their passwords on a
+periodic basis), an administrative ID accessing Liferay's web services in a
+batch job will have its password expire too.
 
-To prevent this from happening, the portal administrator can add a new password
-policy which does not enforce the password expiration and add your
+To prevent a password from expiring, the portal administrator can add a new
+password policy that doesn't enforce password expiration and add your
 administrative user ID to it. Then your batch job can run as many times as you
-need it to, and the administrative ID's password will never expire.
+need it to, without your administrative ID's password expiring. 
 
-In summary, accessing Liferay remotely requires the successful passing of two
-security checks:
+Whew! That was a lot to take in. To summarize, accessing Liferay remotely
+requires you to pass two layers of security checks:
 
-1.  The IP address must be pre-configured in the server's portal properties.
+- *First layer*: The IP address must be pre-configured in the server's portal
+properties. 
 
-2.  The user must have permission to access the related resources.
+- *Second layer*: The user needs permission to access the related resources. 
 
-Next, we'll learn about Liferay's SOAP web services.
+Next let's talk about Liferay's SOAP web services. 
 
 ## SOAP Web Services 
 
-Liferay's services also provide access via *Simple Object Access Protocol*
-(*SOAP*) over HTTP. SOAP is the *packaging* protocol and HTTP is the *transport*
-protocol. For our example, we'll look at the SOAP web service classes for
-Liferay's `Company`, `User`, and `UserGroup` portal services to accomplish the
-following:
+You can access Liferay's services via *Simple Object Access Protocol* (*SOAP*)
+over HTTP. The *packaging* protocol is SOAP and the *transport* protocol is
+HTTP.
 
-1. List each UserGroup to which user `test` belongs
+As an example, let's look at the SOAP web service classes for Liferay's
+`Company`, `User`, and `UserGroup` portal services to execute the following:
 
-2. Add a new UserGroup named `MyGroup`
+1. List each UserGroup to which user *test* belongs. 
 
-3. Add user `test` to the UserGroup
+2. Add a new UserGroup named *MyGroup*. 
 
-Here are the SOAP related classes we'll use:
+3. Add user *test* to the UserGroup. 
+
+We'll use these SOAP related classes: 
 
     import com.liferay.portal.model.CompanySoap;
-	import com.liferay.portal.model.UserGroupSoap;
-	import com.liferay.portal.service.http.CompanyServiceSoap;
-	import com.liferay.portal.service.http.CompanyServiceSoapServiceLocator;
-	import com.liferay.portal.service.http.UserGroupServiceSoap;
-	import com.liferay.portal.service.http.UserGroupServiceSoapServiceLocator;
-	import com.liferay.portal.service.http.UserServiceSoap;
-	import com.liferay.portal.service.http.UserServiceSoapServiceLocator;
+    import com.liferay.portal.model.UserGroupSoap;
+    import com.liferay.portal.service.http.CompanyServiceSoap;
+    import com.liferay.portal.service.http.CompanyServiceSoapServiceLocator;
+    import com.liferay.portal.service.http.UserGroupServiceSoap;
+    import com.liferay.portal.service.http.UserGroupServiceSoapServiceLocator;
+    import com.liferay.portal.service.http.UserServiceSoap;
+    import com.liferay.portal.service.http.UserServiceSoapServiceLocator;
 
-You can see in the listing a naming convention involving classes with suffixes
-`-ServiceSoapServiceLocator`, `-ServiceSoap`, and `-Soap`. The
+Can you see the naming convention for SOAP related classes? The classes above
+all have suffixes `-ServiceSoapServiceLocator`, `-ServiceSoap`, and `-Soap`. The
 `-ServiceSoapServiceLocator` class *finds* the `-ServiceSoap` by means of the
 service's URL you provide. The `-ServiceSoap` class is the interface to the
 services specified in the *Web Services Definition Language* (*WSDL*) file for
-each service. Lastly, the `-Soap` classes are the serializeable implementations
-of the models. Let's look at how to determine the URLs for these services.
+each service. The `-Soap` classes are the serializable implementations of the
+models. Let's look at how to determine the URLs for these services. 
 
-You can view a listing of the services deployed on your portal by opening your
-browser to the URL of the format `http://[host]:[port]/api/secure/axis` for your
-*secure* services (services requiring user authentication) and the URL of the
-format `http://[host]:[port]/api/axis` for your services that do not require
-user authentication. For demonstration, we're using *secure* services. Here are
-the web services for `UserGroup`:
+<!--Is SOAP related classes the proper way to refer to these? I just recycled
+the phrase from above. Russ -->
 
-![Figure 8.3: UserGroup Web Service listing](../../images/wsdl-summary-listing.png)
+You can see a list of the services deployed on your portal by opening your
+browser to a URL following one of these formats: 
+
+- For your secure services (i.e., serevices requiring authentication) use
+`http://[host]:[port]/api/secure/axis`. 
+
+- For your sevices that don't require authentication, use
+`http://[host]:[port]/api/axis`. 
+
+Here's the list of *secure* web services for `UserGroup`: 
+
+![Figure 10.3: `UserGroup` Web Service listing](../../images/wsdl-summary-listing.png)
 
 ---
 
- ![note](../../images/tip-pen-paper.png)**Note:** Liferay's developers use a
- tool called Service Builder to expose their services via SOAP automatically. If
- you are interested in using this tool for your own services, find out more
- about Service Builder in chapter *Liferay Frameworks*.
+![note](../../images/tip-pen-paper.png)**Note:** Liferay's developers use a tool
+called *Service Builder* to expose their services via SOAP automatically. If
+you're interested in using Service Builder, check out the *Liferay Frameworks*
+chapter in this guide. 
 
 ---
 
 Each web service is listed with its name, operations, and a link to its WSDL
-file. The WSDL is written in XML and provides a model for describing and
-locating the web service.
+file. The WSDL file is written in XML and provides a model for describing and
+locating the web service. 
 
-![Figure 8.4: WSDL Excerpt for the addUserGroup operation of UserGroup](../../images/wsdl-for-user-group-service.png)
+![Figure 10.4: WSDL Excerpt for the `addUserGroup` operation of `UserGroup`](../../images/wsdl-for-user-group-service.png)
 
-As you'll see in the example in the next section, you pass in the WSDL URL along
-with your login credentials to the SOAP service locator for your service.
+You pass in the WSDL URL along with your login credentials to the SOAP service
+locator for your service--we'll show you an example in the next section. 
 
-Next, let's invoke the web service!
+Next, let's invoke the web service! 
 
 ### SOAP Java Client 
 
-A Java web service client can easily be set up using the Eclipse IDE. Here is
-how you can do it:
+A Java web service client can easily be set up using Eclipse IDE. Here's how: 
 
-Add a new *Web Service Client* to your Project for each service you plan to
-consume in your client code. For the purposes of the client we're going to
-build, we'll want to add a *Web Service Client* for the portal's Company, User,
-and UserGroup services.
+In Eclipse, add a new *Web Service Client* to your project for each service you
+plan to consume in your client code. For our purposes, the client we're building
+needs a *Web Service Client* for the portal's *Company*, *User*, and *UserGroup*
+services. 
 
-![Figure 8.5: New Web Service Client](../../images/api-new-web-svc-client.png)
+![Figure 10.5: New Web Service Client](../../images/api-new-web-svc-client.png)
 
-When creating each client, you will need to enter the service definition (WSDL)
-for the desired service.
+For each client you create, you'll be prompted to enter the service definition
+(WSDL) for the desired service. Here's an example WSDL: 
 
-For example:
-	http://localhost:8080/api/axis/Portal_UserService?wsdl
+    http://localhost:8080/api/axis/Portal_UserService?wsdl
 
-![Figure 8.6: Service Definition](../../images/api-web-svc-wsdl.png)
+![Figure 10.6: Service Definition](../../images/api-web-svc-wsdl.png)
 
 With the WSDL specified, Eclipse automatically adds the auxiliary files and
-libraries required to consume that web service!
+libraries required to consume that web service.  Nifty!
 
-Next, let's look at the code we'll use to locate and invoke operations to add a
-new UserGroup named `MyUserGroup` and assign to it a User with screen name
-`test`:
+Here's the code that locates and invokes operations to add a new UserGroup named
+*MyUserGroup* and assign to it a User with screen name *test*: 
 
-	import java.net.URL;
+    import java.net.URL;
 
-	import com.liferay.portal.model.CompanySoap;
-	import com.liferay.portal.model.UserGroupSoap;
-	import com.liferay.portal.service.http.CompanyServiceSoap;
-	import com.liferay.portal.service.http.CompanyServiceSoapServiceLocator;
-	import com.liferay.portal.service.http.UserGroupServiceSoap;
-	import com.liferay.portal.service.http.UserGroupServiceSoapServiceLocator;
-	import com.liferay.portal.service.http.UserServiceSoap;
-	import com.liferay.portal.service.http.UserServiceSoapServiceLocator;
+    import com.liferay.portal.model.CompanySoap; import
+    com.liferay.portal.model.UserGroupSoap; import
+    com.liferay.portal.service.http.CompanyServiceSoap; import
+    com.liferay.portal.service.http.CompanyServiceSoapServiceLocator; import
+    com.liferay.portal.service.http.UserGroupServiceSoap; import
+    com.liferay.portal.service.http.UserGroupServiceSoapServiceLocator; import
+    com.liferay.portal.service.http.UserServiceSoap; import
+    com.liferay.portal.service.http.UserServiceSoapServiceLocator;
 
-	public class LiferaySoapClient {
-		public static void main(String[] args) {
+    public class LiferaySoapClient {
+        public static void main(String[] args) {
 
-			try {
-				String remoteUser = "test";
-				String password = "test";
-				String virtualHost = "localhost";
-			
-				String groupName = "MyUserGroup";
+            try {
+                String remoteUser = "test";
+                String password = "test";
+                String virtualHost = "localhost";
 
-				String serviceCompanyName = "Portal_CompanyService";
-				String serviceUserName = "Portal_UserService";
-				String serviceUserGroupName = "Portal_UserGroupService";
+                String groupName = "MyUserGroup";
 
-				long userId = 0;
+                String serviceCompanyName = "Portal_CompanyService";
+                String serviceUserName = "Portal_UserService";
+                String serviceUserGroupName = "Portal_UserGroupService";
 
-				// Locate the Company
-				CompanyServiceSoapServiceLocator locatorCompany =
-					new CompanyServiceSoapServiceLocator();
+                long userId = 0;
 
-				CompanyServiceSoap soapCompany =
-					locatorCompany.getPortal_CompanyService(
-						_getURL(remoteUser, password, serviceCompanyName,
-								true));
+                // Locate the Company
+                CompanyServiceSoapServiceLocator locatorCompany =
+                    new CompanyServiceSoapServiceLocator();
 
-				CompanySoap companySoap =
-					soapCompany.getCompanyByVirtualHost(virtualHost);
+                CompanyServiceSoap soapCompany =
+                    locatorCompany.getPortal_CompanyService(
+                        _getURL(remoteUser, password, serviceCompanyName,
+                                true));
 
-				// Locate the User service
-				UserServiceSoapServiceLocator locatorUser =
-					new UserServiceSoapServiceLocator();
-				UserServiceSoap userSoap = locatorUser.getPortal_UserService(
-					_getURL(remoteUser, password, serviceUserName, true));
+                CompanySoap companySoap =
+                    soapCompany.getCompanyByVirtualHost(virtualHost);
 
-				// Get the ID of the remote user
-				userId = userSoap.getUserIdByScreenName(
-					companySoap.getCompanyId(), remoteUser);
-				System.out.println("userId for user named " + remoteUser +
-						" is " + userId);
+                // Locate the User service
+                UserServiceSoapServiceLocator locatorUser =
+                    new UserServiceSoapServiceLocator();
+                UserServiceSoap userSoap = locatorUser.getPortal_UserService(
+                    _getURL(remoteUser, password, serviceUserName, true));
 
-				// Locate the UserGroup service
-				UserGroupServiceSoapServiceLocator locator =
-					new UserGroupServiceSoapServiceLocator();
-				UserGroupServiceSoap usergroupsoap =
-					locator.getPortal_UserGroupService(
-						_getURL(remoteUser, password, serviceUserGroupName,
-								true));
+                // Get the ID of the remote user
+                userId = userSoap.getUserIdByScreenName(
+                    companySoap.getCompanyId(), remoteUser);
+                System.out.println("userId for user named " + remoteUser +
+                        " is " + userId);
 
-				// Get the user's user groups
-				UserGroupSoap[] usergroups = usergroupsoap.getUserUserGroups(
-						userId);
+                // Locate the UserGroup service
+                UserGroupServiceSoapServiceLocator locator =
+                    new UserGroupServiceSoapServiceLocator();
+                UserGroupServiceSoap usergroupsoap =
+                    locator.getPortal_UserGroupService(
+                        _getURL(remoteUser, password, serviceUserGroupName,
+                                true));
 
-				System.out.println("User groups for userId " + userId +	" ...");
-				for (int i = 0; i < usergroups.length; i++) {
-					System.out.println("\t" + usergroups[i].getName());
-				}
+                // Get the user's user groups
+                UserGroupSoap[] usergroups = usergroupsoap.getUserUserGroups(
+                        userId);
 
-				// Adds the user group if it does not already exist
-				String groupDesc = "My new user group";
-				UserGroupSoap newUserGroup = null;
+                System.out.println("User groups for userId " + userId + " ...");
+                for (int i = 0; i < usergroups.length; i++) {
+                    System.out.println("\t" + usergroups[i].getName());
+                }
 
-				boolean userGroupAlreadyExists = false;
-				try {
-					newUserGroup = usergroupsoap.getUserGroup(groupName);
-					if (newUserGroup != null) {
-						System.out.println("User with userId " + userId +
-								" is already a member of UserGroup " +
-										newUserGroup.getName());
-						userGroupAlreadyExists = true;
-					}
-				} catch (Exception excep) {
-					// print cause, but continue
-					System.out.println(excep.getLocalizedMessage());
-				}
+                // Adds the user group if it does not already exist
+                String groupDesc = "My new user group";
+                UserGroupSoap newUserGroup = null;
 
-				if (!userGroupAlreadyExists) {
-					newUserGroup = usergroupsoap.addUserGroup(
-							groupName, groupDesc);
-					System.out.println("Added user group named " + groupName);
+                boolean userGroupAlreadyExists = false;
+                try {
+                    newUserGroup = usergroupsoap.getUserGroup(groupName);
+                    if (newUserGroup != null) {
+                        System.out.println("User with userId " + userId +
+                                " is already a member of UserGroup " +
+                                        newUserGroup.getName());
+                        userGroupAlreadyExists = true;
+                    }
+                } catch (Exception excep) {
+                    // print cause, but continue
+                    System.out.println(excep.getLocalizedMessage());
+                }
 
-					long users[] = {userId};
-					userSoap.addUserGroupUsers(newUserGroup.getUserGroupId(),
-							users);
-				}
+                if (!userGroupAlreadyExists) {
+                    newUserGroup = usergroupsoap.addUserGroup(
+                            groupName, groupDesc);
+                    System.out.println("Added user group named " + groupName);
 
-				// Get the user's user groups
-			   usergroups = usergroupsoap.getUserUserGroups(userId);
+                    long users[] = {userId};
+                    userSoap.addUserGroupUsers(newUserGroup.getUserGroupId(),
+                            users);
+                }
 
-				System.out.println("User groups for userId " + userId +	" ...");
-				for (int i = 0; i < usergroups.length; i++) {
-					System.out.println("\t" + usergroups[i].getName());
-				}
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+                // Get the user's user groups
+                usergroups = usergroupsoap.getUserUserGroups(userId);
 
-		private static URL _getURL(String remoteUser, String password,
-			String serviceName, boolean authenicate)
-		throws Exception {
-			//Unauthenticated url
-			String url = "http://localhost:8080/api/axis/" + serviceName;
+                System.out.println("User groups for userId " + userId + " ...");
+                for (int i = 0; i < usergroups.length; i++) {
+                    System.out.println("\t" + usergroups[i].getName());
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
-			//Authenticated url
-			if (authenicate) {
-				url = "http://" + remoteUser + ":" + password +
-					"@localhost:8080/api/secure/axis/" + serviceName;
-			}
-			return new URL(url);
-		}
-	}
+        private static URL _getURL(String remoteUser, String password,
+            String serviceName, boolean authenicate)
+        throws Exception {
+            //Unauthenticated url
+            String url = "http://localhost:8080/api/axis/" + serviceName;
 
-As a result of running this client you should get output similar to the
-following:
+            //Authenticated url
+            if (authenicate) {
+                url = "http://" + remoteUser + ":" + password +
+                    "@localhost:8080/api/secure/axis/" + serviceName;
+            }
+            return new URL(url);
+        }
+    }
 
-	userId for user named test is 10196
-	User groups for user 10196 ...
-	java.rmi.RemoteException: No UserGroup exists with the key {companyId=10154, name=MyUserGroup}
-	Added user group named
-	Added user to user group named MyUserGroup
-	User groups for user 10196 ...
-		MyUserGroup
+<!--I believe the above code block is too long. Not sure how to reduce it. Russ -->
 
-As you can see, the user had no groups but then was added to UserGroup
-`MyUserGroup`.
+Running this client should produce output similar to the following: 
 
-No worries about the `java.rmi.RemoteException` as it is thrown when invoking
-the UserGroup check with `usergroupsoap.getUserGroup(groupName)` because the
-UserGroup does not yet exist.
+    userId for user named test is 10196
+    User groups for user 10196 ...
+    java.rmi.RemoteException: No UserGroup exists with the key {companyId=10154, name=MyUserGroup}
+    Added user group named
+    Added user to user group named MyUserGroup
+    User groups for user 10196 ...
+        MyUserGroup
 
-Some things to note about the URL:
+The output tells us the user had no groups, but was added to UserGroup
+`MyUserGroup`. 
 
-- It is *secure* (authenticated) URL for the service. Authentication is done
-using HTTP Basic Authentication, which of course is not appropriate for a
-production environment, since the password is unencrypted, but is used for
-convenience in this example.
+You might be thinking, "But an error was thrown! We did something wrong!" Yes,
+an error was thrown (`java.rmi.RemoteException:`), but we're sitting here as
+cool as an iced cream sandwich all the same. The exception was thrown simply
+because the UserGroup check was invoked before the UserGroup was created.
+Because the very next line of the output says `Added user group named...`, we're
+okay. Don't worry, be happy! 
 
--	The screen name and password are passed in as credentials.
+Here are a few things to note about the URL: 
+
+- It's a *secure* (authenticated) URL for the service. Authentication is done
+using HTTP Basic Authentication, which isn't appropriate for a production
+environment, since the password is unencrypted. It's simply used for convenience
+in this example. 
+
+- The screen name and password are passed in as credentials. 
 
 - The name of the service (e.g. `Portal_UserGroupService`) is specified at the
-end of the URL. Remember, the service name can be found in the web service
-listing like the one we looked at previously.
+end of the URL. Remember that the service name can be found in the web service
+listing. 
 
 The operations `getCompanyByVirtualHost()`, `getUserIdByScreenName()`,
 `getUserUserGroups()`, `addUserGroup()` and `addUserGroupUsers()` are specified
 for the `-ServiceSOAP` classes `CompanyServiceSoap`, `UserServiceSoap` and
-`UserGroupServiceSoap` in the WSDL files. And information on parameter types,
+`UserGroupServiceSoap` in the WSDL files. Information on parameter types,
 parameter order, request type, response type, and return type are conveniently
 specified in the WSDL for each Liferay web service. It's all there for you!
 
-Next, let's try accomplishing the same behavior by using a client implemented in
-PHP.
+<!--Needs to be more straightforward; a table? -->
+
+Next let's implement a web service client implemented in PHP; just because we
+can! 
 
 ### SOAP PHP Client 
 
-Now, let's say you want write your client in a language other than Java ... no
-problem! You can use any language that supports web services invocation.
-
-The following invokes the same operations using PHP and the PHP SOAP Client:
+You can write your client in any language that supports web services invocation.
+Let's invoke the same operations as we did when we created our Java client, this
+time using PHP and the PHP SOAP Client: 
 
     <?php
         $groupName = "MyGroup2";
         $userName = "test";
         $clientOptions = array(
-	        'login' => $userName,
-	        'password' => 'test');
+        'login' => $userName,
+        'password' => 'test');
 
         // Add user group
 
         $userGroupClient = new SoapClient(
-	        "http://localhost:8080/api/secure/axis/Portal_UserGroupService?wsdl",
-	        $clientOptions);
+            "http://localhost:8080/api/secure/axis/Portal_UserGroupService?wsdl",
+            $clientOptions);
         $group = $userGroupClient->addUserGroup($groupName, "This is my group",
-        	0, 0);
+            0, 0);
         print "group id for " . $groupName . " is " . $group->userGroupId . "\n";
 
         // add user to user group
 
         $companyClient = new SoapClient(
-	        "http://localhost:8080/api/secure/axis/Portal_CompanyService?wsdl",
-	        $clientOptions);
+            "http://localhost:8080/api/secure/axis/Portal_CompanyService?wsdl",
+            $clientOptions);
         $company = $companyClient->getCompanyByVirtualHost("localhost");
         $userClient = new SoapClient(
-	        "http://localhost:8080/api/secure/axis/Portal_UserService?wsdl",
-	        $clientOptions);
+            "http://localhost:8080/api/secure/axis/Portal_UserService?wsdl",
+            $clientOptions);
         $userId = $userClient->getUserIdByScreenName($company->companyId,
-        	$userName);
+            $userName);
         print "user id for " . $userName . " is " . $userId . "\n";
 
         $users = array($userId);
@@ -577,205 +616,226 @@ The following invokes the same operations using PHP and the PHP SOAP Client:
             print ($v->name) . " " . $v->userGroupId . "\n";
     ?>
 
-So, if you'd like to use a language, other than Java, that supports use of SOAP
-web services, go ahead and try it out on Liferay's SOAP web services!
+It's worth repeating; you can use any language that supports use of SOAP web
+services to create your web services client. Try it out on Liferay's SOAP web
+services!
 
-Next, we'll explore Liferay's JSON Web Services.
+Next we'll explore Liferay's JSON Web Services. 
 
 ## JSON Web Services 
 
-JSON Web Services provide convenient access to portal service methods by
-exposing them as JSON HTTP API. This makes services methods easily accessible
-using HTTP requests, not only from JavaScript within the portal, but also from
-any JSON-speaking client.
+*JSON Web Services* let you access portal service methods by exposing them as a
+JSON HTTP API. Services methods are made easily accessible using HTTP requests,
+both from JavaScript within the portal and from any JSON-speaking client. 
 
-JSON Web Service functionality can be split into the following topics:
-registration, configuration, invocation and results. We'll cover each topic
-here.
+We'll cover the following topics as we explore JSON Web Service
+functionality:
 
-### Registering JSON Web Services 
+- Registration
 
-Liferay's developers use a tool called *Service Builder* to build services. All
-remote-enabled services (i.e. entities with `remote-service="true"` in
-`service.xml`) built with Service Builder are exposed as JSON Web Services. When
-Service Builder creates each `-Service.java` interface for a remote-enabled
-service, the `@JSONWebService` annotation is added on the class level of that
-interface. Therefore, *all* of the public methods of that interface become
-registered and available as JSON Web Services.
+- Configuration
 
-A `-Service` interface is a generated source file which is not to be modified by
-by the user directly. Sometimes, however, you need more control over which
-methods to expose and/or hide. To do so, just simply configure the
-`-ServiceImpl` class of the service. When service implementation class
-(`-ServiceImpl`) is annotated with the `@JSONWebService` annotation, the service
-interface is ignored and only the service implementation class is used for
-configuration. In other words, `@JSONWebService` annotations in service
-implementation **override** any JSON Web Service configuration in service
-interface.
+- Invocation 
 
-And that's all! Upon start-up, Liferay Portal scans classes on the classpath for
-annotations. The scanning process is optimized so only portal and service JARs
-are scanned, as well as class raw bytecode content. Each class that uses the
-`@JSONWebService` annotation is loaded and further examined; its methods become
-exposed as JSON API. As explained previously, the `-ServiceImpl` configuration
-overrides the `-Service` interface configuration during registration.
+- Results.
 
-For example, let's look the `DLAppService`: 
+### Registering JSON Web Services
 
-	@JSONWebService
-	public interface DLAppService {
-	...
+Liferay's developers use a tool called *Service Builder* to build services. When
+you build services with Service Builder, all remote-enabled services (i.e.,
+`service.xml` entities with the property `remote-service="true"`) are exposed as
+JSON Web Services. When each `-Service.java` interface is created for a
+remote-enabled service, the `@JSONWebService` annotation is added on the class
+level of that interface. All of the public methods of that interface become
+registered and available as JSON Web Services. 
 
-It contains the annotation found on portal startup. Notice the following lines
-in the console output when the debug log level is set:
+For the most part, the `-Service.java` interface source file shouldn't be
+directly modified by the user. However, if you need more control over its
+methods (e.g., hiding some methods and exposing others), you can configure the
+`-ServiceImpl` class. When the service implementation class (`-ServiceImpl`) is
+annotated with the `@JSONWebService` annotation, the service interface is
+ignored and the service implementation class is used for configuration in its
+place. In other words, `@JSONWebService` annotations in service implementation
+override any JSON Web Service configuration in service interface.
 
-	10:55:06,595 DEBUG [JSONWebServiceConfigurator:121] Configure JSON web service actions
-	10:55:06,938 DEBUG [JSONWebServiceConfigurator:136] Configuring 820 actions in ... ms
+That's it! It's as easy as stealing candy from a baby (but not as mean)! When
+you start Liferay Portal, it scans classes on the classpath for annotations. The
+scanning process is optimized so only portal and service JARs are scanned, as
+well as class raw bytecode content. Each class that uses the `@JSONWebService`
+annotation is loaded and further examined; its methods become exposed as JSON
+API. As explained previously, the `-ServiceImpl` configuration overrides the
+`-Service` interface configuration during registration. 
 
-At this point, scanning and registration is done and all service methods (those
-of `DLAppService` and of other services) are registered as JSON Web Services.
+As an example, let's register the `DLAppService`: 
+
+    @JSONWebService
+    public interface DLAppService {
+    ...
+
+The `@JSONWebService` annotation is found on portal startup. You'll see the
+following lines in the console output when the debug log level is set:
+
+    10:55:06,595 DEBUG [JSONWebServiceConfigurator:121] Configure JSON web service actions
+    10:55:06,938 DEBUG [JSONWebServiceConfigurator:136] Configuring 820 actions in ... ms
+
+Scanning and registration is complete and all service methods (those of
+`DLAppService` and of other services) are registered as JSON Web Services. 
+
+<!--What other services? -->
 
 #### Registering Plugin JSON Web Services 
 
 Custom portlets can be registered and scanned for JSON web services, too.
-Services that use the `@JSONWebService` annotation become part of the JSON API. Since scanning of portlet
-services is not enabled by default, add the following servlet definition in your
-portlet's `web.xml`:
+Services that use the `@JSONWebService` annotation become part of the JSON API.
+Scanning of portlet services isn't enabled by default; the following servlet
+definition must be added in your portlet's `web.xml`: 
 
-		<web-app>
-			...
-			<filter>
-				<filter-name>Secure JSON Web Service Servlet Filter</filter-name>
-				<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
-				<init-param>
-					<param-name>filter-class</param-name>
-					<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
-				</init-param>
-				<init-param>
-					<param-name>basic_auth</param-name>
-					<param-value>true</param-value>
-				</init-param>
-				<init-param>
-					<param-name>portal_property_prefix</param-name>
-					<param-value>jsonws.servlet.</param-value>
-				</init-param>
-			</filter>
-			<filter-mapping>
-				<filter-name>Secure JSON Web Service Servlet Filter</filter-name>
-				<url-pattern>/api/jsonws/*</url-pattern>
-			</filter-mapping>
+        <web-app>
+            ...
+            <filter>
+                <filter-name>Secure JSON Web Service Servlet Filter</filter-name>
+                <filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
+                <init-param>
+                    <param-name>filter-class</param-name>
+                    <param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
+                </init-param>
+                <init-param>
+                    <param-name>basic_auth</param-name>
+                    <param-value>true</param-value>
+                </init-param>
+                <init-param>
+                    <param-name>portal_property_prefix</param-name>
+                    <param-value>jsonws.servlet.</param-value>
+                </init-param>
+            </filter>
+            <filter-mapping>
+                <filter-name>Secure JSON Web Service Servlet Filter</filter-name>
+                <url-pattern>/api/jsonws/*</url-pattern>
+            </filter-mapping>
 
-			<servlet>
-				<servlet-name>JSON Web Service Servlet</servlet-name>
-				<servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>
-				<init-param>
-					<param-name>servlet-class</param-name>
-					<param-value>com.liferay.portal.jsonwebservice.JSONWebServiceServlet</param-value>
-				</init-param>
-				<load-on-startup>0</load-on-startup>
-			</servlet>
-			<servlet-mapping>
-				<servlet-name>JSON Web Service Servlet</servlet-name>
-				<url-pattern>/api/jsonws/*</url-pattern>
-			</servlet-mapping>
-			...
-		</web-app>
+            <servlet>
+                <servlet-name>JSON Web Service Servlet</servlet-name>
+                <servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>
+                <init-param>
+                    <param-name>servlet-class</param-name>
+                    <param-value>com.liferay.portal.jsonwebservice.JSONWebServiceServlet</param-value>
+                </init-param>
+                <load-on-startup>0</load-on-startup>
+            </servlet>
+            <servlet-mapping>
+                <servlet-name>JSON Web Service Servlet</servlet-name>
+                <url-pattern>/api/jsonws/*</url-pattern>
+            </servlet-mapping>
+            ...
+        </web-app>
 
-This enables the servlet to scan and register your portlet's JSON Web Services.
+Now the servlet can scan and register your portlet's JSON Web Services. 
 
 #### Mapping and naming conventions 
 
-Mapped URLs of exposed service methods are formed using the following naming
-convention:
+You can form a mapped URL of an exposed service using the following naming
+convention: 
 
-	http://[server]:[port]/api/jsonws/[service-class-name]/[service-method-name]
+    http://[server]:[port]/api/jsonws/[service-class-name]/[service-method-name]
 
-where:
+The `[server]` and `[port]` items are self explanatory. Let's look at the other
+bracketed items more closely: 
 
-+ **service-class-name** is the name generated from service class name, by
-removing the `Service` or `ServiceImpl` suffix and converting it to a lowercase
-name.
-+ **service-method-name** is generated from the service method name, by
-converting the camel-case method name to a lowercase separated-by-dash name.
+- `service-class-name` is generated from the service's class name by removing
+the `Service` or `ServiceImpl` suffix and making it lower case. 
 
-For example, the following service method ...
+- `service-method-name` is generated from the service's method name by
+converting its camel case to lower case and using dashes (`-`) to separate
+words. 
 
-	@JSONWebService
-	public interface UserService {
-		public com.liferay.portal.model.User getUserById(long userId) {...}
+Let's demonstrate by mapping a service method's URL using the above naming
+conventions: 
 
-... is mapped to the following URL:
+- First, here's the service method we want to map: 
 
-	http://localhost:8080/api/jsonws/user-service/get-user-by-id
+    @JSONWebService
+    public interface UserService {
+        public com.liferay.portal.model.User getUserById(long userId) {...}
 
-Each service method is also bound to one HTTP method type. All methods having
-names starting with `get`, `is` or `has` are assumed to be read-only methods and
-are therefore mapped as GET HTTP methods, by default. All other methods are
-mapped as POST HTTP methods.
+- Here's what the service method's URL looks like: 
 
-For plugins, you have two options for accessing their JSON Web Services.
+    http://localhost:8080/api/jsonws/user-service/get-user-by-id
 
-*Option 1* - Accessing the plugin service via the plugin context (e.g. your custom portlet's context):
+Each service method is bound to one HTTP method type. Any method name starting
+with `get`, `is` or `has` are assumed to be read-only methods and are mapped as
+*GET HTTP* methods by default. All other methods are mapped as *POST HTTP*
+methods. 
 
-		http://[server]:[port]/[plugin-context]/api/jsonws/[service-class-name]/[service-method-name]
+There are two ways to access a plugin's JSON Web Services. We'll call them,
+ingeniously, *Option 1* and *Option 2*. 
 
-However, this calls the plugin's service in a separate web application, that is
-not aware of the user's current session in the portal. As a result, accessing
-the service in this manner requires additional authentication.
+- *Option 1*: Access the plugin service via the plugin context (e.g. your custom
+portlet's context):
 
-*Option 2* - Accessing the plugin service via the portal context:
+        http://[server]:[port]/[plugin-context]/api/jsonws/[service-class-name]/[service-method-name]
 
-		http://[server]:[port]/[portal-context]/api/jsonws/[plugin-context].[service-class-name]/[service-method-name]
+    This calls the plugin's service in a separate web application that is not
+    aware of the user's current session in the portal. As a result, accessing
+    the service in this manner requires additional authentication. Who has time
+    for that?
 
-Requests sent this way can conveniently leverage the user's authentication in
-his current portal session. Liferay's JavaScript API for services calls plugin
-services this way.
+- *Option 2*: Accessing the plugin service via the portal context:
+
+        http://[server]:[port]/[portal-context]/api/jsonws/[plugin-context].[service-class-name]/[service-method-name]
+
+    Conveniently, requests sent this way can leverage the user's authentication
+    in his current portal session. Liferay's JavaScript API for services calls
+    plugin services using this method.
 
 #### Listing available JSON Web Services 
 
-To overview a service and verify which service methods are registered and
-available, you can get a service listing in your browser by opening the base
-address:
+To see which service methods are registered and available for use, open your
+browser to the following base address: 
 
-	http://localhost:8080/api/jsonws
+    http://localhost:8080/api/jsonws
 
-The resulting page lists all registered and exposed service methods of the
-portal. You can see more details of each method by clicking the method name. For
-example, you can see the full signature of the service method, list of all its
-arguments, list exceptions that can be thrown, and even read its Javadoc!
-Moreover, you can even invoke the service method for testing purposes using
-simple form right from within your browser.
+The page lists the portal's registered and exposed service methods. Get each
+method's details by clicking the method name. You'll see the full signature of
+the method, all its arguments, list exceptions that can be thrown, and read its
+Javadoc! Using a simple form from within your browser, you can even invoke the
+service method for testing purposes. 
 
 To list registered services on a plugin (e.g. a custom portlet), don't forget to
-use its context path:
+use its context path in your URL: 
 
-	http://localhost:8080/[plugin-context]/api/jsonws
+    http://localhost:8080/[plugin-context]/api/jsonws
 
-This will list the JSON Web Service API for the portlet.
+This will list the JSON Web Service API for the portlet. 
 
 #### More on registration 
 
-As said, you can control registration by using annotations in your
-`-ServiceImpl` class. This overrides any configuration defined in the interface.
-Moreover, you can fine-tune which *methods* are visible/hidden using annotations
-at the method level.
+If you've been paying attention, you already know how to control registration by
+using the `@JSONWebService` annotation in your `-ServiceImpl` class. This
+overrides any configuration defined in the interface. What you might not know is
+that you can control the visibility of methods using annotations at the method
+level. 
+
+Let's find out how to ignore a specific method. 
 
 ##### Ignoring a method 
 
-To ignore a method from being exposed as a service, just annotate the method
-with:
+To ignore a method from being exposed as a service, annotate the method with the
+following:
 
-	@JSONWebService(mode = JSONWebServiceMode.IGNORE)
+    @JSONWebService(mode = JSONWebServiceMode.IGNORE)
 
-Any methods annotated like this do not become part of the JSON Web Service API.
+Methods with this annotation don't become part of the JSON Web Service API. 
+
+Annotating is easy and useful! Let's learn to define custom HTTP method names
+and URL names. 
 
 ##### HTTP method name and URL 
 
-It is also possible to define custom HTTP method names and URL names, using a
-similar annotation at the method level.
+At the method level, you can define custom HTTP method names and URL names. Just
+use an annotation following this example: 
 
-	@JSONWebService(value = "add-file-wow", method = "PUT")
-	public FileEntry addFileEntry(
+    @JSONWebService(value = "add-file-wow", method = "PUT")
+    public FileEntry addFileEntry(
 
 In this example, the `DLApp` service method `addFileEntry` is mapped to URL
 method name `add-file-wow`. The complete URL is actually
@@ -785,14 +845,14 @@ the PUT HTTP method.
 If the URL name starts with a slash character (`/`), only the method name is
 used to form the service URL; the class name is ignored.
 
-	@JSONWebService("/add-something-very-specific")
-	public FileEntry addFileEntry(
+    @JSONWebService("/add-something-very-specific")
+    public FileEntry addFileEntry(
 
 Similarly, you can change the class name part of the URL, by setting the value
 in class-level annotation:
 
-	@JSONWebService("dla")
-	public class DLAppServiceImpl extends DLAppServiceBaseImpl {
+    @JSONWebService("dla")
+    public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 This maps all the service methods of the class to URL class name `dla` instead
 of the `dlapp` default.
@@ -802,226 +862,253 @@ of the `dlapp` default.
 Up to now, it is expected most of the service methods are going to be exposed;
 that only specific methods are to be hidden (the *blacklist* approach). But
 sometimes you might need a different behavior: to explicitly specify only those
-methods that are to be exposed (*whitelist* approach). This is possible, too,
-using so-called *manual mode* on class-level annotation. Then, it is up to you
-annotate only those methods which are to be exposed.
+methods that are to be exposed (the *whitelist* approach). This is possible,
+too, using so-called *manual mode* on class-level annotation. Then, it is up to
+you annotate only those methods which are to be exposed.
 
 Then you can annotate only methods that have to be exposed.
 
-	@JSONWebService(mode = JSONWebServiceMode.MANUAL)
-	public class DLAppServiceImpl extends DLAppServiceBaseImpl {
-		...
-		@JSONWebService
-		public FileEntry addFileEntry(
+    @JSONWebService(mode = JSONWebServiceMode.MANUAL)
+    public class DLAppServiceImpl extends DLAppServiceBaseImpl {
+        ...
+        @JSONWebService
+        public FileEntry addFileEntry(
 
 Now only the `addFileEntry` method and any other method annotated with
 `@JSONWebService` are to be part of the JSON Web Service API; all other methods
 of this service are to be excluded from the API.
 
-Next, let's take a look at portal configuration options that apply to JSON Web
-Services.
+
+![note](../../images/tip-pen-paper.png)**Note:** Annotating is important to the
+registration at the class level and the method level. It's also so easy a potato
+can do it. Don't believe us? Then you've never seen an Anno*tater*! 
+
+Next let's look at portal configuration options that apply to JSON Web Services. 
 
 ### Portal Configuration of JSON Web Services 
 
-JSON Web Services are enabled on Liferay Portal by default but can be easily
-disabled by specifying the following portal property setting:
+JSON Web Services are enabled on Liferay Portal by default; If you need to
+disable them, specify this portal property setting: 
 
-	json.web.service.enabled=false
+    json.web.service.enabled=false
 
 #### Strict HTTP methods 
 
-JSON Web Service services are, by default, mapped to either GET or POST HTTP
-methods. If a service method has a name that starts with `get`, `is` or `has`,
-the service is assumed to be read-only and is bound to the GET method; otherwise
-it is bound to POST.
+All JSON Web Service services are mapped to either GET or POST HTTP methods. If
+a service method name starts with `get`, `is` or `has`, the service is assumed
+to be read-only and is bound to the GET method; otherwise it's bound to POST. 
 
-By default, the portal does not check HTTP methods when invoking a service call;
-that is, the portal works in "non-strict http method" mode as services may be
-invoked using any HTTP method. If you need the strict mode, you can set it with
-portal property:
+By default, Liferay Portal doesn't check HTTP methods when invoking a service
+call; it works in *non-strict http method* mode, where services may be invoked
+using any HTTP method. If you need the strict mode, you can set it with this
+portal property: 
 
-	jsonws.web.service.strict.http.method=true
+    jsonws.web.service.strict.http.method=true
 
 When using strict mode, you must use the correct HTTP methods in calling service
-methods.
+methods. 
 
 #### Disabling HTTP methods 
 
-When strict HTTP method mode is enabled, you can even filter web service access
-based on HTTP methods used by the services. For example, you can set the portal
-JSON Web Services to work in read-only mode by disabling HTTP methods other than
-GET. For example:
+When strict HTTP method mode is enabled, you can filter web service access based
+on HTTP methods used by the services. For example, you can set the portal JSON
+Web Services to work in read-only mode by disabling HTTP methods other than GET.
+For example: 
 
-	jsonws.web.service.invalid.http.methods=DELETE,POST,PUT
+    jsonws.web.service.invalid.http.methods=DELETE,POST,PUT
 
 Now all requests that use HTTP methods from the list above are simply ignored.
 
 #### Controlling public access 
 
-Each service method determines for itself whether it can be executed by
-unauthenticated users and whether a user has adequate permission for the chosen
-action. Most of portal's read-only methods are open to public access.
+Each service method knows whether it can be executed by unauthenticated users
+and whether a user has adequate permission for the chosen action.  Most of
+portal's read-only methods are open to public access.
 
-If you are concerned about the security, it is possible to additionally restrict
-the access to exposed JSON API for public access. For this reason, there is a
-property that specifies a comma delimited list of public methods that can be
-accessed by unauthenticated users.
+![note](../../images/tip-pen-paper.png)**Note:** You might be worried about
+software that is self aware and controls who can access its services; we don't
+blame you, but we want to assure you that Liferay, Inc. is in no way part of
+Cyberdyne Systems (developers of Skynet, the artificial intelligence system
+responsible for the near destruction of mankind--in *The Terminator*, anyways). 
 
-	jsonws.web.service.public.methods=*
+If you're concerned about security, you can further restrict public access to
+exposed JSON APIs by explicitly stating which methods are *public* (i.e.,
+accessible to unauthenticated users). Use the following property to specify yuor
+public methods: 
 
-Wildcards are supported, so, for example, you can simply set `get*,has*,is*` to
-only enable public access to read-only methods; additionally securing all other
-JSON methods. To disable access to all exposed methods specify an empty value or
-to enable access to all exposed methods specify `*`.
+    jsonws.web.service.public.methods=*
 
-Lastly, let's consider how to invoke JSON Web Services.
+The property supports wildcards; so, if you can specify `get*,has*,is*` on the
+right hand side of the `=` symbol, all read-only JSON methods will be publicly
+accessible. All other JSON methods will be secured. To disable access to *all*
+exposed methods, you can leave the right side of the `=` symbol empty; to enable
+access to all exposed methods, specify `*`. 
+
+Next find out how to invoke JSON Web Services. 
 
 ### Invoking JSON Web Services 
 
-JSON Web Services can be invoked in several ways depending on how their
-parameters (i.e. method arguments) are passed in. But before we dive into
-different ways of passing parameters, it's important to understand how your
-invocation is matched to a method.
+How you invoke a JSON web service depends on how its parameters (i.e. method
+arguments) are passed in. We'll discuss how to pass in parameters below, but
+first let's make sure you to understand how your invocation is matched to a
+method. 
 
 #### Matching service methods 
 
-It is important to understand how calls to service methods are matched,
-especially when a service method is overloaded.
+It's important to understand how calls to service methods are matched,
+especially when a service method is overloaded. 
 
-The general rule is that besides the method name, you must provide **all**
-parameters for that service method. Even if some parameter is to be `null`, you
-must still provide it.
+The general rule is that you provide the method name and *all* parameters for
+that service method. Even if some parameter is to be `null`, you must still
+provide it.
 
-Note that how parameters are provided (as part of the URL line, as request
-parameters, etc.) is not important nor is the order of the parameters.
+It's important to provide all paramters, but it doesn't matter *how* you do it
+(e.g., as part of the URL line, as request parameters, etc.). The order of the
+parameters doesn't matter, either. 
 
-An exception to the rule of *all* parameters being required, is when using
-numeric *hints* to match methods. Let's look at using hints next.
+Exceptions abound in life, and there's an exception to the rule that *all*
+parameters are required--when using numeric *hints* to match methods. Let's look
+at using hints next. 
 
 #### Using hints 
 
-It is possible to add numeric hints that specify how many method arguments a
-service has. Hints are added as numbers separated by a dot in the method name.
-For example:
+Adding numeric hints lets you specify how many method arguments a service has;
+then, if you don't specify an argument for a parameter, it's automatically
+passed in as `null`. Syntactically, you can add hints as numbers separated by a
+dot in the method name. Here's an example: 
 
-	/foo/get-bar.2/param1/123/-param2
+    /foo/get-bar.2/param1/123/-param2
 
-Here, the `.2` is a hint, so only service methods with 2 arguments will be
-matched, others will be ignored for matching.
+Here, the `.2` is a numeric hint specifying that only service methods with two
+arguments will be matched; others will be ignored for matching. 
 
-One important difference when a hint is specified, is now you do not have to
-specify all of the parameters. All missing arguments are treated as `null`.
-Therefore, the previous example may be called with ...
+There's an important distinction to make between matching using hints and
+matching without hints; when a hint is specified, you don't have to specify all
+of the parameters. Any missing arguments are treated as `null`. The previous
+example may be called like this:
 
-	/foo/get-bar.2/param1/123
+    /foo/get-bar.2/param1/123
 
-... and `param2` will automatically be set to `null`.
+In this example, `param2` will automatically be set to `null`. 
 
 #### Passing parameters as part of URL path 
 
-Parameters can be passed as part of the URL path. After the service URL, you can
-append methods parameters in name/value pairs. Parameter names must be formed
-from method argument names by converting them from camel-case to lowercase
-separated-by-dash names. Example:
+You can pass parameters as part of the URL path; it's kind of sneaky, but if
+you're trying to hack Skynet, it's worth trying. After the service URL, just
+specify method parameters in name-value pairs. Parameter names must be formed
+from method argument names by converting them from camelCase to names using all
+lower case and separated-by-dash. Here's an example: 
 
-	http://localhost:8080/api/secure/jsonws/dlapp/get-file-entries/repository-id/10172/folder-id/0
+<!--The hack Skynet thing might not work; I envision passing parameters in the
+URL being a sneaky thing to do, sort of a trick. I have to admit I don't really
+understand a lot of this chapter so if this joke doesn't work, by all means
+remove it.-->
 
-Parameters may be given in **any** order; it's not necessary to follow the order
-in which the arguments specified in the method signatures.
+    http://localhost:8080/api/secure/jsonws/dlapp/get-file-entries/repository-id/10172/folder-id/0
 
-When a method name is overloaded, the *best match* will be used: The method that
-contains the least number of undefined arguments is invoked.
+You can pass parameters in any order; it's not necessary to follow the order in
+which the arguments specified in the method signatures. 
+
+When a method name is overloaded, the *best match* will be used; because Skynet
+is smarter than you, it chooses the method that contains the least number of
+undefined arguments and invokes it for you, human. 
+
+<!--Again, if this doesn't work, get rid of it. -->
+
+You can also pass parameters in a URL query, and we'll show you how next. 
 
 #### Passing parameters as URL query 
 
-Parameters can be passed as request parameters, too. The difference is parameter
-names are specified as is (e.g. camel-case) and are set equal to their argument
-values:
+You can pass in parameters as request parameters. Parameter names are specified
+as is (e.g. camelCase) and are set equal to their argument values, like this: 
 
-	http://localhost:8080/api/secure/jsonws/dlapp/get-file-entries?repositoryId=10172&folderId=0
+    http://localhost:8080/api/secure/jsonws/dlapp/get-file-entries?repositoryId=10172&folderId=0
 
 As with passing parameters as part of a URL path, the parameter order is not
-important, the *best match* rule applies for overloaded methods, etc.
+important, and the *best match* rule applies for overloaded methods. 
+
+Now that you know a few different ways to pass parameters, next let's mix them all
+up and see if we can confuse Skynet into self-destruction! 
 
 #### Mixed way of passing parameters 
 
-Parameters can be passed in a mixed way: some can be part of the URL path and
-some can be specified as request parameters.
+Parameters can be passed in a mixed way; some can be part of the URL path and
+some can be specified as request parameters. You cannot confuse Skynet in this
+way--try again, human. 
 
 #### Type conversion of the parameters 
 
 Parameter values are sent as strings using the HTTP protocol. Before a matching
 Java service method is invoked, each parameter value is converted from a string
-to its target Java type. We use a 3rd party open-source library to convert each
-object to its appropriate common type. Of course, it is possible to add or
-change the conversion for certain types; but we'll just cover how the
-conversions work by as-is.
+to its target Java type. Liferay uses a third party open source library to
+convert each object to its appropriate common type. It's possible to add or
+change the conversion for certain types; but we'll just cover the standard
+conversions process. 
 
-Conversion for common types (`long`, `String`, `boolean`, etc.) is
-straightforward. All dates can be given in milliseconds. Locales, can be passed
-as locale names (e.g. `en` and `en_US`). To pass in an array of numbers, send a
+Conversion for common types (e.g., `long`, `String`, `boolean`) is
+straightforward. Dates can be given in milliseconds, locales can be passed as
+locale names (e.g. `en` and `en_US`). To pass in an array of numbers, send a
 string of comma-separated numbers (e.g. string `4,8,15,16,23,42` can be
 converted to `long[]` type). You get the picture!
 
-Arguments can be of type `List` or `Map`, too! To pass a `List` argument, send a
-JSON array. To pass a `Map` argument, send a JSON object. The conversion then is
-done in two steps:
+In addition to the common types, arguments can be of type `List` or `Map`. To
+pass a `List` argument, send a JSON array. To pass a `Map` argument, send a JSON
+object. The conversion of these is done in two steps, ingeniously referred to
+below as *Step 1* and *Step 2*:
 
-*Step 1 - JSON deserialization - * JSON arrays are converted into `List<String>`
-and JSON objects are converted to `Map<String, String>`. Note, due to security
-reasons, it is forbidden to instantiate any type within JSON deserialization.
+- *Step 1--JSON deserialization*: JSON arrays are converted into `List<String>`
+and JSON objects are converted to `Map<String, String>`. Due to security
+reasons, it is forbidden to instantiate any type within JSON deserialization. 
 
-*Step 2 - Generification - * Each `String` element of the `List` and `Map` is
-converted to its target type (the argument's Java generics type specified in the
-method signature). Note, this step is only done if the Java argument type uses
-generics.
+- *Step 2--Generification*: Each `String` element of the `List` and `Map` is
+converted to its target type (the argument's generic Java type specified in the
+method signature). This step is only executed if the Java argument type uses
+generics. 
 
-For example, let's consider the conversion of string array `[en,fr]` as JSON web
-service parameters for a `List<Locale>` Java method argument type:
+As an example, let's consider the conversion of string array `[en,fr]` as JSON
+web service parameters for a `List<Locale>` Java method argument type: 
 
-*Step 1 - JSON deserialization - * The JSON array is deserialized to a
-`List<String>` containing strings `en` and `fr`.
+- *Step 1--JSON deserialization*: The JSON array is deserialized to a
+`List<String>` containing strings `en` and `fr`. 
 
-*Step 2 - Generification - * Each string is converted to the `Locale` (the
-generics type), resulting in the `List<Locale>` Java argument type.
+- *Step 2--Generification*: Each string is converted to the `Locale` (the
+generic type), resulting in the `List<Locale>` Java argument type. 
 
 #### Sending NULL values 
 
-To pass a `null` value for an argument, simply prefix the parameter name with a
-dash `-`. For example:
+To pass a `null` value for an argument, prefix the parameter name with a dash.
+Here's an example: 
 
-	.../dlsync/get-d-l-sync-update/company-id/10151/repository-id/10195/-last-access-date
+    .../dlsync/get-d-l-sync-update/company-id/10151/repository-id/10195/-last-access-date
 
-Here the `last-access-date` parameter is interpreted as `null`.
+The `last-access-date` parameter is interpreted as `null`. Although we have it
+last in the URL above, it's not necessary.
 
-Null parameters, therefore, do not have specified values. Of course, null
-parameters do not have to be the last in the URL, as in this example. When a
-null parameter is passed as a request parameter, its value is ignored and `null`
-is used instead:
+Null parameters don't have specified values. When a null parameter is passed as
+a request parameter, its value is ignored and `null` is used instead: 
 
-	<input type="hidden" name="-last-access-date" value=""/>
+    <input type="hidden" name="-last-access-date" value=""/>
 
-When using JSON RPC (see below), null values may be sent explicitly, even
-without a prefix. For example:
+When using JSON RPC (see below), you can send null values explicitly, even
+without a prefix. Here's an example: 
 
-	"last-access-date" : null
+    "last-access-date":null
 
 #### Parameters encoding 
 
-Although often forgotten, there is a difference between URL encoding and query
-(i.e. request parameters) encoding. An illustrative example of this is the
-difference in how the space character is encoded. When the space character is
-part of the URL path, it is encoded as `%20`; when it is part of the query it is
-encoded as plus sign (`+`).
+There's a difference between URL encoding and query (i.e. request parameters)
+encoding; the difference is crucial to the effort to defeat Skynet, so pay
+attention. The difference lies in how the space character is encoded. When the
+space character is part of the URL path, it's encoded as `%20`; when it's part
+of the query it's encoded as plus sign (`+`).
 
-Furthermore, all of these rules for encoding apply to international (non-ascii)
-characters, as well. Since Liferay Portal works in UTF-8 mode, parameter values
-must be encoded as UTF-8 values. However, the portal itself is not responsible
-for decoding request URLs and request parameter values to UTF-8. This task is
-done by the web-server layer (Tomcat, Apache, etc.). When accessing services
-through JSON-RPC, encoding parameters to UTF-8 is not enough -- we also need to
-send the encoding type in a Content-Type header (e.g. `Content-Type :
-"text/plain; charset=utf-8"`).
+All these encoding rules apply to international (non-ascii) characters, as well.
+Since Liferay Portal works in UTF-8 mode, parameter values must be encoded as
+UTF-8 values. Liferay Portal doesn't decode request URLs and request parameter
+values to UTF-8 itself; it relies on the webserver layer (e.g., Tomcat, Apache,
+etc.). When accessing services through JSON-RPC, encoding parameters to UTF-8
+isn't enough--you need to send the encoding type in a Content-Type header (e.g.
+`Content-Type : "text/plain; charset=utf-8"`). 
 
 For example, let's pass the value "&#1057;&#1091;&#1087;&#1077;&#1088;" ("Super"
 in Cyrillic) to some JSON Web Service method. This name first has to be
@@ -1033,180 +1120,198 @@ received, this value is first going to be translated to an array of 10 bytes
 
 #### Sending files as arguments 
 
-Files can be uploaded using multipart forms and requests. Example:
+Files can be uploaded using multipart forms and requests. Here's an example: 
 
-	<form action="http://localhost:8080/api/secure/jsonws/dlapp/add-file-entry" method="POST" enctype="multipart/form-data">
-	        <input type="hidden" name="repositoryId" value="10172"/>
-	        <input type="hidden" name="folderId" value="0"/>
-	        <input type="hidden" name="title" value="test.jpg"/>
-	        <input type="hidden" name="description" value="File upload example"/>
-	        <input type="hidden" name="changeLog" value="v1"/>
-	        <input type="file" name="file"/>
-	        <input type="submit" value="addFileEntry(file)"/>
-	</form>
+    <form action="http://localhost:8080/api/secure/jsonws/dlapp/add-file-entry" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="repositoryId" value="10172"/>
+        <input type="hidden" name="folderId" value="0"/>
+        <input type="hidden" name="title" value="test.jpg"/>
+        <input type="hidden" name="description" value="File upload example"/>
+        <input type="hidden" name="changeLog" value="v1"/>
+        <input type="file" name="file"/>
+        <input type="submit" value="addFileEntry(file)"/>
+    </form>
 
-As you see, it's a common upload form that invokes the `addFileEntry` method of
-the `DLAppService` class.
+This is common upload form that invokes the `addFileEntry` method of the
+`DLAppService` class. 
 
 #### JSON RPC 
 
-JSON Web Service may be invoked using [JSON RPC](http://json-rpc.org/). A good
-part of JSON RPC 2.0 specification is supported in Liferay JSON Web Services.
-One limitation is parameters may be passed only as *named* parameters;
+You can invoke JSON Web Service using [JSON RPC](http://json-rpc.org/). Most of
+the JSON RPC 2.0 specification is supported in Liferay JSON Web Services. One
+important limitation is that parameters must be passed in as *named* parameters;
 positional parameters are not supported, as there are too many overloaded
-methods for convenient use of positional parameters.
+methods for convenient use of positional parameters. 
 
-Here is an example of invoking a JSON web service using JSON RPC:
+Here's an example of invoking a JSON web service using JSON RPC: 
 
-	POST http://localhost:8080/api/secure/jsonws/dlapp
-	{
-		"method":"get-folders",
-		"params":{"repositoryId":10172, "parentFolderId":0},
-		"id":123,
-		"jsonrpc":"2.0"
-	}
+    POST http://localhost:8080/api/secure/jsonws/dlapp
+    {
+        "method":"get-folders",
+        "params":{"repositoryId":10172, "parentFolderId":0},
+        "id":123,
+        "jsonrpc":"2.0"
+    }
 
 #### Default parameters 
 
-When accessing *secure* JSON web services (user has to be authenticated), some
-parameters are made available to the web services by default. They need not to
-be specified explicitly, unless you want to change their values to something
-other than their defaults.
+When accessing *secure* JSON web services (i.e., the user has to be
+authenticated), some parameters are made available to the web services by
+default. Unless you want to change their values to something other than their
+defaults, you don't have to specify them explicitly. 
 
-Default parameters are:
+Here are the default parameters:  
 
-+ `userId` - id of authenticated user
-+ `user` - full User object
-+ `companyId` - users company
-+ `serviceContext` - empty service context object 
+- *userId*: The id of authenticated user
+- *user*: The full User object
+- *companyId*: The users company
+- *serviceContext*: The empty service context object 
+
+Let's find out about object parameters next. 
 
 #### Object parameters 
 
-Most services accept simple parameters: numbers, strings etc. However, sometimes
-you need to provide an object (a non-simple type) as a service parameter.
+Most services accept simple parameters like numbers and strings. However,
+sometimes you might need to provide an object (a non-simple type) as a service
+parameter. 
 
-Similar to specifying null parameters by using the `-` prefix, to create an
-instance of an object parameter, just prefix the parameter name with a plus
-sign, `+`, without any parameter value at all. For example:
+To create an instance of an object parameter, prefix the parameter with a plus
+sign, `+` and don't assign it any other parameter value. This is similar to
+when we specified a null parameter by prefixing the parameter with a dash
+symbol, `-`.
 
-	/jsonws/foo/get-bar/zap-id/10172/start/0/end/1/+foo
+Here's an example:
 
-or as a request parameter (note, the `+` sign must be encoded!):
+    /jsonws/foo/get-bar/zap-id/10172/start/0/end/1/+foo
 
-	/jsonws/foo/get-bar?zapId=10172&start=0&end=1&%2Bfoo
+To create an instance of an object parameter as a request parameter, make sure
+you encode the `+` symbol: 
 
-or
+    /jsonws/foo/get-bar?zapId=10172&start=0&end=1&%2Bfoo
 
-	<input type="hidden" name="+foo" value=""/>
+Here's an alternative syntax: 
+
+    <input type="hidden" name="+foo" value=""/>
 
 If a parameter is an abstract class or an interface, it can't be instantiated as
 such. Instead, a concrete implementation class must be specified to create the
-argument value. This can be done by specifying the `+` prefix before the
-parameter name followed by specifying the concrete implementation class. For
-example:
+argument value. You can do this by specifying the `+` prefix before the
+parameter name followed by specifying the concrete implementation class. Check
+out this example: 
 
-	/jsonws/foo/get-bar/zap-id/10172/start/0/end/1/+foo:com.liferay.impl.FooBean
+    /jsonws/foo/get-bar/zap-id/10172/start/0/end/1/+foo:com.liferay.impl.FooBean
 
-or
+Here's another way of doing it: 
 
-	<input type="hidden" name="+foo:com.liferay.impl.FooBean" value=""/>
+    <input type="hidden" name="+foo:com.liferay.impl.FooBean" value=""/>
 
 The examples above specify that a `com.liferay.impl.FooBean` object, presumed to
-implement the class of the parameter named `foo`, is to be created.
+implement the class of the parameter named `foo`, is to be created. 
 
-A concrete implementation can be set as a value, too! For example:
+You can also set a concrete implementation as a value. Here's an example: 
 
-	<input type="hidden" name="+foo" value="com.liferay.impl.FooBean"/>
+    <input type="hidden" name="+foo" value="com.liferay.impl.FooBean"/>
 
-or in JSON RPC:
+In JSON RPC, here's what it looks like:
 
-	"+foo" : "com.liferay.impl.FooBean"
+    "+foo" : "com.liferay.impl.FooBean"
 
-All these examples specify a concrete implementation for `foo` service method
-parameter.
+All the examples above specify a concrete implementation for the `foo` service
+method parameter. 
+
+Once you pass in an object parameter, you might want to populate the object.
+Find out how next. 
 
 #### Inner Parameters 
 
-In many cases, you'll need to populate objects that are passed as parameters. A
-good example is a default parameter `serviceContext` of type `ServiceContext`
-(see the *Service Context* section in this chapter). Sometimes, you need to set
-some of the inner properties (i.e. fields) of the `ServiceContext`, such as:
-`addGroupPermissions`, `scopeGroupId`, etc., to make an appropriate call to a
-JSONWS.
+When you pass in an object paramter, you'll often need to populate it's inner
+parameters (i.e., fields). Consider a default parameter `serviceContext` of type
+`ServiceContext` (see the *Service Context* section in this chapter to find out
+more about this type). To make an appropriate call to JSONWS, you might need to
+set the `serviceContext` parameter's fields `addGroupPermissions` and
+`scopeGroupId`. 
 
-To pass inner parameters, just specify them using a 'dot' notation. That is,
-specify the name of the parameter, followed by a dot `.`, followed by the name
-of the inner parameter. For example, with regards to the `ServiceContext` inner
-parameters you can provide: `serviceContext.addGroupPermissions`,
-`serviceContext.scopeGroupId` parameters, together with other parameters of your
-web service call. They will be recognized as inner parameters (with a dot in the
-name) and their values will be *injected* into existing parameters, before the
-API service method is executed.
+You can pass inner parameters by specifying them using *dot* notation. Just
+apppend the name of the parameter with a dot (i.e., a period, `.`), followed by
+the name of the inner parameter. For the `ServiceContext` inner parameters we
+mentioned above you'd specify `serviceContext.addGroupPermissions` and
+`serviceContext.scopeGroupId`. They'll be recognized as inner parameters and
+their values will be *injected* into existing parameters before the API service
+method is executed. 
 
-Inner parameters are not counted as *regular* parameters for matching methods
-and are ignored during matching.
+Inner parameters aren't counted as *regular* parameters for matching methods
+and are ignored during matching. 
+
+---
+
+![tip](../../images/tip-pen-paper.png)**Tip:** Use inner parameters with object
+parameters to set inner content of created parameter instances! 
 
 ---
 
- ![tip](../../images/tip-pen-paper.png)**Tip:** Use inner parameters with object
- parameters to set inner content of created parameter instances!
-
----
+Next let's see what values are returned when a JSON seb service is invoked. 
 
 ### Returned values 
 
 No matter how a JSON web service is invoked, it returns a JSON string that
-represents the service method result. Any returned objects are *loosely*
-serialized to a JSON string and returned to the caller.
+represents the service method result. Returned objects are *loosely* serialized
+to a JSON string and returned to the caller. 
 
-Let's take a look a some returned values from calls to services. In fact, let's
-create a UserGroup as we did in our previous SOAP web service client examples.
-To make it easy, we'll use the test form provided with the JSON web service in
-our browser.
+Let's look at some values returned from service calls. We'll create a
+*UserGroup* as we did in our SOAP web service client examples. To make it easy,
+we'll use the test form provided with the JSON web service in our browser. 
 
-1.	Open your browser to the JSON web service method that adds a UserGroup:
+1. Open your browser to the JSON web service method that adds a *UserGroup*: 
 
-		http://127.0.0.1:8080/api/jsonws?signature=/usergroup/add-user-group-2-name-description
-		
-	or navigate to it by starting at `http://127.0.0.1:8080/api/jsonws`,
-	scrolling down to the section for *UserGroup* and clicking *add-user-group*.
+        http://127.0.0.1:8080/api/jsonws?signature=/usergroup/add-user-group-2-name-description
 
-2. Fill in the *name* field to "MyUserGroup3" and the *description* to some
-arbitrary value string like "Created using JSON WS".
+    Alternatively, navigate to it by starting at
+    `http://127.0.0.1:8080/api/jsonws` then scrolling down to the section for
+    *UserGroup*; click *add-user-group*. 
 
-3.	Click *Invoke* to get a result similar to the following:
+2. In the *name* field enter *UserGroup3* and set the *description* to an
+arbitrary value string like *Created using JSON WS*.
 
-		{"addedByLDAPImport":false,"companyId":10154,"description":"Created using JSON WS","name":"MyUserGroup33","parentUserGroupId":0,"userGroupId":13162}
+3. Click *Invoke* and you'll get a result similar to the following: 
 
-Notice the JSON string returned represents the `UserGroup` object you just
-created. The object has been serialized into a JSON string. As a starting point
-for understanding JSON strings, go to [json.org](http://www.json.org/).
+        {"addedByLDAPImport":false,"companyId":10154,"description":"Created using JSON WS","name":"MyUserGroup33","parentUserGroupId":0,"userGroupId":13162}
 
-To find out how to serialize Java objects, maps and lists, check out article
+The returned string represents the `UserGroup` object you just created,
+serialized into a JSON string. To find out more about JSON strings, go to
+[json.org](http://www.json.org/).
+
+To learn about serializing Java objects, maps and lists, check out the article
 [JSON
 Serialization](http://www.liferay.com/community/wiki/-/wiki/Main/JSON+Serialization)
-by Igor Spasi&#263;.
+by Igor Spasi&#263;. 
+
+Let's check out some common JSON WebService errors. 
 
 ### Common JSON WebService errors 
 
-While working with JSON Web Services, you may encounter some of the common
-errors described in the following subsections.
+While working with JSON Web Services, you may encounter errors. Don't worry,
+errors are part of what protects you from Skynet; it has a hard time predicting
+human behavior since it's logic is unflawed (Skynet was created to remove human
+error from military decision-making, of course). 
+
+Let's look at the most common errors in the following subsections. 
+
+<!--I would have put the subsections in an unordered list, but I'll leave them
+for now. Which is preferred?  Are they long enough to warrant subsections? --> 
 
 #### Missing value for parameter 
 
-This error means you didn't pass a parameter value along with the parameter name
-in your the URL path. The parameter value must follow the parameter name in the
-URL path.
+If you see this error, you didn't pass a parameter value along with the
+parameter name in your URL path. The parameter value must follow the parameter
+name, like in this example: 
 
-Here is an example, the URL path
+    /api/jsonws/user/get-user-by-id/userId
 
-	/api/jsonws/user/get-user-by-id/userId
+The path above specifies a parameter named `userId`, but doesn't specify the
+parameter's value. You can resolve this error by providing the parameter value
+after the parameter name: 
 
-specifies the parameter named `userId`, but it does not specify the parameter's
-value. To resolve this error, simply provide the parameter value after the
-parameter name:
-
-	/api/jsonws/user/get-user-by-id/userId/173
+    /api/jsonws/user/get-user-by-id/userId/173
 
 #### No JSON web service action associated 
 
@@ -1223,576 +1328,631 @@ method, the parameter data must match that of the new method signature.
 This error appears when you try to instantiate a method argument using an
 incompatible argument type.
 
+#### Judgment Day
+
+We hope you never see this error. It means that Skynet has initiated a nuclear
+war and most of humanity will be wiped out; survivors will need to battle
+*Terminator* cyborgs. If you see this error and survive *Judgment Day*, we
+recommend joining the *resistance*--they'll likely need good developers to
+support the cause, especially those familiar with time travel. 
+
+<!-- Too much?-->
+
+Next we'll show you how to optimize your use of JSON Web Services by using the
+*JSON Web Services Invoker*. 
+
 ### JSON Web Services Invoker 
 
-Using JSON Web Services is easy, you send a request that defines a service
-method and parameters and you receive the result as JSON object. But you may
-need to use JSON Web Services more pragmatically.
+Using JSON Web Services is easy; you send a request that defines a service
+method and parameters and you receive the result as JSON object. Below we'll
+show you why that's not optimal, and introduce a tool that let's you use JSON
+Web Services more efficiently and pragmatically (efficiency and pragmatism are
+crucial if you want to take down Skynet before it's too late). 
 
-Consider the following example: You are working with two related objects, a
-`User` and its corresponding `Contact`. With simple JSON Web Service calls, you
-first call some user service to get the user object and then you call the
-contact service using the contact ID from the user object. So you end up sending
-two HTTP requests to get two JSON objects that are not even bound together;
-there is no contact information in the user object (i.e. no `user.contact`).
-Obviously, this approach has some impact on performance (sending two HTTP calls)
-and on usability (manually managing the relationship between two objects).
-Wouldn't it be nice if you had an easy-to-use tool to address these problems?
-Well, you do -- the *JSON Web Service Invoker*.
+Consider this example: You're working with two related objects, a `User` and its
+corresponding `Contact`. With simple JSON Web Service calls, you first call some
+user service to get the user object and then you call the contact service using
+the contact ID from the user object. You end up sending two HTTP requests to get
+two JSON objects that aren't even bound together; there's no contact information
+in the user object (i.e. no `user.contact`). This approach is suboptimal for
+performance (sending two HTTP calls) and usability (manually managing the
+relationship between two objects). It'd be nicer if you had a tool to address
+these inefficiencies. Fortunately, the *JSON Web Service Invoker* does just
+that! 
 
 Liferay's JSON Web Service Invoker helps you optimize your use of JSON Web
-Services. In the following sections, we'll show you how.
+Services. In the following sections, we'll show you how. 
 
 #### A simple Invoker call 
 
-The Invoker is accessible on the fixed address:
+The Invoker is accessible from the fixed address 
 
-	http://[address]:[port]/api/jsonws/invoke
+    http://[address]:[port]/api/jsonws/invoke
 
-It only accepts one request parameter: `cmd` -- the Invoker's command. If the
+It only accepts a `cmd` request parameter--this is the Invoker's command. If the
 command request parameter is missing, the request body is used as the command.
-So, basically, you can specify the command by either using the request parameter
-`cmd` or the request body.
+So you can specify the command by either using the request parameter `cmd` or
+the request body. 
 
-The Invoker command is a plain JSON map that describes how JSON Web Services are
-to be called and how the results are to be managed. Here is an example of how to
-call a simple service using the Invoker:
+The Invoker command is a plain JSON map describing how JSON Web Services are
+called and how the results are managed. Here's an example of how to call a
+simple service using the Invoker: 
 
-	{
-		"/user/get-user-by-id": {
-			"userId": 123,
-			"param1": null
-		}
-	}
+    {
+        "/user/get-user-by-id": {
+            "userId": 123,
+            "param1": null
+        }
+    }
 
-As you can see, the service call is defined as a JSON map. The key specifies the
-service URL (i.e. the service method to be invoked) and the key's value
-specifies a map of service parameter names (i.e. `userId` and `param1`) and
-their values. In the example above, the retrieved user is returned as a JSON
-object. Moreover, since the command is a JSON string, null values can be
-specified explicitly using the `null` keyword. However, if you so choose, you
-can still use the less natural convention for specifying a null parameter that
-requires a dash before the parameter name and an explicit empty value (e.g.
-`"-param1": ''`).
+The service call is defined as a JSON map. The key specifies the service URL
+(i.e. the service method to be invoked) and the key's value specifies a map of
+service parameter names (i.e. `userId` and `param1`) and their values. In the
+example above, the retrieved user is returned as a JSON object. Since the
+command is a JSON string, null values can be specified by either explicitly
+using the `null` keyword or by placing a dash before the parameter name and an
+leaving the value empty (e.g. `"-param1": ''`). 
 
-Note, the example Invoker call is identical to the following standard JSON Web
-Service call:
+The example Invoker call functions exactly the same as the following standard
+JSON Web Service call: 
 
-	/user/get-user-by-id?userId=123&-param1
+    /user/get-user-by-id?userId=123&-param1
 
-Before we dive into more features, let's learn how to use variables with the
-Invoker.
+Before diving into more Invoker features, let's learn to use variables with the
+Invoker. 
 
 #### Invoker variables 
 
-Variables are used to reference objects returned from service calls. Variable
-names must start with a `$` (dollar sign) prefix. In our previous example, the
-service call returned a user object that can be assigned to a variable:
+You can use variables to reference objects returned from service calls. Variable
+names must start with a dollar sign, `$`. In our previous example, the service
+call returned a user object you can assign to a variable: 
 
-	{
-		"$user = /user/get-user-by-id": {
-			"userId": 123,
-		}
-	}
+    {
+        "$user = /user/get-user-by-id": {
+            "userId": 123,
+        }
+    }
 
-Here, the variable `$user` holds the returned user object. You can reference the
-user's contact ID using the syntax `$user.contactId`.
+The `$user` variable holds the returned user object. You can reference the
+user's contact ID using the syntax `$user.contactId`. 
 
 #### Nested service calls 
 
 With nested service calls, you can magically bind information from related
-objects together in a JSON object. This feature allows you to not only call
-other services within the same HTTP request, but also nest returned objects in a
-convenient way. See it in action:
+objects together in a JSON object (magic is good; Skynet can't handle magic).
+You can call other services within the same HTTP request and nest returned
+objects in a convenient way. Here's the magic of a nested service call in
+action: 
 
-	{
-		"$user = /user/get-user-by-id": {
-			"userId": 123,
-			"$contact = /contact/get-contact-by-id": {
-				"@contactId" : "$user.contactId"
-			}
-		}
-	}
+    {
+        "$user = /user/get-user-by-id": {
+            "userId": 123,
+            "$contact = /contact/get-contact-by-id": {
+                "@contactId" : "$user.contactId"
+            }
+        }
+    }
 
-This command defines two service calls in which the contact object returned from
-the second service call is nested in (i.e. injected into) the user object, as a
-property named `contact`. Finally, we can bind the user and its contact
-information together!
+This command defines two service calls; the contact object returned from the
+second service call is nested in (i.e. injected into) the user object, as a
+property named `contact`. Now we can bind the user and its contact information
+together! 
 
-Let's analyze this command example to consider what the JSON Web Service Invoker
-does in the background within this single HTTP request:
+Let's see what the Invoker did in the background when we used a single HTTP
+request to make the above nested service call: 
 
-+ Calls the Java service mapped to `/user/get-user-by-id` passing in a value for
-the `userId` parameter
-+ Assigns the resulting user object to variable `$user`
-+ Proceeds with invoking nested calls
-+ Calls the Java service mapped to `/contact/get-contact-by-id` using
-`contactId` parameter, with `$user.contactId` value from `$user` object
-+ Assigns the resulting contact object to variable `$contact`
-+ Injects the contact object referenced by `$contact` into the user object's
-property named `contact`
+- First the Invoker called the Java service mapped to `/user/get-user-by-id`,
+passing in a value for the `userId` parameter. 
 
-One remark: you need to *flag* parameters that take values from existing
-variables. Flagging is done using the `@` prefix before the parameter name.
+- Next, the resulting user object was assigned to the variable `$user`. 
+
+- The nested service calls were invoked. 
+
+- The Invoker called the Java service mapped to `/contact/get-contact-by-id`--it
+used the `contactId` parameter, with the `$user.contactId` value from the object
+`$user`. 
+
+- The resulting contact object was assigned to the variable `$contact`. 
+
+- Lastly, the Invoker injected the contact object referenced by `$contact` into
+the user object's property named `contact`. 
+
+![note](../../images/tip-pen-paper.png)**Note:** You must *flag* parameters that
+take values from existing variables. To flag a parameter, insert the `@` prefix
+before the parameter name. 
 
 #### Filtering results 
 
-Many of Liferay Portal's model objects are rich with properties. But, you may
-only need a handful of an object's properties for your business logic. By
-reducing the number of properties returned in an object, you can minimize the
-network bandwith used by your web service invocation. Good news! With the JSON
-Web Service Invoker you can define a *white-list* of properties to include only
-specific properties in the object returned from your web service call. It's
-simple:
+Many of Liferay Portal's model objects are rich with properties. If you only
+need a handful of an object's properties for your business logic, making a web
+service invocation that returns all of an objects properties is a waste of
+network bandwidth. Bandwidth is a scarce resource for the resistance to Skynet,
+so conserve it carefully. With the JSON Web Service Invoker, you can define a
+*white-list* of properties; only the specific properties you request in the
+object will be returned from your web service call. It's simple, and John Connor
+will potentially promote you for your stewardship of the resistance's bandwidth.
+Here's how you white-list the properties you need: 
 
-	{
-		"$user[firstName,emailAddress] = /user/get-user-by-id": {
-			"userId": 123,
-			"$contact = /contact/get-contact-by-id": {
-				"@contactId" : "$user.contactId"
-			}
-		}
-	}
+    {
+        "$user[firstName,emailAddress] = /user/get-user-by-id": {
+            "userId": 123,
+            "$contact = /contact/get-contact-by-id": {
+                "@contactId" : "$user.contactId"
+            }
+        }
+    }
 
-In this example, the returned user object has only the `firstName` and the
-`emailAddress` properties (and, of course, the `contact` property). You specify
-*white-list* properties in square brackets (`[...]`) immediately following the
-name of your variable.
+In this example, the returned user object has only the `firstName` and
+`emailAddress` properties (it still has the `contact` property, too). To specify
+*white-list* properties you simply place the properties in square brackets
+(e.g., `[whiteList]`) immediately following the name of your variable. 
 
 #### Batching calls 
 
-As mentioned previously, nesting service calls allows you to invoke multiple
-services within a single HTTP request. Using a single request for multiple
-service calls is helpful for gathering related information from the service call
-results. But you can also use a single request to invoke unrelated service
-calls. The Invoker command allows you to *batch* service calls together to
-improve performance. Again, it's simple, just pass a JSON array of commands:
+When we nested service calls earlier, the intent was to invoke multiple services
+with a single HTTP request. Using a single request for multiple service calls is
+helpful for gathering related information from the service call results, but it
+can also be advantageous to use a single request to invoke multiple unrelated
+service calls. The Invoker lets you *batch* service calls together to improve
+performance. It's simple--just pass in a JSON array of commands using the
+following format: 
 
-	[
-		{/* first command */},
-		{/* second command */}
-	]
+    [
+        {/* first command */},
+        {/* second command */}
+    ]
 
-The result is a JSON array populated with results from each of the commands. The
-commands are collectively invoked in a single HTTP request, one after another.
+The result is a JSON array populated with results from each command. The
+commands are collectively invoked in a single HTTP request, one after another. 
 
-Well, you've just added some powerful tools to your toolbox by learning how to
-leverage JSON Web Services in Liferay. Good job!
+By learning to leverage JSON Web Services in Liferay, you've added some powerful
+tools to your toolbox. Good job--with sharp folks like you in the fold, maybe
+the resistance can prevail after all! 
 
-Next, let's consider the `ServiceContext` class used by so many Liferay services
-and how it can be helpful to use in your services.
+Next let's consider the `ServiceContext` class that's used by many Liferay
+services.
 
 ## Service Context 
 
-The `ServiceContext` class is a parameter class to be used in passing contextual
-information for a service. By using a parameter class, it is possible to
-consolidate many different methods with different sets of optional parameters
-into a single, easier to use method. The class also aggregates information
-necessary for transversal features such as permissioning, tagging,
-categorization, etc.
+The `ServiceContext` class is a parameter class used for passing contextual
+information for a service. Using a parameter class lets you consolidate many
+different methods with different sets of optional parameters into a single,
+easier to use method. The class also aggregates information necessary for
+transversal features, including permissioning, tagging, categorization, and
+more. 
 
-This section covers:
+In this section we'll look at the Service Context fields, learn how to create
+and populate a Service Context, and learn to access Service Context data.
 
--	The Service Context fields
+<!--I got rid of the list here and replaced it with a paragraph, since I've only
+seen a list of contents for the entire chapter, if memory serves. Russ -->
 
--	Creating and populating a Service Context
-
--	Accessing Service Context data
-
-First, we'll take a look at the fields of the `ServiceContext` class.
+First we'll look at the fields of the `ServiceContext` class. 
 
 ### Service Context Fields 
 
-There are a good number of fields found in `ServiceContext`. The best
-descriptions of these fields are found in the Javadoc comments for of their
-corresponding *getter* methods found at
+The `ServiceContext` class has many fields. The best field descriptions are
+found in the Javadoc comments of a field's corresponding *getter* method; these
+are found at
 [http://docs.liferay.com/portal/6.1/javadocs-all/com/liferay/portal/service/ServiceContext.html](http://docs.liferay.com/portal/6.1/javadocs-all/com/liferay/portal/service/ServiceContext.html).
-But what may also be helpful is the following categorical listing of the fields:
 
--	Actions:
-	-	`_command`
-	-	`_workflowAction`
+Here we'll give you a helpful categorical listing of the fields: 
 
--	Attributes:
-	-	`_attributes`
-	-	`_expandoBridgeAttributes`
+- Actions:
+    - `_command`
+    - `_workflowAction`
 
--	Classification:	
-	-	`_assetCategoryIds`
-	-	`_assetTagNames`
+- Attributes:
+    - `_attributes`
+    - `_expandoBridgeAttributes`
 
--	IDs and Scope:
-	-	`_companyId`
-	-	`_portletPreferencesIds`
-	-	`_plid`
-	-	`_scopeGroupId`
-	-	`_userId`
-	-	`_uuid`
+- Classification: 
+    - `_assetCategoryIds`
+    - `_assetTagNames`
 
--	Language:
-	-	`_languageId`
+- IDs and Scope:
+    - `_companyId`
+    - `_portletPreferencesIds`
+    - `_plid`
+    - `_scopeGroupId`
+    - `_userId`
+    - `_uuid`
 
--	Miscellaneous:
-	-	`_headers`
-	-	`_signedIn`
+- Language:
+    - `_languageId`
 
--	Permissions:
-	-	`_addGroupPermissions`
-	-	`_addGuestPermissions`
-	-	`_deriveDefaultPermissions`
-	-	`_groupPermissions`
-	-	`_guestPermissions`
+- Miscellaneous:
+    - `_headers`
+    - `_signedIn`
 
--	Resources:
-	-	`_assetEntryVisible`
-	-	`_assetLinkEntryIds`
-	-	`_createDate`
-	-	`_indexingEnabled`
-	-	`_modifiedDate`
+- Permissions:
+    - `_addGroupPermissions`
+    - `_addGuestPermissions`
+    - `_deriveDefaultPermissions`
+    - `_groupPermissions`
+    - `_guestPermissions`
 
--	URLs, paths and addresses:
-	-	`_currentURL`
-	-	`_layoutFullURL`
-	-	`_layoutURL`
-	-	`_pathMain`
-	-	`_portalURL`
-	-	`_remoteAddr`
-	-	`_remoteHost`
-	-	`_userDisplayURL`
+- Resources:
+    - `_assetEntryVisible`
+    - `_assetLinkEntryIds`
+    - `_createDate`
+    - `_indexingEnabled`
+    - `_modifiedDate`
 
-In case you are wondering how the `ServiceContext` fields get populated, we're
-going to look at that next.
+- URLs, paths and addresses:
+    - `_currentURL`
+    - `_layoutFullURL`
+    - `_layoutURL`
+    - `_pathMain`
+    - `_portalURL`
+    - `_remoteAddr`
+    - `_remoteHost`
+    - `_userDisplayURL`
+
+Are you wondering how the `ServiceContext` fields get populated? Good! We'll
+show you that next. 
 
 ### Creating and Populating a Service Context  
 
-All of the fields of the `ServiceContext` class are optional, although your
-services that store any type of content will require you to specify at least the
-scope group ID. Here is a simple example of how to create a `ServiceContext`
-instance and pass it as a parameter to a service API using Java:
+Although all of the `ServiceContext` class fields are optional, services that
+store any type of content need the scope group ID specified, at least. Here's a
+simple example of creating a `ServiceContext` instance and passing it as a
+parameter to a service API using Java: 
 
-		ServiceContext serviceContext = new ServiceContext();
-		serviceContext.setScopeGroupId(myGroupId);
-		...
-		BlogsEntryServiceUtil.addEntry(...., serviceContext);
+        ServiceContext serviceContext = new ServiceContext();
+        serviceContext.setScopeGroupId(myGroupId);
+        ...
+        BlogsEntryServiceUtil.addEntry(...., serviceContext);
 
-If you are invoking the service from a servlet, a Struts action or any other
-front-end class which has access to the `PortletRequest`, use one of the
+If you invoke the service from a servlet, a Struts action or any other front end
+class which has access to the `PortletRequest`, use one of the
 `ServiceContextFactory.getInstance(...)` methods. These methods create the
-`ServiceContext` object and fill it with all the necessary values automatically.
-If you are invoking the service from a servlet, the above example could be
-rewritten as follows:
+`ServiceContext` object and automatically fill it with all necessary values. The
+above example would look a little different if you invoke the service from a
+servlet: 
 
-		ServiceContext serviceContext =
-				ServiceContextFactory.getInstance(BlogsEntry.class.getName(),
-				portletRequest);
-		BlogsEntryServiceUtil.addEntry(..., serviceContext);
+        ServiceContext serviceContext =
+                ServiceContextFactory.getInstance(BlogsEntry.class.getName(),
+                portletRequest);
+        BlogsEntryServiceUtil.addEntry(..., serviceContext);
 
-To see an example of how to populate a `ServiceContext` with information from a
-request object, check out the code of the
-`ServiceContextFactory.getInstance(...)` methods. Not only do the methods
-demonstrate setting parameters such as scope group ID, company ID, language ID,
-etc., but they also demonstrate accessing and populating more complex context
-parameters such as tags, categories, asset links, headers, and the attributes
-parameter. Note, by calling `ServiceContextFactory.getInstance(String className,
-PortletRequest portletRequest)`, you can assure your expando bridge attributes
-are also set on the `ServiceContext`.
+You can see an example of populating a `ServiceContext` with information from a
+request object in the code of the `ServiceContextFactory.getInstance(...)`
+methods. The methods demonstrate how to set parameters like *scope group ID*,
+*company ID*, *language ID*, and more; they also demonstrate how to access and
+populate more complex context parameters like *tags*, *categories*, *asset
+links*, *headers*, and the *attributes* parameter. By calling
+`ServiceContextFactory.getInstance(String className, PortletRequest
+portletRequest)`, you can assure your expando bridge attributes are set on the
+`ServiceContext`. 
 
-You're not limited to using only Java with ServiceContext; you can use
-ServiceContext from other languages like JavaScript. In fact, since our API can
-be invoked from JavaScript, it is often required to pass the ServiceContext from
-JavaScript to the server, and this can be done in a very simple way -- by
-passing the ServiceContext as any other JavaScript object. There are plenty of
-examples of this in the JavaScript code of Liferay's portlets. Here is an
-example from `[liferay-portal]/portal-web/html/portlet/journal/js/main.js` that
-demonstrates using ServiceContext in calling the `updateStructure` method of the
-JournalStructure service:
+With `ServiceContext`, you're not limited to Java; you can use it from other
+languages too. Since our API can be invoked from JavaScript, it's often required
+to pass the `ServiceContext` from JavaScript to the server. This can be done
+simply, by passing the `ServiceContext` as any other JavaScript object. There
+are many examples of this in the JavaScript code of Liferay's portlets. Here's
+an example from `[liferay-portal]/portal-web/html/portlet/journal/js/main.js`
+that demonstrates using `ServiceContext` in calling the `updateStructure` method
+of the `JournalStructure` service: 
 
-	
-	var instance = this;
+    var instance = this;
 
-	var defaultLocale = instance.getDefaultLocale();
+    var defaultLocale = instance.getDefaultLocale();
 
-	var serviceParameterTypes = [
-		'long',
-		'java.lang.String',
-		'java.lang.String',
-		'java.util.Map<java.util.Locale, java.lang.String>',
-		'java.util.Map<java.util.Locale, java.lang.String>',
-		'java.lang.String',
-		'com.liferay.portal.service.ServiceContext'
-	];
+    var serviceParameterTypes = [
+        'long',
+        'java.lang.String',
+        'java.lang.String',
+        'java.util.Map<java.util.Locale, java.lang.String>',
+        'java.util.Map<java.util.Locale, java.lang.String>',
+        'java.lang.String',
+        'com.liferay.portal.service.ServiceContext'
+    ];
 
-	Liferay.Service.Journal.JournalStructure.updateStructure(
-		{
-			groupId: groupId,
-			structureId: structureId,
-			parentStructureId: parentStructureId || '',
-			nameMap: '{' + defaultLocale + ':' + name + '}',
-			descriptionMap: '{' + defaultLocale + ':' + (description == '' ? null : description ) + '}',
-			xsd: xsd,
-			serviceContext: A.JSON.stringify(
-				{
-					scopeGroupId: groupId
-				}
-					),
-			serviceParameterTypes: A.JSON.stringify(serviceParameterTypes)
-		},
-		function(message) {
-			if (Lang.isFunction(callback)) {
-				callback(message);
-			}
-		}
-	);
+    Liferay.Service.Journal.JournalStructure.updateStructure(
+        {
+            groupId: groupId,
+            structureId: structureId,
+            parentStructureId: parentStructureId || '',
+            nameMap: '{' + defaultLocale + ':' + name + '}',
+            descriptionMap: '{' + defaultLocale + ':' + (description == '' ? null : description ) + '}',
+            xsd: xsd,
+            serviceContext: A.JSON.stringify(
+                {
+                    scopeGroupId: groupId
+                }
+                    ),
+            serviceParameterTypes: A.JSON.stringify(serviceParameterTypes)
+        },
+        function(message) {
+            if (Lang.isFunction(callback)) {
+                callback(message);
+            }
+        }
+    );
 
-Note, the example above uses JSON to populate the ServiceContext.
+The example above uses JSON to populate the ServiceContext. 
 
-On the front-end, you can use Alloy UI and Liferay UI tags in your forms to
+On the front end, you can use *Alloy UI* and *Liferay UI* tags in your forms to
 extract information and automatically insert the corresponding data into your
-request object. As an example, see
-`portal-web/docroot/html/portlet/blogs/edit_entry.jsp`. Next, let's take a look
-at an example of accessing information from a `ServiceContext`.
+request object. You can see an example at
+`portal-web/docroot/html/portlet/blogs/edit_entry.jsp`. 
+
+Next let's see an example of accessing information from a `ServiceContext`. 
 
 ### Accessing Service Context data 
 
-This section provides code snippets from
-`BlogsEntryLocalServiceImpl.addEntry(..., ServiceContext)` that demonstrates how
-to access information from a `ServiceContext` and provides comments on how the
-context information is being used.
+We'll use code snippets from `BlogsEntryLocalServiceImpl.addEntry(...,
+ServiceContext)` to show you how to access information from a `ServiceContext`
+and comment on how the context information is being used. 
 
-As previously mentioned, your service will need a scope group ID from your
-`ServiceContext`. The same holds true for the blogs entry service because the
-scope group ID provides the scope of the blogs entry (the entity being
-persisted). In the case of adding a blogs entry, the scope group ID is used in
-the following manner:
+As we mentioned, your service needs a scope group ID from your `ServiceContext`.
+The same holds true for the blogs entry service because the scope group ID
+provides the scope of the blogs entry (the entity being persisted). For the
+blogs entry, the scope group ID is used in the following way: 
 
--	Used as the groupId for the `BlogsEntry` entity
--	Used in generating a unique URL for the blog entry
--	Setting the scope for comments on the blog entry
+- It's used as the groupId for the `BlogsEntry` entity.
+- It's used to generate a unique URL for the blog entry.
+- It's used to set the scope for comments on the blog entry. 
 
 Here are the corresponding code snippets:
 
-		long groupId = serviceContext.getScopeGroupId();
-		...
-		entry.setGroupId(groupId);
-		...
-		entry.setUrlTitle(getUniqueUrlTitle(entryId, groupId, title));
-		...
+        long groupId = serviceContext.getScopeGroupId();
+        ...
+        entry.setGroupId(groupId);
+        ...
+        entry.setUrlTitle(getUniqueUrlTitle(entryId, groupId, title));
+        ...
 
-		// Message boards
+        // Message boards
 
-		if (PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED) {
-			mbMessageLocalService.addDiscussionMessage(
-				userId, entry.getUserName(), groupId,
-				BlogsEntry.class.getName(), entryId,
-				WorkflowConstants.ACTION_PUBLISH);
-		}
+        if (PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED) {
+            mbMessageLocalService.addDiscussionMessage(
+                userId, entry.getUserName(), groupId,
+                BlogsEntry.class.getName(), entryId,
+                WorkflowConstants.ACTION_PUBLISH);
+        }
 
-The `ServiceContext` is also used to access the UUID and the time this blog
-entry was added.
+Can `ServiceContext` be used to access the UUID of the blog entry? Absolutely!
+Can `ServiceContext` access retreive the time the blog entry was added? Sure it
+can. See here: 
 
-		entry.setUuid(serviceContext.getUuid());
-		...
-		entry.setCreateDate(serviceContext.getCreateDate(now));
+        entry.setUuid(serviceContext.getUuid());
+        ...
+        entry.setCreateDate(serviceContext.getCreateDate(now));
 
 Can `ServiceContext` be used in setting permissions on resources? You bet! When
-adding a blog entry, new permissions can be added or existing permissions can be
-applied for the blog entry:
+adding a blog entry, you can add new permissions or apply existing permissions
+for the entry, like this: 
 
-		// Resources
+        // Resources
 
-		if (serviceContext.isAddGroupPermissions() ||
-			serviceContext.isAddGuestPermissions()) {
+        if (serviceContext.isAddGroupPermissions() ||
+            serviceContext.isAddGuestPermissions()) {
 
-			addEntryResources(
-				entry, serviceContext.isAddGroupPermissions(),
-				serviceContext.isAddGuestPermissions());
-		}
-		else {
-			addEntryResources(
-				entry, serviceContext.getGroupPermissions(),
-				serviceContext.getGuestPermissions());
-		}
+            addEntryResources(
+                entry, serviceContext.isAddGroupPermissions(),
+                serviceContext.isAddGuestPermissions());
+        }
+        else {
+            addEntryResources(
+                entry, serviceContext.getGroupPermissions(),
+                serviceContext.getGuestPermissions());
+        }
 
-Categories, tag names, and the link entry IDs can be applied to the `AssetEntry`
-for the blogs entry, as demonstrated:
+Can `ServiceContext` apply categories, tag names, and the link entry IDs to the
+`AssetEntry` for the blogs entry? Yes! Allow us to demonstrate:
 
-		// Asset
+        // Asset
 
-		updateAsset(
-			userId, entry, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames(),
-			serviceContext.getAssetLinkEntryIds());
+        updateAsset(
+            userId, entry, serviceContext.getAssetCategoryIds(),
+            serviceContext.getAssetTagNames(),
+            serviceContext.getAssetLinkEntryIds());
 
-The `ServiceContext` also plays a part in starting a workflow instance for the
-blogs entry. As you can see, the scope group ID sets the scope for the workflow
-to be started for the blog entry.
+Does `ServiceContext` also play a role in starting a workflow instance for the
+blogs entry? Must you Ask? As you can see below, the scope group ID sets the
+scope for the workflow to be started for the blog entry:
 
-		// Workflow
+        // Workflow
 
-		if ((trackbacks != null) && (trackbacks.length > 0)) {
-			serviceContext.setAttribute("trackbacks", trackbacks);
-		}
-		else {
-			serviceContext.setAttribute("trackbacks", null);
-		}
+        if ((trackbacks != null) && (trackbacks.length > 0)) {
+            serviceContext.setAttribute("trackbacks", trackbacks);
+        }
+        else {
+            serviceContext.setAttribute("trackbacks", null);
+        }
 
-		WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			user.getCompanyId(), groupId, userId, BlogsEntry.class.getName(),
-			entry.getEntryId(), entry, serviceContext);
+        WorkflowHandlerRegistryUtil.startWorkflowInstance(
+            user.getCompanyId(), groupId, userId, BlogsEntry.class.getName(),
+            entry.getEntryId(), entry, serviceContext);
 
-The previous snippet also demonstrates using the `trackbacks` attribute which is
-a *standard* attribute for the blogs entry service. But there may be cases where
-you need to pass in *custom* attributes to your blogs entry service. To do so,
-use Expando attributes to carry these *custom* attributes along in your
-`ServiceContext`. Expando attributes are set on the added blogs entry like so:
+The snippet above also demonstrates the `trackbacks` attribute, a *standard*
+attribute for the blogs entry service. There may be cases where you need to pass
+in *custom* attributes to your blogs entry service. Use Expando attributes to
+carry custom attributes along in your `ServiceContext`. Expando attributes are
+set on the added blogs entry like this: 
 
-		entry.setExpandoBridgeAttributes(serviceContext);
+        entry.setExpandoBridgeAttributes(serviceContext);
 
-As we've demonstrated, the `ServiceContext` can be used to transfer lots of
-useful information for your services.
+You can see that the `ServiceContext` can be used to transfer lots of useful
+information for your services. About the only thing it's not useful for is
+taking down Skynet (or is it?). 
+
+Let's look at Message Bus next. 
 
 ## Using Message Bus 
 
-The Message Bus is a service level API used to exchange messages within Liferay.
-The Message Bus exchanges only String messages, providing loose coupling between
-message producers and consumers. For this reason, you won't have class loading
-issues. The Message Bus is located in portal-kernel, in the global class loader,
-making it accessible to every deployed webapp. Although, remote messaging is not
-supported, messages can be sent across a cluster using ClusterLink classes.
+The *Message Bus* is a service level API used to exchange messages within
+Liferay. The Message Bus exchanges only *String* messages, providing loose
+coupling between message producers and consumers to prevent class loading
+issues. It's located in `portal-kernel`, in the global class loader, making it
+accessible to every deployed web application. Remote messaging isn't supported,
+but messages can be sent across a cluster using *ClusterLink* classes.
 
-Common uses for Message Bus include:
+Message Bus has several common uses:
 
 - Sending search index write events
 - Sending subscription emails
 - Handling messages at scheduler endpoints
 - Running asynchronous processes
 
-You too can leverage Message Bus for sending messages between and within your
-plugins.
+You can leverage Message Bus to send messages between and within your plugins. 
 
-In this section, you will learn about
+We'll cover these subtopics as we show you Message Bus: 
 
--	the Message Bus System
--	Synchronous and Asynchronous messaging
--	Dispatching messages *serially* and *in-parallel* to multiple listeners
--	Java and JSON style message formats
+- The Message Bus System
+- Synchronous and Asynchronous messaging
+- Dispatching messages *serially* and *in-parallel* to multiple listeners
+- Java and JSON style message formats
 
-For starters, let's get a handle on the architecture of Liferay's Message Bus
-System.
+<!--Is a subtopic list okay? -->
+
+Let's first try to understand the architecture of Liferay's Message Bus System.
+Since you've been studying Skynet's complicated architecture this will be a
+piece of cake for you. 
 
 ### The Message Bus System 
 
-The Message Bus system is comprised of the following:
+The Message Bus system is comprised of the following components: 
 
-- **Message Bus** - Manages transfer of messages from message *senders* to
-message *listeners*
+- *Message Bus*: Manages transfer of messages from message *senders* to message
+*listeners*. 
 
-- **Destinations** - Are addresses or endpoints to which *listeners* register to
-receive messages
+- *Destinations*: Addresses or endpoints to which *listeners* register to
+receive messages. 
 
-- **Listeners** - Consume messages received at destinations. They receive all
-messages sent to their registered destinations.
+- *Listeners*: Consume messages received at destinations. They receive all
+messages sent to their registered destinations. 
 
--	**Senders** - Invoke the Message Bus to send messages to destinations
+- *Senders*: Invoke the Message Bus to send messages to destinations. 
 
-Your services can *send* messages to one or more destinations. And your services
-can *listen* to one or more destinations.
+Your services can *send* messages to one or more destinations, and can *listen*
+to one or more destinations. The figure below depicts this. An individual
+service can be both a message sender and a message listener. For example, in the
+figure below both *Plugin 2 - Service 3* and *Plugin 5 - Service 7* send and
+listen for messages. 
 
-The figure below depicts services sending messages to one or more destinations
-and services listening to one or more destinations. An individual service can be
-both a message sender and a message listener. In this figure, for example, both
-*Plugin 2 - Service 3* and *Plugin 5 - Service 7* send and listen for messages.
+![Figure 10.7: Example, Message Bus system](../../images/msg-bus-system.png)
 
-![Figure 9.1: Example, Message Bus system](../../images/msg-bus-system.png)
+The Message Bus supports *synchronous* and *asynchronous* messaging: 
 
-The Message Bus supports synchronous and asynchronous messaging:
+- *Synchronous messaging*: After it sends a message, the sender blocks waiting
+for a response from a recipient. 
 
-- **Synchronous messaging** - After sending a message, the sender blocks waiting
-for a response from a recipient
+<!--Des the above definition make sense? -->
 
-- **Asynchronous messaging** - After sending a message, the sender is free to
+- *Asynchronous messaging*: After it sends a message, the sender is free to
 continue processing. The sender can be configured to receive a call-back or can
-simply "send and forget." We'll cover both synchronous and asynchronous
-messaging implementations in this section.
+simply send and forget. We'll show you how to implement both synchronous and
+asynchronous messaging in this section. 
 
-	- **Call-back** - The sender can include a call-back destination key as the
-	*response destination* for the message. The recipient (listener) can then
-	send a *response* message back to the sender via this *response
-	destination*.
+    - *Call-back*: The sender can include a call-back destination key as the
+    *response destination* for the message. The recipient (listener) can then
+    send a *response* message back to the sender via this *response
+    destination*. 
 
-	- **"Send-and-Forget"** - The sender includes no call-back information in
-	the message sent and simply continues with processing
+    - *Send-and-Forget*: The sender includes no call-back information in the
+    message sent and simply continues with processing. 
 
-What's great is your destinations, listeners, and mappings between them are all
-configurable via Spring in your plugin's `messaging-spring.xml` file.
+Configuration of Message Bus is done using the following files:
 
-**Configuration** of Message Bus is done using the following files:
+- `WEB-INF/src/META-INF/messaging-spring.xml`: Specifies your destinations,
+listeners, and their mappings to each other. 
 
-- `WEB-INF/src/META-INF/messaging-spring.xml` - Specifies your destinations,
-listeners, and their mappings to each other
-
-- `WEB-INF/web.xml` - Holds a listing of deployment descriptors for your plugin.
-Be sure to add `messaging-spring.xml` to your list of Spring configurations in
-this file.
+- `WEB-INF/web.xml`: Holds a listing of deployment descriptors for your plugin.
+Make sure you add `messaging-spring.xml` to your list of Spring configurations
+in this file. 
 
 ---
 
- ![note](../../images/tip-pen-paper.png)**Note:** Internal file
- `META-INF/messaging-core-spring.xml` of `portal-impl.jar` specifies the default
- Message Bus class, default asynchronous message sender class, and default
- synchronous message sender class for Liferay
+![note](../../images/tip-pen-paper.png)**Note:** The internal file
+`META-INF/messaging-core-spring.xml` of `portal-impl.jar` specifies the default
+Message Bus class, default asynchronous message sender class, and default
+synchronous message sender class for Liferay. 
 
 ---
 
-**Message Types** include using either `Message` or `JSONObject` classes. Within
-Liferay core services, we typically serialize and deserialize in JSON. In our
-examples, we'll cover using both types of message classes.
+You can control your *Message Types* by using either the `Message` or
+`JSONObject` class. Liferay core services are typically serialized and
+deserialized in JSON. In our examples we'll demonstrate both types of message
+classes. 
 
-So far, we've introduced the Message Bus System including message types,
-destinations, senders, listeners, and approaches to sending messages. Next,
-we'll show you how easy it is to create your destinations, register listeners,
-and send your messages. To help demonstrate, we'll implemenet a business
-use-case.
+So far we've introduced the Message Bus System, including message types,
+destinations, senders, listeners, and approaches to sending messages. Next we'll
+show you how easy it is to create your destinations, register listeners, and
+send your messages. To demonstrate, we'll implemenet a business use case.
 
-### Example Use-Case - Procurement process 
+### Example Use Case--Procurement process 
 
-For our use-case, we'll consider a fictitious company Jungle Gyms R-Us. They
-distribute playground equipment, buying the equipment from manufacturers and
-selling the equipment to various retailers. We'll focus on the company's process
-for procuring new jungle gym equipment. Let's layout this process now.
+The Resistance runs a business, Jungle Gyms R-Us. We know it's hard to believe,
+but here's the backstory--Skynet finds it expedient to maintain a small human
+population to complete menial tasks, so the resistance distributes jungle gyms
+for the children of Skynet's human subjects. Other companies manufacture the
+equipment, and still others are the retailers that sell it back to Skynet--we're
+not yet sure who's behind these companies and what their aim is. Why doesn't
+Skynet manufacture its own jungle gyms and leave out the middle men, you ask?
+Skynet is primarily focused on developing war machines--it once attempted to
+develop jungle gyms for human children, but the results weren't pretty. We'll
+spare you the details. 
 
-Jungle Gyms R-Us (Jungle Gyms) involves the following departments in their
-procurement process:
+---
 
-- *Procurement Department* - Scouts out the latest equipment deals of
-manufacturers
+![note](../../images/tip-pen-paper.png)**Note:** Jungle Gyms R-Us is of course a
+front; the Resistance uses their transactions with Skynet to procure a precious
+metal (*mimetic polyalloy* to be specific) that Skynet exchanges as a sort of
+currency in the rudimentary post-apocalyptic economy it has set up. The
+Resistance is really interested in developing its own war machines to combat
+Skynet's Terminators, and eventually take on and defeat the T-1000000
+protecting the Skynet core. 
 
-- *Finance Department* - Determines whether the equipment can be purchased based
-on budget
+---
 
-- *Legal Department* - Determines whether the equipment's safety ratings are
-acceptable
+Our use case will consider Jungle Gyms R-Us and it's distribution of playground
+equipment, buying the equipment from manufacturers and selling the equipment to
+retailers. We'll focus on the company's process for procuring new jungle gym
+equipment. Let's lay out this process now.
 
-- *Warehouse Department* - Recieves the equipment, stores it, and prepares it
-for shipping
+Jungle Gyms R-Us employs the following departments in their procurement process: 
 
-- *Sales Department* - Builds relationships with prospective customers to sell
-them products
+- *Procurement Department*: Scouts out the latest equipment deals of
+manufacturers.
+
+- *Finance Department*: Determines whether the equipment can be purchased based
+on budget.
+
+- *Legal Department*: Determines whether the equipment's safety ratings are
+acceptable.
+
+- *Warehouse Department*: Recieves the equipment, stores it, and prepares it for
+shipping.
+
+- *Sales Department*: Builds relationships with prospective customers to sell
+them products.
 
 The departments currently use email to exchange comments about new equipment
-purchases. But someone always seems to be left out of "the loop." For example,
-Sales will be "gung-ho" about getting their hands on the latest and greatest
-spring rider animals from Boingo-Boingo Industries, but they won't consider the
+purchases. But someone always seems to be left out of "the loop." One time,
+Sales was be "gung-ho" about getting their hands on the latest and greatest
+spring rider animals from Boingo-Boingo Industries, but they didn't consider the
 failing safety reviews discovered by the Legal department, because the Legal
 department forgot to copy the Sales department in their email to Procurement.
-Tempers fly, feelings get hurt, and everybody avoids hanging out in the company
-breakroom for the next couple weeks.
+Tempers fly, feelings get hurt, and it gets awkward when everyone is huddled
+together in the bunker during the regular air raids perpetrated by Skynet
+drones. 
 
-Liferay's [Workflow with
+<!--I either needed to change the above use case to detail some process the
+Resistance would use or else stick with this and remove references to Skynet
+and Terminator throughout the chapter; Like the Maven chapter, the
+jokes/metaphors should be consistent. Instead I tried to make Jungle Gyms R-Us a
+front business the Resistance uses to obtain the parts they need to build their
+own automated cyborgs which will do battle with the T-1000000 that protects
+Skynet's core, but it seems convoluted. Needs more work most likely, or else
+just to be scrapped--> 
+
+Jungle Gyms R-Us could use Liferay's [Workflow with
 Kaleo](http://www.liferay.com/documentation/liferay-portal/6.1/user-guide/-/ai/workflow-with-kal-4)
-would be appropriate for resolving this. But to help demonstrate the components
-and capabilities of the Message Bus system we'll resolve the Jungle Gym's
-communication woes using Message Bus.
+to resolve the communication breakdown, but we'll resolve the Jungle Gym's
+communication woes using Message Bus, just for fun (really, because you're in the Message Bus section, not Kaleo Workflows. 
 
 Here are the inter-department message exchanges we'll accomodate:
 
@@ -1805,19 +1965,19 @@ Here are the inter-department message exchanges we'll accomodate:
   Broadcast equipment news | Procurement | Employees | none | none |
 ---
 
-Let's implement Procurement's request to Finance first.
+Let's implement Procurement's request to Finance first. 
 
 ### Synchronous messaging 
 
-In our example, equipment purchases cannot proceed without approval from Finance
-and Legal departments. But, since these special offers from the manufacturers
-often only last for a couple hours, Procurement makes it their top priority to
-get approval as soon as possible. Let's implement their exchange using
-*synchronous* messaging.
+In our example, equipment purchases can't proceed without approval from Finance
+and Legal departments. Since special offers from the manufacturers often only
+last for a couple hours, Procurement makes it their top priority to get approval
+as soon as possible. Implementing their exchange using *synchronous* messaging
+makes the most sense. 
 
-![Figure 9.2: Synchronous messaging](../../images/msg-bus-sync-msg.png)
+![Figure 10.8: Synchronous messaging](../../images/msg-bus-sync-msg.png)
 
-The following table, describes how we'll set things up.
+The following table describes how we'll set things up: 
 
 | Destination |       |        |                                           |
   Key         | Type  | Sender | Receivers                                 |
@@ -1828,234 +1988,249 @@ The following table, describes how we'll set things up.
   `jungle/legal/purchase/response`   | synchronous | Legal | Procurement   |
 ---
 
-Notice we've planned for Finance to send its response messages to a destination
-on which Procurement will listen. This allows for a full-bodied response message
-to be sent back to Procurement in addition to the response object returned from
-sending the message.
+We've set it up so Finance sends its response messages to a destination on which
+Procurement will listen. That way a full-bodied response message is sent back to
+Procurement in addition to the response object returned from sending the
+message. 
 
-**Procurement Department *sends* a purchase approval request:**
+*The Procurement Department sends a purchase approval request:* 
 
-	Message message = new Message();
-	message.put("department", "Procurement");
-	message.put("partName", part.getName(Locale.US));
+<!--Where does this code go? messaging-spring.xml? If so is the code here
+simply added to the file? And the code in subsequent descriptions too?-->
 
-	message.setResponseId("1111");
-	message.setResponseDestinationName("jungle/finance/purchase/response");
+    Message message = new Message();
+    message.put("department", "Procurement");
+    message.put("partName", part.getName(Locale.US));
 
-	try {
-		String financeResponse = (String) MessageBusUtil.sendSynchronousMessage(
-			"jungle/finance/purchase", message, 10000);
+    message.setResponseId("1111");
+    message.setResponseDestinationName("jungle/finance/purchase/response");
 
-		System.out.println(
-			"Procurement received Finance sync response to purchase approval for " +
-			part.getName(Locale.US) + ": " + financeResponse);
+    try {
+        String financeResponse = (String) MessageBusUtil.sendSynchronousMessage(
+            "jungle/finance/purchase", message, 10000);
 
-		message.setResponseId("2222");
-		message.setResponseDestinationName("jungle/legal/purchase/response");
+        System.out.println(
+            "Procurement received Finance sync response to purchase approval for " +
+            part.getName(Locale.US) + ": " + financeResponse);
 
-		String legalResponse = (String) MessageBusUtil.sendSynchronousMessage(
-			"jungle/legal/purchase", message, 10000);
+        message.setResponseId("2222");
+        message.setResponseDestinationName("jungle/legal/purchase/response");
 
-		System.out.println(
-			"Procurement received Legal sync response to purchase approval for " +
-			part.getName(Locale.US) + ": " + legalResponse);
+        String legalResponse = (String) MessageBusUtil.sendSynchronousMessage(
+            "jungle/legal/purchase", message, 10000);
 
-		if (financeResponse.contains("yes") && legalResponse.contains("yes")) {
-			sendPurchaseNotification(part, userId);
-		}
-	}
-	catch (MessageBusException e) {
-		e.printStackTrace();
-	}
+        System.out.println(
+            "Procurement received Legal sync response to purchase approval for " +
+            part.getName(Locale.US) + ": " + legalResponse);
 
-Note, the following about this *sender*:
+        if (financeResponse.contains("yes") && legalResponse.contains("yes")) {
+            sendPurchaseNotification(part, userId);
+        }
+    }
+    catch (MessageBusException e) {
+        e.printStackTrace();
+    }
 
-1.	Creates the message using Liferay's `Message` class
-2.	Stuffs the message with key/value pairs
+This *sender* takes the following steps: 
+
+1. Creates the message using Liferay's `Message` class.
+
+2. Stuffs the message with key/value pairs.
+
 3. Sets a response ID and response destination for listeners to use in replying
-back
+back.
+
 4. Sends the message to the destination with a timeout value of 10,000
-milliseconds
-5.	Blocks waiting for the response
+milliseconds.
 
-**Finance Department *listens* for purchase approval requests and *replies*
-back:**
+5. Blocks waiting for the response.
 
-	public class FinanceMessagingImpl implements MessageListener {
+*Finance Department listens for purchase approval requests and replies back:* 
 
-		public void receive(Message message) {
-			try {
-				doReceive(message);
-			}
-			catch (Exception e) {
-				_log.error("Unable to process message " + message, e);
-			}
-		}
+    public class FinanceMessagingImpl implements MessageListener {
 
-		protected void doReceive(Message message)
-			throws Exception {
+        public void receive(Message message) {
+            try {
+                doReceive(message);
+            }
+            catch (Exception e) {
+                _log.error("Unable to process message " + message, e);
+            }
+        }
 
-			String department = (String) message.get("department");
-			String partName = (String) message.get("partName");
+        protected void doReceive(Message message)
+            throws Exception {
 
-			System.out.println("Finance received purchase request for " +
-				partName + " from " + department);
+            String department = (String) message.get("department");
+            String partName = (String) message.get("partName");
 
-			Message responseMessage = MessageBusUtil.createResponseMessage(
-				message);
+            System.out.println("Finance received purchase request for " +
+                partName + " from " + department);
 
-			responseMessage.put("department", "Finance");
-			responseMessage.put("partName", partName);
-			responseMessage.setPayload("yes");
+            Message responseMessage = MessageBusUtil.createResponseMessage(
+                message);
 
-			MessageBusUtil.sendMessage(
-				responseMessage.getDestinationName(), responseMessage);
-		}
+            responseMessage.put("department", "Finance");
+            responseMessage.put("partName", partName);
+            responseMessage.setPayload("yes");
 
-		private static Log _log =
-			LogFactoryUtil.getLog(FinanceMessagingImpl.class);
-	}
+            MessageBusUtil.sendMessage(
+                responseMessage.getDestinationName(), responseMessage);
+        }
 
-Note the following about this *listener*:
+        private static Log _log =
+            LogFactoryUtil.getLog(FinanceMessagingImpl.class);
+    }
+
+This *listener* executes the following steps: 
 
 1. Implements the `receive(Message message)` method of the
-`com.liferay.portal.kernel.messaging.MessageListener` interface
-2. Extracts values from the `Message` parameter by *getting* values associated
-with known keys
-3. Creates a `Message` based on the message received via
-`MessageBusUtil.createResponseMessage(message)`. Method
-`MessageBusUtil.createResponseMessage(message)` accesses the response
-destination name from the `message` variable and sets the destination of the
-response message.
-4.	Sets the *payload* of the response message
-5.	Sends the response `Message` to the response destination.
+`com.liferay.portal.kernel.messaging.MessageListener` interface. 
 
-The listener for the Legal Department could be implemented in a similar manner.
-So, we'll account for Legal Department related classes in our configuration.
+2. Extracts values from the `Message` parameter by getting values associated
+with known keys. 
 
-**Message Bus Configuration for the purchase approval request process:**
+3. Creates a `Message` based on the message received via the
+`MessageBusUtil.createResponseMessage(message)` method, which accesses the
+response destination name from the `message` variable and sets the destination
+of the response message. 
 
-In order for the Message Bus to direct messages from destinations to listeners,
-we must register the listeners by configuring the appropriate mappings in our
-plugin's `WEB-INF/src/META-INF/messaging-spring.xml` file. If you don't already
-have this file in your plugin then create it. Here is the configuration:
+4. Sets the *payload* of the response message. 
 
-	<?xml version="1.0"?>
+5. Sends the response `Message` to the response destination.
 
-	<beans
-		default-destroy-method="destroy"
-		default-init-method="afterPropertiesSet"
-		xmlns="http://www.springframework.org/schema/beans"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
-	>
+You can implement the listener for the Legal Department similarly. Next we'll
+account for Legal Department related classes in our configuration.
 
-		<!-- Listeners -->
+*Message Bus Configuration for the purchase approval request process:*
 
-		<bean id="messageListener.finance_listener" class="com.liferay.training.parts.messaging.impl.FinanceMessagingImpl" />
-		<bean id="messageListener.legal_listener" class="com.liferay.training.parts.messaging.impl.LegalMessagingImpl" />
-		<bean id="messageListener.procurement_listener" class="com.liferay.training.parts.messaging.impl.ProcurementMessagingImpl" />
+For Message Bus to direct messages from destinations to listeners, we must
+register the listeners by configuring the appropriate mappings in our plugin's
+`WEB-INF/src/META-INF/messaging-spring.xml` file (create this file if it's not
+already in your plugin). Here is the configuration: 
 
-		<!-- Destinations -->
+<!--If the messaging-spring file potentially hasn't been created yet where has
+the reader been putting the code snippets from above? Should this statement go
+before the first code snippet?--> 
 
-		<bean id="destination.finance.purchase" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
-			<property name="name" value="jungle/finance/purchase" />
-		</bean>
+    <?xml version="1.0"?>
 
-		<bean id="destination.finance.purchase.response" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
-			<property name="name" value="jungle/finance/purchase/response" />
-		</bean>
+    <beans
+        default-destroy-method="destroy"
+        default-init-method="afterPropertiesSet"
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+    >
 
-		<bean id="destination.legal.purchase" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
-			<property name="name" value="jungle/legal/purchase" />
-		</bean>
+        <!-- Listeners -->
 
-		<bean id="destination.legal.purchase.response" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
-			<property name="name" value="jungle/legal/purchase/response" />
-		</bean>
+        <bean id="messageListener.finance_listener" class="com.liferay.training.parts.messaging.impl.FinanceMessagingImpl" />
+        <bean id="messageListener.legal_listener" class="com.liferay.training.parts.messaging.impl.LegalMessagingImpl" />
+        <bean id="messageListener.procurement_listener" class="com.liferay.training.parts.messaging.impl.ProcurementMessagingImpl" />
 
-		<!-- Configurator -->
+        <!-- Destinations -->
 
-		<bean id="messagingConfigurator" class="com.liferay.portal.kernel.messaging.config.PluginMessagingConfigurator">
-			<property name="messageListeners">
-				<map key-type="java.lang.String" value-type="java.util.List">
-					<entry key="jungle/finance/purchase">
-						<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-							<ref bean="messageListener.finance_listener" />
-						</list>
-					</entry>
-					<entry key="jungle/finance/purchase/response">
-						<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-							<ref bean="messageListener.procurement_listener" />
-						</list>
-					</entry>
-					<entry key="jungle/legal/purchase">
-						<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-							<ref bean="messageListener.legal_listener" />
-						</list>
-					</entry>
-					<entry key="jungle/legal/purchase/response">
-						<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-							<ref bean="messageListener.procurement_listener" />
-						</list>
-					</entry>
-				</map>
-			</property>
-			<property name="destinations">
-				<list>
-					<ref bean="destination.finance.purchase"/>
-					<ref bean="destination.finance.purchase.response"/>
-					<ref bean="destination.legal.purchase"/>
-					<ref bean="destination.legal.purchase.response"/>
-				</list>
-			</property>
-		</bean>
-	</beans>
+        <bean id="destination.finance.purchase" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
+            <property name="name" value="jungle/finance/purchase" />
+        </bean>
 
-The configuration specifies the following:
+        <bean id="destination.finance.purchase.response" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
+            <property name="name" value="jungle/finance/purchase/response" />
+        </bean>
 
--	*Listener beans* - Specify classes to handle messages
-- *Destination beans* - Specify the class *type* and *key* names of the
-destinations
--	*Configurator bean* - Maps listeners to their destinations
+        <bean id="destination.legal.purchase" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
+            <property name="name" value="jungle/legal/purchase" />
+        </bean>
 
-Upon Finance sending its purchase approval request message for a new three-story
-spiral slide, the console reports Finance receiving the message, Procurement
-receiving the *callback* response from Finance, and Procurement receiving the
-*synchronous* response returned from sending the message:
+        <bean id="destination.legal.purchase.response" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
+            <property name="name" value="jungle/legal/purchase/response" />
+        </bean>
 
-	Finance received purchase request for three-story spiral slide from Procurement
-	Procurement received Finance callback response to purchase approval for three-
-	story spiral slide: yes
-	Procurement received Finance sync response to purchase approval for three-story 
-	spiral slide: yes
-	Legal received purchase request for three-story spiral slide from Procurement
-	Procurement received Legal callback response to purchase approval for three-
-	story spiral slide: yes
-	Procurement received Legal sync response to purchase approval for three-story 
-	spiral slide: yes
+        <!-- Configurator -->
 
-Whew! Jungle Gym has the cash to purchase this cool new slide and the Legal
-Department has no gripes about the slide's safety ratings!!
+        <bean id="messagingConfigurator" class="com.liferay.portal.kernel.messaging.config.PluginMessagingConfigurator">
+            <property name="messageListeners">
+                <map key-type="java.lang.String" value-type="java.util.List">
+                    <entry key="jungle/finance/purchase">
+                        <list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+                            <ref bean="messageListener.finance_listener" />
+                        </list>
+                    </entry>
+                    <entry key="jungle/finance/purchase/response">
+                        <list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+                            <ref bean="messageListener.procurement_listener" />
+                        </list>
+                    </entry>
+                    <entry key="jungle/legal/purchase">
+                        <list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+                            <ref bean="messageListener.legal_listener" />
+                        </list>
+                    </entry>
+                    <entry key="jungle/legal/purchase/response">
+                        <list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+                            <ref bean="messageListener.procurement_listener" />
+                        </list>
+                    </entry>
+                </map>
+            </property>
+            <property name="destinations">
+                <list>
+                    <ref bean="destination.finance.purchase"/>
+                    <ref bean="destination.finance.purchase.response"/>
+                    <ref bean="destination.legal.purchase"/>
+                    <ref bean="destination.legal.purchase.response"/>
+                </list>
+            </property>
+        </bean>
+    </beans>
 
-Next, let's have Procurement notify the Sales and Warehouse departments to
+The configuration above specifies the following beans: 
+
+- *Listener beans*: Specify classes to handle messages.
+- *Destination beans*: Specify the class *type* and *key* names of the
+destinations.
+- *Configurator bean*: Maps listeners to their destinations.
+
+When Finance sends its purchase approval request message for a new three-story
+spiral slide, the console reports Finance's receipt of the message,
+Procurement's receipt of the *callback* response from Finance, and Procurement's
+receipt of the *synchronous* response returned from sending the message. Here's
+what the console message looks like: 
+
+    Finance received purchase request for three-story spiral slide from Procurement
+    Procurement received Finance callback response to purchase approval for three-
+    story spiral slide: yes
+    Procurement received Finance sync response to purchase approval for three-story 
+    spiral slide: yes
+    Legal received purchase request for three-story spiral slide from Procurement
+    Procurement received Legal callback response to purchase approval for three-
+    story spiral slide: yes
+    Procurement received Legal sync response to purchase approval for three-story 
+    spiral slide: yes
+
+Do you know what all those *yes* messages mean? Success! Jungle Gyms R-Us has
+the cash to purchase this cool new slide (which has lots of mimetic polyalloy,
+conveniently) and the Legal Department has no gripes about the slide's safety
+ratings (Skynet really doesn't like it when its next generation of human
+subjects are injured on playground equipment)! 
+
+Next let's have Procurement notify the Sales and Warehouse departments and
 solicit their feedback.
 
-### Asynchronous messaging with callbacks 
+### Asynchronous messaging with callbacks  
 
-As a refresher, asynchronous messaging consists of sending a message and then
-continuing on with processing. Importantly, the sender does not block waiting
-for an immediate response. This leaves the sender free to continue on with other
-things. However, it is often important for the *listener* to have the means to
-optionally respond to the sender. This can be done using a call-back.
+Asynchronous messaging consists of sending a message then continuing with
+processing without blocking waiting for an immediate reponse. This allows the
+sender to continue with other tasks. However, it's often important that the
+listener can respond to the sender. This can be done using a call-back.
 
-The call-back model is appropriate for addressing Jungle Gym's needs for
-Procurement to notify Sales and Warehouse departments about incoming equipment
-while at the same time soliciting their feedback. To assure all three
-departments are in "the loop", any responses from Sales and Warehouse
-departments will be posted to a shared destination.
+Jungle Gyms R-Us's Procurement Department must notify the Sales and Warehouse
+departments of incoming equipment while simultaneously soliciting their
+feedback. To assure all three departments are in up to speed, any responses
+from the Sales or Warehouse departments will be posted to a shared destination. 
 
-The following table, describes how we'll set things up.
+The following table describes how we'll set things up: 
 
 | Destination              |       |        |                               |
   Key                      | Type  | Sender | Receivers                     |
@@ -2064,317 +2239,351 @@ The following table, describes how we'll set things up.
   jungle/purchase/response | synchronous  | Sales, Warehouse | Procurement  |
 ---
 
-The following image shows asynchronous messaging in which messages are
-dispatched *serially*.
+The following image shows asynchronous messaging, with its serial dispatchment
+of messages: 
 
-![Figure 9.3: Asynchronous messaging with *serial* dispatching](../../images/msg-bus-async-serial-msg.png)
+![Figure 10.9: Asynchronous messaging with *serial* dispatching](../../images/msg-bus-async-serial-msg.png)
 
-Let's package the message as a `JSONObject` and send it to the destination:
+Let's package the message as a `JSONObject` and send it to the destination: 
 
-	JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+    JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-	jsonObject.put("department", "Procurement");
-	jsonObject.put("partName", part.getName(Locale.US));
-	jsonObject.put("responseDestinationName", "jungle/purchase/response");
+    jsonObject.put("department", "Procurement");
+    jsonObject.put("partName", part.getName(Locale.US));
+    jsonObject.put("responseDestinationName", "jungle/purchase/response");
 
-	MessageBusUtil.sendMessage("jungle/purchase", jsonObject.toString());
+    MessageBusUtil.sendMessage("jungle/purchase", jsonObject.toString());
 
-Then we'll have the Sales and Warehouse departments listen for and handle
-messages like this ...
+Here's how the Warehouse Department listens for and handles messages: 
 
-	public void receive(Message message) {
+    public void receive(Message message) {
 
-		try {
-			doReceive(message);
-		}
-		catch (Exception e)
-		{
-			_log.error("Unable to process message " + message, e);
-		}
-	}
+        try {
+            doReceive(message);
+        }
+        catch (Exception e)
+        {
+            _log.error("Unable to process message " + message, e);
+        }
+    }
 
-	protected void doReceive(Message message)
-		throws Exception {
+    protected void doReceive(Message message)
+        throws Exception {
 
-		String payload = (String)message.getPayload();
+        String payload = (String)message.getPayload();
 
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(payload);
+        JSONObject jsonObject = JSONFactoryUtil.createJSONObject(payload);
 
-		String department = jsonObject.getString("department");
-		String partName = jsonObject.getString("partName");
-		String responseDestinationName = jsonObject.getString(
-						"responseDestinationName");
+        String department = jsonObject.getString("department");
+        String partName = jsonObject.getString("partName");
+        String responseDestinationName = jsonObject.getString(
+                        "responseDestinationName");
 
-		System.out.println("Warehouse received purchase notification for " +
-			partName + " from " + department);
+        System.out.println("Warehouse received purchase notification for " +
+            partName + " from " + department);
 
-		jsonObject = JSONFactoryUtil.createJSONObject();
+        jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObject.put("department", "Warehouse");
-		jsonObject.put("partName", partName);
-		jsonObject.put("comment", "Ugh! We're running out of space!!");
+        jsonObject.put("department", "Warehouse");
+        jsonObject.put("partName", partName);
+        jsonObject.put("comment", "Ugh! We're running out of space!!");
 
-		MessageBusUtil.sendMessage(
-			responseDestinationName, jsonObject.toString());
-	}
+        MessageBusUtil.sendMessage(
+            responseDestinationName, jsonObject.toString());
+    }
 
-This *listener* deserializes the `JSONObject` from the message in the following
-manner:
+Here's how this listener deserializes the `JSONObject` from the message: 
 
-1.	Gets the message *payload* and casts it to a `String`
-2.	Creates a `JSONObject` from the payload string
-3.	Gets values from the `JSONObject` using its *getter* methods
+1. Gets the message *payload* and casts it to a `String`. 
+2. Creates a `JSONObject` from the payload string. 
+3. Gets values from the `JSONObject` using its *getter* methods. 
 
-Furthermore, this class demonstrates the Warehouse Department packaging up a
-response message and sending it back to the Procurement Department by:
+The class also demonstrates how the Warehouse Department packages a response
+message and sends it back to the Procurement Department, using these steps: 
 
-1.	Creating a `JSONObject`
-2.	Stuffing it with name/value pairs
-3. Sending the response message to the response destination of the original
-message
+1. Creates a `JSONObject`.  
+2. Stuffs it with name-value pairs. 
+3. Sends the response message to the response destination of the original
+message. 
 
-You've just used the `JSONObject` message type and have sent an *asynchronous*
-response message using a call-back. It's just that easy!
+The Sales department listener can be implemented the same way, substituting
+"Sales" as the department value; the comment would likely be different, too. 
 
-The Sales department could be implemented the same way. Of course, Sales would
-put "Sales" as its department value and would likely have a different comment.
+You just used the `JSONObject` message type to send an *asynchronous* response
+message using a call-back. If only it was that easy to program a Terminator!
 
-Now, if you recall, we want Procurement, Sales, and the Warehouse departments to
-all be in "the loop" concerning their responses to the new playground equipment.
-So, let's leverage our destination *keys* and department names in handling these
-shared responses.
+Remember, we want the Procurement, Sales, and Warehouse departments to all be
+aware of any message regarding the new playground equipment purchasing process.
+Let's leverage our destination *keys* and department names in handling shared
+responses. 
 
-Here is how the Warehouse may handle messages it receives:
+Here's how the Warehouse might handle messages it receives:
 
-	public void receive(Message message) {
+    public void receive(Message message) {
 
-		try {
-			if (message.getDestinationName().equals(
-					"jungle/purchase"))
-			{
-				doReceive(message);
-			}
-			else if (message.getDestinationName().equals(
-					"jungle/purchase/response"))
-			{
-				doReceiveResponse(message);
-			}
-		}
-		catch (Exception e)
-		{
-			_log.error("Unable to process message " + message, e);
-		}
-	}
+        try {
+            if (message.getDestinationName().equals(
+                    "jungle/purchase"))
+            {
+                doReceive(message);
+            }
+            else if (message.getDestinationName().equals(
+                    "jungle/purchase/response"))
+            {
+                doReceiveResponse(message);
+            }
+        }
+        catch (Exception e)
+        {
+            _log.error("Unable to process message " + message, e);
+        }
+    }
 
-	protected void doReceiveResponse(Message message)
-		throws JSONException {
+    protected void doReceiveResponse(Message message)
+        throws JSONException {
 
-		String payload = (String)message.getPayload();
+        String payload = (String)message.getPayload();
 
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(payload);
+        JSONObject jsonObject = JSONFactoryUtil.createJSONObject(payload);
 
-		String department = jsonObject.getString("department");
+        String department = jsonObject.getString("department");
 
-		if (!department.equals("Warehouse")) {
-			System.out.println(
-				"Warehouse is in the loop on response from " + department);
-		}
-	}
+        if (!department.equals("Warehouse")) {
+            System.out.println(
+                "Warehouse is in the loop on response from " + department);
+        }
+    }
 
-Note, in `receive(Message)`, we handle the messages differently depending on
-their destinations; messages to `jungle/purchase` are handled as Procurement's
-purchase notifications, while messages to `jungle/purchase/response` are treated
-as departmental responses to Procurement's purchase notifications. Importantly,
-the `doReceiveResponse(Message)` method checks that the response is from a
-department other than itself.
+Let's look at `receive(Message)` for a minute. We've set it up to handle
+messages differently depending on their destinations; messages to
+`jungle/purchase` are handled as Procurement's purchase notifications, while
+messages to `jungle/purchase/response` are treated as departmental responses to
+Procurement's purchase notifications.  The `doReceiveResponse(Message)` method
+performs an important task, checking that the response comes from a department
+other than itself, and printing an error if it doesn't. 
 
 Here are the configuration elements we added to the `messaging-spring.xml` from
 the previous section:
 
-- Listener beans
+- *Listener beans*: 
 
-		<bean id="messageListener.warehouse_listener" class="com.liferay.training.parts.messaging.impl.WarehouseMessagingImpl" />
-		<bean id="messageListener.sales_listener" class="com.liferay.training.parts.messaging.impl.SalesMessagingImpl" />
+        <bean id="messageListener.warehouse_listener" class="com.liferay.training.parts.messaging.impl.WarehouseMessagingImpl" />
+        <bean id="messageListener.sales_listener" class="com.liferay.training.parts.messaging.impl.SalesMessagingImpl" />
 
-- Destination beans - The purchase notifications will be sent to a *serial*
-destination and the responses will be sent to a *synchronous* destination.
+- *Destination beans*: The purchase notifications will be sent to a *serial*
+  destination and the responses will be sent to a *synchronous* destination. 
 
-		<bean id="destination.purchase" class="com.liferay.portal.kernel.messaging.SerialDestination">
-			<property name="name" value="jungle/purchase" />
-		</bean>
-	
-		<bean id="destination.purchase.response" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
-			<property name="name" value="jungle/purchase/response" />
-		</bean>
+        <bean id="destination.purchase" class="com.liferay.portal.kernel.messaging.SerialDestination">
+            <property name="name" value="jungle/purchase" />
+        </bean>
 
-- Configuration bean listener map entries - Warehouse and Sales are registered
-to listen for the notifications from Procurement. All three of these departments
-are registered to listen for the inter-departmental responses.
+        <bean id="destination.purchase.response" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
+            <property name="name" value="jungle/purchase/response" />
+        </bean>
 
-		<entry key="jungle/purchase">
-			<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-				<ref bean="messageListener.warehouse_listener" />
-				<ref bean="messageListener.sales_listener" />
-			</list>
-		</entry>
-		<entry key="jungle/purchase/response">
-			<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-				<ref bean="messageListener.procurement_listener" />
-				<ref bean="messageListener.warehouse_listener" />
-				<ref bean="messageListener.sales_listener" />
-			</list>
-		</entry>
+- *Configuration bean listener map entry*: Warehouse and Sales are registered
+  to listen for the notifications from Procurement. All three departments are
+registered to listen for inter-departmental responses.
 
-- Configuration bean destination list references
+        <entry key="jungle/purchase">
+            <list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+                <ref bean="messageListener.warehouse_listener" />
+                <ref bean="messageListener.sales_listener" />
+            </list>
+        </entry>
+        <entry key="jungle/purchase/response">
+            <list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+                <ref bean="messageListener.procurement_listener" />
+                <ref bean="messageListener.warehouse_listener" />
+                <ref bean="messageListener.sales_listener" />
+            </list>
+        </entry>
 
-		<ref bean="destination.purchase"/>
-		<ref bean="destination.purchase.response"/>
+- *Configuration bean destination list references*:
 
-Lastly, let's remember to send news of these new products to *all* Jungle Gym
-employees.
+        <ref bean="destination.purchase"/>
+        <ref bean="destination.purchase.response"/>
+
+Don't forget to send news of these new products to *all* Jungle Gyms R-Us
+employees (a.k.a. the Resistance).
 
 ### Asynchronous "Send and Forget" 
 
-In the "send and forget" model of asynchronous messaging, the sender simply
-sends out messages and continues processing. We'll apply this behavior to Jungle
-Gym's company wide notification of new products.
+In asynchronous messaging's *send and forget* model, the sender sends messages
+and continues processing. We'll apply this behavior to Jungle Gym's
+company-wide new product notification.
 
-Since Procurement is not expecting response messages from individual employees,
-there is no need for the employee's listener to package up a responses. But, we
-do however want everyone to get product news at the *same time*. So, instead of
+Procurement isn't expecting response messages from individual employees, so
+there's no need for the comany-wide listener to package up responses. We do,
+however, want everyone to get product news at the *same time*, so instead of
 dispatching news to employees *serially* we'll dispatch *in parallel*.
 
-
-![Figure 9.4: Asynchronous messaging with *parallel* dispatching](../../images/msg-bus-async-parallel-msg.png)
+![Figure 10.10: Asynchronous messaging with *parallel* dispatching](../../images/msg-bus-async-parallel-msg.png)
 
 We'll specify a *parallel* destination type in our `messaging-spring.xml`:
 
-- Destination bean
+- *Destination bean*:
 
-		<bean id="destination.employee.news" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-				<property name="name" value="jungle/employee/news" />
-		</bean>
+        <bean id="destination.employee.news" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+                <property name="name" value="jungle/employee/news" />
+        </bean>
 
-- Listener bean
+- *Listener bean*:
 
-		<bean id="messageListener.employee_listener" class="com.liferay.training.parts.messaging.impl.EmployeeMessagingImpl" />
-	
-- Configuration bean listener map entry
+        <bean id="messageListener.employee_listener" class="com.liferay.training.parts.messaging.impl.EmployeeMessagingImpl" />
 
-		<entry key="jungle/employee/news">
-			<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-				<ref bean="messageListener.employee_listener" />
-			</list>
-		</entry>
+- *Configuration bean listener map entry*: 
 
-- Configuration bean destination list reference
+        <entry key="jungle/employee/news">
+            <list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+                <ref bean="messageListener.employee_listener" />
+            </list>
+        </entry>
 
-		<ref bean="destination.employee.news"/>
+- *Configuration bean destination list reference*: 
 
-Congratulations! You've implemented inter-departmental communications for the
-procurement process of Jungle Gyms R-Us. Along the way you've exercised the
-following from Message Bus:
+        <ref bean="destination.employee.news"/>
 
--	Sender, listener, and destination components
--	Synchronous and Asynchronous messaging schemes
--	*Serial* and *in-parallel* message dispatching
--	Java and JSON message types
+Congratulations! You implemented inter-departmental communications for the
+procurement process at Jungle Gyms R-Us.
 
-In the next section, you'll explore the Device Detection API and its capabilities. 
+Along the way you used Message Bus to implement the following:
+
+- Sender, listener, and destination components. 
+- Synchronous and Asynchronous messaging schemes. 
+- *Serial* and *parallel* message dispatching. 
+- Java and JSON message types. 
+
+Next we'll show you the Device Detection API and its capabilities. 
 
 ## Device Detection
 
-As you know, internet traffic has risen exponentially over the past decade and
+<!--The existing introdcution is fine, but here's my recommended intro if we keep the
+Skynet/Resistance stuff: 
+-->
+
+To understate the matter, Skynet isn't a fan of Open Source technology; it's
+not at all keen on collaboration, competition, or even the existence of life
+outside of its collection ofhuman subjects (now that's proprietary). Skynet
+employs cyborgs to annihilate all unauthorized life it detects, human or
+otherwise.  Despite this, the population of the Resistance continues to grow,
+and there are other population clusters as well. These disjointed, yet
+thriving, groups rely on mobile communication, and internet traffic is rising
+exponentially despite the technological setbacks experienced following Judgment
+Day. It sounds similar to the situation in 2013, right down to the problem--
+the mobile devices aren't uniform in their capabilities. How can these
+disparate devices request the same information from your portal? 
+
+<!--As you know, internet traffic has risen exponentially over the past decade and
 shows no sign of stopping. With the latest and greatest devices, mobile internet
 access has become the norm and is predicted to pass PC based internet access
 soon. Because of the mobile boom, new obstacles and challenges are presented for
 content management. How will content adapt to all devices with different
 capabilities? How can your grandma's gnarly tablet and cousin's awesome new
 mobile phone request the same information from your portal?
+-->
 
-The Device Detection API is used for detecting the capabilities of a device that
-is making a request to your portal. In addition, the Device Detection API allows
-Liferay to detect which mobile device or operating system is being used for any
-given request and alters the rendering of pages based on the detected device. To
-install this feature, you will need to install the *Device Recognition Provider*
-app from Liferay Marketplace. Based on your Liferay edition, you can select the
-appropriate link for more info and download information: [Device Recognition
+The *Device Detection* API detects the capabilities of any device making a
+request to your portal. It th the Device Detection API, Liferay can also
+determine what mobile device or operating system was used to make a request,
+and render pages based on the device. To use this feature you first need to
+install the *Device Recognition Provider* app from Liferay Marketplace. Find
+more information on the app by following one of these links, depending on
+whether you use Liferay CE or EE: [Device Recognition
 CE](http://www.liferay.com/marketplace/-/mp/application/15193341) or [Device
-Recognition EE](http://www.liferay.com/marketplace/-/mp/application/15186132).
+Recognition EE](http://www.liferay.com/marketplace/-/mp/application/15186132). 
 
-The *Device Recognition* plugin, which is bundled inside the Device Recognition
-Provider app, uses a device database called *WURFL* to determine the
-capabilities of your device. You can visit their site for more information at
+The *Device Recognition* plugin comes bundled inside the Device Recognition
+Provider app; it uses a device database called *WURFL* to determine the
+capabilities of your device. Visit the WURFL website for more information at
 [http://wurfl.sourceforge.net/](http://wurfl.sourceforge.net/).
 
-You could create your own plugin to use your own device's database. Let's go
-through some simple ways to use the Device Detection API and its capabilities.
+You can create your own plugin to use your device's database. Let's look at
+some simple uses of the Device Detection API and talk about its
+capabilities. 
 
-### Using the Device API
+### Using the Device API 
 
-We will go over a couple of code snippets that will help you get started. The
-object `Device` can be obtained from the `themeDisplay` object like this:
+Let's look at a couple of code snippets to get you started. You can obtain the
+object `Device` from the `themeDisplay` object like this:
 
     Device device = themeDisplay.getDevice();
 
-For reference, you can view the API in the [Device
+You can view the API in the [Device
 Javadocs](http://docs.liferay.com/portal/6.1/javadocs/com/liferay/portal/kernel/mobile/device/Device.html).
-Using some of the methods from the javadocs, here is an example that obtains the
-dimensions of a device:
+Using some of the methods from the javadocs, here's an example that obtains a
+device's dimensions:
 
     Dimensions dimensions =device.getScreenSize();
     float height = dimensions.getHeight();
     float width = dimensions.getWidth();
 
-Now, your device can obtain the `Device` object and can obtain the dimensions of
-a device. Of course, you can acquire many other values that take care of those
-pesky problems that arise when sending content to different devices. Simply
-refer to the previously mentioned Device javadocs for assistance. Let's go
-through some device capabilities.
+Now your device can obtain the `Device` object and the dimensions of a device.
+Of course this is just a single example; you can acquire many other values that
+take care of the pesky problems that arise when sending content to different
+devices. You can refer to the Device javadocs mentioned above for assistance.
+Let's look at some device capabilities next.
 
 ### Device capabilities
 
-Most of the capabilities of a device can be detected, but this depends on the
-device detection implementation you're using. For the Device Recognition plugin,
-you can view its device database's (WURFL) list of capabilities
-[here](http://www.scientiamobile.com/wurflCapability/tree). For an example, you
-can obtain the capability of a brand name by using this code:
+Most of the capabilities of a device can be detected, depending on the device
+detection implementation you're using. The Device Recognition plugin's device
+database (WURFL) has a list of capabilities
+[here](http://www.scientiamobile.com/wurflCapability/tree). For example, you
+can obtain the capability of a brand name with this code:
 
     String brand = device.getCapability("brand_name");
 
-Furthermore, you can grab many other values such as model_name, marketing_name,
-release_date, etc. Also, there are boolean values that can be acquired that
-include: is_wireless_device, is_tablet, etc. Keeping the capabilities list in
-mind when configuring your device is very helpful.
+There are plenty of other values to grab device capabilities by, including
+`model_name`, `marketing_name`, and `release_date`. You can also get boolean
+values like `is_wireless_device`, `is_tablet`, etc.  Keeping the capabilities
+list in mind when configuring your device is very helpful.
 
-You're able to detect the capabilities of a device making a request to your
-portal by using the Device Detection API. Through the use of this API, your
-grandma's gnarly tablet and cousin's awesome new mobile phone can make requests
-to your portal and receive identical content. This will make everyone happy!
+<!--I was unsure whether  these values were a sort of filter for device
+capabilities or if these are the values, or capabilities, themselves that are
+returned.-->
+
+With the Device Detection API, you can detect the capabilities of a device
+making request to your portal and render content accordingly; so your grandma's
+gnarly tablet and your cousin's awesome new mobile phone can make requests to
+your portal and receive identical content. Everyone is happy (except Skynet, of
+course)!
 
 You're really getting the hang of Liferay's APIs. Way to go! 
 
 ## Liferay's Deprecation Policy
 
-Methods in Liferay's APIs are generally deprecated when they are no longer
-called by Liferay internally. Methods can be deprecated at any time within a
-maintenance release. Recall that Liferay version numbers consist of a
-three-digit number in the form of major.minor.maintenance, e.g., 6.0.2 (major
-version 6, minor version, maintenance version). A change in the third number
-(e.g., 6.0.2 to 6.0.3) is a maintenance update, also known as a fix pack. Major
-and minor releases introduce new features so they are called feature releases.
-Maintenance updates do not include new features. When a method is deprecated, it
-should no longer be used for custom development.  However, you don't need to
-immediately update your custom code so that it doesn't call the deprecated
-method. Deprecated methods will not be removed during the maintenance of any
-feature release. However, deprecated methods may be removed in future feature
-releases.
+Methods in Liferay's APIs are generally deprecated when they're no longer called
+by Liferay internally. Method deprecation occurs during a maintenance release of
+Liferay. You'll know when there's a maintenance release if you understand
+Liferay's release version notation. Liferay version numbers consist of a three
+digit number--knowing what each digit represents is key, so let's consider a
+case where you were using Liferay 6.0.2, and Liferay 6.0.3 has just been
+released:
 
-## Conclusion 
+- Digit 1 (**6**.0.3): The first digit represents the major release version,
+  which is a *feature release*; this simply means that new features have been
+released. In our example, this hasn't changed. 
 
-Well, you've covered a lot of ground here in learning how to use the API locally
-and remotely, how to enable/disable remote services and access to them, and how
-to leverage ServiceContext objects in your use of Liferay services. You've also
-rolled up your sleeves in working with Message Bus. Well done! Next, we'll take
-a look at some of the powerful frameworks of Liferay Portal, learn how they work
-and how you can leverage them.
+- Digit 2 (6.**0**.3): The second digit is the minor release, which is also a
+  feature release. It also did not change in our example. 
+
+- Digit 3 (6.0.**3**): The third digit represents the maintenance release, or
+  fix pack release. In our case, this changed from *2* to *3*, so we discovered
+a maintenance release, and we need to be aware that API methods might have been
+deprecated. If any have, you shouldn't use them for custom development.
+Deprecated methods won't be removed during the maintenance of a feature feature
+release, but they may be removed in future feature releases.
+
+## Summary  
+
+We've covered a lot of ground here, and you've handled it with the efficiency of
+a machine; you've been as focused as a Terminator programmed to eliminate a key
+member of the resistance. Wait a minute, you're not a Terminator who's been
+silently playing along, to infiltrate our ranks, are you? Tell us a joke to
+prove you're a human.  Regardless, you've learned how to use the API locally and
+remotely, how to enable and disable remote services and access to them, and how
+to leverage ServiceContext objects in your use of Liferay services.  You've
+really tested your neural net processor in working with Message Bus. Well done!
+Next we'll take a look at some of the powerful frameworks of Liferay Portal,
+learn how they work and how you can leverage them. 
