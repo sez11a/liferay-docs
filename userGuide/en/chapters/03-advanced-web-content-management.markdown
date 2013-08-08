@@ -1536,20 +1536,20 @@ configure Liferay for mobile devices.
 
 ## Displaying Site Pages to Mobile Devices  
 
-Mobile device rules allow you to configure sets of rules to alter the behavior
-of the portal based on the device being used to access Liferay. The proportion
-of mobile device users browsing the web has been steadily increasing, so it's
-important to be able to handle different kinds of devices appropriately. For
-instance, you can configure the look and feel of Liferay pages accessed by
+Mobile device families allow you to configure sets of rules to alter the
+behavior of the portal based on the device being used to access Liferay. The
+proportion of mobile device users browsing the web has been steadily increasing,
+so it's important to be able to handle different kinds of devices appropriately.
+For instance, you can configure the look and feel of Liferay pages accessed by
 smartphone or tablet users differently from those accessed by PC users.
 
-Both sites and individual pages can be configured with any number of rule
-groups. A rule group is designed to describe a group of devices; think of a rule
-group as a mobile device family. It can contain one or more rules that describe
-a category of devices, such as all Android devices or all iOS tablets. You can
-define as many rules in a rule group as you need to classify all the devices for
-which you'd like to define actions. Rule groups can be prioritized to determine
-which one applies to a given page request. 
+Both sites and individual pages can be configured with any number of mobile
+device families. A family is designed to describe a group of devices. It can
+contain one or more rules that describe a category of devices, such as all
+Android devices or all iOS tablets. You can define as many rules in a family as
+you need to classify all the devices for which you'd like to define actions.
+Families can be prioritized to determine which one applies to a given page
+request.
 
 In order to configure mobile device rules, you need a way to find out the
 characteristics of the device. While some of the characteristics are provided by
@@ -1568,9 +1568,6 @@ you can still set up mobile device rules. They won't, however, be effective
 until a database is deployed, because the portal won't have enough information
 about the devices being used to make page requests.
 
-<!-- Marketplace info below needs to be updated when Marketplace is available
-for 6.2 testing. -->
-
 To configure mobile device rules, you must install the Device Recognition
 Provider plugin. This plugin uses the WURFL database to enable Liferay to detect
 which mobile device or operating system is being used for any given request. To
@@ -1588,59 +1585,57 @@ Internet, an error appears in your log: `SLF4J: Failed to load class
 downloads device information from the web. You can provide the same information
 to WURFL manually by downloading the SLF4J distribution from
 [http://www.slf4j.org/download.html](http://www.slf4j.org/download.html),
-unzipping the resulting file, copying `slf4j-log4j12.jar` to
+unzipping the resulting file, copying `slf4j-log4j12-<version>.jar` to
 `[WEB_APP_HOME]/wurfl-web/WEB-INF/lib` folder, and restarting your Liferay
 instance. On some application servers, you'll need to add this .jar file to the
 `wurfl-web.war` file first (in the directory noted above) before deploying the
 file to your server. 
 
-You can access the Mobile Device Rules administrative page from the Content
-section of the Control Panel. Select the appropriate scope using the context
-menu selector so your rule groups are available where you expect them to be. The
-Mobile Device Rules administrative page displays a list of defined rule groups
-and lets you add more. To add rules to a rule group, select *Actions*
-&rarr; *Manage Rules*, or click on a rule group to edit it, and then click
-the *Manage Rules* link.
+You can access the Mobile Device Families administrative page from the
+Configuration section of Site Administration. Make sure you're on the
+appropriate site before adding mobile device families via Site Administration.
+You can also add families for all sites by navigating to the Control Panel
+&rarr; *Sites* &rarr; *Global*. The Mobile Device Families administrative page
+displays a list of defined families and lets you add more. To add rules to a
+family, select *Actions* &rarr; *Manage Classification Rules*, or click on a
+family to edit it, and then click the *Manage Classification Rules* link.
 
-![Figure 3.28: You can manage device rules from the Mobile Device Rules administrative page.](../../images/mobile-device-rules.png)
+![Figure 3.28: You can manage device rules from the Mobile Device Families administrative page.](../../images/mobile-device-families.png)
 
-The rules defined for a rule group, along with the priorities of the rule groups
-selected for a particular site or page, determine which rule group's actions are
-applied to a given request. From the Manage Rules page for a specific rule set,
-you can add a rule by specifying a rule type. Remember that you can add as many
-rules to a rule group as you need in order to classify the devices on which
-you'd like to take actions. Note that, by default, only the Simple Rule type is
-available.  The rules are designed, however, to be extensible, and additional
-rule types can be added by your developers. Once added, you can edit the rule to
-specify a device type and operating system.
+The rules defined for a family, along with the priorities of the families
+selected for a particular site or page, determine which family's actions are
+applied to a given request. From the Manage Classification Rules page for a
+specific rule set, you can add a rule by specifying an operating system, rule
+type, physical screen size, and screen resolution. Remember that you can add as
+many rules to a family as you need in order to classify the devices on which
+you'd like to take actions. You'll notice after saving the classification rule
+that it's characterized as a *Simple Rule*. By default, only the Simple Rule
+type is available. The rules are designed to be extensible, and additional rule
+types can be added by your developers.
 
 ![Figure 3.29: You need to install the Device Recognition Provider plugin to populate the OS list.](../../images/mobile-device-editing-rule.png)
 
-<!-- Needs to be updated for 6.2 -->
-<!-- Unable to deploy Device Recognition plugin at time of image updating. -->
+Once you've created some mobile device families and added some rules to them,
+you'll be ready to set up some actions. The actions defined for a family
+determine what happens to a particular request when the device is detected and
+the family has been found to apply.
 
-Once you've created some mobile device rule groups and added some rules to them,
-you'll be ready to set up some actions. The actions defined for a rule group
-determine what happens to a particular request when the device is detected
-and the rule group has been found to apply.
+You can add actions to a family from the Site Pages page of Site Administration.
+Select either the public or private pages and then look for the *Mobile Device
+Rules* link in the right-hand menu. Use the *Select Device Family* button to
+select families to be applied either to a site or to a single page. If you
+select the page group itself from the left-hand menu, the selected family
+applies to all the pages of the site by default. If, however, you select an
+individual page and then click the *Select Device Family* button, the families
+apply only to that page. You can select multiple families for a particular site
+or page and order them by priority. The families are checked in decreasing order
+of priority: the actions defined by the first family that applies are executed.
 
-You can add actions to a rule group from the Site Pages page of Site
-Administration. Select either the public or private pages and then look for the
-*Mobile Rule Groups* link in the right-hand menu. Use the *Select Rule Group*
-button to select rule groups to be applied either to a site or to a single page.
-If you select the page group itself from the left-hand menu, the selected rule
-group applies to all the pages of the site by default. If, however, you select
-an individual page and then click the *Select Rule Group* button, the rule
-groups apply only to that page. You can select multiple rule groups for a
-particular site or page and order them by priority. The rule groups are checked
-in decreasing order of priority: the actions defined by the first rule group
-that applies are executed.
-
-![Figure 3.30: You can select a mobile device rule group to apply for a site or page from the Site Pages section of the Control Panel.](../../images/mobile-device-selection.png)
+![Figure 3.30: You can select a mobile device family to apply for a site or page from the Site Pages section of Site Administration.](../../images/mobile-device-selection.png)
 
 To add actions to a selected rule group, use the *Actions* &rarr; *Manage
 Actions* button and then click *Add Action*. By default, there are four kinds of
-actions that can be configured for mobile rule groups: layout template
+actions that can be configured for mobile families: layout template
 modifications, theme modifications, URL redirects, and site redirects. Layout
 template modifications let you change the way portlets are arranged on pages
 delivered to mobile devices, and themes modifications let you select a specific
