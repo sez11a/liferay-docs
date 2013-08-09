@@ -720,7 +720,7 @@ associated with your template.
 The following figure displays the form shown when editing the *Community Site*
 template's settings:
 
-![Figure 3.13: Site templates have several configurable options including the option to allow site administrators to modify pages accociated with the site template.](../../images/01-site-templates.png)
+![Figure 3.11: Site templates have several configurable options including the option to allow site administrators to modify pages accociated with the site template.](../../images/01-site-templates.png)
 
 By default, the following site templates are provided:
 
@@ -773,7 +773,7 @@ when you clicked *View Pages*. Changes to site templates are automatically saved
 as you make them, so you don't need to return to the Site Templates page of the
 Control Panel and select *Save*.
 
-![Figure 3.14: You can see the name of the site template you're currently editing.](../../images/editing-site-template.png)
+![Figure 3.12: You can see the name of the site template you're currently editing.](../../images/editing-site-template.png)
 
 Next, let's use our site template to create our Engineering, Marketing and Legal
 sites. Go to the Control Panel and click on *Sites*. Then click *Add* &rarr;
@@ -872,7 +872,7 @@ it's possible to select a theme, a layout template, to add portlets to the page
 and to configure portlet preferences. Both sites and site templates can utilize
 page templates for creating new pages.
 
-![Figure 3.15: The Blog page template is already available for use along with the Content Display Page and Wiki page templates.](../../images/server-configuration-page-templates.png)
+![Figure 3.13: The Blog page template is already available for use along with the Content Display Page and Wiki page templates.](../../images/server-configuration-page-templates.png)
 
 You can edit or delete existing page templates, configure their permissions, or
 add new page templates. By default, three sample page templates are provided:
@@ -916,7 +916,7 @@ page templates when creating a new page. If you want any user who can create a
 page to be able to use the page template, just check the *View* permission for
 the *User* role.
 
-![Figure 3.16: When creating a new site page, you're given options for the page template and page type.](../../images/selecting-page-template.png)
+![Figure 3.14: When creating a new site page, you're given options for the page template and page type.](../../images/selecting-page-template.png)
 
 To use your template to create a new page, just navigate to a page over which
 you have site administrator privileges and select *Add* &rarr; *Page* from the
@@ -926,7 +926,7 @@ you're on your desired site and navigate to *Admin* &rarr; *Site
 Administration*. Then click on *Site Pages* &rarr; *Add Page*, type a name,
 select your template from the drop down menu, and click *Add Page* to finish.
 
-![Figure 3.17: You can choose whether or not to automatically apply page template changes to live pages.](../../images/automatic-application-page-template-changes.png)
+![Figure 3.15: You can choose whether or not to automatically apply page template changes to live pages.](../../images/automatic-application-page-template-changes.png)
 
 Note that by default, when a site administrator creates pages based on a page
 template, any future changes to the template are automatically propagated to
@@ -994,7 +994,7 @@ translation, you must finish creating the content in your default language and
 save it. Once you've done that, editing the content provides you with the option
 to *Add Translation*.
 
-![Figure 3.18: Adding a translation](../../images/04-web-content-content-translation.png)
+![Figure 3.16: Adding a translation](../../images/04-web-content-content-translation.png)
 
 <!-- Needs to be replaced for 6.2 -->
 <!-- Very few translation options available at present time (6) -->
@@ -1006,7 +1006,7 @@ you to easily compare the original with the new translation. Once you are done
 with the translation, click *Save* and the translation is added to the list of
 *Available Translations*.
 
-![Figure 3.19: Adding a translation](../../images/04-web-content-content-translation-2.png)
+![Figure 3.17: Adding a translation](../../images/04-web-content-content-translation-2.png)
 
 <!-- Needs to be replaced for 6.2 -->
 <!-- Unable to compare translations at this time -- window sizing issues -->
@@ -1057,7 +1057,7 @@ information. The scheduler is built right into the form your users access to add
 web content. Specifically, it can be found in the right panel listed with
 several other configurable settings.
 
-![Figure 3.20: The web content scheduler can be easily accessed from the right panel of the page.](../../images/04-web-content-schedule.png)
+![Figure 3.18: The web content scheduler can be easily accessed from the right panel of the page.](../../images/04-web-content-schedule.png)
 
 **Display Date:** Sets (within a minute) when content will be displayed.
 
@@ -1179,7 +1179,7 @@ site. Then click on *Site Settings* in the left menu and then on *Staging*
 listed under the Advanced tab. Select *Remote Live* under Staging Type and
 additional options appear.
 
-![Figure 3.21: After your remote Liferay server and local Liferay server have been configured to communicate with each other, you have to specify a few Remote Live connection settings.](../../images/remote-live-staging-settings.png)
+![Figure 3.19: After your remote Liferay server and local Liferay server have been configured to communicate with each other, you have to specify a few Remote Live connection settings.](../../images/remote-live-staging-settings.png)
 
 <!-- Needs to be replaced for 6.2 -->
 <!-- Skipping Staging images at present time. Still a lot of development work to
@@ -1259,7 +1259,7 @@ it's important to quickly publish a fix. If you're following the Nose-ster
 example, check *Enabled On Public Pages* to enable page versioning for the
 Nose-ster site and then click *Save*.
 
-![Figure 3.22: You can decide to use versioning and choose what content should be staged.](../../images/04-web-content-staging.png)
+![Figure 3.20: You can decide to use versioning and choose what content should be staged.](../../images/04-web-content-staging.png)
 
 <!-- Needs to be replaced for 6.2 -->
 
@@ -1291,7 +1291,7 @@ options are restored and you can access some new options related to staging. If
 you're following along with the Nose-ster example, navigate back to the News and
 Events page and click on *Staging* to get your page editing capabilities back.
 
-![Figure 3.23: You can see the new bar staging adds to the top of your screen.](../../images/04-web-content-staging-live-page.png)
+![Figure 3.21: You can see the new bar staging adds to the top of your screen.](../../images/04-web-content-staging-live-page.png)
 
 <!-- Needs to be replaced for 6.2 -->
 
@@ -1340,7 +1340,7 @@ which types of content are published when you publish to the live site). If
 workflow is enabled for Calendar Events, the event needs to go through the
 workflow process before it can be published to the live site.
 
-![Figure 3.24: Ready to publish to the live site.](../../images/04-web-content-staging-publish.png)
+![Figure 3.22: Ready to publish to the live site.](../../images/04-web-content-staging-publish.png)
 
 <!-- Needs to be replaced for 6.2 -->
 
@@ -1356,7 +1356,7 @@ displayed in a Web Content Display portlet on one of your pages and then click
 popup, expand the Applications heading and scroll down until you see the section
 for Web Content.
 
-![Figure 3.25: Uncheck the version history box to only publish the latest approved version of web content articles that have multiple versions.](../../images/web-content-version-history-box.png)
+![Figure 3.23: Uncheck the version history box to only publish the latest approved version of web content articles that have multiple versions.](../../images/web-content-version-history-box.png)
 
 <!-- Needs to be replaced for 6.2 -->
 
@@ -1462,7 +1462,7 @@ For example, we could create a page variation called Thanksgiving for the News
 and Events page inside of the Christmas variation and another one called
 Christmas Day to display different content on those particular days.
 
-![Figure 3.26: This is an example of a Thanksgiving Page Variation.](../../images/04-web-content-branch-thanksgiving.png)
+![Figure 3.24: This is an example of a Thanksgiving Page Variation.](../../images/04-web-content-branch-thanksgiving.png)
 
 <!-- Needs to be replaced for 6.2 -->
 
@@ -1498,8 +1498,7 @@ Let's examine teams next.
 
 ## Creating Teams for Advanced Site Membership Management  
 
-Teams don't appear as a link in the Control Panel because they exist *within*
-sites. Teams allow site administrators a greater degree of flexibility than was
+Teams allow site administrators a greater degree of flexibility than was
 possible using just user groups and roles. They allow site administrators to
 create various sets of users and permissions for site-specific functions. Teams
 are the preferred method for collecting permissions within a single site.
@@ -1511,28 +1510,26 @@ permissions defined by it would only apply within the scope of a designated
 site. Furthermore, team members, unlike user group members, are guaranteed to be
 members of the desired site.
 
-To create a team within a site, first navigate to the *Control Panel &rarr;
-Sites* page and then select *Actions &rarr; Manage Memberships* for the site
-within which you want to create a team. Finally, click *View Teams* and
-click the *Add Team* button.
+To create a team within a site, first navigate to the Site Administration page
+of your site and select *Users* &rarr; *Site Teams*. It's important to note that
+configuring other site membership groupings, such as *Users*, *Organizations*,
+and *User Groups* can be found in the *Site Memberships* portlet, which is also
+located in the Users tab. You can visit the *Management* chapter for more
+information on how these site memberships. Finally, click the *Add Team* button.
 
-![Figure 3.27: Creating teams within your site helps your users demonstrate teamwork and collaboration.](../../images/01-creating-a-team.png)
+![Figure 3.25: Creating teams within your site helps your users demonstrate teamwork and collaboration.](../../images/01-creating-a-team.png)
 
 After you've clicked the *Add Team* button and entered a name and a description,
 click *Save*. Your new team will appear in the list. To add members, simply
 click on *Actions &rarr; Assign Members*.
 
-Permission management for teams is handled at the individual portlet level,
-using the *Options &rarr; Configuration &rarr; Permissions* tab of the portlet
-itself. Remember the portlet options link is the wrench symbol at the top of a
-portlet. This enables users who wouldn't have access to all of the necessary
-options in the Control Panel to manage permissions through teams.
+Permission management for teams is configured by navigating to *Actions* &rarr;
+*Permissions* for your individual site. Setting permissions for the team assigns
+every member of the team with equal permissions. Only administrators with the
+ability to edit/manage the team have the ability to manage team permissions.
 
-To give a team access to a particular portlet function, access the *Permissions*
-tab of a portlet residing on a page, check the boxes corresponding to
-permissions you want to assign to the teams, then click *Save*. That's it! Now
-your team is ready to perform their functions. Next, let's look at how to
-configure Liferay for mobile devices.
+That's it! Now your team is ready to perform their functions. Next, let's look
+at how to configure Liferay for mobile devices.
 
 ## Displaying Site Pages to Mobile Devices  
 
@@ -1600,7 +1597,7 @@ displays a list of defined families and lets you add more. To add rules to a
 family, select *Actions* &rarr; *Manage Classification Rules*, or click on a
 family to edit it, and then click the *Manage Classification Rules* link.
 
-![Figure 3.28: You can manage device rules from the Mobile Device Families administrative page.](../../images/mobile-device-families.png)
+![Figure 3.26: You can manage device rules from the Mobile Device Families administrative page.](../../images/mobile-device-families.png)
 
 The rules defined for a family, along with the priorities of the families
 selected for a particular site or page, determine which family's actions are
@@ -1613,7 +1610,7 @@ that it's characterized as a *Simple Rule*. By default, only the Simple Rule
 type is available. The rules are designed to be extensible, and additional rule
 types can be added by your developers.
 
-![Figure 3.29: You need to install the Device Recognition Provider plugin to populate the OS list.](../../images/mobile-device-editing-rule.png)
+![Figure 3.27: You need to install the Device Recognition Provider plugin to populate the OS list.](../../images/mobile-device-editing-rule.png)
 
 Once you've created some mobile device families and added some rules to them,
 you'll be ready to set up some actions. The actions defined for a family
@@ -1631,7 +1628,7 @@ apply only to that page. You can select multiple families for a particular site
 or page and order them by priority. The families are checked in decreasing order
 of priority: the actions defined by the first family that applies are executed.
 
-![Figure 3.30: You can select a mobile device family to apply for a site or page from the Site Pages section of Site Administration.](../../images/mobile-device-selection.png)
+![Figure 3.28: You can select a mobile device family to apply for a site or page from the Site Pages section of Site Administration.](../../images/mobile-device-selection.png)
 
 To add actions to a selected rule group, use the *Actions* &rarr; *Manage
 Actions* button and then click *Add Action*. By default, there are four kinds of
@@ -1691,7 +1688,7 @@ mobile phones, and click *Save*. Now we just need to define the redirect action
 for our family. Navigate to *Pages* &rarr; *Site Pages* and click on *Mobile
 Device Rules* in the navigation menu to the right.
 
-![Figure 3.31: To apply a mobile device family to a page set of a site, click on *Mobile Device Rules*, click *Select Device Family*, and select the desired rule group.](../../images/site-pages-mobile-device-rules.png)
+![Figure 3.29: To apply a mobile device family to a page set of a site, click on *Mobile Device Rules*, click *Select Device Family*, and select the desired rule group.](../../images/site-pages-mobile-device-rules.png)
 
 Click *Select Device Family* and then click the *Android and Bada Mobile Phones*
 device family that you configured. Once you've selected your device family,
