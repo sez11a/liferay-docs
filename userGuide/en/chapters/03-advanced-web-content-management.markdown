@@ -1650,17 +1650,17 @@ actions in addition to the four actions provided by default.
 To review, if you'd like to configure an action or actions that take place when
 mobile device requests are received, take the following steps:
 
-1. Create a mobile device rule group to represent the family of devices for
-   which to define an action or actions.
+1. Create a mobile device family to represent the group of devices for which to
+   define an action or actions.
 
-2. Define one or more rules for your rule group that describe the family of
-   devices represented by your rule group.
+2. Define one or more rules for your family that describe the group of
+   devices represented by your family.
 
-3. Apply your rule group to an entire page set of a site (all the public pages
-   of a site or all the private pages) or to a single page.
+3. Apply your family to an entire page set of a site (all the public pages of a
+   site or all the private pages) or to a single page.
 
-4. Define one or more actions for your rule group that describe how requests
-   should be handled.
+4. Define one or more actions for your family that describe how requests should
+   be handled.
 
 To see how this might work in practice, let's discuss a few examples of how you
 can use mobile device rules. First, suppose you have a separate version of a
@@ -1677,54 +1677,54 @@ Page* button. Now our Android/Bada Liferay site has a public Welcome page just
 like our default Liferay site.
 
 Next, select *Liferay* in the *My Sites* tab of the Dockbar, navigate to Site
-Administration, and click on *Mobile Device Rules*. Click on *Add Rule Group*,
-enter the name *Android and Bada Mobile Phones*, and click *Save*. You'll see
-the message, *No rules are configured for this rule group*.
+Administration &rarr; Configuration, and click on *Mobile Device Families*.
+Click on *Add Device Family*, enter the name *Android and Bada Mobile Phones*, and
+click *Save*. You'll see the message, *No rules are configured for this rule
+group*.
 
-Click the *Manage Rules* link and we'll configure our rule group to apply only
-to mobile phones running Android or Bada. Click *Add Rule*, enter *Rule 1* for
-the name and select *Simple Rule* for the type, then click *Save*. Then click on
-the rule to edit it or click *Actions* &rarr; *Edit*. Under OS, select *Android*
-and *Bada OS* (hold down Control to make multiple selections), select *False*
-under Tablet since we want our rule group to apply only to mobile phones, and
-click *Save*. Now we just need to define the redirect action for our rule group.
-Navigate back to *Site Administration* &rarr; *Site Pages* and click on *Mobile
+Click the *Manage Classification Rules* link and we'll configure our rule group
+to apply only to mobile phones running Android or Bada. Click *Add
+Classification Rule*, enter *Rule 1* for the name. Under Operating System,
+select *Android* and *Bada OS* (hold down Control to make multiple selections),
+select *Other Devices* under Tablet since we want our family to apply only to
+mobile phones, and click *Save*. Now we just need to define the redirect action
+for our family. Navigate to *Pages* &rarr; *Site Pages* and click on *Mobile
 Device Rules* in the navigation menu to the right.
 
-![Figure 3.31: To apply a mobile device rule group to a page set of a site, click on *Mobile Device Rules*, click *Select Rule Group*, and select the desired rule group.](../../images/site-pages-mobile-device-rules.png)
+![Figure 3.31: To apply a mobile device family to a page set of a site, click on *Mobile Device Rules*, click *Select Device Family*, and select the desired rule group.](../../images/site-pages-mobile-device-rules.png)
 
-Click *Select Rule Group* and then click the *Android and Bada Mobile Phones*
-rule group that you configured. Once you've selected your rule group, click 
-*Mobile Rule Groups* again and click either on your rule group or *Actions*
-&rarr; *Manage Actions* next to it. Then click *Add Action*, enter the name
-*Android/Bada Liferay Redirect*, and select *Site Redirect* under Type.  Under
-the Site dropdown menu that appears, select *Android/Bada Liferay* and under the
-Page dropdown menu that appears, select the *Welcome* page that you created
-earlier. Lastly, click *Save*. That's it! Now Android and Bada mobile phone
-users are redirected to the Android/Bada Liferay site from the Liferay site. 
+Click *Select Device Family* and then click the *Android and Bada Mobile Phones*
+device family that you configured. Once you've selected your device family,
+click on your device family or *Actions* &rarr; *Manage Actions* next to it.
+Then click *Add Action*, enter the name *Android/Bada Liferay Redirect*, and
+select *Redirect to Site* under Type. Under the Site dropdown menu that appears,
+select *Android/Bada Liferay* and under the Page dropdown menu that appears,
+select the *Welcome* page that you created earlier. Lastly, click *Save*. That's
+it! Now Android and Bada mobile phone users are redirected to the Android/Bada
+Liferay site from the Liferay site. 
 
 Let's look at one more example of using mobile device rules before we move on.
 Suppose you'd like to create another rule so that when a site is accessed by an
 Android or iOS tablet, a different layout is used. To set this up, we need to
 follow the same four steps described above. First, make sure you're on the
 Liferay site by checking in the My Sites tab of the Dockbar. Then navigate to
-the Mobile Device Rules page of Site Administration. Add a new rule group called
-*Android and iOS Tablets*. Add a simple rule called *Rule 1* to this rule group.
-As with the previous example, we only need one rule to describe our device
-family. Edit *Rule 1* and select *Android and iPhone OS* under the OS heading
-and *True* under the Tablet heading, then click *Save*.
+the Mobile Device Families page of Site Administration. Add a new device family
+called *Android and iOS Tablets*. Add a classification rule called *Rule 1*,
+select *Android and iPhone OS* under the *Operating System heading*, select
+*Tablets* under the *Device Type* heading, then click *Save*. As with the
+previous example, we only need one rule to describe our device family.
 
 Next, click on *Site Pages* in Site Administration, select *Mobile Device
-Rules*, and select the *Android and iOS Tablets* rule group. Notice that you've
-now selected two rule groups for the Liferay site's public pages and they've
-been assigned priorities. If a device making a request belongs to both of the
-device families represented by the rule groups, the priority of the rule groups
-determines which rule group's actions are executed. Note that in our example,
-the first rule group contains only mobile phones and the second rule group
-contains only tablets, so no devices can belong to both rule groups. Now we just
-need to define an action for our Android and iOS Tablets rule group to use a
-different layout: On the Site Pages page of Site Administration, click on
-*Mobile Device rules*, and then on *Actions* &rarr; *Manage Actions* next to
+Rules*, and select the *Android and iOS Tablets* device family. Notice that
+you've now selected two rule groups for the Liferay site's public pages and
+they've been assigned priorities. If a device making a request belongs to both
+of the device families represented by the rule groups, the priority of the rule
+groups determines which rule group's actions are executed. Note that in our
+example, the first rule group contains only mobile phones and the second rule
+group contains only tablets, so no devices can belong to both rule groups. Now
+we just need to define an action for our Android and iOS Tablets rule group to
+use a different layout: On the Site Pages page of Site Administration, click on
+*Mobile Device Rules*, and then on *Actions* &rarr; *Manage Actions* next to
 Android and iOS Tablets. Click on *Add Action*, enter the name *Layout Template
 Modification*, and select the *Layout Template Modification* action type.
 Lastly, select the *1 Column* layout template (or whichever one you like) and
