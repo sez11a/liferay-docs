@@ -636,7 +636,8 @@ steps for upgrading Liferay, all you need to do to access previously added
 events is deploy the new Calendar portlet and add it to a page. You can browse
 through the new Calendar to confirm that the upgrade succeeded: you should be
 able to view and edit calendar events that were added via the old calendar
-portlet.
+portlet. Previously existing site-scoped calendar events appear in each site's
+default calendar.
 
 The old Calendar portlet included certain calendar event types such as
 appointments, birthdays, holidays, and meetings. The new Calendar portlet
