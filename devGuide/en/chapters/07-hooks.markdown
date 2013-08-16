@@ -42,7 +42,7 @@ hooks projects are stored in the Plugins SDK's `hooks` directory.
 
 5.  Click *Finish*. 
 
-![Figure 6.1: Creating your hook plugin](../../images/06-hooks-1.png)
+![Figure 7.1: Creating your hook plugin](../../images/06-hooks-1.png)
 
 The Plugins SDK automatically named the hook by appending "-hook" to the project
 name. With Developer Studio, you can create a completely new plugin or add a new
@@ -110,7 +110,7 @@ plugin is built to contain this:
 In Developer Studio's *Package Explorer*, here's what the hook structure looks
 like:
 
-![Figure 6.2: Package Explorer view of hook plugin](../../images/06-hooks-3.png)
+![Figure 7.2: Package Explorer view of hook plugin](../../images/06-hooks-3.png)
 
 The particular files you'll work on depend on what Liferay feature you're
 overriding with your hook. Let's start making hooks for the features developers
@@ -231,7 +231,7 @@ changes to a JSP.
 
 Your custom string is now displayed at the bottom of the Search portlet.
 
-![Figure 6.3: After customizing the JSP file, your custom string is displayed.](../../images/jsp-search-string.png)
+![Figure 7.3: After customizing the JSP file, your custom string is displayed.](../../images/jsp-search-string.png)
 
 Next, we'll explore application adapters and what they can do for your sites and
 site templates.
@@ -331,7 +331,7 @@ Here's how we do it:
 5.  Select *Manage* &rarr; *Site Settings*. From the *Application Adapter*
     field's drop-down menu, select *example*. Then click *Save*. 
 
-    ![Figure 6.4: Your *Application Adapters* are easily accessible in your Site's settings.](../../images/06-hooks-select-site-app-adapter.png)
+    ![Figure 7.4: Your *Application Adapters* are easily accessible in your Site's settings.](../../images/06-hooks-select-site-app-adapter.png)
 
 6.  Navigate back to your site's Navigation portlet, and make sure that the
     modification message from your Application Adapter hook plugin's `view.jsp`
@@ -441,7 +441,7 @@ specific list of predefined properties. This list is found in
 source code. In addition to defining custom actions, hooks can override portal
 properties to define model listeners, validators, generators, and
 content sanitizers. If you want to customize a property that's not found in this
-list, you must use an Ext plugin (chapter 7). 
+list, you must use an Ext plugin (Chapter 8). 
 
 ---
 
@@ -464,7 +464,7 @@ for similar Struts actions, but from portlets.
 Struts actions are defined as classes, and they're all connected in a
 `struts-config.xml` file. A `struts-config.xml` for Liferay portal running on
 Apache Tomcat is in the
-`liferay-portal-<version>/tomcat-<version>/webapps/ROOT/WEB-INF` directory. The
+`liferay-portal-[version]/tomcat-[version]/webapps/ROOT/WEB-INF` directory. The
 `struts-config.xml` file links actions to specific JSP pages. Each action
 performs a specific task and then returns a *forward*, an object containing a
 name and path. The forward defines what page the user goes to after the action
@@ -708,7 +708,7 @@ Both custom Struts actions are executed via your Struts action hook!
 Try your new Struts path by accessing it from your browser (e.g.
 `http://localhost:8080/c/portal/sample`). 
 
-![Figure 6.5: Your new Struts action displays *Hello World!* in your browser.](../../images/06-hooks-5.png)
+![Figure 7.5: Your new Struts action displays *Hello World!* in your browser.](../../images/06-hooks-5.png)
 
 Let's continue our hooks expedition by overriding a portal service.
 

@@ -105,6 +105,11 @@ other Liferay plugins that are detailed in the *Portlet Development* chapter of
 this guide. In addition to those, there are some Marketplace-specific
 requirements to keep in mind.
 
+- *Target the Java 6 JRE*: Your app's byte code must be compatible with Java 6
+  (i.e., Java 1.6). Liferay's Plugins SDK already targets Java 6 via the
+  `build.properties` setting `ant.build.javac.target=1.6`; so don't override
+  this setting. Your app will be rejected if its byte code is not compatible
+  with Java 6. 
 - *WAR (`.war`) files*:
     - WARs must contain a `WEB-INF/liferay-plugin-package.properties` file.
     - WARs must not contain any `WEB-INF/liferay-plugin-package.xml` file.
@@ -130,16 +135,32 @@ requirements to keep in mind.
 
 - *liferay-plugin-package.properties file*:
     - Property `recommended.deployment.context` must not be set.
-    - Property `security-manager-enabled` must be set to `true`.  This enables
-      Liferay's Plugin Security Manager.  Read the [Plugin Security Management
-      Chapter](http://www.liferay.com/documentation/liferay-portal/6.1/development/-/ai/lp-6-1-dgen11-plugin-security-management-0)
-      in this guide for information on developing secure apps.  Every
-      app you submit on the Marketplace must use this framework.
+    - Setting property `security-manager-enabled` to `true` is mandatory for all
+      paid apps on 6.1 CE GA3, 6.1 EE GA3, and later, but is optional for free
+      apps. Setting this property to `true` enables Liferay's Plugin Security
+      Manager. If you're enabling the security manager, you'll also need to
+      define your Portal Access Control List (PACL) in this file. Read 
+      Chapter 13 on Plugin Security Management for information on developing
+      secure apps. 
 - *Deployment contexts*:
     - Liferay reserves the right to deny an application if any of its plugin
       deployment contexts is the same as another plugin in the Marketplace.
     - Liferay reserves the right to replace WAR files of app plugins that have
       the same deployment context as plugins built by Liferay.
+
+---
+
+ ![note](../../images/tip-pen-paper.png) **Important:** If you're developing a
+ paid app or want your free app to satisfy Liferay's Plugin Security Manager,
+ Chapter 13 on Plugin Security Management for details. Give yourself adequate
+ time to develop your app's PACL and time to test your app thoroughly with the
+ security manager enabled. 
+
+---
+
+Now that you've learned the packaging and deployment requirements for your app,
+let's consider the versions of Liferay you're targetting for your app and how to
+prepare your app for them. 
 
 ### Things you need before you can publish [](id=lp-6-1-dgen10-things-you-need-before-you-can-publish-0)
 
@@ -147,7 +168,7 @@ You must first develop your app using your preferred development tool (for
 example, using Liferay Developer Studio or the Plugins SDK). Your app will
 consist of one or more Liferay plugins. Ensure your app is designed to work with
 Liferay 6.1 or later. If you wish to target multiple versions of Liferay (for
-example, you may wish to support both 6.1 CE GA2 and 6.1 EE GA1), ensure you
+example, you may wish to support both 6.1 CE GA3 and 6.1 EE GA3), ensure you
 have built binary images of your app for each supported minor family release, if
 necessary. If a single set of files will work across all supported Liferay
 versions, you do not need to build multiple plugins. Liferay guarantees
@@ -273,7 +294,7 @@ Wiki](http://www.liferay.com/community/wiki/-/wiki/Main/Liferay+Versioning+Polic
 Accordingly, Liferay 6.1 CE GA1 is designated as version `6.1.0`. CE GA2 is then
 `6.1.1`, and so on. Liferay 6.1 EE GA1 is designated as `6.1.10`. EE versioning
 follows a slightly different policy given then presence of fix packs and service
-packs, so 6.1 EE GA2 is `6.1.20`.
+packs, so 6.1 EE GA3 is `6.1.30`.
 
 For each plugin that makes up your app, packaging directives must be placed in
 the `liferay-plugin-package.properties` file (located in the `WEB-INF/`
@@ -293,15 +314,15 @@ compatible).
  with (and will fail to deploy to) any EE release.
 
 For example, to specify that a particular plugin in your app is compatible with
-Liferay 6.1 CE GA2 (and later), and 6.1 EE GA2 (and later), add this line to
+Liferay 6.1 CE GA3 (and later), and 6.1 EE GA3 (and later), add this line to
 your `liferay-plugin-packages.properties` file:
 
-    liferay-versions=6.1.1+,6.1.20+
+    liferay-versions=6.1.2+,6.1.30+
 
-This means that the app works with any 6.1 CE release starting with CE GA2, and
-and 6.1 EE release starting with EE GA2. Marketplace will create two packages,
-one that is compatible with the 6.1 CE GA2 release and *later*, and another that
-is compatible with 6.1 EE GA2 release and *later*.
+This means that the app works with any 6.1 CE release starting with CE GA3, and
+and 6.1 EE release starting with EE GA3. Marketplace will create two packages,
+one that is compatible with the 6.1 CE GA3 release and *later*, and another that
+is compatible with 6.1 EE GA3 release and *later*.
 
  ![note](../../images/tip-pen-paper.png)**Note:** Any CE or EE versions you
  include in your packaging directives *must* be terminated with a version using
@@ -309,48 +330,65 @@ is compatible with 6.1 EE GA2 release and *later*.
  versions of Liferay (but does not guarantee your app will work in future
  versions).  So, `liferay-versions=6.1.1,6.1.2` will not work, but
  `liferay-versions=6.1.1,6.1.2+` will work.  Similarly,
- `liferay-versions=6.1.1+,6.1.20,6.1.21` will not work (as the EE versions are
- not properly terminated), but `liferay=versions=6.1.1+,6.1.20,6.1.21+` will
+ `liferay-versions=6.1.2+,6.1.30,6.1.31` will not work (as the EE versions are
+ not properly terminated), but `liferay=versions=6.1.2+,6.1.30,6.1.31+` will
  work.
 
 
 Here are some additional examples:
 
-    # works with Liferay 6.1 CE and EE GA2 and later (NOT compatible with 6.1
-    # CE or EE GA1).  This is most likely what you want to use.
-    liferay-versions=6.1.1+,6.1.20+
+    # works with Liferay 6.1 CE and EE GA3 and later (NOT compatible with 6.1
+    # CE or EE GA2).  This is most likely what you want to use.
+    liferay-versions=6.1.2+,6.1.30+
 
     # works with Liferay 6.1 CE GA2, GA3, and GA5 (but not GA4), and EE GA2
     # and later
     liferay-versions=6.1.1,6.1.2,6.1.4+,6.1.20+
     
-    # works with Liferay 6.1 EE GA2 and later (NOT compatible with CE)
-    liferay-versions=6.1.20+
+    # works with Liferay 6.1 EE GA3 and later (NOT compatible with CE)
+    liferay-versions=6.1.30+
 
-If some plugins within your app must be built for multiple releases, ensure that
-the respective plugins have appropriate versioning information in them. For
-example: suppose your app consists of two plugins: a portlet and a hook. The
-portlet is simple, and uses standard API calls that work on all Liferay 6.1
-releases. However, the hook is different for CE vs. EE because it takes
-advantage of some feature of EE.
+You may find it advantageous to implement one of your app's plugins in multiple
+ways, customizing that plugin for different Liferay releases. We'll illustrate
+this with an example. 
 
-In this case, your portlet plugin would have `liferay-versions=6.1.1+,6.1.20+`,
-indicating that it is compatible with CE and EE. However, because the hook must
-be built against a different API for Liferay EE, you'd built *two* hook plugins.
-The first one would specify `liferay-versions=6.1.1+` (indicating it works with
-CE GA2 and later, but not EE), and the second hook plugin would specify
-`liferay-versions=6.1.20+` (indicating it works with EE GA2 and later, but not
-CE GA2). As you upload these plugins later on in this example, you will notice
-that they are grouped into separate packages of plugins for each supported
-release. In some cases, if a plugin is compatible with multiple releases, it
-will be automatically copied for use in all of the releases for which your app
-supports. Also, in some cases, if Marketplace cannot determine the appropriate
-package into which to place your plugin, it may reject it. For example, if you
-specified `liferay-versions=1.0.0+`, because you are confident your plugin
-works with any Liferay release, Marketplace likely will reject it as `1.0` is
-not a known Liferay release.
+#### Example App: Using Different Versions of a Hook [](id=using-different-versions-of-a-hook-liferay-portal-6-1-dev-guide-en)
 
-Now that you have developed your app, it's time to get started with Marketplace!
+Suppose your app consists of two plugins: a portlet and a hook. The portlet uses
+standard API calls that work on all Liferay 6.1 releases. Your hook, on the
+other hand, needs to interact with EE GA3 differently than it does with CE GA3,
+because you want the hook to take advantage of an exclusive EE feature. For your
+app, how do you provide one version of your hook plugin for EE and another
+version of it for CE, while applying your portlet plugin to both EE and CE? 
+
+It's easy. In this case, you'd specify versions
+`liferay-versions=6.1.2+,6.1.30+` for your portlet plugin, indicating that it is
+compatible with CE GA3 and later, and EE GA3 and later. As for your hook plugin,
+you'd create and build *two* versions of it, one version of the hook to use with
+Liferay EE and the other version of the hook to use with Liferay CE. You'd
+specify `liferay-versions=6.1.30+` for your EE hook and
+`liferay-versions=6.1.2+` for your CE hook. The EE hook would work exclusively
+with EE GA3 and later, while the CE hook would work exclusively with CE GA3 and
+later. You might think that it's difficult to arrange the packaging for an app
+that has plugins targeted to different Liferay releases, but it's easy.
+Marketplace takes care of it based on the `liferay-versions` values you
+specified for each plugin. We'll talk about that next.  
+
+#### Marketplace Packages Your App's Plugins [](id=marketplace-packages-your-app-plugins-liferay-portal-6-1-dev-guide-en)
+
+When you upload your app's plugins, as demonstrated later on in this chapter,
+you'll notice that Marketplace groups them into separate packages based on the
+respective releases each plugin supports. Marketplace copies a plugin into each
+of the release packages corresponding to its list of `liferay-versions` values.
+If Marketplace cannot verify the version of Liferay the plugin supports, it
+rejects the plugin. For example, if you specify `liferay-versions=1.0.0+` for
+your plugin--perhaps because you are confident it can work on any Liferay
+release--Marketplace will likely reject it, because it doesn't know of a `1.0`
+release of Liferay. So take care in specifying the Liferay version information
+for each your app's plugins. 
+
+Now that you've developed your app and specified its packaging directives, it's
+time to get it to the Marketplace! 
 
 ### Establish a Marketplace Account [](id=lp-6-1-dgen10-establish-a-marketplace-account-0)
 
@@ -361,7 +399,7 @@ upper-right corner of the screen. Once you have registered, you can visit the
 Marketplace at [http://liferay.com/marketplace](http://liferay.com/marketplace).
 The Marketplace home page is shown below:
 
-![Figure 10.1: The Marketplace home page is where users go to find new and interesting apps. ](../../images/marketplace-homepage.png) 
+![Figure 15.1: The Marketplace home page is where users go to find new and interesting apps. ](../../images/marketplace-homepage.png) 
 
 This is the front page of the Marketplace and is where users go to find new and
 interesting apps. You'll visit here often during the course of development, so
@@ -374,7 +412,7 @@ on your personal home and profile pages can be found in the Liferay Marketplace
 chapter of the *User Guide*. For now, go to your personal home page by clicking
 on the *Go to My Home* link.
 
-![Figure 10.2: Use the My Home Page link from anywhere in Liferay to navigate to your personal pages. ](../../images/marketplace-my-homepage-link.png) 
+![Figure 15.2: Use the My Home Page link from anywhere in Liferay to navigate to your personal pages. ](../../images/marketplace-my-homepage-link.png) 
 
 Your home page contains links to often-used functionality of liferay.com,
 including app creation and management. There are several links on the left of
@@ -384,7 +422,7 @@ in companies you are associated with) or apps that you or your company have
 developed. You'll use this page heavily, so a bookmark would be useful here.
 Click *App Manager* to visit this page.
 
-![Figure 10.3: The App Manager lets you maintain everything about apps you've purchased or published.](../../images/marketplace-my-app-manager.png) 
+![Figure 15.3: The App Manager lets you maintain everything about apps you've purchased or published.](../../images/marketplace-my-app-manager.png) 
 
 You'll notice three tabs across the top:
 
@@ -405,7 +443,7 @@ allowing you to fill in your app's details.
 
 The first step is to enter the basic details about your app. 
 
-![Figure 10.4: Add all the details about your app, including tags, categories, and links to your site.](../../images/marketplace-add-app-details.png) 
+![Figure 15.4: Add all the details about your app, including tags, categories, and links to your site.](../../images/marketplace-add-app-details.png) 
 
 This screen allows you to enter basic details about the app you are publishing.
 
@@ -481,7 +519,7 @@ Make up some sample data to use during this example, and enter it into the form.
 Once you have entered all your app's details, click *Next* to move on to the
 next screen.
 
-![Figure 10.5: Specify the version of your app here, following the guidelines. ](../../images/marketplace-add-app-version-initial.png) 
+![Figure 15.5: Specify the version of your app here, following the guidelines. ](../../images/marketplace-add-app-version-initial.png) 
 
 On this screen, you must specify the version of your app. Review the guidance in
 the *What is a version* section in this chapter to choose a good version
@@ -495,7 +533,7 @@ support different Liferay versions. You must upload at least one plugin file
 before advancing beyond this screen. The screen is shown here as it initially
 appears:
 
-![Figure 10.6: Specify a set of files for each version of Liferay Portal you wish to support.](../../images/marketplace-add-app-initial-files.png) 
+![Figure 15.6: Specify a set of files for each version of Liferay Portal you wish to support.](../../images/marketplace-add-app-initial-files.png) 
 
 Press the *Browse* button, and select the plugins that make up your app. Each
 time you add plugins to the list, they will automatically begin uploading, and
@@ -509,7 +547,7 @@ Therefore, we will upload 3 plugins that make up our app. Once the files are
 uploaded, a check mark appears next to each plugin, and the plugins are
 displayed based on the compatibility information.
 
-![Figure 10.7: Your app has uploaded successfully.](../../images/marketplace-add-app-uploaded-files.png) 
+![Figure 15.7: Your app has uploaded successfully.](../../images/marketplace-add-app-uploaded-files.png) 
 
 This indicates that the files were successfully uploaded. Notice that the
 portlet plugin was automatically copied for use in both the EE and CE
@@ -522,7 +560,7 @@ Whenever you make a change (app details, adding files, adding new versions), you
 always wind up at a *Preview* screen. This allows you to preview your app as it
 will appear in the Marketplace, so you can confirm your changes.
 
-![Figure 10.8: Always preview your app before submitting it. You may see changes here that you want to make before you submit it.](../../images/marketplace-add-app-preview-and-submit.png) 
+![Figure 15.8: Always preview your app before submitting it. You may see changes here that you want to make before you submit it.](../../images/marketplace-add-app-preview-and-submit.png) 
 
 For this example, review the information. Is it as you expect? If not, click
 *Edit* to go back and continue making changes until you are satisfied.
@@ -587,7 +625,7 @@ process. To make changes to this content for your app, navigate to *Home* &rarr;
 *App Manager* &rarr; *Apps*, then click the *Action* button next to the app you
 wish to edit, and select *Edit*.
 
-![Figure 10.9: Editing an app is as simple as navigating to it and clicking *Edit*.](../../images/marketplace-edit-app-details.png) 
+![Figure 15.9: Editing an app is as simple as navigating to it and clicking *Edit*.](../../images/marketplace-edit-app-details.png) 
 
 This screen shows you what the app looks like on the Marketplace. To edit the
 detail information, click the *Edit* button at the bottom of the preview. This
@@ -642,7 +680,7 @@ button begins the process of adding a new version, starting with the App Details
 screen. In this case, the screen is pre-filled with data from the current
 version of the app, as shown below.
 
-![Figure 10.10: Adding a version is similar to creating a new app, except that the fields are filled in for you.](../../images/marketplace-add-version-details.png) 
+![Figure 15.10: Adding a version is similar to creating a new app, except that the fields are filled in for you.](../../images/marketplace-add-version-details.png) 
 
 You can make any changes to the pre-filled data on this screen. Since this is a
 new version of an existing app making major changes (such as completely changing
@@ -685,7 +723,7 @@ downloads, and installations of your app(s). To access these metrics, navigate
 to *Home* &rarr; *App Manager* &rarr; *Apps*, click on the *Actions* button next
 to the app for which you want metrics, and select the *Metrics* action.
 
-![Figure 10.11: App metrics let you see graphically how many views, downloads, and installations your app has in the Marketplace.](../../images/marketplace-app-metrics-views.png) 
+![Figure 15.11: App metrics let you see graphically how many views, downloads, and installations your app has in the Marketplace.](../../images/marketplace-app-metrics-views.png) 
 
 The view shown above is the default metrics view for a single app. Across the
 top is a list of data series options (*Views*, *Downloads*, or *Installations*).
