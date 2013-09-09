@@ -2237,7 +2237,7 @@ Then add the following `JAVA_OPTS` assignment one line above the
   replacing any matching attributes with the ones found in the assignment
   below:
 
-			JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m
+			JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
 		
 The prescribed script modifications are now complete for your Liferay
 installation on JBoss. Next we'll consider the database and mail configuration. 
