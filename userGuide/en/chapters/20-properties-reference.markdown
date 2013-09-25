@@ -3867,7 +3867,6 @@ Set JGroups' system properties. System properties have higher priority than indi
 		#
 		\
 		jgroups.bind_addr:localhost,\
-		#jgroups.bind_interface:eth0,\
 		\
 		#
 		# Multicast
