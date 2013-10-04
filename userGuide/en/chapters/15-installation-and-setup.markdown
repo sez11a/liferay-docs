@@ -2067,7 +2067,7 @@ place, configure your `portal-ext.properties` file with the following:
 
 **Liferay Home** is one folder above JBoss's install location.
 
-1. Download and install JBoss AS 7.0.x into your preferred directory. This
+1. Download and install JBoss AS 7.x.x into your preferred directory. This
    directory is referred to as `$JBOSS_HOME` throughout this section.
 
 2. Download the latest version of the Liferay Portal `.war` file.
@@ -2079,19 +2079,19 @@ installing and configuring Liferay on JBoss.
 
 ### Dependency Jars [](id=dependency-jars-liferay-portal-6-2-user-guide-15-en-1)
 
-Let's work with the dependency jar files first.
+Let's work with the dependency JAR files first.
 
-1. Create folder `$JBOSS_HOME/modules/com/liferay/portal/main` and unzip the jar
-   files found in the Liferay Portal Dependencies zip file to this folder. Make
-   sure the zip file's jar files are extracted into the
+1. Create the folder `$JBOSS_HOME/modules/com/liferay/portal/main` and unzip the
+   JAR files found in the Liferay Portal Dependencies ZIP file to this folder.
+   Make sure that the ZIP file's JAR files are extracted into the
    `$JBOSS_HOME/modules/com/liferay/portal/main` folder.
 
-2. Download your database driver `.jar` file and put it into the
-   `$JBOSS_HOME/modules/com/liferay/portal/main` folder as well. For
-   demonstration purposes, we'll download the MySQL Connector/J driver from
+2. Download your database driver JAR file and put it into the
+   `$JBOSS_HOME/modules/com/liferay/portal/main` folder as well. For example, if
+   you want to use MySQL, download the MySQL Connector/J driver from
    [http://dev.mysql.com/downloads/connector/j/](http://dev.mysql.com/downloads/connector/j/)
-   and put its `.jar` file into the
-   `$JBOSS_HOME/modules/com/liferay/portal/main` folder.
+   and put its JAR file into the `$JBOSS_HOME/modules/com/liferay/portal/main`
+   folder.
 
 3. Create the file `module.xml` in the
    `$JBOSS_HOME/modules/com/liferay/portal/main` folder and insert the following
@@ -2191,7 +2191,8 @@ Make the following modifications to `standalone.xml`:
 
 		<security-domain name="PortalRealm">
 			<authentication>
-				<login-module code="com.liferay.portal.security.jaas.PortalLoginModule" flag="required"/>				</authentication>
+				<login-module code="com.liferay.portal.security.jaas.PortalLoginModule" flag="required"/>
+                        </authentication>
 		</security-domain>
 
 Now it's time for some changes to your configuration and startup scripts.
@@ -2200,10 +2201,14 @@ Make the following modifications to your standalone domain's configuration
 script file `standalone.conf` (`standalone.conf.bat` on Windows) found in your
 `$JBOSS_HOME/bin/` folder.
 
-These modifications change the following options: 
+These modifications change the following options:
+
 - Set the file encoding
+
 - Set the user time-zone
+
 - Set the preferred protocol stack
+
 - Increase the default amount of memory available.
 
 Make the following edits as applicable to your operating system:
@@ -2337,16 +2342,16 @@ Liferay Portal can access them.
 	If you're using *Liferay Portal* to manage your data source, follow the
 	instructions in the *Deploy Liferay* section for using the setup wizard.
 
-3. If you're using *Liferay Portal* to manage your mail session, this
-   configuration is done within Liferay Portal. That is, after starting your
-   portal as described in the *Deploy Liferay* section, go to *Control Panel
-   &rarr; Server Administration &rarr; Mail* and enter the settings for your
-   mail session.
-
-    If you're using *JBoss* to manage your mail session, add the following to your
-    `portal-ext.properties` file to reference that mail session:
+3. If you're using *JBoss* to manage your mail session, add the following to
+   your `portal-ext.properties` file to reference that mail session:
 
         mail.session.jndi.name=java:mail/MailSession
+
+    If you're using *Liferay Portal* to manage your mail session, this
+    configuration is done within Liferay Portal. That is, after starting your
+    portal as described in the *Deploy Liferay* section, go to *Control Panel
+    &rarr; Server Administration &rarr; Mail* and enter the settings for your
+    mail session.
 
 You've completed the steps necessary for your deployment of Liferay so Liferay
 Portal can now communicate with your data source and mail session--way to go!
@@ -2358,17 +2363,20 @@ Now you're ready to deploy Liferay Portal.
    your JBoss installation, delete all of its subfolders and files. Otherwise,
    create a new folder `$JBOSS_HOME/standalone/deployments/ROOT.war`.
 
-2. Unzip the Liferay `.war` file into the `ROOT.war` folder.
+2. Unzip the Liferay `.war` file into the `ROOT.war` folder. When you're done,
+   you should have the following subfolders and files: `ROOT.war/dtd`,
+   `ROOT.war/errors`, `ROOT.war/html`, `ROOT.war/layouttpl`, `ROOT.war/wap`,
+   `ROOT.war/EB-INF`, `favicon.ico`, and `index.jsp`.
 
 3. To trigger deployment of `ROOT.war`, create an empty file named
    `ROOT.war.dodeploy` in  your `$JBOSS_HOME/standalone/deployments/` folder.
-   On startup, JBoss detects the presence of this file and deploys it as a web
-   application.
+   On startup, JBoss detects the presence of this file and deploys `ROOT.war` as
+   a web application.
 
 4. Remove `eclipselink.jar` from
    `$JBOSS_HOME/standalone/deployments/ROOT.war/WEB-INF/lib` to assure the
    Hibernate persistence provider is used instead of the one provided in the
-   `eclipselink.jar`. Note, JBoss 7.0.2 has a known issue
+   `eclipselink.jar`. Note that JBoss 7.0.2 has a known issue
    [http://community.jboss.org/thread/169944](http://community.jboss.org/thread/169944)
    in determining which persistence provider to use.
 
@@ -2379,7 +2387,7 @@ Now you're ready to deploy Liferay Portal.
     to configure your portal, setup your site's administrative account and/or
     manage your database within Liferay.
 		
-    If this is your first time starting Liferay Portal 6.1, the setup wizard is
+    If this is your first time starting Liferay Portal 6.2, the setup wizard is
     invoked on server startup. If you want to re-run the wizard, specify
     `setup.wizard.enabled=true` in your properties file (e.g.
     `portal-setup-wizard.properties`).
