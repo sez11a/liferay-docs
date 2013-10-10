@@ -3168,8 +3168,8 @@ This allows JOnAS to startup appropriately with Liferay installed.
 
 Now that the application server has all extraneous services and applications
 disabled, you can now tweak the configuration of the containers within JOnAS:
-Tomcat and OSGi. By default, the Tomcat container is set to listen on a
-different HTTP HTTPS ports than the ones Liferay uses by default.
+Tomcat and OSGi. By default, the Tomcat container is set to listen on different
+HTTP and HTTPS ports than the ones Liferay uses by default.
 
 To change the Tomcat ports for Liferay's use:
 
