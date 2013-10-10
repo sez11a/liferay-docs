@@ -3031,9 +3031,9 @@ configuration directory from the server itself. In fact, the separation of the
 configuration is recommended by the developers of JOnAS as a way to cleanly
 deploy so you can revert to default settings later.
 
-If you don't have an existing JOnAS installation, it is recommeded to use the
-available Liferay-JOnAS bundle, which can be downloaded from
-[http://www.liferay.com/ja/downloads/liferay-portal/available-releases](http://www.liferay.com/ja/downloads/liferay-portal/available-releases).
+If you don't have an existing JOnAS installation, we recommend that you use a
+Liferay-JOnAS bundle. You can download the latest version from
+[https://www.liferay.com/downloads/liferay-portal/available-releases](https://www.liferay.com/downloads/liferay-portal/available-releases).
 
 Given the unique nature of the server, there are a few steps to consider in the
 configuration stage. Otherwise, installing on JOnAS follows much the same
@@ -3048,47 +3048,50 @@ deployed to the root context, which you must remove prior to installing the
 Liferay `.war` package (and which you'd want to remove anyway for a production
 configuration). JOnAS allows you to decide where to place all the server
 configuration and deployment settings, also called `$JONAS_BASE`. The folder
-created by unzipping the JOnAS application (likely called `jonas-full-5.2.2` or
+created by unzipping the JOnAS application (likely called `jonas-full-5.2.4` or
 similar) is referred to as `$JONAS_ROOT`. This allows a unique, clean separation
 between application and configuration. 
 
 The structure of `$JONAS_BASE` is:
-- /conf    -    configuration files
-- /deploy    -    main deployment directory (Liferay is deployed here)
-- /lib    -    used for extending the main server classloaders
-- /lib/ext    -    extensions for unbundled applications
-- /logs    -    logs for the running instance
-- /work    -    the working directory, used by containers such as Tomcat
-- /repositories    -    contains OSGi bundles for deployment; not used for Liferay installation
+
+- `/bin` -- shell scripts, including ones for starting and stopping JOnAS
+- `/conf` -- configuration files
+- `/deploy` -- main deployment directory (Liferay is deployed here)
+- `/lib` -- used for extending the main server classloaders
+- `/lib/ext` -- extensions for unbundled applications
+- `/logs` -- logs for the running instance
+- `/work` -- the working directory, used by containers such as Tomcat
+- `/repositories` -- contains OSGi bundles for deployment; not used for Liferay
+  installation
     
 By default, the `$JONAS_BASE` directory is the same as `$JONAS_ROOT`. Creating a
 new `$JONAS_BASE` is a simple process, outlined in the JOnAS Configuration
 Guide, found at
-[http://jonas.ow2.org/JONAS_5_2_2/doc/doc-en/html/configuration_guide.html](http://jonas.ow2.org/JONAS_5_2_2/doc/doc-en/html/configuration_guide.html).
+[http://jonas.ow2.org/JONAS_5_2_4/doc/doc-en/html/configuration_guide.html](http://jonas.ow2.org/JONAS_5_2_4/doc/doc-en/html/configuration_guide.html).
 
 To remove sample files and unneeded configuration:
 
 1.  Navigate to the directory you unpackaged *JOnAS* into, `$JONAS_BASE`.
 
 2.  Find the following sample directories and remove them:
-    - /examples
-    - /tutorial
+    - `/examples`
+    - `/tutorial`
 
 3.  Navigate to `$JONAS_BASE/conf` and remove the following files:
-    - db2.properties
-    - FirebirdSQL.properties
-    - HSQL1.properties
-    - jetty\*.xml
-    - InstantDB1.properties
-    - InterBase1.properties
-    - MailMimePartDS1.properties
-    - MailSession1.properties
-    - McKoi1.properties
-    - MySQL.properties
-    - Oracle1.properties
-    - PostgreSQL1.properties
-    - spy.properties
-    - Sybase1.properties
+    - `db2.properties`
+    - `FirebirdSQL.properties`
+    - `HSQL1.properties`
+    - `jetty\*.xml`
+    - `InstantDB1.properties`
+    - `InterBase1.properties`
+    - `MailMimePartDS1.properties`
+    - `MailSession1.properties`
+    - `McKoi1.properties`
+    - `MySQL.properties`
+    - `Oracle1.properties`
+    - `PostgreSQL1.properties`
+    - `spy.properties`
+    - `Sybase1.properties`
 		
     This disables the default settings for the databases available in JOnAS, as
     well as removing configuration for Jetty as a container to use for the
@@ -3096,21 +3099,22 @@ To remove sample files and unneeded configuration:
       
 4.  To remove the default application installed on the root context:
 
-    1. Go to the `$JONAS_BASE/deploy` directory and remove:
-        - ctxroot.xml
-        - doc.xml
-        - jdbc-ds.xml
-        - jonasAdmin.xml
-    2. Go to the `$JONAS_ROOT/repositories` directory to remove the application
-    by removing:
-        - org/mortbay/
-        - org/ow2/jonas/documentation/
-        - org/ow2/jonas/jonas-admin/
-        - org/ow2/jonas/jonas-ctxroot/
-	     
-    This will fully remove the Maven deployment plan and artifact for the
-    JOnAS default application, as well as the administration console from
-    loading on the root context.
+    1. Go to the `$JONAS_BASE/deploy` directory and remove the following files:
+        - `ctxroot.xml`
+        - `doc.xml`
+        - `jdbc-ds.xml`
+        - `jonasAdmin.xml`
+
+    2. Go to the `$JONAS_ROOT/repositories/maven2-internal` directory and remove
+       the following folders:
+        - `org/mortbay/`
+        - `org/ow2/jonas/documentation/`
+        - `org/ow2/jonas/jonas-admin/`
+        - `org/ow2/jonas/jonas-ctxroot/`
+        	     
+    This fully removes the Maven deployment plan and artifact for the JOnAS
+    default application. It also removes the administration console from loading
+    on the root context.
       
 Now that JOnAS is prepared for configuring Liferay to run on the server as its
 root application, you can begin tuning the settings for Liferay. By default,
@@ -3136,7 +3140,7 @@ To turn of HSQL and other JOnAS-level services:
 
             jonas.service.dbm.datasources    
 	    
-    Thereby preventing the HSQL database from being used internally.
+    This prevents the HSQL database from being used internally.
        
 4. Find the services configuration around line 82:
 
@@ -3159,13 +3163,13 @@ To turn of HSQL and other JOnAS-level services:
             jonas.development    false
 
 This allows JOnAS to startup appropriately with Liferay installed.
-            
+
 ### Configuring Containers in JOnAS [](id=configuring-containers-in-jonas-liferay-portal-6-2-user-guide-15-en)
 
 Now that the application server has all extraneous services and applications
 disabled, you can now tweak the configuration of the containers within JOnAS:
 Tomcat and OSGi. By default, the Tomcat container is set to listen on a
-different HTTP port and HTTPS port than Liferay uses by default.
+different HTTP HTTPS ports than the ones Liferay uses by default.
 
 To change the Tomcat ports for Liferay's use:
 
@@ -3187,8 +3191,8 @@ To change the Tomcat ports for Liferay's use:
    adjust the ports if needed (such as changing the AJP port from `9009` to
    `8009`.
 
-To modify the OSGI defaults to ensure required java packages are bootsrapped by
-the loader:
+To modify the OSGI defaults to ensure that required Java packages are
+bootstrapped by the loader, use these steps:
 
 1. Open the file `defaults.properties` inside of `$JONAS_BASE/conf/osgi`.
 
@@ -3196,11 +3200,11 @@ the loader:
 
         javase-packages ${javase-${javase.version}}
 	    
-     And add the following packages to make it read:
+     Add the following packages to make it read as follows:
       
         javase-packages ${javase-${javase.version}}, com.sun.jmx.mbeanserver, com.sun.crypto.provider, org.apache.felix.framework
 	      
-    To ensure the required packages are loaded.
+    This ensures that the required packages are loaded.
       
 ### Starting JOnAS [](id=starting-jonas-liferay-portal-6-2-user-guide-15-en)
 
@@ -3209,32 +3213,32 @@ the portal dependencies and the Liferay `.war` file and start the server. JOnAS
 maintains libraries inside `$JONAS_BASE/lib/ext` and the application inside
 `$JONAS_BASE/deploy`.
 
-To install `liferay-portal-dependencies-6.1.x-<date>.zip`:
+To install `liferay-portal-dependencies-6.2.x-[date].zip`:
 
-1. Unzip the archive `liferay-portal-dependencies-6.1.x-<date>.zip` on your
+1. Unzip the archive `liferay-portal-dependencies-6.2.x-[date].zip` on your
    local filesystem.
 
 2. Navigate to `$JONAS_BASE/lib/ext`.
 
-3. Copy the `.jar` files from `liferay-portal-dependencies-6.1.x-<date>/` to
+3. Copy the `.jar` files from `liferay-portal-dependencies-6.2.x-[date]/` to
    `$JONAS_BASE/lib/ext`.
 
 4. Install any additional libraries needed, such as database connectors.
 
-To deploy the `liferay-portal-6.1.x-<date>.war` file:
+To deploy the `liferay-portal-6.2.x-[date].war` file:
 
-1. Copy the `liferay-portal-6.1.x-<date>.war` file from its current directory.
+1. Copy the `liferay-portal-6.2.x-[date].war` file from its current directory.
 
 2. Navigate to `$JONAS_BASE/deploy`.
 
-3. Paste the `liferay-portal-6.1.x-<date>.war` file into the `deploy` directory.
+3. Paste the `liferay-portal-6.2.x-[date].war` file into the `deploy` directory.
 
 Once the necessary files have been installed, all that is needed is to start
 JOnAS:
 
 1. Navigate to `$JONAS_BASE/bin`.
 
-2. Run the command `jonas.bat start` on Windows and `./jonas start` on UNIX-lixe
+2. Run the command `jonas.bat start` on Windows and `./jonas start` on UNIX-like
    systems.
 
 JOnAS starts and Liferay opens a browser to `http://localhost:8080`.
