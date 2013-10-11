@@ -3329,6 +3329,17 @@ JOnAS:
 
 JOnAS starts and Liferay opens a browser to `http://localhost:8080`.
 
+---
+
+ ![Note](../../images.tip.png) Note: There's a known issue with some versions of
+ JOnAS 5.2 that prevents the JOnAS server from reaching a running state after
+ restarting it. See
+ [http://jira.ow2.org/browse/JONAS-739](http://jira.ow2.org/browse/JONAS-739)
+ for details. A temporary workaround is to remove the
+ `$JONAS_BASE/work/felix-cache` folder and restart the server.
+
+---
+
 ## Installing Liferay on WebLogic 10 [](id=installing-liferay-on-weblogic-10-liferay-portal-6-2-user-guide-15-en)
 
 **Liferay Home** is one folder above the domain to which you will be installing
