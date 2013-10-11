@@ -3048,7 +3048,7 @@ deployed to the root context, which you must remove prior to installing the
 Liferay `.war` package (and which you'd want to remove anyway for a production
 configuration). JOnAS allows you to decide where to place all the server
 configuration and deployment settings, also called `$JONAS_BASE`. The folder
-created by unzipping the JOnAS application (likely called `jonas-full-5.2.4` or
+created by unzipping the JOnAS application (likely called `jonas-full-5.2.3` or
 similar) is referred to as `$JONAS_ROOT`. This allows a unique, clean separation
 between application and configuration. 
 
@@ -3067,7 +3067,7 @@ The structure of `$JONAS_BASE` is:
 By default, the `$JONAS_BASE` directory is the same as `$JONAS_ROOT`. Creating a
 new `$JONAS_BASE` is a simple process, outlined in the JOnAS Configuration
 Guide, found at
-[http://jonas.ow2.org/JONAS_5_2_4/doc/doc-en/html/configuration_guide.html](http://jonas.ow2.org/JONAS_5_2_4/doc/doc-en/html/configuration_guide.html).
+[http://jonas.ow2.org/JONAS_5_2_3/doc/doc-en/html/configuration_guide.html](http://jonas.ow2.org/JONAS_5_2_3/doc/doc-en/html/configuration_guide.html).
 
 To remove sample files and unneeded configuration:
 
@@ -3117,10 +3117,53 @@ To remove sample files and unneeded configuration:
     on the root context.
       
 Now that JOnAS is prepared for configuring Liferay to run on the server as its
-root application, you can begin tuning the settings for Liferay. By default,
-JOnAS has its own deployment of Hypersonic it uses internally. This internal use
-of HSQL must be disabled, along with other JOnAS services, so they won't
-conflict with Liferay's.
+root application, you can begin tuning the settings for Liferay. We need to
+specify some class loader filtering settings since Liferay provides some
+libraries that conflict with those of JOnAS. We'll specify these libraries in
+`$JONAS_BASE/conf/classloader-default-filtering.xml` to ensure that Liferay will
+use its embedded libraries and not those provided by JOnAS.
+
+1. Open the `classloader-default-filtering.xml` file in the `$JONAS_BASE/conf`
+   folder and search for the following line:
+
+        <filter-name>org.apache.commons.digester.*</filter-name>
+
+    One you've found it, replace it with the following lines:
+
+        <filter-name>antlr.*</filter-name>
+        <filter-name>EDU.oswego.*</filter-name>
+        <filter-name>javassist.*</filter-name>
+        <filter-name>net.sf.cglib.*</filter-name>
+        <filter-name>net.sf.ehcache.*</filter-name>
+        <filter-name>org.apache.commons.*</filter-name>
+        <filter-name>org.dom4j.*</filter-name>
+        <filter-name>org.hibernate.*</filter-name>
+        <filter-name>org.jboss.*</filter-name>
+        <filter-name>org.objectweb.asm.*</filter-name>
+        <filter-name>org.objectweb.jotm.*</filter-name>
+        <filter-name>org.quartz.*</filter-name>
+        <filter-name>org.springframework.*</filter-name>
+
+Now Liferay will use its own versions of these libraries and not those of JOnAS.
+Next, you need to add some system packages to JOnAS's OSGi framework.
+
+1. To do this, extract the `default.properties` file from the
+   `$JONAS_BASE/lib/bootstrap/felix-launcher.jar` file to the `$JONAS_BASE/conf`
+   directory.
+   
+2. Rename the file from `default.properties` to `felix-config.properties`.
+
+3. Open the `felix-config.properties` file and search for the following:
+
+        org.osgi.framework.system.packages=org.osgi.framework;
+
+    When you've found this string, replace it with the following one:
+
+        org.osgi.framework.system.packages=com.sun.crypto.provider; com.sun.image.codec.jpeg; com.sun.jmx.interceptor; com.sun.jmx.mbeanserver; org.apache.xerces.parsers; org.apache.xerces.util; org.apache.xerces.xni; org.apache.xerces.xni.parser; org.osgi.framework;
+
+JOnAS also has its own deployment of Hypersonic that it uses internally. This
+internal use of HSQL must be disabled, along with other JOnAS services, so they
+won't conflict with Liferay's.
 
 To turn of HSQL and other JOnAS-level services:
 
@@ -3134,7 +3177,7 @@ To turn of HSQL and other JOnAS-level services:
         
         ...
 	
-        jonas.service.dbm.datasources    hsql
+        jonas.service.dbm.datasources    HSQL1
 	    
 3. Change the datasources definition around line 353 to read: 
 
@@ -3153,6 +3196,9 @@ To turn of HSQL and other JOnAS-level services:
     This prevents the internal `db` and `security` services from interfering
     with Liferay.
       
+<!-- Commenting out since this instruction does not appear in the 6.2
+build-dist.xml unzip-jonas target. -Jesse
+
 6. To put JOnAS into production mode for proper deployment of Liferay, find the
    property around line 71:
 
@@ -3163,31 +3209,47 @@ To turn of HSQL and other JOnAS-level services:
             jonas.development    false
 
 This allows JOnAS to startup appropriately with Liferay installed.
+-->
 
 ### Configuring Containers in JOnAS [](id=configuring-containers-in-jonas-liferay-portal-6-2-user-guide-15-en)
 
 Now that the application server has all extraneous services and applications
-disabled, you can now tweak the configuration of the containers within JOnAS:
-Tomcat and OSGi. By default, the Tomcat container is set to listen on different
-HTTP and HTTPS ports than the ones Liferay uses by default.
+disabled, you can tweak the configuration of the containers within JOnAS: Tomcat
+and OSGi. By default, the Tomcat container is set to listen on different HTTP
+and HTTPS ports than the ones Liferay uses by default.
 
 To change the Tomcat ports for Liferay's use:
 
 1. Open the file `tomcat6-server.xml` inside of `$JONAS_BASE/conf`.
 
-2. Find the `Connector` definition around line 69:
+2. Search for `autoDeploy` around line 129:
+
+            <Host name="localhost"  appBase="webapps"
+                unpackWARs="false" autoDeploy="false"
+                deployOnStartup="false" deployXML="false"
+                xmlValidation="false" xmlNamespaceAware="false">
+
+    Change the `autoDeploy` value to `true`:
+
+            <Host name="localhost"  appBase="webapps"
+                unpackWARs="false" autoDeploy="true"
+                deployOnStartup="false" deployXML="false"
+                xmlValidation="false" xmlNamespaceAware="false">
+
+3. Find the `Connector` definition around line 69:
 
             <Connector port="9000" protocol="HTTP/1.1"
                            connectionTimeout="20000"
                            redirectPort="9043" />
 			   
-    Change it to reflect the default ports:
+    Change it to reflect the default ports and add a `URIEncoding` attribute set
+    to `UTF-8`:
 
             <Connector port="8080" protocol="HTTP/1.1"
                            connectionTimeout="20000"
-                           redirectPort="8443" />
+                           redirectPort="8443" URIEncoding="UTF-8" />
 
-3. If you are using any other settings in Tomcat's server settings, you can
+4. If you are using any other settings in Tomcat's server settings, you can
    adjust the ports if needed (such as changing the AJP port from `9009` to
    `8009`.
 
@@ -3202,10 +3264,34 @@ bootstrapped by the loader, use these steps:
 	    
      Add the following packages to make it read as follows:
       
-        javase-packages ${javase-${javase.version}}, com.sun.jmx.mbeanserver, com.sun.crypto.provider, org.apache.felix.framework
+        javase-packages ${javase-${javase.version}}, com.sun.crypto.provider, com.sun.jmx.interceptor, com.sun.jmx.mbeanserver, org.apache.felix.framework
 	      
     This ensures that the required packages are loaded.
-      
+
+Next, we need to configure some JVM options for Liferay.
+
+1. On Unix-like systems, edit the `$JBOSS_BASE/bin/setenv` file and search for
+   the following: `export JAVA_OPTS`. When you find this string, replace it with
+   the following lines:
+
+        JAVA_OPTS="-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true  -Djava.security.policy==$JONAS_ROOT/conf/java.policy -Djonas.felix.configuration.file=\"$JONAS_ROOT/conf/felix-config.properties\" -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
+
+        export JAVA_OPTS
+
+2. On Unix-like systems, make sure that the `$JBOSS_BASE/bin/setenv` file is
+   executable: run `chmod a+x setenv` from the `$JBOSS_BASE/bin` directory.
+
+3. On Windows, edit the `$JBOSS_BASE/bin/setenv.bat` file and search for the
+   following: `set JONAS_CLASSPATH=%JONAS_BASE%\conf;%JONAS_CLASSPATH%`. When
+   you find this string, replace it with the following lines:
+
+        set JONAS_CLASSPATH=%JONAS_BASE%\conf;%JONAS_CLASSPATH%
+
+        JAVA_OPTS="-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true  -Djava.security.policy==$JONAS_ROOT/conf/java.policy -Djonas.felix.configuration.file=\"$JONAS_ROOT/conf/felix-config.properties\" -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
+
+These JVM options should allow Liferay to run without problems. If necessary,
+you can increase the JVM memory options.
+
 ### Starting JOnAS [](id=starting-jonas-liferay-portal-6-2-user-guide-15-en)
 
 Once you have the required configuration in place, all that is left is to copy
