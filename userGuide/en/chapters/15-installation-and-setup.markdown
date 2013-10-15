@@ -2138,14 +2138,21 @@ place, configure your `portal-ext.properties` file with the following:
 
 ## Installing Liferay on JBoss 7 [](id=installing-liferay-on-jboss-7-liferay-portal-6-2-user-guide-15-en)
 
+If you have a JBoss 7 application server on which you'd like to manually install
+Liferay, follow the instructions in this section. Note: JBoss EAP 6 includes the
+JBoss 7 application server. Please see [https://access.redhat.com/site/articles/112673](https://access.redhat.com/site/articles/112673)
+for details about which JBoss AS versions are included in which JBoss EAP
+versions.
+
 **Liferay Home** is one folder above JBoss's install location.
 
-1. Download and install JBoss AS 7.x.x into your preferred directory. This
-   directory is referred to as `$JBOSS_HOME` throughout this section.
+1. If you don't already have it installed, download and install JBoss AS 7.x.x
+   into your preferred directory. This directory is referred to as `$JBOSS_HOME`
+   throughout this section.
 
 2. Download the latest version of the Liferay Portal `.war` file.
 
-3. Download Liferay's Portal Dependencies.
+3. Download Liferay Portal's dependencies.
 
 Now that you have all of your installation files, you are ready to start
 installing and configuring Liferay on JBoss.
