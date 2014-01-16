@@ -810,14 +810,17 @@ Control Lists (PACL) with Liferay on Tomcat.
 
 To enable PACL, you need to enable the security manager and add some required
 permissions to the server policy configuration file. This entails editing
-the `CATALINA_OPTS` variable and editing the `Catalina.policy` file:
+the `CATALINA_OPTS` variable and editing the `catalina.policy` file:
 
 In the *Administration* tab of the Tcat Administration Console, click *Server
 Profiles* and click the profile applied to your Liferay Tcat server. Click the
 *Value* field of the `CATALINA_OPTS` variable created earlier, and add the
 following parameter to it:
 
-    `-Djava.security.manager -Djava.security.policy=$CATALINA_BASE/conf/catalina.policy`
+    `-Djava.security.manager -Djava.security.policy==$CATALINA_BASE/conf/catalina.policy`
+
+The double equals sign tells the app server to use this policy file on top of
+any existing security policies. 
 
 Edit `$TCAT_HOME/conf/Catalina.policy` and add the required permissions:
 
@@ -844,6 +847,14 @@ Edit `$TCAT_HOME/conf/Catalina.policy` and add the required permissions:
         grant codeBase "file:${catalina.home}${/}work${/}Catalina${/}localhost${/}ROOT${/}-" {
             permission java.security.AllPermission;
         };
+
+To enable the security manager on Tomcat, the server must be started with the
+`-security` commandline options. Shutdown your Tomcat instance and restart it
+with the following command: 
+
+    ./startup.sh -security
+
+Tomcat reports the message `Using Security Manager` to your terminal. 
 
 Now you have PACL enabled and configured for your portal. Let's deploy Liferay!
 
