@@ -1,4 +1,4 @@
-# Working With The liferay-docs Project From Within Your Browser
+# Working With liferay-docs From Within Your Browser
 
 If you've needed to edit or review one of the Liferay's official documents and
 you'd like to do so from the browser, you're in luck! You can work with the
@@ -10,7 +10,7 @@ copies of projects, view and modify project files, and submit modified files.
 
 ---
 
- ![Note](../images/tip.png) **Note:** This documentation does not cover making
+ ![Note](images/tip.png) **Note:** This documentation does not cover making
  changes using Git, Git related desktop tools, or Markdown editors. For making
  lots of edits or complex editing, the browser based editor is very limited in
  functionality. In addition, deleting or replacing image files requires Git.
@@ -25,7 +25,7 @@ Let's get started using the liferay-docs GitHub project in the browser.
 ## Sign Up for GitHub
 
 In order to manipulate the liferay-docs project and receive updates from
-contributers, you need to become a member of GitHub. 
+contributors, you need to become a member of GitHub. 
 
 Becoming a member of GitHub allows you to *fork* repositories to your own
 account so that you can manipulate them as you wish. You'll be able to receive
@@ -51,7 +51,7 @@ We'll demonstrate forking the
    You can go straight to its URL (e.g.,
    <https://github.com/liferay/liferay-docs>). 
 
-   If you didn't know its location, you ccould search for Liferay's repositories
+   If you didn't know its location, you could search for Liferay's repositories
    in GitHub, by entering `liferay` in the search field and clicking *Search*. 
 
    ![Here are the results from searching for `liferay`.](images/searchForLiferayInGitHub.png)
@@ -62,7 +62,7 @@ We'll demonstrate forking the
 
 Great! Now you have your own copy of the liferay-docs repository. 
 
-Note, that you have a copy the the `master` branch. It's a good practice to make
+Note, that you have a copy the `master` branch. It's a good practice to make
 changes in a branch separate from the `master` branch. 
 
 Let's create a branch for you to work in. 
@@ -86,11 +86,11 @@ Here's an abbreviated version of the liferay-docs project directory structure:
 
     liferay-docs/
      |____ [document dir]/ (e.g. userGuide/, devGuide/, soffice/)
-     |      |____ [language dir]/ (e.g. 'en' for English, 'es' for Spanish)
+     |      |____ en
      |      |      |
      |      |      |____ chapters/
      |      |      |      |____ [0-9][0-9]-[subject].markdown
-     |      |      |            (e.g. 01-intro.markdown)        
+     |      |      |            (e.g., 01-intro.markdown)        
      |      |      |
      |      |      |____ images/ (language specific versions of the default images)
      |      |
@@ -136,7 +136,8 @@ description for your changes, and click *Commit Changes*.
 
    ![Commit your changes.](images/myCommit.png)
 
-Great! You've modified the file and commited those modifications to your branch. 
+Great! You've modified the file and committed those modifications to your
+branch. 
 
 Now you're ready to share those changes with others, so they can merge them into
 their branches. To submit your changes for review by Liferay, you'll send them
@@ -169,6 +170,6 @@ create a working branch of a repository, make changes to text files, and share
 those changes with others using pull requests. 
 
 As you work more with GitHub projects you'll want to become familiar with using
-Git a and Git related desktop tools. Visit GitHub's
+Git and Git related desktop tools. Visit GitHub's
 [Help](https://help.github.com/) site to learn more. 
 
