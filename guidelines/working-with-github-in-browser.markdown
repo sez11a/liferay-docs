@@ -155,11 +155,20 @@ branch.
 Here's how to submit a pull request from your branch:
 
 1. Make sure your branch is selected in the `branch` dropdown button.
+
 2. Navigate to your branch's root folder (i.e., `liferay-docs/`). 
+
 3. Click on *Pull Request*. 
-4. Select a recipient (e.g., `liferay`) for your changes. 
-4. Describe your changes in the text field. 
-5. Submit your pull request. 
+
+   ![Click Pull Request](images/clickPullRequest.png)
+
+5. Select a recipient (e.g., `liferay`) for your changes. 
+
+6. Describe your changes in the text field. 
+
+7. Click on *Send Pull Request*. 
+
+   ![Send Pull Request.](images/sendPullRequest.png)
 
 It's that easy to submit your changes to Liferay! 
 
