@@ -817,7 +817,7 @@ Profiles* and click the profile applied to your Liferay Tcat server. Click the
 *Value* field of the `CATALINA_OPTS` variable created earlier, and add the
 following parameter to it:
 
-    `-Djava.security.manager -Djava.security.policy==$CATALINA_BASE/conf/catalina.policy`
+    `-Djava.security.manager -Djava.security.policy=$CATALINA_BASE/conf/catalina.policy`
 
 The double equals sign tells the app server to use this policy file on top of
 any existing security policies. 
@@ -1355,13 +1355,13 @@ Make the following edits as applicable to your operating system:
 Then add the following `JAVA_OPTS` assignment one line above the
 `:JAVA_OPTS_SET` line found at end of the file:
 
-        set "JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Djava.security.manager -Djava.security.policy==$JBOSS_HOME/bin/server.policy -Djboss.home.dir=$JBOSS_HOME -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
+        set "JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Djava.security.manager -Djava.security.policy=$JBOSS_HOME/bin/server.policy -Djboss.home.dir=$JBOSS_HOME -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
 
 - On Unix, merge the following values into your settings for `JAVA_OPTS`
   replacing any matching attributes with the ones found in the assignment
   below:
 
-        JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Djava.security.manager -Djava.security.policy==$JBOSS_HOME/bin/server.policy -Djboss.home.dir=$JBOSS_HOME -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m
+        JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Djava.security.manager -Djava.security.policy=$JBOSS_HOME/bin/server.policy -Djboss.home.dir=$JBOSS_HOME -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m
 
     Make sure you replace the `$JBOSS_HOME` references with the appropriate
     directory. You'll notice we've added some Java security options. We'll
@@ -2145,10 +2145,10 @@ and add the following contents:
 To enable security on your WebLogic server and direct the server to your policy
 file, open the `setDomainEnv.[cmd|sh]` file in your domain's folder. Then set
 the `-Djava.security.manager` Java option and set the property
-`-Djava.security.policy==` to the location of your `weblogic.policy` file. You
+`-Djava.security.policy=` to the location of your `weblogic.policy` file. You
 can specify both settings on the same line like this:  
 
-    -Djava.security.manager -Djava.security.policy==$WEBLOGIC_HOME/wlserver/ser\
+    -Djava.security.manager -Djava.security.policy=$WEBLOGIC_HOME/wlserver/ser\
     ver/lib
 
 The double equals sign tells the app server to use this policy file on top of
