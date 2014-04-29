@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<project name="Develop" default="echo-props" basedir=".">
+
+	<import file="../build-site-common.xml" />
+
+	<property name="page.dir" value="develop"/>
+
+</project>
