@@ -1,4 +1,4 @@
-# Using Liferay IDE's Remote Server Adapter
+# Using Liferay IDE's Remote Server Adapter [](id=using-liferay-ides-remote-server-adapter-lp-6-2-develop-tutorial)
 
 The *Remote Server Adapter* lets you deploy local plugin projects to remote
 servers. You can use it to deploy apps you're developing to a test server for
@@ -28,7 +28,7 @@ application server Liferay Portal supports.
 
 Now you're ready to configure and use the Remote Server Adapter! 
 
-## Configuring and Using the Remote Server Adapter
+## Configuring and Using the Remote Server Adapter [](id=configuring-and-using-the-remote-server-adapter-lp-6-2-develop-tutorial)
 
 To configure and use the Remote Server Adapter, follow these steps: 
 

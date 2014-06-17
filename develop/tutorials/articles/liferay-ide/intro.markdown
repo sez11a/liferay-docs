@@ -1,4 +1,4 @@
-# Liferay IDE
+# Liferay IDE [](id=liferay-ide-lp-6-2-develop-tutorial)
 
 Liferay-specific tool is Liferay IDE, a fully featured Integrated Development
 Environment (IDE) based on Eclipse. Even if you're a grizzled veteran Java
