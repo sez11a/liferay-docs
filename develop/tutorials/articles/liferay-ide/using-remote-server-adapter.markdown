@@ -15,6 +15,8 @@ IDE](http://www.liferay.com/downloads/liferay-projects/liferay-ide) or
 Studio](http://www.liferay.com/group/customer/products/developer-studio). How's
 that for convenience! 
 
+![Figure 1: Liferay IDE's Remote Server Adapter lets you deploy plugins to remote servers, such as your test server or beta server.](../../images/remote-server-adapter-connector.png)
+
 Of course, it's possible to install the Remote IDE Connector application on a
 production server, but it creates an unnecessary security risk, so we don't
 recommend it. On a production server, you shouldn't update, or hot-fix, plugins
