@@ -38,7 +38,7 @@ appears.
 
 ---
 
-![note](../../images/01-tip.png) **Note:** The first time you create a project,
+![note](../../images/tip.png) **Note:** The first time you create a project,
 make sure you're online. In the background, Liferay's Plugins SDK downloads
 several `.jar` files that it needs in order to operate. This keeps the initial
 download small, but makes it take a long time to create your first project
@@ -406,7 +406,7 @@ entry.
 
 ---
 
-![tip](../../images/01-tip.png) **Note:** Clearly, portlet preferences and string
+![tip](../../images/tip.png) **Note:** Clearly, portlet preferences and string
 delimiters are not the best way to implement this. To learn about a proper
 implementation for saving data, follow the *Writing a Data-Driven Application*
 learning path. 
