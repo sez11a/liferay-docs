@@ -114,7 +114,7 @@ from an exploded `.war` file on the file system.
 
 ---
 
-![tip](../../images/01-tip.png) **Note:** This does not prevent Liferay from
+![tip](../../images/tip.png) **Note:** This does not prevent Liferay from
 running in a clustered environment on multiple JBoss servers. You can set up a
 cluster of Liferay instances running on JBoss 7.1 servers running in standalone
 mode. Please refer to the chapter of this guide on [Configuring Liferay for High

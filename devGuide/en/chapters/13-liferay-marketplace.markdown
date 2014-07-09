@@ -170,7 +170,7 @@ keep in mind:
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Important:** If you're developing a
+ ![Note](../../images/tip.png) **Important:** If you're developing a
  paid app or want your free app to satisfy Liferay's Plugin Security Manager,
  see the section [Understanding Plugin Security
  Management](https://www.liferay.com/documentation/liferay-portal/6.2/development/-/ai/understanding-plugin-security-management-liferay-portal-6-2-dev-guide-11-en),
@@ -269,7 +269,7 @@ your app works with.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** If you haven't yet done so,
+ ![Note](../../images/tip.png) **Note:** If you haven't yet done so,
  make sure to read the [Leveraging the
  Marketplace](https://www.liferay.com/documentation/liferay-portal/6.2/user-guide/-/ai/leveraging-the-liferay-marketplace-liferay-portal-6-2-user-guide-14-en)
  chapter of *Using Liferay Portal 6.2*! 
@@ -338,7 +338,7 @@ using this form: `liferay-versions=CE,CE,CE+,EE,EE,EE+` (where `CE` and `EE` are
 replaced with the corresponding Liferay Releases with which your app is
 compatible).
 
- ![Note](../../images/tip-pen-paper.png) **Note:** If your app is compatible
+ ![Note](../../images/tip.png) **Note:** If your app is compatible
  with both CE and EE, you must specify a set of versions for both CE and EE
  releases. If you only specify compatibility with CE, then your app will not be
  compatible with (and will fail to deploy to) any EE release.
@@ -354,7 +354,7 @@ and 6.1 EE release starting with EE GA3. Marketplace will create two packages,
 one that is compatible with the 6.1 CE GA3 release and *later*, and another that
 is compatible with 6.1 EE GA3 release and *later*.
 
- ![Note](../../images/tip-pen-paper.png)**Note:** Any CE or EE versions you
+ ![Note](../../images/tip.png)**Note:** Any CE or EE versions you
  include in your packaging directives *must* be terminated with a version using
  the `+` symbol.  This ensures that your app will be deployable onto future
  versions of Liferay (but does not guarantee your app will work in future
@@ -1184,7 +1184,7 @@ Here's how you generate a PACL policy for your plugin:
 
 ----
 
-![Note](../../images/tip-pen-paper.png) **Note:** There is a known issue
+![Note](../../images/tip.png) **Note:** There is a known issue
  [LPS-41716](https://issues.liferay.com/browse/LPS-41716) in which Liferay may
  need to be restarted after deploying your plugin, in order for the security
  manager to detect and write out the complete set of policies for a plugin. If

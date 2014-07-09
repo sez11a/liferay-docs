@@ -46,7 +46,7 @@ values there.
 
 ---
 
- ![Tip](../../images/01-tip.png)**Note:** This chapter documents a
+ ![Tip](../../images/tip.png)**Note:** This chapter documents a
  Liferay-specific cluster configuration, without getting into specific
  implementations of third party software, such as Java EE application servers,
  HTTP servers, and load balancers. Please consult your documentation for those
@@ -301,7 +301,7 @@ storing multiple versions of the document.
 
 ---
 
- ![Tip](../../images/01-tip.png)**Note:** The numeric file entry name of a
+ ![Tip](../../images/tip.png)**Note:** The numeric file entry name of a
  document is distinct from the document ID; be careful not to confuse the two!
  Each has an independent counter. The numeric file entry name of a document is
  used in the folder path for storing the document but the document ID is not.
@@ -1062,7 +1062,7 @@ separate search server or syncing the indexes on the nodes' file systems.
 
 ---
 
- ![Tip](../../images/01-tip.png)**Note:** MySQL users need to modify their JDBC
+ ![Tip](../../images/tip.png)**Note:** MySQL users need to modify their JDBC
  connection string for this to work. Add the following parameter to your
  connection string:
 

@@ -141,7 +141,7 @@ preference key named `showLocationAddress`.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** Make sure to declare the
+ ![Note](../../images/tip.png) **Note:** Make sure to declare the
  required taglib directives in your `configuration.jsp`, or `init.jsp` if one
  exists in your portlet.
 
@@ -212,7 +212,7 @@ method from the `DefaultConfigurationAction` class we're extending.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** You won't need to store
+ ![Note](../../images/tip.png) **Note:** You won't need to store
  portlet preferences by calling `preferences.store()` since they're
  automatically stored in the `DefaultConfigurationAction` class, which your
  configuration class extends.

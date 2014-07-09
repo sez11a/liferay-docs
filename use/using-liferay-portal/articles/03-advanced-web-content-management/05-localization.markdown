@@ -38,7 +38,7 @@ steps above to localize content, only fields within the structure that had the
 
 ---
 
- ![Note](../../images/01-tip.png) **Note:** The Localizable checkbox was removed
+ ![Note](../../images/tip.png) **Note:** The Localizable checkbox was removed
  for 6.2 CE GA1 and GA2, and 6.2 EE GA1, SP1, and SP2. However, the Localizable
  checkbox is now available for Liferay following these versions for web content
  structure fields. You can view

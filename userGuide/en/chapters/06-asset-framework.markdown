@@ -936,7 +936,7 @@ for more information.
 
 ---
 
- ![Tip](../../images/01-tip.png) **Tip:** When the Asset Publisher displays web
+ ![Tip](../../images/tip.png) **Tip:** When the Asset Publisher displays web
  content instances that have an associated small image, the small image becomes a
  link to the full instance.  To use this feature, add or edit a web content
  instance that the Asset Publisher should display. Before clicking *Publish*,
@@ -1010,7 +1010,7 @@ enable/disable the following options for displayed assets:
 
     ---
 
-     ![Tip](../../images/01-tip.png) **Tip:** An alternate way to add comments
+     ![Tip](../../images/tip.png) **Tip:** An alternate way to add comments
      and ratings to a page is through the *Page Comments* and *Page Ratings*
      portlets.  Just add the portlets in the appropriate location near the asset
      you'd like to have feedback for. Note that starting in Liferay 6.2, these
@@ -1106,7 +1106,7 @@ This Page* box. Also, for its display settings, set the Display Style to
 
 ---
 
- ![Note](../../images/01-tip.png) **Note:** Web content linked in the Asset
+ ![Note](../../images/tip.png) **Note:** Web content linked in the Asset
  Publisher can be viewed by clicking their asset links. With the *View in
 Context* behavior checked, the link displays the Web Content in its
 configured display page. If the web content does not have a configured display

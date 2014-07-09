@@ -62,7 +62,7 @@ latest Liferay CE Maven artifacts from source, follow these steps:
     
     ---
 
-    ![note](../../images/tip-pen-paper.png) **Note**: If you only plan to
+    ![note](../../images/tip.png) **Note**: If you only plan to
     install the Liferay artifacts locally and not deploy them, the
     `releases.[user name].properties` is not required 
 
@@ -91,7 +91,7 @@ latest Liferay CE Maven artifacts from source, follow these steps:
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Warning:** During the process of
+![note](../../images/tip.png) **Warning:** During the process of
  packaging up the `javadoc.jar` files for your Liferay artifacts, your machine
  may experience sluggish performance or an insufficient amount of Java heap
  space. There are two solutions to this problem:

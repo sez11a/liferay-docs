@@ -6,7 +6,7 @@ files, JavaScript files, CSS files, and images.
 
 ---
 
-![Important](../../images/tip-pen-paper.png) **Important:** Some resources have
+![Important](../../images/tip.png) **Important:** Some resources have
 additional requisites:
 
 - ***JSPF:*** Changes won't take effect unless you modify the JSP that

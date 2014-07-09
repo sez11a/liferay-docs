@@ -46,7 +46,7 @@ of the server.
 
 ---
 
-![Tip](../../images/01-tip.png) **Tip:** Note that Liferay *requires* JDK 6 or
+![Tip](../../images/tip.png) **Tip:** Note that Liferay *requires* JDK 6 or
 greater. Do not attempt to install Liferay 6.2 on an application server that
 runs under Java 5 or lower; it will not work. If you are running an
 application server that ships with a JDK and that JDK is version 5 or lower,

@@ -135,7 +135,7 @@ your remote (live) Liferay server.
 
 ---
 
- ![Tip](../../images/01-tip.png) **Tip:** In general, remote staging should be
+ ![Tip](../../images/tip.png) **Tip:** In general, remote staging should be
  enabled for a site as early as possible. It's generally *not* a good idea to
  add gigabytes of data into Liferay's CMS and then decide to turn on remote
  staging.  There's an existing issue that limits Liferay to less than 2G of data

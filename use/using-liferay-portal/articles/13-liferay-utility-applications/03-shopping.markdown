@@ -343,7 +343,7 @@ page.
 
 ---
 
-![Tip](../../images/01-tip.png) **Tip:** Make sure to create your affiliate
+![Tip](../../images/tip.png) **Tip:** Make sure to create your affiliate
 program before generating an access key; otherwise, the access key will not be
 linked to your affiliate program. 
 

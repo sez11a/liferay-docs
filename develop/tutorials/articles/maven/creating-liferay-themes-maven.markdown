@@ -35,7 +35,7 @@ tutorial, making sure to select *Theme* instead of *Portlet* as the plugin type.
 
 ---
 
-![tip](../../images/tip-pen-paper.png) **Tip**: If you're using Maven's
+![tip](../../images/tip.png) **Tip**: If you're using Maven's
 Archetype command line tool to generate your theme project, you can filter on
 group ID `liferay`, or even the group ID/artifact ID combination
 `liferay:theme`, to more easily find the Liferay portlet archetypes. 
@@ -123,7 +123,7 @@ tutorial.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** When you execute the *package*
+![note](../../images/tip.png) **Note:** When you execute the *package*
 goal, a WAR file is created; it's just like the Maven WAR type project.
 Simultaneously, the parent theme is downloaded and copied, and your theme's
 customizations are overlaid last. A thumbnail image of the theme is created and

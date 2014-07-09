@@ -83,7 +83,7 @@ order to make customizations to their applications and add business logic.
 
 ---
 
- ![Tip](../../images/tip-pen-paper.png) **Note:** You don't have to use Service
+ ![Tip](../../images/tip.png) **Note:** You don't have to use Service
  Builder for plugin or portlet development. It's entirely possible to develop
  Liferay plugins by writing custom code for database persistence using your
  persistence framework of choice, such as JPA or Hibernate.
@@ -209,7 +209,7 @@ page.
 
 ---
 
- ![Tip](../../images/tip-pen-paper.png) **Note:** If you're looking for
+ ![Tip](../../images/tip.png) **Note:** If you're looking for
  a fully-functional portlet application that can manage events, please 
  use Liferay's Calendar portlet instead. The example described in this section
  is only intended to demonstrate how to use Service Builder. The Calendar
@@ -415,7 +415,7 @@ entities, we'll set both local service and remote service to `true`.
 
 ---
 
- ![Tip](../../images/tip-pen-paper.png) **Tip:** Suppose you have an existing
+ ![Tip](../../images/tip.png) **Tip:** Suppose you have an existing
  DAO service for an entity built using some other framework such as JPA. You can
  set local service to `false` and remote service to `true` so that the methods
  of your remote `-Impl` class can call the methods of your existing DAO. This
@@ -737,7 +737,7 @@ throughout this chapter. The project resides in the
 
 ---
 
- ![Tip](../../images/tip-pen-paper.png) **Note:** On Windows, your Liferay
+ ![Tip](../../images/tip.png) **Note:** On Windows, your Liferay
  Portal instance and your Plugins SDK must be on the same drive in order to
  build services. E.g., if your Liferay Portal instance is on your `C:\` drive,
  your Plugins SDK must also be on your `C:\` drive in order for Service Builder

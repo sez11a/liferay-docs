@@ -60,7 +60,7 @@ using PubSub.
 
 ---
 
-![Note](../../images/tip-pen-paper.png) **Note:** Gadget-to-gadget communication
+![Note](../../images/tip.png) **Note:** Gadget-to-gadget communication
 using the publish-subscribe framework has been deprecated for Google gadgets:
 [https://developers.google.com/gadgets/docs/pubsub](https://developers.google.com/gadgets/docs/pubsub).
 However, PubSub is still the primary communication for gadgets and will be
@@ -154,7 +154,7 @@ for a user to allow communications between those gadgets and your portlets.
 
 ---
 
-![Note](../../images/tip-pen-paper.png) **Note:** The publish-subscribe
+![Note](../../images/tip.png) **Note:** The publish-subscribe
 framework has been deprecated for Google gadgets:
 [https://developers.google.com/gadgets/docs/pubsub](https://developers.google.com/gadgets/docs/pubsub).
 However, PubSub is still a primary communication mechanism between portlets and
@@ -176,7 +176,7 @@ possible?
 
 ---
 
-![Note](../../images/tip-pen-paper.png) **Note:** If you'd like to edit a
+![Note](../../images/tip.png) **Note:** If you'd like to edit a
 Liferay core portlet, it's not recommended to edit its code directly. Always
 customize Liferay core portlets using Liferay hooks.
 
@@ -208,7 +208,7 @@ Portal Directory portlet as a publisher to that channel.
 
 ---
 
-![Note](../../images/tip-pen-paper.png) **Note:** If you would like to broadcast
+![Note](../../images/tip.png) **Note:** If you would like to broadcast
 messages to portlets, follow the same guidelines, but don't use the `gadget:`
 prefix in your topic parameter value for the call to the `Liferay.fire()`
 function.

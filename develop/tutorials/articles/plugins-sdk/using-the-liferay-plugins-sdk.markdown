@@ -101,7 +101,7 @@ you specified doesn't end in "-portlet".
 
 ---
 
- ![Tip](../../images/tip-pen-paper.png) **Tip**: If you are using a source
+ ![Tip](../../images/tip.png) **Tip**: If you are using a source
  control system such as Subversion, CVS, Mercurial, Git, etc., this would be a
  good moment to do an initial check-in of your changes. After building the
  plugin for deployment, several additional files will be generated that should

@@ -152,7 +152,7 @@ the `liferay.com` Marketplace.
 
 ---
 
- ![Tip](../../images/01-tip.png) Your `liferay.com` Home page is a private page.
+ ![Tip](../../images/tip.png) Your `liferay.com` Home page is a private page.
  It's distinct from your public `liferay.com` Profile page.
 
 ---
@@ -361,7 +361,7 @@ can connect to the `liferay.com` Marketplace.
 
 ---
  
- ![Tip](../../images/01-tip.png) Tip: Any local user with administrative
+ ![Tip](../../images/tip.png) Tip: Any local user with administrative
  privileges can use the Marketplace to browse and install apps from the
  Marketplace, by entering their `liferay.com` credentials in the above login
  screen. This allows multiple administrators to manage the apps installed on the
@@ -567,7 +567,7 @@ specific file extension for web application bundles but they typically have a
 
 ---
 
- ![Tip](../../images/tip-pen-paper.png) **Note:** Liferay 6.2's OSGi runtime is
+ ![Tip](../../images/tip.png) **Note:** Liferay 6.2's OSGi runtime is
  experimental and unsupported. It should be considered a technology preview at
  this time. 
 

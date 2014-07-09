@@ -288,7 +288,7 @@ We'll call our new site template *Social Layout*. Click *Save*.
 
 ---
 
-![tip](../../images/01-tip.png) Tip: Unchecking *Allow Site Administrators to
+![tip](../../images/tip.png) Tip: Unchecking *Allow Site Administrators to
 Modify the Pages Associated with this Site Template* only prevents users from
 modifying the specific pages contained in the template but does not disable a
 user's ability to add or modify additional pages.

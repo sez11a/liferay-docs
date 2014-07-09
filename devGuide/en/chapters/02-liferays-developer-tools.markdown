@@ -212,7 +212,7 @@ these requirements before proceeding:
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** Earlier versions of Liferay
+ ![Note](../../images/tip.png) **Note:** Earlier versions of Liferay
  (e.g., 5.2.x) are not supported by the Liferay IDE. 
 
 ---
@@ -243,7 +243,7 @@ explain the easiest way to use the Plugins SDK: by running it from Liferay IDE.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** You can have multiple Plugins
+ ![Note](../../images/tip.png) **Note:** You can have multiple Plugins
  SDKs configured. You can set the default Plugins SDK by checking its box in the
  list of *Installed Liferay Plugin SDKs*.
 
@@ -731,7 +731,7 @@ we'll show you will still import them into your workspace.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** This section assumes that
+ ![Note](../../images/tip.png) **Note:** This section assumes that
  you've created projects with the Plugins SDK and are familiar with the
  directory structure used by the Plugins SDK. If you need to, check out the
  *Plugins SDK* section of this chapter; it comes right after this section. 
@@ -786,7 +786,7 @@ set up in Liferay IDE. You can use these steps:
 
     ---
 
-    ![Note](../../images/tip-pen-paper.png) **Note:** If your SDK isn't
+    ![Note](../../images/tip.png) **Note:** If your SDK isn't
     configured in Liferay IDE (i.e., it's not in the dropdown list of the
     *Import Projects* window), use the *Configure* link to add one. To configure
     a Plugins SDK from the Installed SDKs window, just click *Add* and then
@@ -827,7 +827,7 @@ the steps below.
 
     ---
 
-    ![Note](../../images/tip-pen-paper.png) **Note:** If no convert action is
+    ![Note](../../images/tip.png) **Note:** If no convert action is
     available, either the project is already a Liferay IDE project or it is not
     faceted (i.e., Java and Dynamic Web project facets are not yet configured
     for it). For instructions on resolving these issues, see the section
@@ -920,7 +920,7 @@ server to host the plugins you'll deploy to it.
 
 ---
 
- ![Important](../../images/tip-pen-paper.png) **Important:** Keep a record of
+ ![Important](../../images/tip.png) **Important:** Keep a record of
  your portal administrator login credentials (e.g., username/password) for your
  remote Liferay server; you'll need them to configure your connection from
  Liferay IDE to the remote Liferay server. 
@@ -1025,7 +1025,7 @@ Here's how to publish plugin projects to your remote server in Liferay IDE:
 
     ---
 
-    ![Note](../../images/tip-pen-paper.png) **Note:** Make sure you have
+    ![Note](../../images/tip.png) **Note:** Make sure you have
     available projects configured in Liferay IDE. If not, you'll get an error
     message indicating there are no available resources to add or remove from
     the server. 
@@ -1080,7 +1080,7 @@ Liferay Portal for development, our examples use the Tomcat bundle.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** In Liferay Developer Studio,
+ ![Note](../../images/tip.png) **Note:** In Liferay Developer Studio,
  the SDK is already installed and ready to use. Liferay Portal Enterprise
  Edition (EE) comes with Liferay Developer Studio and much more (see [CE vs. EE](http://www.liferay.com/downloads/liferay-portal/overview)). Download a
  [free trial](http://www.liferay.com/c/portal/register_trial_license?redirect=/products/liferay-portal/ee/30-day-trial)
@@ -1112,7 +1112,7 @@ Installation steps:
 
 ---
 
- ![Tip](../../images/tip-pen-paper.png) **Tip**: By default, Liferay Portal
+ ![Tip](../../images/tip.png) **Tip**: By default, Liferay Portal
  Community Edition comes bundled with many plugins. It's common to remove them
  to speed up the server start-up. Just navigate to the
  `liferay-portal-[version]/tomcat-[tomcat-version]/webapps` directory and delete
@@ -1298,7 +1298,7 @@ appends "-portlet" to the project name when creating its directory.
 
 ---
 
- ![Tip](../../images/tip-pen-paper.png) **Tip**: If you are using a source
+ ![Tip](../../images/tip.png) **Tip**: If you are using a source
  control system such as Subversion, CVS, Mercurial, Git, etc., this would be a
  good moment to do an initial check-in of your changes. After building the
  plugin for deployment, several additional files will be generated that should
@@ -1521,7 +1521,7 @@ To create a repository using Nexus, follow these steps:
 
     ![Figure 2.20: Adding a repository to hold your Liferay artifacts is easy with Nexus OSS.](../../images/maven-nexus-create-repo.png)
 
-    ![note](../../images/tip-pen-paper.png) **Note:** To learn more about each
+    ![note](../../images/tip.png) **Note:** To learn more about each
     type of Nexus repository, read Sonatype's *Managing Repositories* at
     [http://www.sonatype.com/books/nexus-book/reference/confignx-sect-manage-repo.html](http://www.sonatype.com/books/nexus-book/reference/confignx-sect-manage-repo.html).
 
@@ -1572,7 +1572,7 @@ artifacts.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** You only need to configure a
+![note](../../images/tip.png) **Note:** You only need to configure a
 repository server if you're installing downloaded Liferay CE/EE artifacts from
 a zip file or if you want to share artifacts (e.g., Liferay artifacts and/or
 your plugins) with others. If you're automatically installing Liferay CE
@@ -1616,7 +1616,7 @@ server, do the following:
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** The username `admin` and
+![note](../../images/tip.png) **Note:** The username `admin` and
 password `admin123` are the credentials of the default Nexus OSS administrator
 account. If you changed these credentials for your Nexus server, make sure to
 update `settings.xml` with these changes.
@@ -1647,7 +1647,7 @@ options.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** The EE and CE zip files are a
+![note](../../images/tip.png) **Note:** The EE and CE zip files are a
 means to *install* the artifacts to a Maven repository of your choice. In the
 next few sections, we'll demonstrate the zip file and Central Repository
 installation options. 
@@ -1774,7 +1774,7 @@ latest Liferay CE Maven artifacts from source, follow these steps:
     
     ---
 
-    ![note](../../images/tip-pen-paper.png) **Note**: The `releases.[user
+    ![note](../../images/tip.png) **Note**: The `releases.[user
     name].properties` is not required if you only plan to install the Liferay
     artifacts locally and not deploy them. 
 
@@ -1798,7 +1798,7 @@ latest Liferay CE Maven artifacts from source, follow these steps:
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Warning:** During the process of
+![note](../../images/tip.png) **Warning:** During the process of
  packaging up the `javadoc.jar` files for your Liferay artifacts, your machine
  may experience sluggish performance or an insufficient amount of Java heap
  space. There are two solutions to this problem:
@@ -1956,7 +1956,7 @@ First, specify the Liferay Repository's credentials in your project's parent
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Important:** Do not leave the Liferay
+![note](../../images/tip.png) **Important:** Do not leave the Liferay
 repository configured when publishing artifacts to Maven Central. You must
 comment out the Liferay Repository credentials when publishing your artifacts.
 
@@ -1982,7 +1982,7 @@ how.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Important:** Currently, the *GA1*
+![note](../../images/tip.png) **Important:** Currently, the *GA1*
 Liferay Maven artifacts are not available in Maven's Central Repository. The
 Central Repository is only synced to Liferay's *6.2.0-RC5* release. As a current
 workaround to accessing Liferay's *6.2 GA1* artifacts, please reference the
@@ -2085,7 +2085,7 @@ can import an existing Maven project by navigating to *File* &rarr; *Import*
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** Due to the lifecycle mapping
+![note](../../images/tip.png) **Note:** Due to the lifecycle mapping
 of Eclipse and Maven, it is unsafe to manually insert or overwrite the
 `.classpath` and `.project` files and `.settings` folder. IDE automatically
 generates these files when a project is imported and updates them appropriately.
@@ -2396,7 +2396,7 @@ that refer to this parent) can leverage these dependencies.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** You could just as easily
+![note](../../images/tip.png) **Note:** You could just as easily
 include such dependencies in the POM of each of your plugin projects, but
 specifying them in a parent project makes them accessible to child projects
 through inheritance. 
@@ -2420,7 +2420,7 @@ below to generate Liferay plugin projects of any type.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** Make sure Maven is installed
+![note](../../images/tip.png) **Note:** Make sure Maven is installed
  and that its executable is in your `$PATH` environment variable. 
 
 ---
@@ -2493,7 +2493,7 @@ plugins using the command line.
 
     ---
 
-    ![note](../../images/tip-pen-paper.png) **Note:** If you haven't already
+    ![note](../../images/tip.png) **Note:** If you haven't already
     created a parent project, you may want to consider creating one to share
     common project information. See section *Using a Parent Plugin Project* for
     details.
@@ -2506,7 +2506,7 @@ plugins using the command line.
 
     ---
     
-    ![note](../../images/tip-pen-paper.png) **Important:** Currently, the new
+    ![note](../../images/tip.png) **Important:** Currently, the new
     GA1 artifacts for CE and EE are only available from
     [repository.liferay.com](repository.liferay.com). Therefore, you must use
     the `-DarchetypeCatalog=...` portion to access the Liferay Repository.
@@ -2660,7 +2660,7 @@ the Liferay Repository, the newest archetype version is automatically selected.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** The archetype file is
+![note](../../images/tip.png) **Note:** The archetype file is
 downloaded and installed automatically to your local repository (e.g.,
 `.m2/repository/com/liferay/maven/archetypes/[archetype]`). If you
 configured a mirror pointing to your public repository on Nexus, the
@@ -2760,7 +2760,7 @@ these steps:
 
     ---
  
-    ![note](../../images/tip-pen-paper.png) **Note:** If you get the following
+    ![note](../../images/tip.png) **Note:** If you get the following
     error after executing `mvn liferay:deploy`, make sure you're executing the
     command from your plugin's directory (e.g., `sample-portlet`)--not your
     parent project's directory. 
@@ -2808,7 +2808,7 @@ Your plugin is now available in your Nexus repository!
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** There are three build phases
+![note](../../images/tip.png) **Note:** There are three build phases
 you'll use when developing plugins with Maven: 
 
 - In Maven's *compile* phase, explicit dependencies are downloaded to your
@@ -2844,7 +2844,7 @@ with Maven* section.
 
 ---
 
-![tip](../../images/tip-pen-paper.png) **Tip**: As you use Maven's Archetype
+![tip](../../images/tip.png) **Tip**: As you use Maven's Archetype
 tool to generate your portlet project, you can filter on group ID `liferay`, or
 even the group ID/artifact ID combination `liferay:portlet`, to 
 find the Liferay portlet archetypes more easily. 
@@ -2935,7 +2935,7 @@ with Maven* section, making sure to select *Theme* as the plugin type.
 
 ---
 
-![tip](../../images/tip-pen-paper.png) **Tip**: As you use Maven's Archetype
+![tip](../../images/tip.png) **Tip**: As you use Maven's Archetype
 tool to generate your theme project, you can filter on group ID `liferay`, or
 even the group ID/artifact ID combination `liferay:theme`, to more easily
 find the Liferay portlet archetypes. 
@@ -3011,7 +3011,7 @@ Plugins with Maven* section.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** When you execute the *package*
+![note](../../images/tip.png) **Note:** When you execute the *package*
 goal, a WAR file is created; it's just like the Maven WAR type project.
 Simultaneously, the parent theme is downloaded and copied, and your theme's
 customizations are overlaid last. A thumbnail image of the theme is created and
@@ -3043,7 +3043,7 @@ the plugin type.
 
 ---
 
-![tip](../../images/tip-pen-paper.png) **Tip**: As you use Maven's Archetype
+![tip](../../images/tip.png) **Tip**: As you use Maven's Archetype
 tool to generate your hook you can filter on group ID `liferay`, or even the
 group ID/artifact ID combination `liferay:hook`, to more easily find the
 Liferay portlet archetypes. 
@@ -3130,7 +3130,7 @@ plugin type.
 
 ---
 
-![tip](../../images/tip-pen-paper.png) **Tip**: As you use Maven's Archetype
+![tip](../../images/tip.png) **Tip**: As you use Maven's Archetype
 tool to generate your layout template project, you can filter on group ID
 `liferay`, or even group ID / artifact ID combination `liferay:layout`, to find
 the Liferay layout template archetypes.

@@ -226,7 +226,7 @@ First, specify the Liferay Repository's credentials in your project's parent
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Important:** Do not leave the Liferay
+![note](../../images/tip.png) **Important:** Do not leave the Liferay
 repository configured when publishing artifacts to Maven Central. You must
 comment out the Liferay Repository credentials when publishing your artifacts.
 
@@ -252,7 +252,7 @@ how.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** Sometimes, the Liferay Maven
+![note](../../images/tip.png) **Note:** Sometimes, the Liferay Maven
 artifacts for a release are not immediately available on Maven's Central
 Repository. The Central Repository might still be synced to a previous release
 of Liferay. If this occurs, just download the Liferay Maven artifacts from

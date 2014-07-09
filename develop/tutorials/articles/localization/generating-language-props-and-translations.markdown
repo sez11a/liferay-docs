@@ -115,7 +115,7 @@ your property's new value.
 
 ---
 
-![Note](../../images/tip-pen-paper.png) **Note:** If you're Mavenizing your
+![Note](../../images/tip.png) **Note:** If you're Mavenizing your
 portlet, you must manually copy the translations to your deployed application.
 Copy your `content` folder into your portlet's
 `src/main/webapp/WEB-INF/classes` folder. 

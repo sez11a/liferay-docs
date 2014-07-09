@@ -298,7 +298,7 @@ are from different portlets (e.g. portlets from different developers).
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** Each role named in a
+ ![Note](../../images/tip.png) **Note:** Each role named in a
  portlet's `<security-role-ref>` element is given permission to add the portlet
  to a page. 
 
@@ -1070,7 +1070,7 @@ search for a tag or create a new one or select an existing category.
 
 ---
 
- ![Tip](../../images/tip-pen-paper.png) **Tip:** If you're using Liferay's
+ ![Tip](../../images/tip.png) **Tip:** If you're using Liferay's
  AlloyUI Form taglibs, creating fields to enter tags and categories is even
  simpler. You just use `<aui:input name="tags" type="assetTags" />` and
  `<aui:input name="categories" type="assetCategories" />`, respectively. 
@@ -1629,7 +1629,7 @@ file for examples of defining trash handlers.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** Notice that the album trash
+![note](../../images/tip.png) **Note:** Notice that the album trash
 handler is also specified within the Songs portlet. This was done for
 organizational purposes. A trash handler refers to an entity, not a portlet.
 Thus, a trash handler can be declared in any of a plugin's portlets. For
@@ -1718,7 +1718,7 @@ their original location, but with their visibility turned off.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** If you're not using assets
+![note](../../images/tip.png) **Note:** If you're not using assets
 with your entity, you'll need to filter the elements in your UI by status, so
 only approved entities are shown. Otherwise, your app will display approved
 entities and trashed entities together. Only assets can use the
@@ -1993,7 +1993,7 @@ click the song's *Restore* button.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** Sometimes, conflicts can occur
+![note](../../images/tip.png) **Note:** Sometimes, conflicts can occur
 when restoring entries. For instance, suppose you create a file with the same
 name of a file that you've trashed. Although the file is in the Recycle Bin,
 it's still present in its original location, but with its status changed and
@@ -2541,7 +2541,7 @@ Configuration of Message Bus is done using the following files:
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** The internal file
+![note](../../images/tip.png) **Note:** The internal file
 `META-INF/messaging-core-spring.xml` of `portal-impl.jar` specifies the default
 Message Bus class, default asynchronous message sender class, and default
 synchronous message sender class for Liferay. 

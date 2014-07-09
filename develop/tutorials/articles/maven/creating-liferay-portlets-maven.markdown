@@ -13,7 +13,7 @@ tutorial, making sure to select *Portlet* as the plugin type.
 
 ---
 
-![tip](../../images/tip-pen-paper.png) **Tip**: If you're using Maven's
+![tip](../../images/tip.png) **Tip**: If you're using Maven's
 Archetype command line tool to generate your portlet project, you can filter on
 the group ID `liferay`, or even the group ID/artifact ID combination
 `liferay:portlet`, to find the Liferay portlet archetypes more easily. 

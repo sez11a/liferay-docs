@@ -78,7 +78,7 @@ tutorial explain the process. Just follow these steps:
 
     ---
  
-    ![note](../../images/tip-pen-paper.png) **Note:** If you get the following
+    ![note](../../images/tip.png) **Note:** If you get the following
     error after executing `mvn liferay:deploy`, make sure you're executing the
     command from your plugin's directory (e.g., `sample-portlet`)--not your
     parent project's directory. 
@@ -126,7 +126,7 @@ Your plugin is now available in your Nexus repository!
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** There are three build phases
+![note](../../images/tip.png) **Note:** There are three build phases
 you'll use when developing plugins with Maven: 
 
 - In Maven's *compile* phase, explicit dependencies are downloaded to your

@@ -133,7 +133,7 @@ configuration, and we encourage you to keep your projects in the Plugins SDK.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png) **Tip**: If you are using a source
+ ![tip](../../images/tip.png) **Tip**: If you are using a source
  control system such as Subversion, CVS, Mercurial, Git, etc., this might be
  a good moment to do an initial check-in of your changes. After building the
  plugin for deployment, several additional files will be generated that should
@@ -151,7 +151,7 @@ is a method of deployment used throughout this guide.
 
 ---
 
- ![note](../../images/tip-pen-paper.png) **Note:** Liferay supports a wide
+ ![note](../../images/tip.png) **Note:** Liferay supports a wide
  variety of application servers. Many, such as Tomcat and Jboss, provide a
  simple way to deploy web applications by just copying a file into a folder and
  Liferay's auto-deploy mechanism takes advantage of that ability. You should be
@@ -353,7 +353,7 @@ Here's a basic summary of what each element represents:
 
     ---
     
-    ![note](../../images/tip-pen-paper.png) **Note:** You should not specify
+    ![note](../../images/tip.png) **Note:** You should not specify
     values for a portlet's title, short title, and keywords in both a portlet's 
     `<portlet-info>` element in `portlet.xml` and in a resource bundle. If you
     do so unintentionally, the values in the resource bundle take precedence over the
@@ -534,7 +534,7 @@ portlet to save and display a custom greeting.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png) **Tip:** If your portlet deployed
+ ![tip](../../images/tip.png) **Tip:** If your portlet deployed
  successfully, but you don't see any changes in your browser after refreshing
  the page, Tomcat may have failed to rebuild your JSPs. To fix this, delete the
 `work` folder in `liferay-portal-[version]/tomcat-[tomcat-version]` and refresh
@@ -621,7 +621,7 @@ the Liferay's Portlet 2.0 Javadocs at
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** For the purpose of making
+![note](../../images/tip.png) **Note:** For the purpose of making
 our example easy to follow, we cheated a little bit. The portlet specification
 doesn't allow setting preferences from a JSP, because they are executed in what
 is known as the render state. There are good reasons for this restriction, and
@@ -826,7 +826,7 @@ phase you must read them from the `actionRequest` and then invoke the
 
 ---
 
- ![tip](../../images/tip-pen-paper.png) **Tip:** Liferay offers a convenient
+ ![tip](../../images/tip.png) **Tip:** Liferay offers a convenient
  extension to the portlet specification through the `MVCPortlet` class to copy
  all action parameters directly as render parameters. You can achieve this by
  setting the following `init-param` in your `portlet.xml`:
@@ -1295,7 +1295,7 @@ are accessible from either of the portlets.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** It's best to use the Liferay
+ ![Note](../../images/tip.png) **Note:** It's best to use the Liferay
  naming convention for language bundle file and folder so your portlets can
  access the bundle and you can use the automatic language building capabilities
  of Liferay IDE and the Plugins SDK with the bundle. 
@@ -1369,7 +1369,7 @@ translations in the same folder as your `Language.properties` file.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** Since translations aren't generated
+ ![Note](../../images/tip.png) **Note:** Since translations aren't generated
  for existing properties, use two steps if you need to edit existing properties.
  First, remove the properties from `Language.properties` and run `ant
  build-lang` to remove the properties from all the other resource bundles. Then
@@ -1380,7 +1380,7 @@ translations in the same folder as your `Language.properties` file.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** If you're Mavenizing your
+ ![Note](../../images/tip.png) **Note:** If you're Mavenizing your
  portlet, make sure to copy your `content` folder into your portlet's
  `src/main/webapp/WEB-INF/classes` folder. 
 
@@ -1417,7 +1417,7 @@ description values.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** If your project only has one
+ ![Note](../../images/tip.png) **Note:** If your project only has one
  portlet, it's best to put your resource bundle directly in the `content`
  folder. Specifying your bundle in file `content/Language.properties` lets you
  leverage the Plugins SDK's language building capabilities, via right-clicking
@@ -1514,7 +1514,7 @@ You're becoming an expert localizer!
 
 ---
 
- ![Tip](../../images/tip-pen-paper.png)**Tip:** Do you know how your portlet
+ ![Tip](../../images/tip.png)**Tip:** Do you know how your portlet
  title is processed? If your portlet doesn't define a resource bundle or
  `javax.portlet.title`, the portal container next checks the `<portlet-info>`
  and inner `<portlet-title>` node in the `portlet.xml` descriptor. If they're
@@ -1524,7 +1524,7 @@ You're becoming an expert localizer!
 
 ---
 
- ![Note](../../images/tip-pen-paper.png)**Note:** Be aware that using Struts
+ ![Note](../../images/tip.png)**Note:** Be aware that using Struts
  portlet and referring to a `StrutsResource` bundle in your `portlet.xml`
  engages a different title and description algorithm. Titles and long titles are
  pulled using two different keys:
@@ -1750,7 +1750,7 @@ method from the `DefaultConfigurationAction` class we're extending.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** You won't need to store
+ ![Note](../../images/tip.png) **Note:** You won't need to store
  portlet preferences by calling `preferences.store()` since they're
  automatically stored in the `DefaultConfigurationAction` class, which your
  configuration class extends.

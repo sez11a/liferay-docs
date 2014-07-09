@@ -50,7 +50,7 @@ defined in `portal.properties`. It's time to get started!
 
     ---
 
-    ![Important](../../images/tip-pen-paper.png) **Important:** If your action
+    ![Important](../../images/tip.png) **Important:** If your action
     access the `HttpServletRequest` object, extend
     `com.liferay.portal.kernel.events.Action`; otherwise, extend 
     `com.liferay.portal.struts.SimpleAction`. 
@@ -70,7 +70,7 @@ defined in `portal.properties`. It's time to get started!
 
     ---
 
-    ![Important](../../images/tip-pen-paper.png) **Important:** Since portal
+    ![Important](../../images/tip.png) **Important:** Since portal
     properties like `login.events.pre` accept *multiple* values, you must
     append your values to the existing values. You can repeatedly modify 
     the properties from additional hooks. 

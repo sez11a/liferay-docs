@@ -16,7 +16,7 @@ Follow these steps to create a Liferay plugin from the command line:
 
     ---
 
-    ![note](../../images/tip-pen-paper.png) **Note:** If you haven't already
+    ![note](../../images/tip.png) **Note:** If you haven't already
     created a parent project, you may want to consider creating one to share
     common project information. See the
     [Using Liferay Maven Parent Plugin Projects](https://www-ldn.liferay.com/develop/tutorials/-/knowledge_base/using-liferay-maven-parent-plugin-projects-lp-6-2-develop-tutorial)
@@ -30,7 +30,7 @@ Follow these steps to create a Liferay plugin from the command line:
 
     ---
 
-    ![note](../../images/tip-pen-paper.png) **Important:** Sometimes, after a
+    ![note](../../images/tip.png) **Important:** Sometimes, after a
     new Liferay release, the Liferay CE and EE artifacts might only be available
     from [repository.liferay.com](repository.liferay.com). In this case, you
     must use the `-DarchetypeCatalog=...` option to access the Liferay
@@ -183,7 +183,7 @@ the Liferay Repository, the newest archetype version is automatically selected.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** The archetype file is
+![note](../../images/tip.png) **Note:** The archetype file is
 downloaded and installed automatically to your local repository (e.g.,
 `.m2/repository/com/liferay/maven/archetypes/[archetype]`). If you
 configured a mirror pointing to your public repository on Nexus, the

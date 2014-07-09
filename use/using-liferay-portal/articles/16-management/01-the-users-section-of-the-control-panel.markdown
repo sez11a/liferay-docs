@@ -234,7 +234,7 @@ the currently configured parent.
 
 ---
 
- ![Tip](../../images/01-tip.png) **Tip:** By creating an organization, you
+ ![Tip](../../images/tip.png) **Tip:** By creating an organization, you
  automatically become both a member and receive the Organization Owner role,
  which gives you full administrative rights within the organization. This means
  that you can, for example, appoint other users to be organization

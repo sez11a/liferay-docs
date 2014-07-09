@@ -19,7 +19,7 @@ to include resources with your theme.
 
 ---
 
-![Note](../../images/tip-pen-paper.png) **Note:** The resources importer can be
+![Note](../../images/tip.png) **Note:** The resources importer can be
 used in any type of plugin project to import resources. Importing resources
 within a theme plugin is just one of the more common use cases. To learn how to
 use the resources importer in other types of plugins, please see the
@@ -45,7 +45,7 @@ Marketplace app.
 
 ---
 
-![Tip](../../images/tip-pen-paper.png) **Tip:** If you deploy a theme to your
+![Tip](../../images/tip.png) **Tip:** If you deploy a theme to your
 Liferay Portal instance and don't have the resources importer already deployed,
 you might see a message like this:
  
@@ -90,7 +90,7 @@ into a site template, you can specify the following in your
 
 ---
 
-![warning](../../images/tip-pen-paper.png) **Warning:** If you're developing
+![warning](../../images/tip.png) **Warning:** If you're developing
 themes for Liferay Marketplace, don't configure your theme to import resources
 directly into a site. Instead, use the default: import the resources into a
 site template. Do this by commenting out the

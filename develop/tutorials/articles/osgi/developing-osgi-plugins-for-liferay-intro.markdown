@@ -16,7 +16,7 @@ custom OSGi plugins for Liferay.
 
 ---
 
-![Tip](../../images/tip-pen-paper.png) **Note:** Liferay 6.2's OSGi runtime is
+![Tip](../../images/tip.png) **Note:** Liferay 6.2's OSGi runtime is
 experimental and unsupported. It should be considered a technology preview at
 this time. 
 

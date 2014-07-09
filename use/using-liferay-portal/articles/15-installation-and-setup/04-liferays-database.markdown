@@ -28,7 +28,7 @@ can skip to the next section.
 
 ---
 
-![Tip](../../images/01-tip.png) **Note:** The below instructions are not the
+![Tip](../../images/tip.png) **Note:** The below instructions are not the
 recommended set up for Liferay installations, but the procedure is documented
 here so enterprises with more restrictive standards can install Liferay with
 more strict--but suboptimal--database settings. If it's at all possible,

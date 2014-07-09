@@ -199,7 +199,7 @@ Liferay.
 	
     ---
 
-    ![note](../../images/01-tip.png) **Note:** The above resource definition
+    ![note](../../images/tip.png) **Note:** The above resource definition
     assumes your database name is *lportal* and your MySQL username and password
     are both *root*. You'll have to update these values with your own database name
     and credentials.

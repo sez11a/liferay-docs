@@ -17,7 +17,7 @@ This tutorial shows the steps required to accomplish this.
 
     ---
 
-    ![Note](../../images/tip-pen-paper.png) **Note:** If no convert action is
+    ![Note](../../images/tip.png) **Note:** If no convert action is
     available, either the project is already a Liferay IDE project or it is not
     faceted (i.e., Java and Dynamic Web project facets are not yet configured
     for it). For instructions on resolving these issues, see the
