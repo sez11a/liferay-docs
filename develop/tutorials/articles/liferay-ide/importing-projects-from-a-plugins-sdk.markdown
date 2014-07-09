@@ -13,7 +13,7 @@ Plugins SDK project into your workspace.
 <!--
 ---
 
-![Note](../../images/tip-pen-paper.png) **Note:** This section assumes that
+![Note](../../images/tip.png) **Note:** This section assumes that
 you've created projects with the Plugins SDK and are familiar with the
 directory structure used by the Plugins SDK. If you need to, check out the
 *Plugins SDK* section of this chapter; it comes right after this section. 
@@ -77,7 +77,7 @@ you've already set up in Liferay IDE. Follow these steps:
 
     ---
 
-    ![Note](../../images/tip-pen-paper.png) **Note:** If your Plugins SDK isn't
+    ![Note](../../images/tip.png) **Note:** If your Plugins SDK isn't
     configured in Liferay IDE (i.e., it's not in the dropdown list of the
     *Import Projects* window), use the *Configure* link to add one. To configure
     a Plugins SDK from the Installed SDKs window, just click *Add* and then

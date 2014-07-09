@@ -91,7 +91,7 @@ are accessible from either of the portlets.
 
 ---
 
-![Note](../../images/tip-pen-paper.png) **Note:** It's best to use the Liferay
+![Note](../../images/tip.png) **Note:** It's best to use the Liferay
 naming convention for the language bundle file and folder so your portlets can
 access the bundle and you can use the automatic language building capabilities
 of Liferay IDE and the Plugins SDK with the bundle. 

@@ -206,7 +206,7 @@ Follow these steps to create a Liferay Maven parent plugin project:
 
     ---
 
-    ![note](../../images/tip-pen-paper.png) **Note:** You could just as easily
+    ![note](../../images/tip.png) **Note:** You could just as easily
     include such dependencies in the POM of each of your plugin projects, but
     specifying them in a parent project makes them accessible to child projects
     through inheritance. 

@@ -80,7 +80,7 @@ source code.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** Due to the lifecycle mapping
+![note](../../images/tip.png) **Note:** Due to the lifecycle mapping
 of Eclipse and Maven, it is unsafe to manually insert or overwrite the
 `.classpath` file, `.project` file, and `.settings` folder. IDE automatically
 generates these files when a project is imported and updates them appropriately.

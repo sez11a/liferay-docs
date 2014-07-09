@@ -226,7 +226,7 @@ Here is MultiMarkdown-like source for an example table:
 	  foo     | bar            | single quotes | 'yes' |
 	  foo     | bar            | code          | `System.out.println()` |
 	  foo     | bar            | link          | [Liferay.com](http://liferay.com) |
-	  foo     | bar            | image         | ![tip](../../images/tip-pen-paper.png)|
+	  foo     | bar            | image         | ![tip](../../images/tip.png)|
 
 Here is the table rendered in Github ...
 

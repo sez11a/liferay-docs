@@ -29,7 +29,7 @@ create one resource bundle for the title and another one for the description.
 
 ---
 
-![Note](../../images/tip-pen-paper.png) **Note:** If your project only has one
+![Note](../../images/tip.png) **Note:** If your project only has one
 portlet, it's best to put your resource bundle directly in the `content`
 folder. Specifying your bundle in the file `content/Language.properties` lets
 you leverage the Plugins SDK's language building capabilities, via
@@ -144,7 +144,7 @@ You're becoming an expert localizer!
 
 ---
 
-![Tip](../../images/tip-pen-paper.png)**Tip:** Do you know how your portlet
+![Tip](../../images/tip.png)**Tip:** Do you know how your portlet
 title is processed? If your portlet doesn't define a resource bundle or
 `javax.portlet.title`, the portal container next checks the `<portlet-info>`
 and inner `<portlet-title>` node in the `portlet.xml` descriptor. If they're
@@ -154,7 +154,7 @@ missing too, the `<portlet-name>` node value is rendered as the portlet title.
 
 ---
 
-![Note](../../images/tip-pen-paper.png)**Note:** Be aware that using a Struts 
+![Note](../../images/tip.png)**Note:** Be aware that using a Struts 
 portlet and referring to a `StrutsResource` bundle in your `portlet.xml`
 engages a different title and description algorithm. Titles and long titles are
 pulled using the following respective keys:

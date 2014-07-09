@@ -324,7 +324,7 @@ this runtime environment, they start in Development Mode.
 
 ---
 
-![tip](../../images/tip-pen-paper.png) **Warning:** Only change the Server Mode
+![tip](../../images/tip.png) **Warning:** Only change the Server Mode
 from within the runtime environment's Liferay settings section. On server
 startup, if Standard mode is set in Liferay Developer Studio/IDE the 
 `portal-developer.properties` file is not included for overriding portal
@@ -485,7 +485,7 @@ company's name in the footer of your site's pages:
 
     ---
 
-    ![note](../../images/tip-pen-paper.png) **Note:** Let's look more closely
+    ![note](../../images/tip.png) **Note:** Let's look more closely
     at two theme setting variables appearing in the above logic. The
     `display-slogan-footer` variable holds a boolean value indicating whether
     to display the version of the footer that contains your slogan. The
@@ -512,7 +512,7 @@ company's name in the footer of your site's pages:
 
 ---
 
-![tip](../../images/tip-pen-paper.png) **Warning:** Make sure you have an
+![tip](../../images/tip.png) **Warning:** Make sure you have an
 up-to-date DTD version specified for your `liferay-look-and-feel.xml` file.
 For example, `http://www.liferay.com/dtd/liferay-look-and-feel_6_2_0.dtd`. When
 referencing older DTD files (e.g., 6.0.0), the slogan settings are unavailable.
@@ -533,7 +533,7 @@ footer, including the slogan.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** Use a language properties
+![note](../../images/tip.png) **Note:** Use a language properties
 hook to display configurable theme settings properly, like the slogan text area
 and footer checkbox from the previous example. For details, see the [Overriding
 a *Language.properties*
@@ -609,7 +609,7 @@ doctype for the following predefined settings to work correctly.
 
 ---
 
-![note](../../images/tip-pen-paper.png) **Note:** To override default behavior
+![note](../../images/tip.png) **Note:** To override default behavior
 for individual portlets, you can modify the a portlet's `liferay-portlet.xml`
 file.
 
@@ -806,7 +806,7 @@ to include resources with your theme.
 
 ---
 
-![Note](../../images/tip-pen-paper.png) **Note:** The resources importer can be
+![Note](../../images/tip.png) **Note:** The resources importer can be
 used in any type of plugin project to import resources. Importing resources
 within a theme plugin is just one of the more common use cases.
 
@@ -829,7 +829,7 @@ Marketplace app.
 
 ---
 
-![Tip](../../images/tip-pen-paper.png) **Tip:** If you deploy a theme to your
+![Tip](../../images/tip.png) **Tip:** If you deploy a theme to your
 Liferay Portal instance and don't have the resources importer already deployed,
 you might see a message like this:
  
@@ -874,7 +874,7 @@ into a site template, you can specify the following in your
 
 ---
 
-![warning](../../images/tip-pen-paper.png) **Warning:** If you're developing
+![warning](../../images/tip.png) **Warning:** If you're developing
 themes for Liferay Marketplace, don't configure your theme to import resources
 directly into a site. Instead, use the default: import the resources into a
 site template. Do this by commenting out the

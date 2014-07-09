@@ -164,7 +164,7 @@ libraries.
 
 ---
 
-![Note](../../images/tip-pen-paper.png) **Note:** This configuration capability
+![Note](../../images/tip.png) **Note:** This configuration capability
 is only available for Android apps that were created using the ADT plugin for
 Eclipse. The action will not work for Android apps built with Gradle or Maven,
 but you can still manually configure your project to use the Mobile SDK. For
@@ -351,7 +351,7 @@ the user's email address.
 
 ---
 
-![Note](../../images/tip-pen-paper.png) **Warning:** Take care when using 
+![Note](../../images/tip.png) **Warning:** Take care when using 
 administrator credentials on a production Liferay instance, as you'll have
 permission to call any service. Make sure not to modify data accidentally. Of
 course, the default administrator credentials should be disabled on a production
@@ -405,7 +405,7 @@ the `groupId` parameter in the call `userService.getGroupUsers(groupId)`.
 
 ---
 
-![Note](../../images/tip-pen-paper.png) **Note:** Many service methods
+![Note](../../images/tip.png) **Note:** Many service methods
 require a group ID as a parameter. The SDK's `GroupService` class, which uses
 Liferay Portal's
 [`GroupService`](http://docs.liferay.com/portal/6.2/javadocs/com/liferay/portal/service/GroupService.html),
@@ -494,7 +494,7 @@ transform method and handle JSON parsing yourself.
 
 ---
 
-![Note](../../images/tip-pen-paper.png) **Note:** If you still don't want to use
+![Note](../../images/tip.png) **Note:** If you still don't want to use
 any of these callbacks, you can implement `AsyncTaskCallback` directly, but be
 careful, you should always get the first element of the `JSONArray` passed as a
 parameter to the `onPostExecute(JSONArray jsonArray)` method (i.e.,
@@ -655,7 +655,7 @@ Service method return types can be `void`, `NSString`, `NSArray`,
 
 ---
 
-![Note](../../images/tip-pen-paper.png) **Note:** Many service methods
+![Note](../../images/tip.png) **Note:** Many service methods
 require a group ID as a parameter. 
 You can call `[LRGroupService_v62 getUserSitesGroups:&error]`, which uses
 Liferay Portal's

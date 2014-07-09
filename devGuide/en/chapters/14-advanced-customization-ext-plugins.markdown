@@ -184,7 +184,7 @@ significant:
 
 ---
 
- ![tip](../../images/tip-pen-paper.png) **Tip:** After creating an Ext plugin,
+ ![tip](../../images/tip.png) **Tip:** After creating an Ext plugin,
  remove the files you don't need to customize from
  `docroot/WEB-INF/ext-web/docroot/WEB-INF`. Liferay keeps track of the files
  deployed by each Ext plugin and won't let you deploy multiple Ext plugins that
@@ -264,7 +264,7 @@ property value.
 
 ---
 
- ![note](../../images/tip-pen-paper.png) **Note:** Some Liferay bundles come
+ ![note](../../images/tip.png) **Note:** Some Liferay bundles come
  installed with a sample website. It's useful for showcasing certain features of
  Liferay, but if you removed it, you likely don't want it reinstalled each time
  your bundle is unzipped. To prevent the reinstallation of 7-Cogs, unzip your
@@ -952,7 +952,7 @@ version of Liferay is released.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png) **Tip:** This is an advanced technique;
+ ![tip](../../images/tip.png) **Tip:** This is an advanced technique;
  it may have a large impact on the maintainability of your code, especially if
  abused. Seek alternatives, and if you're sure this is your only option, think
  of it as a short term solution. Contact Liferay's developers about applying the
@@ -1042,7 +1042,7 @@ news; migrating is automated and relatively easy.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png) **Tip:** When migrating an extension
+ ![tip](../../images/tip.png) **Tip:** When migrating an extension
  environment, first consider whether any of the extension environment's features
  can be moved into other types of plugins. Portlets and hooks are designed to
  meet specific needs and they're easier to learn. Additionally, they're easier

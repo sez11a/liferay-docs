@@ -118,7 +118,7 @@ Voila! Your hook deployed.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** If the Liferay server
+ ![Note](../../images/tip.png) **Note:** If the Liferay server
  prints the following message to your console, the *Marketplace Portlet* and 
  *Portal Compatibility Hook* must not already be deployed on your server.
 
@@ -148,7 +148,7 @@ A BUILD SUCCESSFUL message indicates your hook is now being deployed. If you
 switch to the terminal window running Liferay, in a few seconds you
 should see the message "Hook for example-hook is available for use". 
 
- ![Note](../../images/tip-pen-paper.png) **Note:** When we created portlets and
+ ![Note](../../images/tip.png) **Note:** When we created portlets and
  themes, they were fully functional upon deployment. Hooks aren't like that
  because they're Liferay customizations. The default customization is the
  original implementation! 
@@ -188,7 +188,7 @@ JavaScript files, CSS files, or images.
 
 ---
 
- ![Important](../../images/tip-pen-paper.png) **Important:** Some resources have
+ ![Important](../../images/tip.png) **Important:** Some resources have
  additional requisites:
 
  - ***JSPF:*** Changes won't take effect unless you modify the JSP that
@@ -254,7 +254,7 @@ won't know which version to use.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** We don't recommend changing
+ ![Note](../../images/tip.png) **Note:** We don't recommend changing
  Liferay's *Terms of Use* with a hook. You can replace the *Terms of Use* with a
  piece of web content simply by specifying values for these two properties in
  `portal-ext.properties`:
@@ -497,7 +497,7 @@ for others, extend `com.liferay.portal.struts.SimpleAction`.
 
 ---
 
- ![Important](../../images/tip-pen-paper.png) **Important:** For better forward
+ ![Important](../../images/tip.png) **Important:** For better forward
  compatibility, use hooks to customize Struts actions rather than Ext plugins.
 
 ---
@@ -518,7 +518,7 @@ won't know which value to use.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** Hooks support customizing a
+ ![Note](../../images/tip.png) **Note:** Hooks support customizing a
  specific list of predefined properties.  For a list of portal properties that
  can be overridden via hook, see the
  [liferay-hook_6_2_0.dtd](http://docs.liferay.com/portal/6.2/definitions). In
@@ -783,7 +783,7 @@ then extend `BaseSanitizer`.
 
 ---
 
- ![tip](../../images/tip-pen-paper.png) **Tip:** Your `portal.properties` file
+ ![tip](../../images/tip.png) **Tip:** Your `portal.properties` file
  also provides options to extend portal services. For example, you can extend
  `BaseSanitizer` to use a custom sanitizer by setting the `sanitizer.impl`
  property. By setting this property to your custom sanitizer class, you're
@@ -828,7 +828,7 @@ Liferay to use your service class instead of the original.
 
     ---
 
-    ![tip](../../images/tip-pen-paper.png) **Note:** The wrapper class
+    ![tip](../../images/tip.png) **Note:** The wrapper class
     (`MyUserLocalServiceImpl` in this example) will be loaded in the hook's
     class loader. That means it will have access to any other class included in
     the same WAR file, but *not* the *internal* classes of Liferay.
@@ -889,7 +889,7 @@ like this:
 
 ---
 
- ![Tip](../../images/tip-pen-paper.png) **Tip:** Check the DTD of each Liferay
+ ![Tip](../../images/tip.png) **Tip:** Check the DTD of each Liferay
  XML file, you modify for the elements and attributes that can be included in the
  XML and the specified order for those elements. You can find the Liferay DTDs
  online here: [http://docs.liferay.com/portal/6.2/definitions](http://docs.liferay.com/portal/6.2/definitions).

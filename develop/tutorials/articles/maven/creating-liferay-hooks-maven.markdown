@@ -15,7 +15,7 @@ tutorial, making sure to select *Hook* as the plugin type.
 
 ---
 
-![tip](../../images/tip-pen-paper.png) **Tip**: If you're using Maven's
+![tip](../../images/tip.png) **Tip**: If you're using Maven's
 Archetype command line tool to generate your hook you can filter on group ID
 `liferay`, or even the group ID/artifact ID combination `liferay:hook`, to more
 easily find the Liferay portlet archetypes. 

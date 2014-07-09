@@ -15,7 +15,7 @@ Liferay Portal for development, our examples use the Tomcat bundle.
 
 ---
 
-![Note](../../images/tip-pen-paper.png) **Note:** In Liferay Developer Studio,
+![Note](../../images/tip.png) **Note:** In Liferay Developer Studio,
 the SDK is already installed and ready to use. Liferay Portal Enterprise
 Edition (EE) comes with Liferay Developer Studio and much more (see
 [CE vs EE](http://www.liferay.com/downloads/liferay-portal/overview)).
@@ -52,7 +52,7 @@ To install the Plugins SDK, follow these steps:
 
 ---
 
-![Tip](../../images/tip-pen-paper.png) **Tip**: By default, Liferay Portal
+![Tip](../../images/tip.png) **Tip**: By default, Liferay Portal
 Community Edition comes bundled with many plugins. It's common to remove them to
 optimize the server's startup time. Just navigate to the
 `liferay-portal-[version]/tomcat-[tomcat-version]/webapps` directory and remove

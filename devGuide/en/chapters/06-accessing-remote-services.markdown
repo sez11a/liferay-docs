@@ -132,7 +132,7 @@ services, pass in the appropriate user credentials, and upload the documents.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** The `portal.properties` file
+ ![Note](../../images/tip.png) **Note:** The `portal.properties` file
  resides on the portal host machine and is controlled by the portal
  administrator. Portal administrators can configure security settings for the
  Axis Servlet, the Liferay Tunnel Servlet, the Spring Remoting Servlet, the JSON
@@ -202,7 +202,7 @@ following:
 
 ---
 
- ![Tip](../../images/tip-pen-paper.png) **Important:** In order for
+ ![Tip](../../images/tip.png) **Important:** In order for
  authentication to work for remote service calls, the portal authentication type
  must be set either to *screen name* or *user ID*. Authentication using the
  *email address* authentication type is not supported for remote service calls. 
@@ -297,7 +297,7 @@ browser to the following URL:
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** Prior to Liferay 6.2, there
+ ![Note](../../images/tip.png) **Note:** Prior to Liferay 6.2, there
  were two different URLs for accessing remote Liferay services.
  `http://[host]:[port]/api/secure/axis` was for services requiring
  authentication and `http://[host]:[port]/api/axis` was for services that didn't
@@ -322,7 +322,7 @@ Here's the list of *secure* web services for `UserGroup`:
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** Liferay's developers use a
+ ![Note](../../images/tip.png) **Note:** Liferay's developers use a
  tool called *Service Builder* to expose their services via SOAP automatically.
  If you're interested in using Service Builder, read [Generating Your Service
  Layer](http://www.liferay.com/documentation/liferay-portal/6.2/development/-/ai/generating-your-service-layer-liferay-portal-6-2-dev-guide-04-en). 
@@ -668,7 +668,7 @@ regards to your remote services.
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** Liferay's developers use 
+ ![Note](../../images/tip.png) **Note:** Liferay's developers use 
  *Service Builder* to expose their services via JSON automatically.
  If you're interested in using Service Builder, read [Generating Your Service
  Layer](http://www.liferay.com/documentation/liferay-portal/6.2/development/-/ai/generating-your-service-layer-liferay-portal-6-2-dev-guide-04-en). 
@@ -1241,7 +1241,7 @@ and are ignored during matching.
 
 ---
 
- ![Tip](../../images/tip-pen-paper.png) **Tip:** Use inner parameters with
+ ![Tip](../../images/tip.png) **Tip:** Use inner parameters with
  object parameters to set inner content of created parameter instances! 
 
 ---
@@ -1477,7 +1477,7 @@ request to make the above nested service call:
 
 ---
 
- ![Note](../../images/tip-pen-paper.png) **Note:** You must *flag* parameters
+ ![Note](../../images/tip.png) **Note:** You must *flag* parameters
  that take values from existing variables. To flag a parameter, insert the `@`
  prefix before the parameter name. 
 

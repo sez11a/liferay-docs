@@ -29,7 +29,7 @@ tutorial, making sure to select *Layout Template* as the plugin type.
 
 ---
 
-![tip](../../images/tip-pen-paper.png) **Tip**: If you're using Maven's
+![tip](../../images/tip.png) **Tip**: If you're using Maven's
 Archetype command line tool to generate your layout template project, you can
 filter on group ID `liferay`, or even group ID / artifact ID combination
 `liferay:layout`, to find the Liferay layout template archetypes.
