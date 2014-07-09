@@ -1,6 +1,6 @@
 # Installing Liferay on WebSphere 8.5 [](id=installing-liferay-on-websphere-8-5-lp-6-2-use-useportal)
 
-![Tip](../../images/01-tip.png) **Tip:** Throughout this installation and
+![Tip](../../images/tip.png) **Tip:** Throughout this installation and
 configuration process, WebSphere prompts you to Click Save to apply changes to
 Master Configuration. Do so intermittently to save your changes.
 

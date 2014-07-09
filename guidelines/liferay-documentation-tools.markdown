@@ -287,7 +287,7 @@ sidebar with two horizontal rules, like so:
 
 	---
 
-	![tip](../../images/01-tip.png) Your sidebar text goes here. 
+	![tip](../../images/tip.png) Your sidebar text goes here. 
 
 	---
 
@@ -340,7 +340,7 @@ the template text:
 
 	---
 
-	![tip](../../images/01-tip.png)$1
+	![tip](../../images/tip.png)$1
 
 	---
 

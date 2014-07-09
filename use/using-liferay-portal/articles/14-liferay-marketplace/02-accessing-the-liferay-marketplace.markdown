@@ -92,7 +92,7 @@ the `liferay.com` Marketplace.
 
 ---
 
- ![Tip](../../images/01-tip.png) Your `liferay.com` Home page is a private page.
+ ![Tip](../../images/tip.png) Your `liferay.com` Home page is a private page.
  It's distinct from your public `liferay.com` Profile page.
 
 ---

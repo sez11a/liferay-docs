@@ -117,7 +117,7 @@ action, visit the *Document Management* chapter's *WebDAV access* chapter.
 
 ---
 
- ![Note](../../images/01-tip.png) **Note:** Some operating systems require a
+ ![Note](../../images/tip.png) **Note:** Some operating systems require a
  WebDAV server to be class level 2 before (i.e., to support file locking) before
  allowing files to be read or written. For Liferay 6.2, the Documents and Media
  library was upgraded to class level 2 but Web Content structures and templates

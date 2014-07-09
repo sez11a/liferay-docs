@@ -44,7 +44,7 @@ creating the `liferay-plugin-repository.xml` file yourself.
 
 ---
 
-![Tip](../../images/01-tip.png) **Tip:** The Software Catalog plugin was
+![Tip](../../images/tip.png) **Tip:** The Software Catalog plugin was
 deprecated in Liferay 6.2 and is disabled by default. To activate it, navigate
 to the Control Panel &rarr; *Plugins Configuration* and scroll through the list
 of portlets until you find *Software Catalog*. Select *Software Catalog* and

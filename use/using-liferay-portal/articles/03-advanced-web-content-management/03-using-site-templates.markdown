@@ -39,7 +39,7 @@ are automatically copied to sites based on that template.
 
 ---
 
-![tip](../../images/01-tip.png) **Tip:** If you want to publish a piece of web
+![tip](../../images/tip.png) **Tip:** If you want to publish a piece of web
 content to many sites and ensure modifications are applied to all, don't use
 site template content for that purpose. Instead, place the content in the global
 scope and then reference it from a *Web Content Display* application in each

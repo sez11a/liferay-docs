@@ -117,7 +117,7 @@ iGoogle or any other OpenSocial-compatible site. Let's try this now.
 
 ---
 
-![Tip](../../images/01-tip.png) **Warning:** The iGoogle site will be removed
+![Tip](../../images/tip.png) **Warning:** The iGoogle site will be removed
 completely from Google on November 1, 2013:
 [https://support.google.com/websearch/answer/2664197](https://support.google.com/websearch/answer/2664197).
 Therefore, after the specified date, sharing your Liferay OpenSocial gadgets to

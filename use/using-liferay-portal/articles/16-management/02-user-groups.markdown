@@ -166,7 +166,7 @@ checked.
 
 ---
 
- ![Tip](../../images/01-tip.png) **Tip:** Prior to Liferay 6.1, pages from
+ ![Tip](../../images/tip.png) **Tip:** Prior to Liferay 6.1, pages from
  different user groups could be combined on users' personal sites by using a
  naming convention. Liferay 6.1 simplifies the way user groups' sites work by
  disallowing page combination. Set the property

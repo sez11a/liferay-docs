@@ -26,7 +26,7 @@ be placed in this file are documented in [our reference documentation](http://do
 
 ---
 
-![Tip](../../images/01-tip.png) **Note:** To avoid using the setup wizard so you
+![Tip](../../images/tip.png) **Note:** To avoid using the setup wizard so you
 can configure everything manually from a `portal-ext.properties` file, you must
 disable the Setup Wizard by specifying `setup.wizard.enabled=false` in the
 `portal-ext.properties`. Also, note that property values in

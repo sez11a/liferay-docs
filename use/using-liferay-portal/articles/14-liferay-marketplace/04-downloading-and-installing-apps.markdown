@@ -84,7 +84,7 @@ can connect to the `liferay.com` Marketplace.
 
 ---
  
- ![Tip](../../images/01-tip.png) Tip: Any local user with administrative
+ ![Tip](../../images/tip.png) Tip: Any local user with administrative
  privileges can use the Marketplace to browse and install apps from the
  Marketplace, by entering their `liferay.com` credentials in the above login
  screen. This allows multiple administrators to manage the apps installed on the
