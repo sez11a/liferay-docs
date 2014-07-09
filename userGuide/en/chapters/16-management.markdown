@@ -271,7 +271,7 @@ the currently configured parent.
 
 ---
 
- ![Tip](../../images/01-tip.png) **Tip:** By creating an organization, you
+ ![Tip](../../images/tip.png) **Tip:** By creating an organization, you
  automatically become both a member and receive the Organization Owner role,
  which gives you full administrative rights within the organization. This means
  that you can, for example, appoint other users to be organization
@@ -503,7 +503,7 @@ checked.
 
 ---
 
- ![Tip](../../images/01-tip.png) **Tip:** Prior to Liferay 6.1, pages from
+ ![Tip](../../images/tip.png) **Tip:** Prior to Liferay 6.1, pages from
  different user groups could be combined on users' personal sites by using a
  naming convention. Liferay 6.1 simplifies the way user groups' sites work by
  disallowing page combination. Set the property
@@ -665,7 +665,7 @@ some of Liferay's out-of-the-box roles:
 
 ---
 
- ![Tip](../../images/01-tip.png) **Tip:** It's easy to overlook the differences between
+ ![Tip](../../images/tip.png) **Tip:** It's easy to overlook the differences between
  site and organization owners and site and organization administrators. Remember
  that site and organization administrators *cannot* delete the membership of or
  remove the administrator or owner role from any other administrator or owner.
@@ -904,7 +904,7 @@ permissions for the role.
 
 ---
 
- ![Tip](../../images/01-tip.png) Note: Prior to Liferay version 6.0, Power Users
+ ![Tip](../../images/tip.png) Note: Prior to Liferay version 6.0, Power Users
  and Users did *not* have the same default permissions. So if are using Liferay
  5.2 or a previous version, it's dangerous to remove the Power Users role from
  the default user associations: this could remove certain permissions you expect

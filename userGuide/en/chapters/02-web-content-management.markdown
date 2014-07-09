@@ -212,7 +212,7 @@ member of the portal can access it.
 
 ---
 
- ![Tip](../../images/01-tip.png) **Tip:** Prior to Liferay 6.1, there were two
+ ![Tip](../../images/tip.png) **Tip:** Prior to Liferay 6.1, there were two
  ways of creating sites: organizations and communities. This has been simplified
  to provide more ease of use and allow for more flexibility. The main role of
  organizations is still to organize the users of the portal in a hierarchy but
@@ -249,7 +249,7 @@ chapters 14, 16, and 17 of this guide.
 
 ---
 
- ![Tip](../../images/01-tip.png) **Tip:** Prior to Liferay 6.2, the Control Panel
+ ![Tip](../../images/tip.png) **Tip:** Prior to Liferay 6.2, the Control Panel
  included interfaces both for site administration and for portal administration.
  In Liferay 6.2, these interfaces have been separated. If you're signed in as an
  administrator, you can access the Liferay 6.2 Control Panel by clicking *Admin*
@@ -303,7 +303,7 @@ organization site by navigating to its *Site Settings* menu.
 
 ---
 
- ![Tip](../../images/01-tip.png) It's possible for site memberships to be
+ ![Tip](../../images/tip.png) It's possible for site memberships to be
  handled automatically by a membership policy. The membership policy can check
  various pieces of information from each user, such as their first names, last
  names, birthdays, job titles, organizations, and user groups. Using this
@@ -504,7 +504,7 @@ category name collision, Liferay renames the imported categories.
 
 ---
 
- ![Note](../../images/01-tip.png) **Note:** LAR files are version dependent. You
+ ![Note](../../images/tip.png) **Note:** LAR files are version dependent. You
  can't import a LAR file that was exported from one version of Liferay into
  a Liferay server that's running a different version of Liferay. Also,
  note that periodically exporting LARs is *not* a complete backup solution;
@@ -677,7 +677,7 @@ tabs of the Manage Site Settings dialog box (see below).
 
 ---
 
- ![Tip](../../images/01-tip.png) In previous versions of Liferay, it was
+ ![Tip](../../images/tip.png) In previous versions of Liferay, it was
  possible that a single page could be indexed multiple times. In Liferay 6.1,
  all URLs that direct to the same page will only create one entry in the index.
  Previously, the simple URL
@@ -728,7 +728,7 @@ page.
 
 ---
 
- ![Tip](../../images/01-tip.png) Usually, you don't want the web content display
+ ![Tip](../../images/tip.png) Usually, you don't want the web content display
  portlet that you're using to embed a portlet to be visible. To make the web
  content display portlet invisible, click on the gear icon of the web content
  display portlet, select *Look and Feel*, set *Show Borders* to *No*, and click
@@ -966,7 +966,7 @@ For details about Liferay's social collaboration suite, see chapter 10.
 
 ---
 
- ![Tip](../../images/01-tip.png) **Note:** The *Web Content List* and *Recent
+ ![Tip](../../images/tip.png) **Note:** The *Web Content List* and *Recent
  Content* plugins were deprecated in Liferay 6.2 and are disabled by default. To
  activate a disabled plugin, navigate to the Control Panel &rarr; *Plugins
  Configuration* and scroll through the list of portlets until you find the

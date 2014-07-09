@@ -143,7 +143,7 @@ action, visit the *Document Management* chapter's *WebDAV access* chapter.
 
 ---
 
- ![Note](../../images/01-tip.png) **Note:** Some operating systems require a
+ ![Note](../../images/tip.png) **Note:** Some operating systems require a
  WebDAV server to be class level 2 before (i.e., to support file locking) before
  allowing files to be read or written. For Liferay 6.2, the Documents and Media
  library was upgraded to class level 2 but Web Content structures and templates
@@ -699,7 +699,7 @@ are automatically copied to sites based on that template.
 
 ---
 
-![tip](../../images/01-tip.png) **Tip:** If you want to publish a piece of web
+![tip](../../images/tip.png) **Tip:** If you want to publish a piece of web
 content to many sites and ensure modifications are applied to all, don't use
 site template content for that purpose. Instead, place the content in the global
 scope and then reference it from a *Web Content Display* application in each
@@ -1045,7 +1045,7 @@ steps above to localize content, only fields within the structure that had the
 
 ---
 
- ![Note](../../images/01-tip.png) **Note:** The Localizable checkbox was removed
+ ![Note](../../images/tip.png) **Note:** The Localizable checkbox was removed
  for 6.2 CE GA1 and GA2, and 6.2 EE GA1, SP1, and SP2. However, the Localizable
  checkbox is now available for Liferay following these versions for web content
  structure fields. You can view
@@ -1243,7 +1243,7 @@ your remote (live) Liferay server.
 
 ---
 
- ![Tip](../../images/01-tip.png) **Tip:** In general, remote staging should be
+ ![Tip](../../images/tip.png) **Tip:** In general, remote staging should be
  enabled for a site as early as possible. It's generally *not* a good idea to
  add gigabytes of data into Liferay's CMS and then decide to turn on remote
  staging.  There's an existing issue that limits Liferay to less than 2G of data

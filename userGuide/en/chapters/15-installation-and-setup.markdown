@@ -142,7 +142,7 @@ can skip to the next section.
 
 ---
 
-![Tip](../../images/01-tip.png) **Note:** The below instructions are not the
+![Tip](../../images/tip.png) **Note:** The below instructions are not the
 recommended set up for Liferay installations, but the procedure is documented
 here so enterprises with more restrictive standards can install Liferay with
 more strict--but suboptimal--database settings. If it's at all possible,
@@ -285,7 +285,7 @@ be placed in this file are documented in [our reference documentation](http://do
 
 ---
 
-![Tip](../../images/01-tip.png) **Note:** To avoid using the setup wizard so you
+![Tip](../../images/tip.png) **Note:** To avoid using the setup wizard so you
 can configure everything manually from a `portal-ext.properties` file, you must
 disable the Setup Wizard by specifying `setup.wizard.enabled=false` in the
 `portal-ext.properties`. Also, note that property values in
@@ -598,7 +598,7 @@ of the server.
 
 ---
 
-![Tip](../../images/01-tip.png) **Tip:** Note that Liferay *requires* JDK 6 or
+![Tip](../../images/tip.png) **Tip:** Note that Liferay *requires* JDK 6 or
 greater. Do not attempt to install Liferay 6.2 on an application server that
 runs under Java 5 or lower; it will not work. If you are running an
 application server that ships with a JDK and that JDK is version 5 or lower,
@@ -1321,7 +1321,7 @@ from an exploded `.war` file on the file system.
 
 ---
 
-![tip](../../images/01-tip.png) **Note:** This does not prevent Liferay from
+![tip](../../images/tip.png) **Note:** This does not prevent Liferay from
 running in a clustered environment on multiple JBoss servers. You can set up a
 cluster of Liferay instances running on JBoss 7.1 servers running in standalone
 mode. Please refer to the chapter of this guide on [Configuring Liferay for High
@@ -1859,7 +1859,7 @@ Liferay.
 	
     ---
 
-    ![note](../../images/01-tip.png) **Note:** The above resource definition
+    ![note](../../images/tip.png) **Note:** The above resource definition
     assumes your database name is *lportal* and your MySQL username and password
     are both *root*. You'll have to update these values with your own database name
     and credentials.
@@ -2263,7 +2263,7 @@ Congratulations! You are now running Liferay on Oracle WebLogic 12c.
 
 ## Installing Liferay on WebSphere 8.5 [](id=installing-liferay-on-websphere-8-5-liferay-portal-6-2-user-guide-15-en)
 
-![Tip](../../images/01-tip.png) **Tip:** Throughout this installation and
+![Tip](../../images/tip.png) **Tip:** Throughout this installation and
 configuration process, WebSphere prompts you to Click Save to apply changes to
 Master Configuration. Do so intermittently to save your changes.
 
@@ -2587,7 +2587,7 @@ to users. This is covered in the Manual Configuration section below.
 
 ---
 
-![Tip](../../images/01-tip.png) **Tip:** The wizard is an extremely helpful tool,
+![Tip](../../images/tip.png) **Tip:** The wizard is an extremely helpful tool,
 especially if you're setting up Liferay for the first time or creating a
 completely fresh portal instance. If you're a Liferay veteran and you already
 have your database information and various properties set up, you can skip the
@@ -2599,7 +2599,7 @@ wizard by adding this line to your *portal-ext.properties* file:
 
 ---
 
-![Tip](../../images/01-tip.png) **Tip:** In Liferay 6.2, the admin user test@liferay.com
+![Tip](../../images/tip.png) **Tip:** In Liferay 6.2, the admin user test@liferay.com
 is created by the setup wizard even when a different user is specified. This
 means that two admin users are created: test@liferay.com and the specified user.
 Unless you're just installing Liferay for testing purposes, you should

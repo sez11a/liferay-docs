@@ -1268,7 +1268,7 @@ Server Administration Control Panel interface.
 
 ---
 
- ![Tip](../../images/01-tip.png) **Tip:** If you're running Liferay on a Linux
+ ![Tip](../../images/tip.png) **Tip:** If you're running Liferay on a Linux
  server and experience a problem enabling Xuggler, check your server's glibc
  version. You might have to update glibc to version 2.6 or later in order for
  Xuggler to work.

@@ -327,7 +327,7 @@ We'll call our new site template *Social Layout*. Click *Save*.
 
 ---
 
-![tip](../../images/01-tip.png) Tip: Unchecking *Allow Site Administrators to
+![tip](../../images/tip.png) Tip: Unchecking *Allow Site Administrators to
 Modify the Pages Associated with this Site Template* only prevents users from
 modifying the specific pages contained in the template but does not disable a
 user's ability to add or modify additional pages.
@@ -609,7 +609,7 @@ iGoogle or any other OpenSocial-compatible site. Let's try this now.
 
 ---
 
-![Tip](../../images/01-tip.png) **Warning:** The iGoogle site will be removed
+![Tip](../../images/tip.png) **Warning:** The iGoogle site will be removed
 completely from Google on November 1, 2013:
 [https://support.google.com/websearch/answer/2664197](https://support.google.com/websearch/answer/2664197).
 Therefore, after the specified date, sharing your Liferay OpenSocial gadgets to
