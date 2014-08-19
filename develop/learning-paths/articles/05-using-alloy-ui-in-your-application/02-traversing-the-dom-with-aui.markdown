@@ -596,3 +596,7 @@ like this:
 
 Congrats! Your silly phrase generator is complete, and now you have a basic 
 understanding of how to traverse the DOM using AlloyUI.
+
+## Next Steps
+
+Add Link for JSF portlets here
