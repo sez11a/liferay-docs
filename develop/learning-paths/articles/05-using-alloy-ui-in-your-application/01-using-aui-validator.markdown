@@ -1,13 +1,13 @@
 # Using AlloyUI to Validate Forms in Your Application
 
 In the previous learning paths, you setup a basic form for the user to fill out
-to populate the guestbook. It serves as a good starting point and does exactly 
-what it needs to do. However, one thing that has not been addressed up to this 
-point is form validation. Before submitting your form, you want to make sure
-that the user has filled it out exactly as you had intended. You need to let
-them know which fields are required, if there is a limit on the number of
-characters, if they left any fields empty etc. AlloyUI makes form validation a
-straight forward and easy process.
+to populate the guestbook. This serves as a good starting point for what we're 
+going to do. One thing that has not been addressed up to this point is form 
+validation. Before submitting your form, you want to make sure that the user has 
+filled it out exactly as you had intended. You need to let them know which 
+fields are required, if there is a limit on the number of characters, if they 
+left any fields empty etc. AlloyUI makes form validation a straight forward and 
+easy process.
 
 We'll break down this process into two sections: using the AlloyUI validator tag
 and using the AlloyUI Character Counter module. Go ahead and get started with
