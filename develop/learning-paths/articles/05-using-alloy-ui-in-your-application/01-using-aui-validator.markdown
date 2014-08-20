@@ -29,19 +29,19 @@ the form input fields a bit.
     To keep things simple, replace the contents between the `<aui:fieldset>` and
     `<aui:fieldset/>` tags with the following:
     
-    <aui:model-context bean="<%= entry %>" model="<%= Entry.class %>" />
-    <aui:input name="name" >
-         <aui:validator name="required"/>
-    </aui:input>
-    <aui:input name="email" >
-         <aui:validator name="email"/>
-         <aui:validator name="required"/>
-    </aui:input>
-    <aui:input id="message" type="textarea" name="message" style="resize:none" >
-         <aui:validator name="required" errorMessage="Leave a message please." />
-    </aui:input>
-    <aui:input name='guestbookId' type='hidden' value='<%= ParamUtil.getString(renderRequest, "guestbookId") %>'/>
-    <aui:input name="entryId" type="hidden" />
+        <aui:model-context bean="<%= entry %>" model="<%= Entry.class %>" />
+        <aui:input name="name" >
+             <aui:validator name="required"/>
+        </aui:input>
+        <aui:input name="email" >
+             <aui:validator name="email"/>
+             <aui:validator name="required"/>
+        </aui:input>
+        <aui:input id="message" type="textarea" name="message" style="resize:none" >
+             <aui:validator name="required" errorMessage="Leave a message please." />
+        </aui:input>
+        <aui:input name='guestbookId' type='hidden' value='<%= ParamUtil.getString(renderRequest, "guestbookId") %>'/>
+        <aui:input name="entryId" type="hidden" />
 
     The AUI validator tag is a very quick and easy solution to validating your 
     fields. The first thing to note is that the `<aui:validator/>` tag is placed 

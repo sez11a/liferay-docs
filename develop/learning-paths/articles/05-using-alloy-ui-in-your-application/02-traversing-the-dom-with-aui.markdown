@@ -595,19 +595,19 @@ like this:
     <aui:form>
 
 		    <aui:fieldset id="silly" style="display:none;">
-			    <aui:input name="adjective" id="adj" >
+			    <aui:input name="adjective" id="adj" type="text">
             	    <aui:validator name="required"/>
                 </aui:input>
-                <aui:input name="verb" id="verb" >
+                <aui:input name="verb" id="verb" type="text">
             	    <aui:validator name="required"/>
                 </aui:input>
-                <aui:input name="adverb" id="adv" >
+                <aui:input name="adverb" id="adv" type="text">
             	    <aui:validator name="required"/>
                 </aui:input>
-                <aui:input name="animal" id="ani" >
+                <aui:input name="animal" id="ani" type="text">
             	    <aui:validator name="required"/>
                 </aui:input>
-                <aui:input name="location" id="loc" >
+                <aui:input name="location" id="loc" type="text">
             	    <aui:validator name="required"/>
                 </aui:input>
             </aui:fieldset>
