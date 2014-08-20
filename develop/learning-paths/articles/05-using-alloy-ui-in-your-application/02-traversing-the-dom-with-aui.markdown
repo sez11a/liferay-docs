@@ -1,4 +1,4 @@
-# Traversing the DOM with AlloyUI
+# Traversing the DOM with AlloyUI [](id=traversing-the-dom-with-alloyui)
 
 In the last portion of the learning path you learned how AlloyUI functions and 
 can be applied to your application. In this section we'll show you how you can 
@@ -23,21 +23,27 @@ First we'll walk through familiar territory: creating the form.
 
 2. Add the input fields below to the form:
 
-            <aui:input name="adjective" id="adj" >
+            <aui:input name="adjective" id="adj" type="text">
             	<aui:validator name="required"/>
             </aui:input>
-            <aui:input name="verb" id="verb" >
+            <aui:input name="verb" id="verb" type="text">
             	<aui:validator name="required"/>
             </aui:input>
-            <aui:input name="adverb" id="adv" >
+            <aui:input name="adverb" id="adv" type="text">
             	<aui:validator name="required"/>
             </aui:input>
-            <aui:input name="animal" id="ani" >
+            <aui:input name="animal" id="ani" type="text">
             	<aui:validator name="required"/>
             </aui:input>
-            <aui:input name="location" id="loc" >
+            <aui:input name="location" id="loc" type="text">
             	<aui:validator name="required"/>
             </aui:input>
+            
+    We've added an additional type attribute of text for each of our input 
+    fields, so that they are visible. The entry bean that is used in the
+    guestbook form configures the `<aui:input>` fields automatically. Since we
+    are not adding our silly phrase form fields to the bean, we have to force
+    type to text so that they appear.
 
 3. Add a aui:button to the form to generate the silly phrase:
 
@@ -535,9 +541,24 @@ like this:
     });
 
     </aui:script>
+    
+    <%
+    long entryId = ParamUtil.getLong(renderRequest, "entryId");
+
+    Entry entry = null;
+
+    if (entryId > 0) {
+	
+	    entry = EntryLocalServiceUtil.getEntry(entryId);
+	
+    }
+
+    %>
+    
     <aui:form action="<%= addEntryURL %>" name="<portlet:namespace />fm">
 
             <aui:fieldset>
+            	<aui:model-context bean="<%= entry %>" model="<%= Entry.class %>" />
                 <aui:input name="name" >
                     <aui:validator name="required"/>
                 </aui:input>
@@ -550,6 +571,7 @@ like this:
                 </aui:input>
             
                 <aui:input name='guestbookId' type='hidden' value='<%= ParamUtil.getString(renderRequest, "guestbookId") %>'/>
+                <aui:input name="entryId" type="hidden" />
 			    <div style="margin-top: -30px">
                     <span id="counter"></span> character(s) remaining
                 </div>

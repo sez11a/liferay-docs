@@ -7,6 +7,7 @@
 </portlet:renderURL>
 
 <portlet:actionURL name="addEntry" var="addEntryURL"></portlet:actionURL>
+
 <aui:script>
 YUI().use(
   'aui-char-counter',
@@ -91,9 +92,24 @@ else if(!checked){
 });
 
 </aui:script>
+
+<%
+long entryId = ParamUtil.getLong(renderRequest, "entryId");
+
+Entry entry = null;
+
+if (entryId > 0) {
+	
+	entry = EntryLocalServiceUtil.getEntry(entryId);
+	
+}
+
+%>
+
 <aui:form action="<%= addEntryURL %>" name="<portlet:namespace />fm">
 
         <aui:fieldset>
+        	<aui:model-context bean="<%= entry %>" model="<%= Entry.class %>" />
             <aui:input name="name" >
             	<aui:validator name="required"/>
             </aui:input>
@@ -106,6 +122,7 @@ else if(!checked){
             </aui:input>
             
             <aui:input name='guestbookId' type='hidden' value='<%= ParamUtil.getString(renderRequest, "guestbookId") %>'/>
+            <aui:input name="entryId" type="hidden" />
 			<div style="margin-top: -30px">
             <span id="counter"></span> character(s) remaining
             </div>
@@ -126,22 +143,22 @@ else if(!checked){
 <p style="font-size:35px;line-height:120%;display:none;" id="title">Silly Phrase Generator</p>
 <div id="message"></div>
 </html>
-<aui:form>
+<aui:form name="<portlet:namespace />sillyForm">
 
 		<aui:fieldset id="silly" style="display:none;">
-			<aui:input name="adjective" id="adj" >
+			<aui:input name="adjective" id="adj" type="text" >
             	<aui:validator name="required"/>
             </aui:input>
-            <aui:input name="verb" id="verb" >
+            <aui:input name="verb" id="verb" type="text" >
             	<aui:validator name="required"/>
             </aui:input>
-            <aui:input name="adverb" id="adv" >
+            <aui:input name="adverb" id="adv" type="text">
             	<aui:validator name="required"/>
             </aui:input>
-            <aui:input name="animal" id="ani" >
+            <aui:input name="animal" id="ani" type="text">
             	<aui:validator name="required"/>
             </aui:input>
-            <aui:input name="location" id="loc" >
+            <aui:input name="location" id="loc" type="text">
             	<aui:validator name="required"/>
             </aui:input>
         </aui:fieldset>

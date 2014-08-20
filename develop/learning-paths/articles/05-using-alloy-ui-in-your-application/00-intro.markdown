@@ -1,4 +1,4 @@
-# Using Alloy UI in your Application
+# Using Alloy UI in your Application [](id=using-alloy-ui-in-your-application)
 
 When it comes to your application's UI components, AlloyUI is hands down the 
 best choice. AlloyUI provides an easy to use framework with a uniform API, 

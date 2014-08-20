@@ -1,4 +1,4 @@
-# Using AlloyUI to Validate Forms in Your Application
+# Using AlloyUI to Validate Forms in Your Application [](id=using-alloyui-to-validate-forms-in-your-application)
 
 In the previous learning paths, you setup a basic form for the user to fill out
 to populate the guestbook. This serves as a good starting point for what we're 
@@ -29,7 +29,7 @@ the form input fields a bit.
     To keep things simple, replace the contents between the `<aui:fieldset>` and
     `<aui:fieldset/>` tags with the following:
     
-    ```
+    <aui:model-context bean="<%= entry %>" model="<%= Entry.class %>" />
     <aui:input name="name" >
          <aui:validator name="required"/>
     </aui:input>
@@ -41,8 +41,7 @@ the form input fields a bit.
          <aui:validator name="required" errorMessage="Leave a message please." />
     </aui:input>
     <aui:input name='guestbookId' type='hidden' value='<%= ParamUtil.getString(renderRequest, "guestbookId") %>'/>
-    
-    ```
+    <aui:input name="entryId" type="hidden" />
 
     The AUI validator tag is a very quick and easy solution to validating your 
     fields. The first thing to note is that the `<aui:validator/>` tag is placed 
@@ -90,37 +89,33 @@ not only does it allow us to limit the amount of characters to a number we
 specify, it also is capable of notifying the user how may characters are left. 
 Let's get started. 
 
-1. Open your `edit_entry.jsp` and add `<aui:script>` tags just beneath the 
-`</portlet:actionURL>` end tag. We'll be placing all of our code inside these
-tags.
+1. Open your `edit_entry.jsp` and add `<aui:script>` tags just above the 
+`<%` opening tag for `long entryId = ...`. We'll be placing all of our 
+code inside these tags.
 
     The first thing we need to do is load the `aui-char-counter` module.
 
 2. Inside of the `<aui:script>` tag, add the code below to the top:
 
-    ```
-    YUI().use(
-      'aui-char-counter',
-      function(Y) {
+        YUI().use(
+          'aui-char-counter',
+          function(Y) {
   
-      }
-    );
+          }
+        );
     
-    ```    
     Now that we've loaded the character counter module, we need to create a new
     instance of the character counter to use.
     
 3. Add the code below inside of the `function(Y)` brackets to create an instance 
 of the character counter:
 
-    ```
-    new Y.CharCounter(
-      {
+        new Y.CharCounter(
+          {
            
-      }
-    );
-        
-    ```
+          }
+        );
+
     Now that we've created an instance of the module we loaded, we're going to
     configure the character counter by setting values for the counter's
     attributes.
@@ -128,12 +123,9 @@ of the character counter:
 4. Add the attributes below inside of the character counter instance you just
 created:
 
-    ```
-    counter: '#counter',
-    input: '#<portlet:namespace />message',
-    maxLength: 70
-
-    ```
+        counter: '#counter',
+        input: '#<portlet:namespace />message',
+        maxLength: 70
     
     Now we have a fully functioning character counter. The values above set the
     counter to display in the element with the id `counter`. The input attribute 
@@ -153,10 +145,7 @@ created:
 5. Create a `<span>` element just above the closing `</aui:fieldset>` tag that
 looks like the following:
 
-    ```
-    <span id="counter"></span> character(s) remaining
-   
-    ```
+        <span id="counter"></span> character(s) remaining
    
     There you have it! Now you can redeploy and test out the guestbook entry
     form. You'll now see your fancy new character counter keeps track of how many
@@ -167,19 +156,16 @@ looks like the following:
 6. Nest your `<span>` tag in between two `<div>` tags so that your code looks
 like this:
 
-   ```
-    <div style="margin-top: -30px">
-        <span id="counter"></span> character(s) remaining
-    </div>
+        <div style="margin-top: -30px">
+            <span id="counter"></span> character(s) remaining
+        </div>
     
-   ``` 
-    With updated visuals, your form should look like the one below:
+With updated visuals, your form should look like the one below:
    
 ![Figure 2: With our new character counter your form should look like this one.](../../images/guestbook-char-counter.png)
    
-    With all the additions, here's what your `edit_entry.jsp` should look like:
-   
-   ```
+With all the additions, here's what your `edit_entry.jsp` should look like:
+    
     <%@include file = "/html/init.jsp" %>
 
     <portlet:renderURL var="viewURL">
@@ -187,6 +173,7 @@ like this:
     </portlet:renderURL>
 
     <portlet:actionURL name="addEntry" var="addEntryURL"></portlet:actionURL>
+    
     <aui:script>
     YUI().use(
       'aui-char-counter',
@@ -201,10 +188,24 @@ like this:
       }
     );
     </aui:script>
+    
+    <%
+    long entryId = ParamUtil.getLong(renderRequest, "entryId");
+
+    Entry entry = null;
+
+    if (entryId > 0) {
+	
+	    entry = EntryLocalServiceUtil.getEntry(entryId);
+	
+    }
+
+    %>
+
     <aui:form action="<%= addEntryURL %>" name="<portlet:namespace />fm">
 
             <aui:fieldset>
-
+                <aui:model-context bean="<%= entry %>" model="<%= Entry.class %>" />
                 <aui:input name="name" >
             	    <aui:validator name="required"/>
                 </aui:input>
@@ -217,6 +218,7 @@ like this:
                 </aui:input>
             
                 <aui:input name='guestbookId' type='hidden' value='<%= ParamUtil.getString(renderRequest, "guestbookId") %>'/>
+                <aui:input name="entryId" type="hidden" />
 			    <div style="margin-top: -30px">
                     <span id="counter"></span> character(s) remaining
                 </div>
@@ -229,7 +231,10 @@ like this:
 
             </aui:button-row>
     </aui:form>
-    
-   ```
+
 Your form validation is done! Save your changes and deploy your application. You
 can rest assured that your form will be filled out as you had intended.
+
+## Next Steps
+
+[Traversing the Dom with AlloyUI](/develop/learning-paths/-/knowledge_base/traversing-the-dom-with-alloyui)
