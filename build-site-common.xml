@@ -12,8 +12,15 @@
 		<path refid="lib.classpath" />
 	</path>
 
-	<property name="build.dir" value="./build"/>
-	<property name="pandoc.app" location="/home/${user.name}/.cabal/bin/pandoc"/>
+    <property environment="env" />
+
+    <property file="../../build.${USERNAME}.properties" />
+    <property file="../../build.${user.name}.properties" />
+    <property file="../../build.${env.COMPUTERNAME}.properties" />
+    <property file="../../build.${env.HOST}.properties" />
+    <property file="../../build.${env.HOSTNAME}.properties" />
+    <property file="../../build.properties" />
+
 	<property name="dist.dir" value="./dist"/>
 
 	<!-- taskdefs -->
@@ -90,7 +97,7 @@
 		</zip>
 	</target>
 
-	<target name="number-headers" description="Numbers the headers of Markdown articles found in ${doc.dir}/articles">
+	<target name="add-article-metadata" description="Adds friendly URLs and source URLs to the headers of Markdown articles found in ${doc.dir}/articles">
 		<property file="${project.dir}/release-site.properties" />
 		<java
 			classname="com.liferay.documentation.util.NumberHeadersSiteMain"
@@ -99,6 +106,18 @@
 			fork="true"
 		>
 			<arg value="${doc.dir}"/>
+		</java>
+
+		<java
+			classname="com.liferay.documentation.util.AddSourceUrlSiteMain"
+			classpathref="project.classpath"
+			failonerror="true"
+			fork="true"
+		>
+			<arg value="${doc.dir}"/>
+			<arg value="${repo.owner}"/>
+			<arg value="${repo.name}"/>
+			<arg value="${repo.branch}"/>
 		</java>
 	</target>
 
@@ -112,7 +131,7 @@
 		</copy>
 	</target>
 
-	<target name="prepare-dist" depends="check-images-site, check-intros, clean-dist, number-headers, check-headers" description="Prepares the document for distribution.">
+	<target name="prepare-dist" depends="check-images-site, check-intros, clean-dist, add-article-metadata, check-headers" description="Prepares the document for distribution.">
 		<echo message="... creating ${dist.dir} directory"/>
 		<mkdir dir="${dist.dir}"/>
 	</target>
