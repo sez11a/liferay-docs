@@ -4,8 +4,8 @@ When it comes to your application's UI components, AlloyUI is hands down the
 best choice. AlloyUI provides an easy to use framework with a uniform API, 
 allowing you to keep a consistent look and feel throughout your application.
 
-If you've followed the learning paths that preceeded, You learned how to get 
+If you've followed the learning paths that preceded, You learned how to get 
 your application up and running, provided a database to hold all of your data, 
 implemented security using Liferay's permission system, and implemented actions 
-in your application. In this learning path you'll learn how to use AlloyUI to 
+in your application. In this learning path, you'll learn how to use AlloyUI to 
 implement form validation and traverse the DOM.
