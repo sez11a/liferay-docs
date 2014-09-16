@@ -27,14 +27,14 @@ tutorial or the
 [Creating Liferay Maven Plugins from the Command Line](https://www-ldn.liferay.com/develop/tutorials/-/knowledge_base/creating-liferay-maven-plugins-from-the-command-lin)
 tutorial, making sure to select *Layout Template* as the plugin type. 
 
----
++$$$
 
-![tip](../../images/tip-pen-paper.png) **Tip**: If you're using Maven's
+**Tip**: If you're using Maven's
 Archetype command line tool to generate your layout template project, you can
 filter on group ID `liferay`, or even group ID / artifact ID combination
 `liferay:layout`, to find the Liferay layout template archetypes.
 
----
+$$$
 
 Since it's helpful to familiarize yourself with the Liferay layout template
 plugin project's anatomy, that topic is covered next. 

@@ -21,7 +21,7 @@ your convenience, they're all listed in the table below.
  $theme | com.liferay.taglib.util.VelocityTaglib | [Javadoc](http://docs.liferay.com/portal/6.2/javadocs-all/com/liferay/taglib/util/VelocityTaglib.html) |
  $colorScheme | com.liferay.portal.model.ColorScheme | [Javadoc](http://docs.liferay.com/portal/6.2/javadocs/com/liferay/portal/model/ColorScheme.html) |
  $portletDisplay | com.liferay.portal.theme.PortletDisplay | [Javadoc](http://docs.liferay.com/portal/6.2/javadocs/com/liferay/portal/theme/PortletDisplay.html) |
----
+$$$
 
 Now you have a better understanding of the variables available to you
 for your layout templates! 

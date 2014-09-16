@@ -87,14 +87,14 @@ in the same project.
 At this point, any language keys you specify in the `Language.properties` files
 are accessible from either of the portlets. 
 
----
++$$$
 
-![Note](../../images/tip-pen-paper.png) **Note:** It's best to use the Liferay
+**Note:** It's best to use the Liferay
 naming convention for the language bundle file and folder so your portlets can
 access the bundle and you can use the automatic language building capabilities
 of Liferay IDE and the Plugins SDK with the bundle. 
 
----
+$$$
 
 In this tutorial, you created a new language key, learned how to specify that
 language key in different languages, and shared the new language key with two
