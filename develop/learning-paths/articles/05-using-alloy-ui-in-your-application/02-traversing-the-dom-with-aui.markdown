@@ -1,87 +1,101 @@
 # Traversing the DOM with AlloyUI [](id=traversing-the-dom-with-alloyui)
 
-In the last portion of the learning path you learned how AlloyUI functions and 
-can be applied to your application. In this section we'll show you how you can 
-use AlloyUI to manipulate HTML elements in the DOM(Document Object Model). We'll 
-explore this subject through a fun addition to our current Guestbook application. 
-We'll create a silly phrase generator using the aui:forms and aui:buttons that 
-were covered in the last section. For now our silly phrase will display in our
-page, we'll persist the phrase to the database in a later section.
+In the last portion of the learning path, you learned how AlloyUI can be applied
+to your application. In this section, you'll learn how you can use AlloyUI to
+manipulate HTML elements in the DOM (Document Object Model). You'll explore this
+subject through a fun addition to your Guestbook application: you'll
+create a silly phrase generator using the `<aui:forms>` and `<aui:buttons>` that
+were covered in the last section. For now, the silly phrase is generated on the
+fly; you'll persist the phrase to the database in a later section.
 
-First we'll walk through familiar territory: creating the form.
+First you'll walk through familiar territory: creating the form.
 
 ## Creating the form
 
-1. Open the edit_entry.jsp and add `<aui:form>` tags to the bottom.
+<!-- The past learning paths used Liferay Developer Studio/IDE's snippets to do
+most of the work. These instructions should be revised to use them. -Rich -->
 
-     Next we need to create the input fields for the form. If you're familiar 
-     with the children's madlibs game, then you'll know the basic idea of what 
-     our form will be. We're going to generate a silly phrase that will be made 
-     up of different parts of speech. As we did with our other input fields, 
-     we'll add `aui:validator` tags to the fields. Since we'll be grabbing these 
-     input elements later, each one needs to be given a unique id as well.
+1.  Open the `edit_entry.jsp` and add `<aui:form>` tags to the bottom.
 
-2. Add the input fields below to the form:
+    Next, you need to create the input fields for the form. If you've seen 
+    the children's game *Madlibs*, then this will be familiar to you. You'll
+    generate a silly phrase that will be made up of different parts of speech. As
+    you did with the other input fields, you'll add `aui:validator` tags to the
+    fields.  Since you'll be grabbing these input elements later, each one needs to
+    be given a unique id as well.
 
-            <aui:input name="adjective" id="adj" type="text">
-            	<aui:validator name="required"/>
-            </aui:input>
-            <aui:input name="verb" id="verb" type="text">
-            	<aui:validator name="required"/>
-            </aui:input>
-            <aui:input name="adverb" id="adv" type="text">
-            	<aui:validator name="required"/>
-            </aui:input>
-            <aui:input name="animal" id="ani" type="text">
-            	<aui:validator name="required"/>
-            </aui:input>
-            <aui:input name="location" id="loc" type="text">
-            	<aui:validator name="required"/>
-            </aui:input>
+2.  Add the input fields below to the form:
+
+        <aui:input name="adjective" id="adj" type="text">
+       	<aui:validator name="required"/>
+        </aui:input>
+        <aui:input name="verb" id="verb" type="text">
+        	<aui:validator name="required"/>
+        </aui:input>
+        <aui:input name="adverb" id="adv" type="text">
+         	<aui:validator name="required"/>
+        </aui:input>
+        <aui:input name="animal" id="ani" type="text">
+        	<aui:validator name="required"/>
+        </aui:input>
+        <aui:input name="location" id="loc" type="text">
+        	<aui:validator name="required"/>
+        </aui:input>
             
-    We've added an additional type attribute of text for each of our input 
-    fields, so that they are visible. The entry bean that is used in the
-    guestbook form configures the `<aui:input>` fields automatically. Since we
-    are not adding our silly phrase form fields to the bean, we have to force
-    type to text so that they appear.
+    You added an additional type attribute of `text` for each input 
+    field to make them visible. The entry bean that is used in the
+    guestbook form defines the bean for the `<aui:input>` fields automatically.
+    Since you are not adding silly phrase form fields to the bean, you have to
+    force the `type` to text so that they appear.
 
-3. Add a aui:button to the form to generate the silly phrase:
+3.  Add an `<aui:button>` to the form to generate the silly phrase:
 
         <button class="btn btn-primary" id="submit">Generate</button>
 
-    Now that we have our form created we need to add the html element for our 
+<!-- The above snippet is not an <aui:button>. -Rich -->
+
+    Now that the form is done, you need to add the `<html>` element for our 
     silly phrase to display in:
 
-4. add the html element just above the `<aui:form>` opening tag we just made:
+4. Add the html element just above the `<aui:form>` opening tag we just made:
 
         <html>
           <div id="message"></div>
         </html>
 
-For now a empty `<div>` has been created with a unique id. We'll append an HTML 
-element that will display our silly phrase later on. Now that we have the 
-foundation layer, we can add the logic to make it work.
+<!-- I have never seen an <html> element used outside the beginning and ending
+tags of a full page. This, of course, should never be done in a portlet
+application, because it's the root element of the page, and a portlet runs in a
+portion of a page. Are you sure this is the proper way to do things? -Rich -->
+
+For now an empty `<div>` has been created with a unique id. You'll append an HTML 
+element that will display our silly phrase later on. Now that you have the 
+foundation layer, you can add the logic to make it work.
 
 ## Adding Logic to the Silly Phrase Generator
 
-The first thing we need to do is grab our aui:button element so that we can 
+The first thing you need to do is grab the `<aui:button>` element so that you can 
 attach a click event to it:
 
-1. Add this aui script just below the `aui-char-counter` script we created in 
-the first part of our learning path:
+1.  Add this script just below the `<aui-char-counter>` script you created in 
+    the first part of the learning path:
 
         <aui:script use="event, node">
           var btnSubmit = A.one("#submit");
         </aui:script>
 
-    We've given the `use` attribute of our `<aui:script>` tag the value of the 
-    `event` and `node` packages so that we have access to them for our click 
-    event and input nodes later on. We use the `A.one` selector method to grab 
-    our button node by passing it's id as the argument. Now that we have a 
-    variable for our button element and our aui packages selected, we can 
-    declare our variables.
+    You give the `use` attribute of the `<aui:script>` tag the value of the 
+    `event` and `node` packages so that you have access to them for our click 
+    event and input nodes later on. You then use the `A.one` selector method to grab 
+    the button node by passing its `id` as the argument. Now that you have a 
+    variable for the button element and the aui packages selected, you can 
+    declare variables.
 
-2. Declare these variables just below the btnSubmit variable:
+<!-- Here, you're using the A variable, where before you were using the Y
+variable (and I added a comment asking why). We should be consistent and use the
+AlloyUI constructs everywhere. -Rich -->
+
+2.  Declare these variables just below the `btnSubmit` variable:
 
         var verb = A.one("#<portlet:namespace />verb");
         var adj = A.one("#<portlet:namespace />adj");
@@ -91,24 +105,24 @@ the first part of our learning path:
 
     Each id for the input fields is preceeded by `<portlet:namespace/>` tag to 
     avoid namespacing issues between portlets. In addition to the input field 
-    and button variables we'll need to declare a variable for an element to 
-    display our silly phrase inside. We'll grab the div element we created 
+    and button variables, you must declare a variable for an element to 
+    display the silly phrase inside. You'll grab the `<div>` element you created 
     earlier for this:
 
         var container = A.one("#message");
 
-    All of our variables have been declared, so now we can create our click 
+    All variables have been declared, so now you can create the click 
     event.
 
-3. Add the function just below our container variable:
+3.  Add the function just below the container variable:
 
         btnSubmit.on('click', function(event){
 
 	    )};    
 
-    Next, we need to declare variables for the value of our input fields.
+    Next, you need to declare variables for the value of your input fields.
 
-4. Add these variables just inside of the function we just created:
+4. Add these variables just inside the function you just created:
 
         ver = (verb.get('value'));
         adje = (adj.get('value'));
@@ -116,175 +130,187 @@ the first part of our learning path:
         mama = (mam.get('value'));
         loca = (loc.get('value'));
 
-    Next we'll add an html element to display our silly phrase. To do this, 
-    we'll append a html `<p>` element to our container `<div>` and give it a 
+    Next, you'll add an element to display our silly phrase. To do this, 
+    you'll append a `<p>` element to the container `<div>` and give it a 
     unique id to grab in the steps to follow.
 
-5. Append the element just below our value variables:
+5.  Append the element just below our value variables:
 
         container.append('<p id="phrase"></p>');
 
-    Now that we have our HTML element created we need to assign it a variable 
-    that we can call upon later.
+    Now that you have the HTML element created, you must assign it a variable 
+    that you can call upon later.
 
-6. Add the variable below our appended element:
+6.  Add the variable below the appended element:
 
         message= A.one("#phrase");
 
-    Alright! Our framework is set, now we need to write the code for the message. 
-    To do this, we'll set the HTML of our `<p>` element which we just set to the 
+    All right! The framework is set; now you need to write the code for the message. 
+    To do this, you'll set the HTML of our `<p>` element which you just assigned to the 
     message variable.
 
-7. Add this code below the message variable:
+7.  Add this code below the message variable:
 
         message.html('Your silly phrase of the day is:<br>' + '"' + ver + ' your ' + adje + ' ' + mama + ' ' + adve + ' in the ' + loca + '."');
-    
-We use the `html()` method to set the inner HTML of the message element.
+ 
+You use the `html()` method to set the inner HTML of the message element.
 
-There you have it! redeploy your application and goto the add entry page of the 
-guestbook to see our finished silly phrase generator. With the form filled out 
-like the one below, your silly phrase should read: "Walk your left-footed 
-platypus gingerly in the warehouse."
+There you have it! Redeploy your application and go to the Guestbook's Add Entry
+page to see the finished silly phrase generator. With the form filled out like
+the one below, your silly phrase should read: "Walk your left-footed platypus
+gingerly in the warehouse."
 
 ![Figure 1: You can generate some silly phrases with the silly phrase generator.](../../images/guestbook-silly-phrase.png)
 
-Everything is in working order, but there are a few things left that we can 
+Everything is in working order, but there are a few things left that you can 
 do to make this better.
 
 ## Finishing Touches
 
-The silly phrase generator is complete! Congrats! there are a few finishing 
-touches that will hit it out of the park though. First of all, we can style the 
-silly phrase so that it sticks out from the rest of the form. Second, we can 
+The silly phrase generator is complete! Congrats! There are a few finishing 
+touches that will hit it out of the park, though. First of all, you can style the 
+silly phrase so that it sticks out from the rest of the form. Second, you can 
 safeguard against generating the silly phrase if the entire form is not filled 
-out. Next, we can add an option to hide the silly phrase generator when it's not 
-being used. Finally, we'll add a tool tip using Alloy's aui-tooltip module so 
-that our guest knows that they have the option to create a silly phrase.
+out. Next, you can add an option to hide the silly phrase generator when it's not 
+being used. Finally, you'll add a tool-tip using AlloyUI's `aui-tooltip` module so 
+that users know that they have the option to create a silly phrase.
 
 ### Styling the Silly Phrase
 
-The first thing we can do is add a bit of style to it, so that it stands out 
-from our forms.
+The first thing you can do is add a bit of style to the phrase, so that it
+stands out from the form.
 
-1. Add the style code just below the message code we just wrote:
+1.  Add the style code just below the message code you just wrote:
 
         message.setStyle('fontSize', '200%');
         message.setStyle('lineHeight', '120%');
 
-    We style our silly phrase by grabbing it's id, which we've set to the 
-    variable `message` and then we call the `setStyle()` method on it and give 
-    it two arguments: 1.) the CSS style we want to use; 2.) the value for the 
-    style. In this case, we set the font size to double the original size. We've 
-    also set the lineHeight to a little wider than normal to account for word 
-    wrapping so that the words don't overlap when the page is resized to a 
-    smaller width. One final thing we can do to give our silly phrase form a bit 
-    of separation is to add a title.
+    You style our silly phrase by grabbing its `id`, which you set to the 
+    variable `message`. Then you call the `setStyle()` method on it and give 
+    it two arguments: 1.) the CSS style you want to use; 2.) the value for the 
+    style. In this case, you set the font size to double the original size. You've 
+    also set the `lineHeight` a little wider than normal so that the words don't
+    overlap when the page is resized to a smaller width. One final thing you can do
+    to give the silly phrase form a bit of separation from the rest of the page
+    is to add a title.
 
-2. Add the following `<p>` element just inside of our `<html>` tag:
+2.  Add the following `<p>` element just inside of our `<html>` tag:
 
         <p style="font-size:35px;line-height:120%;" id="title">Silly Phrase Generator</p>
 
-    We've assigned our title some default styles inside of the `<p>` tag.  We've 
-    given it a font-size to make it stand out as a title, and as with our silly 
-    phrase, we've given it a larger than normal line height to account for word 
-    wrapping. Now we can assign it a variable so that we can access it later.
-    
-3. Declare the title variable just below our container variable:
+    You've assigned the title some default styles inside the `<p>` tag.  You've 
+    given it a `font-size` to make it stand out as a title, and as with the silly 
+    phrase, you've given it a larger than normal line height to account for word 
+    wrapping. Now you can assign it a variable so that we can access it later.
+ 
+3.  Declare the title variable just below the container variable:
 
         var title = A.one("#title");
 
-Our silly phrase now stands out from our form. Next we'll prevent the silly 
+The silly phrase now stands out from the form. Next, you'll prevent the silly 
 phrase from being generated if all the fields are not filled out. 
-    
-### Safeguarding the Silly Phrase Generator
-    
-We'll create an alert that will notify the guest that they need to fill out all 
-the fields. We'll create an if statement to do this. First we need a condition 
-to test. We want to make sure all the fields are filled out before the silly 
-phrase is generated, so we can test if any of the fields are left empty when the 
-generate button is clicked. 
 
-1. Create the if statement just below our styles with the following conditions:
+<!-- I don't believe this represents best practices. Styles should not be placed
+in the code; they should go in the main.css file that's generated in the
+docroot/css folder when the project is created. -Rich -->
+ 
+### Safeguarding the Silly Phrase Generator
+ 
+Next, you'll create an alert that notifies users that they need to fill out all 
+the fields. You'll create an `if` statement to do this. First, you need a condition 
+to test. You want to make sure all the fields are filled out before the silly 
+phrase is generated, so you can test if any of the fields are left empty when the 
+Generate button is clicked. 
+
+1.  Create the `if` statement just below the styles:
 
         if (ver == '' ||adje == '' ||adve == '' ||mama == '' ||loca == '') {
 				
 	    }
 
-    Our if statement test if any of our fields are blank, by testing if the 
-    corresponding variable equals nothing(''). Each condition is separated by 
-    the `||`(or) operator, meaning that if any of these conditions are true the 
+    The if statement tests if any fields are blank, by checking if the 
+    corresponding variable equals nothing (''). Each condition is separated by 
+    the `||`(or) operator, meaning that if any of these conditions are true, the 
     statement is true. Now we can write what we want to happen if the condition 
     is true. Right now if the silly phrase is generated and any of the fields 
-    are left blank, the phrase still displays the fields that were filled out. 
-    To prevent this, we need to set the html for the message to nothing if the 
+    are left blank, the phrase still shows the fields that were filled out. 
+    To prevent this, you need to set the HTML for the message to nothing if the 
     condition is true.
 
-2. Add this code to the condition:
+2.  Add this code to the condition:
 
         message.html('');
 
     Now if the silly phrase is generated with any blank fields, the message is 
-    blank. Now we need to alert the guest that they need to fill out all the 
+    blank. You need to alert the guest that they need to fill out all the 
     fields. This is done with the `alert()` function.
 
-3. Add the following alert to the if statement to complete the silly phrase 
-generator:
+3.  Add the following alert to the if statement to complete the silly phrase 
+    generator:
 
         alert('You need to fill out the entire form to generate a silly phrase');
 
-Next we'll setup the logic to hide the phrase when the form is not being used.
+Next, you'll create the logic to hide the phrase when the form is not being used.
+
+<!-- All this is basic JavaScript stuff, and has no bearing on AlloyUI. Alert
+boxes in particular are not best practices for working code anymore. Can this be
+reimplemented using AlloyUI modules? -Rich -->
 
 ### Hiding the Silly Phrase Generator
 
-The first thing we need to do is create a node that can have an event attached 
-to it to hide and show our silly phrase generator. A checkbox works well for 
-this, with it's two posiible states: checked and unchecked. We want this option 
-to be visible on the guestbook form so we'll add it there.
+The first thing you need to do is create a node that can have an event attached 
+to it to hide and show the silly phrase generator. A check box works well for 
+this, because of its two possible states: checked and unchecked. This option 
+should be visible on the Guestbook form, so you'll add it there.
 
-1. Inside of the `edit_entry.jsp` add the following code to the guestbook form,
-just before the closing `</aui:fieldset>` tag: 
+1.  Inside the `edit_entry.jsp`, add the following code to the form,
+    just before the closing `</aui:fieldset>` tag: 
 
-        <aui:input id="show" type="checkbox" name="include" label="Show silly phrase" checked="false"/>
+        <aui:input id="show" 
+            type="checkbox" 
+            name="include" 
+            label="Show silly phrase" 
+            checked="false"
+        />
 
-    Now that we have the checkbox created, we can assign it's node a variable.
-    
-2. Declare this variable just below the title variable:
+    Now that the check box is there, you can assign its node a variable.
+ 
+2.  Declare this variable just below the title variable:
 
         var checkbox = A.one("#<portlet:namespace/>showCheckbox");
     
-    Just as before, we use the node's id to reference it. One thing that you 
-    probably notice is the added 'Checkbox' appended to the end of our show id. 
-    It's important to note that when a aui input is created of type checkbox, 
-    'Checkbox' is automatically appended to the end of the id. Now that we have
-    our checkbox variable attached to our node, we can create the function to
-    hide our silly phrase generator.
-    
-3. Add this function just below our buttonSubmit.on('click'... function:
+    Just as before, you use the node's `id` to reference it. One thing that you 
+    probably notice is the added 'Checkbox' appended to the end of the show `id`. 
+    It's important to note that when an `<aui:input>` is created of type `checkbox`, 
+    'Checkbox' is automatically appended to the end of the `id`. Now that you have
+    the `checkbox` variable attached to the node, you can create the function
+    that hides the silly phrase generator.
+ 
+3.  Add this function just below the `buttonSubmit.on('click'...` function:
 
         checkbox.on('change', function(event){
 
         });
 
-    We've created a function that listens for an 'onChange' event on the
-    checkbox node. If there is any change in the state of the checkbox node,
-    this function will be triggered. Now we can setup the conditions that we
-    want for the checkbox. Seeing as there are two states to a checkbox: checked
-    and unchecked, we will naturally have two conditions. First we will need a
-    way to check what the state of the checkbox is. In order to do that we'll
-    use the attr() method to check the value of the checkbox's `checked`
-    attribute. We'll declare a private variable to determine if the checkbox is
-    checked.
-    
-4. Declare the checked variable at the top of the checkbox function:
+    This is a function that listens for an 'onChange' event on the
+    `checkbox` node. If there is any change in its state, this function is
+    triggered. Now you can define the conditions for the `checkbox`. Since there are
+    two states to a `checkbox` element (checked and unchecked), you'll  naturally have
+    two conditions. First you need a way to check the state of the `checkbox`. 
+    In order to do that you'll use the `attr()` method to check the value of the
+    `checkbox`'s `checked` attribute. We'll declare a private variable to determine if
+    the `checkbox` is checked.
+ 
+4.  Declare the `checked` variable at the top of the `checkbox` function:
 
         var checked = checkbox.attr('checked');
     
-    We've set the checked variable equal to the `checked` attribute of our
-    checkbox node. The `checked` attribute holds a boolean value depending on
-    the state of the checkbox: true for checked and false for unchecked. Now we
-    can write our conditional statements to test for these two states.
-    
-5. Add the following conditional statements to the checkbox function:
+    The checked variable is now equal to the `checked` attribute of the
+    `checkbox` node. The `checked` attribute holds a boolean value depending on
+    the state of the checkbox: true for `checked` and false for `unchecked`. Now
+    you can write conditional statements to test for these two states.
+ 
+5. Add the following conditional statements to the `checkbox` function:
 
         if(checked){
     
@@ -293,45 +319,50 @@ just before the closing `</aui:fieldset>` tag:
     
         }
     
-    We have our two conditionals written: one that checks if the checked
+    The two conditionals are now written: one that checks if the checked
     attribute is true, and one that checks if it is false. The `!`(not) operator
-    placed before the checked condition in the elseif statement test for if the
-    checked attribute is not true, i.e false. With our conditional statements 
-    set up we can now add the functionality. We'll use the show() and hide() 
-    methods to show and hide our nodes, depending on the state of the checkbox.
-    First we need to determine what nodes we need to show and hide. The main
-    element we need to hide is the silly phrase generator form. As of right now
-    there is no variable created for it, so we'll go ahead and do that now. if 
-    we were to try to hide the form element itself, the input fields would still
-    appear. Instead, we'll need to hide the fieldset element that holds the
-    input fields and validator tags. First we'll need to add an id to the
-    fieldset element so we can grab the node in our conditions.
+    placed before the checked condition in the `elseif` statement tests whether the
+    checked attribute is not true, (false). Now you can add the functionality.
+You'll use the `show()` and `hide()` methods to show and hide the nodes, depending on
+the state of the `checkbox`.  First you need to determine the nodes to
+show and hide. The main element to be hidden is the silly phrase generator
+form. As of right now there is no variable created for it, so you must create
+one.. If you were to try to hide the form element itself, the input fields
+would still appear. Instead, you'll need to hide the `<aui:fieldset>` element
+that holds the input fields and validator tags. First you'll add an `id` to
+the `<aui:fieldset>` element so you can grab the node. 
 
-6. Add the id `silly` to the `<fieldset>` tag that holds our silly phrase form:
+6.  Add the id `silly` to the `<aui:fieldset>` tag that holds the silly phrase
+    form:
 
         <aui:fieldset id="silly" style="display:none;">
 
-    In addition to the id, we've also given the fieldset a display style of none.
-    We'll go over this in a little bit. Now that we have our id, we need to add 
-    a variable for the node.
-    
-7. Declare the following variable below our checkbox variable:
+    In addition to the `id`, you also gave the `<aui:fieldset>` a display style
+    of `none`.  This will be explained later. Now that you have an `id`, you need
+    to add a variable for the node.
+ 
+7.  Declare the following variable below the `checkbox` variable:
 
         var silly = A.one("#<portlet:namespace/>silly");
     
-    Now that we have our fieldset element assigned to a variable, we can use it
-    to hide and show our silly phrase form. Before we go back to the conditional
-    statement, we'll need to add some styles to the other elements we want to
-    hide. We've added a display style of none to the silly fieldset because we 
-    want to have the form hidden by default, until the checkbox is checked to 
-    show it. Likewise, we will need to add the same styling to our message 
-    `<div>`, title `<p>`, and generate `<aui:button>` for our silly phrase form. 
+    Now that the `<aui:fieldset>` element is assigned to a variable, you can use it
+    to hide and show the silly phrase form. Before you go back to the conditional
+    statement, however, you must add some styles to the other elements that
+should be hidden. You added a display style of `none` to the silly
+`<aui:fieldset>` because the form must be hidden until the check box is checked.
+Likewise, the same styling must be added to the  message 
+    `<div>`, title `<p>`, and generate `<aui:button>`. 
     After you've added the styles to those elements, you can return back to the 
-    conditional statement. At this point it's pretty straight forward. If the 
-    checkbox is checked we want to show our silly phrase form, and if it's 
-    unchecked we want to hide the form.
-    
-8. Your conditional statement should look like the following:
+    conditional statement. At this point it's pretty straightforward. If the 
+    check box is checked, you want to show the silly phrase form, and if it's 
+    unchecked you want to hide the form.
+
+<!-- Never say something is straightforward, self-explanatory, common sense, or
+anything else like that. See
+https://github.com/liferay/liferay-docs/blob/master/guidelines/writers-guidelines.markdown#common-documentation-and-phraseology-issues
+-Rich -->
+ 
+8.  Your conditional statement should look like the following code:
 
         checkbox.on('change', function(event){
         var checked = checkbox.attr('checked');
@@ -349,15 +380,15 @@ just before the closing `</aui:fieldset>` tag:
         }
 	
         });
-    
-We are now able to hide and show our form! Next we'll add a informational 
-tooltip to explain what the silly phrase generator is exactly.
-    
+ 
+You can now hide and show the form! Next, you'll add an informational 
+tooltip to explain what the silly phrase generator is.
+ 
 ### Implementing Alloy's Tooltip Module
 
-The first thing we'll do is write the script for the `aui-tooltip` module.
+The first thing to do is write the script for the `aui-tooltip` module.
 
-1. Add this script just below our `aui-char-counter` script:
+1.  Add this script just below the `aui-char-counter` script:
 
         <aui:script>
         YUI().use(
@@ -376,45 +407,66 @@ The first thing we'll do is write the script for the `aui-tooltip` module.
         );
         </aui:script>
 
-    As you can see, there are a few attributes that need to be configured for
-    the tooltip module. the `trigger` attribute takes a value of the id of the
-    node that triggers the tooltip to popup on mouse over. Position refers to
-    the position the tooltip pops up relative to the trigger node. cssClass
-    refers to the styling for the tooltip. Opacity refers to the opacity of the
-    tooltip. Finally, visible refers to whether or not the tooltip is visible by
-    default. Before we configure the attributes though, we need to create the 
-    node for the trigger. If you take a look at the Control Panel in Liferay
-    Portal you can see the tooltips in action. Next to each link is a question
-    mark icon that displays a tooltip on mouse over. We'll use the same icon for
-    our tooltip. We'll use `<liferay-ui:icon>` tag to use the same icon that
-    Liferay uses. Since the `aui-tooltip` module requires an id for the trigger
-    attribute we'll need to nest the `<liferay-ui:icon>` tag inside of a `<span>`
-    tag.
-    
-2. Add this `<span>` element below our checkbox element:
+<!-- Again, you've got YUI().use and a function called Y. I suspect that it
+should be AUI.use() and an A function, and we should consistently use that.
+-Rich -->
 
-        <span id="help" title="Check the box to create a silly phrase or uncheck it to hide the form. Fill out the fields below with the correct parts of speech to generate a unique and silly phrase."><liferay-ui:icon image="help" message=""/></span>
-    
-    In addition to the id attribute we've also added a title attribute to the 
-    `<span>` tag. The tooltip module uses the value of the title attribute of 
+    As you can see, the tooltip module has a few attributes that must be set.
+    The `trigger` defines the `id` of the node that triggers the
+    tooltip to pop up on mouse over. `Position` refers to the position the tooltip pops
+    up relative to the trigger node. `cssClass` refers to the styling for the tooltip.
+    `Opacity` refers to how transparent the tooltip should be. Finally, `visible`
+    refers to whether or not the tooltip is visible by default. 
+
+<!-- I suggest you reformat the above paragraph as definitions, like this: 
+
+`trigger`: defines the `id` of the node that triggers the tooltip to pop up. 
+`position`: defines the position of the tooltip relative to the trigger node.
+(etc)
+
+-Rich -->
+
+    Before you define values for the attributes, you must create the node for the
+    trigger. If you look at the Control Panel in Liferay Portal, you can see
+    tooltips in action. Next to each link is a question mark icon that displays a
+    tooltip on mouse over. You'll define the same icon, using the
+    `<liferay-ui:icon>` tag to use the same icon that Liferay uses. Since the
+    `aui-tooltip` module requires an `id` for the trigger attribute, you must nest
+    the `<liferay-ui:icon>` tag inside a `<span>` tag.
+ 
+2.  Add this `<span>` element below the `checkbox` element:
+
+        <span id="help" 
+            title="Check the box to create a silly phrase or uncheck it to 
+            hide the form. Fill out the fields below with the correct parts of 
+            speech to generate a unique and silly phrase.">
+
+            <liferay-ui:icon image="help" message=""/>
+
+        </span>
+ 
+<!-- The above code was not formatted. Please format all your code so it is easy
+to read. -Rich -->
+
+    In addition to the `id` attribute, you also added a title attribute to the 
+    `<span>` tag. The tooltip module uses the title attribute's value from  
     the trigger node for the tooltip text. The `<liferay-ui:icon>` has been 
-    nested inside of the `<span>` tag. It's image attribute has been set to help, 
-    which is the name of the icon we want to use. 
-    
-    ---
+    nested inside the `<span>` tag. Its image attribute has been set to the help
+    icon. 
 
-    ![Note](../../images/tip-pen-paper.png) **Note:** You can find a full list
-    of the available icons in your 
+    +$$$
+
+    **Note:** You can find a full list of the available icons in your 
     `/webapps/ROOT/html/themes/classic/images/common/` directory. 
 
-    ---
+    $$$
     
-    It's message attribute has been set to empty, so that no text is displayed 
-    on mouse over of the icon; we want the AUI tooltip's text to display on 
-    mouse over and the two would conflict. Now we can go ahead and configure the
+    The message attribute has been set to empty, so that no text is displayed 
+    on mouse over of the icon: you want the AUI tooltip's text to display on 
+    mouse over, and the two would conflict. Now you can go ahead and configure the
     tooltip.
-    
-3. configure the tooltip's attributes to the following values:
+ 
+3.  Set the tooltip's attributes to the following values:
 
         trigger: '#help',
         position: 'right',
@@ -422,199 +474,34 @@ The first thing we'll do is write the script for the `aui-tooltip` module.
         opacity: 1,
         visible: false
     
-    The trigger attribute has been set to our `<span>` element. We've configured
-    the tooltip to popup on the right side of our help icon, set the opacity to
+    The trigger attribute has been set to the `<span>` element. You've configured
+    the tooltip to pop up on the right side of the help icon, set the opacity to
     fully opaque, and configured the tooltip to be hidden by default. If you
-    redeploy the guestbook portlet, you will see your new tooltip is fully
-    functional. However, right now the tooltip is below our checkbox. We want
-    the tooltip to be on the same line as the checkbox. In order to do that
-    we'll add some styling to our checkbox and tooltip, and organize them inside
-    of `<divs>`.
-    
-4. Update your checkbox and tooltip to reflect the code below:
+    redeploy the Guestbook portlet, you'll see your new tooltip is fully
+    functional. Right now, however, the tooltip is below the check box, when it
+    should be on the same line. In order to change that, you must add some styling to
+    the checkbox and tooltip and organize them inside `<divs>`.
+ 
+4.  Update your check box and tooltip to reflect the code below:
 
         <div>
             <div style="float:left;"><aui:input id="show" type="checkbox" name="include" label="Show silly phrase generator" checked="false"/></div>
             <div style="float:left; margin-left:10px;"><span id="help" title="Check the box to create a silly phrase or uncheck it to hide the form. Fill out the fields below with the correct parts of speech to generate a unique and silly phrase."><liferay-ui:icon image="help" message=""/></span></div>
         </div>
-    
-    What we've done is placed both the checkbox and tooltip inside of their own
-    `<div>`s and set them both to float left inside of the larger `<div>`. The
+ 
+<!-- Please format the code above properly. -Rich -->
+
+    What you've done is placed both the checkbox and tooltip inside their own
+    `<div>`s and set them both to float left inside the larger `<div>`. The
     tooltip has been given an additional 10 pixel margin from the left, so that
-    it's `<div>` will be on the right of the checkbox label. With this new
-    organization and styles, our silly phrase generator is now complete! Give
+    its `<div>` is on the right of the check box label. With this new
+    organization and styles, your silly phrase generator is now complete! Give
     yourself a pat on the back. Your finished form should look like this:
-    
+ 
 ![Figure 2: Go make some silly phrases.](../../images/guestbook-silly-phrase-finished.png)
-    
-With the added silly phrase generator code your `edit_entry.jsp` should look 
-like this:
-    
-    <%@include file = "/html/init.jsp" %>
-
-    <portlet:renderURL var="viewURL">
-	    <portlet:param name="mvcPath" value="/html/guestbook/view.jsp"></portlet:param>
-    </portlet:renderURL>
-
-    <portlet:actionURL name="addEntry" var="addEntryURL"></portlet:actionURL>
-    <aui:script>
-    YUI().use(
-      'aui-char-counter',
-      function(Y) {
-        new Y.CharCounter(
-          {
-            counter: '#counter',
-            input: '#<portlet:namespace />message',
-            maxLength: 70
-          }
-        );
-      }
-    );
-    </aui:script>
-    <aui:script>
-    YUI().use(
-      'aui-tooltip',
-      function(Y) {
-        new Y.Tooltip(
-          {
-            trigger: '#help',
-            position: 'right',
-            cssClass: 'tooltip-help',
-            opacity: 1,
-            visible: false
-          }
-        ).render();
-      }
-    );
-    </aui:script>
-    <aui:script use="event, node">
-        var btnSubmit = A.one("#submit");
-        var btnSave = A.one("#save");
-        var verb = A.one("#<portlet:namespace />verb");
-        var adj = A.one("#<portlet:namespace />adj");
-	    var mam = A.one("#<portlet:namespace />ani");
-	    var adv = A.one("#<portlet:namespace />adv");
-	    var loc = A.one("#<portlet:namespace />loc");
-	    var container = A.one("#message");
-	    var title = A.one("#title");
-	    var checkbox = A.one("#<portlet:namespace/>showCheckbox");
-        var silly = A.one("#<portlet:namespace/>silly");
-    
-    
-        btnSubmit.on('click', function(event){
-        
-            ver = (verb.get('value'));
-            adje = (adj.get('value'));
-            adve = (adv.get('value'));
-            mama = (mam.get('value'));
-            loca = (loc.get('value'));
-            container.append('<p id="phrase"></p>');
-            message= A.one("#phrase");
-        
-        
-            message.html('Your silly phrase of the day is:<br>' + '"' + ver + ' your ' + adje + ' ' + mama + ' ' + adve + ' in the ' + loca + '."');
-            message.setStyle('fontSize', '200%');
-            message.setStyle('lineHeight', '120%');
-        
-            if (ver == '' ||adje == '' ||adve == '' ||mama == '' ||loca == '') {
-			    message.html('');
-			    alert('You need to fill out the entire form to generate a silly phrase');			
-		    }
-		
-    });
-
-    checkbox.on('change', function(event){
-    var checked = checkbox.attr('checked');
-    if(checked){
-	    btnSubmit.show();
-	    container.show();
-	    silly.show();
-	    title.show();
-    }
-    else if(!checked){
-	    btnSubmit.hide();
-	    container.hide();
-	    silly.hide();
-	    title.hide();
-    }
-	
-    });
-
-    </aui:script>
-    
-    <%
-    long entryId = ParamUtil.getLong(renderRequest, "entryId");
-
-    Entry entry = null;
-
-    if (entryId > 0) {
-	
-	    entry = EntryLocalServiceUtil.getEntry(entryId);
-	
-    }
-
-    %>
-    
-    <aui:form action="<%= addEntryURL %>" name="<portlet:namespace />fm">
-
-            <aui:fieldset>
-            	<aui:model-context bean="<%= entry %>" model="<%= Entry.class %>" />
-                <aui:input name="name" >
-                    <aui:validator name="required"/>
-                </aui:input>
-                <aui:input name="email" >
-            	    <aui:validator name="email"/>
-            	    <aui:validator name="required"/>
-                </aui:input>
-                <aui:input id="message" type="textarea" name="message" style="resize:none" >
-            	    <aui:validator name="required" errorMessage="Leave a message please." />
-                </aui:input>
-            
-                <aui:input name='guestbookId' type='hidden' value='<%= ParamUtil.getString(renderRequest, "guestbookId") %>'/>
-                <aui:input name="entryId" type="hidden" />
-			    <div style="margin-top: -30px">
-                    <span id="counter"></span> character(s) remaining
-                </div>
-                <div>
-                    <div style="float:left;"><aui:input id="show" type="checkbox" name="include" label="Show silly phrase generator" checked="false"/></div>
-                    <div style="float:left; margin-left:10px;"><span id="help" title="Check the box to create a silly phrase or uncheck it to hide the form. Fill out the fields below with the correct parts of speech to generate a unique and silly phrase."><liferay-ui:icon image="help" message=""/></span></div>
-                </div>
-            </aui:fieldset>
-
-            <aui:button-row>
-
-			    <aui:button type="submit" id="save"></aui:button>
-			    <aui:button type="cancel" onClick="<%= viewURL %>"></aui:button>
-
-            </aui:button-row>
-    </aui:form>
-    <html>
-    <p style="font-size:35px;line-height:120%;display:none;" id="title">Silly Phrase Generator</p>
-    <div id="message"></div>
-    </html>
-    <aui:form>
-
-		    <aui:fieldset id="silly" style="display:none;">
-			    <aui:input name="adjective" id="adj" type="text">
-            	    <aui:validator name="required"/>
-                </aui:input>
-                <aui:input name="verb" id="verb" type="text">
-            	    <aui:validator name="required"/>
-                </aui:input>
-                <aui:input name="adverb" id="adv" type="text">
-            	    <aui:validator name="required"/>
-                </aui:input>
-                <aui:input name="animal" id="ani" type="text">
-            	    <aui:validator name="required"/>
-                </aui:input>
-                <aui:input name="location" id="loc" type="text">
-            	    <aui:validator name="required"/>
-                </aui:input>
-            </aui:fieldset>
-            
-                <aui:button class="btn btn-primary" id="submit" value="Generate" style="display:none;"></aui:button>
-        
-    </aui:form>
+ 
+<!-- You don't need to paste in the entire file, so I deleted it. It's better to
+tell readers where to download the source code so they can examine it. -Rich -->
 
 Congrats! Your silly phrase generator is complete, and now you have a basic 
 understanding of how to traverse the DOM using AlloyUI.
