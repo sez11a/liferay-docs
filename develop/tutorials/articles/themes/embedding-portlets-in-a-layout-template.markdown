@@ -48,7 +48,7 @@ Here's a description of the portlets to be embedded in the example layout:
  Search        | `3`                        | 2   | 4      | core   | no  | N/A |
  Hello World   | `my-hello-world-portlet`   | 1   | 1      | custom | no  | myhelloworldportlet |
  Goodbye World | `my-goodbye-world-portlet` | 3   | 1      | custom | yes | myhelloworldportlet |
----
+$$$
 
 Now that the embedded portlet's characteristics have been acquired, you can
 plug them into a layout template to embed the portlets. 

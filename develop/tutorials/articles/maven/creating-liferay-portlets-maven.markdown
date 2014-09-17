@@ -11,14 +11,14 @@ tutorial or the
 [Creating Liferay Maven Plugins from the Command Line](https://www-ldn.liferay.com/develop/tutorials/-/knowledge_base/creating-liferay-maven-plugins-from-the-command-lin)
 tutorial, making sure to select *Portlet* as the plugin type. 
 
----
++$$$
 
-![tip](../../images/tip-pen-paper.png) **Tip**: If you're using Maven's
+**Tip**: If you're using Maven's
 Archetype command line tool to generate your portlet project, you can filter on
 the group ID `liferay`, or even the group ID/artifact ID combination
 `liferay:portlet`, to find the Liferay portlet archetypes more easily. 
 
----
+$$$
 
 Since it's helpful to familiarize yourself with the Liferay portlet plugin
 project's anatomy, that topic is covered next. 

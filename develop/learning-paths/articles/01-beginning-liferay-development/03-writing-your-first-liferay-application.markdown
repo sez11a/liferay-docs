@@ -36,15 +36,15 @@ appears.
 
 5. When done, click *Finish*. 
 
----
++$$$
 
-![note](../../images/01-tip.png) **Note:** The first time you create a project,
+**Note:** The first time you create a project,
 make sure you're online. In the background, Liferay's Plugins SDK downloads
 several `.jar` files that it needs in order to operate. This keeps the initial
 download small, but makes it take a long time to create your first project
 (about four minutes). After the initial download, it won't happen again. 
 
----
+$$$
 
 Your project now appears in the Package Explorer on the left. What you've just
 done is create a blank Liferay project. Projects can have any number of
@@ -404,14 +404,14 @@ name ends and the guestbook entry begins. The caret symbol (^) makes a good
 delimiter because users are highly unlikely to use that symbol in a guestbook
 entry. 
 
----
++$$$
 
-![tip](../../images/01-tip.png) **Note:** Clearly, portlet preferences and string
+**Note:** Clearly, portlet preferences and string
 delimiters are not the best way to implement this. To learn about a proper
 implementation for saving data, follow the *Writing a Data-Driven Application*
 learning path. 
 
----
+$$$
 
 The following method implements adding a guestbook entry to a portlet preference
 called `guestbook-entries`: 

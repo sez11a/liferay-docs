@@ -13,14 +13,14 @@ tutorial or the
 [Creating Liferay Maven Plugins from the Command Line](https://www-ldn.liferay.com/develop/tutorials/-/knowledge_base/creating-liferay-maven-plugins-from-the-command-lin)
 tutorial, making sure to select *Hook* as the plugin type. 
 
----
++$$$
 
-![tip](../../images/tip-pen-paper.png) **Tip**: If you're using Maven's
+**Tip**: If you're using Maven's
 Archetype command line tool to generate your hook you can filter on group ID
 `liferay`, or even the group ID/artifact ID combination `liferay:hook`, to more
 easily find the Liferay portlet archetypes. 
 
----
+$$$
 
 Since it's helpful to familiarize yourself with the Liferay hook plugin
 project's anatomy, that topic is covered next. 
