@@ -1,9 +1,11 @@
 # Microsoft Office integration [](id=microsoft-office-integration)
 
-Liferay lets you open Microsoft Office files that reside in
-Documents and Media. You can open the files from Microsoft Internet
-Explorer or open them directly from your Microsoft Office applications.
-Let's open a file from your browser first.
+Liferay lets you open Microsoft Office files that reside in Documents and Media.
+You can open the files from Microsoft Internet Explorer or open them directly
+from your Microsoft Office applications. **Importantly,** these integration
+features are only supported on Windows XP with 32-bit versions of Microsoft
+Internet Explorer and 32-bit versions of Microsoft Office. Let's open a file
+from your browser first. 
 
 Liferay lets you launch Microsoft Office right from folders in Documents and
 Media. First, find the Microsoft Office file that you want to edit. Then
@@ -14,18 +16,8 @@ file opens in your Microsoft Office application.
 
 ![Figure 5.7: Open Microsoft Office files from within your Internet Explorer browser by clicking the *Open in MS Office* link.](../../images/05-open-in-MS-office.png)
 
-<!-- Needs to be replaced for 6.2 -->
-<!-- This feature only works for 32 bit browsers/Microsoft Office. -->
-
 When you save the file, it is stored automatically in the Documents and Media
 folder from which you opened it. 
-
-Note that 64-bit Microsoft Internet Explorer and 64-bit Microsoft Office
-versions do not currently support this feature. It is only supported on 32-bit
-Microsoft Internet Explorer versions with 32-bit versions of Microsoft Office.
-See
-[http://issues.liferay.com/browse/LPS-28718](http://issues.liferay.com/browse/LPS-28718)
-for more information. 
 
 Next we'll show you how to navigate your Documents and Media folders and
 open a file from the Microsoft Office application. 
