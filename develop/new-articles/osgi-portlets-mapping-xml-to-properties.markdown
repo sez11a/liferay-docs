@@ -1,8 +1,11 @@
 # Mapping Portlet Descriptors to OSGi Service Properties
 
-This section describes the mapping of Portlet XML descriptor values onto OSGi service properties to be used when publishing OSGi Portlets. 
+This section describes the mapping of Portlet XML descriptor values onto OSGi
+service properties to be used when publishing OSGi Portlets. 
 
-OSGi services can contain properties in their definition which makes dealing with configuration concerns simple and cohesive. These properties are typically represented as key-value pairs, or more generally as a Map-like object.
+OSGi services can contain properties in their definition which makes dealing
+with configuration concerns simple and cohesive. These properties are typically
+represented as key-value pairs, or more generally as a Map-like object.
 
 Portlet spec property keys are prefixed by:
 
@@ -12,7 +15,9 @@ Liferay property keys are prefixed by:
 
 	com.liferay.portlet.
 
-The mappings essentially flatten what is found in the XML descriptor, sticking relatively closely to the original naming in order to have a memorable relationship with those definitions.
+The mappings essentially flatten what is found in the XML descriptor, sticking
+relatively closely to the original naming in order to have a memorable
+relationship with those definitions.
 
 ### JSR-168 & JSR-286 Descriptor Mappings
 
@@ -54,7 +59,8 @@ The mappings essentially flatten what is found in the XML descriptor, sticking r
 
 ### Liferay Descriptor Mappings
 
->**Note:** XPath notation derived from **Liferay Portlet** [5](#five) is used in this document for simplicity.
+**Note:** XPath notation derived from **Liferay Portlet** [5](#five) is used in
+this document for simplicity.
 
 |`liferay-portlet.xml` XPath | OSGi Service Property|
 |----|----|
@@ -138,8 +144,8 @@ The mappings essentially flatten what is found in the XML descriptor, sticking r
 |`/liferay-portlet-app/portlet/include`|not supported|
 
 
-* [<a name="one">1</a>] Portlets are registered as concrete objects.
-* [<a name="two">2</a>] Multiple of these properties may be used, results in an array of values.
-* [<a name="three">3</a>] This type is registered as an OSGi service.
-* [<a name="four">4</a>] http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd
-* [<a name="five">5</a>] http://www.liferay.com/dtd/liferay-portlet-app_7_0_0.dtd
+- [<a name="one">1</a>] Portlets are registered as concrete objects.
+- [<a name="two">2</a>] Multiple of these properties may be used, results in an array of values.
+- [<a name="three">3</a>] This type is registered as an OSGi service.
+- [<a name="four">4</a>] http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd
+- [<a name="five">5</a>] http://www.liferay.com/dtd/liferay-portlet-app_7_0_0.dtd

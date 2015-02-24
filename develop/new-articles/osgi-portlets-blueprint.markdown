@@ -1,3 +1,32 @@
-<p><h1>Blueprint</h1><p>Blueprint is a component framework derived from spring’s XML bean configurations.</p><p>We need to create a blueprint XML file whose location in the bundle must default to <code>OSGi-INF/blueprint/*.xml</code> (this can be overridden by OSGi headers which we’ll leave as an exercise for a later time).</p><p>Therefore we’ll create <code>OSGi-INF/blueprint/blueprint.xml</code> with the following content:</p> <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</p><p>&lt;blueprint xmlns=&quot;<a href="http://www.osgi.org/xmlns/blueprint/v1.0.0&quot;&gt">http://www.osgi.org/xmlns/blueprint/v1.0.0&quot;&gt</a>;  &lt;service id=&quot;my.bundle.MyPortlet.service&quot; interface=&quot;javax.portlet.Portlet&quot; ref=&quot;my.bundle.MyPortlet&quot;&gt;  &lt;service-properties&gt;  &lt;entry key=&quot;com.liferay.portlet.display-category&quot; value=&quot;category.sample&quot; /&gt;  &lt;entry key=&quot;com.liferay.portlet.instanceable&quot; value=&quot;true&quot; /&gt;  &lt;entry key=&quot;javax.portlet.display-name&quot; value=&quot;My Blueprint Portlet&quot; /&gt;  &lt;entry key=&quot;javax.portlet.security-role-ref&quot; value=&quot;power-user,user&quot; /&gt;  &lt;/service-properties&gt;  &lt;/service&gt;</p>
-<pre><code>&amp;lt;bean id=&amp;quot;my.bundle.MyPortlet&amp;quot; class=&amp;quot;my.bundle.MyPortlet&amp;quot; /&amp;gt;
-</code></pre><p>&lt;/blueprint&gt; </code></pre><p>Re-deploying the portlet, we should see:</p><p>[image]</p><p>After adding it to the page we should have:</p><p>[image]</p></p>
+# Blueprint
+
+Blueprint is a component framework derived from Spring’s XML bean
+configurations.
+
+We need to create a blueprint XML file whose location in the bundle must default
+to `OSGi-INF/blueprint/*.xml`. (This can be overridden by OSGi headers which
+we'll leave as an exercise for a later time.)
+
+Therefore we'll create `OSGi-INF/blueprint/blueprint.xml` with the following
+content:
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+        <service id="my.bundle.MyPortlet.service" interface="javax.portlet.Portlet" ref="my.bundle.MyPortlet">
+        <service-properties>
+        <entry key="com.liferay.portlet.display-category" value="category.sample" />
+        <entry key="com.liferay.portlet.instanceable" value="true" />
+        <entry key="javax.portlet.display-name" value="My Blueprint Portlet" /> 
+        <entry key="javax.portlet.security-role-ref" value="power-user,user" />
+        </service-properties>
+        </service>
+        <bean id="my.bundle.MyPortlet" class="my.bundle.MyPortlet">
+    </blueprint> 
+
+Re-deploying the portlet, we should see:
+
+![image]()
+
+After adding it to the page we should have:
+
+![image]()
