@@ -1,27 +1,30 @@
 # OSGi Portlets by Example
 
-Liferay 7.0 (as of yet released) offers the capability of deploying portlets as OSGi services. What are the benefits of doing this?
+Liferay 7.0 allows portlets to be deployed as OSGi services. What are the
+benefits of doing this?
 
-- Deploy, Redeploy, Uninstall, start and stop portlets at any time using OSGi's
-  management tools. That means no longer depending on specific app server tools
-  which are often not as reliable or flexible. It will probably mean a faster
-  startup as well.
-- Define the portlets with annotations instead of XML files. Both for the
-  standard characteristics (portlet.xml not needed anymore except for some
-  advanced options) and the ones that are specific to Liferay
-  (liferay-portlet.xml and liferay-display.xml)
-- Declared dependencies: when developing an OSGi module the developer needs to
-  declare (with the help of the bnd tool) the APIs that the module's code
-  depends on. Over time this will help evolve the portlet to be more
+- Portlets can be deployed, redeployed, uninstalled, started, and stopped at any
+  time using OSGi's management tools. This means that Liferay no longer needs to
+  depend on specific application server tools which are often not as reliable or
+  flexible. It most cases, this will also result in a faster startup.
+- Portlet configurations can be defined via annotations on portlet classes
+  instead of via XML files. Properties that were previously specified in
+  standard portlet configuration files such as `portlet.xml` and
+  Liferay-specific configuration files such as `liferay-portlet.xml` and
+  `liferay-display.xml` can be defined via annotations. `portlet.xml` might
+  still need to be used for some advanced use cases.
+- Portlets can declare dependencies. When developing an OSGi module, a developer
+  needs to declare (with the help of the bnd tool) the APIs that the module's
+  code depends on. Over time, this helps evolve the portlet to be more
   maintainable.
-- Detect breaking changes sooner: If one of the dependencies have changed in an
-  incompatible way you will be notified instead of getting Java errors during
-  runtime later on.
-- Improved extensibility: by making your portlets OSGi bundles it will be dead
-  easy to make them extensible as well using OSGi extension points (which are
-  annotation driven!)
-- Much more: OSGi modules tend to be easier to test since there is a higher
-  emphasis on APIs, the remoting capabilities of API will increase the
+- Breaking changes can be detected in portlets sooner. If one of the
+  dependencies changes in an incompatible way, you're notified at compile-time
+  instead of at runtime.
+- Portlets are more extensible. Designing portlets as OSGi bundles makes it very
+  easy to make them extensible using OSGi extension points (which are
+  annotation-driven)!
+- Other benefits: OSGi modules tend to be easier to test since there is a higher
+  emphasis on APIs. The remoting capabilities of the API increase the
   scalability since the portlet can be distributed in several processes, etc.
 
 The key to harnessing the power of OSGi is choosing a *component framework* to
@@ -29,45 +32,49 @@ work with. A component framework is synonymous with frameworks which provide
 **DI** (dependency injection), **SoC** (separation of concerns), and **IoC**
 (Inversion of Control).
 
-Some popular (non-OSGi) component frameworks (there are others) are:
+Some popular (non-OSGi) component frameworks (there are others) are
 
 - Spring
 - Google Guice
 - CDI
 
-OSGi component frameworks, in addition to providing the features above, offer
-awareness of the dynamic nature of the OSGi runtime supporting well behaved
-arrival and departure of bundles and services at runtime.
+OSGi component frameworks, in addition to providing the features mentioned
+above, offer awareness of the dynamic nature of the OSGi runtime. Such awareness
+supports well behaved arrival and departure of bundles and services at runtime.
 
-A few are (there are others):
+A few OSGi component frameworks (there are others) are
 
 - Declarative Services (a.k.a. **DS**, OSGi Spec) (**recommended**)
 - Blueprint (OSGi Spec)
 - Apache Felix DM
 - IPojo
 
-Liferay will prefer **DS** (using DS annotations) as a component framework and
-so most examples will take this form. It's the most concise way of building
-complex component models and simplest to use.
+Liferay prefers **DS** (using DS annotations) as a component framework and so
+most Liferay examples take this form. It's the most concise way of building
+complex component models and it's the simplest to use.
 
-However, this document also demonstrates designing portlets using the raw OSGi
-API as well as Blueprint.
+However, Liferay portlets can also be designed using the raw OSGi API or using
+Blueprint. Please see the []() and []() tutorials for more information.
 
-## Build system
+## Build System
 
-Though the examples are similar it helps choose the samples which will suit your preferred buildsystem. Complete projects are available in the blade project. 
+Liferay provides examples that demonstrate how to create OSGi applications for
+Liferay 7. There are examples using several different build systems. Although
+the examples are similar, it helps to choose examples which suit your preferred
+build system. Complete projects are available in the
+[BLADE](https://github.com/rotty3000/blade) project. 
 
 Currently there are projects using:
 
 - Maven
 - Bndtools
-- Gradle (coming soon)
+- Gradle
 - Liferay Plugins SDK (coming soon)
-- Others? (if there is significant interest we can add any other build system)
 
-## The portlet class
+## The Portlet Class
 
-Let's start with the following portlet class:
+Regardless of your preferred build system, you need to create at least a simple
+Java project with a portlet class. Consider the following example portlet class:
 
     package my.bundle;
 
@@ -90,8 +97,9 @@ Let's start with the following portlet class:
 
 This is an overly simple portlet. However from the point of view of the portlet,
 there are no differences with respect to how portlets operate in Liferay via
-OSGi and so the level of complexity of the portlet is irrelevant for this
-document. We're going to focus on the service aspects only.
+OSGi and how to operate without OSGi. The level of complexity of the portlet is
+irrelevant for this example. We're going to focus only on the service aspects of
+the portlet.
 
 ### DS Annotations
 
@@ -99,11 +107,11 @@ document. We're going to focus on the service aspects only.
 convenient way to define components via its build time annotations. These
 annotations are supported by bnd or by any build tool which uses
 [bnd](http://bnd.bndtools.org/) under the covers (like the Apache Felix
-`maven-bundle-plugin`, the gradle `osgi` plugin, the bnd `ant` tasks, or
+`maven-bundle-plugin`, the Gradle `osgi` plugin, the bnd `ant` tasks, or
 [Bndtools IDE](http://bndtools.org/)).
 
-Let's add the annotations which will result in the portlet being registered as
-an OSGi service. 
+You can add annotations to your portlet which result in your portlet being
+registered as an OSGi service. 
 
 Add the following directly to the portlet class:
 
@@ -156,13 +164,14 @@ The complete class looks like this:
 
 That's it! 
 
-Build and deploy the bundle, refresh the page and we should see:
+Build and deploy your bundle, access Liferay's Gogo shell, and run the *lb*
+command. Confirm that your bundle has been installed and is active:
 
 ![image]()
 
-After adding it to the page we have:
+Add your portlet to a Liferay page and look for something like this:
 
 ![image]()
 
-**Note:** DS annotations are class annotation and so do not result in any extra
-runtime dependencies.
+**Note:** DS annotations are class annotations. As such, they do not result in
+any extra runtime dependencies.
