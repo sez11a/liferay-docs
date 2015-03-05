@@ -1,4 +1,4 @@
-# OSGi Portlets by Example
+# OSGi Portlets Using Declarative Services
 
 Liferay 7.0 allows portlets to be deployed as OSGi services. What are the
 benefits of doing this?
