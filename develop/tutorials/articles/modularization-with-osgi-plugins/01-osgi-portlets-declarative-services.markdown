@@ -165,13 +165,16 @@ The complete class looks like this:
 That's it! 
 
 Build and deploy your bundle, access Liferay's Gogo shell, and run the *lb*
-command. Confirm that your bundle has been installed and is active:
+command. To confirm that your bundle has been installed and is active, look for
+a line like the following:
 
-![image]()
+    110|Active     |    1|My DS Portlet (1.0.0.SNAPSHOT)
 
-Add your portlet to a Liferay page and look for something like this:
+Check that you can add your portlet to a page and that it's working correctly.
+An easy way to make sure that it's working is to check that its `doView` method
+is invoked.
 
-![image]()
+![In the example above, the portlet was added to the *category.sample* category. When added to a Liferay page, the portlet displays the text *My DS Portlet - Hello World*.](../../images/my-ds-portlet.png)
 
 **Note:** DS annotations are class annotations. As such, they do not result in
 any extra runtime dependencies.
