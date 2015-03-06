@@ -178,3 +178,10 @@ is invoked.
 
 **Note:** DS annotations are class annotations. As such, they do not result in
 any extra runtime dependencies.
+
+You can find a complete example portlet built via OSGi declarative services in
+the BLADE project on Github. It's called *Portlet DS*. Remember that the BLADE
+project examples are available for several different build systems, such as
+Maven, Gradle, and Bndtools. For example, the Maven version of the Portlet DS
+portlet is available here:
+[Maven Portlet DS](https://github.com/rotty3000/blade/tree/master/maven/blade.portlet.ds).
