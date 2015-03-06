@@ -184,6 +184,18 @@ manually publish and manage services is not extreme but it is significant.
 Therefore, Liferay recommends using DS (declarative services) to publish and
 manage services instead of manually using the OSGi API.
 
+Build and deploy your bundle, access Liferay's Gogo shell, and run the *lb*
+command. To confirm that your bundle has been installed and is active, look for
+a line like the following:
+
+    111|Active     |    1|My OSGi API Portlet (1.0.0.SNAPSHOT)
+
+Check that you can add your portlet to a page and that it's working correctly.
+An easy way to make sure that it's working is to check that its `doView` method
+is invoked.
+
+![In the example above, the portlet was added to the *category.sample* category. When added to a Liferay page, the portlet displays the text *My OSGi API Portlet - Hello World*.](../../images/my-osgi-api-portlet.png)
+
 You can find a complete example portlet built via the OSGi API in the BLADE
 project on Github. It's called *Portlet OSGi API*. Remember that the BLADE
 project examples are available for several different build systems, such as
