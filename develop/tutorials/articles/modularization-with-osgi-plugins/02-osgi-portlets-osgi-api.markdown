@@ -19,7 +19,8 @@ The OSGi API provides access to the lifecycle of a bundle when the bundle
 provides (and declares) an implementation of the `BundleActivator` interface.
 
 OSGi bundles declare features by providing headers in the `MANIFEST.MF` files of
-their JAR files. Suppose you have a bundle with the following `MANIFEST.MF`:
+their JAR files. Suppose you have a bundle with the following `MANIFEST.MF` and
+a portlet class called `MyPortlet`:
 
     Bundle-SymbolicName: my.bundle
     Bundle-Activator: my.bundle.Activator
