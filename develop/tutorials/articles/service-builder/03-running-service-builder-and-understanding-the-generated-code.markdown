@@ -3,7 +3,7 @@
 This tutorial explains how to run Service Builder and provides an overview of
 the code that Service Builder generates. If you'd like to use Service Builder in
 your application but haven't yet created a `service.xml` file, please see the
-[Defining an Object-Relational Map with Service Builder](https://dev.liferay.com/develop/tutorials/-/knowledge_base/6-2/defining-an-object-relational-map-with-service-builder)
+[Defining an Object-Relational Map with Service Builder](/develop/tutorials/-/knowledge_base/6-2/defining-an-object-relational-map-with-service-builder)
 tutorial and then come back to this one.
 
 ## Running Service Builder [](id=running-service-builder)
