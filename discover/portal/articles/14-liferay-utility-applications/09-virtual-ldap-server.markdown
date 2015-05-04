@@ -2,8 +2,6 @@
 
 ![EE-only](../../images/ee-feature-web.png)
 
-The Virtual LDAP Server EE app, available from
-[Liferay Marketplace](https://liferay.com/marketplace), 
 Lightweight Directory Access Protocol (LDAP) is an application protocol for
 accessing and maintaining distributed directory information services over an
 Internet Protocol (IP) network. Out-of-box, Liferay allows users to be imported
