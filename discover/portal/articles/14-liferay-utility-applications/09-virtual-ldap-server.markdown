@@ -8,11 +8,11 @@ Internet Protocol (IP) network. Out-of-box, Liferay allows users to be imported
 from or exported to an external LDAP server. Please see Liferay's
 [LDAP](discover/portal/-/knowledge_base/6-2/integrating-existing-users-into-liferay#ldap)
 documentation for details. The Virtual LDAP Server EE app, available from
-[Liferay Marketplace](https://liferay.com/marketplace), adds an internal LDAP
-server to Liferay that runs as a service. The LDAP server added by the app
-exposes Liferay's user data store via the LDAP protocols. This allows third
-party tools to access Liferay user information (profile, roles, groups, etc.) as
-if accessing an LDAP server.
+[Liferay Marketplace](https://www.liferay.com/marketplace/-/mp/application/15186785),
+adds an internal LDAP server to Liferay that runs as a service. The LDAP server
+added by the app exposes Liferay's user data store via the LDAP protocols. This
+allows third party tools to access Liferay user information (profile, roles,
+groups, etc.) as if accessing an LDAP server.
 
 By default, the LDAP server added by the Virtual LDAP Server EE app runs on port
 11389 but this can be configured by overriding the following line of the
