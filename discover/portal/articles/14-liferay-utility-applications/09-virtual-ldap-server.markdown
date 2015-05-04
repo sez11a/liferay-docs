@@ -57,4 +57,5 @@ user:
 
 If a user or other Liferay entity is added, edited, or deleted while you're
 browsing Liferay's LDAP server, simply refresh your LDAP client to see the
-update.
+update. **Important:** Liferay's LDAP server is read-only. You cannot edit users
+or other LDAP entities via an LDAP client.
