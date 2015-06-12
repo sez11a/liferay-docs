@@ -1,0 +1,54 @@
+# Notifying and Drawing Attention to Users by Mentioning Them [](id=notifying-and-drawing-attention-to-users-by-mentioning-them)
+
+Have you ever wanted to link to a user's home page in the middle of a Blogs
+entry or Message Boards message in which you're praising them? Have you ever
+wanted to notify specific colleagues in an important comment you were adding to
+site content? With the Mentions portlet, you can *mention* (notify and/or draw
+attention to) your friends and colleagues using a simple syntax in your content.
+The Mentions feature enables you to refer to the user in context of your content
+and email that user with a link to it. You can mention users from within a Blogs
+entry, Message Boards message, or comment. You can mention them from any
+application that uses Liferay's comments feature. What's more, in Blogs and
+Message Boards, each user mention links to that user's home page. 
+
+![Figure 1: By using the *mention* syntax in a Blogs entry, Message Boards message, or comment, you can link to a user's home page and notify the user with an email.](../../images/mentions-in-comment.png)
+
+The Mentions feature works as you'd expect. While editing comments or content
+(in Blogs or Message Boards), enter an "@" character followed by the *user name*
+of the user you're mentioning. A selector appears, listing users that match the
+name you're entering. In the selector, each user is represented by his/her
+profile picture, name, and user name. Click on the user you want to mention and
+finish editing your content. On publishing the content, the mentioned users
+receive an email informing them that they've been mentioned. The email message
+includes the author's name, content, and a link to the content. 
+
+Here's an example notification email message:
+
+	Dear Joe Bloggs,
+
+	Neil Armstrong mentioned you in the following comment:
+
+	----------
+	I bet @joe would like visiting the moon.
+	----------
+
+	View comment.(link)
+
+	Sincerely,
+	Kim Admin
+	kim.admin@lunarresort.com 
+
+To set up the Mentions portlet, download and install it from the [Liferay
+Marketplace](https://www.liferay.com/marketplace). The mentions feature is
+enabled globally by default, but you can enable/disable it globally and per
+site. In order for a site to have Mentions enabled, Mentions must be enabled for
+the site's portal. You can access the Mentions control screen by clicking the
+*Mentions* link in the Configuration category in Portal Settings. A site's
+Mentions administration screen can be accessed by clicking the *Mentions* link
+in the Advanced section of Site Settings. Note that any user can mention any
+other user.
+
+By mentioning users you can get their attention, praise them with kudos, and
+link to their home pages. And did I *mention* that the portlet is available on
+EE and CE? Have fun collaborating and socializing with the Mentions portlet,
+today! 
