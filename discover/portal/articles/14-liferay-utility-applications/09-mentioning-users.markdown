@@ -1,18 +1,18 @@
 # Notifying and Drawing Attention to Users by Mentioning Them [](id=notifying-and-drawing-attention-to-users-by-mentioning-them)
 
-Have you ever wanted to link to a user's home page in the middle of a Blogs
-entry or Message Boards message in which you're praising them? Have you ever
-wanted to notify specific colleagues in an important comment you were adding to
-site content? With the Mentions portlet, you can *mention* (notify and/or draw
-attention to) your friends and colleagues by entering the "@" character followed
-by their user name. When you mention a user, the user receives an in-portal
-notification and email--both link to the content. You can mention users in a
-blog entry, a Message Boards message, or comment. You can mention them from any
-application that uses Liferay's comments feature. What's more, in the content of
-a blog entry or Message Boards message, each user mention links to that user's
-home page. 
+Have you ever wanted to link to a user's home page in the middle of a blog entry
+or Message Boards message in which you're praising them? Have you ever wanted to
+notify specific colleagues in an important comment you were adding to site
+content? With the Mentions portlet, you can *mention* (notify and/or draw
+attention to) friends and colleagues by entering the "@" character followed by
+their user name. When you mention a user, the user receives an in-portal
+notification and email--both link to the content that includes the mention. You
+can mention users in a blog entry, a Message Boards message, or comment; you can
+mention them from any application that uses Liferay's comments feature. What's
+more, in the content of a blog entry or Message Boards message, each user
+mention links to that user's home page. 
 
-![Figure 1: By using the *mention* syntax in a Blogs entry, Message Boards message, or comment, you can link to a user's home page and notify the user with an email.](../../images/mentions-in-comment.png)
+![Figure 1: By using the *mention* syntax in a blog entry, Message Boards message, or comment, you can link to a user's home page and notify the user with an email.](../../images/mentions-in-comment.png)
 
 The Mentions feature works as you'd expect. While editing comments or content,
 enter an "@" character followed by the *user name* of the user you're mentioning
