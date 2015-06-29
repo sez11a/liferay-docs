@@ -24,6 +24,14 @@ in-portal notification and an email, informing them that they've been mentioned.
 The notification and email indicate the author's name and content's type, and
 they link to the content. 
 
++$$$
+
+**Known Limitation**: In comments, homepage hyperlinks aren't displayed for
+mentioned users. Refer to issue
+[LPS-56020](https://issues.liferay.com/browse/LPS-56020) for details. 
+
+$$$
+
 ![Figure 2: The Notifications portlet informs you when and where you're mentioned.](../../images/mentions-notifications.png)
 
 Here's an example notification email message:
