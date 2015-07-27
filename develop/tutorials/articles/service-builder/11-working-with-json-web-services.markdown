@@ -926,7 +926,7 @@ tutorial.
 
 ## Related Topics [](id=related-topics)
 
-[SOAP Web Services](develop/tutorials/-/knowledge_base/6-2/soap-web-services)
+[SOAP Web Services](/develop/tutorials/-/knowledge_base/6-2/soap-web-services)
 
-[Plugin Security and PACL](develop/tutorials/-/knowledge_base/6-2/plugin-security-and-pacl)
+[Plugin Security and PACL](/develop/tutorials/-/knowledge_base/6-2/plugin-security-and-pacl)
 
