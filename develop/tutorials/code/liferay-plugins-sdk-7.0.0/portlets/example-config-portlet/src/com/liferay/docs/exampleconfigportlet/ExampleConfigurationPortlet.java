@@ -1,4 +1,4 @@
-package com.liferay.docs.exampleconfigurationportlet;
+package com.liferay.docs.exampleconfigportlet;
 
 import java.io.IOException;
 import java.util.Map;
@@ -12,22 +12,18 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Modified;
 
-import com.liferay.docs.exampleconfigurationportlet.configuration.ExampleConfigurationPortletConfiguration;
+import com.liferay.docs.exampleconfigportlet.configuration.ExampleConfiguration;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.portal.kernel.settings.SettingsException;
-import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.theme.PortletDisplay;
-import com.liferay.portal.theme.ThemeDisplay;
 
 import aQute.bnd.annotation.metatype.Configurable;
 
 @Component(
-	configurationPid = "com.liferay.docs.exampleconfigurationportlet.configuration.ExampleConfigurationPortletConfiguration",
+	configurationPid = "com.liferay.docs.exampleconfigportlet.configuration.ExampleConfiguration",
 	immediate = true,
 	property = {
 		"com.liferay.portlet.display-category=category.sample",
 		"com.liferay.portlet.instanceable=true",
-		"javax.portlet.display-name=Example Configuration Portlet",
+		"javax.portlet.display-name=Example Config Portlet",
 		"javax.portlet.init-param.config-template=/configuration.jsp",
         "javax.portlet.init-param.template-path=/",
         "javax.portlet.init-param.view-template=/view.jsp",
@@ -45,33 +41,19 @@ public class ExampleConfigurationPortlet extends MVCPortlet {
 	@Modified
 	protected void activate(Map<String, Object> properties) {
 		_configuration = Configurable.createConfigurable(
-            ExampleConfigurationPortletConfiguration.class, properties);
+            ExampleConfiguration.class, properties);
 	}
 	
 	@Override
 	public void doView(RenderRequest request, RenderResponse response)
 		throws PortletException, IOException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-		
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-		
-		try {
-			ExampleConfigurationPortletConfiguration configuration =
-                portletDisplay.getPortletInstanceConfiguration(
-                    ExampleConfigurationPortletConfiguration.class);
-			
-			String validLanguages = configuration.validLanguages();
-			
-			System.out.println("validLanguages: " + validLanguages);
-		}
-		catch (SettingsException se) {
-			se.printStackTrace();
-		}
+			request.setAttribute(
+                ExampleConfiguration.class.getName(), _configuration);
 		
 		super.doView(request, response);
 	}
 	
-	private volatile ExampleConfigurationPortletConfiguration _configuration;
+	private volatile ExampleConfiguration _configuration;
 
 }

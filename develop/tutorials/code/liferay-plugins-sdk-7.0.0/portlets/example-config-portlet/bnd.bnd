@@ -1,8 +1,8 @@
 Bundle-Name: Example Configuration Portlet
-Bundle-SymbolicName: com.liferay.docs.exampleconfigurationportlet
+Bundle-SymbolicName: com.liferay.docs.exampleconfigportlet
 Bundle-Version: 1.0.0
-Private-Package: com.liferay.docs.exampleconfigurationportlet,\
-com.liferay.docs.exampleconfigurationportlet.configuration
+Private-Package: com.liferay.docs.exampleconfigportlet,\
+com.liferay.docs.exampleconfigportlet.configuration
 
 -dsannotations: *
 Service-Component: *

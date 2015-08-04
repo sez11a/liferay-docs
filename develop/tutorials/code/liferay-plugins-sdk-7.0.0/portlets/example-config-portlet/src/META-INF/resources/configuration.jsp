@@ -1,5 +1,7 @@
 <%@ include file="/init.jsp" %>
 
+<%@ page import="com.liferay.portal.kernel.util.Constants" %>
+
 <liferay-portlet:actionURL portletConfiguration="<%= true %>"
 	var="configurationActionURL" />
 
@@ -18,8 +20,8 @@
 
 		<aui:select name="validLangugages" label="Valid Languages"
 			value="<%= validLanguages %>">
-			<aui:option value="en|es|pt">Arial</aui:option>
-			<aui:option value="en|es|pt|de">Arial</aui:option>
+			<aui:option value="en|es|pt">English, Spanish, and Portuguese]</aui:option>
+			<aui:option value="en|es|pt|de">English, Spanish, Portuguese, and German</aui:option>
 		</aui:select>
 
 	</aui:fieldset>

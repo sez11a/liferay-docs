@@ -7,16 +7,15 @@
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
-<%@page import="com.liferay.docs.exampleconfigurationportlet.configuration.ExampleConfigurationPortletConfiguration" %>
+<%@page import="com.liferay.docs.exampleconfigportlet.configuration.ExampleConfiguration" %>
 
 <portlet:defineObjects />
 
 <liferay-theme:defineObjects />
 
 <%
-	ExampleConfigurationPortletConfiguration configuration =
-		(ExampleConfigurationPortletConfiguration)
-		renderRequest.getAttribute(ExampleConfigurationPortletConfiguration.class.getName());
+	ExampleConfiguration configuration = (ExampleConfiguration)
+		request.getAttribute(ExampleConfiguration.class.getName());
 
 	String validLanguages = "";
 
