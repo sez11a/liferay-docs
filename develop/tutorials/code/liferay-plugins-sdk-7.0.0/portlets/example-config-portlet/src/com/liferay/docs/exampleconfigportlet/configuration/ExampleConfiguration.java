@@ -15,6 +15,6 @@ public interface ExampleConfiguration {
 		deflt = "en|es|pt",
 		required = false
     )
-	public String validLanguages();
+	public String[] validLanguages();
 
 }
