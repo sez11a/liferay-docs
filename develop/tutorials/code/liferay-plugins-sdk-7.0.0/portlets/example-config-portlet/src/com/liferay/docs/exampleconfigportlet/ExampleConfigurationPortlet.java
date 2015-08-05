@@ -33,10 +33,6 @@ import aQute.bnd.annotation.metatype.Configurable;
 )
 public class ExampleConfigurationPortlet extends MVCPortlet {
 	
-	public String getDefaultLanguageLabel(Map labels) {
-		return (String) labels.get(_configuration.defaultLanguage());
-	}
-	
 	@Activate
 	@Modified
 	protected void activate(Map<String, Object> properties) {
@@ -46,10 +42,10 @@ public class ExampleConfigurationPortlet extends MVCPortlet {
 	
 	@Override
 	public void doView(RenderRequest request, RenderResponse response)
-		throws PortletException, IOException {
+            throws PortletException, IOException {
 
-			request.setAttribute(
-                ExampleConfiguration.class.getName(), _configuration);
+        request.setAttribute(
+            ExampleConfiguration.class.getName(), _configuration);
 		
 		super.doView(request, response);
 	}
