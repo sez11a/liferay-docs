@@ -16,8 +16,5 @@ public interface ExampleConfiguration {
 		required = false
     )
 	public String validLanguages();
-	
-	@Meta.AD(required = false)
-	public int itemsPerPage();
 
 }
