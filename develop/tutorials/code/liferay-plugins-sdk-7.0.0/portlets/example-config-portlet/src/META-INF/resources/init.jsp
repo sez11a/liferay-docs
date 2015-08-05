@@ -18,10 +18,13 @@
 		request.getAttribute(ExampleConfiguration.class.getName());
 
 	String validLanguages = "";
+	String defaultLanguage = "";
 
 	if (configuration != null) {
-		validLanguages =
-			portletPreferences.getValue(
-				"validLanguages", configuration.validLanguages());
+		validLanguages = portletPreferences.getValue(
+            "validLanguages", configuration.validLanguages());
+		
+		defaultLanguage = portletPreferences.getValue(
+            "defaultLanguage", configuration.defaultLanguage());
 	}
 %>
