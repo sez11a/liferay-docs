@@ -291,3 +291,8 @@ up. -Rich -->
 
 <!-- Please summarize what the reader has learned. -Rich -->
 
+## Creating a Configuration Action
+
+Add the following dependency to `ivy.xml`:
+
+    <dependency name="servlet-api" org="javax.servlet" rev="2.5" />
