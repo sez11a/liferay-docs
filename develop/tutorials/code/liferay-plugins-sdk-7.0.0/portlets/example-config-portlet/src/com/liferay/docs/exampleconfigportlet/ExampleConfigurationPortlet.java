@@ -27,6 +27,7 @@ import aQute.bnd.annotation.metatype.Configurable;
 		"javax.portlet.init-param.config-template=/configuration.jsp",
         "javax.portlet.init-param.template-path=/",
         "javax.portlet.init-param.view-template=/view.jsp",
+		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user"
 	},
 	service = Portlet.class
