@@ -1,0 +1,7 @@
+Bundle-Name: Example JSON Serialization Portlet
+Bundle-SymbolicName: com.liferay.docs.examplejsonserializationportlet
+Bundle-Version: 1.0.0
+Private-Package: com.liferay.docs.examplejsonserializationportlet
+Include-Resource:\
+        classes,\
+        META-INF/resources=src/META-INF/resources
