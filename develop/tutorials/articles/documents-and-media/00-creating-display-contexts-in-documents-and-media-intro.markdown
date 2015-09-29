@@ -1,89 +1,79 @@
 # Creating Display Contexts in Documents and Media
 
-Display contexts are an ongoing effort (currently applied to Documents & Media
-portlet) to modularize the user interface (UI) in Liferay Portal. This
-modularization will lead to a better source code structure and the possibility
-to customize Liferay Portal's UI by deploying OSGi modules without any need to
-develop hooks or ext plugins.
+Display contexts are an ongoing effort (currently applied in the Documents and
+Media portlet) to modularize Liferay Portal's user interface (UI). This
+modularization results in better source code structure and facilitates
+customizing Liferay dynamically using OSGi modules. 
 
-Let's look at the anatomy of a Display Context (from now on DC) by looking at
-one specific type of DC. We will use `DLViewFileVersionDisplayContext`.
+Let's look at the anatomy of a Display Context (DC) by looking at one specific
+type of DC called [`DLViewFileVersionDisplayContext`](http://docs.liferay.com/portal/7.0-a1/javadocs/com/liferay/portlet/documentlibrary/display/context/DLViewFileVersionDisplayContext.html).
 
-## What is DLViewFileVersionDisplayContext for?
+## What is a DLViewFileVersionDisplayContext for?
 
-First of all, DCs are always related to one action (page, window) of the
-portlet. For instance, the `DLViewFileVersionDisplayContext` is the responsible
-for the D&M page showing the details of a specific version of a document (a
-`FileVersion`).
-
-Nevertheless, a DC may be used in a different context until every view is moved
-to its own DC. For example, the `DLViewFileVersionDisplayContext` is used to
-render the context menus associated to each file in the *Files List View* of
-D&M. This is because the *Files List View* has no DC assigned yet. Once the
-*Files List View* has a DC, it will be used instead of
-`DLViewFileVersionDisplayContext`, and the shared logic (that deciding which
-actions should be rendered) will be placed in a common class used by both DCs.
+DCs always relate to one action (page, window) of the portlet. For instance, the
+`DLViewFileVersionDisplayContext` is responsible showing the details of a
+specific version (a `FileVersion`) of a document on a Documents and Media page.
+The `DLViewFileVersionDisplayContext` renders context menus associated to each
+file in the *Files List View* of Documents and Media. This is because the *Files
+List View* has no DC assigned yet. Once the *Files List View* has a DC, it will
+be used instead of `DLViewFileVersionDisplayContext`, and the shared logic (that
+decides which actions to render) will be placed in a common class used by both
+DCs. 
 
 To finish with, a DC is always defined by an interface which, usually, has a
-default implementation in Liferay's core. The default implementation does the
-basic functionality everybody expects from Liferay, but it can be easily
-extended or replaced by deploying an OSGi bundle.
+default implementation in Liferay's core. The default implementation provides
+basic functionality that Liferay users expect, but it can be easily extended or
+replaced by an implementation deployed in an OSGi bundle. 
 
 ## What kind of things does DLViewFileVersionDisplayContext decide?
 
-A look at the methods in `DLViewFileVersionDisplayContext` shows that it is
-responsible for deciding what actions are available to the user in the *File
-Version View*. For example, the methods:
+A look at the methods in `DLViewFileVersionDisplayContext` shows that it decides
+what actions the File Version View makes available to a user . For example, the
+following methods respectively return the menu and the list of toolbar
+items to show the user for the
+[`FileVersion`](http://docs.liferay.com/portal/7.0-a1/javadocs/com/liferay/portal/kernel/repository/model/FileVersion.html). 
 
-- `List<MenuItem> getMenuItems()`
+- `Menu getMenu()`
 - `List<ToolbarItem> getToolbarItems()`
 
-return the list of menu or toolbar items to show for the `FileVersion` currently
-shown to the user. The default implementation in the portal returns the *Edit*,
-*Checkout*, *Delete*, etc. actions you are used to, but it would be pretty easy
-to deploy an OSGi bundle which filters such list of items and, for example,
-removes the *Delete* one so that it is not shown to the user.
+The default implementation in the portal returns a menu with typical actions
+*Edit*, *Checkout*, *Delete*, etc. But it would be pretty easy to deploy an OSGi
+bundle that filters out the *Delete* action, for example, to hide it from the
+user. 
 
-Some other methods like:
+The following `DLViewFileVersionDisplayContext` methods return values already
+present in the `FileVersion` model object, but that are filtered according to
+what's needed in the UI. 
 
 - `List<DDMStructure> getDDMStructures()`
-- `Fields getFields(DDMStructure ddmStructure)`
+- `DDMFormValues getDDMFormValues(DDMStructure ddmStructure)`
 
-return values already present in the `FileVersion` model object, but filtered
-according to the UI needs. An overriding implementation could, for instance,
-remove some fields from a metadata section of the UI simply implementing the
-`getFields()` method. It could also simulate fields which are not stored in the
-database, or modify existing fields.
+An extension implementation could, for example, override the `getDDMFormValues`
+method to remove some form values from a metadata section of the UI. An
+implementation could modify existing form values or simulate form values which
+are not stored in the database. 
 
-Finally, another type of method sometimes found in DCs is:
+Lastly, consider the following `DLViewFileVersionDisplayContext` method that
+renders a preview of a `FileVersion` instance. 
 
-- `void renderPreview(HttpServletRequest request, HttpServletResponse response)`
+    void renderPreview(HttpServletRequest request, HttpServletResponse response)
 
-which is a method called by Liferay whenever it needs to render a preview of a
-`FileVersion`. This method renders its HTML output directly instead of returning
-a model object (like, say, `MenuItem`). Thus, it is less extensible than the
-previous types of method and less maintainable. It's somewhat between a hook and
-a proper DC method. Unfortunately for such an unstructured content as a preview,
-it is not possible to define a proper model object like `MenuItem` or
-`ToolbarItem`.
+This method renders HTML output directly instead of returning a model object
+(like, say, `MenuItem`). It is, therefore, less extensible than the previous
+types of methods and less maintainable. It's a cross between a hook and a proper
+DC method. Unfortunately for such unstructured content as a preview, it's
+impossible to define a proper model object like `MenuItem` or `ToolbarItem`.  
 
-## How do I extend DLViewFileVersionDisplayContext?
+## How do I Extend a DLViewFileVersionDisplayContext?
 
-Overriding the default implementation of a DC is easy and straightforward. You
+Overriding the default implementation of a DC is straightforward and easy. You
 can see a sample customization of `DLViewFileVersionDisplayContext` inside
 Liferay's source code, under
 [`modules/apps/document-library/document-library-google-docs`](https://github.com/liferay/liferay-portal/tree/master/modules/apps/document-library/document-library-google-docs).
 
-Whenever you want to extend a DC, you must create an OSGi module that will be
-deployed inside Liferay. How to create such modules is beyond the scope of this
-article, so we will assume that you know how to develop and deploy OSGi modules
-for Liferay.
-
-The first step is implementing a DC factory for the DC you want to customize. In
-our example, we will implement `DLViewFileVersionDisplayContextFactory` and
-declare it as an OSGi component providing such service
-(`DLViewFileVersionDisplayContextFactory`). For that, we just need to declare a
-class as:
+First, implement a DC factory for the type of DC you want to customize. Here's
+an example DC factory that implements `DLViewFileVersionDisplayContextFactory`
+and that declares itself an OSGi component that provides a service. 
 
     @Component(
        service = DLViewFileVersionDisplayContextFactory.class
@@ -95,7 +85,8 @@ class as:
 
     }
 
-Then, we implement the method in `DLViewFileVersionDisplayContextFactory`: 
+Then you could, for example, implement the method
+`getDLFileVersionActionsDisplayContext` like this: 
 
     @Override
     public DLViewFileVersionDisplayContext getDLFileVersionActionsDisplayContext(
@@ -112,35 +103,37 @@ Then, we implement the method in `DLViewFileVersionDisplayContextFactory`:
         return parentDLFileEntryActionsDisplayContext;
     }
 
-The DC factory methods receive a parent DC, the request and response of the view
-being rendered, and one or more business object associated with the view (in
-this case a `FileVersion`). With that information, the DC factory needs to
-decide whether or not its DC applies to the caller view. For example, we could
-implement a customized DC that only applies to image files. We could check the
-extension of the `FileVersion` in the `shouldBeCustomized()` method and only
-return true if it is PNG, JPG or GIF.
+DC factory methods typically take as parameters a parent DC, the request and
+response of the view being rendered, and one or more business objects (in this
+case a `FileVersion`) associated with the view. The DC factory uses this
+information to decide whether to apply its DC to the caller view. 
 
-The parent DC is provided for two reasons:
+You could, for example, implement a customized DC that only applies to image
+files. Its factory's `getDLFileVersionActionsDisplayContext` method could
+inspect the `FileVersion`'s extension in a helper method called
+`shouldBeCustomized`, that only returns true if the extension is for a PNG, JPG,
+or GIF file. 
 
-1. If the factory is not willing to customize the default DC it should return
-the parent DC as it was provided.
+The `getDLFileVersionActionsDisplayContext` method uses the parent DC for the
+following reasons: 
 
-2. If the factory decides to customize the DC, it is handy to pass the parent DC
-to the customized implementation so that it can call it and then operate on the
-results of the parent DC. Of course, this is not mandatory, and you can
-implement your customized DC from scratch, but sometimes you just want to
-slightly modify the default behaviour, rather than changing it totally.
+1.  If the factory doesn't customize the default DC, it can return the parent DC.
 
-You may be wondering what happens if you register several factories. The answer
-is that you can deploy as many as you want and they will be chained according to
-their [service ranking](http://www.osgi.org/javadoc/r4v42/org/osgi/framework/Constants.html#SERVICE%5FRANKING).
+2.  If the factory customizes the DC, it can optionally apply methods of the
+    parent DC. If you want only to modify slightly the default behavior of the
+    parent DC, you'll probably want to access the parent DC. 
 
-## A real world example: how to remove the Delete menu item in our example DC
+You may be wondering what happens if you register several factories. You can
+deploy as many as you want and they'll be chained in descending order
+according to their [service ranking](http://www.osgi.org/javadoc/r4v42/org/osgi/framework/Constants.html#SERVICE%5FRANKING).
 
-Say you want to remove the *Delete* action from the *File Version View* menus.
-To do that you must first implement the DC factory as shown in the previous
-section and then override the `List<MenuItem> getMenuItems()` method in your
-`CustomizedDLViewFileVersionDisplayContext` as shown below:
+## Example: How to Remove the Delete Menu Item Using a Display Context
+
+Say you want to remove the *Delete* action from Document and Media's *File
+Version View* menus. You must first implement the applicable DC factory, as
+demonstrated previously. Then you override the `List<MenuItem> getMenuItems()`
+method in your `CustomizedDLViewFileVersionDisplayContext`, as shown in the
+paraphrased code below: 
 
     public class CustomizedDLViewFileVersionDisplayContext extends
     BaseDLViewFileVersionDisplayContext {
@@ -160,38 +153,34 @@ section and then override the `List<MenuItem> getMenuItems()` method in your
 
     }
 
-As you can see, what we are doing is:
+Here's the logic it implements:
 
-1.  Calling the parent DC to obtain the default list of menu items.
+1.  Call the parent DC to obtain the default list of menu items.
 
-2.  Traversing the list to find the *Delete* menu item and remove it (note that
-    D&M provides the `DLUIItemKeys` API so that overriders can identify
-    `MenuItems` programatically without any black magic).
+2.  Traverse the list to find the *Delete* menu item and remove it. Note:
+    Documents and Media provides the
+    [`DLUIItemKeys`](http://docs.liferay.com/portal/7.0-a1/javadocs/com/liferay/portlet/documentlibrary/display/context/DLUIItemKeys.html)
+    API for implementations to programmatically identify menu items.
 
 3.  Return the modified list of menu items.
 
-Note that `CustomizedDLViewFileVersionDisplayContext` extends from
-`BaseDLViewFileVersionDisplayContext` instead of directly implementing
-`DLViewFileVersionDisplayContext`. This is not mandatory, but provides a better
-migration path to deploy current DCs in future versions of Liferay.
+Note that the `CustomizedDLViewFileVersionDisplayContext` class extends
+`BaseDLViewFileVersionDisplayContext`, instead of directly implementing
+`DLViewFileVersionDisplayContext`. Extending an existing Liferay base DC isn't
+mandatory, but it can provide a better migration path for deploying your DCs in
+future versions of Liferay. 
 
-Imagine what would happen if the next version of Liferay is shipped with a new
-method in the `DLViewFileVersionDisplayContext` interface: if your customized DC
-directly implements the interface it will not compile, but if you extend
-`BaseDLViewFileVersionDisplayContext` your customized DC will compile without
-trouble and that functionality will be provided by Liferay's default
-implementation. That way, you won't need any effort to migrate your
-customizations to future versions of Liferay.
+Imagine what would happen if the next version of Liferay ships with a new method
+in the `DLViewFileVersionDisplayContext` interface: if your customized DC
+directly implements the interface, it won't compile; but if your DC extends
+`BaseDLViewFileVersionDisplayContext`, it will compile without trouble and the
+new method will already be implemented by Liferay's default implementation.
+Extending a Liferay base implementation facilitates migrating your DC
+customizations to future versions of Liferay. 
 
 ## Conclusion
 
-Display contexts will hopefully help to modularize Liferay's UI layer and make
-it, at the same time, extensible by third parties in a robust way which will
-need less future maintenance than a hook or an ext plugin. They will also make
-Liferay's APIs explicit and compilable which will, in the end, lead to an easier
-to maintain and reuse source code both inside Liferay and in third party code
-outside of it.
-
-Remember that you can see a real life example inside Liferay's source code,
-under
-[`modules/apps/document-library/document-library-google-docs`](https://github.com/liferay/liferay-portal/tree/master/modules/apps/document-library/document-library-google-docs).
+Display contexts help modularize Liferay's UI layer and make it more extensible
+by using a robust approach to alleviate maintenance. DC's help make Liferay's
+APIs explicit and compilable to facilitate maintenance and source code reuse,
+both inside Liferay and in third party code. 
