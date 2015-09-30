@@ -193,8 +193,8 @@ source code reuse, both inside Liferay and in third party code.
 
 **Related Topics**
 
-[Understandting Liferay's Module Framework](https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/understanding-liferays-module-framework)
+[Understandting Liferay's Module Framework](/develop/tutorials/-/knowledge_base/7-0/understanding-liferays-module-framework)
 
-[Creating a Simple Bundle](https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/creating-a-simple-bundle)
+[Creating a Simple Bundle](/develop/tutorials/-/knowledge_base/7-0/creating-a-simple-bundle)
 
-[Creating Liferay Plugins/Bundles in the Blade Environment](https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/creating-liferay-plugins-bundles-in-the-blade-environment)
+[Creating Liferay Plugins/Bundles in the Blade Environment](/develop/tutorials/-/knowledge_base/7-0/creating-liferay-plugins-bundles-in-the-blade-environment)
