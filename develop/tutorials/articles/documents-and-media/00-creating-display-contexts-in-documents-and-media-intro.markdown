@@ -1,4 +1,4 @@
-# Creating Display Contexts in Documents and Media
+# Creating Display Contexts in Documents and Media [](id=creating-display-contexts-in-documents-and-media)
 
 Display Contexts (DCs) are classes that model portlet screens. They're a part of
 an ongoing effort to modularize Liferay Portal's UI. This modularization results
@@ -12,7 +12,7 @@ Documents and Media portlet:
 To learn the anatomy of Display Contexts and how to create one, let's consider
 the `DLViewFileVersionDisplayContext` interface. 
 
-## What is a DLViewFileVersionDisplayContext for?
+## What is a DLViewFileVersionDisplayContext for? [](id=what-is-a-dlviewfileversiondisplaycontext-for)
 
 DCs should relate to one entire view, or whole screen, of a portlet. The
 `DLViewFileVersionDisplayContext` bends the rule, as it relates only to *part*
@@ -28,7 +28,7 @@ implementations provide basic functionality that Liferay users expect. These
 implementations can, however, be easily extended or replaced by another
 implementation deployed in an OSGi bundle.
 
-## What Kind of Things Does DLViewFileVersionDisplayContext Decide?
+## What Kind of Things Does DLViewFileVersionDisplayContext Decide? [](id=what-kind-of-things-does-dlviewfileversiondisplaycontext-decide)
 
 A look at the methods in `DLViewFileVersionDisplayContext` shows that it decides
 what actions the File Version View makes available to a user. For example, the
@@ -68,7 +68,7 @@ between a hook and a proper DC method. For unstructured content, such as preview
 content, it's unfortunately impossible to define a proper model object like
 `MenuItem` or `ToolbarItem`. 
 
-## How do I Extend a DLViewFileVersionDisplayContext?
+## How do I Extend a DLViewFileVersionDisplayContext? [](id=how-do-i-extend-a-dlviewfileversiondisplaycontext)
 
 Overriding the default implementation of a DC is straightforward. You can see a
 sample customization of `DLViewFileVersionDisplayContext` in Liferay's source
@@ -132,7 +132,7 @@ You may be wondering what happens if you register several factories. You can
 deploy as many as you want and they'll be chained in descending order
 according to their [service ranking](http://www.osgi.org/javadoc/r4v42/org/osgi/framework/Constants.html#SERVICE%5FRANKING).
 
-## Example: How to Remove the Delete Menu Item Using a Display Context
+## Example: How to Remove the Delete Menu Item Using a Display Context [](id=example-how-to-remove-the-delete-menu-item-using-a-display-context)
 
 Say you want to remove the *Delete* action from Document and Media's *File
 Version View* menus. You must first implement the applicable DC factory, as
