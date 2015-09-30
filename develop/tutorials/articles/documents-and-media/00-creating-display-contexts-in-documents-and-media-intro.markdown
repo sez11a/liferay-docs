@@ -10,13 +10,11 @@ type of DC called [`DLViewFileVersionDisplayContext`](http://docs.liferay.com/po
 
 ## What is a DLViewFileVersionDisplayContext for?
 
-DCs always relate to one action (page, window) of the portlet. For instance, the
-`DLViewFileVersionDisplayContext` is responsible showing the details of a
-specific version (a `FileVersion`) of a document on a Documents and Media page.
-The `DLViewFileVersionDisplayContext` renders context menus associated to each
-file in the *Files List View* of Documents and Media. This is because the *Files
-List View* has no DC assigned yet. Once the *Files List View* has a DC, it will
-be used instead of `DLViewFileVersionDisplayContext`, and the shared logic (that
+DCs always relate to one view of the portlet. For instance, the
+`DLViewFileVersionDisplayContext` is modeling the view that shows the details of 
+specific version (a `FileVersion`) of a document on a page containing the Documents and Media portlet.
+
+An exception to this is the fact that `DLViewFileVersionDisplayContext` renders context menus associated to each file in the *Files List View* of Documents and Media. This is because the *Files List View* has no DC assigned yet. Once the *Files List View* has a DC, it will be used instead of `DLViewFileVersionDisplayContext`, and the shared logic (that
 decides which actions to render) will be placed in a common class used by both
 DCs. 
 
@@ -140,17 +138,21 @@ paraphrased code below:
 
         ...
 
-        @Override public List<MenuItem> getMenuItems() throws PortalException {
-        List<MenuItem> menuItems = super.getMenuItems();
+        @Override public Menu getMenu() throws PortalException {
+        	Menu menu = super.getMenu();
+			List<MenuItem> menuItems = menu.getMenuItems();
 
-            for (MenuItem menuItem : menuItems) { if
-            (DLUIItemKeys.DELETE.equals(menuItem.getKey())) {
-            menuItems.remove(menuItem); break; } }
+			for (MenuItem menuItem : menuItems) { 
+				if (DLUIItemKeys.DELETE.equals(menuItem.getKey())) {
+            		menuItems.remove(menuItem); 
+            		break; 
+            	} 
+          }
 
-            return menuItems; }
+          return menu; 
+        }
 
         ...
-
     }
 
 Here's the logic it implements:
