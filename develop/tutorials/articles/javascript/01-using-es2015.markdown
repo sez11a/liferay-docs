@@ -6,12 +6,12 @@ do these things, you need make only minor adjustments to your JavaScript files
 and projects. 
 
 To use the ES2015 syntax in a JavaScript file, add the extension `.es` to its
-name. For example, you rename file `filename.js` to `filename.es.js`. The
-extension indicates it uses ES2015 syntax and must therefore be transpiled by
+name. For example, rename `filename.js` to `filename.es.js`. The extension
+indicates it uses ES2015 syntax and must therefore be transpiled by
 [Babel](https://babeljs.io/) before deployment. 
 
-ES2015 advanced features, such as
-[generators](https://babeljs.io/docs/learn-es2015/#generators), are available to
+ES2015 advanced features such as
+[generators](https://babeljs.io/docs/learn-es2015/#generators) are available to
 you if you import the `polyfillBabel` class from the `polyfill-babel` module
 found in Liferay 7: 
 
@@ -24,7 +24,7 @@ code. You can inspect
 to see what's polyfilled. 
 
 Once you've completed writing your module, you can expose it by creating a
-`bower.json` file that specifies your bundle's name and version. Make sure to
+`bower.json` file that specifies your module's name and version. Make sure to
 create this in your module's root folder. The
 [frontend-js-numsequences-web]( https://github.com/liferay/liferay-docs/tree/master/develop/tutorials/code/liferay-plugins-sdk-7.0.0/portlets/frontend-js-numsequences-web)
 module, for example, specifies the following values in its `bower.json` file: 
@@ -35,10 +35,10 @@ module, for example, specifies the following values in its `bower.json` file:
     }
 
 The Module Config Generator creates the module based on this information. There 
-you have it! In just a few steps you can prepare your module to leverage the 
-latest JavaScript standard features and publish it. 
+you have it! In just a few steps you can prepare and publish a module that uses
+the ES2015 standard. 
 
-**Related Topics**
+## Related Topics
 
 [Using ES2015 Modules in Your Portlet](/develop/tutorials/-/knowledge_base/7-0/using-es2015-modules-in-your-portlet)
 
