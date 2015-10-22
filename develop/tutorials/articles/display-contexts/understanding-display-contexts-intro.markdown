@@ -1,16 +1,45 @@
-# Creating Display Contexts in Documents and Media [](id=creating-display-contexts-in-documents-and-media)
+# Understanding Display Contexts [](id=understanding-display-contexts)
 
-Display Contexts (DCs) are classes that model portlet screens. They're a part of
-an ongoing effort to modularize Liferay Portal's UI. This modularization results
-in better source code structure and facilitates customizing Liferay dynamically
-using OSGi modules. The first DCs created in Liferay Portal apply to the
-Documents and Media portlet:
+A Display Context is a Java class that controls access to a portlet screen's UI
+elements. For example, the Document Library would use Display Contexts to
+provide its screens all their UI elements. It would use one Display Context for
+its document edit screen, another for its document view screen, etc. A portlet
+ideally uses a different Display Context for each of its screens. 
+
+A screen's JSP calls on the Display Context (DC) to get elements to render and
+to decide whether to render certain types of elements. Some of the DC methods
+return a collection of UI elements (e.g., a menu object of menu items), while
+other DC methods return booleans that determine whether to show particular
+element types. The DC decides which objects to display, while the JSP organizes
+the rendered objects and implements the screen's look and feel. The JSP
+developer doesn't have to decide which elements to display; he simply calls DC
+methods to populate UI components with objects to render. 
+
+To customize or extend a Liferay portlet screen that uses a DC, a developer can
+extend the DC and override the methods that control access to the elements that
+interest him. For example, he can turn off displaying certain types of elements
+(e.g., actions) by overriding the DC method that makes that decision. He can add
+new custom elements (e.g., new actions) or remove existing elements (e.g., a
+delete action) from a collection of elements a DC method returns. The beauty of
+customizing via a DC is that the developer doesn't have to modify the JSP. He
+modifies only the particular methods that are related to the UI customization
+goals. And JSP updates won't break the DC customizations. Replacing a JSP, on
+the other hand, can lead to missing an important JSP modification that a new
+Liferay version introduces. 
+
+As you create custom portlets, you may want to implement DCs. You can benefit
+from the separation of concerns that DCs provide and customers can extend your
+portlet DCs to specify which UI elements to display. And they don't need to
+worry about missing out on the updates you make to the JSPs. Everybody wins! 
+
+The first DCs created in Liferay Portal apply to the Documents and Media
+portlet: 
 
 - [`DLEditFileEntryDisplayContext`](http://docs.liferay.com/portal/7.0-a1/javadocs/com/liferay/portlet/documentlibrary/display/context/DLEditFileEntryDisplayContext.html): models the edit file entry/version screen
 - [`DLViewFileVersionDisplayContext`](http://docs.liferay.com/portal/7.0-a1/javadocs/com/liferay/portlet/documentlibrary/display/context/DLViewFileVersionDisplayContext.html): models the view file entry/version screen
 
-To learn the anatomy of Display Contexts and how to create one, let's consider
-the `DLViewFileVersionDisplayContext` interface. 
+To learn more about Display Contexts, let's examine the
+`DLViewFileVersionDisplayContext` interface. 
 
 ## What is a DLViewFileVersionDisplayContext for? [](id=what-is-a-dlviewfileversiondisplaycontext-for)
 
