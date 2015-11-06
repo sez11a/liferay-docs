@@ -1,0 +1,17 @@
+-buildpath: \
+	osgi.core;version=5.0,\
+	com.liferay.portal:portal-service;version='[7.0,8)',\
+	biz.aQute.bndlib
+
+Bundle-Version: 1.0.0.${tstamp}
+
+Import-Package: \
+    com.liferay.portal.service;version="7.0.0",\
+    org.osgi.framework;version="[1.7,2)",\
+    *
+
+Export-Package: \
+	com.liferay.docs.guestbook.exception,\
+	com.liferay.docs.guestbook.model,\
+	com.liferay.docs.guestbook.service,\
+	com.liferay.docs.guestbook.service.persistence
