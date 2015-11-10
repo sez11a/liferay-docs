@@ -8,7 +8,7 @@ application deployed alongside of the applications that come with Liferay.
 Your first application is simple: you'll build a guestbook application that
 looks like this: (screenshot not yet taken)
 
-<!-- screenshot here -->
+![Figure x: You'll create this simple application.](../../images/first-guestbook-portlet.png)
 
 By default, it shows guestbook messages that various users have left on your
 website. To add a message, you click the *Add Entry* button to show a form you
@@ -288,7 +288,12 @@ Save `edit_entry.jsp` and redeploy your application. If you refresh the page
 and click the *Add Entry* button, your form appears. If you click the *Cancel*
 button, it works! However, don't click the *Save* button yet. You haven't yet
 created the action that saves a guestbook entry, so clicking *Save* will
-produce an error. Implementing the action is your next task.
+produce an error.
+
+![Figure x: This is the Guestbook application's form for adding entries.](../../images/first-guestbook-portlet.png)
+
+Implementing the portlet action (what happens when the user clicks *Save*) is
+your next task.
 
 ### Implementing Portlet Actions
 
