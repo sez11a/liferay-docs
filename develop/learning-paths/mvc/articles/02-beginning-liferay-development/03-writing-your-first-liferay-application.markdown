@@ -3,10 +3,10 @@
 Getting started with your first Liferay application takes only minutes. We'll
 guide you through the step-by-step process of creating your project and
 deploying your application to Liferay. Before you know it, you'll have your
-application deployed alongside of the applications that come with Liferay. 
+application deployed alongside of the applications that come with Liferay.
 
 Your first application is simple: you'll build a guestbook application that
-looks like this: (screenshot not yet taken)
+looks like this:
 
 ![Figure x: You'll create this simple application.](../../images/first-guestbook-portlet.png)
 
@@ -24,8 +24,8 @@ a portlet project. You'll use the
 [Blade Tools](https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/introduction-to-blade-tools)
 command line tool to create your application. The new Liferay application
 wizards available in Liferay IDE and Liferay Developer Studio use Blade Tools
-under the hood. Thus, everything works the same way regardless of your specific
-development environment or IDE.
+under the hood. Thus, new projects can be created the same way regardless of
+your specific development environment or IDE.
 
 To create your Guestbook application, use the following command:
 
@@ -40,6 +40,19 @@ the `com.liferay.docs.guestbook` package from
 this file, rename the class declaration from
 `Com.liferay.docs.guestbookPortlet` to `GuestbookPortlet`. If you want to
 import your project into an IDE, do so now.
+
+Note: Two important concepts for Liferay 7 development are modules and
+components. A *module* is the one and only type of Liferay 7 plugin. A
+*component* is an implementation of an interface. In Liferay, a component is
+typically a
+[Declarative Services](http://wiki.osgi.org/wiki/Declarative_Services)
+component, which means that it's a Java class that's decorated with the
+`org.osgi.service.component.annotations.Component` annotation. Please see the [Understanding Liferay's Module Framework](/develop/tutorials/-/knowledge_base/7-0/understanding-liferays-module-framework)
+tutorial for more information on Liferay modules, components, and Liferay's
+module framework. In this learning path, you're creating a single module called
+`com.liferay.docs.guestbook`. In this module, you're creating a single
+component: the `GuestbookPortlet` class which implements the `Portlet`
+interface.
 
 ## What is a Portlet?
 
@@ -57,15 +70,16 @@ difference between a Liferay application and an application built on another
 platform is that Liferay Portal can serve many applications at the same time on
 the same page. Usually, a web application takes up the entire page, and if you
 want, you can do this with Liferay as well. But Liferay has the added benefit of
-being able to run many applications on the same page. For this reason, you'll
-find that the framework takes this into account at every step. We're saying this
-up front, because you'll be experiencing this soon, and we want you to know why
-certain things, like platform-generated URLs, are necessary.
+being able to run many applications on the same page. Liferay's framework takes
+this into account at every step. We're saying this up front, because you'll be
+experiencing this soon, and we want you to know why certain things, like
+platform-generated URLs, are necessary.
 
 Even though you haven't yet made any updates to it, the Guestbook project that
 you created in the previous section is ready to be built and deployed to
-Liferay. Make your Liferay 7 instance is running, and then run this command
-from your `com.liferay.docs.guestbook` project folder to build your project:
+Liferay. Make sure your Liferay 7 instance is running, and then run this
+command from your `com.liferay.docs.guestbook` project folder to build your
+project:
 
     gradle build
 
@@ -75,13 +89,18 @@ deploy it, run this command from your project:
     blade deploy build/libs/com.liferay.docs.guestbook-1.0.jar
 
 Next, check that your application is available in Liferay. Open a browser,
-navigate to your portal ([http://localhost:8080](http://localhost:8080)) by
-default, and add your application to a page. To add an application to a page,
+navigate to your portal ([http://localhost:8080](http://localhost:8080) by
+default) and add your application to a page. To add an application to a page,
 click on the *Add* button (it looks like a plus sign) and then on
 *Applications*. In this list, your application should appear in the Sample
 category. If there's an entry there with no name, that's your application.
-Mouse over it and click *Add*. Don't worry, you'll soon learn how to add a
-display name for your application.
+Mouse over it and click *Add*. Don't worry, you can add a display name for your
+application by defining a property like this:
+
+    "javax.portlet.display-name=Guestbook"
+
+This property string should be added to the `property` array defined in the
+`@Component` annotation of your `GuestbookPortlet` class.
 
 ![Figure x: This is the default Liferay homepage. It contains several portlet applications including the initial version of the Guestbook application that was created by Blade Tools.](../../images/default-portlet-application.png)
 
@@ -89,8 +108,8 @@ Now you're ready to jump in and start developing your Guestbook portlet.
 
 ## Creating an Add Guestbook Button
 
-A guestbook application is pretty simple, right? People come to your site, type
-their names and a brief message, and then post it for you. Users can read the
+A guestbook application is pretty simple, right? People come to your site,
+enter their names and brief messages, and then post them. Users can read the
 entries that others posted, and they can post entries themselves.
 
 The first thing, therefore, that we need is a landing page that displays
@@ -329,8 +348,8 @@ when a user triggers its matching URL.
 
         }
 
-3. Hover your mouse over `ActionRequest` and add the import. Do the same for
-   `ActionResponse`.
+3. Add the required `javax.portlet.ActionRequest` and
+   `javax.portlet.ActionResponse` imports.
 
 You've now created a portlet action. It doesn't do anything, but at least you
 won't get an error now if you submit your form. Next, you should make the
@@ -546,8 +565,8 @@ step is to implement the view, so users can see guestbook entries.
 ### Displaying Guestbook Entries
 
 Liferay's development framework makes it easy to loop through data and display
-it nicely to the end user. You'll use a component called the *Search Container*
-to make this happen.
+it nicely to the end user. You'll use a Liferay UI construct called the *Search
+Container* to make this happen.
 
 1. Add the these tags to your `view.jsp` below the closing
    `</portlet:renderURL>` tag but before the opening `<aui:button-row>` tag:
