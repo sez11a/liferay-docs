@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 	property = {
 		"com.liferay.portlet.display-category=category.sample",
 		"com.liferay.portlet.instanceable=true",
+		"javax.portlet.display-name=Guestbook",
 		"javax.portlet.security-role-ref=power-user,user",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
