@@ -11,9 +11,9 @@ Its editor delivers features you'd expect, in an elegant in-context manner. It
 has a complete set of WYSIWYG controls that appear where and when you need them.
 You can stay in this easy-to-use mode or switch to source mode to edit your
 content's HTML code. In source mode, you can work with light text on a dark
-background or dark text on a light background. To cap things off, you can do
-fullscreen editing to minimize distractions as your create your posts. You'll
-have a satisfying experience creating awesome blog posts. 
+background or dark text on a light background. To cap things off, you can open
+the dual screen HTML editor to see your code rendered in real time. You'll have
+a satisfying experience creating awesome blog posts. 
 
 Lastly, Liferay Blogs empowers you to show off your blogs using powerful display
 apps. You can leverage Liferay's built-in display templates or create your own,
@@ -30,11 +30,12 @@ started.
 
 Each site comes with a built-in blog instance. So let's explore adding an entry
 to your site's blog. In Site Administration, the Blogs entry provides the best
-place to draft blogs. Go to the Product Menu &rarr; *Sites* &rarr; *\[Site
-Name\]* &rarr; *Content* &rarr; *Blogs*. The *Entries* screen appears, listing
-the site's blog entries. 
+place to draft blogs. Click the Product Menu icon
+(![Product Menu](../../images/menu-icon.png)) to open the Product Menu. Then
+navigate to *Sites* &rarr; *\[Site Name\]* &rarr; *Content* &rarr; *Blogs*. The
+*Entries* screen appears, listing the site's blog entries. 
 
-Click on the *Add Blog Entry* button (the blue square plus at the bottom right)
+Click the *Add Blog Entry* icon (![Add Blog Entry](../../images/add-icon.png))
 to bring up the blog entry editor. 
 
 ![Figure 1: This screenshot highlights the blog entry editor's controls for formatting text, justifying images, and editing tables.](../../images/blogs-blogs-entry-mars.png)
@@ -52,12 +53,13 @@ tweet to share your blog post on Twitter.
 
 Whenever you park your cursor in the content area, the *Add* icon (`+`) appears.
 If you click on it, it shows controls for inserting an image, table, or
-horizontal line. To insert an image, click the icon that depicts the mountain
-silhouette. The image file selector screen appears. It lets you choose an
-existing image uploaded to Documents and Media, or it lets you upload a new
-image. You can also drag-and-drop image files into the content area. After
-you've added the image to the blog entry, clicking on the image brings up
-controls for justifying it to the right or left side of the article. 
+horizontal line (![Controls](../../images/content-insert-controls-icon.png)). To
+insert an image, click the icon that depicts the mountain silhouette. The image
+file selector screen appears. It lets you choose an existing image uploaded to
+Documents and Media, or it lets you upload a new image. You can also
+drag-and-drop image files into the content area. After you've added the image to
+the blog entry, clicking on the image brings up controls for justifying it to
+the right or left side of the article. 
 
 You can also insert a table with as many rows and columns as you like. If you
 click inside the table, table editing controls appear. They let you designate
@@ -66,31 +68,28 @@ add rows, columns, and cells.
 
 Now you're familiar with the editor's regular mode. If you'd rather work with
 the content's HTML code, you can. To switch the editor to source view, select
-the *Source* icon (`</>`). Note that an icon (`abc`) for regular mode appears,
+the *Source* icon (`</>`). Note that an *abc* icon for regular mode appears,
 giving you the option to switch back to regular view. To satisfy your eyes,
 source view's moon icon and sun icon let you switch between a dark theme and a
 light theme. The built-in syntax coloring helps you identify HTML elements,
-regardless of the mode you're using.
+regardless of the mode you're using. 
 
-If you prefer to work in distraction-free mode, we've got you covered. You can
-switch to fullscreen mode by selecting the *Fullscreen* icon (bidirectional
-diagonally-crossed arrows). The *Edit Content* window appears, taking up the
-entire browser screen. The first icons above the editor allow you to arrange the
-HTML editor and rendered content area, horizontally or vertically. These dual
-views allow you to edit the HTML source and render it in real time. The last
-icon at the top of the content editor lets you toggle hiding the content
-rendering area, so you can use the entire browser space to work on the HTML
-code. Fullscreen view can really help you stay "in the zone" as you create
+You can even work in a dual pane view that shows your HTML code on the left and
+a preview pane on the right. To open this view, click the *Enlarge* icon
+(![Enlarge](../../images/enlarge-icon.png)). You can arrange the HTML and
+preview panes, horizontally or vertically. You can also hide the preview pane,
+so the HTML editor takes up the entire window space. No matter how you want to
+use the HTML editor, it can really help you stay "in the zone" as you create
 awesome blog entries. 
 
-![Figure 2: Fullscreen view helps you minimize screen clutter and render HTML changes in real time.](../../images/blogs-full-screen-editor.png)
+![Figure 2: The enlarged source editor helps you minimize screen clutter and render changes in real time.](../../images/blogs-full-screen-editor.png)
 
 Every 25 seconds, the entry you're editing is automatically saved as a draft, so
 a browser crash or network interruption won't cause you to lose your entry. You
-can exit the fullscreen view by clicking *Done* (which saves your content)
-or clicking *Cancel* to abandon any changes since the last auto-save. From
-the normal sized source view, you can click the `abc` icon to switch back to
-the WYSIWYG editor. 
+can exit the enlarged editor by clicking *Done* (which saves your content) or
+clicking *Cancel* to abandon any changes since the last auto-save. From the
+normal sized source view, you can click the *abc* icon to switch back to the
+WYSIWYG editor. 
 
 You've learned all the ins and outs of the content editor. Next, you'll learn
 how to specify your blog entry's other characteristics. 
@@ -103,14 +102,14 @@ an image, you can click the *Select File* button to use the image selector to
 choose an existing image in the blog, an image file from Documents and Media, or
 an image outside the portal. You can browse to an image file and upload it.
 After you set the entry's cover image, you can add a caption to it. And if you
-want to select a different image, you can click the *Change* icon (circling
-arrows) to bring up the image selector again.
+want to select a different image, you can click the *Change* icon
+(![Change](../../images/change-icon.png)) to bring up the image selector again.
 
-Clicking the *Configuration* icon (gear) at the top of the entry editor lets you
-configure the blog entry. You can set a particular Display Date for the entry,
-choose a 400 character text-only abstract or a custom abstract containing a
-thumbnail image and a manually written description. You can also send emails on
-entry updates. 
+Clicking the *Configuration* icon (![Gear](../../images/gear-icon.png)) at the
+top of the entry editor lets you configure the blog entry. You can set a
+particular Display Date for the entry, choose a 400 character text-only abstract
+or a custom abstract containing a thumbnail image and a manually written
+description. You can also send emails on entry updates. 
 
 The Categorization heading is next in the entry configuration screen. Its
 options allow you to attribute tags and/or categories to your blog entry. Doing
@@ -124,8 +123,6 @@ portal that's related to your entry, you can choose it here. For example, you
 might want to write a blog entry talking about a discussion that happened on the
 forums. To link those two assets together, select the forum thread under Related
 Assets. 
-
-<!-- I thought Sergio said they were removing support for pingbacks? -Rich -->
 
 Blog entries also support *pingbacks*. Pingbacks are XML-RPC requests that are
 automatically sent when you link to another site. If you link to another site in
@@ -153,15 +150,15 @@ and entry information, or displaying the entries in a table. Working with
 existing blog entries has never been easier! 
 
 You can manage entries individually or in a batch. Each entry has an *Actions*
-icon to edit the entry, configure its permissions, or move it to the Recycle
-Bin. You can select the *All* checkbox to select all entries or select an
-entry's individual check box, and click the Recycle Bin icon to move them into
-the Recycle Bin. Under the *Images* tab you can view individual entries and 
-delete them individually or in a batch. 
+icon (![Actions](../../images/actions-icon.png)) to edit the entry, configure
+its permissions, or move it to the Recycle Bin. You can select the *All*
+checkbox to select all entries or select an entry's individual check box, and
+click the trash icon to move them into the Recycle Bin. Under the *Images* tab
+you can view individual images and delete them individually or in a batch. 
 
-The *Options* icon at the top of Blogs lets you configure permissions and
-notifications, or import/export the blog. Here are the blog instance
-Configuration options:
+The *Options* icon (![Options](../../images/options-icon.png)) at the top of
+Blogs lets you configure permissions and notifications, or import/export the
+blog. Here are the blog instance Configuration options:
 
 **Email From:** defines the *From* field in the email messages that users
 receive from Blogs.
@@ -174,17 +171,14 @@ when a new blog entry has been updated.
 
 **RSS:** choose how blogs are displayed to RSS readers. 
 
-**Maximum Items to Display:** choose the total number of RSS feeds entries to
+- **Maximum Items to Display:** choose the total number of RSS feeds entries to
 display on the initial page. You can choose up to one hundred to be displayed.
 
-**Display Style:** choose between *Full Content*, *Abstract*, and *Title*. These
+- **Display Style:** choose between *Full Content*, *Abstract*, and *Title*. These
 options work just like the ones above for blog entries.
 
-**Format:** choose which format you want to deliver your blogs: Atom 1.0, RSS
+- **Format:** choose which format you want to deliver your blogs: Atom 1.0, RSS
 1.0, or RSS 2.0.
-
-<!-- I believe the Atom format is being discontinued. Jesse wrote a tutorial on
-it that we had to remove. Please confirm this with Sergio. -Rich -->
 
 You've learned how to create blog entries and manage them. It's time to consider
 blog security. For example, who is allowed to view the different blog instances
@@ -248,13 +242,12 @@ traffic to your site.
 
 By default, the Blogs application displays the abstract and image of the latest
 entries. There are several display options that let you configure the listing to
-look the way you want. To configure the application, click the *Options* icon
-in the app's title bar and select *Configuration*. The *Display Settings* are in
-the Setup tab. 
+look the way you want. To configure the application, click the *Options* icon in
+the app's title bar and select *Configuration*. The *Display Settings* are in
+the Setup tab. To choose the right settings, you should think about the best way
+to display your entries as well as how you want users to interact with bloggers. 
 
-**Display Settings:** changes various display options for the Blogs application.
-To choose the right settings, you should think about the best way to display
-your entries as well as how you want users to interact with bloggers.
+Here are the Display Settings:
 
 **Maximum Items to Display:** choose the total number of blog entries to display
 on the initial page. You can select up to 75 to display at once.
@@ -297,10 +290,11 @@ Here are descriptions for the other Blogs Configuration tabs:
 
 **Permissions:** shows Liferay's permissions dialog for the Blogs application.
 
-**Communication:** presents the application's public render parameters that you
-can manage for communication across applications. 
-
-<!-- Not sure what the above even means. -Rich -->
+**Communication:** lists public render parameters the application makes
+accessible to other applications on the page. The applications can communicate
+via these parameters. For each shared parameter, you can specify whether to
+allow communication via the parameter and select which incoming parameter can
+populate it. 
 
 **Sharing:** lets you embed the application instance as a widget on on any
 website, Facebook, or Netvibes, or as an OpenSocial Gadget.
@@ -347,15 +341,13 @@ displays.
 This lets users subscribe to an aggregate feed of all your bloggers. Below this
 checkbox, you can configure how you want the RSS Feed displayed:
 
-**Maximum Items to Display:** select maximum number of RSS items to display.
+- **Maximum Items to Display:** select maximum number of RSS items to display.
 
-**Display Style:** select from several different styles for displaying RSS
+- **Display Style:** select from several different styles for displaying RSS
 feeds: *Abstract*, *Full Content*, and *Title*.
 
-**Format:** select which web feed language to use for your feed, which
-includes *Atom 1.0*, *RSS 1.0*, or *RSS 2.0*.
-
-<!-- Again, we should check with Sergio about Atom feeds. -Rich --> 
+- **Format:** select which web feed language to use for your feed, which
+includes *Atom 1.0*, *RSS 1.0*, or *RSS 2.0*. 
 
 **Show Tags:** for each entry, displays all the tags associated with the blogs.
 
@@ -370,10 +362,11 @@ Here are descriptions for the other Blogs Aggregator's Configuration screens:
 
 <!-- TODO - Revisit the permission Access in Control Panel. It's currently grayed out. - Jim --> 
 
-**Communication:** presents the application's public render parameters that you
-can manage for communication across applications.
-
-<!-- I have no idea what the above means. -Rich -->
+**Communication:** lists public render parameters the application makes
+accessible to other applications on the page. The applications can communicate
+via these parameters. For each shared parameter, you can specify whether to
+allow communication via the parameter and select which incoming parameter can
+populate it. 
 
 **Sharing:** lets you embed the application instance as a widget on on any
 website, Facebook, or Netvibes, or as an OpenSocial Gadget.
@@ -390,7 +383,7 @@ application, except that it shows entries from multiple blogs.
 
 ![Figure 6: The Blogs Aggregator lets you display blog entries authored by multiple authors from different sites.](../../images/blogs-blog-aggregator.png)
 
-## Summary
+## Summary [](id=summary)
 
 Throughout this section, you've learned how to create blog posts in a powerful
 no-nonsense editor, manage blog instances and blog entries, and display blogs
