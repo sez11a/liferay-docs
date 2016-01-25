@@ -24,6 +24,11 @@ available in LCS:
   applying fix packs, monitoring server status, viewing server metrics, and 
   more. 
 
+- [**Managing Liferay EE Subscriptions:**](/discover/deployment/-/knowledge_base/6-2/using-lcs#managing-liferay-ee-subscriptions)
+  Learn how to view and manage your Liferay EE subscriptions for the servers in 
+  your LCS project. This includes elastic subscriptions for auto-scaling 
+  environments.
+
 - [**Configuring LCS Notifications:**](/discover/deployment/-/knowledge_base/6-2/using-lcs#configuring-lcs-notifications)
   Learn how to configure LCS to send you notification emails when specific 
   events occur in your LCS projects.
@@ -254,12 +259,13 @@ and alerts. As with the project view, fix packs and alerts are displayed in
 tables. These tables behave exactly the same here as they do in the project 
 view. The only difference is that they show fix packs and alerts for the 
 environment instead of the whole project. The Environment table displays details 
-about the environment, such as its name, description, and location. You can edit 
-these fields by clicking the blue pencil icon next to each. You can also delete 
-the environment by clicking the Delete button below the Environment table. 
-Clicking the Automatic Registration button lets you generate and view 
-*environment tokens* that allow automatic configuration of LCS clients. See the 
-section below for more information on environment tokens. 
+about the environment, such as its name, description, location, type, and 
+Liferay EE subscription type. Fields with a blue pencil icon can be edited by 
+clicking the icon. You can also delete the environment by clicking the Delete 
+button below the Environment table. Clicking the Automatic Registration button 
+lets you generate and view *environment tokens* that allow automatic 
+configuration of LCS clients. See the section below for more information on 
+environment tokens. 
 
 ![Figure 4.16: The LCS environment view shows an overview of an LCS environment.](../../images/lcs-environment-view.png)
 
@@ -380,7 +386,7 @@ the update process and also gives you extensive information on how your servers
 are running. Next, you'll learn how to use LCS to manage your Liferay EE 
 subscriptions. 
 
-## Managing Liferay EE Subscriptions
+## Managing Liferay EE Subscriptions [](id=managing-liferay-ee-subscriptions)
 
 LCS also lets you view and manage your Liferay EE subscriptions. You can view 
 your project's subscriptions, see how they're being used, assign an environment 
