@@ -377,7 +377,69 @@ check both checkboxes.
 
 As you can see, the LCS Dashboard is a powerful tool that greatly simplifies 
 the update process and also gives you extensive information on how your servers 
-are running. Next, you'll learn how to configure notifications in LCS.
+are running. Next, you'll learn how to use LCS to manage your Liferay EE 
+subscriptions. 
+
+## Managing Liferay EE Subscriptions
+
+LCS also lets you view and manage your Liferay EE subscriptions. You can view 
+your project's subscriptions, see how they're being used, assign an environment 
+to a subscription type, and more. You can access these features from the 
+*Subscriptions* tab on the upper-left of the LCS site. The following screenshot 
+shows this. 
+
+![Figure 4.24: The *Subscriptions* tab in LCS lets you view and manage your Liferay EE subscriptions.](../../images/lcs-subscriptions.png)
+
+LCS presents subscription information in the *Details* and *Elastic 
+Subscriptions* tabs. When you select *Subscriptions*, the *Details* tab is shown 
+first. This tab shows you basic information on your subscriptions and lets you 
+assign subscription types to your LCS environments. In *Details*, the 
+*Subscriptions* table shows you a list of Liferay EE subscriptions available for 
+your LCS project. For each subscription, the table shows the following 
+information:
+
+- Start Date
+- Expiration Date
+- Support End Date
+- Platform
+- Product
+- Processor Cores Allowed
+- Servers Allowed
+- Servers Used
+
+Below this table is the *Subscriptions Usage* table. The *Subscriptions Usage* 
+table shows you how you're currently utilizing your subscriptions. For each 
+subscription type, this table shows the servers allowed, servers used, and 
+servers available. The *Project Environments* table, below the *Subscriptions 
+Usage* table, shows the subscription type you've assigned to each environment. 
+You can also use this table to assign a subscription type to an environment. 
+Note that all the servers in an environment must be shut down to assign a 
+subscription type. These assignments are also reflected in the *Project Servers* 
+table. This table shows the environment and subscription type for each server in 
+your LCS project. 
+
+The *Elastic Subscriptions* tab displays information about the elastic 
+subscriptions in your project. For this tab to appear, you must have at least 
+one environment in your project set to the elastic subscription type. Elastic 
+subscriptions let you register an unlimited number of Liferay servers, unlike 
+other subscriptions that limit you to a certain number of servers. This is 
+invaluable in auto-scaling environments, where servers are automatically created 
+and destroyed in response to server load. The following screenshot shows the 
+*Elastic Subscriptions* tab. 
+
+![Figure 4.25: The *Elastic Subscriptions* tab displays details about your servers registered under the elastic subscription type.](../../images/lcs-elastic-subscriptions.png)
+
+This tab displays the number of online elastic servers and the uptime details 
+for each. The number of online elastic servers per day is shown in a graph. 
+Uptime statistics are displayed in a table that lists each elastic server's 
+start time, end time, and duration. Below the table, the total duration for all 
+elastic servers is also shown. Above the table, you can click the *Download 
+Report* button to download a report of these data. Also, you can use the 
+*Enviroment* and *Month* selectors above the graph to select the environment and 
+month to show data from, respectively. The data in both the graph and the table 
+reflect your selections here. 
+
+Next, you'll learn how to configure notifications in LCS. 
 
 ## Configuring LCS Notifications [](id=configuring-lcs-notifications)
 
@@ -397,16 +459,13 @@ by default. Click *Add Rule* to define one.
 
 First specify the project, environment, and server for the notification. Note
 that you have the option of selecting all environments and servers in a
-project. Then check the checkbox for each event that you want to trigger an
-email notification. For example, the notification rule in the illustration
-above tells LCS to send you an email whenever any server in any of the
-project's environments unexpectedly goes offline. You should note that this
-differs from normal shutdown events, which don't trigger email notifications.
-During normal server shutdown, the server communicates this status to LCS. An
-email notification is only generated when the connection with the server is 
-abruptly terminated. Click *Save* when you're done defining the notification 
-rule. It then appears in a table along with any other existing rules. Each has 
-an Actions button that lets you edit or delete it. 
+project. Then check the checkbox for each event that you want to trigger an 
+email notification. For example, if you create a notification rule with *The 
+server unexpectedly shuts down* selected for all servers and environments in 
+your project, then LCS sends you an email when any server in your project goes 
+offline without a normal shut down event. Click *Save* when you're done defining 
+the notification rule. It then appears in a table along with any other existing 
+rules. Each has an Actions button that lets you edit or delete it. 
 
 Great! Now you know how to set notification rules in LCS. The next section shows 
 you how to use environment tokens to automatically register Liferay instances 
