@@ -156,8 +156,6 @@ status after 20 seconds, try refreshing the page. If you see a red symbol
 indicating no data is being transmitted, please contact the Liferay team for 
 support. 
 
-![Figure 4.8: The server is connecting to LCS.](../../images/lcs-server-connecting.png)
-
 Once a successful connection is established, some statistics and links are
 displayed. Here's a description of what's displayed:
 
@@ -179,15 +177,11 @@ displayed. Here's a description of what's displayed:
   The project home in LCS is also called the *dashboard*.
 - **Environment:** This link takes you to this server's registered environment.
 - **Server Dashboard:** This link takes you to the server on LCS.
-- **Configure Liferay Connected Services:** This link lets you change which LCS 
-  services are enabled for your portal. Doing so triggers reconnection with the 
-  new settings. 
+- **Configure Services:** This link lets you change which LCS services are 
+  enabled for your portal. Doing so triggers reconnection with the new settings. 
 - **Disconnect:** Disconnects this Liferay instance from LCS.
-- **Reset Credentials:** Removes the authorizing account from registration with 
-  LCS. Note that your credentials are not human readable in the portal instance. 
-  This is because OAuth, which uses tokens, is used for authentication. 
 
-![Figure 4.9: The server is connected to LCS.](../../images/lcs-server-connected.png)
+![Figure 4.8: The server is connected to LCS.](../../images/lcs-server-connected.png)
 
 Awesome! Now that you've registered your server with your LCS account, you can 
 dig in to the features of LCS. 
