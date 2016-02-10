@@ -899,15 +899,10 @@ What if your Liferay instance has already been manually registered with LCS,
 but you want to switch to using an environment token? No problem! Follow these
 steps:  
 
-1. Use the LCS client portlet to disconnect and reset the credentials in the 
-   Liferay instance. Then press the *Back* button to the left of the Control 
-   Panel text in the Dockbar. Pressing *Back* deletes the current OAuth 
-   credentials. 
-
-2. Shut down your Liferay instance and place the token file in the portal's 
+1. Shut down your Liferay instance and place the token file in the portal's 
    `data` folder. 
 
-3. Restart your Liferay instance. The LCS client portlet uses the token file to 
+2. Restart your Liferay instance. The LCS client portlet uses the token file to 
    connect to LCS automatically. 
 
 As you've now seen, LCS is a powerful tool that simplifies the management of 
