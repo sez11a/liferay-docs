@@ -168,7 +168,7 @@ in action.
 
 ## Example Configurations [](id=example-configurations)
 
-### Liferay Portal 7.0: AlloyUI 3.0 / CrystalUI 1.0 / Portlet 2.0 / JSF 2.2 [](id=liferay-portal-7-0-alloyui-3-0--crystalui-1-0--portlet-2-0--jsf-2-2)
+### Liferay Portal 7.0: AlloyUI 3.0 / Metal 1.0 / Portlet 2.0 / JSF 2.2 [](id=liferay-portal-7-0-alloyui-3-0--crystalui-1-0--portlet-2-0--jsf-2-2)
 
 	<dependencies>
 		<dependency>
@@ -184,17 +184,17 @@ in action.
 		<dependency>
 			<groupId>com.liferay.faces.bridge</groupId>
 			<artifactId>liferay-faces-bridge-ext</artifactId>
-			<version>2.0.0</version>
+			<version>5.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.liferay.faces.crystal</groupId>
-			<artifactId>liferay-faces-crystal</artifactId>
+			<groupId>com.liferay.faces.metal</groupId>
+			<artifactId>liferay-faces-metal</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.faces.portal</groupId>
 			<artifactId>liferay-faces-portal</artifactId>
-			<version>2.0.0</version>
+			<version>3.0.0</version>
 		</dependency>
 	</dependencies>
 
@@ -214,12 +214,12 @@ in action.
 		<dependency>
 			<groupId>com.liferay.faces.bridge</groupId>
 			<artifactId>liferay-faces-bridge-ext</artifactId>
-			<version>1.0.0</version>
+			<version>3.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.faces.portal</groupId>
 			<artifactId>liferay-faces-portal</artifactId>
-			<version>1.0.0</version>
+			<version>2.0.0</version>
 		</dependency>
 	</dependencies>
 
@@ -239,12 +239,12 @@ in action.
 		<dependency>
 			<groupId>com.liferay.faces.bridge</groupId>
 			<artifactId>liferay-faces-bridge-ext</artifactId>
-			<version>1.0.0</version>
+			<version>2.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.faces.portal</groupId>
 			<artifactId>liferay-faces-portal</artifactId>
-			<version>1.0.0</version>
+			<version>2.0.0</version>
 		</dependency>
 	</dependencies>
 
@@ -260,12 +260,12 @@ in action.
 
 ## Related Topics [](id=related-topics)
 
-[Creating and Deploying JSF Portlets](/develop/tutorials-jsf-test/-/knowledge_base/tutorials-test-jsf/creating-and-deploying-jsf-portlets)
+[Creating and Deploying JSF Portlets](/develop/tutorials/-/knowledge_base/6-2/creating-and-deploying-jsf-portlets)
 
-[Developing Liferay Faces Portlets with Maven](/develop/tutorials-jsf-test/-/knowledge_base/tutorials-test-jsf/developing-liferay-faces-portlets-with-maven)
+[Developing Liferay Faces Portlets with Maven](/develop/tutorials/-/knowledge_base/6-2/developing-liferay-faces-portlets-with-maven)
 
-[Using Portlet Preferences with JSF](/develop/tutorials-jsf-test/-/knowledge_base/tutorials-test-jsf/using-portlet-preferences-with-jsf)
+[Using Portlet Preferences with JSF](/develop/tutorials/-/knowledge_base/6-2/using-portlet-preferences-with-jsf)
 
-[Liferay Faces Alloy UI Components](/develop/tutorials-jsf-test/-/knowledge_base/tutorials-test-jsf/liferay-faces-alloy-ui-components)
+[Liferay Faces Alloy UI Components](/develop/tutorials/-/knowledge_base/6-2/liferay-faces-alloy-ui-components)
 
-[Liferay Faces Bridge UI Components](/develop/tutorials-jsf-test/-/knowledge_base/tutorials-test-jsf/liferay-faces-bridge-ui-components)
+[Liferay Faces Bridge UI Components](/develop/tutorials/-/knowledge_base/6-2/liferay-faces-bridge-ui-components)
