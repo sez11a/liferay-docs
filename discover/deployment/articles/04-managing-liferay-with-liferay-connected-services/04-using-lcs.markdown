@@ -351,11 +351,9 @@ differently. Fix packs are broken down into those that are available for
 installation and those that are already installed. You can access these through 
 the Available and Installed tabs at the top of the fix packs table. The Server 
 table lists your server's name, description, and location. You can edit these 
-values by clicking the pencil icon next to each. You can also move the server to 
-a different environment by selecting the environment from the *Move to 
-Environment* selector. If you no longer want the server in LCS, click the 
-*Unregister* button to remove it. Note that this doesn't alter your actual 
-server; it just removes it from your LCS project.
+values by clicking the pencil icon next to each. If you no longer want the 
+server in LCS, click the *Unregister* button to remove it. Note that this 
+doesn't alter your actual server; it just removes it from your LCS project. 
 
 ![Figure 4.21: The LCS server Overview lets you view and edit the basic information of a server registered with LCS.](../../images/lcs-server-overview.png)
 
