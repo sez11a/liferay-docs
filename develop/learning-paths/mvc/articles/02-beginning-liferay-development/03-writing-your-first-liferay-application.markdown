@@ -27,19 +27,25 @@ wizards available in Liferay IDE and Liferay Developer Studio use Blade Tools
 under the hood. Thus, new projects can be created the same way regardless of
 your specific development environment or IDE.
 
+<!-- Add instructions to create a Liferay workspace, to create a
+01-beginning-liferay-development folder in the modules folder, and to create
+the Guestbook application in the 01-beginning-liferay-development folder. -->
+
 To create your Guestbook application, use the following command:
 
-    blade create jspportlet com.liferay.docs.guestbook
+    blade create -c GuestbookPortlet -p com.liferay.docs.guestbook com.liferay.docs.guestbook
 
-This creates a project named `com.liferay.docs.guestbook`. Blade Tools creates
-a portlet class in the proper package in your project's `src/main/java` folder
-and creates your application's JSP files and language properties file in your
-project's `src/main/resources` folder. Rename the generated portlet class in
-the `com.liferay.docs.guestbook` package from
-`Com.liferay.docs.guestbookPortlet.java` to `GuestbookPortlet.java`. Inside,
-this file, rename the class declaration from
-`Com.liferay.docs.guestbookPortlet` to `GuestbookPortlet`. If you want to
-import your project into an IDE, do so now.
+This command creates a project named `com.liferay.docs.guestbook`. `-c
+GuestbookPortlet` specifies the name of the class to be generated. `-p
+com.liferay.docs.guestbook` specifies the package in which the class is to be
+generated. By default, the `mvcportlet` template is used. You could have
+specified this explicitly using the `-t mvcportlet` option. When you use the
+`mvcportlet` template, Blade Tools creates a portlet class (the name of which
+can be specified with the `-c` option) in a package (the name of which can be
+specified by the `-p` option) in your project's `src/main/java` folder. It also
+creates your application's JSP files and language properties file in your
+project's `src/main/resources` folder. If you want to import your project into
+an IDE, do so now.
 
 Note: Two important concepts for Liferay 7 development are modules and
 components. A *module* is the one and only type of Liferay 7 plugin. A
