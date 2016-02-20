@@ -48,8 +48,8 @@ specified this explicitly using the `-t mvcportlet` option. When you use the
 can be specified with the `-c` option) in a package (the name of which can be
 specified by the `-p` option) in your project's `src/main/java` folder. Blade
 Tools also creates your application's JSP files and language properties file in
-your project's `src/main/resources` folder. If you want to import your project
-into an IDE, do so now.
+your project's `src/main/resources` folder. Import your project into Liferay
+IDE now.
 
 Note: Two important concepts for Liferay 7 development are modules and
 components. A *module* is the one and only type of Liferay 7 plugin. A
@@ -250,7 +250,7 @@ produces an error since no `edit_entry.jsp` exists yet. Creating the
 
 ### Creating a Page for Adding Guestbook Entries
 
-In the same folder your `view.jsp` is in, create the `edit_entry.jsp`: 
+In the same folder your `view.jsp` is in, create the `edit_entry.jsp` file:
 
 1. Right-click on your project's `src/main/resources/META-INF/resources` folder
    and choose *New* &rarr; *File*.
@@ -356,8 +356,7 @@ method in the portlet class with the same name. `MVCPortlet` calls that method
 when a user triggers its matching URL.
 
 1. Open the `GuestbookPortlet.java`. Blade Tools generated this class when you
-   created the portlet project. (Recall that this class was generated with a
-   different name but you renamed it to `GuestbookPortlet`.)
+   created the portlet project.
 
 2. Create a method with the following signature:
 
@@ -449,10 +448,11 @@ portlet preferences API.
 
 This is not the normal way to use portlet preferences, but it provides a quick
 and easy way for you to store guestbook entries in this first version of your
-application. You'd also want to do proper logging in case of an error, rather
-than use `System.out.println`. These are things that can be corrected later.
+application. You'll implement a robust way to store guestbook entries in a
+later learning path.
 
-The next and final feature to implement is a way to view guestbook entries.
+The next and final feature to implement is a mechanism for viewing guestbook
+entries.
 
 ## Viewing Guestbook Entries
 
@@ -469,7 +469,7 @@ your controller (your portlet class). Now you need your model.
    selecting *New* &rarr; *Package*, and then entering the package name in the
    dialog box that appears.
 
-2. Next, create your model class. This is a simple JavaBean that contains a
+2. Next, create your model class. This is a simple Java bean that contains a
    guestbook entry. Right-click on your new package and select *New* &rarr;
    *Class*. Give your class the name `Entry` and click *Finish*.
 
@@ -479,7 +479,7 @@ give it the fields you need to store entries.
 1. Create two private String variables: `name` and `message`.
 
 2. Right-click on a blank area of the editor and select *Source* &rarr;
-   *Generate Getters and Setters*. 
+   *Generate Getters and Setters*.
 
 3. Next, provide two constructors: one that initializes the class with no
    values for the two fields, and one that takes the two fields as parameters
@@ -506,12 +506,12 @@ give it the fields you need to store entries.
                 return name;
             }
 
-            public void setName(String name) {
-                this.name = name;
-            }
-
             public String getMessage() {
                 return message;
+            }
+
+            public void setName(String name) {
+                this.name = name;
             }
 
             public void setMessage(String message) {
@@ -562,7 +562,7 @@ which it's currently inheriting from its parent class, `MVCPortlet`.
    array to a `List` of your model objects:
 
         private List<Entry> parseEntries(String[] guestbookEntries) {
-            ArrayList<Entry> entries = new ArrayList();
+            List<Entry> entries = new ArrayList<Entry>();
 
             for (String entry : guestbookEntries) {
                 String[] parts = entry.split("\\^", 2);
@@ -574,7 +574,7 @@ which it's currently inheriting from its parent class, `MVCPortlet`.
         }
 
 As you can see, this method splits the entries in the `String` array into two
-parts based on the caret (^) character.
+parts based on the caret (`^`) character.
 
 Now that you have your controller preparing your data for display, your next
 step is to implement the view, so users can see guestbook entries.
