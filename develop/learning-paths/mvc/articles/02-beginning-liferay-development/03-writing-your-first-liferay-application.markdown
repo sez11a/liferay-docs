@@ -27,11 +27,15 @@ wizards available in Liferay IDE and Liferay Developer Studio use Blade Tools
 under the hood. Thus, new projects can be created the same way regardless of
 your specific development environment or IDE.
 
-<!-- Add instructions to create a Liferay workspace, to create a
-01-beginning-liferay-development folder in the modules folder, and to create
-the Guestbook application in the 01-beginning-liferay-development folder. -->
-
-To create your Guestbook application, use the following command:
+Blade Tools allows you to create a Liferay workspace. A Liferay workspace is a
+generated environment that contains both your Liferay projects and a Liferay
+bundle on which to test them. The recommended way to develop applications for
+Liferay 7 is to use a Liferay workspace. To create a Liferay workspace, follow
+the instructions in the Creating a Liferay Workspace article:
+[https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/creating-a-liferay-workspace](https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/creating-a-liferay-workspace)
+Once your Liferay workspace is created, create a
+`beginning-liferay-development` folder in the `modules` folder. Navigate to the
+new folder and then use this command to create your Guestbook application:
 
     blade create -c GuestbookPortlet -p com.liferay.docs.guestbook com.liferay.docs.guestbook
 
@@ -42,10 +46,10 @@ generated. By default, the `mvcportlet` template is used. You could have
 specified this explicitly using the `-t mvcportlet` option. When you use the
 `mvcportlet` template, Blade Tools creates a portlet class (the name of which
 can be specified with the `-c` option) in a package (the name of which can be
-specified by the `-p` option) in your project's `src/main/java` folder. It also
-creates your application's JSP files and language properties file in your
-project's `src/main/resources` folder. If you want to import your project into
-an IDE, do so now.
+specified by the `-p` option) in your project's `src/main/java` folder. Blade
+Tools also creates your application's JSP files and language properties file in
+your project's `src/main/resources` folder. If you want to import your project
+into an IDE, do so now.
 
 Note: Two important concepts for Liferay 7 development are modules and
 components. A *module* is the one and only type of Liferay 7 plugin. A
@@ -90,20 +94,27 @@ project:
     gradle build
 
 This command creates a deployable JAR file that you can deploy to Liferay. To
-deploy it, run this command from your project:
+deploy it using Blade Tools, you first need to install the remote agent. To
+install it, use this command:
 
-    blade deploy build/libs/com.liferay.docs.guestbook-1.0.jar
+    blade agent install
+
+After the blade agent has been installed, run this command from your project:
+
+    blade deploy
 
 Next, check that your application is available in Liferay. Open a browser,
 navigate to your portal ([http://localhost:8080](http://localhost:8080) by
-default) and add your application to a page. To add an application to a page,
+default), and add your application to a page. To add an application to a page,
 click on the *Add* button (it looks like a plus sign) and then on
 *Applications*. In this list, your application should appear in the Sample
-category. If there's an entry there with no name, that's your application.
-Mouse over it and click *Add*. Don't worry, you can add a display name for your
-application by defining a property like this:
+category. Its name should be `com.liferay.docs.guestbook JSP Portlet`. You can
+change this name by editing the `javax.portlet.display-name` property in your
+`GuestbookPortlet` class. E.g., you could use
 
     "javax.portlet.display-name=Guestbook"
+
+to change the display name of your application to `Guestbook`.
 
 This property string should be added to the `property` array defined in the
 `@Component` annotation of your `GuestbookPortlet` class.
@@ -127,7 +138,7 @@ project's `src/main/resources/META-INF/resources` folder. It's called
     <%@ include file="/init.jsp" %>
 
     <p>
-        <b><liferay-ui:message key="com_liferay_docs_guestbook_Com_liferay_docs_guestbookPortlet.caption"/></b>
+        <b><liferay-ui:message key="com_liferay_docs_guestbook_GuestbookPortlet.caption"/></b>
     </p>
 
 As you can see, this file contains some sample content since Blade Tools
@@ -169,8 +180,8 @@ and two useful tags):
         <liferay-theme:defineObjects />
 
 Your application now displays a button instead of a message but the button
-currently doesn't do anything. Next, you should learn about system-generated
-URLs since you need a URL to map to your button.
+currently doesn't do anything. Next, you'll learn about system-generated URLs
+since you need a URL to map to your button.
 
 ### Generating URLs for Portlets
 
