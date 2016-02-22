@@ -7,10 +7,10 @@ buyers imagine what the house might look like with their belongings. Liferay's
 [resources importer](https://dev.liferay.com/participate/liferaypedia/-/wiki/Main/Resources+Importer) module is a tool that allows a theme developer to have
 files and web content automatically imported into the platform when a theme is
 deployed. Usually, the resources are imported into a site template but they can
-also be imported directly into a site. Global Administrators can use the site or
-site template created by the resources importer to showcase the theme. This is a
-great way for theme developers to provide a sample context that optimizes the
-design of their theme. In fact, all standalone themes that are uploaded to
+also be imported directly into a site. Liferay Administrators can use the site 
+or site template created by the resources importer to showcase the theme. This 
+is a great way for theme developers to provide a sample context that optimizes 
+the design of their theme. In fact, all standalone themes that are uploaded to
 Liferay Marketplace must use the resources importer. This ensures a uniform
 experience for Marketplace users: a user can download a theme from Marketplace,
 install it on their platform, go to Sites or Site Templates in the Control Panel
@@ -21,7 +21,11 @@ to include resources with your theme.
 
 **Note:** The resources importer has undergone some changes that affect the
 properties and class names that were referred to in versions prior to Liferay 
-7.0.0. Please read through the steps below to see the updates.
+7.0.0. Please read through the steps below to see the updates. In previous 
+versions of Liferay, you had to deploy the resources importer if you declared it
+as a dependency in your theme's `liferay-plugin-package.properties` file. In 
+Liferay 7.0.0 and up, this is no longer a requirement. The resources importer is 
+now an OSGI module, and is deployed to your instance by default.
 
 $$$
 
@@ -36,6 +40,8 @@ tutorial.
 
 $$$-->
 
+<!-- (Need to find replacement example)
+
 Liferay's welcome theme includes resources that the resources importer
 automatically deploys to the default site. (Note: The welcome theme is only
 applied out-of-the-box in Liferay CE.) The welcome theme and the pages and
@@ -43,16 +49,7 @@ content that it imports to the default site provide a good example of the
 resources importer's functionality.
 
 ![Figure 10.8: The welcome theme uses the resources importer to import pages and content to the default site of a fresh Liferay installation.](../../images/welcome-theme.png)
-
-+$$$
-
-**Note:** In previous versions of Liferay, you had to deploy the resources 
-importer if you declared it as a dependency in your theme's 
-`liferay-plugin-package.properties` file. In Liferay 7.0.0 and up, this is no 
-longer a requirement. The resources importer is now an OSGI module,
-and is deployed to your instance by default.
-
-$$$
+-->
 
 When you create a new theme using the Liferay Theme Generator, check your
 theme's `src/WEB-INF/liferay-plugin-package.properties` file for the developer
@@ -60,7 +57,7 @@ mode entry:
 
     resources-importer-developer-mode-enabled=true
 
-This is a convenience feature for theme developers. With this setting enabled, 
+This is a convenience feature for theme developers. With this setting enabled,
 importing resources to a site or site template that already exists, recreates 
 the site or site template. Importing resources into a site template reapplies 
 the site template and its resources to the sites that are based on the site 
@@ -121,16 +118,55 @@ imported by your theme should be placed in the following directory structure:
           content articles (XML) by template. Each folder name must match the
           file name of the corresponding template. For example, create folder
           `Template 1/` to hold an article based on template file
-          `Template 1.ftl`. 
-        - `structures/` - contains structures (XML) and folders of child
+          `Template 1.ftl`.
+        - `structures/` - contains structures (JSON) and folders of child
           structures. Each folder name must match the file name of the
           corresponding parent structure. For example, create folder
-          `Structure 1/` to hold a child of structure file `Structure 1.xml`.
+          `Structure 1/` to hold a child of structure file `Structure 1.json`.
         - `templates/` - groups templates (VM or FTL) into folders by structure.
           Each folder name must match the file name of the corresponding
           structure. For example, create folder `Structure 1/` to hold a
-          template for structure file `Structure 1.xml`.
+          template for structure file `Structure 1.json`.
 
+The following is the XML file for a basic web content article:
+
+    <?xml version="1.0"?>
+
+    <root available-locales="en_US" default-locale="en_US">
+	    <dynamic-element name="content" type="text_area" index-type="keyword" index="0">
+		    <dynamic-content language-id="en_US">
+			    <![CDATA[
+				    <center>
+				    <p><img alt="" src="[$FILE=space-program-history.jpg$]" /></p>
+				    </center>
+
+				    <p>In the mid-20th century, after two of the 
+				    most violent wars in history, mankind turned 
+				    its gaze upwards to the stars. Instead of 
+				    continuing to strive against one another, 
+				    man choose instead to strive against the 
+				    limits that we had bound ourselves to. And 
+				    so the Great Space Race began.</p>
+
+				    <p>At first the race was to reach space--get 
+				    outside the earth's atmosphere, and when 
+				    that had been reached, we shot for the moon. 
+				    After sending men to the moon, robots to 
+				    Mars, and probes beyond the reaches of our 
+				    solar system, it seemed that there was 
+				    nowhere left to go.</p>
+
+				    <p>The Space Program aims to change that. 
+				    Beyond national boundaries, beyond what 
+				    anyone can imagine that we can do. The sky 
+				    is not the limit.</p>
+			    ]]>
+		    </dynamic-content>
+	    </dynamic-element>
+    </root>
+
+You can view an article's XML by going to its source.
+    
 When you create a new theme using the Liferay Theme Generator, a default 
 `sitemap.json` file is created and a default
 `liferay-plugin-package.properties` file is created in the `WEB-INF` folder.
@@ -341,7 +377,7 @@ displayed on a page, simply specify an HTML file. You can declare portlets by
 specifying their portlet IDs which can be found in the App Manager of the 
 Control Panel. Select the suite that the App is located in, click the App, click
 the App web link, and open the *Portlets* tab that appears. the portlet ID is 
-displayed below the name App. You can also specify portlet preferences for each 
+displayed below the name of the App. You can also specify portlet preferences for each 
 portlet.
 
 +$$$
@@ -370,8 +406,8 @@ these pages, the `assets.json` file specifies details about the assets to be
 imported. Tags can be applied to any asset. Abstract summaries and small images
 can be applied to web content articles. For example, the following `assets.json`
 file specifies two tags for the `company_logo.png` image, one tag for the
-`Custom Title.html` web content article, and an abstract summary and small image
-for the `Child Web Content 1.xml` article structure:
+`Custom Title.xml` web content article, and an abstract summary and small image
+for the `Child Web Content 1.json` article structure:
 
     {
         "assets": [
@@ -383,7 +419,7 @@ for the `Child Web Content 1.xml` article structure:
                 ]
             },
             {
-                "name": "Custom Title.html",
+                "name": "Custom Title.xml",
                 "tags": [
                     "web content"
                 ]
@@ -401,7 +437,7 @@ Now that you've learned about the directory structure for your resources, the
 for describing the assets of your resources, it's time to put resources into
 your theme. You can create resources from scratch and/or bring in resources that
 you've already created in Liferay. Let's go over how to leverage your HTML
-(basic web content), XML (structures), or VM or FTL (templates) files from
+(basic web content), JSON (structures), or VM or FTL (templates) files from
 Liferay:
 
 +$$$
@@ -412,86 +448,23 @@ content articles require a structure and template.
 
 $$$
 
-- **web content (basic):** Edit the article, click the Source icon that appears, 
-  copy its contents into an HTML file, and create a folder for it in the 
-  `resources-importer/journal/articles/` directory. Create a JSON file with the 
-  same name as the folder you just created, and add the following code to it:
-  
-      {
-          "availableLanguageIds": [
-              "en_US"
-          ],
-          "defaultLanguageId": "en_US",
-          "fields": [
-              {
-                  "label": {
-                      "en_US": "Content"
-                  },
-                  "predefinedValue": {
-                  "en_US": ""
-                  },
-                  "style": {
-                      "en_US": ""
-                  },
-                  "tip": {
-                      "en_US": ""
-                  },
-                  "dataType": "html",
-                  "fieldNamespace": "ddm",
-                  "indexType": "keyword",
-                  "localizable": true,
-                  "name": "content",
-                  "readOnly": false,
-                  "repeatable": false,
-                  "required": false,
-                  "showLabel": true,
-                  "type": "ddm-text-html"
-              }
-          ]
-      }
-  
-  Place the JSON file into the `structures` folder. Create a folder with the 
-  same name as the JSON file and web content folder, and place it into the 
-  `templates` folder. Finally, create a FreeMarker template file inside of the 
-  folder you just created and add the following line of code to it:
-  
-      ${content.getData()}
-  
-  You should have a structure similar to the following:
-  
-- `journal/`
-    - `articles/`
-        - `BASIC_WEB_CONTENT/`
-            - `Article 1.html`
-            - `Article 2.html`
-    - `structures/`
-        - `BASIC_WEB_CONTENT.json`
-    - `templates/`
-        - `BASIC_WEB_CONTENT`
-            - `BASIC_WEB_CONTENT.ftl`
-            
-  The basic web content template and structure source code shown above can be 
-  found by editing the article, and clicking the *Basic Web Content* link next 
-  to *Structure* and *Template*.
-  
-- **web content (based on structure and template):** Edit the article, click
-  *Download* to download it as a file `article.xml`. Create a folder for the
-  template under `resources-importer/journal/articles/`, rename the downloaded
-  `article.xml` file as desired, and copy it into the folder for the template.
-  The web content article's XML fills in the data required by the structure.
-  Older versions of Liferay Portal 6.2 do not offer the *Download* button for
-  web content articles by default. Visit the
-  [Features of Liferay's WCM](/discover/portal/-/knowledge_base/6-2/features-of-liferays-wcm#rich-wysiwyg-editing)
-  section for information on which Portal versions include the *Download* button
-  by default, and how to install it for older versions.
-- **structure:** Edit the structure by clicking *Source*, and copy and paste its
-  contents into a new XML file for the structure in the
-  `resources-importer/journal/structures/` folder. The structure XML sets a
-  wireframe, or blueprint, for an article's data. 
-- **template:** Edit the template by clicking *Source*, and copy and paste its
-  contents into a new XML file for the template in the
-  `resources-importer/journal/templates/` folder. The template defines how the
-  data should be displayed.
+- **web content:** Edit the article, and copy the content from the *Source* view. 
+  Create a folder for the article under `resources-importer/journal/articles/`, 
+  copy the contents into an XML file, named as desired, and place it into the 
+  folder for the article. The web content article's XML fills in the data 
+  required by the structure.
+
+- **structure:** Edit the structure by clicking the link under 
+  *Structure and Template*, and copy and paste its contents into a new JSON file 
+  for the structure in the `resources-importer/journal/structures/` folder. The 
+  structure JSON sets a wireframe, or blueprint, for an article's data. Note XML 
+  structures are also accepted for backward compatibility.
+
+- **template:** Create a folder for the template under 
+  `resources-importer/journal/templates/`. Edit the template by clicking 
+  the link under *Structure and Template*, and copy and paste its contents into 
+  a new FTL file for the template, and place it into the folder for the template. 
+  The template defines how the data should be displayed.
 
 <!-- *Download* button is currently unavailable for Web Content (based on
 structure and template). Contacted Juan for more info and following LPS-31355
@@ -536,6 +509,8 @@ resources:
 You can go back to any of the beginning steps in this outline to make
 refinements. It's just that easy to develop a theme with resources intact!
 
+<!-- (NEED TO UPDATE WORKING EXAMPLE)
+
 To see a simple working example of the resources importer in action, visit
 [https://github.com/liferay/liferay-docs/blob/6.2.x/devGuide/code/test-resources-importer-theme-6.2.0.1.war](https://github.com/liferay/liferay-docs/blob/6.2.x/devGuide/code/test-resources-importer-theme-6.2.0.1.war).
 This is just the classic Liferay theme with some sample resources added. If
@@ -554,11 +529,12 @@ have your theme's resources imported into a site template. For further examples,
 please examine the Zoe themes which you can find on Github here
 [https://github.com/liferay/liferay-plugins/tree/master/themes](https://github.com/liferay/liferay-plugins/tree/master/themes)
 and which you can download from Liferay Marketplace.
+-->
 
 **Related Topics**
 
-[Themes and Layout Templates](develop/tutorials/-/knowledge_base/6-2/themes-and-layout-templates)
+<!--[Creating Themes with the Theme Generator](URL goes here)-->
 
-[Application Display Templates](develop/tutorials/-/knowledge_base/6-2/application-display-templates)
+[Styling Apps with Application Display Templates](/discover/portal/-/knowledge_base/7-0/styling-apps-with-application-display-templates)
 
 
