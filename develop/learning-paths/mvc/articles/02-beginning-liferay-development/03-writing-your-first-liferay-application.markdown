@@ -1,9 +1,9 @@
 # Writing Your First Liferay Application
 
-Getting started with your first Liferay application takes only minutes. We'll
-guide you through the step-by-step process of creating your project and
-deploying your application to Liferay. Before you know it, you'll have your
-application deployed alongside of the applications that come with Liferay.
+It's easy to get started with your first Liferay application. We'll guide you
+through the step-by-step process of creating your project and deploying your
+application to Liferay. Before you know it, you'll have your application
+deployed alongside of the applications that come with Liferay.
 
 Your first application is simple: you'll build a guestbook application that
 looks like this:
@@ -11,16 +11,15 @@ looks like this:
 ![Figure x: You'll create this simple application.](../../images/first-guestbook-portlet.png)
 
 By default, it shows guestbook messages that various users have left on your
-website. To add a message, you click the *Add Entry* button to show a form you
-can use to enter and save a message.
+website. To add a message, you click the *Add Entry* button to show a form that
+lets you enter and save a message.
 
 Ready to write your first Liferay application?
 
 ## Creating Your First Liferay Application
 
-Now that everything's configured, let's jump right in and create your first
-project. Applications in Liferay Portal are called *portlets*, so you'll create
-a portlet project. You'll use the
+Let's jump right in and create your first project. Applications in Liferay
+Portal are called *portlets* so you'll create a portlet project. You'll use the
 [Blade Tools](https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/introduction-to-blade-tools)
 command line tool to create your application. The new Liferay application
 wizards available in Liferay IDE and Liferay Developer Studio use Blade Tools
@@ -34,22 +33,24 @@ Liferay 7 is to use a Liferay workspace. To create a Liferay workspace, follow
 the instructions in the Creating a Liferay Workspace article:
 [https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/creating-a-liferay-workspace](https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/creating-a-liferay-workspace)
 Once your Liferay workspace is created, create a
-`beginning-liferay-development` folder in the `modules` folder. Navigate to the
-new folder and then use this command to create your Guestbook application:
+`beginning-liferay-development` folder in your Liferay workspace's `modules`
+folder. Navigate to the new folder and then use this command to create your
+Guestbook application:
 
     blade create -c GuestbookPortlet -p com.liferay.docs.guestbook com.liferay.docs.guestbook
 
 This command creates a project named `com.liferay.docs.guestbook`. `-c
 GuestbookPortlet` specifies the name of the class to be generated. `-p
 com.liferay.docs.guestbook` specifies the package in which the class is to be
-generated. By default, the `mvcportlet` template is used. You could have
-specified this explicitly using the `-t mvcportlet` option. When you use the
-`mvcportlet` template, Blade Tools creates a portlet class (the name of which
-can be specified with the `-c` option) in a package (the name of which can be
+generated. By default, the `mvcportlet` template is used. You can explicitly
+specify this using the `-t mvcportlet` option. When you use the `mvcportlet`
+template, Blade Tools creates a portlet class (the name of which can be
+specified with the `-c` option) in a package (the name of which can be
 specified by the `-p` option) in your project's `src/main/java` folder. Blade
 Tools also creates your application's JSP files and language properties file in
-your project's `src/main/resources` folder. Import your project into Liferay
-IDE now.
+your project's `src/main/resources` folder.
+
+After you've created your project, import it into Liferay IDE.
 
 Note: Two important concepts for Liferay 7 development are modules and
 components. A *module* is the one and only type of Liferay 7 plugin. A
@@ -67,41 +68,41 @@ interface.
 ## What is a Portlet?
 
 When you access a web site, you interact with an application. That application
-may be simple: it may only show you information, such as an article. The
-application may be complex: you may be doing your taxes online, inputting lots
-of data into an application that calculates whether you owe or are due a refund.
-These applications run on a *platform* that provides application developers the
-building blocks they need to make applications.
+might be simple: it might only show you one piece of information, such as an
+article. The application might be complex: you could be doing your taxes
+online, inputting lots of data into an application that calculates whether you
+owe or are due a refund. These applications run on a *platform* that provides
+application developers the building blocks they need to make applications.
 
 ![Figure x: Many Liferay applications can run at the same time on the same page.](../../images/portlet-applications.png)
 
 Liferay Portal is a platform, and its applications are called *portlets*. One
 difference between a Liferay application and an application built on another
-platform is that Liferay Portal can serve many applications at the same time on
-the same page. Usually, a web application takes up the entire page, and if you
-want, you can do this with Liferay as well. But Liferay has the added benefit of
-being able to run many applications on the same page. Liferay's framework takes
-this into account at every step. We're saying this up front, because you'll be
-experiencing this soon, and we want you to know why certain things, like
-platform-generated URLs, are necessary.
+platform is that Liferay Portal can serve many applications on the same page at
+the same time. Usually, a web application takes up the entire page. If you
+want, you can do this with Liferay as well. But Liferay has the added benefit
+of being able to run many applications on the same page. Liferay's framework
+takes this into account at every step. For example, features like
+platform-generated URLs exist to support Liferay's ability to serve multiple
+applications on the same page.
 
-Even though you haven't yet made any updates to it, the Guestbook project that
-you created in the previous section is ready to be built and deployed to
-Liferay. Make sure your Liferay 7 instance is running, and then run this
-command from your `com.liferay.docs.guestbook` project folder to build your
-project:
+Even though all you've done is generate it, the Guestbook project that you
+created in the previous section is ready to be built and deployed to Liferay.
+Make sure your Liferay 7 instance is running. To start it from a Liferay
+workspace, use this command:
 
-    gradle build
+    blade server start
 
-This command creates a deployable JAR file that you can deploy to Liferay. To
-deploy it using Blade Tools, you first need to install the remote agent. To
-install it, use this command:
+To automatically deploy your application using Blade Tools, you first need to
+install the remote agent. To install it, use this command:
 
     blade agent install
 
 After the blade agent has been installed, run this command from your project:
 
     blade deploy
+
+The command above both builds and deploys your project.
 
 Next, check that your application is available in Liferay. Open a browser,
 navigate to your portal ([http://localhost:8080](http://localhost:8080) by
@@ -148,7 +149,7 @@ Liferay JSP portlet application are made in an `init.jsp` file. Every other JSP
 file in the application imports `init.jsp`. This convention ensures that JSP
 dependency management can always be handled from a single fie.
 
-Besides importing `init.jsp`, `view.jsp` simply displays message that
+Besides importing `init.jsp`, `view.jsp` simply displays a message that
 corresponds to a language key. This key and its value are declared in your
 project's `src/main/resources/content/Language.properties` file. Let's add some
 functionality to your Guestbook application by adding a button that says *Add
@@ -235,7 +236,7 @@ parameter which is appended to the generated URL. In this example, a URL
 parameter named `mvcPath` with a value of `/edit_entry` is appended to the URL.
 
 Notice that your `GuestbookPortlet` class extends `MVCPortlet`, which is
-Liferay's MVC Portlet class. In a Liferay MVC portlet, the `mvcPath` URL
+Liferay's MVC portlet class. In a Liferay MVC portlet, the `mvcPath` URL
 parameter is used to indicate a page within your portlet application. To
 navigate to another page in your portlet application, use a portal URL with the
 parameter `mvcPath` to indicate the specific page.
@@ -374,7 +375,7 @@ action save the form data.
 Because of the limitations of the portlet preferences API, you need to store
 each guestbook entry as a `String` in a string array. Since you have two fields
 in your form, you need to have a delimiter so you can determine where the user
-name ends and the guestbook entry begins. The caret symbol (^) makes a good
+name ends and the guestbook entry begins. The caret symbol (`^`) makes a good
 delimiter because users are highly unlikely to use that symbol in a guestbook
 entry.
 
@@ -558,7 +559,7 @@ which it's currently inheriting from its parent class, `MVCPortlet`.
     `List` into the request object. It then calls the parent class's `render`
     method.
 
-2. Beneath the `render` method, place the following method that converts the
+2. Beneath the `render` method, add the following method that converts the
    array to a `List` of your model objects:
 
         private List<Entry> parseEntries(String[] guestbookEntries) {
