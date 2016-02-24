@@ -1,0 +1,28 @@
+Bundle-Name: Guestbook Service
+Bundle-SymbolicName: com.liferay.docs.guestbook.svc
+Bundle-Version: 1.0.0.${tstamp}
+
+Import-Package: \
+	com.liferay.docs.guestbook.*,\
+	com.liferay.portal.service;version="7.0.0",\
+	org.osgi.framework;version="[1.7,2)",\
+	*
+
+Private-Package: \
+	com.liferay.docs.guestbook.model.impl,\
+	com.liferay.docs.guestbook.service.base,\
+	com.liferay.docs.guestbook.service.http,\
+	com.liferay.docs.guestbook.service.impl,\
+	com.liferay.docs.guestbook.service.persistence.impl,\
+	com.liferay.docs.guestbook.service.util
+
+-includeresource:\
+	classes,\
+	src/main/resources
+Liferay-Service: true
+Require-Capability: liferay.extender;filter:="(&(liferay.extender=spring.extender)(version>=1.0)(!(version>=2.0)))"
+Spring-Context: META-INF/spring
+
+-dsannotations: *
+-sources: true
+Require-SchemaVersion: 1.0.0
