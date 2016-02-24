@@ -1,3 +1,5 @@
+Bundle-Name: Guestbook Web
+Bundle-SymbolicName: com.liferay.docs.guestbook.web
 Bundle-Version: 1.0.0.${tstamp}
 
 Import-Package: \
