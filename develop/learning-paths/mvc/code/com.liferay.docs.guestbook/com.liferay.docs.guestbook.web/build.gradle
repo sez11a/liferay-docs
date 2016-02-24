@@ -1,6 +1,6 @@
 dependencies {
-		compile  project(':blade.servicebuilder.api')
-		compile  project(':blade.servicebuilder.svc')
+    compile  project(':com.liferay.docs.guestbook.api')
+    compile  project(':com.liferay.docs.guestbook.svc')
 }
 
 version = '1.0.0'
