@@ -24,6 +24,12 @@ available in LCS:
   applying fix packs, monitoring server status, viewing server metrics, and 
   more. 
 
+- [**Managing Liferay EE Subscriptions:**](/discover/deployment/-/knowledge_base/6-2/using-lcs#managing-liferay-ee-subscriptions)
+  Learn how to view and manage your Liferay EE subscriptions for the servers in 
+  your LCS project. This includes elastic subscriptions for auto-scaling 
+  environments. Note that to use these features, your Liferay instances must be 
+  running Liferay 6.2 EE Service Pack 15 or higher. 
+
 - [**Configuring LCS Notifications:**](/discover/deployment/-/knowledge_base/6-2/using-lcs#configuring-lcs-notifications)
   Learn how to configure LCS to send you notification emails when specific 
   events occur in your LCS projects.
@@ -254,12 +260,13 @@ and alerts. As with the project view, fix packs and alerts are displayed in
 tables. These tables behave exactly the same here as they do in the project 
 view. The only difference is that they show fix packs and alerts for the 
 environment instead of the whole project. The Environment table displays details 
-about the environment, such as its name, description, and location. You can edit 
-these fields by clicking the blue pencil icon next to each. You can also delete 
-the environment by clicking the Delete button below the Environment table. 
-Clicking the Automatic Registration button lets you generate and view 
-*environment tokens* that allow automatic configuration of LCS clients. See the 
-section below for more information on environment tokens. 
+about the environment, such as its name, description, location, type, and 
+Liferay EE subscription type. Fields with a blue pencil icon can be edited by 
+clicking the icon. You can also delete the environment by clicking the Delete 
+button below the Environment table. Clicking the Automatic Registration button 
+lets you generate and view *environment tokens* that allow automatic 
+configuration of LCS clients. See the section below for more information on 
+environment tokens. 
 
 ![Figure 4.16: The LCS environment view shows an overview of an LCS environment.](../../images/lcs-environment-view.png)
 
@@ -345,11 +352,9 @@ differently. Fix packs are broken down into those that are available for
 installation and those that are already installed. You can access these through 
 the Available and Installed tabs at the top of the fix packs table. The Server 
 table lists your server's name, description, and location. You can edit these 
-values by clicking the pencil icon next to each. You can also move the server to 
-a different environment by selecting the environment from the *Move to 
-Environment* selector. If you no longer want the server in LCS, click the 
-*Unregister* button to remove it. Note that this doesn't alter your actual 
-server; it just removes it from your LCS project.
+values by clicking the pencil icon next to each. If you no longer want the 
+server in LCS, click the *Unregister* button to remove it. Note that this 
+doesn't alter your actual server; it just removes it from your LCS project. 
 
 ![Figure 4.21: The LCS server Overview lets you view and edit the basic information of a server registered with LCS.](../../images/lcs-server-overview.png)
 
@@ -364,20 +369,95 @@ useful to the Liferay support team in the event that you need their assistance.
 LCS also lets you view your portal's property values. To do so, click the 
 *Portal Properties* button near the top of the page. Your portal's properties 
 and their values are shown in a searchable table. This gives you a convenient 
-display for seeing exactly what your portal properties are set to. By checking 
-only the *Show Default Values* checkbox, the table shows only the portal's 
-default property values. By checking only the *Show Custom Values* checkbox, the 
-table shows only the portal property values that differ from default. For 
-example, if you change a property setting via a `portal-ext.properties` file, 
-that setting then appears in the Portal Properties table when the *Show Custom 
-Values* checkbox is checked. To show both default and custom property values, 
-check both checkboxes.
+display for seeing exactly what your portal properties are set to. The 
+properties in this table are organized into the following categories:
+
+- **Default Values:** The default values for your portal's properties. 
+
+- **Custom Values:** Any custom values you've set for your portal's properties. 
+  This includes any property values you change via a `portal-ext.properties` 
+  file.
+
+- **Dynamic Properties:** Any property values set at runtime. For example, the 
+  [Liferay Home](/discover/deployment/-/knowledge_base/6-2/liferay-home) 
+  folder's location depends on your configuration. To always specify this folder 
+  when setting any properties that require it, you can use `${liferay.home}` 
+  instead of an absolute directory path. 
+
+You can display any combination of these categories by selecting the 
+corresponding checkboxes at the top of the table. For example, by checking the 
+*Show Default Values* and *Show Custom Values* checkboxes, the table shows your 
+portal's default and custom property values. To show only the custom values, 
+check only the checkbox for *Show Custom Values*. 
 
 ![Figure 4.23: With only the *Show Custom Values* checkbox checked, this table shows only the portal property values that differ from default.](../../images/lcs-server-portal-properties.png)
 
 As you can see, the LCS Dashboard is a powerful tool that greatly simplifies 
 the update process and also gives you extensive information on how your servers 
-are running. Next, you'll learn how to configure notifications in LCS.
+are running. Next, you'll learn how to use LCS to manage your Liferay EE 
+subscriptions. 
+
+## Managing Liferay EE Subscriptions [](id=managing-liferay-ee-subscriptions)
+
+LCS also lets you view and manage your Liferay EE subscriptions. You can view 
+your project's subscriptions, see how they're being used, assign an environment 
+to a subscription type, and more. You can access these features from the 
+*Subscriptions* tab on the upper-left of the LCS site. Note that to use these 
+features, your Liferay instances must be running Liferay 6.2 EE Service Pack 15 
+or higher. 
+
+![Figure 4.24: The *Subscriptions* tab in LCS lets you view and manage your Liferay EE subscriptions.](../../images/lcs-subscriptions.png)
+
+LCS presents subscription information in the *Details* and *Elastic 
+Subscriptions* tabs. When you select *Subscriptions*, the *Details* tab is shown 
+first. This tab shows you basic information on your subscriptions and lets you 
+assign subscription types to your LCS environments. In *Details*, the 
+*Subscriptions* table shows you a list of Liferay EE subscriptions available for 
+your LCS project. For each subscription, the table shows the following 
+information:
+
+- Start Date
+- Expiration Date
+- Support End Date
+- Platform
+- Product
+- Processor Cores Allowed
+- Servers Allowed
+- Servers Used
+
+Below this table is the *Subscriptions Usage* table. The *Subscriptions Usage* 
+table shows you how you're currently utilizing your subscriptions. For each 
+subscription type, this table shows the servers allowed, servers used, and 
+servers available. The *Project Environments* table, below the *Subscriptions 
+Usage* table, shows the subscription type you've assigned to each environment. 
+You can also use this table to assign a subscription type to an environment. 
+Note that all the servers in an environment must be shut down to assign a 
+subscription type. These assignments are also reflected in the *Project Servers* 
+table. This table shows the environment and subscription type for each server in 
+your LCS project. 
+
+The *Elastic Subscriptions* tab displays information about the elastic 
+subscriptions in your project. For this tab to appear, you must have at least 
+one environment in your project set to the elastic subscription type. Elastic 
+subscriptions let you register an unlimited number of Liferay servers, unlike 
+other subscriptions that limit you to a certain number of servers. This is 
+invaluable in auto-scaling environments, where servers are automatically created 
+and destroyed in response to server load. The following screenshot shows the 
+*Elastic Subscriptions* tab. 
+
+![Figure 4.25: The *Elastic Subscriptions* tab displays details about your servers registered under the elastic subscription type.](../../images/lcs-elastic-subscriptions.png)
+
+This tab displays the number of online elastic servers and the uptime details 
+for each. The number of online elastic servers per day is shown in a graph. 
+Uptime statistics are displayed in a table that lists each elastic server's 
+start time, end time, and duration. Below the table, the total duration for all 
+elastic servers is also shown. Above the table, you can click the *Download 
+Report* button to download a report of these data. Also, you can use the 
+*Environment* and *Month* selectors above the graph to select the environment 
+and month to show data from, respectively. The data in both the graph and the 
+table reflect your selections here. 
+
+Next, you'll learn how to configure notifications in LCS. 
 
 ## Configuring LCS Notifications [](id=configuring-lcs-notifications)
 
@@ -393,20 +473,17 @@ from the user menu in the upper-right corner of LCS. You're presented with the
 *Add Rule* button and a table that lists any existing rules. There are no rules 
 by default. Click *Add Rule* to define one. 
 
-![Figure 4.24: You can add rules to determine the events that trigger notifications.](../../images/lcs-add-notification-rule.png)
+![Figure 4.26: You can add rules to determine the events that trigger notifications.](../../images/lcs-notification-rule.png)
 
 First specify the project, environment, and server for the notification. Note
 that you have the option of selecting all environments and servers in a
-project. Then check the checkbox for each event that you want to trigger an
-email notification. For example, the notification rule in the illustration
-above tells LCS to send you an email whenever any server in any of the
-project's environments unexpectedly goes offline. You should note that this
-differs from normal shutdown events, which don't trigger email notifications.
-During normal server shutdown, the server communicates this status to LCS. An
-email notification is only generated when the connection with the server is 
-abruptly terminated. Click *Save* when you're done defining the notification 
-rule. It then appears in a table along with any other existing rules. Each has 
-an Actions button that lets you edit or delete it. 
+project. Then check the checkbox for each event that you want to trigger an 
+email notification. For example, if you create a notification rule with *The 
+server unexpectedly shuts down* selected for all servers and environments in 
+your project, then LCS sends you an email when any server in your project goes 
+offline without a normal shut down event. Click *Save* when you're done defining 
+the notification rule. It then appears in a table along with any other existing 
+rules. Each has an Actions button that lets you edit or delete it. 
 
 Great! Now you know how to set notification rules in LCS. The next section shows 
 you how to use environment tokens to automatically register Liferay instances 
@@ -454,7 +531,7 @@ one: the environment view. Navigate to an environment in LCS and click the
 *Automatic Registration* button. From here you can manage the environment's 
 token. 
 
-![Figure 4.25: Clicking the Automatic Registration button in the environment view shows the token for only that environment.](../../images/lcs-environment-token.png)
+![Figure 4.27: Clicking the Automatic Registration button in the environment view shows the token for only that environment.](../../images/lcs-environment-token.png)
 
 By default, there's no existing token. A table appears that contains only a 
 *Generate* button. Click it to generate a token for the environment. The new 
@@ -468,7 +545,7 @@ Registration* button. The table shows the tokens for all the environments in
 your project. This provides a central location to manage all your environment 
 tokens. Otherwise, the UI for managing them is exactly the same. 
 
-![Figure 4.26: The Connection tab on the left lets you manage the environment tokens for your entire project.](../../images/lcs-environment-token-02.png)
+![Figure 4.28: The Connection tab on the left lets you manage the environment tokens for your entire project.](../../images/lcs-environment-token-02.png)
 
 Once you have an environment token, use the following steps to register a
 previously unregistered Liferay instance with LCS:
@@ -492,21 +569,16 @@ their LCS account's *My Account* &rarr; *OAuth Authorizations* menu. If they
 have previously registered portal instances with LCS, their existing
 credentials are used when they create a token file. 
 
-![Figure 4.27: The OAuth authorization entry in the portal instance using an environment token to connect to LCS.](../../images/lcs-token-oauth-entry.png)
+![Figure 4.29: The OAuth authorization entry in the portal instance using an environment token to connect to LCS.](../../images/lcs-token-oauth-entry.png)
 
 What if your Liferay instance has already been manually registered with LCS,
 but you want to switch to using an environment token? No problem! Follow these
 steps:  
 
-1. Use the LCS client portlet to disconnect and reset the credentials in the 
-   Liferay instance. Then press the *Back* button to the left of the Control 
-   Panel text in the Dockbar. Pressing *Back* deletes the current OAuth 
-   credentials. 
-
-2. Shut down your Liferay instance and place the token file in the portal's 
+1. Shut down your Liferay instance and place the token file in the portal's 
    `data` folder. 
 
-3. Restart your Liferay instance. The LCS client portlet uses the token file to 
+2. Restart your Liferay instance. The LCS client portlet uses the token file to 
    connect to LCS automatically. 
 
 As you've now seen, LCS is a powerful tool that simplifies the management of 
