@@ -27,7 +27,8 @@ available in LCS:
 - [**Managing Liferay EE Subscriptions:**](/discover/deployment/-/knowledge_base/6-2/using-lcs#managing-liferay-ee-subscriptions)
   Learn how to view and manage your Liferay EE subscriptions for the servers in 
   your LCS project. This includes elastic subscriptions for auto-scaling 
-  environments.
+  environments. Note that to use these features, your Liferay instances must be 
+  running Liferay 6.2 EE Service Pack 15 or higher. 
 
 - [**Configuring LCS Notifications:**](/discover/deployment/-/knowledge_base/6-2/using-lcs#configuring-lcs-notifications)
   Learn how to configure LCS to send you notification emails when specific 
@@ -401,8 +402,9 @@ subscriptions.
 LCS also lets you view and manage your Liferay EE subscriptions. You can view 
 your project's subscriptions, see how they're being used, assign an environment 
 to a subscription type, and more. You can access these features from the 
-*Subscriptions* tab on the upper-left of the LCS site. The following screenshot 
-shows this. 
+*Subscriptions* tab on the upper-left of the LCS site. Note that to use these 
+features, your Liferay instances must be running Liferay 6.2 EE Service Pack 15 
+or higher. 
 
 ![Figure 4.24: The *Subscriptions* tab in LCS lets you view and manage your Liferay EE subscriptions.](../../images/lcs-subscriptions.png)
 
