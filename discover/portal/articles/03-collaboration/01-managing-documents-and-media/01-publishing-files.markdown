@@ -60,15 +60,16 @@ click the role's Actions icon
 (![Actions](../../../images/icon-actions.png)) and select *Define
 Permissions*. A screen appears for you to define the role's permissions.
 
-![Figure 1: It's often helpful to define a role for specific users to access Documents and Media from Site Administration.](../../../images/dm-define-role-permissions.png)
+![Figure 1: It's often helpful to define a role with these General Permissions to administer Documents and Media from Site Administration.](../../../images/dm-define-role-permissions.png)
 
 In the role's permission definition screen, navigate to *Site Administration
-&rarr; Content &rarr; Documents and Media*. In the *General Permissions*
-section, select *Access in Site Administration* and click *Save*. This role will
-manage your special set of media files. Once you've created the role, assign it
-to the users who manage the media. Snappy Fingers (username: *snappy*) is the
-Lunar Resort's trigger-happy photographer. We assigned her to the *Resort Guest
-Media Manager* role.
+&rarr; Content &rarr; Documents and Media*. Select all the *General
+Permissions*: *Access in Site Administration*, *Configuration*, *Permissions*,
+*Preferences*, and *View*. Then, *Save* your changes. This role will manage your
+special set of media files. Once you've created the role, assign it to the users
+who manage the media. Snappy Fingers (username: *snappy*) is the Lunar Resort's
+trigger-happy photographer. We assigned her to the *Resort Guest Media Manager*
+role.
 
 +$$$
 
