@@ -82,7 +82,5 @@ As we've demonstrated, you can mention users to get their attention, praise them
 with kudos, and link to their home pages. It helps you welcome specific users to
 collaborate with you. Have fun collaborating and socializing with Mentions! 
 
-Now as your site's community gathers more information on topics or procedures
-relevant to users, you'll want to provide a means for them to collaborate on
-that information. Liferay's Wiki is a terrific application for users to jointly
-produce hierarchies of information.
+Next we'll learn how to inform and alert users with the Alerts and Notifications
+applications. 
