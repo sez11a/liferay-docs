@@ -27,3 +27,6 @@ dist/
 .DS_Store/
 *#
 /develop/tutorials/code/osgi/modules/form-nav-extension-portlet/.nb-gradle/
+
+.gradle/
+bundles/

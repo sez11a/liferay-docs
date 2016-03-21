@@ -1,0 +1,1 @@
+include 'com.liferay.docs.guestbook.api','com.liferay.docs.guestbook.svc','com.liferay.docs.guestbook.web'
