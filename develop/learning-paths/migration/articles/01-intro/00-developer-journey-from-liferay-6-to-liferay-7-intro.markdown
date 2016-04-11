@@ -1,53 +1,52 @@
 # Developer Journey from Liferay 6 to Liferay 7
 
-When you were looking for Liferay 7 migration documentation, were you expecting
-a title such as *Migrating to Liferay 7* or *12 Easy Steps for App Migration*?
-Whatever title you were expecting, I bet it didn't have the word "journey" in
-it. You might be wondering whether you took a wrong turn. Or perhaps we're using
-*journey* as a euphemism for the long and arduous effort required to get Liferay
-6 plugins running on Liferay 7. Would we really do that? No; we're not
-sugarcoating anything. Migrating to Liferay 7 is no easy task and it will take
-considerable effort. But the journey's worth it. We'll explain.
+You have been using Liferay as a developers for some time now; you have read
+documentations and blogs and maybe even gone through some training. More
+importantly, you have already developed some portlets and extensions. And now
+you hear about how all the changes in Liferay 7 and you wonder: will I have to
+relearn everything from scratch? Will I have to recode all existing
+developments? Do I need to learn new tools?
 
-Liferay 7 has much to offer you as a software developer, integrator, and
-maintainer. In fact, we had you in mind as we transformed Liferay's architecture
-and applications into a robust, flexible, and dynamic ecosystem. That's almost
-starting to sound exciting, right--like a *journey*.
+This learning path will answer all these questions and more, showing all the key
+differences and similarities between Liferay 7 and previous versions from a
+developer experience. You will understand new concepts, learn how to make
+minimal changes to make existing applications work and leverage the new
+possibilities to achieve much more than what was possible until now. After
+reading this, you will be able to call yourself a LIferay 7 developer.
 
-At this point, you've decided to upgrade to Liferay 7 or you're still deciding.
-Wherever you're at in your decision process, you want to understand Liferay 7
-and what's involved with migrating your plugins. What are the architectural
-differences between Liferay 6 and 7? What new concepts are involved with
-developing and maintaining plugins? And what were Liferay's reasons for all the
-changes?
+## From a Monolith to a Modular Architecture
 
-We'll start by highlighting some of the key issues that drove us to make
-considerable changes in Liferay 7 and the reasons for resolving the issues the
-way we did. Let's start by going over a few issues with the Liferay Platform
-prior to Liferay 7.
+<!--
+What is a monolith? How was Liferay previously a monolith?
 
-It's often desirable for different applications to use different versions of a
-dependency. For example, you want to keep version 1.1 of an app running for some
-of your applications to use and also run version 1.2 of the app for your other
-application to use. Prior to Liferay 7, you couldn't do this. Now you can.
+What were the advantages of being a monolith?
 
-Liferay 7 lets you specify in each application the precise version of software
-on which it depends. And it let's you use different versions of that software
-for other applications.
+What were the defficiencies?
 
-Another issue we overcame was the size of the Liferay platform. Sure it had
-plenty of useful powerful applications, but you had to take all of them. This
-was due in part to tight coupling between Liferay applications. So we sought a
-way to maximize loose coupling between the apps, by adopting modularity and
-implementing a framework to support it. We wanted to refine the platform's
-essentials to what we now call the Liferay Community Edition Core (CE Core).
-Now, you just run CE Core and need only keep Liferay applications you want.
+What is a modular architecture? Why did we switch?
 
-Adding and removing applications brought up another issue, or key need. We
-wanted a dynamic system that would allow modules to come and go, safely and
-easily. For example, if a dependency went down, we wanted the system to be savvy
-enough to swap in another available module to satisfy the dependency. We
-developed this capability into Liferay's Module Framework.
+Describe our new modular architecture.
+
+-->
+
+<!--
+Jorge's blog - Modularization
+https://www.liferay.com/web/jorge.ferrer/blog/-/blogs/liferay-7-milestone-5-get-involved-while-itâ€™s-hot
+
+Liferay 6 is a monolith
+- It's a single web application
+- All running in same JVM, right?
+- It and it's built-in apps had to be released together
+-->
+
+
+## Core, Apps, and Suites
+
+- Content coming soon.
+
+## From plugins to modules
+
+- (Include the Compatibility Layer)
 
 ## Liferay's Module Framework
 
@@ -59,18 +58,16 @@ can read more about modularity and OSGi in our [introductory tutorials](/develop
 We'll focus on some key aspects of the Module Framework here. 
 
 Liferay's Module Framework leverages OSGi to deploy plugins as modules to the
-Liferay Platform. The modules use Semantic Versioning to uniquely distinguish
-themselves in the system. Not only does a module distinguish itself from other
+Liferay Platform. Not only does a module distinguish itself from other
 modules, but it also distinguishes itself from different versions of itself.
 Each version of each module uniquely registers with the Module Framework. This
 enables applications in Liferay to use different versions of a named module. 
 
-Modules are the single plugin type used in Liferay 7. But Liferay 7 is remains
-compliant with the JSR-286 portal standards. In Liferay 7, even though OSGi
-modules are packaged as Web Application Bundles (WABs), you can still deploy
-legacy WAR-style plugins. Liferay's Module Framework converts the plugin WAR to
-a WAB. The generated WAB is a `.jar` file that essentially consists of the WAR
-file's contents and an OSGi bundle manifest--more on manifests later.
+Modules are the single plugin type used in Liferay 7. In Liferay 7, even though
+OSGi modules are packaged as Web Application Bundles (WABs), you can still
+deploy legacy WAR-style plugins. Liferay's Module Framework converts the plugin
+WAR to a WAB. The generated WAB is a `.jar` file that essentially consists of
+the WAR file's contents and an OSGi bundle manifest--more on manifests later.
 
 ![Figure x: You deploy plugins via Liferay's Module Framework.](../../images/app-server-module-framework.png)
 
@@ -129,9 +126,19 @@ As was stated previously, Liferay 7 continues to support WAR-style plugins, but
 modules are the preferred structure for new Liferay 7 plugins. An important part
 of modularity is the use components and services. They're explained next. 
 
-<!-- new -->
+## Understanding dependencies 
 
-## Services and Components
+Content coming soon.
+
+## From the Plugins SDK to Gradle and Maven
+
+Content coming soon.
+
+## Portlets in Liferay 7 
+
+Content coming soon.
+
+## A New Extension Model: Services and Components
 
 Components are the building blocks of a module. Each component is a Java class
 that focuses on a specific piece of functionality. Services specify the module's
@@ -239,4 +246,24 @@ SDK, for the time being. But you should strongly consider using Gradle or Maven.
 We've even developed a tool called Liferay Workspaces to help you create and
 manage Gradle based plugin projects (more on this later).  
 
+
+## A new configuration paradigm
+
+- From portlet preferences to Configuration API
+
+- From properties files to Configuration API
+
+## Migrating existing code
+
+- A portlet 
+
+- An extension point implementation 
+
+- A servlet
+
+## Designing a modular application
+
+- Modular best practices 
+
+- Portlets as components 
 
