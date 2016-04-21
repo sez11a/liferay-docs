@@ -7,7 +7,7 @@ you hear about all the changes in Liferay 7 and you wonder: will I have to
 relearn everything from scratch? Will I have to recode all existing
 developments? Do I need to learn new tools?
 
-This learning path answers all these questions and more, showing all the key
+This Learning Path answers all these questions and more, showing all the key
 differences and similarities between Liferay 7 and previous versions from a
 developer experience. You'll understand new concepts, learn how to make minimal
 changes to make existing applications work, and leverage the new features and
