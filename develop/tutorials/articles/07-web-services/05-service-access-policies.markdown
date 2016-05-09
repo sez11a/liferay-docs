@@ -6,16 +6,18 @@ detail, and information on managing Service Access Policies, see
 [the user guide article on Service Access Policies](/discover/deployment/-/knowledge_base/7-0/service-access-policies). 
 
 There may be cases, however, where your app needs to integrate with a Liferay 
-instance's Service Access Policies. This kind of integration can be done on two 
-levels. 
+instance's Service Access Policies. For example, you may have an app that: 
 
-<!-- What are some use cases where someone may want to do this? 
+- uses custom remote API authentication (tokens), and requires certain Liferay 
+  services to be available for clients using the tokens. 
 
-* There is a remote app (e.g. Sync) with a custom remote API authentication (tokens) that wants some of portal services to be available for clients using the tokens
-* There is an app (e.g. Sync) with own services that should be available to guest users (no authentication needed)
-* There is an authorization layer for remote services (OAuth Plugin) that needs to drive access to remote services based on own granted privileges.
--->
+- requires its services be made available to guest users, with no authentication 
+  necessary. 
 
+- contains a remote service authorization layer that needs to drive access to 
+  remote services based on granted privileges. 
+
+This kind of integration can be done on two levels. 
 
 <!-- What's the other level, besides portal? 
 
