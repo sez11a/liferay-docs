@@ -17,93 +17,68 @@ instance's Service Access Policies. For example, you may have an app that:
 - contains a remote service authorization layer that needs to drive access to 
   remote services based on granted privileges. 
 
-This kind of integration can be done on two levels. 
+You can do this integration on two levels: 
 
-<!-- What's the other level, besides portal? 
+1. The portal level, via the 
+   [package `com.liferay.portal.kernel.security.service.access.policy`](https://docs.liferay.com/portal/7.0/javadocs/portal-kernel/com/liferay/portal/kernel/security/service/access/policy/package-summary.html). 
+   This package provides classes for basic access to policies. For example, you 
+   can use the 
+   [singleton `ServiceAccessPolicyManagerUtil`](https://docs.liferay.com/portal/7.0/javadocs/portal-kernel/com/liferay/portal/kernel/security/service/access/policy/ServiceAccessPolicyManagerUtil.html) 
+   to obtain Service Access Policies configured in the system. You can also use 
+   the 
+   [`ServiceAccessPolicyThreadLocal` class](https://docs.liferay.com/portal/7.0/javadocs/portal-kernel/com/liferay/portal/kernel/security/service/access/policy/ServiceAccessPolicyThreadLocal.html) 
+   to set and obtain Service Access Policies granted to current request thread. 
+   You may now be thinking, "That sounds great, but what's the advantage of 
+   getting or setting these policies? What's the practical application?" This is 
+   a fantastic question! Getting a list of the configured policies in a Liferay 
+   instance lets remote apps/clients choose the policy to use to access 
+   services. Also, apps like OAuth can offer a list of available policies during 
+   the authorization step in the OAuth workflow, and allow the user to choose 
+   the policy to assign to the remote application. You can also grant a policy 
+   to a current request thread. When a remote client accesses an API, something 
+   must tell the Liferay instance which policies are assigned to this call. This 
+   something is in most cases an 
+   [`AuthVerifier` implementation](https://docs.liferay.com/portal/7.0/javadocs/portal-kernel/com/liferay/portal/kernel/security/auth/verifier/AuthVerifier.html). 
+   For example, in the case of the OAuth app, an `AuthVerifier` implementation 
+   assigns the policy choosen by the user in the authorization step. 
 
-Two levels:
-1, integration with portal package com.liferay.portal.kernel.security.service.access.policy
+2. The OSGi module level, via the following service access profile modules:
+<!-- I can't find these. I can only find com.liferay.portal.security.service.access.policy -->
 
-2, integration with osgi modules:
-- com.liferay.service.access.policy.api.jar`
-- com.liferay.service.access.policy.service.jar`
-- com.liferay.service.access.policy.web.jar`
+    - `com.liferay.service.access.policy.api.jar`
+    - `com.liferay.service.access.policy.service.jar`
+    - `com.liferay.service.access.policy.web.jar`
 
--->
+    These OSGi modules can be used to manage Service Access Policies 
+    programmatically. Each module publishes a list of packages and services that 
+    can be consumed by other OSGi modules. 
 
-On the portal level, the 
-[package `com.liferay.portal.kernel.security.service.access.policy`](https://docs.liferay.com/portal/7.0/javadocs/portal-kernel/com/liferay/portal/kernel/security/service/access/policy/package-summary.html) 
-provides classes for basic access to policies. For example, you can use the 
-[singleton `ServiceAccessPolicyManagerUtil`](https://docs.liferay.com/portal/7.0/javadocs/portal-kernel/com/liferay/portal/kernel/security/service/access/policy/ServiceAccessPolicyManagerUtil.html) 
-to obtain Service Access Policies configured in the system. You can also use the 
-[`ServiceAccessPolicyThreadLocal` class](https://docs.liferay.com/portal/7.0/javadocs/portal-kernel/com/liferay/portal/kernel/security/service/access/policy/ServiceAccessPolicyThreadLocal.html) 
-to set and obtain Service Access Policies granted to current request thread. 
-
-<!-- What is accessing/setting policies used for? 
-
-There is a list of policies configured in DB. Either by portal admin manually using UI or created via API by installed applications.
-
-1, Accessing list of policies using portal API
-Non-osgi plugins can see list of configured policies. This can help remote apps/clients to choose which one to use to access the services.
-
-Also a plugins like OAuth can during authorization step in the OAuth workflow offer list of available policies and allow user to choose which policy should be assigned to the remote application.
-
-2. Granting a policy to current request thread
-
-When a remote client access API, "something" needs to tell portal which policies are assigned/granted to this call. This "something" is in most cases an AuthVerifier implementation that:
-1, in Sync example always assigns SYNC_POLICY
-2, in OAuth plugin example assigns the policy choosed by the user in authorization
-
-
--->
-
-Furthermore, Liferay's Service Access Policy API and implementation is provided 
-via the following OSGi modules:
-
-- `com.liferay.service.access.policy.api.jar`
-- `com.liferay.service.access.policy.service.jar`
-- `com.liferay.service.access.policy.web.jar`
-
-These OSGi modules can be used to manage service access policies 
-programmatically.
-<!-- 
-How? 
-
-Each module publishes a list of packages and services that can be consumed by other OSGi modules. Please see some OSGi guide on how to import packages and use OSGi services.
-
-
-
-What is meant by "manage service access policies automatically"? 
-
-Not automatically but programmatically, that means not via UI but using API.
-
--->
-
-A custom token verification module: 
-<!-- What's a custom token verification module, and how does it fit in with this tutorial?
-
-Example of OSGi module implementing a custom security token verification for remote clients authorization. Can be for example someone's JWT implementation for Liferay remote API. 
-
-For it to work, the developer must
-1, Create a way for remote applications to obtain token - out of scope of this article
-- may need list of existing SAC profiles
-- may need to create custom SAC profile
-
-2, Can offer UI for users to choose a policy - out of scope of this article
-- may need list of existing SAC profiles
-
-3, Need to integrate with portal during remote API/web service call
-- need to grant the associated policy during web service request
-
--->
+You can use either approach to develop a custom token verification module. A 
+custom token verification module is an OSGi module that implements custom 
+security token verification for use in authorizing remote clients. For example, 
+such a module may contain a JSON Web Token implementation for Liferay's remote 
+API. A custom token verification module must integrate with the Liferay instance 
+during the remote API/web service call, to grant the associated policy during 
+the request. The module: 
 
 - should use `ServiceAccessPolicyThreadLocal#addActiveServiceAccessPolicyName()` 
-  to grant the associated policy during web service request.
+  to grant the associated policy during web service request. 
 
 - can use `com.liferay.service.access.policy.api.jar` and  
   `com.liferay.service.access.policy.service.jar` to create policies 
-  programmatically
+  programmatically. 
 
 - can use `ServiceAccessPolicyManagerUtil` to display list of supported policies 
-  when authorizing remote application to associate token with an existing 
-  policy. 
+  when authorizing the remote application, to associate the token with an 
+  existing policy. 
+
+Nice! Now you know how to integrate your apps with the Service Access Policies 
+in a Liferay instance. 
+
+**Related Topics**
+
+[Service Access Policies](/discover/deployment/-/knowledge_base/7-0/service-access-policies)
+
+[Service Builder Web Services](/develop/tutorials/-/knowledge_base/7-0/service-builder-web-services)
+
+[Application Security](/develop/tutorials/-/knowledge_base/7-0/application-security)
