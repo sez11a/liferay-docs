@@ -43,15 +43,16 @@ You can do this integration on two levels:
    assigns the policy choosen by the user in the authorization step. 
 
 2. The OSGi module level, via the following service access profile modules:
-<!-- I can't find these. I can only find com.liferay.portal.security.service.access.policy -->
 
-    - `com.liferay.service.access.policy.api.jar`
-    - `com.liferay.service.access.policy.service.jar`
-    - `com.liferay.service.access.policy.web.jar`
+    - `com.liferay.portal.security.service.access.policy.api.jar`
+    - `com.liferay.portal.security.service.access.policy.service.jar`
+    - `com.liferay.portal.security.service.access.policy.web.jar`
 
     These OSGi modules can be used to manage Service Access Policies 
-    programmatically. Each module publishes a list of packages and services that 
-    can be consumed by other OSGi modules. 
+    programmatically. You can find their source code here in 
+    [GitHub](https://github.com/liferay/liferay-portal/tree/master/modules/apps/foundation/portal-security). 
+    Each module publishes a list of packages and services that can be consumed 
+    by other OSGi modules. 
 
 You can use either approach to develop a custom token verification module. A 
 custom token verification module is an OSGi module that implements custom 
@@ -64,9 +65,9 @@ the request. The module:
 - should use `ServiceAccessPolicyThreadLocal#addActiveServiceAccessPolicyName()` 
   to grant the associated policy during web service request. 
 
-- can use `com.liferay.service.access.policy.api.jar` and  
-  `com.liferay.service.access.policy.service.jar` to create policies 
-  programmatically. 
+- can use `com.liferay.portal.security.service.access.policy.api.jar` and 
+  `com.liferay.portal.security.service.access.policy.service.jar` to create 
+  policies programmatically. 
 
 - can use `ServiceAccessPolicyManagerUtil` to display list of supported policies 
   when authorizing the remote application, to associate the token with an 

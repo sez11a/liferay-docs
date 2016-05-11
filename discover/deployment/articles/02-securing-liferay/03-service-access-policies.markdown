@@ -129,14 +129,14 @@ Policy module. This module includes the following important classes:
 - `com.liferay.portal.kernel.security.service.access.policy.ServiceAccessPolicyThreadLocal`: makes `ServiceAccessPolicy` instances active.
 
 Liferay's Service Access Policy module resides in the
-`modules/apps/service-access-policy` directory in Liferay's source code. In a
-running Liferay instance, the service access policy functionality is provided by
-these three bundles which you can find in the `[Liferay Home]/osgi/modules`
+`modules/apps/foundation/portal-security` directory in Liferay's source code. In 
+a running Liferay instance, the service access policy functionality is provided 
+by these three bundles which you can find in the `[Liferay Home]/osgi/portal` 
 directory:
 
-- `com.liferay.service.access.policy.api.jar`
-- `com.liferay.service.access.policy.service.jar`
-- `com.liferay.service.access.policy.web.jar`
+- `com.liferay.portal.security.service.access.policy.api.jar`
+- `com.liferay.portal.security.service.access.policy.service.jar`
+- `com.liferay.portal.security.service.access.policy.web.jar`
 
 These modules provide the service access policy management UI that's accessible
 from the Control Panel. They also provide the interface and default
