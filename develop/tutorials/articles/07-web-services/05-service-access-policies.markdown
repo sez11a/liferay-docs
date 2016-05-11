@@ -49,8 +49,8 @@ You can do this integration on two levels:
     - `com.liferay.portal.security.service.access.policy.web.jar`
 
     These OSGi modules can be used to manage Service Access Policies 
-    programmatically. You can find their source code here in 
-    [GitHub](https://github.com/liferay/liferay-portal/tree/master/modules/apps/foundation/portal-security). 
+    programmatically. You can find their source code 
+    [here in GitHub](https://github.com/liferay/liferay-portal/tree/master/modules/apps/foundation/portal-security). 
     Each module publishes a list of packages and services that can be consumed 
     by other OSGi modules. 
 
