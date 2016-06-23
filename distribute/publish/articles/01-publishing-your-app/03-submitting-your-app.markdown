@@ -22,9 +22,9 @@ appears, so that you can fill in your app's details.
 ## Specify Your App's Initial Details [](id=specify-your-apps-initial-details)
 
 From this screen you enter your app's basic details. Previous articles
-[Planning Your App's Distribution](/distribute/how-to-publish/-/knowledge_base/how-to-publish/planning-your-apps-distribution)
+[Planning Your App's Distribution](/distribute/how-to-publish/-/knowledge_base/distribute/planning-your-apps-distribution)
 and
-[Preparing Your App](/distribute/how-to-publish/-/knowledge_base/how-to-publish/preparing-your-app)
+[Preparing Your App](/distribute/how-to-publish/-/knowledge_base/distribute/preparing-your-app)
 helped prepare you for filling in these details. 
 
 The top portion of the app wizard's initial screen is shown in the figure below.
@@ -116,9 +116,9 @@ app, specify the app entry IDs of the apps to be replaced by the new app in the
 *Supercedes App Entry IDs* field.
 
 Remember to visit the articles
-[Planning Your App's Distribution](/distribute/how-to-publish/-/knowledge_base/how-to-publish/planning-your-apps-distribution)
+[Planning Your App's Distribution](/distribute/how-to-publish/-/knowledge_base/distribute/planning-your-apps-distribution)
 and
-[Preparing Your App](/distribute/how-to-publish/-/knowledge_base/how-to-publish/preparing-your-app)
+[Preparing Your App](/distribute/how-to-publish/-/knowledge_base/distribute/preparing-your-app)
 for information to help you decide how best to fill in many of these fields. 
 
 Once you've entered all your app's details, click *Next* to get to the screen
@@ -128,7 +128,7 @@ for uploading your app's files.
 
 On this screen, you must specify your app's version and upload your app's files. 
 Note that the article 
-[Planning Your App's Distribution](/distribute/how-to-publish/-/knowledge_base/how-to-publish/planning-your-apps-distribution) 
+[Planning Your App's Distribution](/distribute/how-to-publish/-/knowledge_base/distribute/planning-your-apps-distribution) 
 helps you plan your app's versioning scheme. Likewise, the article 
 [Preparing Your App](/distribute/publish/-/knowledge_base/publish/preparing-your-app) 
 helps you determine which files to upload. 
