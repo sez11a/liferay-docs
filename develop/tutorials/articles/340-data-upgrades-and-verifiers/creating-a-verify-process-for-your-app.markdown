@@ -161,17 +161,6 @@ property. The threshold property accepts numerical values, including zero:
 
     verify.process.concurrency.threshold=5
 
-+$$$
-
-**Note:** To migrate an existing verify process, follow the same steps covered 
-in the previous sections:
-
-  - Convert the class into a component, declaring the same properties as above
-  - Reference any Liferay services the class uses, using the `@Reference`
-  annotation.
-
-$$$
-
 There you go. Now you know how to create a verification process for your app!
 
 ## Related Topics [](id=related-topics)
