@@ -54,6 +54,30 @@ Rules app verify process above:
 
     com.liferay.mobile.device.rules.service
 
+<!-- Manuel can you verify that the information in this comment is correct. Like 
+the Upgrade framework tutorial, we need an example of how to define a verify 
+process here. Can you edit this one or provide a better example? Thx! -->
+    
+Verify processes are written within this class as well. Continuing with the
+Mobile Device Rules app example, you can see that the `verifyResourcedModels()`
+verifier is defined in this same package:
+
+    protected void verifyResourcedModels() throws Exception {
+            _verifyResourcePermissions.verify(
+                    new MDRRuleGroupInstanceVerifiableModel());
+            _verifyResourcePermissions.verify(new MDRRuleGroupVerifiableModel());
+    }
+    
+The methods within this verifier are defined in external files and imported
+within the package at the top:
+
+    import com.liferay.mobile.device.rules.verify.model.
+    MDRRuleGroupInstanceVerifiableModel;
+    import com.liferay.mobile.device.rules.verify.model.
+    MDRRuleGroupVerifiableModel;
+
+<!-- End of comment -->
+    
 Now that your verify process class is written, you can learn how to declare
 dependencies on Liferay services for your verify processes next.
 
