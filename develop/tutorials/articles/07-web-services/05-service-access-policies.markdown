@@ -1,4 +1,4 @@
-# Service Access Policies
+# Service Access Policies [](id=service-access-policies)
 
 Service Access Policies are an additional layer of web service security, 
 defining services or service methods that can be invoked remotely. For more 
@@ -40,7 +40,7 @@ You can do this integration on two levels:
    something is in most cases an 
    [`AuthVerifier` implementation](https://docs.liferay.com/portal/7.0/javadocs/portal-kernel/com/liferay/portal/kernel/security/auth/verifier/AuthVerifier.html). 
    For example, in the case of the OAuth app, an `AuthVerifier` implementation 
-   assigns the policy choosen by the user in the authorization step. 
+   assigns the policy chosen by the user in the authorization step. 
 
 2. The OSGi module level, via the following service access policy modules:
 
@@ -60,8 +60,8 @@ custom token verification module is an OSGi module that implements custom
 security token verification for use in authorizing remote clients. For example, 
 such a module may contain a JSON Web Token implementation for Liferay's remote 
 API. A custom token verification module must integrate with the Liferay instance 
-during the remote API/web service call, to grant the associated policy during 
-the request. The module: 
+during the remote API/web service call to grant the associated policy during the 
+request. The module: 
 
 - can use `com.liferay.portal.security.service.access.policy.api.jar` and 
   `com.liferay.portal.security.service.access.policy.service.jar` to create 
@@ -130,8 +130,9 @@ Sync's remote API, these policies grant access to Sync's
     }
 
 [Click here](https://github.com/liferay/liferay-portal/blob/7.0.x/modules/apps/sync/sync-security/src/main/java/com/liferay/sync/security/service/access/policy/SyncSAPEntryActivator.java) 
-to see the entire `SyncSAPEntryActivator` class. Also, these policies are 
-included and enabled in Liferay by default. Remember, you can access policies in 
+to see the entire `SyncSAPEntryActivator` class. This class creates the policies 
+when the module starts. Note that this module is included and enabled in Liferay 
+by default. You can access these and other policies in your Liferay instance at 
 *Control Panel* &rarr; *Configuration* &rarr; *Service Access Policy*. 
 
 The `sync-security` module must then grant the appropriate policy when needed. 
