@@ -202,8 +202,6 @@ over the existing verify processes:
  output would be the following information:
  
     Registered verify process com.liferay.portal.security.sso.cas
-
- - showReports
     
 There you go. Now you know how to create a verification process for your app!
 
