@@ -146,6 +146,69 @@ directly use the components.
 
 Now that your verify process is written, you'll need to execute it next.
 
+## Executing your very process [](id=executing-your-verify-process)
+
+To execute your verify process you only have to deploy the module that
+contains it in the portal. Just copy the `jar` file in the `deploy` folder
+under your `LIFERAY_HOME`, and the hot-deploy mechanisms will do the rest. 
+
+The verify process will be executed immediately.
+
+With the new modularity capabilities of the portal, you can now trigger a new
+execution of any verify process already present in the portal. Using the
+`Gogo shell`, the OSGi command line shell, you can perform some operations
+over the existing verify processes. These operations are:
+
+ - execute
+ - executeAll
+ - list
+ - show
+ - showReports
+
+### execute
+
+Executes the verify process passed as argument.
+
+    g! verify:execute com.liferay.journal.service
+
+### executeAll
+
+Executes all verify processes present in the portal.
+
+    g! verify:executeAll
+
+### list
+
+Lists all existing verify process present in the portal.
+
+    g! verify:list
+    Registered verify process com.liferay.portal.scheduler.internal.verify
+    Registered verify process com.liferay.portal.security.sso.cas
+    Registered verify process com.liferay.journal.service
+    Registered verify process com.liferay.portal.security.sso.openid
+    Registered verify process com.liferay.dynamic.data.mapping.service
+    Registered verify process com.liferay.portal.security.sso.token.siteminder
+    Registered verify process com.liferay.wiki.service
+    Registered verify process com.liferay.portal.security.sso.ntlm
+    Registered verify process com.liferay.portal.security.sso.token.shibboleth
+    Registered verify process com.liferay.polls.service
+    Registered verify process com.liferay.portal.security.sso.google
+    Registered verify process com.liferay.mobile.device.rules.service
+    Registered verify process com.liferay.shopping.service
+    Registered verify process com.liferay.portal.security.ldap
+    Registered verify process com.liferay.portal.security.sso.opensso
+    Registered verify process com.liferay.portal.security.service.access.policy.service
+    Registered verify process com.liferay.document.library.service
+    Registered verify process com.liferay.portal.security.sso.facebook.connect
+    Registered verify process com.liferay.bookmarks.service
+
+### show
+
+Shows information about the verify process passed as argument.
+
+    g! verify:show com.liferay.portal.security.sso.cas
+    Registered verify process com.liferay.portal.security.sso.cas
+
 There you go. Now you know how to create a verification process for your app!
 
 ## Related Topics [](id=related-topics)
