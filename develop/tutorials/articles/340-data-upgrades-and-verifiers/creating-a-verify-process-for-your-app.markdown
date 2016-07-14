@@ -19,20 +19,24 @@ Component of the service `VerifyProcess` class that extends the interface
 `VerifyProcess`.
 
 This interface provides a `doVerify` method that handles the verifiers. For
-example, take a look at the [MDRServiceVerifyProcess.java](https://github.com/liferay/liferay-portal/blob/2960360870ae69360861a720136e082a06c5548f/modules/apps/foundation/mobile-device-rules/mobile-device-rules-service/src/main/java/com/liferay/mobile/device/rules/verify/MDRServiceVerifyProcess.java) 
-class for the Mobile Device Rules app:
+example, take a look at the [DDMServiceVerifyProcess.java](https://github.com/mdelapenya/liferay-portal/blob/247aa80e752ad3864fe7fb1d56b8a80a64efc61a/modules/apps/forms-and-workflow/dynamic-data-mapping/dynamic-data-mapping-service/src/main/java/com/liferay/dynamic/data/mapping/verify/DDMServiceVerifyProcess.java) 
+class for the Dynamic Data Mapping app:
 
     @Component(
             immediate = true,
             property = {"verify.process.name=
-            com.liferay.mobile.device.rules.service"},
+            com.liferay.dynamic.data.mapping.service"},
             service = VerifyProcess.class
     )
-    public class MDRServiceVerifyProcess extends VerifyProcess {
+    public class DDMServiceVerifyProcess extends VerifyProcess {
     
             @Override
             protected void doVerify() throws Exception {
-                    verifyResourcedModels();
+                    verifyStructures();
+                    verifyStructureLinks();
+                    verifyTemplateLinks();
+
+                    verifyContents();
             }
 
     }
@@ -52,29 +56,56 @@ It is recommended that you use the name of the service package of the app as the
 value for the `verify.process.name` property, as shown in the Mobile Device
 Rules app verify process above:
 
-    com.liferay.mobile.device.rules.service
+    com.liferay.dynamic.data.mapping.service
 
 <!-- Manuel can you verify that the information in this comment is correct. Like 
 the Upgrade framework tutorial, we need an example of how to define a verify 
 process here. Can you edit this one or provide a better example? Thx! -->
     
-Verify processes are written within this class as well. Continuing with the
-Mobile Device Rules app example, you can see that the `verifyResourcedModels()`
-verifier is defined in this same package:
+Verify processes are written within this class as well. Let's use the
+VerifyUser as an example to understand the concepts.
 
-    protected void verifyResourcedModels() throws Exception {
-            _verifyResourcePermissions.verify(
-                    new MDRRuleGroupInstanceVerifiableModel());
-            _verifyResourcePermissions.verify(new MDRRuleGroupVerifiableModel());
+    @Override
+    protected void doVerify() throws Exception {
+        verifyStructures();
+        verifyStructureLinks();
+        verifyTemplateLinks();
+
+        verifyContents();
     }
-    
-The methods within this verifier are defined in external files and imported
-within the package at the top:
 
-    import com.liferay.mobile.device.rules.verify.model.
-    MDRRuleGroupInstanceVerifiableModel;
-    import com.liferay.mobile.device.rules.verify.model.
-    MDRRuleGroupVerifiableModel;
+you can see that the `verifyStructures()` and `verifyStructure(DDMStructure)`
+method is defined in this same class:
+
+    protected void verifyStructures() throws Exception {
+        try (LoggingTimer loggingTimer = new LoggingTimer()) {
+            ActionableDynamicQuery actionableDynamicQuery =
+                _ddmStructureLocalService.getActionableDynamicQuery();
+
+            actionableDynamicQuery.setPerformActionMethod(
+                new ActionableDynamicQuery.PerformActionMethod() {
+
+                    @Override
+                    public void performAction(Object object)
+                        throws PortalException {
+
+                        DDMStructure structure = (DDMStructure)object;
+
+                        verifyStructure(structure);
+                    }
+
+                });
+
+            actionableDynamicQuery.performActions();
+        }
+    }
+
+    protected void verifyStructure(DDMStructure structure)
+        throws PortalException {
+
+        verifyDDMForm(structure.getDDMForm());
+        verifyDDMFormLayout(structure.getDDMFormLayout());
+    }
 
 <!-- End of comment -->
     
