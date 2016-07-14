@@ -144,71 +144,7 @@ As you may have noticed, the `ServiceUtil` classes are no longer being used.
 Instead, the OSGi framework is providing the Liferay services, so you can
 directly use the components.
 
-Now that your verify process is written, you'll need to configure portal
-settings for it next.
-
-## Configuring Portal Settings for Your Verify Process [](id=configuring-portal-settings-for-your-verify-process)
-
-Once you've written your data verifier process, you'll need to enable it to 
-startup with the portal. To enable your verify process on startup, you must add 
-it to your portal configuration, under the `verify.processes` property in your 
-`portal-ext.properties` file:
-
-    verify.processes=com.liferay.portal.verify.VerifyProcessSuite,my.package.MyVerifyProcess
-    
-Each verify process class is separated by a comma. The first one shown,
-`com.liferay.portal.verify.VerifyProcessSuite`, is the default verifyProcess
-pipeline. See the [portal.properties](https://github.com/liferay/liferay-portal/blob/d0dc23ac195b2ac0ce3b893b74538b5fe71fcfa2/portal-impl/src/portal.properties#L169-L179)
-verify section for more information.
-
-Now that your verify processes are enabled, you can control the frequency at
-which they execute next.
-
-### Setting Verification frequency [](id=setting-verification-frequency)
-
-The verify processes can be configured to be executed with a custom frequency on 
-portal startup. This frequency only accepts three possible values:
-
- - **Always executed:** All verify processes will be executed on each portal
-   startup.
- - **Never executed:** No verify processes will be executed on each portal
-   startup.
- - **Executed once:** All verify processes will be executed only in next portal
-   startup, and no more.
-
-This frequency can be configured in `portal-ext.properties` file, using the
-`verify.frequency` property. Possible values are `-1`, `0` and `1`, meaning 
-Always, Never and Once, respectively:
-
-    verify.frequency=1
-    
-Next, you can configure the transactions for your verify process.
-
-### Setting Transactions during data verification [](id=setting-transactions-during-data-verification)
-
-You can disable database transactions management during verification. This
-forces autocommit, which will speed up the verify process.
-
-To disable database transactions, you must add it to your
-`portal-ext.properties`, under the `verify.database.transactions.disabled` 
-property. Set the property to `true` to disable data transactions and `false` to
-enable data transactions.
-
-    verify.database.transactions.disabled=true
-    
-Finally, you can control the verification concurrency next. 
-
-### Setting Verification concurrency [](id=setting-verification-concurrency)
-
-Configure this threshold to indicate when to execute certain 
-`com.liferay.portal.verify.VerifyProcess` tasks concurrently. Each 
-`VerifyProcess` implementation governs what it may concurrently execute.
-
-To configure the concurrency threshold, you must add it to your
-`portal-ext.properties`, under the `verify.process.concurrency.threshold` 
-property. The threshold property accepts numerical values, including zero:
-
-    verify.process.concurrency.threshold=5
+Now that your verify process is written, you'll need to execute it next.
 
 There you go. Now you know how to create a verification process for your app!
 
