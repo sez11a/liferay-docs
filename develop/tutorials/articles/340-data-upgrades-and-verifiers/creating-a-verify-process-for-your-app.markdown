@@ -154,8 +154,7 @@ startup with the portal. To enable your verify process on startup, you must add
 it to your portal configuration, under the `verify.processes` property in your 
 `portal-ext.properties` file:
 
-    verify.processes=com.liferay.portal.verify.VerifyProcessSuite,
-    my.package.MyVerifyProcess
+    verify.processes=com.liferay.portal.verify.VerifyProcessSuite,my.package.MyVerifyProcess
     
 Each verify process class is separated by a comma. The first one shown,
 `com.liferay.portal.verify.VerifyProcessSuite`, is the default verifyProcess
