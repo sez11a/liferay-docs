@@ -58,10 +58,6 @@ Rules app verify process above:
 
     com.liferay.dynamic.data.mapping.service
 
-<!-- Manuel can you verify that the information in this comment is correct. Like 
-the Upgrade framework tutorial, we need an example of how to define a verify 
-process here. Can you edit this one or provide a better example? Thx! -->
-    
 Verify processes are written within this class as well. Let's use the
 VerifyUser as an example to understand the concepts.
 
@@ -107,8 +103,6 @@ method is defined in this same class:
         verifyDDMFormLayout(structure.getDDMFormLayout());
     }
 
-<!-- End of comment -->
-    
 Now that your verify process class is written, you can learn how to declare
 dependencies on Liferay services for your verify processes next.
 
