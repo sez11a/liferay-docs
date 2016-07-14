@@ -8,6 +8,7 @@ should be aware that this may make modifications directly to the database.
 This tutorial demonstrates how to:
 
 - Create a verify process for your app using new development patterns
+- Execute a verify process 
 
 Get started by writing your verify package next.
 
@@ -53,13 +54,13 @@ for more information. And to execute them see [VerifyProcessTracker.java](https:
 for more information.
 
 It is recommended that you use the name of the service package of the app as the
-value for the `verify.process.name` property, as shown in the Mobile Device
-Rules app verify process above:
+value for the `verify.process.name` property, as shown in the Dynamic Data
+Mapping app verify process above:
 
     com.liferay.dynamic.data.mapping.service
 
-Verify processes are written within this class as well. Let's use the
-VerifyUser as an example to understand the concepts.
+Verify processes are written within this class as well. For example, take a look 
+at the `VerifyUser`:
 
     @Override
     protected void doVerify() throws Exception {
@@ -120,7 +121,7 @@ they can use release Liferay services.
 
 If you choose to use Liferay services in your verify process, you'll need to
 declare dependencies on those services. Because the services are not available 
-until the Portal or the modules they rely on are started, **your verify
+until the Portal, or the modules they rely on, are started, **your verify
 process must depend on them to load**, before your processes can execute.
 You can declare a dependency for your verify process, using the `@Reference`
 annotation. For example, here is a reference to the `DLFileVersionLocalService`
@@ -148,40 +149,32 @@ Now that your verify process is written, you'll need to execute it next.
 
 ## Executing your very process [](id=executing-your-verify-process)
 
-To execute your verify process you only have to deploy the module that
-contains it in the portal. Just copy the `jar` file in the `deploy` folder
-under your `LIFERAY_HOME`, and the hot-deploy mechanisms will do the rest. 
+To execute your verify process, deploy the module that contains it in the
+portal, using the following step: 
+
+1.  Copy your module's `jar` file into your app server's `deploy` folder, under 
+    your `LIFERAY_HOME`, and the hot-deploy mechanisms will do the rest.
 
 The verify process will be executed immediately.
 
 With the new modularity capabilities of the portal, you can now trigger a new
 execution of any verify process already present in the portal. Using the
-`Gogo shell`, the OSGi command line shell, you can perform some operations
-over the existing verify processes. These operations are:
+[Gogo shell](/develop/reference/-/knowledge_base/7-0/using-the-felix-gogo-shell), 
+the OSGi command line shell, you can perform the following useful operations 
+over the existing verify processes:
 
- - execute
- - executeAll
- - list
- - show
- - showReports
-
-### execute
-
-Executes the verify process passed as argument.
-
-    g! verify:execute com.liferay.journal.service
-
-### executeAll
-
-Executes all verify processes present in the portal.
-
-    g! verify:executeAll
-
-### list
-
-Lists all existing verify process present in the portal.
-
-    g! verify:list
+ - **execute:** Executes the verify process passed as an argument. For example,
+ you would run the following command from the Gogo shell to execute the 
+ `com.liferay.journal.service` module's verify process: 
+ `g! verify:execute com.liferay.journal.service`.
+ 
+ - **executeAll:** Executes all verify processes present in the portal, using 
+ the following command from the Gogo shell: `g! verify:executeAll`.
+ 
+ - **list:** Lists all existing verify processes present in the portal, using
+ the following command from the Gogo shell: `g! verify:list`. An example listing
+ would be the following output:
+ 
     Registered verify process com.liferay.portal.scheduler.internal.verify
     Registered verify process com.liferay.portal.security.sso.cas
     Registered verify process com.liferay.journal.service
@@ -201,14 +194,17 @@ Lists all existing verify process present in the portal.
     Registered verify process com.liferay.document.library.service
     Registered verify process com.liferay.portal.security.sso.facebook.connect
     Registered verify process com.liferay.bookmarks.service
-
-### show
-
-Shows information about the verify process passed as argument.
-
-    g! verify:show com.liferay.portal.security.sso.cas
+ 
+ - **show:** Shows information about the verify process passed as an argument.
+ For example, you would run the following command in the Gogo shell to show
+ information about the `com.liferay.portal.security.sso.cas` module's verify
+ process: `g! verify:show com.liferay.portal.security.sso.cas`. An example
+ output would be the following information:
+ 
     Registered verify process com.liferay.portal.security.sso.cas
 
+ - showReports
+    
 There you go. Now you know how to create a verification process for your app!
 
 ## Related Topics [](id=related-topics)
