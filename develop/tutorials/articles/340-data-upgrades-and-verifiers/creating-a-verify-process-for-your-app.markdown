@@ -120,10 +120,11 @@ they can use release Liferay services.
 
 If you choose to use Liferay services in your verify process, you'll need to
 declare dependencies on those services. Because the services are not available 
-until the Portal or the modules they rely on are started, **your verify process must depend on them to load**, 
-before your processes can execute. You can declare a dependency for your verify 
-process, using the `@Reference` annotation. For example, here is a reference to 
-the `DLFileVersionLocalService` for the [Document Library app](https://github.com/liferay/liferay-portal/blob/2960360870ae69360861a720136e082a06c5548f/modules/apps/collaboration/document-library/document-library-service/src/main/java/com/liferay/document/library/workflow/DLFileEntryWorkflowHandler.java):
+until the Portal or the modules they rely on are started, **your verify
+process must depend on them to load**, before your processes can execute.
+You can declare a dependency for your verify process, using the `@Reference`
+annotation. For example, here is a reference to the `DLFileVersionLocalService`
+for the [Document Library app](https://github.com/liferay/liferay-portal/blob/2960360870ae69360861a720136e082a06c5548f/modules/apps/collaboration/document-library/document-library-service/src/main/java/com/liferay/document/library/workflow/DLFileEntryWorkflowHandler.java):
 
     @Reference(unbind = "-")
     protected void setDLFileVersionLocalService(
