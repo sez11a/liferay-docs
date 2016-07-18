@@ -2,13 +2,14 @@
 
 Service Access Policies are an additional layer of web service security, 
 defining services or service methods that can be invoked remotely. For more 
-detail, and information on managing Service Access Policies, see 
+detail and information on managing Service Access Policies, see 
 [the user guide article on Service Access Policies](/discover/deployment/-/knowledge_base/7-0/service-access-policies). 
 
-There may be cases, however, where your app needs to integrate with a Liferay 
-instance's Service Access Policies. For example, you may have an app that: 
+There may be cases, however, when your application needs to integrate with a
+Liferay instance's Service Access Policies. For example, you may have an app
+that 
 
-- uses custom remote API authentication (tokens), and requires certain Liferay 
+- uses custom remote API authentication (tokens) and requires certain Liferay 
   services to be available for clients using the tokens. 
 
 - requires its services be made available to guest users, with no authentication 
@@ -19,7 +20,7 @@ instance's Service Access Policies. For example, you may have an app that:
 
 You can do this integration on two levels: 
 
-1. The portal level, via the 
+1. The portal level, using the 
    [package `com.liferay.portal.kernel.security.service.access.policy`](https://docs.liferay.com/portal/7.0/javadocs/portal-kernel/com/liferay/portal/kernel/security/service/access/policy/package-summary.html). 
    This package provides classes for basic access to policies. For example, you 
    can use the 
@@ -33,7 +34,7 @@ You can do this integration on two levels:
    is a fantastic question! Getting a list of the configured policies in a 
    Liferay instance lets remote apps/clients choose the policy to use to access 
    services. Also, apps like OAuth can offer a list of available policies during 
-   the authorization step in the OAuth workflow, and allow the user to choose 
+   the authorization step in the OAuth workflow and allow the user to choose 
    the policy to assign to the remote application. You can also grant a policy 
    to a current request thread. When a remote client accesses an API, something 
    must tell the Liferay instance which policies are assigned to this call. This 
@@ -42,7 +43,7 @@ You can do this integration on two levels:
    For example, in the case of the OAuth app, an `AuthVerifier` implementation 
    assigns the policy chosen by the user in the authorization step. 
 
-2. The OSGi module level, via the following service access policy modules:
+2. The OSGi module level, using the following service access policy modules:
 
     - `com.liferay.portal.security.service.access.policy.api.jar`
     - `com.liferay.portal.security.service.access.policy.service.jar`
@@ -156,7 +157,7 @@ example,
 Nice! Now you know how to integrate your apps with the Service Access Policies 
 in a Liferay instance. 
 
-**Related Topics**
+## Related Topics
 
 [Service Access Policies](/discover/deployment/-/knowledge_base/7-0/service-access-policies)
 
