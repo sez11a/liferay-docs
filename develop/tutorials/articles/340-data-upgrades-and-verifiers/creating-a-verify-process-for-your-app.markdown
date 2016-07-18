@@ -15,12 +15,12 @@ Get started by writing your verify package next.
 ## Writing the Verify Package [](id=writing-the-verify-package)
 
 In order to create a verify process you must first create a package called 
-`verify` in your project's layout. Inside of the `verify` package, create a OSGi 
+`verify` in your project's layout. Inside the `verify` package, create an OSGi 
 Component of the service `VerifyProcess` class that extends the interface
 `VerifyProcess`.
 
 This interface provides a `doVerify` method that handles the verifiers. For
-example, take a look at the [DDMServiceVerifyProcess.java](https://github.com/mdelapenya/liferay-portal/blob/247aa80e752ad3864fe7fb1d56b8a80a64efc61a/modules/apps/forms-and-workflow/dynamic-data-mapping/dynamic-data-mapping-service/src/main/java/com/liferay/dynamic/data/mapping/verify/DDMServiceVerifyProcess.java) 
+example, look at the [DDMServiceVerifyProcess.java](https://github.com/mdelapenya/liferay-portal/blob/247aa80e752ad3864fe7fb1d56b8a80a64efc61a/modules/apps/forms-and-workflow/dynamic-data-mapping/dynamic-data-mapping-service/src/main/java/com/liferay/dynamic/data/mapping/verify/DDMServiceVerifyProcess.java) 
 class for the Dynamic Data Mapping app:
 
     @Component(
@@ -42,10 +42,10 @@ class for the Dynamic Data Mapping app:
 
     }
 
-You must use `VerifyProcess.class` as the `service` property value, to denote 
-that the class is a valid implementation for the `VerifyProcess` interface.
-The `immediate` property specifies that the component will be available 
-immediately, rather than the first time it's used.
+You must use `VerifyProcess.class` as the `service` property value to mark the
+class as a valid implementation for the `VerifyProcess` interface.  The
+`immediate` property specifies that the component will be available immediately,
+rather than the first time it's used.
 
 You must also define the mandatory `verify.process.name` property, which is used 
 by the OSGi service tracker for verifiers to capture verifier components. See 
@@ -59,8 +59,8 @@ Mapping app verify process above:
 
     com.liferay.dynamic.data.mapping.service
 
-Verify processes are written within this class as well. For example, take a look 
-at the `VerifyUser`:
+Verify processes are written within this class as well. For example, look at
+`VerifyUser`:
 
     @Override
     protected void doVerify() throws Exception {
@@ -71,8 +71,8 @@ at the `VerifyUser`:
         verifyContents();
     }
 
-you can see that the `verifyStructures()` and `verifyStructure(DDMStructure)`
-method is defined in this same class:
+You can see that the `verifyStructures()` and `verifyStructure(DDMStructure)`
+methods are defined in this same class:
 
     protected void verifyStructures() throws Exception {
         try (LoggingTimer loggingTimer = new LoggingTimer()) {
