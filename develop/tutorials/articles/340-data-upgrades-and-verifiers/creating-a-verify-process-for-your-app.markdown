@@ -19,7 +19,7 @@ In order to create a verify process you must first create a package called
 Component of the service `VerifyProcess` class that extends the interface
 `VerifyProcess`.
 
-This interface provides a `doVerify` method that handles the verifiers. For
+This interface provides a `doVerify` method that handles the verifiers. For 
 example, look at the [DDMServiceVerifyProcess.java](https://github.com/mdelapenya/liferay-portal/blob/247aa80e752ad3864fe7fb1d56b8a80a64efc61a/modules/apps/forms-and-workflow/dynamic-data-mapping/dynamic-data-mapping-service/src/main/java/com/liferay/dynamic/data/mapping/verify/DDMServiceVerifyProcess.java) 
 class for the Dynamic Data Mapping app:
 
@@ -59,8 +59,19 @@ Mapping app verify process above:
 
     com.liferay.dynamic.data.mapping.service
 
-Verify processes are written within this class as well. For example, look at
-`VerifyUser`:
+Once your verify process class is setup, you can write your verifiers next.
+
+### Writing Verifiers
+
+Verifiers are executed during the verify process, as you saw in the previous 
+section. They are responsible for the database integrity checks that take place 
+during the release of a specific version of your app.
+
+Because verifiers are fairly simple, generally, it is best to keep all the logic 
+in the same class. If your verifiers are more complex, you can of course 
+separate the logic into separate classes. However, declaring the verifiers as 
+methods within the verify process class is best practice, in most cases. For 
+example, looking at the `DDMServiceVerifyProcess.java` class again:
 
     @Override
     protected void doVerify() throws Exception {
@@ -71,8 +82,8 @@ Verify processes are written within this class as well. For example, look at
         verifyContents();
     }
 
-You can see that the `verifyStructures()` and `verifyStructure(DDMStructure)`
-methods are defined in this same class:
+The `verifyStructures()` and `verifyStructure(DDMStructure)` methods are 
+defined in this same class:
 
     protected void verifyStructures() throws Exception {
         try (LoggingTimer loggingTimer = new LoggingTimer()) {
@@ -104,6 +115,13 @@ methods are defined in this same class:
         verifyDDMFormLayout(structure.getDDMFormLayout());
     }
 
+The example above shows one verify process. Each verify process is completely 
+different from one another, entirely dependent on the business logic of each 
+application. For example, the integrity rules could force all surnames to be 
+uppercase, so the developer would have to create a verify process that updates 
+all rows' surname column. Your verify processes will naturally depend on what is
+needed for your application.
+    
 Now that your verify process class is written, you can learn how to declare
 dependencies on Liferay services for your verify processes next.
 
