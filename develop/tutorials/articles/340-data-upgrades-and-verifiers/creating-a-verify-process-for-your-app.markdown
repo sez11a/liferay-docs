@@ -1,9 +1,11 @@
 # Creating A Verify Process for Your App [](id=creating-a-verify-process-for-your-app)
 
 During the cycle of development, you'll want to verify the data your app is 
-producing is consistent. A verify process is a class that will run on portal 
-startup to verify and fix any integrity problems found in the database. You 
-should be aware that this may make modifications directly to the database.
+producing is consistent and accurate. A verify process is a class that will run 
+on portal startup to verify that your app is functioning properly, according to 
+your app's business logic, and notify you of any business logic data integrity 
+problems found in the database. You should be aware that this may make 
+modifications directly to the database.
 
 This tutorial demonstrates how to:
 
@@ -49,8 +51,9 @@ rather than the first time it's used.
 
 You must also define the mandatory `verify.process.name` property, which is used 
 by the OSGi service tracker for verifiers to capture verifier components. See 
-[VerifyProcessTracker.java](https://github.com/liferay/liferay-portal/blob/master/modules/apps/foundation/portal/portal-verify-extender/src/main/java/com/liferay/portal/verify/extender/internal/VerifyProcessTracker.java#L152-L153)
-for more information. And to execute them see [VerifyProcessTracker.java](https://github.com/liferay/liferay-portal/blob/master/modules/apps/foundation/portal/portal-verify-extender/src/main/java/com/liferay/portal/verify/extender/internal/VerifyProcessTracker.java#L344-L361)
+[VerifyProcessTrackerOSGiCommands.java](https://github.com/liferay/liferay-portal/blob/master/modules/apps/foundation/portal/portal-verify-extender/src/main/java/com/liferay/portal/verify/extender/internal/VerifyProcessTrackerOSGiCommands.java#L161-L162)
+for more information. To learn how to execute them see 
+[VerifyProcessTrackerOSGiCommands.java](https://github.com/liferay/liferay-portal/blob/master/modules/apps/foundation/portal/portal-verify-extender/src/main/java/com/liferay/portal/verify/extender/internal/VerifyProcessTrackerOSGiCommands.java.java#L390-L407)
 for more information.
 
 It is recommended that you use the name of the service package of the app as the
@@ -59,19 +62,14 @@ Mapping app verify process above:
 
     com.liferay.dynamic.data.mapping.service
 
-Once your verify process class is setup, you can write your verifiers next.
+You can learn how to write your verifiers in more detail next.
 
-### Writing Verifiers [](id=writing-verifiers)
+## Writing Verifiers [](id=writing-verifiers)
 
 Verifiers are executed during the verify process, as you saw in the previous 
-section. They are responsible for the database integrity checks that take place 
-during the release of a specific version of your app.
-
-Because verifiers are fairly simple, generally, it is best to keep all the logic 
-in the same class. If your verifiers are more complex, you can of course 
-separate the logic into separate classes. However, declaring the verifiers as 
-methods within the verify process class is best practice, in most cases. For 
-example, looking at the `DDMServiceVerifyProcess.java` class again:
+section, via the `doVerify()` method. They are responsible for the business 
+logic data integrity checks that take place during the release of a specific 
+version of your app:
 
     @Override
     protected void doVerify() throws Exception {
@@ -82,48 +80,211 @@ example, looking at the `DDMServiceVerifyProcess.java` class again:
         verifyContents();
     }
 
-The `verifyStructures()` and `verifyStructure(DDMStructure)` methods are 
-defined in this same class:
+You could write all of your code within this class, however for clarity, you may
+want to separate the logic into different classes.
+    
+For example, the verifier methods are called in this class, however the main 
+logic for the verifiers is located inside of another class.
+    
+Take a look at the `verifyStructures()` method for example:
 
     protected void verifyStructures() throws Exception {
-        try (LoggingTimer loggingTimer = new LoggingTimer()) {
-            ActionableDynamicQuery actionableDynamicQuery =
-                _ddmStructureLocalService.getActionableDynamicQuery();
-
-            actionableDynamicQuery.setPerformActionMethod(
-                new ActionableDynamicQuery.PerformActionMethod() {
-
-                    @Override
-                    public void performAction(Object object)
-                        throws PortalException {
-
-                        DDMStructure structure = (DDMStructure)object;
-
-                        verifyStructure(structure);
+                    try (LoggingTimer loggingTimer = new LoggingTimer()) {
+                            ActionableDynamicQuery actionableDynamicQuery =
+                                    _ddmStructureLocalService.getActionableDynamicQuery();
+    
+                            actionableDynamicQuery.setPerformActionMethod(
+                                    new 
+                                    ActionableDynamicQuery.PerformActionMethod() 
+                                    {
+    
+                                            @Override
+                                            public void performAction(Object 
+                                            object)
+                                                    throws PortalException {
+    
+                                                    DDMStructure structure = 
+                                                    (DDMStructure)object;
+    
+                                                    verifyStructure(structure);
+                                            }
+    
+                                    });
+    
+                            actionableDynamicQuery.performActions();
                     }
-
-                });
-
-            actionableDynamicQuery.performActions();
-        }
     }
+
+This verifier method throws a portal exception, calling another method,
+`verifyStructure(structure)`, called further down:
 
     protected void verifyStructure(DDMStructure structure)
-        throws PortalException {
-
-        verifyDDMForm(structure.getDDMForm());
-        verifyDDMFormLayout(structure.getDDMFormLayout());
+                    throws PortalException {
+    
+                    verifyDDMForm(structure.getDDMForm());
+                    verifyDDMFormLayout(structure.getDDMFormLayout());
     }
 
-The example above shows one verify process. Each verify process is completely 
-different from one another, entirely dependent on the business logic of each 
-application. For example, the integrity rules could force all surnames to be 
-uppercase, so the developer would have to create a verify process that updates 
-all rows' surname column. Your verify processes will naturally depend on what is
-needed for your application.
+This method throws a portal exception as well and calls a couple methods. Take a 
+closer look at the `verifyDDMForm(structure.getDDMForm());` method for example. 
+Examining the code you can see that it uses  this method for validation:
+
+    protected void verifyDDMForm(DDMForm ddmForm) throws PortalException {
+                    _ddmFormValidator.validate(ddmForm);
+    }
+
+`-ddmFormValidator` is a reference to `ddmFormValidator` as shown here:
+
+    @Reference(unbind = "-")
+            protected void setDDMFormValidator(DDMFormValidator 
+            ddmFormValidator) {
+                    _ddmFormValidator = ddmFormValidator;
+    }
+
+The `ddmFormValidator` class is imported at the top of this class:
+
+    import com.liferay.dynamic.data.mapping.validator.DDMFormValidator;
+
+and implemented in the following class: [DDMFormValidatorImpl.java](https://github.com/liferay/liferay-portal/blob/35970e7e4516281127d37c60a45877d88a180b88/modules/apps/forms-and-workflow/dynamic-data-mapping/dynamic-data-mapping-validator/src/main/java/com/liferay/dynamic/data/mapping/validator/internal/DDMFormValidatorImpl.java)
+
+The `ddmFormValidator` `validate()` method that is called in the 
+`verifyDDMForm()` method is defined at the top of the `DDMFOrmValidatorImpl` 
+class. The `verifyDDMForm()` method internally checks that the default language 
+of each DDMForm is present as an available locale in the DDMForm. It also checks 
+to make sure that all the form fields are compliant with the app's business 
+logic:
+
+    @Component(immediate = true)
+    public class DDMFormValidatorImpl implements DDMFormValidator {
     
-Now that your verify process class is written, you can learn how to declare
-dependencies on Liferay services for your verify processes next.
+            @Override
+            public void validate(DDMForm ddmForm) throws 
+            DDMFormValidationException {
+                    validateDDMFormLocales(ddmForm);
+    
+                    List<DDMFormField> ddmFormFields = 
+                    ddmForm.getDDMFormFields();
+    
+                    if (ddmFormFields.isEmpty()) {
+                            throw new MustSetFieldsForForm();
+                    }
+    
+                    validateDDMFormFields(
+                            ddmFormFields, new HashSet<String>(), 
+                            ddmForm.getAvailableLocales(),
+                            ddmForm.getDefaultLocale());
+    }
+
+You can review the full [`DDMFormValidatorImpl.java`](https://github.com/liferay/liferay-portal/blob/35970e7e4516281127d37c60a45877d88a180b88/modules/apps/forms-and-workflow/dynamic-data-mapping/dynamic-data-mapping-validator/src/main/java/com/liferay/dynamic/data/mapping/validator/internal/DDMFormValidatorImpl.java) 
+class for the entire method to learn more.
+
+As another example of what a verifier typically does, you can take a look at the
+[DDMLayoutValidatorImpl.java](https://github.com/liferay/liferay-portal/blob/2960360870ae69360861a720136e082a06c5548f/modules/apps/forms-and-workflow/dynamic-data-mapping/dynamic-data-mapping-validator/src/main/java/com/liferay/dynamic/data/mapping/validator/internal/DDMFormLayoutValidatorImpl.java) 
+class.
+
+the `verifyDDMFormLayout()` method internally checks that, for all pages, rows, 
+and columns, in a DDMForm, there are no duplicated field names. It also checks 
+if the title of all pages is the same as the DDMFormLayout language. Finally, it 
+checks that all columns in the rows of each page does not have a size greater 
+than 12.
+
+Your verifiers will depend on what your app's business logic requires, but You 
+can use the same general approach to write your verifiers. 
+
+Once your verifiers are written, you can learn how to address any data issues
+that come up next.
+
+## Addressing Business Logic Data Integrity Issues
+
+When issues occur with your app's business logic, you'll need to handle them.
+You could write a log, or correct the data with code, or even throw an exception 
+if it's a critical issue that portal should not, or can not, start without 
+explaining how to correct it manually.
+
+To give an example of logging an error, take another look at the 
+`validateDDMFormLocales(DDMFORM ddmForm)` method:
+
+    protected void validateDDMFormLocales(DDMForm ddmForm)
+            throws DDMFormValidationException {
+    
+            Locale defaultLocale = ddmForm.getDefaultLocale();
+    
+            if (defaultLocale == null) {
+                throw new MustSetDefaultLocale();
+            }
+    
+            validateDDMFormAvailableLocales(
+                ddmForm.getAvailableLocales(), defaultLocale);
+        }
+
+In this example, if there is not a default locale specified, a 
+`MustSetDefaultLocale()` error is thrown. This is defined in the 
+[DDMFormLayoutValidationException.java](https://github.com/liferay/liferay-portal/blob/2960360870ae69360861a720136e082a06c5548f/modules/apps/forms-and-workflow/dynamic-data-mapping/dynamic-data-mapping-validator/src/main/java/com/liferay/dynamic/data/mapping/validator/DDMFormLayoutValidationException.java)
+class:
+
+    public static class MustSetDefaultLocale
+                    extends DDMFormLayoutValidationException {
+    
+                    public MustSetDefaultLocale() {
+                            super("DDM form layout does not have a default 
+                            locale");
+                    }
+    
+    }
+    
+This exception extends `DDMFormLayoutValidationException`. If you look at the 
+top of the `DDMFormLayoutValidationException.java` class, you can see that it
+extends `PortalException.java`:
+
+    public class DDMFormLayoutValidationException extends PortalException
+
+If you take a look at the `DBUpgrader.java` class(the class that handles the 
+verify suite), you can see how the verify process works:
+
+    try {
+                StartupHelperUtil.verifyProcess(
+                    newBuildNumber, release.isVerified());
+            }
+            catch (Exception e) {
+                _updateReleaseState(ReleaseConstants.STATE_VERIFY_FAILURE);
+    
+                _log.error(
+                    "Unable to execute verify process: " + e.getMessage(), e);
+    
+                throw e;
+            }
+            finally {
+                if (PropsValues.VERIFY_DATABASE_TRANSACTIONS_DISABLED) {
+                    TransactionsUtil.enableTransactions();
+                }
+            }
+
+In the case of any exceptions, it catches it and stops the server startup 
+process. This will ensure that if there are any major issues that need addressed 
+immediately, the server won't startup until they are fixed, as shown in the 
+`processStartupEvents()` method of the try catch block for the 
+[MainServlet.java](https://github.com/liferay/liferay-portal/blob/4c72e50d806acbcf130a120e809d5051013efb44/portal-impl/src/com/liferay/portal/servlet/MainServlet.java) 
+class:
+
+    if (_log.isDebugEnabled()) {
+                            _log.debug("Process startup events");
+                    }
+    
+                    try {
+                            processStartupEvents();
+                    }
+                    catch (Exception e) {
+                            _log.error(e, e);
+    
+                            System.out.println(
+                                    "Stopping the server due to unexpected 
+                                    startup errors");
+    
+                            System.exit(0);
+    }
+    
+Now that you know how data integrity issues are handled, you can learn how to 
+declare dependencies on Liferay services for your verify processes next.
 
 ## Using Liferay Services in Your Verify Process [](id=using-liferay-services-in-your-verify-process)
 
@@ -135,7 +296,9 @@ This is an important distinction between upgrade processes and verify processes.
 An upgrade process of the portal core cannot use Liferay services to access the 
 database, as those Liferay services are using the upgraded definition of the
 database, but since verify processes are already in the upgraded schema version, 
-they can use release Liferay services.
+they can use release Liferay services. You can learn more about upgrade
+processes in the [Creating an Upgrade Process for Your App](/develop/tutorials/-/knowledge_base/7-0/creating-an-upgrade-process-for-your-app) 
+tutorial.
 
 If you choose to use Liferay services in your verify process, you'll need to
 declare dependencies on those services. Because the services are not available 
