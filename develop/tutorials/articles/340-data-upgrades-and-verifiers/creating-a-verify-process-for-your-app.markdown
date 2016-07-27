@@ -251,7 +251,7 @@ can use the same general approach to write your verifiers.
 Once your verifiers are written, you can learn how to address any data issues
 that come up next.
 
-## Addressing Business Logic Data Integrity Issues
+## Addressing Business Logic Data Integrity Issues [](id=addressing-business-logic-data-integrity-issues)
 
 You may be wondering why all these exceptions are being thrown in the example 
 code. The answer to that question truly gets to the heart of the purpose of a 
@@ -444,7 +444,7 @@ for more information.
 You may wish to execute your verifiers more than just when they are deployed. 
 You can learn how to execute your verifiers using the Gogo shell next. 
 
-### Executing your Verify Process Using the Gogo Shell
+### Executing your Verify Process Using the Gogo Shell [](id=executing-your-verify-process-using-the-gogo-shell)
 
 With the new modularity capabilities of the portal, you can now trigger a new
 execution of any verify process already present in the portal. Using the
