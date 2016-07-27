@@ -2,10 +2,10 @@
 
 During the cycle of development, you'll want to verify the data your app is 
 producing is consistent and accurate. A verify process is a class that will run 
-on either portal or your application startup to verify that your app is functioning properly, according to 
-your app's business logic, and notify you of any business logic data integrity 
-problems found in the database. You should be aware that this may make 
-modifications directly to the database.
+on either portal or your application startup to verify that your app is functioning
+properly, according to your app's business logic, and notify you of any
+business logic data integrity problems found in the database. You should
+be aware that this may make modifications directly to the database.
 
 This tutorial demonstrates how to:
 
