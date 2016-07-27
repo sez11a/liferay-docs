@@ -2,9 +2,9 @@
 
 During the cycle of development, you'll want to verify the data your app is 
 producing is consistent and accurate. A verify process is a class that will run 
-on either portal or your application startup to verify that your app is functioning
-properly, according to your app's business logic, and notify you of any
-business logic data integrity problems found in the database. You should
+on either portal, or your application startup, to verify that your app is 
+functioning properly, according to your app's business logic, and notify you of 
+any business logic data integrity problems found in the database. You should
 be aware that this may make modifications directly to the database.
 
 This tutorial demonstrates how to:
@@ -255,10 +255,10 @@ that come up next.
 
 You may be wondering why all these exceptions are being thrown in the example 
 code. The answer to that question truly gets to the heart of the purpose of a 
-verifier. Ultimately, a verifier validates your app's business logic and ensures 
-that it is functioning properly. In any case that the business logic of your app 
-malfunctions, or is missing data that it needs i.e. user input, the verifier is 
-meant to catch the issue and notify the user.
+verifier. Ultimately, a verifier validates your app's business logic, and 
+ensures that it is functioning properly. In any case that the business logic of 
+your app malfunctions, or is missing data that it needs i.e. user input, the 
+verifier is meant to catch the issue and notify the user.
 
 In the `DDMServiceVerifyProcess` class example, the app throws exceptions when 
 there is an issue with a verify process.
@@ -267,8 +267,9 @@ When issues occur with your app's business logic, you'll need to handle them.
 You could write a log, or correct the data with code, or even throw an exception 
 if it's a critical issue that should stop the startup of your portal.
 
-A good route would be to throw an exception in most cases. This ensures that
-the portal will only start when your app is in full working order.
+Throwing an exception, in most cases, is the best approach to handle your app's 
+data integrity issues. This ensures that the portal will only start when your 
+app is in full working order.
 
 Follow these steps to write exceptions for your app:
 
@@ -289,15 +290,16 @@ Follow these steps to write exceptions for your app:
     This class can hold all the exceptions for your app.
 
 2.  Next, you can define specific exceptions related to your business logic
-    as inner subclasses of the `*Exception` class you just created. A good
-    tip for exception names is the more concrete you name your specific
-    exception, the better you'll understand why it is failing.:
+    as inner subclasses of the `*Exception` class you just created:
     
         public class [ExceptionClassName] extends PortalException {
             public static class [SpecificExceptionName] extends [ExceptionClassName] {
                 ...
             }
         }
+        
+    When defining your exceptions, it's best to give them a concrete name that
+    clearly communicates the specific reason for the exception.
     
     For example, the `DDMFormValidationException` class declares its exceptions
     as subclasses within its class, using the following code:
@@ -306,6 +308,9 @@ Follow these steps to write exceptions for your app:
                         extends DDMFormValidationException {
             ...
         }
+        
+    The exception name of `MustSetDefaultLocale` makes it clear that you must 
+    set a default locale to solve the error.
         
 3.  Next, you'll need to define the constructors for your exception subclass.
 
@@ -323,9 +328,9 @@ Follow these steps to write exceptions for your app:
         }
         
     In this case, you can see that the constructor uses the `super` keyword to 
-    override the superclass, `DDMFormValidationException` in this case, constructor, 
-    setting the error message for the exception. You can use the same pattern to 
-    write your error messages.
+    override the superclass, `DDMFormValidationException` in this case, 
+    constructor, setting the error message for the exception. You can use the 
+    same pattern to write your error messages.
 
     Once your exceptions are declared, you can call the exceptions in your
     verifiers next.
@@ -363,7 +368,7 @@ Follow these steps to write exceptions for your app:
         }
 
 In this example, if there is not a default locale specified for the structure, a 
-new instance of the `MustSetDefaultLocale()` is created and thrown, calling the 
+new instance of `MustSetDefaultLocale()` is created and thrown, calling the 
 `MustSetDefaultLocale()` class method, which sets the error text.
 
 In the case of any exceptions, the server startup process is stopped. This will 
