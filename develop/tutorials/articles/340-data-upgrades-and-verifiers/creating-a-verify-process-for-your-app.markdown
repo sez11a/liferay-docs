@@ -288,11 +288,12 @@ Follow these steps to write exceptions for your app:
         
     This class can hold all the exceptions for your app.
 
-2.  Next, you can define your exceptions as inner subclasses of the `*Exception` 
-    class you just created:
+2.  Next, you can define specific exceptions related to your business logic as inner subclasses of the `*Exception` 
+    class you just created. A good tip for exception names is the more concrete you name your specific
+    exception, the better you'll understand why it is failing.:
     
         public class [ExceptionClassName] extends PortalException {
-            public static class [ExceptionName] extends [ExceptionClassName] {
+            public static class [SpecificExceptionName] extends [ExceptionClassName] {
                 ...
             }
         }
