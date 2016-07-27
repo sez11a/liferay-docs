@@ -49,7 +49,7 @@ verify process:
 
     It is recommended that you use the name of the service package of the app as 
     the value for the `verify.process.name` property. For example, the 
-    [DDMServiceVerifyProcess](https://github.com/mdelapenya/liferay-portal/blob/247aa80e752ad3864fe7fb1d56b8a80a64efc61a/modules/apps/forms-and-workflow/dynamic-data-mapping/dynamic-data-mapping-service/src/main/java/com/liferay/dynamic/data/mapping/verify/DDMServiceVerifyProcess.java) 
+    [DDMServiceVerifyProcess](https://github.com/liferay/liferay-portal/blob/247aa80e752ad3864fe7fb1d56b8a80a64efc61a/modules/apps/forms-and-workflow/dynamic-data-mapping/dynamic-data-mapping-service/src/main/java/com/liferay/dynamic/data/mapping/verify/DDMServiceVerifyProcess.java) 
     uses the following configuration for the Dynamic Data Mapping app:
 
         @Component(
@@ -74,7 +74,7 @@ verify process:
                 ...
         }
     
-    For example, look at the [DDMServiceVerifyProcess](https://github.com/mdelapenya/liferay-portal/blob/247aa80e752ad3864fe7fb1d56b8a80a64efc61a/modules/apps/forms-and-workflow/dynamic-data-mapping/dynamic-data-mapping-service/src/main/java/com/liferay/dynamic/data/mapping/verify/DDMServiceVerifyProcess.java) 
+    For example, look at the [DDMServiceVerifyProcess](https://github.com/liferay/liferay-portal/blob/247aa80e752ad3864fe7fb1d56b8a80a64efc61a/modules/apps/forms-and-workflow/dynamic-data-mapping/dynamic-data-mapping-service/src/main/java/com/liferay/dynamic/data/mapping/verify/DDMServiceVerifyProcess.java) 
     class for the Dynamic Data Mapping app:
 
         @Component(
