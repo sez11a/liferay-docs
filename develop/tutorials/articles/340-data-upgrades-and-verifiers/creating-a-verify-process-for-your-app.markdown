@@ -305,7 +305,7 @@ Follow these steps to write exceptions for your app:
             ...
         }
         
-3.  Next, you'll need to define the method for your exception subclass.
+3.  Next, you'll need to define the constructors for your exception subclass.
 
     For example, the `DDMFormValidationException` class defines the 
     `MustSetDefaultLocale()` method the following way:
@@ -320,8 +320,8 @@ Follow these steps to write exceptions for your app:
         
         }
         
-    In this case, you can see that the method uses the `super` keyword to 
-    override the superclass, `DDMFormValidationException` in this case, method, 
+    In this case, you can see that the constructor uses the `super` keyword to 
+    override the superclass, `DDMFormValidationException` in this case, constructor, 
     setting the error message for the exception. You can use the same pattern to 
     write your error messages.
 
