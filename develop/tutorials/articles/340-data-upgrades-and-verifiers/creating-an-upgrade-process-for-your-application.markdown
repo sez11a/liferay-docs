@@ -7,9 +7,8 @@ need to happen, but also they need to be registered in the database. The system
 then records the current state of the schema so that if the upgrade fails, the
 process can revert the app back to its previous version.
 
-This tutorial demonstrates how to
-
-- Create an upgrade process for your app using Liferay's new upgrade framework
+This tutorial demonstrates how to create an upgrade process for your app using
+Liferay's new upgrade framework. 
 
 Go ahead and jump right in to declaring your dependencies next.
 
