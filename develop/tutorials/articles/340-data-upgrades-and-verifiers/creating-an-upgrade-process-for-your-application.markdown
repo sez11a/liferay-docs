@@ -119,7 +119,7 @@ instance:
     new com.liferay.calendar.upgrade.v1_0_0.UpgradeCalendarBooking());
 
 For each database schema upgrade, you'll define a registration in parameters to
-`Registry` instance's [`register` method](https://docs.liferay.com/portal/7.0/javadocs/modules/apps/foundation/portal/com.liferay.portal.upgrade/com/liferay/portal/upgrade/registry/UpgradeStepRegistrator.Registry.html).
+the local `Registry` instance's [`register` method](https://docs.liferay.com/portal/7.0/javadocs/modules/apps/foundation/portal/com.liferay.portal.upgrade/com/liferay/portal/upgrade/registry/UpgradeStepRegistrator.Registry.html).
 
 Here's the entire registrator's `register` method implementation from module
 `com.liferay.calendar.service` version 2.0.5: 
