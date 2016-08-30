@@ -636,6 +636,10 @@ settings should only be performed by a Liferay administrator.
 
 $$$
 
+You can review the full list of system settings, as well as how to override
+existing system settings, in the [Knowledge Base Configuration](/discover/portal/-/knowledge_base/7-0/knowledge-base-configuration) 
+reference doc.
+
 The Knowledge Base has several optional features that are disabled by default,
 but can be enabled and configured from System Settings. These include source
 URL, import file conventions, new article priority increment, and sections. Now
@@ -654,11 +658,11 @@ System Settings section.
 
 To enable using the source URL, check on the *Source URLEnabled* checkbox. 
 
-To change the label of the of the button that takes the user to each article's
-source location, specify a new label value for the setting *Source URLEdit
-message key*. Best practice is to specify the value as a language key. For
-example, if you create a language key `edit-on-bitbucket=Edit on Bitbucket`, you
-can specify that language key as the button's new label:
+To change the label of the button that takes the user to each article's source 
+location, specify a new label value for the setting *Source URLEdit message key*. 
+Best practice is to specify the value as a language key. For example, if you 
+create a language key `edit-on-bitbucket=Edit on Bitbucket`, you can specify 
+that language key as the button's new label:
 
     edit-on-bitbucket
 
