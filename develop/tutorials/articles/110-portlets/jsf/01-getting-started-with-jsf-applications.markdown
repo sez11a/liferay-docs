@@ -70,8 +70,9 @@ Bridge.
     [Maven archetypes](https://web.liferay.com/web/neil.griffin/blog/-/blogs/new-maven-archetypes-for-jsf-portlets)
     are available to help you get started quickly. They set the default
     configuration for you and contain boilerplate code so you can skip the file
-    creation steps and get started right away. In this tutorial, you'll set up
-    the folder structure manually. Follow the folder structure outline below:
+    creation steps and get started right away. For your JSF application, you'll
+    set up the folder structure manually. Follow the folder structure outline
+    below:
 
         - hello-user-jsf-portlet
             - src
@@ -84,9 +85,16 @@ Bridge.
                             - views
 
 2.  Make sure your module specifies the dependencies necessary for a Liferay JSF
-    application. For instance, you must specify the Liferay Faces Bridge as a
-    dependency. For example, this is the `pom.xml` file used from the Maven
-    based Hello User JSF application:
+    application. For instance, you must always specify the Faces API, Faces
+    Reference Implementation (Mojarra), and Liferay Faces Bridge as dependencies
+    in a Liferay-compatible JSF application. Also, an important, but not
+    required, dependency is the Log4j logging utility. This is highly
+    recommended for development purposes because it logs DEBUG messages in the
+    console. You'll configure the logging utility later.
+
+    For an example build file, the `pom.xml` file used for the Maven based Hello
+    User JSF application is below. All the dependencies described above are
+    configured in the Hello User JSF application's `pom.xml` file.
 
         <?xml version="1.0"?>
 
@@ -127,18 +135,6 @@ Bridge.
             </build>
             <dependencies>
                 <dependency>
-                    <groupId>commons-fileupload</groupId>
-                    <artifactId>commons-fileupload</artifactId>
-                    <version>1.3.1</version>
-                    <optional>true</optional>
-                </dependency>
-                <dependency>
-                    <groupId>commons-io</groupId>
-                    <artifactId>commons-io</artifactId>
-                    <version>2.4</version>
-                    <optional>true</optional>
-                </dependency>
-                <dependency>
                     <groupId>javax.faces</groupId>
                     <artifactId>javax.faces-api</artifactId>
                     <version>${faces.api.version}</version>
@@ -168,11 +164,13 @@ Bridge.
             </dependencies>
         </project>
 
-    Note that in this example build configuration, there are several other
-    dependencies besides Liferay Faces Bridge, which include the JSF API,
-    Mojarra, and utility libraries like Commons IO. These dependenices are
-    required for this tutorial's example JSF application, but they can be
-    modified based on the application you're building.
+    There are also two plugins the Hello User JSF application defined in its
+    `pom.xml`:
+    [maven-compiler-plugin](https://maven.apache.org/plugins/maven-compiler-plugin/)
+    and
+    [maven-war-plugin](https://maven.apache.org/plugins/maven-war-plugin/).
+    These two plugins are responsible for building and compiling the JSF
+    application using Maven.
 
     There are several UI component suites that a JSF application can use,
     which include
@@ -210,7 +208,7 @@ WAR-style portlet descriptors.
     The
     [`GenericFacesPortlet` class](https://myfaces.apache.org/portlet-bridge/2.0/api/apidocs/javax/portlet/faces/GenericFacesPortlet.html)
     handles invocations to your JSF portlet and makes your portlet, since it
-    relies on Liferay Faces Bridge, easier to develop by acting as a turnkey
+    relies on Liferay Faces Bridge, easy to develop by acting as a turnkey
     implementation.
 
 2.  Define a default view file as an `init-param` in the `portlet.xml`. This
@@ -314,8 +312,9 @@ WAR-style portlet descriptors.
 
     The `javax.faces.WEBAPP_RESOURCES_DIRECTORY` parameter sets the resources
     folder inside the `WEB-INF` folder. This setting makes the resources in
-    that folder secure from non-JSF calls. You'll create some resources in this
-    folder later.
+    that folder (e.g., CSS, JavaScript, XHTML) secure from non-JSF calls. You'll
+    [create resources](/develop/tutorials/-/knowledge_base/7-0/getting-started-with-jsf-applications#defining-resources-for-a-jsf-application)
+    for your app later.
 
     The Faces Servlet configuration is required to initialize JSF and should be
     defined in all JSF portlets deployed to @product@.
@@ -352,9 +351,9 @@ WAR-style portlet descriptors.
     lifecycle to your console in debug mode. Remove this declaration before
     deploying to production.
 
-Great! You now have a better idea of how to specify and define general
-descriptor files for your JSF portlet. JSF portlets also use Liferay
-descriptors, which you can learn more about in the
+Great! You now have a good idea of how to specify and define general descriptor
+files for your JSF portlet. JSF portlets also use Liferay descriptors, which you
+can learn more about in the
 [Liferay Descriptors](/develop/tutorials/-/knowledge_base/7-0/spring-mvc#liferay-descriptors)
 sub-section.
 
@@ -421,8 +420,8 @@ User application's behavior and UI.
 ### Developing a JSF Application's Behavior and UI [](id=developing-a-jsf-applications-behavior-and-ui)
 
 Your current JSF application satisfies the requirements for portlet descriptors
-and WAR-style structure, but it doesn't do anything yet. In this section, you'll
-learn how to develop a JSF application's back-end and give it a simple UI.
+and WAR-style structure, but it doesn't do anything yet. You'll learn how to
+develop a JSF application's back-end and give it a simple UI next.
 
 The first thing to do is create a Java class for your module. Your JSF portlet's
 behavior is defined here. In the case of the Hello User portlet, you should
