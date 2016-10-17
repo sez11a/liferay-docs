@@ -93,9 +93,9 @@ to download and install patches. You can install patches manually or
 automatically. For automatic patch installation, you need to set up the Patching
 Tool Agent. This is presented next.
 
-$$$+
++$$$
 
-**Checkpoint**: The patching tool is configured. When you run `patching-tool info` you receive information about the product version.
+**Checkpoint:** The patching tool is configured. When you run `patching-tool info` you receive information about the product version.
 
 $$$
 
