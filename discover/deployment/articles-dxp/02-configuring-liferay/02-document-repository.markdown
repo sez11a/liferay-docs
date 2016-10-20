@@ -126,28 +126,9 @@ Property | Default | Required
 +$$$
 
 **Note:** Please refer to the [Document Library property reference](https://docs.liferay.com/portal/7.0/propertiesdoc/portal.properties.html#Document%20Library%20Portlet)
-for a complete list of supported customizations. You can customize features such
+for a complete list of supported configuration options. You can configure features such
 as the maximum allowed size of documents and media files, the list of allowed
 file extensions, which types of files should be indexed, and more.
-
-$$$
-
-+$$$
-
-**Warning:** If the portal has been running since a while and there are
-already existing files managed, it is not enough to change the `dl.store.impl`
-property in the `portal-ext.properties`. The steps to follow in this case are
-the followings:
-1. open the *Menu*
-(![Menu](../../../images/icon-menu.png)) and navigate to *Control Panel &rarr;
- Configuration &rarr; Server Administration &rarr; Data Migration*,
-2. change the value of the `dl.store.impl` dropdown to the desired storage type,
-3. click on execute,
-4. stop the portal application or the servlet container after the migration
-process has been finished,
-5. change the `dl.store.impl` property in the `portal-ext.properties` to the
-storage type which has been chosen at step #2,
-6. start the portal application or the servlet container.
 
 $$$
 
@@ -161,3 +142,18 @@ require manual synchronization. All stores except DBStore are vulnerable to this
 limitation.
 
 $$$
+
+## Changing the storage on an existing installation [](id=changing-storage)
+If file were already uploaded to @product@, it is not enough to change the `dl.store.impl`
+property in the `portal-ext.properties`. The steps to follow in this case are
+the followings:
+1. Open the *Menu*
+(![Menu](../../../images/icon-menu.png)) and navigate to *Control Panel &rarr;
+ Configuration &rarr; Server Administration &rarr; Data Migration*,
+2. Change the value of the `dl.store.impl` dropdown to the desired storage type,
+3. Click on Execute,
+4. Stop the portal application or the servlet container after the migration
+process has been finished,
+5. Change the `dl.store.impl` property in the `portal-ext.properties` to the
+storage type which has been chosen at step #2,
+6. Start the portal application or the servlet container.
