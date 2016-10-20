@@ -25,8 +25,8 @@ installation.
 Liferay's properties configuration files, such as
 `portal-setup-wizard.properties` and `portal-ext.properties`, are stored in the
 *Liferay Home* folder, which is generally one folder up from where your
-application server is installed (see the [Installation and Setup (not yet
-written)]() article for specific details for your application server). Your
+application server is installed (see the [Installation and Setup](/discover/deployment/-/knowledge_base/7-0/deploying-liferay-portal)
+articles for specific details for your application server). Your
 Liferay installation's properties configuration files should absolutely be
 backed up. In fact, it's best to back up your entire application server and
 entire the contents of your Liferay Home folders.
@@ -53,7 +53,9 @@ important to back up your `/osgi` folder.
 The `/logs` folder in Liferay Home contains Liferay's log files. Liferay's log
 files are important to back up since if a problem occurs on Liferay, the
 information in Liferay's log files often provides valuable information for
-determining what went wrong. The `/data`, `/osgi`, and `/logs` folders are all
+determining what went wrong.
+
+The `/data`, `/osgi`, and `/logs` folders are all
 contained in the Liferay Home folder. Thus, if you're backing up both your
 application server folder and your Liferay Home folder, you're in good shape.
 
@@ -82,7 +84,7 @@ using Cluster Link or Solr), that database should be backed up as well
 
 Search indexes can be backed up as well, if you wish to avoid reindexing your
 entire portal after restoring your database. This is easiest to do if you have
-a separate Solr environment on which your index is stored. If you're in a
+a separate Elasticsearch or Solr (see the [Liferay Enterprise Search](/discover/deployment/-/knowledge_base/7-0/liferay-enterprise-search) section) environment on which your index is stored. If you're in a
 clustered configuration and you're replicating indexes, you'll need to back up
 each index replica.
 
