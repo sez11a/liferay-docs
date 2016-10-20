@@ -1,14 +1,15 @@
-# Managing Liferay with Liferay Connected Services [](id=managing-liferay-with-liferay-connected-services)
+# Activating Your DXP Server [](id=registering-your-dxp-server)
+
+@product@ server instances are activated through Liferay Connected Services. Please proceed to [this](//TODO: link) section if you are installing a local workstation instance.
+
+## Introduction to Liferay Connected Services [](id=lcs-introduction)
 
 Liferay Connected Services (LCS) is a set of online tools and services that lets 
 you manage and monitor your Liferay DXP instances. LCS can automatically install 
 the fix packs that you choose, monitor your DXP instances' performance, activate 
-your DXP instances, and help you manage your DXP subscriptions. In other words, 
-LCS is like a butler for the mansion that is Liferay DXP. Even better, the 
-features of LCS work regardless of whether your DXP instance is on a single 
-discreet server or distributed across a node. It's like having a single butler 
-that can serve several mansions at once! You can find more information 
-about LCS on its 
+your DXP instances, and help you manage your DXP subscriptions. This section in the documentation will help you to activate your @product@ installation, the other LCS features are described in the Maintainance sections. //TODO: Link
+
+You can find more information about LCS on its 
 [official product page](http://www.liferay.com/products/liferay-connected-services). 
 
 Before going any further, you should take note of a few key terms used 
@@ -22,16 +23,37 @@ throughout this guide:
 - *Server*: Describes a concrete DXP instance. It can be a standalone server 
   or a cluster node.
 
-As you go through this guide, you'll cover the following topics: 
-
-- Patching Tool Configuration 
-- Connecting and Activating Your Liferay DXP Instances with LCS 
-- Using LCS 
-
 You'll get started with a few configuration steps that are required to use LCS 
 with your Liferay DXP instances.
 
-# Activating Your DXP Server with LCS [](id=registering-your-dxp-server-with-lcs)
+## Downloading the LCS Client App
+
+The LCS client app is part of Liferay DXP 
+bundles and autodeploys when the bundle starts. The LCS client app in the DXP 
+bundle, however, may be outdated. You should therefore download and install 
+the latest version of the LCS client app. You can download the LCS client app 
+[here in the Liferay Marketplace](https://web.liferay.com/marketplace/-/mp/application/71774947). 
+For instructions on using Marketplace to download and install apps, see 
+[this user guide article](/discover/portal/-/knowledge_base/7-0/using-the-liferay-marketplace). 
+Also note that as improvements are made to LCS, older versions of the LCS 
+client app may not work. You should therefore ensure that your DXP instance 
+is always running the latest version of the client. When upgrading the 
+client, you may also need to regenerate the 
+[environment token](/discover/deployment/-/knowledge_base/7-0/using-lcs#using-environment-tokens) 
+that you use to connect. 
+
+## Configuring the LCS Client
+
+The LCS Client needs to connect to Liferay's servers to work.
+If your server connects to the Internet through a proxy, you must 
+preconfigure the LCS client app before it deploys to your DXP instance. [This 
+article shows you how to do this](/discover/deployment/-/knowledge_base/7-0/preconfiguring-the-lcs-client-to-connect-through-a-proxy).
+
+If a proxy is not available and you are behind a firewall, please read [this page](/discover/deployment/-/knowledge_base/7-0/preconfiguring-the-lcs-client-to-connect-through-a-proxy). //TODO: link
+
+## Activating Your DXP Server with LCS [](id=registering-your-dxp-server-with-lcs)
+
+To use LCS, you must have an account at [Liferay.com](http://www.liferay.com/) which should be registered to your company's subscription project. 
 
 Once the LCS client app is deployed, you're ready to activate your DXP server 
 with LCS. You'll use an 
@@ -45,15 +67,20 @@ to do this:
 
     ![Figure 1: Your company's LCS projects are shown under *Manage Projects* in your user menu.](../../../../images-dxp/lcs-user-menu-manage-projects.png)
 
+
++$$$
+
+**Note**: If you don't see the company's project, you can either request access from your colleagues who have are already members or from Liferay Support.
+
+$$$
+
 2. Ensure that an environment exists to activate your server under. If you have 
    sufficient permissions in your company's project, you can create a new 
    environment by selecting the *Add Environment* tab. Note that you must 
    activate a clustered server in a clustered environment. LCS environments can 
    only be designated as clustered when they are created. To create a clustered 
    environment, click *Add Environment* and select the *Cluster* checkbox when 
-   filling out the environment's information. Note that you must set the portal 
-   property `cluster.link.enabled` to `true` in any servers that connect to a 
-   clustered environment. 
+   filling out the environment's information. Clustering must be enabled on the servers, please follow the configuration section for it. //TODO:Link
 
     ![Figure 2: You must activate your DXP server in an LCS environment. The red box in this screenshot highlights an environment.](../../../../images-dxp/lcs-registration-select-environment.png)
 
@@ -132,3 +159,14 @@ server.
 
 For information on using the other features of LCS, see 
 [the next article](/discover/deployment/-/knowledge_base/7-0/using-lcs). 
+
+## Activating a Developer Instance
+
+The steps above show how to activate DXP instances for use in production 
+environments. To activate DXP on a local workstation for testing or development 
+purposes, you don't need to use LCS. Instead, create a ticket in 
+[LESA](https://web.liferay.com/group/customer/support/-/support/ticket) 
+to request an activation key. When creating this ticket, select *Activation Key* 
+in the *Select a component* field. When you receive your key, place it in your 
+local DXP instance's `deploy` folder. 
+
