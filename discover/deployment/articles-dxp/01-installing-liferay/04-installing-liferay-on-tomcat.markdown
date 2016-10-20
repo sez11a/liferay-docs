@@ -52,76 +52,28 @@ Tomcat server folder. This folder is usually named `tomcat-[version]` or
 Next, you need to configure Tomcat for running Liferay.
 
 1. Copy the `setenv.bat` and `setenv.sh` files
-   from your bundle to your `$TOMCAT_HOME/bin` folder. You can create these
-   files if you want, `setenv.bat` looks like this:
-
-        set "CATALINA_OPTS=%CATALINA_OPTS% -Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true  -Dorg.apache.catalina.loader.WebappClassLoader.ENABLE_CLEAR_REFERENCES=false -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=384m"
-
-    `setenv.sh` looks like this:
-
-        CATALINA_OPTS="$CATALINA_OPTS -Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true  -Dorg.apache.catalina.loader.WebappClassLoader.ENABLE_CLEAR_REFERENCES=false -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=384m"
-
-These files set a number of JVM options for Catalina. Catalina is Tomcat's
-servlet container.
+   from your bundle to your `$TOMCAT_HOME/bin` folder.
+   These files set a number of JVM options for Catalina. Catalina is Tomcat's
+   servlet container.
 
 2. Copy the
    `$TOMCAT_HOME/conf/Catalina/localhost/ROOT.xml` file from your bundle to the
-   corresponding location in your application server. You can create this file if you want.
-   The `ROOT.xml` file creates a web application context for Liferay.
-   `ROOT.xml` looks like this:
+   corresponding location in your application server.
 
-        <Context path="" crossContext="true">
-
-            <!-- JAAS -->
-
-            <!--<Realm
-                className="org.apache.catalina.realm.JAASRealm"
-                appName="PortalRealm"
-                userClassNames="com.liferay.portal.kernel.security.jaas.PortalPrincipal"
-                roleClassNames="com.liferay.portal.kernel.security.jaas.PortalRole"
-            />-->
-
-            <!--
-            Uncomment the following to disable persistent sessions across reboots.
-            -->
-
-            <!--<Manager pathname="" />-->
-
-            <!--
-            Uncomment the following to not use sessions. See the property
-            "session.disabled" in portal.properties.
-            -->
-
-            <!--<Manager className="com.liferay.support.tomcat.session.SessionLessManagerBase" />-->
-        </Context>
-
-    Setting `crossContext="true"` allows multiple web applications to use the
-    same class loader. The configuration above includes commented instructions
-    and tags for configuring a JAAS realm, disabling persistent sessions, and
-    disabling sessions entirely.
+    Setting `crossContext="true"` in ROOT.xml allows multiple web
+    applications to use the same class loader. The configuration above
+    includes commented instructions and tags for configuring a JAAS
+    realm, disabling persistent sessions, and disabling sessions
+    entirely.
 
 3. Next, you should make sure that the libraries you copied to
-   `$TOMCAT_HOME/lib/ext` are loaded when you start your server. Copy the `$TOMCAT_HOME/conf/catalina.properties` file
-   from your bundle to your server. You can edit the original file if you want: open
-   `$TOMCAT_HOME/conf/catalina.properties` and replace the line
-
-        common.loader=${catalina.base}/lib,${catalina.base}/lib/*.jar,${catalina.home}/lib,${catalina.home}/lib/*.jar
-
-    with this one:
-
-        common.loader=${catalina.base}/lib,${catalina.base}/lib/*.jar,${catalina.home}/lib,${catalina.home}/lib/*.jar,${catalina.home}/lib/ext,${catalina.home}/lib/ext/*.jar
-
+   `$TOMCAT_HOME/lib/ext` are loaded when you start your server. Copy the
+   `$TOMCAT_HOME/conf/catalina.properties` file from your bundle to your server.
     This allows Catalina to access the JARs that you copied to
     `$TOMCAT_HOME/lib/ext`.
 
 4. Copy the
-   `$TOMCAT_HOME/conf/catalina.policy` file from your bundle to your server. You can
-   replace the contents of the original `$TOMCAT_HOME/conf/catalina.policy`
-   file if you want with this:
-
-        grant {
-            permission java.security.AllPermission;
-        };
+   `$TOMCAT_HOME/conf/catalina.policy` file from your bundle to your server.
 
     If you want to enable PACL for Liferay, you have to enable Tomcat's
     security manager and instruct Catalina to use the
@@ -132,25 +84,7 @@ servlet container.
    to your server. You can simply make a few edits to `server.xml` if you want:
    edit your `$TOMCAT_HOME/conf/server.xml` file and add the attribute
    `URIEncoding="UTF-8"` wherever you see `redirectPort=8443`, in the
-   definition of your connectors (HTTP and AJP). For example:
-
-        <Connector port="8080" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" />
-
-    should become
-
-        <Connector port="8080" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" URIEncoding="UTF-8" />
-
-    And
-
-        <Connector port="8080" protocol="HTTP/1.1"
-                   connectionTimeout="20000"
-                   redirectPort="8443" />
-
-    should become
-
-        <Connector port="8080" protocol="HTTP/1.1"
-                   connectionTimeout="20000"
-                   redirectPort="8443" URIEncoding="UTF-8" />
+   definition of your connectors (HTTP and AJP).
 
 6. If you're on Unix, Linux, or Mac OS, navigate to your `$TOMCAT_HOME/bin`
    folder and run the following command
