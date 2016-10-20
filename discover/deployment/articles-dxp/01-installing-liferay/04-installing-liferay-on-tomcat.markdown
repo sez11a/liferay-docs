@@ -2,7 +2,7 @@
 
 If you want a fresh installation of Liferay on Tomcat 8, simply download *Digital Enterprise 7.0*
 **Bundled with Tomcat** from our
-[customer portal](https://web.liferay.com/group/customer/dxp/downloads/digital-enterprise).
+[Customer Portal](https://web.liferay.com/group/customer/dxp/downloads/digital-enterprise).
 Even if you want to manually install Liferay on an existing Tomcat 8
 application server, it can be helpful to download the bundle. This contains many required dependencies and configuration files. This document will refer to this file as *Liferay Tomcat bundle* or simply *bundle*.
 
@@ -10,9 +10,9 @@ Before proceeding, you should also download *Dependencies*, *OSGi dependencies* 
 
 Installing Liferay manually requires these basic steps:
 
-- Installing Liferay dependencies to your application server
-- Configuring your application server for Liferay
-- Installing the Liferay WAR file to your application server
+- Installing Liferay dependencies
+- Configuring Tomcat for Liferay
+- Installing the Liferay WAR file
 
 You'll see the term *Liferay Home* used in this installation guide. *Liferay
 Home* refers to the folder containing your Tomcat server folder. When Liferay
@@ -25,11 +25,11 @@ Tomcat server folder. This folder is usually named `tomcat-[version]` or
 ## Installing Liferay Dependencies [](id=installing-liferay-dependencies)
 
 1. Extract the bundle to a temporary
-   location of your choosing. You'll copy a number of resources from this
+   location. You'll copy a number of resources from this
    bundle to your Tomcat server as you manually install Liferay.
 
 2. Copy all the JARs from your bundle's
-   `$TOMCAT_HOME/lib/ext` folder to your application server's
+   `$TOMCAT_HOME/lib/ext` folder to your installation's
    `$TOMCAT_HOME/lib/ext` folder. If the `$TOMCAT_HOME/lib/ext` folder doesn't
    exist on your application server, create it.
 
@@ -66,11 +66,15 @@ Next, you need to configure Tomcat for running Liferay.
     realm, disabling persistent sessions, and disabling sessions
     entirely.
 
+    //TODO: explain the changes and don't ask to copy.
+
 3. Next, you should make sure that the libraries you copied to
    `$TOMCAT_HOME/lib/ext` are loaded when you start your server. Copy the
    `$TOMCAT_HOME/conf/catalina.properties` file from your bundle to your server.
     This allows Catalina to access the JARs that you copied to
     `$TOMCAT_HOME/lib/ext`.
+
+    //TODO: explain the changes and don't ask to copy.
 
 4. Copy the
    `$TOMCAT_HOME/conf/catalina.policy` file from your bundle to your server.
@@ -79,9 +83,11 @@ Next, you need to configure Tomcat for running Liferay.
     security manager and instruct Catalina to use the
     `$TOMCAT_HOME/conf/catalina.policy` file. See the Enabling PACL section for
     more information.
+    
+    //TODO: explain the changes and don't ask to copy.
 
 5. Next, you should make sure that UTF-8 URI encoding is used consistently. Copy the `$TOMCAT_HOME/conf/server.xml` file
-   to your server. You can simply make a few edits to `server.xml` if you want:
+   to your server. You can simply make a few edits to `server.xml`:
    edit your `$TOMCAT_HOME/conf/server.xml` file and add the attribute
    `URIEncoding="UTF-8"` wherever you see `redirectPort=8443`, in the
    definition of your connectors (HTTP and AJP).
@@ -95,9 +101,9 @@ Next, you need to configure Tomcat for running Liferay.
 
 ## Tomcat Database Configuration [](id=tomcat-database-configuration)
 
-The easiest way to handle your database configuration is to let Liferay manage
-your data source. If you want to use Liferay's built-in data source, you can
-skip this section. When you first Liferay, you can enter the required database
+The easiest way to handle your database configuration is to let @product@ manage
+your data source. If you want to use the built-in data source, you can
+skip this section. On first startup, you can enter the required database
 configuration information on the Basic Configuration page.
 
 If you want Tomcat to manage your data source, use this procedure:
@@ -134,9 +140,9 @@ mail session.
 ## Tomcat Mail Configuration [](id=tomcat-mail-configuration)
 
 As with database configuration, the easiest way to handle mail configuration is
-to let Liferay handle your mail session. If you want to use Liferay's built-in
-mail session, skip this section and use Liferay's Control Panel to configure a
-mail server after Liferay has been installed and started.
+to let @product@ handle your mail session. If you want to use the built-in
+mail session, skip this section and use the Control Panel to configure a
+mail server after installation.
 
 If you want to manage your mail session with Tomcat, use these instructions:
 
@@ -165,7 +171,7 @@ sure to replace the example mail session values with your own.
         />
     </Context>
 
-Your mail session is configured. Next, you'll make sure Liferay can 
+Your mail session is configured. Next, you'll make sure @product@ can 
 access your mail session and database.
 
 ## Configuring Tomcat-managed Database and Mail Sessions [](id=configuring-tomcat-managed-database-and-mail-sessions)
@@ -173,7 +179,7 @@ access your mail session and database.
 In this section, you'll specify appropriate properties for connecting to your
 database and mail session.
 
-1. If you will use *Liferay Portal* to manage your data source, simply follow
+1. If you will use *@product@* to manage your data source, simply follow
    the instructions on the Basic Configuration page that appears when you first
    start Liferay.
 
@@ -183,8 +189,8 @@ database and mail session.
 
         jdbc.default.jndi.name=jdbc/LiferayPool
 
-2. If you will use *Liferay Portal* to manage your mail session, you can
-   configure the mail session once Liferay has started. That is, after starting
+2. If you will use *@product@* to manage your mail session, you can
+   configure the mail session once it has started. That is, after starting
    your portal as described in the *Deploying Liferay* section, go to *Control
    Panel &rarr; Server Administration &rarr; Mail* and enter the information
    required to configure your mail session.
@@ -374,7 +380,7 @@ Now you're ready to deploy Liferay using your Liferay WAR file.
 
 2. Extract the Liferay `.war` file to `$TOMCAT_HOME/webapps/ROOT`.
 
-    Now it's time to launch Liferay Portal on Tomcat!
+    Now it's time to launch @product@ on Tomcat!
 
 3. Start Tomcat by navigating to `$TOMCAT_HOME/bin` and executing `./startup.sh`
    or `startup.bat`. Alternatively, you can use `./catalina.sh run` or
