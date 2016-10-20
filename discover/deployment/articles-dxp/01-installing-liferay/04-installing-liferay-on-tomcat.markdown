@@ -24,44 +24,22 @@ Tomcat server folder. This folder is usually named `tomcat-[version]` or
 
 ## Installing Liferay Dependencies [](id=installing-liferay-dependencies)
 
-Liferay depends on many JARs that are included in the Liferay Tomcat bundle.
-Some JARs in the bundle are not strictly required but can still be useful. If
-you don't have a Liferay Tomcat bundle, you can download the required JARs from
-third-parties, but because of version differences, it my not work.
-
-1. If you downloaded a Liferay Tomcat bundle, extract the bundle to a temporary
+1. Extract the bundle to a temporary
    location of your choosing. You'll copy a number of resources from this
    bundle to your Tomcat server as you manually install Liferay.
 
-2. If you have a Liferay Tomcat bundle, copy all the JARs from your bundle's
+2. Copy all the JARs from your bundle's
    `$TOMCAT_HOME/lib/ext` folder to your application server's
    `$TOMCAT_HOME/lib/ext` folder. If the `$TOMCAT_HOME/lib/ext` folder doesn't
-   exist on your application server, create it. If you don't have a Liferay
-   Tomcat bundle, you'll have to individually download the JARs listed below, but it is discouraged because of possibly version issues.
+   exist on your application server, create it.
 
-    Here's a list of the JARs that you need to copy or download to your
-    `$TOMCAT_HOME/lib/ext` folder:
-
-    - `activation.jar` - [http://www.oracle.com/technetwork/java/jaf11-139815.html](http://www.oracle.com/technetwork/java/jaf11-139815.html)
-    - `ccpp.jar` - [http://mvnrepository.com/artifact/javax.ccpp/ccpp/1.0](http://mvnrepository.com/artifact/javax.ccpp/ccpp/1.0)
-    - `com.liferay.osgi.service.tracker.collections.jar` - [http://mvnrepository.com/artifact/com.liferay/com.liferay.osgi.service.tracker.collections](http://mvnrepository.com/artifact/com.liferay/com.liferay.osgi.service.tracker.collections)
-    - `com.liferay.registry.api.jar` - [https://repository.liferay.com/nexus/content/repositories/liferay-public-releases/com/liferay/com.liferay.registry.api](https://repository.liferay.com/nexus/content/repositories/liferay-public-releases/com/liferay/com.liferay.registry.api)
-    - `hsql.jar` - [http://hsqldb.org/doc/src/org/hsqldb/jdbc/JDBCDriver.html](http://hsqldb.org/doc/src/org/hsqldb/jdbc/JDBCDriver.html)
-    - `jms.jar`- [http://www.oracle.com/technetwork/java/docs-136352.html](http://www.oracle.com/technetwork/java/docs-136352.html)
-    - `jta.jar`- [http://www.oracle.com/technetwork/java/javaee/jta/index.html](http://www.oracle.com/technetwork/java/javaee/jta/index.html)
-    - `jutf7.jar` - [http://sourceforge.net/projects/jutf7](http://sourceforge.net/projects/jutf7)
-    - `mail.jar` - [http://www.oracle.com/technetwork/java/index-138643.html](http://www.oracle.com/technetwork/java/index-138643.html)
-    - `mysql.jar` - [http://dev.mysql.com/downloads/connector/j](http://dev.mysql.com/downloads/connector/j)
-    - `persistence.jar`- [http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html](http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html)
-    - `portal-kernel.jar` - [http://mvnrepository.com/artifact/com.liferay.portal/com.liferay.portal.kernel](http://mvnrepository.com/artifact/com.liferay.portal/com.liferay.portal.kernel)
-    - `portlet.jar` - [http://mvnrepository.com/artifact/javax.portlet/portlet-api](http://mvnrepository.com/artifact/javax.portlet/portlet-api)
-    - `postgresql.jar` - [https://jdbc.postgresql.org/download.html](https://jdbc.postgresql.org/download.html)
-    - `support-tomcat.jar` - [http://repo1.maven.org/maven2/com/liferay/portal/support-tomcat](http://repo1.maven.org/maven2/com/liferay/portal/support-tomcat)
-
-3. Make sure that Tomcat can access the JDBC driver for your database. The list
-   of JARs above includes `mysql.jar` and `postgresql.jar`. If you're using a
-   database whose JDBC driver is not included in the list above, download the
+3. Make sure that Tomcat can access the JDBC driver for your database. Download the
    driver and copy it to your `$TOMCAT_HOME/lib/ext` folder.
+   Here are a list of some popular JDBC drivers:
+
+    - `hsql.jar` - [http://hsqldb.org/doc/src/org/hsqldb/jdbc/JDBCDriver.html](http://hsqldb.org/doc/src/org/hsqldb/jdbc/JDBCDriver.html)
+    - `mysql.jar` - [http://dev.mysql.com/downloads/connector/j](http://dev.mysql.com/downloads/connector/j)
+    - `postgresql.jar` - [https://jdbc.postgresql.org/download.html](https://jdbc.postgresql.org/download.html)
 
 4. Create an `osgi` folder in your Liferay Home folder. Then extract the OSGi
    ZIP file that you downloaded as *OSGi dependencies* into the `osgi` folder.
@@ -73,9 +51,9 @@ third-parties, but because of version differences, it my not work.
 
 Next, you need to configure Tomcat for running Liferay.
 
-1. If you're working with a bundle, copy the `setenv.bat` and `setenv.sh` files
-   from your bundle to your `$TOMCAT_HOME/bin` folder. If not, create these
-   files. `setenv.bat` looks like this:
+1. Copy the `setenv.bat` and `setenv.sh` files
+   from your bundle to your `$TOMCAT_HOME/bin` folder. You can create these
+   files if you want, `setenv.bat` looks like this:
 
         set "CATALINA_OPTS=%CATALINA_OPTS% -Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true  -Dorg.apache.catalina.loader.WebappClassLoader.ENABLE_CLEAR_REFERENCES=false -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=384m"
 
@@ -86,9 +64,9 @@ Next, you need to configure Tomcat for running Liferay.
 These files set a number of JVM options for Catalina. Catalina is Tomcat's
 servlet container.
 
-2. If you're working with a bundle, copy the
+2. Copy the
    `$TOMCAT_HOME/conf/Catalina/localhost/ROOT.xml` file from your bundle to the
-   corresponding location in your application server. If not, create this file.
+   corresponding location in your application server. You can create this file if you want.
    The `ROOT.xml` file creates a web application context for Liferay.
    `ROOT.xml` looks like this:
 
@@ -123,9 +101,8 @@ servlet container.
     disabling sessions entirely.
 
 3. Next, you should make sure that the libraries you copied to
-   `$TOMCAT_HOME/lib/ext` are loaded when you start your server. If you're
-   working with a bundle, copy the `$TOMCAT_HOME/conf/catalina.properties` file
-   from your bundle to your server. If not, open
+   `$TOMCAT_HOME/lib/ext` are loaded when you start your server. Copy the `$TOMCAT_HOME/conf/catalina.properties` file
+   from your bundle to your server. You can edit the original file if you want: open
    `$TOMCAT_HOME/conf/catalina.properties` and replace the line
 
         common.loader=${catalina.base}/lib,${catalina.base}/lib/*.jar,${catalina.home}/lib,${catalina.home}/lib/*.jar
@@ -137,10 +114,10 @@ servlet container.
     This allows Catalina to access the JARs that you copied to
     `$TOMCAT_HOME/lib/ext`.
 
-4. If you're working with a bundle, copy the
-   `$TOMCAT_HOME/conf/catalina.policy` file from your bundle to your server. If
-   not, just replace the contents of the `$TOMCAT_HOME/conf/catalina.policy`
-   file with this:
+4. Copy the
+   `$TOMCAT_HOME/conf/catalina.policy` file from your bundle to your server. You can
+   replace the contents of the original `$TOMCAT_HOME/conf/catalina.policy`
+   file if you want with this:
 
         grant {
             permission java.security.AllPermission;
@@ -151,10 +128,9 @@ servlet container.
     `$TOMCAT_HOME/conf/catalina.policy` file. See the Enabling PACL section for
     more information.
 
-5. Next, you should make sure that UTF-8 URI encoding is used consistently. If
-   you're working with a bundle, copy the `$TOMCAT_HOME/conf/server.xml` file
-   to your server. If not, you can simply make a few edits to `server.xml`.
-   Edit your `$TOMCAT_HOME/conf/server.xml` file and add the attribute
+5. Next, you should make sure that UTF-8 URI encoding is used consistently. Copy the `$TOMCAT_HOME/conf/server.xml` file
+   to your server. You can simply make a few edits to `server.xml` if you want:
+   edit your `$TOMCAT_HOME/conf/server.xml` file and add the attribute
    `URIEncoding="UTF-8"` wherever you see `redirectPort=8443`, in the
    definition of your connectors (HTTP and AJP). For example:
 
