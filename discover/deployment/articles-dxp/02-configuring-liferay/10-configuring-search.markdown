@@ -1,7 +1,7 @@
 # Configuring Search [](id=configuring-search)
 
 Liferay uses Elasticsearch to index its content. By default, Liferay uses
-Elastic as an embedded service. It works, but this is not a supported
+Elasticsearch as an embedded service. It works, but this is not a supported
 configuration for a production server. Feel free to use it while you're testing
 or developing, but when you're ready to put your site in production, you'll need
 to run Elasticsearch as a standalone process. This is better anyway, because it
@@ -9,7 +9,7 @@ frees you to design your infrastructure the way you want it. If you've got
 hardware or a VM to spare, you can separate your search infrastructure from
 Liferay and reap some performance gains by putting search on a separate box. If
 you're more budget-conscious, you can still increase performance by running
-Elastic in a separate, individually tunable JVM on the same box. 
+Elasticsearch in a separate, individually tunable JVM on the same box. 
 
 Installing Elasticsearch for Liferay is pretty easy and takes only five steps: 
 
@@ -20,9 +20,9 @@ Installing Elasticsearch for Liferay is pretty easy and takes only five steps:
 2. Install Elasticsearch by extracting its archive to the system where you want
    it to run. 
 
-3. Name your Elastic cluster. 
+3. Name your Elasticsearch cluster.
 
-4. Configure Liferay to connect to your Elastic cluster. 
+4. Configure Liferay to connect to your Elasticsearch cluster. 
 
 5. Restart Liferay and reindex your search indexes. 
 
@@ -72,7 +72,7 @@ Once you have a copy of the right version of Elasticsearch, extract it to a
 folder on the machine where you want it running. That's all there is to this
 step. 
 
-### Step Three: Name Your Elastic Cluster [](id=step-three-name-your-elastic-cluster)
+### Step Three: Name Your Elasticsearch Cluster [](id=step-three-name-your-elastic-cluster)
 
 A *cluster* in Elasticsearch is a collection of nodes (servers) identified as a
 cluster by a shared cluster name. The nodes work together to share data and
@@ -89,7 +89,7 @@ Elastic. Edit the following file:
 Uncomment the line that begins with `cluster.name`. Set the cluster name to
 whatever you want to name your cluster: 
 
-    cluster.name: liferay_cluster
+    cluster.name: LiferayElasticsearchCluster
 
 Of course, this isn't a very imaginative name; you may choose to name your
 cluster `finders_keepers` or something else you can remember more easily. Save
@@ -100,24 +100,24 @@ from the `[Elasticsearch Home]/bin` folder:
 
     ./elasticsearch
 
-Elastic starts, and one of its status messages includes a transport address: 
+Elasticsearch starts, and one of its status messages includes a transport address: 
 
     2016-05-03 16:33:28,358][INFO ][transport] [Hobgoblin II] publish_address {127.0.0.1:9300}, bound_addresses {[::1]:9300}, {127.0.0.1:9300}
 
 Take note of this address; you'll need to give it to your Liferay server so it
 can find Elastic on the network. 
 
-### Step Four: Configure Liferay to Connect to your Elastic Cluster [](id=step-four-configure-liferay-to-connect-to-your-elastic-cluster)
+### Step Four: Configure Liferay to Connect to your Elasticsearch Cluster [](id=step-four-configure-liferay-to-connect-to-your-elastic-cluster)
 
 Now you're ready to configure Liferay. Start Liferay if you haven't already, log
 in, and then go to Control Panel &rarr; Configuration &rarr; System Settings
 &rarr; Foundation. Find *Elasticsearch* in the list of settings and click on it.
 Now you can configure it. Here are the options you need to change: 
 
-**Cluster name:** Enter the name of the cluster as you defined it in Elastic. 
+**Cluster name:** Enter the name of the cluster as you defined it in Elastic. The default is `LiferayElasticsearchCluster`.
 
-**Operation mode:** Defaults to EMBEDDED. Change it to REMOTE to connect to a
-standalone Elasticsearch. 
+**Operation mode:** Defaults to `EMBEDDED`. Change it to `REMOTE` to connect to a
+standalone Elasticsearch.
 
 **Transport addresses:** Enter a delimited list of transport addresses for
 Elastic nodes. Here, you'll enter the transport address from the Elastic server
@@ -133,4 +133,4 @@ click the *Execute* button for *Reindex all search indexes*. When you do that,
 you should see some messages scroll up in the Elasticsearch log. 
 
 You're almost done! The only thing left is to make sure Marketplace is working
-and optionally configure portal security. 
+and optionally configure portal security.
