@@ -5,41 +5,11 @@ Very often a Liferay Portal resides inside a private network and due to a compan
 ##Resolution
 In order to allow the traffic to those servers, the company's network administrator must configure the firewall to allow the server which runs the portal to allow inbound and outbound traffic to the following hostnames and IP addresses:
 
-<style>
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 5px;
-    text-align: center;
-}
-caption {
-    text-align: left;
-}
-</style>
- <table >
-
-<tr>
-<th>Liferay Hostname</th>
-<th>Liferay Public IP Address</th>
-</tr>
-
-<tr>
-<td>*.liferay.com</td>
-<td>38.75.15.0/24 <br/> 173.196.212.0/25</td>
-</tr>
-
-<tr>
-<td>lcs-gateway.liferay.com</td>
-<td>54.235.184.179<br/> 54.243.115.146</td>
-</tr>
-
-<tr>
-<td>lcs.liferay.com</td>
-<td>50.17.211.155 <br/> 75.101.148.56 </td>
-</tr>
-</table>
+|     Liferay Hostname    |       Liferay Public IP Address      |
+|:-----------------------:|:------------------------------------:|
+|      *.liferay.com      | 38.75.15.0/24 <br/> 173.196.212.0/25 |
+| lcs-gateway.liferay.com |  54.235.184.179 <br/> 54.243.115.146 |
+|     lcs.liferay.com     |   50.17.211.155 <br/> 75.101.148.56  |
 
 ##Additional Information
 Because Liferay Connected Services is a brand new feature and under heavy development, it is subject to changes in short term. Therefore, the information listed here may not be up-to-date.
