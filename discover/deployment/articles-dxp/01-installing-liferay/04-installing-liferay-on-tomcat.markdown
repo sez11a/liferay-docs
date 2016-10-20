@@ -1,14 +1,12 @@
 # Installing Liferay on Tomcat 8 [](id=installing-liferay-on-tomcat-8)
 
-If you want a fresh installation of Liferay on Tomcat 8, simply download a
-Liferay Tomcat bundle from
-[https://www.liferay.com/downloads/liferay-portal/available-releases](https://www.liferay.com/downloads/liferay-portal/available-releases).
+If you want a fresh installation of Liferay on Tomcat 8, simply download *Digital Enterprise 7.0*
+**Bundled with Tomcat** from our
+[customer portal](https://web.liferay.com/group/customer/dxp/downloads/digital-enterprise).
 Even if you want to manually install Liferay on an existing Tomcat 8
-application server, it can be helpful to download a Liferay Tomcat bundle. The
-bundle contains many required dependencies and configuration files. Before
-proceeding, you should also download the latest Liferay WAR file from
-[https://web.liferay.com/downloads/liferay-portal/available-releases#additional-versions](https://web.liferay.com/downloads/liferay-portal/available-releases#additional-versions)
-as well as the dependencies ZIP file and OSGi JARs ZIP file.
+application server, it can be helpful to download the bundle. This contains many required dependencies and configuration files. This document will refer to this file as *Liferay Tomcat bundle* or simply *bundle*.
+
+Before proceeding, you should also download *Dependencies*, *OSGi dependencies* and *Digital Enterprise WAR* from the same source.
 
 Installing Liferay manually requires these basic steps:
 
@@ -29,7 +27,7 @@ Tomcat server folder. This folder is usually named `tomcat-[version]` or
 Liferay depends on many JARs that are included in the Liferay Tomcat bundle.
 Some JARs in the bundle are not strictly required but can still be useful. If
 you don't have a Liferay Tomcat bundle, you can download the required JARs from
-third-parties, as described below.
+third-parties, but because of version differences, it my not work.
 
 1. If you downloaded a Liferay Tomcat bundle, extract the bundle to a temporary
    location of your choosing. You'll copy a number of resources from this
@@ -39,7 +37,7 @@ third-parties, as described below.
    `$TOMCAT_HOME/lib/ext` folder to your application server's
    `$TOMCAT_HOME/lib/ext` folder. If the `$TOMCAT_HOME/lib/ext` folder doesn't
    exist on your application server, create it. If you don't have a Liferay
-   Tomcat bundle, you'll have to individually download the JARs listed below.
+   Tomcat bundle, you'll have to individually download the JARs listed below, but it is discouraged because of possibly version issues.
 
     Here's a list of the JARs that you need to copy or download to your
     `$TOMCAT_HOME/lib/ext` folder:
@@ -66,7 +64,7 @@ third-parties, as described below.
    driver and copy it to your `$TOMCAT_HOME/lib/ext` folder.
 
 4. Create an `osgi` folder in your Liferay Home folder. Then extract the OSGi
-   ZIP file that you downloaded into the `osgi` folder.
+   ZIP file that you downloaded as *OSGi dependencies* into the `osgi` folder.
 
     Liferay requires an OSGi runtime, and the `osgi` folder provides this with
     many required JAR files and configuration files.
@@ -78,14 +76,6 @@ Next, you need to configure Tomcat for running Liferay.
 1. If you're working with a bundle, copy the `setenv.bat` and `setenv.sh` files
    from your bundle to your `$TOMCAT_HOME/bin` folder. If not, create these
    files. `setenv.bat` looks like this:
-
-        if exist "%CATALINA_HOME%/jre1.6.0_20/win" (
-            if not "%JAVA_HOME%" == "" (
-                set JAVA_HOME=
-            )
-
-            set "JRE_HOME=%CATALINA_HOME%/jre1.6.0_20/win"
-        )
 
         set "CATALINA_OPTS=%CATALINA_OPTS% -Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true  -Dorg.apache.catalina.loader.WebappClassLoader.ENABLE_CLEAR_REFERENCES=false -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=384m"
 
