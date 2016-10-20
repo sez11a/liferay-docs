@@ -82,7 +82,7 @@ please refer to [Elastic's documentation](https://www.elastic.co/guide/index.htm
 Now that you've installed Elastic, it sits in a folder on your machine, which is
 referred to here as `[Elasticsearch Home]`. To name your cluster, you'll define
 the cluster name in both Elasticsearch and in Liferay. First, define it in
-Elastic. Edit the following file: 
+Elasticsearch. Edit the following file: 
 
     [Elasticsearch Home]/config/elasticsearch.yml
 
@@ -105,7 +105,7 @@ Elasticsearch starts, and one of its status messages includes a transport addres
     2016-05-03 16:33:28,358][INFO ][transport] [Hobgoblin II] publish_address {127.0.0.1:9300}, bound_addresses {[::1]:9300}, {127.0.0.1:9300}
 
 Take note of this address; you'll need to give it to your Liferay server so it
-can find Elastic on the network. 
+can find Elasticsearch on the network. 
 
 ### Step Four: Configure Liferay to Connect to your Elasticsearch Cluster [](id=step-four-configure-liferay-to-connect-to-your-elastic-cluster)
 
@@ -114,13 +114,13 @@ in, and then go to Control Panel &rarr; Configuration &rarr; System Settings
 &rarr; Foundation. Find *Elasticsearch* in the list of settings and click on it.
 Now you can configure it. Here are the options you need to change: 
 
-**Cluster name:** Enter the name of the cluster as you defined it in Elastic. The default is `LiferayElasticsearchCluster`.
+**Cluster name:** Enter the name of the cluster as you defined it in Elasticsearch. The default is `LiferayElasticsearchCluster`.
 
 **Operation mode:** Defaults to `EMBEDDED`. Change it to `REMOTE` to connect to a
 standalone Elasticsearch.
 
 **Transport addresses:** Enter a delimited list of transport addresses for
-Elastic nodes. Here, you'll enter the transport address from the Elastic server
+Elasticsearch nodes. Here, you'll enter the transport address from the Elasticsearch server
 you started. 
 
 When finished, click *Save*. You're almost done. 
