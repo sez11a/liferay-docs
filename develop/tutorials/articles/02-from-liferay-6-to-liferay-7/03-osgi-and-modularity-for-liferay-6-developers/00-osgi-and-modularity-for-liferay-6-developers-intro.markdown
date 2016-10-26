@@ -481,7 +481,7 @@ steps:
 
 The figure below illustrates the module lifecycle.
 
-Figure x: This state diagram illustrates the module lifecycle. 
+![Figure 1: This state diagram illustrates the module lifecycle.](../../../images/module-state-diagram.png) 
 
 The [Apache Felix Gogo Shell](/develop/reference/-/knowledge_base/7-0/using-the-felix-gogo-shell)
 lets developers manage the module lifecycle. They can install/uninstall modules
