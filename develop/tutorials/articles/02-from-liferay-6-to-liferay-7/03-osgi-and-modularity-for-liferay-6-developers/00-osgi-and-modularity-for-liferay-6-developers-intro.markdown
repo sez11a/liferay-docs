@@ -434,6 +434,12 @@ to a field marks it to be injected with a service matching the field's type.
 On deploying this class's module, the SCR finds a component configuration of the
 class type `SomeApi` and binds the service to this referencing component class.
 
+At build time, Bnd creates a *component description* file for each of a module's
+components automatically. The file specifies the component's services,
+dependencies, and activation characteristics. On module deployment, the OSGi
+framework reads the component description to create the component and manage its
+dependency on other components.
+
 The SCR stands ready to pair service components with each other. For each
 referencing component, the SCR binds an instance of the targeted service to it.
 
@@ -442,6 +448,102 @@ Services supports dynamic dependency injection. Developers can create and
 publish service components for other classes to use. Developers can update the
 components and even publish alternative component implementations for a service.
 This kind of dynamism is a powerful part of @product-ver@.
+
+## Dynamic Deployment
+
+In OSGi, all components, Java classes, resources, and descriptors are deployed
+to the the OSGi framework via modules. The `MANIFEST.MF` file describes the
+module's physical characteristics, such as the packages it exports and imports.
+The module's component description files specify its functional characteristics
+(i.e., the services its components offer and consume). Components also have
+their own life cycle and deployment controls. Declarative Services and shell
+tools give developers fine-grained control over module and component deployment. 
+
+Since a module's contents depend on its activation, consider the module
+activation steps: 
+
+1.  *Installation*: Copying the module JAR into @product@'s `deploy` folder
+    installs the module to the OSGi framework, marking the module `INSTALLED`.
+
+2.  *Resolution*: Once all the packages the module imports (i.e., via the
+    `import-package` manifest header) are found in other active modules (or the
+    current module), the framework marks the module `RESOLVED`.
+
+3.  *Activation*:  Modules are *eagerly* activated by default. That is, they're
+    *started* and marked `ACTIVE` upon resolution. An active module's components
+    are enabled and its exported packages are made available. If a module
+    specifies a `lazy` activation policy, as shown in the manifest header below,
+    it's activated only after another module requests one of its classes.
+
+        Bundle-ActivationPolicy: lazy
+
+The figure below illustrates the module life cycle.
+
+Figure x: This state diagram illustrates the module life cycle. 
+
+The [Apache Felix Gogo Shell](/develop/reference/-/knowledge_base/7-0/using-the-felix-gogo-shell)
+lets developers manage each module's life cycle. They can install/uninstall
+modules and start/stop them. The developer can update a module and notify
+dependents to use the updated module version. Liferay's tools, including Liferay
+IDE/Developer Studio, Workspace, and Blade CLI provide wrappers to Gogo Shell. 
+
+On activating a module, its components are enabled. A component must be
+activated in order to be used. Activation requires all the component's
+referenced services be satisfied. That is, all referenced services must be
+registered. The highest ranked service that matches each reference is bound to
+the component. Once all of a component's service references are found and bound,
+the component is registered and can be activated. 
+
+Components can use *delayed* (default) or *immediate* activation policies. To
+specify immediate activation, the developer adds the attribute `immediate=true`
+to the `@Component` annotation. 
+
+    @Component(
+        immediate = true,
+        ...)
+
+Unless immediate activation is specified, the component's activation is delayed.
+That is, the component's classes aren't loaded and its object isn't created
+until the component is requested. In this way delayed activation can improve
+startup times and conserve resources. 
+
+Gogo Shell's [Service Component Runtime commands](http://felix.apache.org/documentation/subprojects/apache-felix-service-component-runtime.html#shell-command)
+lets developers inspect components and enable/disable them.
+
+-  `src:list [bundleID]`: Lists the module's (bundle's) components.
+
+-  `src:info [componentID]`: Describes the component, including its status and
+    services it provides.
+
+-  `src:enable [componentID]`: Enables the component.
+
+-  `src:disable [componentID]`: Disables the component.
+
+A service policy is built into every service reference. That is, a component can
+specify how it reacts to registration of new or updated services it references.
+References are static by default, meaning that injected services remain bound to
+the component until the services are disabled. On disabling a service, the
+referencing component becomes unsatisfied and is deactivated. If another
+matching service already exists in the registry, the Service Component Runtime
+binds it to the referencing component. But until a matching service is found and
+bound, the component remains unsatisfied and inactive. 
+
+As an alternative to the default static service references, developers can
+specify the *greedy* service policy. For such a policy, if a matching service
+ranked higher than the currently bound service is registered, the higher ranked
+service is bound to the component automatically.
+
+    @Reference(policyOption = ReferencePolicyOption.GREEDY)
+
+As you've seen, OSGi provides several ways for developers to specify and control
+module and component deployment. They can update and replace components as
+necessary. The OSGi framework and Declarative Services lets developers leverage
+dynamic deployment and account for components coming and going. 
+
+Now you're familiar with annotations and tools for managing deployment.
+Declarative Services annotations let you specify component activation and
+service policies. Gogo Shell commands let you control modules and components.
+Next, you'll create and deploy a module and component to @product@. 
 
 ## Example: Building an OSGi Module [](id=example-building-an-osgi-module)
 
@@ -560,17 +662,22 @@ Congratulations! You've successfully built and deployed an OSGi module to
 
 ## Learning More about OSGi [](id=learning-more-about-osgi)
 
-[Introduction to Liferay Development](https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/introduction-to-liferay-development)
+There are many more helpful things to learn about OSGi. Although OSGi resources
+abound, avoid OSGi service articles that explain techniques older and more
+complicated than Declarative Services. See the resources listed below. 
 
-[OSGi enRoute](http://enroute.osgi.org/)
+[Introduction to Liferay Development](https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/introduction-to-liferay-development) - For using OSGi to develop on @product@ 7.
 
-@product-ver@ leverages the following services extensively. They're specified in
-[*The OSGi Alliance OSGi Compendium: Release 6*](https://www.osgi.org/developer/specifications/).
+[OSGi enRoute](http://enroute.osgi.org/) - For hands-on OSGi tutorials from the OSGi Alliance.
 
-- *Declarative Services Specification* 
+[*The OSGi Alliance OSGi Compendium: Release 6*](https://osgi.org/download/r6/osgi.cmpn-6.0.0.pdf)
+specifies the following services @product@ 7 leverages extensively.
 
-- *Configuration Admin Service Specification* - For modifying deployed bundles.
-Since Configuration Admin services are already integrated with Declarative
-Services, developers need not use the low-level API.
+-   *Declarative Services Specification*
 
-- *Metatype Service Specification* - For describing attribute types as metadata. 
+-   *Configuration Admin Service Specification* - For modifying deployed bundles.
+    Since Configuration Admin services are already integrated with Declarative
+    Services, developers need not use the low-level API.
+
+-   *Metatype Service Specification* - For describing attribute types as metadata. 
+
