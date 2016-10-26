@@ -27,29 +27,30 @@ be.
 
 Here are the topics you'll dig into:
 
-1. **Modules as an Improvement over Traditional Plugins**: Development and
-   customization of applications for Liferay has been done traditionally in
-   plugins (Portlet, Hook, Ext and Web). In @product-ver@, plugins are replaced with
-   (and can be automatically converted to) modules. You'll see the similarities
-   and differences of plugins and modules, and you'll learn the benefits of
-   using modules.
+1.  [Modules as an Improvement over Traditional Plugins](/develop/tutorials/-/knowledge_base/7-0/osgi-and-modularity-for-liferay-6-developers#modules-as-an-improvement-over-traditional-plugins):
+    Development and customization of applications for Liferay has been done
+    traditionally in plugins (Portlet, Hook, Ext and Web). In @product-ver@,
+    plugins are replaced with (and can be automatically converted to) modules.
+    You'll see the similarities and differences of plugins and modules, and
+    you'll learn the benefits of using modules.
 
-2. **Leveraging Dependencies**: In @product-ver@, developers can both declare
-   dependencies among modules and can combine modules to create applications.
-   Since leveraging dependencies provides huge benefits, it's important to spend
-   a lot of time showing how to do it. 
+2.  [Leveraging Dependencies](/develop/tutorials/-/knowledge_base/7-0/osgi-and-modularity-for-liferay-6-developers#leveraging-dependencies):
+    In @product-ver@, developers can both declare dependencies among modules and
+    can combine modules to create applications. Since leveraging dependencies
+    provides huge benefits, it's important to spend a lot of time showing how to
+    do it.
 
-3. **OSGi Services and Dependency Injection**: OSGi provides a powerful concept
-   called OSGi Services (also known as microservices). Together with the
-   Declarative Services standard, it provides a clean way to inject dependencies
-   (similar to Spring Dependency Injection) in a dynamic environment. It also
-   offers an elegant extensibility model that @product-ver@ leverages extensively.
+3.  [OSGi Services and Dependency Injection](/develop/tutorials/-/knowledge_base/7-0/osgi-and-modularity-for-liferay-6-developers#osgi-services-and-dependency-injection-with-declarative-services):
+    OSGi provides a powerful concept called OSGi Services (also known as
+    microservices). OSGi's Declarative Services standard provides a clean way to
+    inject dependencies (similar to Spring Dependency Injection) in a dynamic
+    environment. It also offers an elegant extensibility model that
+    @product-ver@ leverages extensively.
 
-<!-- Uncomment when these sections are added. Jim
-4. **Dynamic Deployment**: Module deployment is managed by @product-ver@ (not the
-application server). This section demonstrates how to use dynamic deployment to
-allow for more dynamicity and speed.
--->
+4.  [Dynamic Deployment](/develop/tutorials/-/knowledge_base/7-0/osgi-and-modularity-for-liferay-6-developers#dynamic-deployment):
+    Module deployment is managed by @product@ (not the application server). This
+    section demonstrates how to use dynamic deployment for better control and
+    efficiency.
 
 After investigating these topics, you'll get hands-on experience creating and
 deploying an OSGi module. 
@@ -64,7 +65,7 @@ applications). Liferay's Plugin Compatibility Layer (explained later) makes it
 possible to deploy traditional plugins to the OSGi runtime framework. To benefit
 from all @product-ver@ and OSGi offer, however, you should use OSGi modules.
 
-Here are some important benefits of using modules:
+Modules offer these benefits:
 
 - **Better Encapsulation** - The only classes a module exposes publicly are
 those it exports explicitly. This lets the developer define internal public
@@ -74,23 +75,23 @@ classes transparent to external clients.
 by JAR file. In traditional plugins, developers had to add *all* of a JAR file's
 classes to the classpath in order to use *any* of its classes. With OSGi,
 developers need only import packages of the classes they need. Only the classes
-in those packages are added to the module's class path.
+in those packages are added to the module's classpath.
 
 - **Lightweight** - A module can be as small as the developer wants it to be. In
 contrast to a traditional plugin, which may require several descriptor files, a
 module requires only a single descriptor file--a standard JAR manifest. Also,
-traditional plugins are typically larger than modules and are deployed on app
-server startup, which can slow down that process considerably. Modules deploy
-more quickly and require minimal overhead cost.
+traditional plugins are typically larger than modules and deployed on app server
+startup, which can slow down that process considerably. Modules deploy more
+quickly and require minimal overhead cost.
 
-- **Easier to Reuse** - OSGi modules lend themselves well to developing small,
-highly cohesive chunks of code. They can be combined to create applications that
-are easier to test and maintain. Modules can be distributed publicly (e.g., on
-Maven Central) or privately. And since modules are versioned, developers can
-specify precisely the modules they want to use.
+- **Easy Reuse** - Modules lend themselves well to developing small, highly
+cohesive chunks of code. They can be combined to create applications that are
+easier to test and maintain. Modules can be distributed publicly (e.g., on Maven
+Central) or privately. And since modules are versioned, developers can specify
+precisely the modules they want to use.
 
 - **In-Context Descriptors** - Where plugins use descriptor files (e.g.,
-`web.xml`, `portlet.xml`, etc.) to describe classes, module classes uses OSGi
+`web.xml`, `portlet.xml`, etc.) to describe classes, module classes use OSGi
 annotations to describe themselves. For example, a module portlet class can use
 [OSGi Service annotation properties](https://dev.liferay.com/develop/reference/-/knowledge_base/7-0/portlet-descriptor-to-osgi-service-property-map)
 to specify its name, display name, resource bundle, public render parameters,
@@ -144,7 +145,7 @@ modules.
 
 - `Import-Package`: Packages this module requires that other modules provide.
 
-Additional headers can be used to specify more characteristics, such as how the
+Other headers can be used to specify more characteristics, such as how the
 module was built, development tools used, etc. 
 
 For example, here are some headers from the Liferay Journal Web module manifest:
@@ -179,8 +180,9 @@ Gradle or Maven, to manage dependencies.
 is an environment for managing module projects (and theme projects). It provides
 Gradle build scripts for developing on Liferay. It can be used from the command
 line or from within [Liferay IDE](/develop/tutorials/-/knowledge_base/7-0/liferay-ide)
-and Developer Studio. Note also that these IDE/Studio provide plugins for Gradle,
-Maven, and BndTools. Tooling details are covered later in this series.
+and Developer Studio. Note also that Liferay IDE/Developer Studio provide
+plugins for Gradle, Maven, and BndTools. Tooling details are covered later in
+this series.
 
 Now that you're familiar with the module structure and manifest, it's time to
 explore how to build modules.
@@ -194,9 +196,9 @@ to generate it. Bnd can be used on its own or along with other build tools, such
 as Gradle or Maven. Liferay Workspace uses Gradle and Bnd together.
 
 One of Bnd's best features is that it automatically transverses a module's code
-to identify external classes the module uses and add them to the manifest's list
-of packages to import. Bnd also provides several OSGi-specific operations that
-simplify module development.
+to identify external classes the module uses and adds them to the manifest's
+list of packages to import. Bnd also provides several OSGi-specific operations
+that simplify module development.
 
 Bnd generates the manifest based on a file called `bnd.bnd` in the project root.
 This file's header list is similar to (but shorter than) that of the
@@ -230,7 +232,7 @@ Using an OSGi manifest, a module declares the Java packages it consumes and
 shares. The manifest's `Import-Package` and `Export-Package` settings expose
 this information. As developers determine whether to use a particular module,
 they know up-front what it offers and what it depends on. As an improvement over
-JavaEE, OSGi takes away dependency guesswork.
+Java EE, OSGi takes away dependency guesswork.
 
 This part of the tutorial explains:
 
@@ -245,9 +247,9 @@ Let's start by learning how dependencies operate in @product-ver@.
 Since all of @product-ver@ leverages dependencies, it also demonstrates how to use
 them. As mentioned previously, all of what was in Liferay 6 and its apps has
 been refactored into OSGi modules. The `portal-service` API (the main API in
-Liferay 6) has been replaced by the `portal-kernel` module (@product@'s kernel
-API) and many small, highly-cohesive modules that provide frameworks, utilities,
-apps, and more.
+Liferay 6) has been replaced by the `portal-kernel` module (@product-ver@'s
+kernel API) and many small, highly-cohesive modules that provide frameworks,
+utilities, apps, and more.
 
 Not only do @product@ modules depend on third-party modules but they also depend
 on each other. You can likewise leverage dependencies in your projects. Whether
@@ -266,7 +268,7 @@ Versioning is independent for each Liferay module and its exported packages. You
 can use a specific package version by depending on the version of the module
 that exports it. And you're free to use a mix of Liferay modules in the versions
 you want (but remember, "With great power comes great responsibility," so unless
-you really know what you are doing, use the same version of each module you
+you really know what you're doing, use the same version of each module you
 depend on).
 
 For all its modules, @product@ uses [Semantic Versioning](http://semver.org).
@@ -330,34 +332,34 @@ described:
 
 **API**:
 
-- `blogs-api` - Encapsulates the core implementation
+-   `blogs-api` - Encapsulates the core implementation
 
-- `blogs-item-selector-api` - Encapsulates the item-selector implementation
+-   `blogs-item-selector-api` - Encapsulates the item-selector implementation
 
 **Back-end**:
 
-- `blogs-service` - Implements `blogs-api`
+-   `blogs-service` - Implements `blogs-api`
 
 **Front-end**:
 
-- `blogs-web` - Provides the app's UI
+-   `blogs-web` - Provides the app's UI
 
 **Non-essential features and extensions**:
 
-- `blogs-editor-configuration` - Extends the `portal-kernel` module for
-extending editors.
+-   `blogs-editor-configuration` - Extends the `portal-kernel` module for
+    extending editors
 
-- `blogs-recent-bloggers-web` - Provides the Recent Bloggers app
+-   `blogs-recent-bloggers-web` - Provides the Recent Bloggers app
 
-- `blogs-item-selector-api` - Encapsulates the item-selector implementation
+-   `blogs-item-selector-api` - Encapsulates the item-selector implementation
 
-- `blogs-item-selector-web` - Renders the Blogs app's item-selector
+-   `blogs-item-selector-web` - Renders the Blogs app's item-selector
 
-- `blogs-layout-prototype` - Creates a Page Template showcasing blog entries
+-   `blogs-layout-prototype` - Creates a Page Template showcasing blog entries
 
 The Blogs app, like many modular apps, separates concerns into modules. In this
 way, front-end developers concentrate on front-end code, back-end developers
-concentrates on that code, and so on. These logical boundaries free developers
+concentrate on that code, and so on. These logical boundaries free developers
 to design, implement, and test the modules independently.
 
 As you develop app-centered modules, you can consider bundling them with your
@@ -452,47 +454,48 @@ This kind of dynamism is a powerful part of @product-ver@.
 ## Dynamic Deployment
 
 In OSGi, all components, Java classes, resources, and descriptors are deployed
-to the the OSGi framework via modules. The `MANIFEST.MF` file describes the
-module's physical characteristics, such as the packages it exports and imports.
-The module's component description files specify its functional characteristics
-(i.e., the services its components offer and consume). Components also have
-their own life cycle and deployment controls. Declarative Services and shell
-tools give developers fine-grained control over module and component deployment. 
+via modules. The `MANIFEST.MF` file describes the module's physical
+characteristics, such as the packages it exports and imports. The module's
+component description files specify its functional characteristics (i.e., the
+services its components offer and consume). Also modules and their components
+have their own lifecycle and administrative APIs. Declarative Services and shell
+tools give developers fine-grained control over module and component deployment.
 
-Since a module's contents depend on its activation, consider the module
-activation steps: 
+Since a module's contents depend on its activation, consider the activation
+steps: 
 
 1.  *Installation*: Copying the module JAR into @product@'s `deploy` folder
     installs the module to the OSGi framework, marking the module `INSTALLED`.
 
-2.  *Resolution*: Once all the packages the module imports (i.e., via the
-    `import-package` manifest header) are found in other active modules (or the
-    current module), the framework marks the module `RESOLVED`.
+2.  *Resolution*: Once all the module's requirements are met (e.g., all packages
+    it imports are available), the framework publishes the module's exported
+    packages and marks it `RESOLVED`.
 
-3.  *Activation*:  Modules are *eagerly* activated by default. That is, they're
-    *started* and marked `ACTIVE` upon resolution. An active module's components
-    are enabled and its exported packages are made available. If a module
-    specifies a `lazy` activation policy, as shown in the manifest header below,
-    it's activated only after another module requests one of its classes.
+3.  *Activation*: Modules are activated *eagerly* by default. That is, they're
+    started in the framework and marked `ACTIVE` on resolution. An active
+    module's components are enabled. If a module specifies a `lazy` activation
+    policy, as shown in the manifest header below, it's activated only after
+    another module requests one of its classes.
 
         Bundle-ActivationPolicy: lazy
 
-The figure below illustrates the module life cycle.
+The figure below illustrates the module lifecycle.
 
-Figure x: This state diagram illustrates the module life cycle. 
+Figure x: This state diagram illustrates the module lifecycle. 
 
 The [Apache Felix Gogo Shell](/develop/reference/-/knowledge_base/7-0/using-the-felix-gogo-shell)
-lets developers manage each module's life cycle. They can install/uninstall
-modules and start/stop them. The developer can update a module and notify
-dependents to use the updated module version. Liferay's tools, including Liferay
-IDE/Developer Studio, Workspace, and Blade CLI provide wrappers to Gogo Shell. 
+lets developers manage the module lifecycle. They can install/uninstall modules
+and start/stop them. Developers can update a module and notify dependent modules
+to use the update. Liferay's tools, including Liferay IDE/Developer Studio,
+Liferay Workspace, and Blade CLI offer similar shell commands that exercise the
+OSGi Admin API. 
 
-On activating a module, its components are enabled. A component must be
-activated in order to be used. Activation requires all the component's
-referenced services be satisfied. That is, all referenced services must be
-registered. The highest ranked service that matches each reference is bound to
-the component. Once all of a component's service references are found and bound,
-the component is registered and can be activated. 
+On activating a module, its components are enabled. But only *activated*
+components can be used. A component's activation requires all its referenced
+services be satisfied. That is, all services it references must be registered.
+The highest ranked service that matches a reference is bound to the component.
+Once all the services the component references are found and bound to it, the
+component is registered and ready for activation. 
 
 Components can use *delayed* (default) or *immediate* activation policies. To
 specify immediate activation, the developer adds the attribute `immediate=true`
@@ -503,42 +506,30 @@ to the `@Component` annotation.
         ...)
 
 Unless immediate activation is specified, the component's activation is delayed.
-That is, the component's classes aren't loaded and its object isn't created
-until the component is requested. In this way delayed activation can improve
-startup times and conserve resources. 
+That is, the component's object is created and its classes are loaded once the
+component is requested. In this way delayed activation can improve startup times
+and conserve resources. 
 
 Gogo Shell's [Service Component Runtime commands](http://felix.apache.org/documentation/subprojects/apache-felix-service-component-runtime.html#shell-command)
-lets developers inspect components and enable/disable them.
+let developers manage components:
 
 -  `src:list [bundleID]`: Lists the module's (bundle's) components.
 
 -  `src:info [componentID]`: Describes the component, including its status and
-    services it provides.
+    the services it provides.
 
 -  `src:enable [componentID]`: Enables the component.
 
 -  `src:disable [componentID]`: Disables the component.
 
-A service policy is built into every service reference. That is, a component can
-specify how it reacts to registration of new or updated services it references.
-References are static by default, meaning that injected services remain bound to
-the component until the services are disabled. On disabling a service, the
-referencing component becomes unsatisfied and is deactivated. If another
-matching service already exists in the registry, the Service Component Runtime
-binds it to the referencing component. But until a matching service is found and
-bound, the component remains unsatisfied and inactive. 
-
-As an alternative to the default static service references, developers can
-specify the *greedy* service policy. For such a policy, if a matching service
-ranked higher than the currently bound service is registered, the higher ranked
-service is bound to the component automatically.
+Service references are static by default. That is, an injected service remains
+bound to the referencing component until the service is disabled. As an
+alternatively, developers can specify *greedy* service policies for references.
+Every time a higher ranked matching service is registered, the framework unbinds
+the lower ranked service from the component and binds the new service in place
+of it automatically. Here's a `@Reference` annotation that uses a greedy policy:
 
     @Reference(policyOption = ReferencePolicyOption.GREEDY)
-
-As you've seen, OSGi provides several ways for developers to specify and control
-module and component deployment. They can update and replace components as
-necessary. The OSGi framework and Declarative Services lets developers leverage
-dynamic deployment and account for components coming and going. 
 
 Now you're familiar with annotations and tools for managing deployment.
 Declarative Services annotations let you specify component activation and
@@ -600,7 +591,7 @@ It contains these methods:
     method on component activation.
 
 The `@Component` annotation defines the class as an OSGi service component. The
-following properties accompany specify its details:
+following properties specify its details:
 
 -  `service=MyService.class` - designates the component to be a service
     component for registering under the type `MyService`. In this example, the
@@ -662,22 +653,35 @@ Congratulations! You've successfully built and deployed an OSGi module to
 
 ## Learning More about OSGi [](id=learning-more-about-osgi)
 
-There are many more helpful things to learn about OSGi. Although OSGi resources
-abound, avoid OSGi service articles that explain techniques older and more
-complicated than Declarative Services. See the resources listed below. 
+There is much more to learn about developing apps using OSGi. Several resources
+are listed below and many more abound. To make the best of your time, however,
+avoid OSGi service articles that explain techniques that are older and more
+complicated than Declarative Services.
 
-[Introduction to Liferay Development](https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/introduction-to-liferay-development) - For using OSGi to develop on @product@ 7.
+Developers new to OSGi should check out these resources:
 
-[OSGi enRoute](http://enroute.osgi.org/) - For hands-on OSGi tutorials from the OSGi Alliance.
+-   [Introduction to Liferay Development](https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/introduction-to-liferay-development) - 
+    For using OSGi to develop on @product-ver@.
 
+-   [OSGi enRoute](http://enroute.osgi.org/) is a site the OSGi Alliance
+    provides to the OSGi community. These sections are recommended.
+
+    -   [Documentation](http://enroute.osgi.org/book/210-doc.html) - For details
+        on modularity and the OSGi architecture.
+
+    -   [Tutorials](http://enroute.osgi.org/book/150-tutorials.html) - For
+        hands-on experience with OSGi modules and Declarative Services.
+
+Developers ready to dive deep into OSGi should read the OSGi specifications.
+They're well-written and provide comprehensive details on all that OSGi offers.
 [*The OSGi Alliance OSGi Compendium: Release 6*](https://osgi.org/download/r6/osgi.cmpn-6.0.0.pdf)
-specifies the following services @product@ 7 leverages extensively.
+specifies the following services that @product-ver@ leverages extensively.
 
 -   *Declarative Services Specification*
 
--   *Configuration Admin Service Specification* - For modifying deployed bundles.
-    Since Configuration Admin services are already integrated with Declarative
-    Services, developers need not use the low-level API.
+-   *Configuration Admin Service Specification* - For modifying deployed
+    bundles. Since Configuration Admin services are already integrated with
+    Declarative Services, however, Liferay developers need not use the low-level
+    API.
 
--   *Metatype Service Specification* - For describing attribute types as metadata. 
-
+-   *Metatype Service Specification* - For describing attribute types as metadata.
