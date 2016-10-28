@@ -23,6 +23,7 @@ use in your forms that are covered in this article:
 - Validating fields using a number of different criteria
 - Configuring form permissions
 - Laying out the form
+- Configuring the autosave interval
 
 Aside from those features, which enhance the building of your forms, there are
 some settings and processing features to explore:
@@ -643,6 +644,18 @@ radio, text, and checkbox fields, laid out in two columns.
 ![Figure 22: The second page of The Lunar Resort employment application.](../../../images/forms-page2.png)
 
 $$$
+
+## Autosave [](id=autosave)
+
+The forms application uses autosave to periodically save the form you're
+building. By default, a save occurs every minute.
+
+To change the autosave interval, navigate to *Control Panel &rarr; Configuration
+&rarr; System Settings &rarr; Forms and Workflow*, and click on the *Forms*
+entry. Find *Autosave Interval* and enter a number in minutes.
+
+Save the configuration when finished, and rest easy knowing that even when you
+forget to save your work, the Forms application has your back.
 
 Now it's done. Your users, including Guest users, can submit applications to The
 Lunar Resort. The form is multi-page, full of features, and there's even some
