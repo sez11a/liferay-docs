@@ -5,10 +5,9 @@ trying to improve it. You add new features, remove features, enhance features,
 reorganize the code, and do whatever you can to respond to what your users want
 and make your application the best it can be. To transition users to new and
 improved versions of your software, you need to take them through the process of
-upgrading. 
+upgrading. You'll also want to verify and fix any integrity problems found in 
+the database while changes are being made to your app.
 
-Liferay provides a robust upgrade framework for you to use. Here you'll learn
-how to create an upgrade process for your application, as well as how to migrate
-your existing upgrade processes to use the new upgrade framework.
-
-<!--Add verifier framework info here once it is written-->
+Liferay provides robust upgrade and verifier frameworks. Here you'll learn how
+to create an upgrade process for your application, as well as how to create a
+verification process for your application.
