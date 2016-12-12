@@ -12,7 +12,7 @@ For Liferay DXP to work correctly, WebSphere 8.5.5 Fix Pack 9 must be installed.
 You can find more information about this fix pack 
 [here](http://www-01.ibm.com/support/docview.wss?uid=swg24041819). 
 
-Please also note that the WebSphere Application Liberty Profile isn't supported
+Please also note that the **WebSphere Application Liberty Profile isn't supported**
 by Liferay. 
 
 You should also read the following articles to familiarize yourself with
@@ -312,8 +312,12 @@ Replace this file's contents with the following:
         permission java.security.AllPermission;
     };
 
++$$$
+
 This configuration opens all permissions--you can fine-tune your policy's 
-permissions later. 
+permissions later.
+
+$$$
 
 Great! Now you're ready to start Liferay. 
 

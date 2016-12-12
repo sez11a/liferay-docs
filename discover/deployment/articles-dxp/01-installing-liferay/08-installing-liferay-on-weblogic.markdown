@@ -20,9 +20,7 @@ Liferay's general installation steps:
 - [Installing Liferay Manually](/discover/deployment/-/knowledge_base/7-0/installing-liferay-manually)
 
 And lastly, download Liferay DXP's WAR file and dependencies from 
-[http://files.liferay.com/private/ee](http://files.liferay.com/private/ee), 
-or the customer portal on 
-[liferay.com](https://www.liferay.com/). 
+the [Customer Portal](https://web.liferay.com/group/customer/dxp/downloads/digital-enterprise).
 You'll need the following files:
 
 - `liferay-dxp-digital-enterprise-[version].war`: Liferay DXP WAR file
@@ -64,12 +62,6 @@ If you're running WebLogic on Mac or Linux, you may also need to set the
 
 This tells the Node Manager to start in non-native mode. This is required for 
 the platforms where WebLogic doesn't provide native Node Manager libraries. 
-
-<!-- 
-Do we need a section on setting MW_HOME, the classpath, and path, as set 
-in setWLSEnv.sh? Or is this something an WLS administrator will already know or 
-have done? 
--->
 
 ## Configuring WebLogic [](id=configuring-weblogic)
 
@@ -251,9 +243,15 @@ apps, you'll want to protect your DXP instance and your WebLogic server from
 security threats. To do so, you must enable Java Security on your WebLogic 
 server and specify a security policy to grant Liferay DXP access to your server. 
 
-First, you'll grant Liferay access to your server. This configuration opens all 
-permissions--you can fine-tune your policy's permissions later. If it doesn't 
-already exist, create a policy file named `weblogic.policy` in your 
+First, you'll grant Liferay access to your server. 
+
++$$$
+
+This configuration opens all permissions--you can fine-tune your policy's permissions later. 
+
+$$$
+
+If it doesn't already exist, create a policy file named `weblogic.policy` in your 
 `$WL_HOME/server/lib` folder. Replace its contents with the following: 
 
     grant {

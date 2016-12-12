@@ -1,14 +1,9 @@
 # Installing Liferay on tc Server [](id=installing-liferay-on-tc-server)
 
-The easiest way to get Liferay running on tc Server is to [download a bundle](https://web.liferay.com/group/customer/downloads/portal/product). If
-that's not an option, you can install Liferay onto tc Server. In addition to a
-supported version of [tc Server](https://network.pivotal.io/products/pivotal-tcserver) (version 3 or
-higher), make sure you have acquired the following items (from [Liferay's customer portal](https://web.liferay.com/group/customer/downloads/portal/product))
+The first step of the installation is to download a supported version of [tc Server](https://network.pivotal.io/products/pivotal-tcserver). Make sure you have acquired the following items (from [Liferay's customer portal](https://web.liferay.com/group/customer/downloads/portal/product))
 
 -  A Liferay WAR file
-
 -  A compressed file with The OSGi JARs that contain much of Liferay's functionality
-
 -  A compressed file with the necessary Liferay dependencies and additional
    libraries you need for your installation
 
@@ -20,6 +15,8 @@ Installing Liferay manually requires these basic steps:
 - Configuring your application server for Liferay
 - Installing Liferay by providing the WAR file to your application server and
   the OSGi folder for Liferay
+
+# Installing Liferay DXP on tc Server [](id=installing-liferay-dxp-on-tc-server)
 
 +$$$
 
@@ -248,6 +245,13 @@ To enable PACL, you need to enable Tomcat’s security manager. Make sure
     grant {
         permission java.security.AllPermission;
     };
+
++$$$
+
+This configuration opens up all permissions. You can tune the permissions in
+your policy later. 
+
+$$$
 
 Open `$TCSERVER_INSTANCE_HOME/bin/setenv.sh` if on Linux, Unix, or Mac OS, or
 `setenv.bat` if on Windows. Enable the security manager by inserting the
