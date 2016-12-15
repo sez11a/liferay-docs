@@ -165,7 +165,10 @@ two strategies:
     `tunneling.servlet.shared.secret` property *must* be ASCII compliant.
 
 Once you've chosen a key, make sure that value of your current server matches
-the value of your remote server.
+the value of your remote server. **Do not share the key with any user.** It is
+used exclusively for communication between the staging and production
+environments. Any user possessing the key can manage the production server,
+execute server-side Java code, etc.
 
 One last thing you'll need to do is update the *TunnelAuthVerfierConfiguration*
 of your Liferay instance. To do this, navigate to the Control Panel &rarr;
