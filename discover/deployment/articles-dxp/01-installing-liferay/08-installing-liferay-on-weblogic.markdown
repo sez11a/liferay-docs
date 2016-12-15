@@ -65,12 +65,6 @@ If you're running WebLogic on Mac or Linux, you may also need to set the
 This tells the Node Manager to start in non-native mode. This is required for 
 the platforms where WebLogic doesn't provide native Node Manager libraries. 
 
-<!-- 
-Do we need a section on setting MW_HOME, the classpath, and path, as set 
-in setWLSEnv.sh? Or is this something an WLS administrator will already know or 
-have done? 
--->
-
 ## Configuring WebLogic [](id=configuring-weblogic)
 
 Next, you must set some variables in two WebLogic startup scripts. These 
