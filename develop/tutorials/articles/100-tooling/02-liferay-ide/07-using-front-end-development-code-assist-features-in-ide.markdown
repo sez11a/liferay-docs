@@ -1,31 +1,32 @@
-# Using Front-End Code Assist Features in IDE [](id=using-front-end-code-assist-features-in-ide)
+# Using Front-End Code Assist Features in @ide@ [](id=using-front-end-code-assist-features-in-ide)
 
-Liferay IDE provides extended front-end development tools to assist in Liferay
+Liferay @ide@ provides extended front-end development tools to assist in Liferay
 development. You now have access to code inferencing and code completion
 features for AlloyUI, JavaScript, CSS, and jQuery. 
 
 This tutorial covers how to use the code assist features for AlloyUI,
-JavaScript, CSS, and jQuery in IDE. Each language is covered in its own section,
-so you can navigate to the language you're most interested in. Continue reading
-to find out how to use IDE's code assist features in your project. 
+JavaScript, CSS, and jQuery in @ide@. Each language is covered in its own
+section, so you can navigate to the language you're most interested in.
+Continue reading to find out how to use @ide@'s code assist features in your
+project. 
 
 ## Using Code Assist Features [](id=using-code-assist-features)
 
-IDE's integration of [Tern](http://ternjs.net/) gives you access to code
+@ide@'s integration of [Tern](http://ternjs.net/) gives you access to code
 assist in JavaScript, AlloyUI, and CSS. To access these features, you must be
 working in a JavaScript, JSP, HTML, or CSS file. 
 
 You must have Tern features enabled in your project in order to use 
 them. By default, Liferay portlet plugins already have Tern features enabled. 
 Visit the
-[Enabling Code Assist Features in your Project](/develop/tutorials/-/knowledge_base/7-0/enabling-tern-code-assist-features-in-your-project)
+[Enabling Code Assist Features in your Project](/develop/tutorials/-/knowledge_base/7-0/enabling-code-assist-features-in-your-project)
 tutorial to learn how to enable Tern features for non-Liferay specific projects.
 
 +$$$
 
 **Note:** For those developing with the Plugins SDK, the taglib descriptions
-that IDE makes available to users are dependent upon the Plugins SDK version.
-IDE uses taglib descriptions from the current SDK's `util-taglib.jar` file, so a
+that @ide@ makes available to users are dependent upon the Plugins SDK version.
+@ide@ uses taglib descriptions from the current SDK's `util-taglib.jar` file, so a
 more up-to-date Plugins SDK means more up-to-date taglib descriptions. 
 
 $$$
@@ -58,7 +59,7 @@ and press *Ctrl+Space* to see a list of objects to choose from.
 $$$
 
 By default, code inference is triggered by a keystroke combination; however, you
-can enable auto activation in IDE's Preferences menu. Follow the steps below
+can enable auto activation in @ide@'s Preferences menu. Follow the steps below
 to enable auto activation: 
  
 1. Navigate to *Window* &rarr; *Preferences* &rarr; *JavaScript* &rarr; *Editor*
@@ -86,7 +87,7 @@ as well as in the HTML/JSP editor when working with `<script>` and
     see a list of all the available AlloyUI code templates, along with
     documentation. 
 
-    ![Figure 3: IDE gives you access to AUI code templates in the JS and JSP editors.](../../../images/code-template.png)
+    ![Figure 3: @ide@ gives you access to AUI code templates in the JS and JSP editors.](../../../images/code-template.png)
  
 3.  Select your template and hit *Enter* to paste its contents into your
     `main.js`. 
@@ -94,7 +95,7 @@ as well as in the HTML/JSP editor when working with `<script>` and
     +$$$
 
     **Note:** You can view all the AlloyUI code templates you have 
-    installed by going to IDE's Preferences menu and selecting *JavaScript*
+    installed by going to @ide@'s Preferences menu and selecting *JavaScript*
     &rarr; *Editor* &rarr; *Templates*. 
 
     $$$ 
@@ -123,7 +124,7 @@ You can also add the import from the Snippets menu under *Taglib imports* &rarr;
 There you go! Whether in a JavaScript file or inside a JSP, you now have access
 to code assist features that improve your workflow. 
 
-Next, you'll examine the JavaScript code assist features for IDE.
+Next, you'll examine the JavaScript code assist features for @ide@.
 
 ### JavaScript Code Assist Features [](id=javascript-code-assist-features)
 
@@ -133,7 +134,7 @@ available in your project because the Tern module `Liferay` is enabled. This
 plugin provides code completions for the static JavaScript object APIs available
 to portlets when running in Liferay Portal. To learn more about enabling Tern
 modules in Eclipse, refer to the
-[Enabling Code Assist Features in Your Project](/develop/tutorials/-/knowledge_base/7-0/enabling-tern-code-assist-features-in-your-project)
+[Enabling Code Assist Features in Your Project](/develop/tutorials/-/knowledge_base/7-0/enabling-code-assist-features-in-your-project)
 tutorial. 
 
 The example below shows how you can use code assist features to easily access
@@ -164,26 +165,26 @@ functions in your portlet project.
 
 6.  Press *Enter* to use code completion and add the function to your button. 
 
-As you can see, JavaScript development is a breeze using IDE's code assist
+As you can see, JavaScript development is a breeze using @ide@'s code assist
 features. Now that you know how to use the AlloyUI and JavaScript code assist
 features, you can learn how to use the CSS code assist features next. 
 
 ### CSS Code Assist Features [](id=css-code-assist-features)
 
-IDE offers code inference and completion tools for CSS. In order to use these
+@ide@ offers code inference and completion tools for CSS. In order to use these
 tools, you'll need to install an additional plugin. 
 
 +$$$
 
 **Note:** The plugin described below is planned to be bundled with Liferay
-IDE in the near future. Initial tests of the plugin revealed performance issues
-in some cases, which is why it is not yet a part of Liferay IDE. Problems were
+@ide@ in the near future. Initial tests of the plugin revealed performance issues
+in some cases, which is why it is not yet a part of Liferay @ide@. Problems were
 not consistent, so you may have no issues installing the plugin, but we wanted
 to give full disclosure about it. 
 
 $$$
 
-Follow the steps below to install the plugin in IDE: 
+Follow the steps below to install the plugin in @ide@: 
 
 1. Go to *Help* &rarr; *Install New Software...*. 
 
@@ -246,8 +247,8 @@ Lastly, you'll learn about the code assist features for jQuery.
 ### jQuery Code Assist Features [](id=jquery-code-assist-features)
 
 You can also use code assist with jQuery. To do this, you must enable the
-`jQuery` Tern module. Follow the instructions in the [Enabling Code Assist Features in Your
-Project](/develop/tutorials/-/knowledge_base/7-0/enabling-tern-code-assist-features-in-your-project)
+`jQuery` Tern module. Follow the instructions in the
+[Enabling Code Assist Features in Your Project](/develop/tutorials/-/knowledge_base/7-0/enabling-code-assist-features-in-your-project)
 tutorial to learn how to enable Tern modules in your project. 
 
 The jQuery Tern plugin gives type information for the jQuery framework. In the
@@ -271,7 +272,7 @@ is also made available.
 
 ![Figure 7: jQuery code assist also displays type information for parameters.](../../../images/jquery-js-2.png)
 
-Excellent! You now know how to use IDE's front-end development code assist 
+Excellent! You now know how to use @ide@'s front-end development code assist 
 features to improve your workflow. 
 
 ## Related Topics [](id=related-topics)
@@ -280,4 +281,4 @@ features to improve your workflow.
 
 [Liferay Workspace](/develop/tutorials/-/knowledge_base/7-0/liferay-workspace)
 
-[From Liferay 6 to Liferay 7](/develop/tutorials/-/knowledge_base/7-0/from-liferay-6-to-liferay-7)
+[From Liferay 6 to @product-ver@](/develop/tutorials/-/knowledge_base/7-0/from-liferay-6-to-liferay-7)

@@ -3,7 +3,7 @@
 A *Liferay Workspace* is a generated environment that is built to hold and
 manage your Liferay projects. This workspace is intended to aid in the
 management of Liferay projects by providing various Gradle build scripts and
-configured properties. This is the official way to create Liferay 7.0 modules
+configured properties. This is the official way to create @product-ver@ modules
 using Gradle. For those developers that still want to develop WAR-style plugins
 using the Plugins SDK, this way is also supported using a Liferay Workspace.
 
@@ -21,17 +21,21 @@ customize your workspace's folder structure any way you'd like.
 
 The top-level files/folder of a Liferay workspace are outlined below:
 
+- `bundles` (generated): the default folder for @product@ bundles.
 - `configs`: holds the configuration files for different environments. These
   files serve as your global configuration files for all Liferay servers and
   projects residing in your workspace.
 - `gradle`: holds the Gradle Wrapper used by your workspace.
 - `modules`: holds your custom modules.
+- `plugins-sdk` (generated): holds plugins to migrate from previous releases.
 - `themes`: holds your custom themes which are built using the Theme Generator.
-- `build.gradle`
-- `gradle.properties`
-- `gradlew`
-- `gradlew.bat`
-- `settings.gradle`
+- `wars` (generated): holds traditional WAR-style web application projects.
+- `build.gradle`: the common Gradle build file.
+- `gradle.properties`: specifies the workspace's project locations and @product@
+  server configuration.
+- `gradlew`: executes the Gradle command wrapper
+- `settings.gradle`: applies plugins to the workspace and configures its
+  dependencies.
 
 The build/properties files included in your workspace's root directory sets your
 workspace's Gradle properties and facilitates the build processes of your
@@ -91,11 +95,11 @@ tutorial.
 $$$
 
 Once you've developed and managed projects in your workspace, it could also be
-usefuly to bundle your workspace into a ZIP or TAR file. This provides the
+useful to bundle your workspace into a ZIP or TAR file. This provides the
 flexibility to distribute your workspace to potential consumers. To do this,
-navigate to your workspace's root folder and run the following:
+navigate to your workspace's root folder and run the following command:
 
-    .\gradlew distBundle[Zip|Tar]
+    ./gradlew distBundle[Zip|Tar]
 
 Your distribution file is available from the workspace's `/build` directory.
 
@@ -109,11 +113,15 @@ generate and install (e.g., `7.0-ce-ga1`).
 Once you've finalized your Gradle properties, navigate to your workspace's root
 folder and run
 
-    gradlew initBundle
+    ./gradlew initBundle
 
 As you read earlier, the workspace uses a Gradle wrapper to download and use
 Gradle build tools. This command downloads the version of Liferay you specified
 in your Gradle properties and installs your Liferay instance in the `bundles`
+folder.
+
+If you want to skip the downloading process, you can create the `bundles` folder
+manually in your workspace's ROOT folder and unzip your @product@ bundle to that
 folder.
 
 The Liferay Workspace is a great development environment for Liferay module
@@ -122,16 +130,15 @@ applications? Liferay Workspace can handle that request too!
 
 ## Using a Plugins SDK from Your Workspace [](id=using-a-plugins-sdk-from-your-workspace)
 
-Because @product@ 7.0 uses a module-based framework, the current structure of a
+Because @product-ver@ uses a module-based framework, the current structure of a
 Liferay Workspace is centered around module development. There are still,
 however, many situations where you must create WAR-style plugins using the
 Plugins SDK. Because of this, your workspace can also work with the Plugins SDK.
 When configuring your SDK in a workspace, you can take advantage of all the new
 functionality workspaces provide and also use the SDK environment that you're
-used to. To learn more about how to convert legacy applications to 7.0 modules
-and what you should consider before making the jump, visit the
-[Modularizing an Existing Portlet](/develop/tutorials/-/knowledge_base/7-0/modularizing-an-existing-portlet)
-tutorial.
+used to. To learn more about upgrading legacy applications to @product-ver@ and
+what you should consider before converting them to modules, visit the tutorial
+[Planning a Plugin Upgrade to Liferay @product-ver@](/develop/tutorials/-/knowledge_base/7-0/migrating-existing-code-to-liferay-7).
 
 The Blade CLI offers a command that allows a Plugins SDK environment be
 automatically generated with Liferay workspace. If you created your workspace
@@ -144,13 +151,14 @@ default, so you must create it yourself. In your workspace's root
 folder, create the `plugins-sdk` folder. Then copy your legacy Plugins SDK
 files into the `plugins-sdk` folder.
 
-One last thing you must do to ensure the Plugins SDK works properly in the
-context of your workspace is to generate all its requirements. These
-requirements include the build JARs the Plugins SDK relies on to function
-properly. To download the necessary requirements for your Plugins SDK, run the
-following command from your workspace's root folder:
+Liferay Workspace and the Plugins SDK require many build related artifacts. To
+start the artifact download process, execute the following command in your
+workspace's root folder:
 
-    gradlew tasks
+    ./gradlew tasks
 
-Once the downloading is complete, your Plugins SDK is ready to use in your
-workspace. It's as simple as that!
+The Workspace and Plugins SDK's artifacts are downloaded, and the available
+tasks are listed in the terminal. Since the download process takes time,
+invoking it at a convenient time such as before a work break can be
+worthwhile. Once the downloading is complete, your Plugins SDK is ready to use
+in your workspace. It's as simple as that!
