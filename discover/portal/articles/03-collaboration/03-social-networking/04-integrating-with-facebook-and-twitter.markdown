@@ -58,12 +58,18 @@ It's important to note that your tweets are displayed *only* in an Activities
 application. To view your tweets, add the Activities application to your user 
 public profile page. Users can then view your profile to see your tweets.
  
-You need to wait a few minutes after registering your Twitter username for your 
-tweets to show up. Keep in mind that your tweets are shown in order according to 
-the date and time that you originally made them. Therefore, if you haven't 
-tweeted in a while, then your tweets might be pushed off the Activities feed by 
-more recent activity. You can change the number of items shown in the Activities 
-feed in its Configuration.
+The Twitter feed is updated every five minutes by default, so you need to wait a 
+few minutes after registering your Twitter username for your tweets to show up.
+This value can be changed through System Settings. Goto *Control Panel* &rarr; 
+*System Settings*, select the *Other* tab, and click *Twitter Service*. The
+default value for the *Twitter synchronization interval* is *5* (5 minutes). Set
+this value to *1* to refresh the Twitter feed every minute.
+
+Keep in mind that your tweets are shown in order according to the date and time 
+that you originally made them. Therefore, if you haven't tweeted in a while, 
+then your tweets might be pushed off the Activities feed by more recent activity. 
+You can change the number of items shown in the Activities feed in its 
+Configuration.
 
 ## Using Social Bookmarks [](id=using-social-bookmarks)
 
