@@ -90,7 +90,7 @@ need to edit any more variations, you can continue clicking *Next* until you
 reach the final preview screen. Click *Submit for Review* to submit your changes
 for review. All changes must go through the submission process. If your
 app revision only consists of metadata changes, it need only go through the
-[*App metadata review*](/distribute/how-to-publish/-/knowledge_base/how-to-publish/understanding-the-app-review-process)
+[*App metadata review*](/distribute/how-to-publish/-/knowledge_base/distribute/understanding-the-app-review-process)
 phase of the review process. 
 
 Once approved, the changes you request appear for your app on the Marketplace.
