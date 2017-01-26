@@ -183,12 +183,12 @@ Settings application:
 
     ![Figure 1: Use the System Settings application in @product@'s Control Panel to
     configure the Elasticsearch
-    adapter.](../../../images/elasticsearch-system-settings.png)
+    adapter.](../../images/elasticsearch-system-settings.png)
 
 4. Change Operation Mode to *Remote*, and then click *Save*.
 
     ![Figure 2: Set Operation Mode to *Remote* from System
-    Settings.](../../../images/elasticsearch-configuration.png)
+    Settings.](../../images/elasticsearch-configuration.png)
 
 5. After you switch operation modes (`EMBEDDED` &rarr; `REMOTE`), you must
    trigger a re-index. Navigate to *Control Panel* &rarr; *Server
@@ -298,7 +298,7 @@ the settings you need by using one or more of the `additionalConfigurations`,
 `additionalIndexConfigurations`, or `additionalTypeMappings` settings. 
 
 ![Figure 3: You can add Elasticsearch configurations to the ones currently available
-in System Settings.](../../../images/elasticsearch-additional-configs.png)
+in System Settings.](../../images/elasticsearch-additional-configs.png)
 
 `additionalConfigurations` is used to define extra settings (defined in YAML)
 for the embedded Elasticsearch or the local Elasticsearch client when running
