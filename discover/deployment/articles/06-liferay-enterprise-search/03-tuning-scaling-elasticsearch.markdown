@@ -20,9 +20,9 @@ You must take care to properly monitor resources to avoid over-allocating betwee
 For most deployments, Liferay recommends deploying 2 Elasticsearch server with at least 4 vCPU/cores.
 This deployment is sufficient if you are not exceeding 50GB index size. The Elasticsearch JVMs should be configured to hold with one (1) index shard and one (1) index replica.
 
-If you are planning a more search intensive site (e.g., 50000 users with 250000 documents), Liferay recommends moving to a three (3) server cluster. In this 3-server configuration, you should look to have 2 Elasticsearch JVMs on each server: a "master-eligible" JVM and a "data" JVM. A "master-eligible" JVM handles clustering operations, including determine which JVM holds which shard. A "data" JVM hold the shards containing the indexed documents.
+If you are planning a more search intensive site (e.g., 50000 users with 250000 documents), Liferay recommends moving to a three (3) server cluster. In this 3-server configuration, you should look to have 2 Elasticsearch JVMs on each server: a "master-eligible" JVM and a "data" JVM. A "master-eligible" JVM handles clustering operations, including determine which JVM holds which shard. A "data" JVM hold the shards containing the indexed documents. For more information on how ElasticSearch defines a data JVM, see this [link](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html) on modules and data nodes.
 
-A dedicated "master-eligible" Elasticsearch JVM would only require 1GB of heap. A dedicated "data" JVM should be sized according to previously provided guidelines.
+A dedicated "master-eligible" Elasticsearch JVM would only require 1GB of heap.
 As the amount of indexed data and number of search requests grow, you may add additional data nodes while using the following guidelines:
 1. Each shard should not exceed 50GB
 2. Each data JVM or data + master JVM should not exceed 31GB heap.
