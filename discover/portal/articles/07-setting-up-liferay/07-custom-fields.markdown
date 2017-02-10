@@ -15,6 +15,8 @@ to their edit forms. Here's the complete list:
 - Calendar Booking
 - Document
 - Documents Folder
+- Knowledge Base Article
+- Knowledge Base Folder
 - Message Boards Category
 - Message Boards Message
 - Organization
