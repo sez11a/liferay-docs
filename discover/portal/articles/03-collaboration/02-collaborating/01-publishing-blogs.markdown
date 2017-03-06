@@ -254,6 +254,15 @@ other role or team that should be able to add blog entries and then click
 able to post to the shared blog. You can also grant roles and teams the ability
 to subscribe to blog updates. 
 
++$$$
+
+**Note:** You can unsubscribe from a blog through a notification email, by 
+clicking the *Cancel subscription* link. If you unsubscribe by accident, you can 
+easily undo the action by clicking the *Manage your subscriptions* link that 
+appears in the notification window. 
+
+$$$
+
 From within the Control Panel, you can configure all the permissions for Blogs.
 Permissions for the Blogs and Blogs Aggregator applications are covered next.
 
