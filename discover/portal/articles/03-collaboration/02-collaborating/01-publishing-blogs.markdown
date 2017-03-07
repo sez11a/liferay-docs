@@ -257,9 +257,9 @@ to subscribe to blog updates.
 +$$$
 
 **Note:** You can unsubscribe from a blog through a notification email, by 
-clicking the *Cancel subscription* link. If you unsubscribe by accident, you can 
-easily undo the action by clicking the *Manage your subscriptions* link that 
-appears in the notification window. 
+clicking the *Cancel subscription* link. You can view your current subscriptions 
+by clicking the *Manage your subscriptions* link that appears in the 
+notification window. 
 
 $$$
 
