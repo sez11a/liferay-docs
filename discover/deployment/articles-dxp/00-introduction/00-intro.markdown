@@ -25,7 +25,7 @@ before installing one of these applications.
 
 ## Reference Architecture [](id=reference-architecture)
 
-When considering deploying @product@, selecting the right architecture is one of
+When considering deploying @product@, selecting the right architecture for your needs is one of
 the first decisions you need to make. You need to consider these factors: 
 
 - Information Security: Securing sensitive hardware and information from
@@ -82,8 +82,8 @@ the web, application, and database tier, you may suffer a catastrophic hardware
 failure of any node and continue to serve users with little performance
 degradation.
 
-The depicted reference architecture represents the minimum deployment units to
-ensure proper fault tolerance within a single data center. You may increase the
+The depicted reference architecture represents the minimum number of deployment units to
+ensure proper fault tolerance within a single data center. From there, you may increase the
 number of servers within each tier according to your load patterns to achieve a
 multiplier effect in the number of users the deployment can support while
 maintaining sufficient fault tolerance.
@@ -95,8 +95,7 @@ reference architecture.
 
 Each deployment's performance characteristics vary depending on the type of
 activity and the performance of custom application elements. Liferay Engineering
-has created a series of scenarios to benchmark @product-ver@'s out
-of the box performance characteristics for content management, collaboration and
+has created a series of scenarios to benchmark @product-ver@'s out-of-the-box performance characteristics for content management, collaboration and
 social enterprise scenarios. Results from these reference architectures have
 indicated @product-ver@ can support over 22,000 virtual
 collaboration users and over 150,000 logins per minute with an average login
@@ -125,7 +124,7 @@ Before starting to plan your @product@ deployment, it's important to include
 different environments to be able to maintain the projects. Liferay uses the
 following terminology for systems:
 
-**Development:** The environment where the software is written. Most simply it
+**Development:** The environment where the software is written. Most simply, it
 is developer workstations containing integrated development environments with
 version and dependency handling along with a version control system with 
 working copies on the individual developer workstations.
