@@ -20,6 +20,12 @@ your Liferay artifacts are deployed to the proper location. The wrapped WAR the
 Deployment Helper tool produces is comparable to the EAR or fat JAR file
 concepts.
 
+The Deployment Helper supports the following file types:
+
+- JARs
+- WARs
+- OSGi Configuration Files (e.g., `.config`)
+
 This tutorial defines how to configure the Deployment Helper for three popular
 build tools: Ant, Gradle, and Maven. Visit the appropriate section to learn how
 to configure the Deployment Helper for that kind of project.
@@ -38,14 +44,14 @@ code into your `build.xml` file:
 
         <target name="build-deployment-helper">
             <build-deployment-helper
-                deploymentFileNames="license.xml"
+                deploymentFileNames="test.jar"
                 deploymentPath="deploy"
                 outputFileName="samples.war"
             />
         </target>
     </project>
 
-For the example code above, you've defined a `license.xml` file as a deployment
+For the example code above, you've defined a `test.jar` file as a deployment
 file, which will be wrapped in a `samples.war` file and deployed to the `deploy`
 folder. See the
 [Deployment Helper property descriptions](/develop/reference/-/knowledge_base/7-0/deployment-helper-gradle-plugin#task-properties)
@@ -69,7 +75,7 @@ following code into your `pom.xml` file:
                 <artifactId>com.liferay.deployment.helper</artifactId>
                 <version>1.0.4</version>
                 <configuration>
-                    <deploymentFileNames>license.xml</deploymentFileNames>
+                    <deploymentFileNames>test.jar</deploymentFileNames>
                     <deploymentPath>deploy</deploymentPath>
                     <outputFileName>samples.war</outputFileName>
                 </configuration>
@@ -77,7 +83,7 @@ following code into your `pom.xml` file:
         </plugins>
     </build>
 
-For the example code above, you've defined a `license.xml` file as a deployment
+For the example code above, you've defined a `test.jar` file as a deployment
 file, which will be wrapped in a `samples.war` file and deployed to the `deploy`
 folder. See the
 [Deployment Helper property descriptions](/develop/reference/-/knowledge_base/7-0/deployment-helper-gradle-plugin#task-properties)
