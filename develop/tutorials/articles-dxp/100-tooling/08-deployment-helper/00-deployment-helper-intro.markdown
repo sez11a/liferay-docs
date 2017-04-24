@@ -45,15 +45,15 @@ code into your `build.xml` file:
         <target name="build-deployment-helper">
             <build-deployment-helper
                 deploymentFileNames="test.jar"
-                deploymentPath="deploy"
                 outputFileName="samples.war"
             />
         </target>
     </project>
 
 For the example code above, you've defined a `test.jar` file as a deployment
-file, which will be wrapped in a `samples.war` file and deployed to the `deploy`
-folder. See the
+file, which will be wrapped in a `samples.war` file. The Deployment Helper
+automatically deploys the WAR to your Liferay instance's `deploy` folder. See
+the
 [Deployment Helper property descriptions](/develop/reference/-/knowledge_base/7-0/deployment-helper-gradle-plugin#task-properties)
 for more information on how these are set.
 
@@ -76,7 +76,6 @@ following code into your `pom.xml` file:
                 <version>1.0.4</version>
                 <configuration>
                     <deploymentFileNames>test.jar</deploymentFileNames>
-                    <deploymentPath>deploy</deploymentPath>
                     <outputFileName>samples.war</outputFileName>
                 </configuration>
             </plugin>
@@ -84,7 +83,8 @@ following code into your `pom.xml` file:
     </build>
 
 For the example code above, you've defined a `test.jar` file as a deployment
-file, which will be wrapped in a `samples.war` file and deployed to the `deploy`
-folder. See the
+file, which will be wrapped in a `samples.war` file. The Deployment Helper
+automatically deploys the WAR to your Liferay instance's `deploy` folder. See
+the
 [Deployment Helper property descriptions](/develop/reference/-/knowledge_base/7-0/deployment-helper-gradle-plugin#task-properties)
 for more information on how these are set.
