@@ -50,18 +50,18 @@ code into your `build.xml` file:
         </target>
     </project>
 
-For the example code above, you've defined a `test.jar` file as a deployment
-file to be wrapped in a `samples.war` file. The Deployment Helper
-automatically deploys the WAR to your Liferay instance's `deploy` folder. See
-the
-[Deployment Helper property descriptions](/develop/reference/-/knowledge_base/7-0/deployment-helper-gradle-plugin#task-properties)
-for more information on how these are set.
+The example code above configures the Deployment Helper by specifying its
+classpath and target for invocation. The Ant target defines two properties for
+the Deployment Helper:
 
-<!-- Something seems to be missing above between the first and second sentences.
-I assume you meant to say something about the properties? Remember the process
-from the Tutorial Workshop: don't write something, look at it, and then submit
-it. Put it aside for a day or two before you come back to it; then you'll be
-more likely to catch these things.  -Rich --> 
+- `deploymentFileNames`: the files or directories to include in the WAR and copy
+  once the WAR is deployed. If a directory is added to this collection, all the
+  JAR files contained in the directory are included in the WAR.
+- `outputFileName`: the WAR file to build, which contains the defined deployment
+  file names (e.g., `test.jar`).
+
+You also have the option to configure the `deploymentPath` property, but this is
+rarely defined since the default is your @product@ instance's `deploy` folder.
 
 ## Gradle
 
@@ -88,14 +88,15 @@ following code into your `pom.xml` file:
         </plugins>
     </build>
 
-For the example code above, you've defined a `test.jar` file as a deployment
-file to be wrapped in a `samples.war` file. The Deployment Helper
-automatically deploys the WAR to your Liferay instance's `deploy` folder. See
-the
-[Deployment Helper property descriptions](/develop/reference/-/knowledge_base/7-0/deployment-helper-gradle-plugin#task-properties)
-for more information on how these are set.
-
-<!-- Same problem here. You've never mentioned any properties, and then you talk
-about setting properties. I think you should go over the properties file and the
-most basic, default properties before pointing people to the reference docs.
--Rich --> 
+The example code above configures the Deployment Helper plugin by specifying its
+`groupId`, `artifactId`, and `version`. The POM configures two properties for
+the Deployment Helper:
+    
+- `deploymentFileNames`: the files or directories to include in the WAR and copy
+  once the WAR is deployed. If a directory is added to this collection, all the
+  JAR files contained in the directory are included in the WAR.
+- `outputFileName`: the WAR file to build, which contains the defined deployment
+  file names (e.g., `test.jar`).
+    
+You also have the option to configure the `deploymentPath` property, but this is
+rarely defined since the default is your @product@ instance's `deploy` folder.
