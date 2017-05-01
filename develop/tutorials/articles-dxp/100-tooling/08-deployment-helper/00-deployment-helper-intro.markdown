@@ -54,14 +54,15 @@ The example code above configures the Deployment Helper by specifying its
 classpath and target for invocation. The Ant target defines two properties for
 the Deployment Helper:
 
-- `deploymentFileNames`: the files or directories to include in the WAR and copy
-  once the WAR is deployed. If a directory is added to this collection, all the
-  JAR files contained in the directory are included in the WAR.
+- `deploymentFileNames`: the files or folders to include in the WAR and copy
+  once the WAR is deployed. If a folder is added to this collection, all the JAR
+  files contained in the folder are included in the WAR.
 - `outputFileName`: the WAR file to build, which contains the defined deployment
   file names (e.g., `test.jar`).
 
 You also have the option to configure the `deploymentPath` property, but this is
-rarely defined since the default is your @product@ instance's `deploy` folder.
+rarely defined since the default is set to your @product@ instance's `deploy`
+folder.
 
 ## Gradle
 
@@ -92,11 +93,12 @@ The example code above configures the Deployment Helper plugin by specifying its
 `groupId`, `artifactId`, and `version`. The POM configures two properties for
 the Deployment Helper:
     
-- `deploymentFileNames`: the files or directories to include in the WAR and copy
-  once the WAR is deployed. If a directory is added to this collection, all the
-  JAR files contained in the directory are included in the WAR.
+- `deploymentFileNames`: the files or folders to include in the WAR and copy
+  once the WAR is deployed. If a folder is added to this collection, all the JAR
+  files contained in the folder are included in the WAR.
 - `outputFileName`: the WAR file to build, which contains the defined deployment
   file names (e.g., `test.jar`).
     
 You also have the option to configure the `deploymentPath` property, but this is
-rarely defined since the default is your @product@ instance's `deploy` folder.
+rarely defined since the default is set to your @product@ instance's `deploy`
+folder.
