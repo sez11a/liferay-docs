@@ -1,9 +1,8 @@
 # Migrating Documents and Media Thumbnails to Adaptive Media [](id=migrating-documents-and-media-thumbnails-to-adaptive-media)
 
-You've seen how Adaptive Media images can greatly improve the user experience 
-across all devices. You can provide the same positive experience to Documents 
-and Media by migrating existing Documents and Media thumbnails to adaptive 
-images. 
+Adaptive Media images can greatly improve the user experience across all devices. 
+You can provide this same experience in Documents and Media by migrating 
+existing Documents and Media thumbnails to adaptive images. 
 
 This tutorial walks you through the process of migrating your Documents and 
 Media thumbnails to adaptive images.
@@ -36,6 +35,9 @@ enabled.
 
 $$$
 
+Follow the instructions found in the [Adding Image Resolutions](/discover/portal/-/knowledge_base/7-0/publishing-files#adding-image-resolutions) 
+section of the Adaptive Media User Guide to create the new Image Resolutions.
+
 Next you can deploy the Document Library Thumbnails module.
 
 ## Deploying the Document Library Thumbnails Module [](id=deploying-the-document-library-thumbnails-module)
@@ -59,29 +61,30 @@ images:
 
 - Adapt the images for the thumbnail image resolution
 
-- Execute an upgrade process that reuses the existing thumbnails
+- Execute a migrate process that reuses the existing thumbnails
 
 The first approach is covered in more detail in the 
-[Generating Missing Image Resolutions section of the User Guide](TODO), however 
-this process requires that all the existing thumbnails be scaled to the 
-image resolution values, and can take some time depending on the number of 
-images. This approach is only recommended when there isn’t a large number of 
-thumbnails to process, or if you prefer to generate your images from scratch.
+[Generating Missing Image Resolutions](/discover/portal/-/knowledge_base/7-0/publishing-files#generating-missing-image-resolutions) 
+section of the Adaptive Media User Guide, however this process requires that all 
+the existing thumbnails be scaled to the image resolution values, and can take 
+some time depending on the number of images. This approach is only recommended 
+when there isn’t a large number of thumbnails to process, or if you prefer to 
+generate your images from scratch.
 
 The second approach reuses the existing thumbnails, so it’s better performance 
 wise because it avoids the expensive scaling operation. This approach is, in 
-general, the recommended way to convert your thumbnail images to Adaptive Media. 
+general, the recommended way to convert your thumbnail images to adaptive images. 
 The steps to run this upgrade are described next.
 
-### Upgrading Documents and Media Thumbnails to Adaptive Media [](id=upgrading-documents-and-media-thumbnails-to-adaptive-media)
+### Running the Migration Process [](id=running-the-migration-process)
 
-The upgrade process is available in the 
-`adaptive-media-document-library-thumbnails` module as a GoGo console set of 
+The migration process is available in the 
+`adaptive-media-document-library-thumbnails` module as a Gogo console set of 
 commands that the administrator must execute. You can learn more about using the 
-GoGo console in the [Felix GoGo Shell](https://dev.liferay.com/develop/reference/-/knowledge_base/7-0/using-the-felix-gogo-shell) 
+Gogo console in the [Felix Gogo Shell](https://dev.liferay.com/develop/reference/-/knowledge_base/7-0/using-the-felix-gogo-shell) 
 tutorial.
 
-Follow these steps to upgrade your thumbnails:
+Follow these steps to migrate your thumbnails:
 
 1.  From the GoGo console run the `thumbnails:check` command. This will list, 
     for each company, how many thumbnails are pending migration and have not 
@@ -102,5 +105,8 @@ Now you know how to migrate your Documents and Media thumbnails to adaptive
 images!
 
 ## Related Topics [](id=related-topics)
+
+<!-- Update link below with right path when User Guide is completed -->
+[Adaptive Media User Guide](/discover/portal/-/knowledge_base/7-0/publishing-files)
 
 [Item Selector Tutorials](/develop/tutorials/-/knowledge_base/7-0/item-selector)
