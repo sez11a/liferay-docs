@@ -1,4 +1,4 @@
-# Overriding a Module's JSPs [](id=overriding-a-modules-jsps)
+# Overriding App JSPs [](id=overriding-a-modules-jsps)
 
 Liferay applications often contain JSPs. Sometimes you might need to override
 one of them. If you need to override the JSPs from a module deployed to the OSGi
@@ -106,4 +106,3 @@ Now you can easily modify the JSPs of any application in Liferay.
 
 To see a sample JSP-modifying fragment in action, look at the [BLADE project
 named `blade.hook.jsp`] (https://github.com/liferay/liferay-blade-samples/tree/master/liferay-workspace/modules/blade.hook.jsp).
-
