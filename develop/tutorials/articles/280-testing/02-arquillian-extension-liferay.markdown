@@ -1,611 +1,692 @@
 # Arquillian Extension for Liferay Example [](id=arquillian-extension-for-liferay-example)
 
 The
-[Arquillian Extension Liferay Example](https://github.com/arquillian/arquillian-extension-liferay/blob/master/arquillian-extension-liferay-example)
-project demonstrates how to use the Arquillian Liferay Extension. In this
-tutorial, you'll use the example project to learn how the Arquillian Extension
-for @product@ works and how to use it in your own projects.
+[Arquillian Blade Example project](https://github.com/liferay-labs/arquillian-blade-example)
+demonstrates performing integration and functional tests using the
+[Arquillian Liferay Extension](https://github.com/liferay-labs/arquillian-liferay).
+Additionally it measures code coverage using
+[JaCoCo](http://eclemma.org/jacoco/).
+In this tutorial, you'll learn how the Arquillian Liferay Extension and JaCoCo
+work. You can download the Arquillian Blade Example project
+[here](https://dev.liferay.com/documents/10184/656312/arquillian-blade-example.zip/27250a6e-4acf-6ed3-33bb-9a8a87fd0776)
+or access its latest code on
+[GitHub](https://github.com/liferay-labs/arquillian-blade-example). 
 
-The Arquillian Extension Liferay Example project is executed in the following
-environment:
+Here are the tutorial sections:
 
-- Tomcat Server
-    - JMX enabled and configured
-- Liferay 7
-- JUnit
+-   [Examining the Sample Portlet](#sample-portlet)
+-   [Integration and Functional Testing with Arquillian](#integration-and-functional-testing-with-arquillian)
+-   [Measuring Code Coverage with JaCoCo](#measuring-code-coverage-with-jacoco)
+-   [Running the Tests](#running-the-tests)
 
-To set up a testing environment like the one used by the Arquillian Extension
-for Liferay Example, you need to enable and configure JMX in your Liferay Tomcat
-server.
+## Examining the Sample Portlet [](id=sample-portlet)
 
-## Enable and Configure JMX in Tomcat [](id=enable-and-configure-jmx-in-tomcat)
+The sample portlet calculates the sum of two numbers. 
 
-You can follow this [guide](https://tomcat.apache.org/tomcat-7.0-doc/monitoring.html#Enabling_JMX_Remote) to enable your JMX configuration in Tomcat.
+![Figure 1: The Arquillian Sample Portlet calculates the sum of two numbers.](../../images/arquillian-example-portlet.png)
 
-Here's an example of a `setenv.sh` file that enables JMX in Tomcat on port 8099
-without authentication:
+The portlet project comprises a portlet class, service classes, and JSPs. It
+follows the standard OSGi module folder structure with Java files in
+`src/main/java/`, resource files in `src/main/resources/META-INF/resources`, and
+build files in the project root. 
 
-    CATALINA_OPTS="$CATALINA_OPTS -Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Dorg.apache.catalina.loader.WebappClassLoader.ENABLE_CLEAR_REFERENCES=false -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
+Here are the primary files:
+
+-   [`SampleService.java`](https://github.com/liferay-labs/arquillian-blade-example/blob/master/src/main/java/com/liferay/arquillian/sample/service/SampleService.java):
+    Provides an interface that defines method `public long add(final int
+    addend1, final int addend2)` for returning the sum of two numbers. 
+
+-   [`SampleServiceImpl.java`](https://github.com/liferay-labs/arquillian-blade-example/blob/master/src/main/java/com/liferay/arquillian/sample/service/SampleServiceImpl.java):
+    Uses OSGi Declarative Services to implement the
+    `SampleService` interface. 
+
+-   [`SamplePortlet.java`](https://github.com/liferay-labs/arquillian-blade-example/blob/master/src/main/java/com/liferay/arquillian/sample/portlet/SamplePortlet.java):
+    Extends
+    [Liferay `MVCPortlet`](@platform-ref@/7.0-latest/javadocs/portal-kernel/com/liferay/portal/kernel/portlet/bridges/mvc/MVCPortlet.html)
+    and processes portlet action commands and renders the result of executing
+    the `add` service.
+
+-   [`bnd.bnd`](https://github.com/liferay-labs/arquillian-blade-example/blob/master/bnd.bnd):
+    Specifies the module's name, symbolic name, and version.
+
+-   [`init.jsp`](https://github.com/liferay-labs/arquillian-blade-example/blob/master/src/main/resources/META-INF/resources/init.jsp):
+    Imports classes and tag libraries for the view layer. 
+
+-   [`view.jsp`](https://github.com/liferay-labs/arquillian-blade-example/blob/master/src/main/resources/META-INF/resources/view.jsp):
+    Provides a form for calculating the sum of two numbers.
+
+You'll examine the tests next. 
+
+## Integration and Functional Testing with Arquillian [](id=integration-and-functional-testing-with-arquillian)
+
+The Arquillian Blade Example tests the sample portlet using its API and UI. 
+
+-   [Integration Test](#integration-test): Invokes the `SampleService`'s `add`
+    method directly. 
+-   [Functional Test](#functional-test): Invokes the `add` method indirectly
+    using a web browser. 
+
+The test classes are in the `src/testIntegration/java` folder and test resources
+are in the `src/testIntegration/resources` folder. The integration test is basic
+and worth examining first. 
+
+### Integration Test [](id=integration-test)
+
+Integration tests exercise module interaction. Although the
+`BasicPortletIntegrationTest` class demonstrates invoking the sample module's
+`SampleService.add` method only, an Arquillian integration test could just as
+easily invoke many methods to test behavior across many modules. 
+
+Here's the `BasicPortletIntegrationTest` class: 
+
+    package com.liferay.arquillian.test;
+
+    import com.google.common.io.Files;
+
+    import com.liferay.arquillian.containter.remote.enricher.Inject;
+    import com.liferay.arquillian.sample.service.SampleService;
+    import com.liferay.portal.kernel.exception.PortalException;
+
+    import java.io.File;
+    import java.io.IOException;
+
+    import org.jboss.arquillian.container.test.api.Deployment;
+    import org.jboss.arquillian.junit.Arquillian;
+    import org.jboss.shrinkwrap.api.ShrinkWrap;
+    import org.jboss.shrinkwrap.api.spec.JavaArchive;
+
+    import org.junit.Assert;
+    import org.junit.Test;
+    import org.junit.runner.RunWith;
+
+    @RunWith(Arquillian.class)
+    public class BasicPortletIntegrationTest {
+
+        @Deployment
+        public static JavaArchive create() throws Exception {
+            final File tempDir = Files.createTempDir();
+
+            String gradlew = "./gradlew";
+
+            String osName = System.getProperty("os.name", "");
+            if (osName.toLowerCase().contains("windows")) {
+                gradlew = "./gradlew.bat";
+            }
+
+            final ProcessBuilder processBuilder = new ProcessBuilder(
+                gradlew, "jar", "-Pdir=" + tempDir.getAbsolutePath());
+
+            final Process process = processBuilder.start();
+
+            process.waitFor();
+
+            final File jarFile = new File(
+                tempDir.getAbsolutePath() +
+                    "/com.liferay.arquillian.sample-1.0.0.jar");
+
+            return ShrinkWrap.createFromZipFile(JavaArchive.class, jarFile);
+        }
+
+        @Test
+        public void testAdd() throws IOException, PortalException {
+            final long result = _sampleService.add(1, 3);
+
+            Assert.assertEquals(4, result);
+        }
+
+        @Inject
+        private SampleService _sampleService;
+
+    }
+
+JUnit annotation `@RunWith(Arquillian.class)` marks the class for Arquillian to
+execute. 
+
+The `create` method packages the test class and resources in a Java archive
+(JAR). Invoking the project's `jar` Gradle task creates the test JAR Arquillian
+executes. 
+
+    @Deployment
+    public static JavaArchive create() throws Exception {
+        final File tempDir = Files.createTempDir();
+
+        final ProcessBuilder processBuilder = new ProcessBuilder(
+            "./gradlew", "jar", "-Pdir=" + tempDir.getAbsolutePath());
+
+        final Process process = processBuilder.start();
+
+        process.waitFor();
+
+        final File jarFile = new File(
+            tempDir.getAbsolutePath() +
+                "/com.liferay.arquillian.sample-1.0.0.jar");
+
+        return ShrinkWrap.createFromZipFile(JavaArchive.class, jarFile);
+    }
+
+JUnit annotation `@Test` designates the `testAdd` method as a test. The method
+invokes the `SampleService` object's `add` method and asserts its result. 
+
+    @Test
+    public void testAdd() throws IOException, PortalException {
+        final long result = _sampleService.add(1, 3);
+
+        Assert.assertEquals(4, result);
+    }
+
+The Liferay Arquillian Extension injects the `_sampleService` field with a
+`SampleService` implementation (i.e., a `SampleServiceImpl` instance). 
+
+    @Inject
+    private SampleService _sampleService;
+
+The integration test has some dependencies, of course. 
+
+#### Dependencies [](id=dependencies)
+
+The project's `build.gradle` file specifies this test's dependencies on
+Liferay's Arquillian container, JUnit, and an Arquillian JUnit test container:
+
+    testIntegrationCompile group: "com.liferay.arquillian", name: "com.liferay.arquillian.arquillian-container-liferay", version: "1.0.6"
+    testIntegrationCompile group: "junit", name: "junit", version: "4.12"
+    testIntegrationCompile group: "org.jboss.arquillian.junit", name: "arquillian-junit-container", version: "1.1.11.Final"
+
+Arquillian tests are configurable too.  
+
+#### Arquillian Configuration [](id=arquillian-configuration)
+
+Arquillian configuration file `src/testIntegration/resources/arquillian.xml`
+uses property `deploymentExportPath` (optional) to write a test archive (e.g.,
+JAR file) to a folder before deploying the tests. You can inspect all the test
+files from this archive. To highlight the `deploymentExportPath` property,
+here's an abbreviated view of the
+[`arquillian.xml` file](https://github.com/liferay-labs/arquillian-blade-example/blob/master/src/testIntegration/resources/arquillian.xml):
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <arquillian xmlns="http://jboss.org/schema/arquillian"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+
+        <!-- More content here -->
+
+        <engine>
+            <property name="deploymentExportPath">build/deployments</property>
+        </engine>
+    </arquillian>
+
+The project uses  Java Management Extensions (JMX) to deploy OSGi modules to
+@product@. Enabling JMX for the application server is next. 
+
+#### JMX Settings [](id=jmx-settings)
+
+Apache Aries JMX exposes the JMX API that Arquillian uses to
+install/deploy/start the modules. Since DXP Digital Enterprise 7.0 Fix Pack 16
+and Liferay CE 7.0 GA4, Liferay Workspace's `startTestableTomcat` Gradle task
+installs the Apache Aries JMX modules automatically. In case you're using and
+earlier @product@ version or haven't already installed the Aries modules, here's
+their group ID, artifact ID, and version information. You can install them using
+[Apache Felix GoGo Shell](/develop/reference/-/knowledge_base/7-0/using-the-felix-gogo-shell):
+
+    "org.apache.aries.jmx:org.apache.aries.jmx:1.1.5"
+    "org.apache.aries:org.apache.aries.util:1.1.3"
+
+JMX is enabled on the application server via Java runtime options. The following
+Apache Tomcat environment script excerpts demonstrate enabling JMX (without
+authentication) on port 8099. 
+
+##### `setenv.sh` JMX Settings [](id=setenv-sh-jmx-settings)
 
     JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.port=8099 -Dcom.sun.management.jmxremote.ssl=false"
 
     CATALINA_OPTS="${CATALINA_OPTS} ${JMX_OPTS}"
 
-You can customize your `setenv.sh` in a similar way.
+##### `setenv.bat` JMX Settings [](id=setenv-bat-jmx-settings)
 
-## Creating a Liferay Portlet for Testing [](id=creating-a-liferay-portlet-for-testing)
+    set "JMX_OPTS=-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.port=8099 -Dcom.sun.management.jmxremote.ssl=false"
 
-You need a Liferay portlet project that can be used for testing. You can use
-your preferred build tool. For example, either Gradle or Maven can be used.
-Follow these steps to create a Liferay portlet project using Maven.
+    set "CATALINA_OPTS=%CATALINA_OPTS% %JMX_OPTS%"
 
-<!-- Gradle example coming soon. -Jesse -->
+Apache Tomcat's
+[guide *Enabling JMX Remote*](https://tomcat.apache.org/tomcat-7.0-doc/monitoring.html#Enabling_JMX_Remote)
+has more JMX configuration details. 
 
-1.  [Add Liferay, portlet, and OSGi dependencies](/develop/tutorials/-/knowledge_base/7-0/configuring-dependencies) 
-    to your project's `pom.xml` file:
+You've seen how the example integration test class and its setup are
+straightforward. Next, you'll discover how fun it is to develop functional
+browser-based tests using Arquillian. 
 
-        ...
-            <dependencies>
-            ....
-                <dependency>
-                    <groupId>com.liferay.portal</groupId>
-                    <artifactId>portal-service</artifactId>
-                    <version>${liferay.version}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>com.liferay.portal</groupId>
-                    <artifactId>util-bridges</artifactId>
-                    <version>${liferay.version}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>com.liferay.portal</groupId>
-                    <artifactId>util-taglib</artifactId>
-                    <version>${liferay.version}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>com.liferay.portal</groupId>
-                    <artifactId>util-java</artifactId>
-                    <version>${liferay.version}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.osgi</groupId>
-                    <artifactId>org.osgi.core</artifactId>
-                    <version>${osgi.version}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>javax.portlet</groupId>
-                    <artifactId>portlet-api</artifactId>
-                    <version>2.0</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>javax.servlet-api</artifactId>
-                    <version>3.0.1</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>javax.servlet.jsp</groupId>
-                    <artifactId>jsp-api</artifactId>
-                    <version>2.0</version>
-                    <scope>provided</scope>
-                </dependency>
-                ....
-            </dependencies>
-        ...
+### Functional Test [](id=functional-test)
 
-2.  Create an OSGi service. This OSGi service is just an example that you'll use
-    for testing purposes. It's a simple service that adds two numbers.
+The Arquillian Blade Example's functional tests interact with the portlet UI to
+verify content and validate behavior. The example tests operate on the following
+view parameters: 
 
-    First, create a new interface:
+-   `firstParameter`: First number to add
+-   `secondParameter`: Second number to add
+-   `result`: Sum of the two numbers
 
-        package org.arquillian.liferay.sample.service;
+The JSP file `view.jsp` and portlet class `BasicPortletFunctionalTest` use these
+parameters. Here's the `view.jsp` code:
 
-        public interface SampleService {
+    <%@ include file="/init.jsp" %>
 
-            public int add(int a, int b);
+    <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 
+    <%
+    int firstParameter = ParamUtil.getInteger(request, "firstParameter", 1);
+    int secondParameter = ParamUtil.getInteger(request, "secondParameter", 1);
+    int result = ParamUtil.getInteger(request, "result");
+    %>
+
+    <portlet:actionURL name="add" var="portletURL" />
+
+    <p>
+    <b>Sample Portlet is working!</b>
+    </p>
+
+    <aui:form action="<%= portletURL %>" method="post" name="fm">
+    <aui:input inlineField="<%= true %>" label="" name="firstParameter" size="4" type="int" value="<%= firstParameter %>" />
+    <span> + </span>
+    <aui:input inlineField="<%= true %>" label="" name="secondParameter" size="4" type="int" value="<%= secondParameter %>" />
+    <span> = </span>
+    <span class="result"><%= result %></span>
+
+    <aui:button type="submit" value="add" />
+    </aui:form>
+
+Users enter numbers in the `firstParameter` and `secondParameter` input fields
+and click on the `add` button to show the sum to the `result` field. 
+
+Functional test class `BasicPortletFunctionalTest` uses Selenium to interact
+with the portlet's UI. Here's the `BasicPortletFunctionalTest` class:
+
+    package com.liferay.arquillian.test;
+
+    import com.google.common.io.Files;
+
+    import com.liferay.arquillian.portal.annotation.PortalURL;
+    import com.liferay.portal.kernel.exception.PortalException;
+
+    import java.io.File;
+    import java.io.IOException;
+
+    import java.net.URL;
+
+    import org.jboss.arquillian.container.test.api.Deployment;
+    import org.jboss.arquillian.container.test.api.RunAsClient;
+    import org.jboss.arquillian.drone.api.annotation.Drone;
+    import org.jboss.arquillian.junit.Arquillian;
+    import org.jboss.shrinkwrap.api.ShrinkWrap;
+    import org.jboss.shrinkwrap.api.spec.JavaArchive;
+
+    import org.junit.Assert;
+    import org.junit.Test;
+    import org.junit.runner.RunWith;
+
+    import org.openqa.selenium.OutputType;
+    import org.openqa.selenium.TakesScreenshot;
+    import org.openqa.selenium.WebDriver;
+    import org.openqa.selenium.WebElement;
+    import org.openqa.selenium.support.FindBy;
+
+    @RunAsClient
+    @RunWith(Arquillian.class)
+    public class BasicPortletFunctionalTest {
+
+        @Deployment
+        public static JavaArchive create() throws Exception {
+            final File tempDir = Files.createTempDir();
+
+            String gradlew = "./gradlew";
+
+            String osName = System.getProperty("os.name", "");
+            if (osName.toLowerCase().contains("windows")) {
+                gradlew = "./gradlew.bat";
+            }
+
+            final ProcessBuilder processBuilder = new ProcessBuilder(
+                gradlew, "jar", "-Pdir=" + tempDir.getAbsolutePath());
+
+            final Process process = processBuilder.start();
+
+            process.waitFor();
+
+            final File jarFile = new File(
+                tempDir.getAbsolutePath() +
+                    "/com.liferay.arquillian.sample-1.0.0.jar");
+
+            return ShrinkWrap.createFromZipFile(JavaArchive.class, jarFile);
         }
 
-    Next, create an implementation for the interface:
+        @Test
+        public void testAdd()
+            throws InterruptedException, IOException, PortalException {
 
-        package org.arquillian.liferay.sample.service;
+            _browser.get(_portlerURL.toExternalForm());
 
-        import org.osgi.service.component.annotations.Component;
+            _firstParamter.clear();
 
-        @Component(immediate = true, service = SampleService.class)
-        public class SampleServiceImpl implements SampleService {
+            _firstParamter.sendKeys("2");
 
-            @Override
-            public int add(int a, int b) {
-                return a + b;
-            }
+            _secondParameter.clear();
 
+            _secondParameter.sendKeys("3");
+
+            _add.click();
+
+            Thread.sleep(5000);
+
+            Assert.assertEquals("5", _result.getText());
         }
 
-3.  Create a Liferay MVC portlet. This portlet will call the service defined in
-    the previous step:
+        @Test
+        public void testInstallPortlet() throws IOException, PortalException {
+            _browser.get(_portlerURL.toExternalForm());
 
-        package org.arquillian.liferay.sample.portlet;
+            final String bodyText = _browser.getPageSource();
 
-        import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-        import com.liferay.portal.kernel.util.ParamUtil;
-        import com.liferay.portal.kernel.util.WebKeys;
-        import com.liferay.portal.theme.ThemeDisplay;
-        import com.liferay.portlet.PortletURLFactoryUtil;
-
-        import javax.portlet.ActionRequest;
-        import javax.portlet.ActionResponse;
-        import javax.portlet.Portlet;
-        import javax.portlet.PortletRequest;
-        import javax.portlet.PortletURL;
-
-        import org.arquillian.liferay.sample.service.SampleService;
-
-        import org.osgi.service.component.annotations.Component;
-        import org.osgi.service.component.annotations.Reference;
-
-        @Component(
-            property = {
-                "com.liferay.portlet.display-category=category.sample",
-                "com.liferay.portlet.instanceable=false",
-                "javax.portlet.display-name=Arquillian Sample Portlet",
-                "javax.portlet.init-param.template-path=/",
-                "javax.portlet.init-param.view-template=/view.jsp",
-                "javax.portlet.name=arquillian_sample_portlet",
-                "javax.portlet.resource-bundle=content.Language",
-                "javax.portlet.security-role-ref=power-user,user"
-            },
-            service = Portlet.class
-        )
-        public class SamplePortlet extends MVCPortlet {
-
-            public void add(ActionRequest actionRequest, ActionResponse actionResponse)
-                throws Exception {
-
-                ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-                    WebKeys.THEME_DISPLAY);
-
-                int firstParameter = ParamUtil.getInteger(
-                    actionRequest, "firstParameter");
-                int secondParameter = ParamUtil.getInteger(
-                    actionRequest, "secondParameter");
-
-                int result = _sampleService.add(firstParameter, secondParameter);
-
-                PortletURL portletURL = PortletURLFactoryUtil.create(
-                    actionRequest, "arquillian_sample_portlet", themeDisplay.getPlid(),
-                    PortletRequest.RENDER_PHASE);
-
-                portletURL.setParameter(
-                    "firstParameter", String.valueOf(firstParameter));
-                portletURL.setParameter(
-                    "secondParameter", String.valueOf(secondParameter));
-                portletURL.setParameter("result", String.valueOf(result));
-
-                actionRequest.setAttribute(WebKeys.REDIRECT, portletURL.toString());
-            }
-
-            @Reference(unbind = "-")
-            public void setSampleService(SampleService sampleService) {
-                _sampleService = sampleService;
-            }
-
-            private SampleService _sampleService;
-
+            Assert.assertTrue(
+                "The portlet is not well deployed",
+                bodyText.contains("Sample Portlet is working!"));
         }
 
-    This portlet needs a `view.jsp` file:
+        @FindBy(css = "button[type=submit]")
+        private WebElement _add;
 
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+        @Drone
+        private WebDriver _browser;
 
-        <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+        @FindBy(css = "input[id$='firstParameter']")
+        private WebElement _firstParamter;
 
-        <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
-        taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %><%@
-        taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
-        taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+        @PortalURL("arquillian_sample_portlet")
+        private URL _portlerURL;
 
-        <portlet:defineObjects />
+        @FindBy(css = "span[class='result']")
+        private WebElement _result;
 
-        <liferay-theme:defineObjects />
+        @FindBy(css = "input[id$='secondParameter']")
+        private WebElement _secondParameter;
 
-        <%
-        int firstParameter = ParamUtil.getInteger(request, "firstParameter", 1);
-        int secondParameter = ParamUtil.getInteger(request, "secondParameter", 1);
-        int result = ParamUtil.getInteger(request, "result");
-        %>
+    }
 
-        <portlet:actionURL name="add" var="portletURL" />
+Arquillian annotation `@RunAsClient` and JUnit annotation `@RunWith` mark the
+class as a web client that runs on Arquillian.
 
-        <p>
-            <b>Sample Portlet is working!</b>
-        </p>
+Similar to the integration test class, this class's `create` method packages the
+test as a JAR file for Arquillian to execute. 
 
-        <aui:form action="<%= portletURL %>" method="post" name="fm">
+Method `testInstallPortlet` verifies portlet content. 
 
-            <aui:input inlineField="<%= true %>" label="" name="firstParameter" size="4" type="int" value="<%= firstParameter %>" />
-            <span> + </span>
-            <aui:input inlineField="<%= true %>" label="" name="secondParameter" size="4" type="int" value="<%= secondParameter %>" />
-            <span> = </span>
-            <span class="result"><%= result %></span>
+    @Test
+    public void testInstallPortlet() throws IOException, PortalException {
+        _browser.get(_portlerURL.toExternalForm());
 
-            <aui:button type="submit" value="add" />
-        </aui:form>
+        final String bodyText = _browser.getPageSource();
 
-4.  Next, create a `bnd.bnd` file for deployment. Your tests will use
-    [Bnd](http://aqute.biz/Bnd/Bnd) to create the artifact to be deployed, so
-    add this Maven dependency to your project's `pom.xml` file:
+        Assert.assertTrue(
+            "The portlet is not well deployed",
+            bodyText.contains("Sample Portlet is working!"));
+    }
 
-        ...
-        <dependencies>
-            ...
-            <dependency>
-                <groupId>org.jboss.shrinkwrap.osgi</groupId>
-                <artifactId>shrinkwrap-osgi</artifactId>
-                <version>1.0.0-alpha-1</version>
-                <scope>test</scope>
-            </dependency>
-            ...
-        </dependencies>
-        ...
+This test class uses the following fields:
 
-    And, of course, you must create a `bnd-basic-portlet-test.bnd` file:
+-   `_browser`: Arquillian annotation `@Drone` sets this field as a Selenium
+    `WebDriver` (browser).
 
-        Bundle-Name: Basic Portlet Test
-        Bundle-SymbolicName: org.arquillian.liferay.sample
-        Bundle-Version: 1.0.0
-        Export-Package: org.arquillian.liferay.sample
-        Include-Resource:\
-            target/classes,\
-            META-INF/resources=src/main/resources/META-INF/resources
+        @Drone
+        private WebDriver _browser;
 
-        Require-Capability:\
-         osgi.extender;filter:="(&(osgi.extender=jsp.taglib)(uri=http://java.sun.com/portlet_2_0))",\
-         osgi.extender;filter:="(&(osgi.extender=jsp.taglib)(uri=http://liferay.com/tld/aui))",\
-         osgi.extender;filter:="(&(osgi.extender=jsp.taglib)(uri=http://liferay.com/tld/portlet))",\
-         osgi.extender;filter:="(&(osgi.extender=jsp.taglib)(uri=http://liferay.com/tld/theme))",\
-         osgi.extender;filter:="(&(osgi.extender=jsp.taglib)(uri=http://liferay.com/tld/ui))",\
-         osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.7))"
+-   `_portlerURL`: Liferay Arquillian annotation `@PortalURL` assigns the
+    portlet's URL to this field. 
 
-        -dsannotations: *
+        @PortalURL("arquillian_sample_portlet")
+        private URL _portlerURL;
 
-    That's it! Your Liferay portlet is complete!
+-   `_firstParamter` and `_secondParameter`: JavaScript selectors and Selenium
+    annotation `@FindBy` map these fields to the form's inputs. 
 
-## Create a Simple Test in Liferay with the Arquillian Liferay Extension [](id=create-a-simple-test-in-liferay-with-the-arquillian-liferay-extension)
+        @FindBy(css = "input[id$='firstParameter']")
+        private WebElement _firstParamter;
 
-Now that you've configured JMX in Tomcat and created a portlet project, you're
-ready to create Liferay tests with the Arquillian Liferay Extension.
+        @FindBy(css = "input[id$='secondParameter']")
+        private WebElement _secondParameter;
 
-1.  Add dependencies to your `pom.xml` file:
+-   `_add`: The form's `submit` button. 
+ 
+        @FindBy(css = "button[type=submit]")
+        private WebElement _add;
 
-        ...
-        <dependencies>
-                ....
-                <dependency>
-                        <groupId>org.arquillian.liferay</groupId>
-                        <artifactId>arquillian-container-liferay</artifactId>
-                        <version>1.0.0.Final-SNAPSHOT</version>
-                        <scope>test</scope>
-                </dependency>
-                <dependency>
-                        <groupId>org.jboss.arquillian.junit</groupId>
-                        <artifactId>arquillian-junit-container</artifactId>
-                        <scope>test</scope>
-                </dependency>
-                <dependency>
-                        <groupId>junit</groupId>
-                        <artifactId>junit</artifactId>
-                        <version>4.12</version>
-                        <scope>test</scope>
-                </dependency>
-                ....
-        </dependencies>
-        ...
+-   `_result`: Sum of the two numbers. 
 
-2.  Create simple integration tests using the Arquillian Liferay Extension.
+        @FindBy(css = "span[class='result']")
+        private WebElement _result;
 
-        package org.arquillian.liferay.test;
+Using the `*Parameter` fields, the `testAdd` method injects numbers `2` and `3`
+into the form, submits the form, and asserts `5` as the result. 
 
-        import com.liferay.portal.kernel.exception.PortalException;
+    @Test
+    public void testAdd()
+        throws InterruptedException, IOException, PortalException {
 
-        import java.io.File;
-        import java.io.IOException;
+        _browser.get(_portlerURL.toExternalForm());
 
-        import org.arquillian.container.liferay.remote.enricher.Inject;
-        import org.arquillian.liferay.sample.service.SampleService;
+        _firstParameter.clear();
 
-        import org.jboss.arquillian.container.test.api.Deployment;
-        import org.jboss.arquillian.junit.Arquillian;
-        import org.jboss.shrinkwrap.api.ShrinkWrap;
-        import org.jboss.shrinkwrap.api.spec.JavaArchive;
-        import org.jboss.shrinkwrap.osgi.api.BndProjectBuilder;
+        _firstParameter.sendKeys("2");
 
-        import org.junit.Assert;
-        import org.junit.Test;
-        import org.junit.runner.RunWith;
+        _secondParameter.clear();
 
-        @RunWith(Arquillian.class)
-        public class BasicPortletIntegrationTest {
+        _secondParameter.sendKeys("3");
 
-            @Deployment
-            public static JavaArchive create() {
-                BndProjectBuilder bndProjectBuilder = ShrinkWrap.create(
-                    BndProjectBuilder.class);
+        _add.click();
 
-                bndProjectBuilder.setBndFile(new File("bnd-basic-portlet-test.bnd"));
+        Thread.sleep(5000);
 
-                bndProjectBuilder.generateManifest(true);
+        Assert.assertEquals("5", _result.getText());
+    }
 
-                return bndProjectBuilder.as(JavaArchive.class);
-            }
+Testing portlets via a web client is that simple! 
 
-            @Test
-            public void testAdd() throws IOException, PortalException {
-                int result = _sampleService.add(1, 3);
+Functional tests typically require more setup than integration tests. 
 
-                Assert.assertEquals(4, result);
-            }
+#### Dependencies
 
-            @Inject
-            private SampleService _sampleService;
+The `BasicPortletFunctionalTest` class requires Arquillian's Graphine extension
+to use the web client. Here's the dependency from the Gradle file
+`build.gradle`:
 
-        }
+    testIntegrationCompile group: "org.jboss.arquillian.graphene", name: "graphene-webdriver", version: "2.1.0.Final"
 
-## Create Simple Functional Tests Using the Arquillian Liferay Extension [](id=create-simple-functional-tests-using-the-arquillian-liferay-extension)
++$$$
 
-To create a functional test in Liferay with the Arquillian Liferay Extension,
-follow this
+**Note**: To learn more about functional testing using Graphine, see this
 [guide](http://arquillian.org/guides/functional_testing_using_graphene/).
 
-1.  Add dependencies to `pom.xml`:
+$$$
 
-        ...
-        <dependencies>
-                ....
-                <dependency>
-                        <groupId>org.jboss.arquillian.graphene</groupId>
-                        <artifactId>graphene-webdriver</artifactId>
-                        <version>2.1.0.Alpha2</version>
-                        <type>pom</type>
-                        <scope>test</scope>
-                </dependency>
-                ....
-        </dependencies>
-        ...	
+The test requires additional Arquillian configuration elements too. 
 
-2.  Add a easy way to execute tests between different browsers.
+#### Arquillian Configuration
 
-    In your `pom.xml` file, create a profile for each desired browser:
+In addition to the `deploymentExportPath` property introduced with the
+integration test, this functional test specifies the browser type using
+`phantomjs` and  the portal's URL. Here's the project's `arquillian.xml` file:
 
-        ...
-        properties>
-            <browser>phantomjs</browser> 
-        </properties>
-        ...
+    <?xml version="1.0" encoding="UTF-8"?>
+    <arquillian xmlns="http://jboss.org/schema/arquillian"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
 
-        <profiles>
-            ...
-            <profile>
-               <id>firefox</id>
-               <properties>
-                  <browser>firefox</browser>
-               </properties>
-            </profile>
-            <profile>
-               <id>chrome</id>
-               <properties>
-                   <browser>chrome</browser>
-               </properties>
-            </profile>
-            ...
-        </profiles>
+        <extension qualifier="webdriver">
+            <property name="browser">phantomjs</property>
+        </extension>
 
-3.  Next, you need to set up `arquillian.xml` in order to change the Arquillian
-    settings for browser selection. Add the following to your project's
-    `arquillian.xml` file in the `src/test/resources` directory.
+        <extension qualifier="graphene">
+            <property name="url">http://localhost:8080</property>
+        </extension>
 
-        <?xml version="1.0" encoding="UTF-8"?>
-        <arquillian xmlns="http://jboss.org/schema/arquillian"
-                                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                                xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+        <engine>
+            <property name="deploymentExportPath">build/deployments</property>
+        </engine>
+    </arquillian>
 
-                <extension qualifier="webdriver">
-                        <property name="browser">${browser}</property>
-                </extension>
++$$$
 
-        </arquillian>
+**Note**: The Arquillian Liferay Extension
+provides these options for injecting the URL of the container (e.g., Apache Tomcat):
+    
+1.  In a test class deployment method or field, use the annotation
+    `@ArquillianResource` to designate the URL.
 
-4.  Create a portlet functional test:
+2.  Configure Arquillian using the graphene URL property (via
+    `arquillian.xml`, `arquillian.properties`, or System Properties).
 
-        package org.arquillian.liferay.test;
+$$$
 
-        import com.liferay.portal.kernel.exception.PortalException;
+You should use Portal properties to prevent @product@ from launching a browser
+and the Setup Wizard. 
 
-        import java.io.File;
-        import java.io.IOException;
+#### Portal Properties
 
-        import java.net.URL;
+The Arquillian Blade Example specifies the following Portal properties in file
+`src/testIntegration/resources/portal-ext.properties`:
 
-        import org.arquillian.container.liferay.remote.enricher.Inject;
-        import org.arquillian.liferay.installportlet.annotation.InstallPortlet;
-        import org.arquillian.liferay.sample.service.SampleService;
+    browser.launcher.url=
+    setup.wizard.enabled=false
 
-        import org.jboss.arquillian.container.test.api.Deployment;
-        import org.jboss.arquillian.container.test.api.RunAsClient;
-        import org.jboss.arquillian.drone.api.annotation.Drone;
-        import org.jboss.arquillian.junit.Arquillian;
-        import org.jboss.shrinkwrap.api.ShrinkWrap;
-        import org.jboss.shrinkwrap.api.spec.JavaArchive;
-        import org.jboss.shrinkwrap.osgi.api.BndProjectBuilder;
+Browsers other than the ones the functional tests launch can interfere with
+tests. Setting `browser.launcher.url` to an empty value prevents @product@ from
+launching a browser on its own. You don't need @product@'s setup wizard either.
+Setting `setup.wizard.enabled=false` bypasses launching the Setup Wizard.
 
-        import org.junit.Assert;
-        import org.junit.Test;
-        import org.junit.runner.RunWith;
+The example project's Gradle task `copyPortalExt`, copies the Portal properties
+file into the @product@ installation.
 
-        import org.openqa.selenium.By;
-        import org.openqa.selenium.WebDriver;
-        import org.openqa.selenium.WebElement;
-        import org.openqa.selenium.support.FindBy;
+As you develop tests, you might want to track the parts of the product your
+tests cover. The example project uses JaCoCo to measure code coverage. JaCoCo is
+explained next. 
 
-        /**
-         * @author Cristina González
-         */
-        @RunAsClient
-        @RunWith(Arquillian.class)
-        public class BasicPortletFunctionalTest {
+If you'd rather launch the Arquillian Blade Example before investigating JaCoCo,
+skip to [Running the Tests](#running-the-tests). Otherwise, jump into JaCoCo! 
 
-            @Deployment
-            public static JavaArchive create() {
-                BndProjectBuilder bndProjectBuilder = ShrinkWrap.create(
-                    BndProjectBuilder.class);
+## Measuring Code Coverage with JaCoCo [](id=measuring-code-coverage-with-jacoco)
 
-                bndProjectBuilder.setBndFile(new File("bnd-basic-portlet-test.bnd"));
+[JaCoCo](http://eclemma.org/jacoco/) measures Java code coverage. The
+Arquillian Blade Example uses JaCoCo to report parts and percentages of the product code the tests execute. 
 
-                bndProjectBuilder.generateManifest(true);
+![Figure 2: JaCoCo reports lines of code tests execute in methods and classes.](../../images/arquillian-example-jacoco-results.png)
 
-                return bndProjectBuilder.as(JavaArchive.class);
-            }
+### Enabling JaCoCo
 
-            @Test
-            public void testAdd() throws IOException, PortalException {
-                browser.get(_portlerURL.toExternalForm());
+JaCoCo requires attaching an agent to the JVM. To attach the JaCoCo agent,
+append the following JaCoCo options to  the Tomcat environment script's
+`CATALINA_OPTS` variable.
 
-                firstParamter.clear();
+#### `setenv.sh` JaCoCo Settings [](id=setenv-sh-jacoco-settings)
 
-                firstParamter.sendKeys("2");
+    JACOCO_OPTS="-javaagent:PATH_TO_JACOCO_AGENT_JAR/jacocoagent.jar=destfile=JACOCO_EXEC_FILE,output=file,append=true,jmx=true"
+    
+    CATALINA_OPTS="${CATALINA_OPTS} ${JACOCO_OPTS}"
 
-                secondParameter.clear();
+#### `setenv.bat` JaCoCo Settings [](id=setenv-bat-jacoco-settings)
 
-                secondParameter.sendKeys("3");
+    set "JACOCO_OPTS=-javaagent:PATH_TO_JACOCO_AGENT_JAR/jacocoagent.jar=destfile=JACOCO_EXEC_FILE,output=file,append=true,jmx=true"
+    
+    set "CATALINA_OPTS=%CATALINA_OPTS% %JACOCO_OPTS%"
 
-                add.click();
+Replace `PATH_TO_JACOCO_AGENT_JAR` with the path to the `jacocoagent.jar` file
+and `JACOCO_EXEC_FILE` with the path to the JaCoCo result dump file. 
 
-                Assert.assertEquals("5", result.getText());
-            }
+### JaCoCo Build Instructions
 
-            @Test
-            public void testInstallPortlet() throws IOException, PortalException {
-                browser.get(_portlerURL.toExternalForm());
+The Gradle build file `build.gradle` specifies several JaCoCo-related
+instructions:
 
-                String bodyText = browser.findElement(By.tagName("body")).getText();
+1.  Apply the plugin to the build:
 
-                Assert.assertTrue(
-                    "The portlet is not well deployed",
-                    bodyText.contains("Sample Portlet is working!"));
-            }
+        apply plugin: 'jacoco'
 
-            @InstallPortlet(name ="arquillian_sample_portlet")
-            private URL _portlerURL;
-
-            @Inject
-            private SampleService _sampleService;
-
-            @FindBy(css = "button[type=submit]")
-            private WebElement add;
-
-            @Drone
-            private WebDriver browser;
-
-            @FindBy(css = "input[id$='firstParameter']")
-            private WebElement firstParamter;
-
-            @FindBy(css = "span[class='result']")
-            private WebElement result;
-
-            @FindBy(css = "input[id$='secondParameter']")
-            private WebElement secondParameter;
-
+        jacoco {
+            toolVersion = '0.7.9'
         }
 
-5.  Configure the `ArquillianResource`:
+2.  Copy the JaCoCo agent into the project build. 
 
-    If you want to inject the URL of the container (e.g., Tomcat) using the
-    annotation `@ArquillianResource`, you can use one of these solutions (if
-    you are using the Arquillian Liferay Extension):
+        task copyJacocoAgent(type: Copy) {
+        println configurations.jacocoAgent
 
-    1. Create a deployment method in your test class.
-    2. Configure Arquillian using the graphene url property (via
-       `arquillian.xml`, `arquillian.properties` or System Properties).
+            configurations.jacocoAgent.asFileTree.each {
+                from(zipTree(it))
+            }
 
-        <?xml version="1.0" encoding="UTF-8"?>
-        <arquillian xmlns="http://jboss.org/schema/arquillian"
-                                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                                xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
-                ...
-                <extension qualifier="graphene">
-                        <property name="url">http://localhost:8080</property>
-                </extension>
-                ...
-        </arquillian>
+            into "${rootDir}/build/jacoco"
+        }
 
-## Create a Jacoco Profile [](id=create-a-jacoco-profile)
+3.  Dump the code coverage data:
 
-[JaCoCo](http://eclemma.org/jacoco/) is a code coverage library for Java.
+        task dumpJacoco {
+            doLast {
+                def serverUrl = 'service:jmx:rmi:///jndi/rmi://localhost:8099/jmxrmi'
+                String beanName = "org.jacoco:type=Runtime"
+                def server = JmxFactory.connect(new JmxUrl(serverUrl)).MBeanServerConnection
+                def gmxb = new GroovyMBean(server, beanName)
 
-1.  Create a new Maven profile called `jacoco` that configures the plugin
-    `jacoco-maven-plugin` with the dependencies `org.jacoco.core` and
-    `arquillian-jacoco`:
+                println "Connected to:\n$gmxb\n"
+                println "Executing dump()"
+                gmxb.dump(true)
+            }
+        }
 
-        ...
-        <profile>
-            <id>jacoco</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>org.jacoco.core</artifactId>
-                    <version>0.7.4.201502262128</version>
-                    <scope>test</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.jboss.arquillian.extension</groupId>
-                    <artifactId>arquillian-jacoco</artifactId>
-                    <version>1.0.0.Alpha8</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.jacoco</groupId>
-                        <artifactId>jacoco-maven-plugin</artifactId>
-                        <version>0.7.4.201502262128</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>prepare-agent</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>report</id>
-                                <phase>prepare-package</phase>
-                                <goals>
-                                    <goal>report</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
+4.  Generate JaCoCo reports:
 
-2.  Generate a Jacoco report in HTML:
+        jacocoTestReport {
+            dependsOn dumpJacoco
+            group = "Reporting"
+            reports {
+                xml.enabled true
+                csv.enabled false
+                html.destination "${buildDir}/reports/coverage"
+            }
+            executionData = files("${rootDir}/build/jacoco/testIntegration.exec")
+        }
 
-        mvn test -Pjavacoc jacoco:report
+JaCoCo code coverage reporting runs as part of the project's `testIntegration`
+Gradle task. 
 
-## Running Tests with the Liferay Arquillian Extension [](id=running-tests-with-the-liferay-arquillian-extension)
+## Running the Tests [](id=running-the-tests)
 
-That's it! If you've download the
-[Arquillian Liferay Extension Example](https://github.com/arquillian/arquillian-extension-liferay/tree/master/arquillian-extension-liferay-example),
-use the following command to run the tests:
+You're ready to run the Arquillian Blade Example tests. Open a terminal to the
+project root and execute the following command:
 
-    mvn clean install
+    gradlew testIntegration
 
-This command can take a long time to execute since Maven needs to download
-Tomcat and Liferay, install Liferay into Tomcat, start Liferay, and then deploy
-and run your tests.
+The command does these things:
+
+1.  Downloads and installs @product-ver@ bundled with Apache Tomcat
+2.  Starts a @product-ver@ server
+3.  Runs the tests, including the functional browser-based tests
+4.  Shuts down the server
+5.  Reports test and code coverage results
+
+For `testIntegration` task details, examine the `build.gradle` file in the
+project root. 
+
+The command can take several minutes to execute because of all it does.  
+
+Test results are found in these locations:
+
+-   *Tests*: `build\reports\tests\testIntegration\index.html`
+-   *Code Coverage*: `build\reports\coverage\index.html`
+
+![Figure 3: Open the test reports to analyze the results.](../../images/arquillian-example-test-results.png)
+
++$$$
+
+Note: before rerunning the tests, you must delete the `build/reports/` and
+`build/test-results/` folders.
+
+$$$
+
+Now that you've examined Arquillian functional and integration tests and JaCoCo
+code coverage capabilities, you can create similar tests and improve test code
+coverage in your projects. 
