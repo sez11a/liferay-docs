@@ -115,9 +115,9 @@ Elasticsearch is running.
 
 There are two ways to configure the adapter: 
 
-1. Use the System Settings application in the Control Panel. 
+1. [Use the System Settings application in the Control Panel.](#configuring-adapter-control-panel) 
 
-2. Manually create an OSGi configuration file. 
+2. [Manually create an OSGi configuration file.](#configuring-adapter-osgi-config)
 
 It's convenient to configure the Elasticsearch adapter from System Settings, but
 this is often only possible during development and testing. If you're not
@@ -127,6 +127,7 @@ a configuration file so you can use the same configuration on another @product@
 system, you can still use System Settings. Just make the configuration edits you
 need, then export the `.config` file with your configuration.
 
+### Configuring the Adapter in the Control Panel.  <a id=configuring-adapter-control-panel></a>
 Here are the steps to configure the Elasticsearch adapter from the System
 Settings application:
 
@@ -156,6 +157,7 @@ repeatable deployment process. Therefore, it's best to use the OSGi
 configuration file, where your configuration is maintained in a controlled
 source.
 
+### Configuring the Adapter with OSGi config files <a id=configuring-adapter-osgi-config></a>
 Follow these steps to configure the Elasticsearch adapter using an OSGi
 configuration file:
 
