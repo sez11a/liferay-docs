@@ -15,12 +15,12 @@ you finish the above steps, you can deploy your portlet to @product@.
 The portlet upgrade tutorials show you how to upgrade the following common
 portlets: 
 
--   [GenericPortlet](upgrading-a-genericportlet)
--   [Servlet-based portlet](upgrading-a-servlet-based-portlet)
--   [Liferay MVC Portlet](upgrading-a-liferay-mvc-portlet)
+-   [GenericPortlet](/develop/tutorials/-/knowledge_base/7-0/upgrading-a-genericportlet)
+-   [Servlet-based portlet](/develop/tutorials/-/knowledge_base/7-0/upgrading-a-servlet-based-portlet)
+-   [Liferay MVC Portlet](/develop/tutorials/-/knowledge_base/7-0/upgrading-a-liferay-mvc-portlet)
+-   [Portlet that uses Service Builder](/develop/tutorials/-/knowledge_base/7-0/upgrading-portlets-that-use-service-builder)
 
 <!-- Uncomment each of the following bullets when their tutorial's available
--   Upgrading a Service Builder Portlet
 -   Upgrading a Struts Portlet
 -   Upgrading a JSF Portlet
 -->
