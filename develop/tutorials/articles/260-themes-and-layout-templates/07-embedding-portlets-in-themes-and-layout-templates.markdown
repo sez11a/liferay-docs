@@ -18,13 +18,13 @@ into a theme.
 
 The first thing you should do is open the template file for which you want to
 declare an embedded portlet. For example, the `portal_normal.ftl` template file
-is a popular place to declare embedded portlets. There are two ways two embed a 
-portlet in a theme: by class name, or by portlet name. Both methods are covered 
+is a popular place to declare embedded portlets. There are two ways two embed a
+portlet in a theme: by class name, or by portlet name. Both methods are covered
 in this section.
 
-### Embedding a Portlet by Class Name
+### Embedding a Portlet in a Theme by Class Name
 
-To embed a portlet by class name, insert the following declaration wherever you 
+To embed a portlet by class name, insert the following declaration wherever you
 want to embed the portlet:
 
     <@liferay_portlet["runtime"]
@@ -34,7 +34,7 @@ want to embed the portlet:
 
 This declaration expects two parameters: the type of action and the class name
 of the entity type the portlet should handle. Here's an example of an embedded
-portlet declaration that uses the class name: 
+portlet declaration that uses the class name:
 
     <@liferay_portlet["runtime"]
         portletProviderAction=portletProviderAction.VIEW
@@ -53,7 +53,7 @@ Great! Your theme declaration is complete. However, the Portal is not yet
 configured to handle this request. You must create a module that can
 find the portlet that fits the theme's request.
 
-1. [Create an OSGi module](/develop/tutorials/-/knowledge_base/7-0/starting-module-development#creating-a-module). 
+1. [Create an OSGi module](/develop/tutorials/-/knowledge_base/7-0/starting-module-development#creating-a-module).
 
 2. Create a unique package name in the module's `src` directory, and create a
    new Java class in that package. To follow naming conventions, name the class
@@ -106,15 +106,14 @@ use wherever your theme is used.
 
 You successfully requested a portlet based on the entity and action types
 required, and created and deployed a module that retrieves the portlet and
-embeds it in your theme. 
+embeds it in your theme.
 
-### Embedding a Portlet by Portlet Name
+### Embedding a Portlet in a Theme by Portlet Name
 
 If you'd like to embed a specific portlet in the theme, you can hardcode it by
 providing its instance ID and name:
 
     <@liferay_portlet["runtime"]
-        portletProviderAction=portletProviderAction.VIEW
         instanceId="INSTANCE_ID"
         portletName="PORTLET_NAME"
     />
@@ -124,66 +123,66 @@ can remove this line. To set your portlet to non-instanceable, set the property
 `com.liferay.portlet.instanceable` in the component annotation of your portlet
 to `false`. The portlet name must be the same as the property
 `javax.portlet.name`.
- 
-Here's an example of an embedded portlet declaration that uses the portlet name 
+
+Here's an example of an embedded portlet declaration that uses the portlet name
 to embed a web content portlet:
 
     <@liferay_portlet["runtime"]
         portletName="com_liferay_journal_content_web_portlet_JournalContentPortlet"
     />
 
-You can also set default preferences for an application. This process is covered 
+You can also set default preferences for an application. This process is covered
 next.
 
 ### Setting Default Preferences for an Embedded Portlet
 
 Follow these steps to set default portlet preferences for an embedded portlet:
 
-1.  Temporarily assign the `VOID` variable to set portlet preferences using the 
-    `freeMarkerPortletPreferences` object as shown in the example below:
+1. Temporarily assign the `VOID` variable to set portlet preferences using the
+  `freeMarkerPortletPreferences` object as shown in the example below:
 
         <#assign VOID = freeMarkerPortletPreferences.setValue(
         "portletSetupPortletDecoratorId", "barebone") />
-    
-2.  Set the `defaultPreferences` attribute to use the 
-    `freeMarkerPortletPreferences` object you just configured:
+
+2. Set the `defaultPreferences` attribute to use the
+   `freeMarkerPortletPreferences` object you just configured:
 
         <@liferay_portlet["runtime"]
             defaultPreferences="${freeMarkerPortletPreferences}"
             portletName="com_liferay_login_web_portlet_LoginPortlet"
         />
 
-3.  Once the preferences have been set and passed to your portlet, you can reset
-    `freeMarkerPortletPreferences` object, so it can be fresh for the next 
-    portlet:
+3. Once the preferences have been set and passed to your portlet, you can reset
+   `freeMarkerPortletPreferences` object, so it can be fresh for the next
+   portlet:
 
         <#assign VOID = freeMarkerPortletPreferences.reset() />
 
-Now you know how to set default preferences for embedded portlets! Next you can 
+Now you know how to set default preferences for embedded portlets! Next you can
 see the additional attributes you can use for your embedded portlets.
-    
+
 ### Additional attributes for Portlets
 
 Below are some additional attributes you can define for embedded portlets:
 
-**defaultPreferences**: A string of Portlet Preferences for the application. 
+**defaultPreferences**: A string of Portlet Preferences for the application.
 This includes look and feel configurations.
 
-**instanceId**: The instance id for the app, if the application is instanceable.
+**instanceId**: The instance ID for the app, if the application is instanceable.
 
-**persistSettings**: Whether to have an application use its default settings, 
+**persistSettings**: Whether to have an application use its default settings,
 which will persist across layouts. The default value is *true*.
 
-**settingsScope**: Specifies which settings use for the application. The default 
+**settingsScope**: Specifies which settings use for the application. The default
 value is `portletInstance`, but can be set to `group` or `company`.
 
-Now you know how to embed a portlet in your theme by class name and by portlet 
-name and how to configure your embedded portlet! Next, you'll learn a similar 
+Now you know how to embed portlets in your theme by class name and by portlet
+name, and how to configure your embedded portlet! Next, you'll learn a similar
 process to embed a portlet in your layout template.
 
 ## Adding a Portlet to a Custom Layout Template [](id=adding-a-portlet-to-a-custom-layout-template)
 
-The process for embedding portlets in layout templates is similar to that for 
+The process for embedding portlets in layout templates is similar to that for
 the theme. The only change is the declaration you insert in your template's TPL
 file.
 
@@ -204,9 +203,9 @@ file.
     templates: `ADD`, `BROWSE`, `EDIT`, and `VIEW`. Specify the entity type and
     action in your layout's declaration.
 
-Now that your layout declaration is complete, you'll need to create a module 
+Now that your layout declaration is complete, you'll need to create a module
 that can handle this request. This process is exactly the same for themes and
-layout templates. Follow steps 1-4 in the [Embedding Portlets by Class Name](#embedding-portlets-by-class-name) 
+layout templates. Follow steps 1-4 in the [Embedding Portlets by Class Name](#embedding-portlets-by-class-name)
 section to set up your module.
 
 +$$$
