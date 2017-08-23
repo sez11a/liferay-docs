@@ -1,4 +1,4 @@
-# Upgrading Data in Development [](id=upgrading-data-in-development)
+# Upgrading Data Schemas in Development [](id=upgrading-data-schemas-in-development)
 
 As you develop modules, you might need to iterate through several database
 schema changes. Before you release new module versions with your finalized
