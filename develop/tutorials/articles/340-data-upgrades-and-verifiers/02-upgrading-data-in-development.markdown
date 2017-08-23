@@ -9,21 +9,25 @@ changes on the fly.
 
 +$$$
 
-**Note**:  The `service.properties` file's property `build.auto.upgrade` in
-Liferay Portal 6.x portlets that use Service Builder applies Liferay Service
+**Note**:  The `build.auto.upgrade` property in `service.properties` for
+Liferay Portal 6.x Service Builder portlets applies Liferay Service
 schema changes on rebuilding the services and redeploying the portlets.
 
 Liferay Digital Enterprise 7.0 SP5 and Liferay CE Portal 7.0.4 GA5 reintroduces
-this feature as this tutorial describes. 
+this feature as this tutorial describes.
+
+The per portlet property `build.auto.upgrade` has been deprecated in favor of
+a new global property `schema.module.build.auto.upgrade`.
 
 $$$
 
 Setting global property `schema.module.build.auto.upgrade` in
 `[Liferay_Home]/portal-developer.properties` to `true` applies the module's
-schema changes with every module build version increment. The feature executes
-schema changes without massaging existing data. It leaves data empty for columns
-you create, drops data from columns you delete or rename, and orphans data from
-tables you delete or rename. 
+schema changes with every module build version increment. The build number can
+be found in the `service.properties` file. The feature executes schema changes
+without massaging existing data. It leaves data empty for columns you create,
+drops data from columns you delete or rename, and orphans data from tables you
+delete or rename. 
 
 Although Build Auto Upgrade updates databases quickly and automatically, it
 doesn't guarantee proper data upgrade--that's for you to implement via
