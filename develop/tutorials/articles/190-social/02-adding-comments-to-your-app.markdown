@@ -10,9 +10,7 @@ steps!
 ![Figure 1: Your JSP lets users comment on content in your portlet.](../../images/social-comments-enabled.png)
 
 This tutorial shows you how to add the comment feature for your application's
-content. The Guestbook app from the MVC Learning Path is used as an example:
-The completed Guestbook app code that uses this feature is on
-[Github](https://github.com/liferay/liferay-docs/tree/master/develop/tutorials/code/osgi/modules/guestbook-social-features/guestbook).
+content.
 
 Follow these steps to add comments to your app:
 
@@ -30,9 +28,7 @@ Follow these steps to add comments to your app:
 
 4.  In your entity's view, use `ParamUtil` to get the ID of the entity
     from the render request. Then you can create an entity object using your
-    `-LocalServiceUtil` class. Below is an example configuration for the
-    Guestbook app's `guestbook-web` module's view entry JSP file
-    [`view_entry.jsp`](https://github.com/liferay/liferay-docs/develop/tutorials/code/osgi/modules/guestbook-social-features/comments/guestbook/guestbook-web/src/main/resources/META-INF/resources/html/guestbookmvcportlet/view_entry.jsp):
+    `-LocalServiceUtil` class. Below is an example configuration:
 
         <%
         long entryId = ParamUtil.getLong(renderRequest, "entryId");
@@ -71,9 +67,6 @@ Follow these steps to add comments to your app:
       </liferay-ui:panel>
     </liferay-ui:panel-container>
 
-Awesome! Now you have a JSP that lets your users comment on content in your
-portlet.
-
 If you haven't already connected your portlet's view to the JSP for your entity,
 you can refer [here](/develop/tutorials/-/knowledge_base/7-0/relating-assets#creating-a-url-to-your-new-jsp)
 to see how to connect your portlet's main view JSP to your entity's view JSP.
@@ -81,22 +74,7 @@ to see how to connect your portlet's main view JSP to your entity's view JSP.
 Great! Now you know how to let users comment on content in your asset enabled
 portlets.
 
-You can also perform permissions checks to control who can access the discussion.
-For example, you can surround the collapsible panel with `c:if` tags that only
-reveal their contents to users that are signed in to the portal:
-
-    <c:if test="<%=themeDisplay.isSignedIn()%>">
-
-        [Collapsible Panel Here]
-
-    </c:if>
-
-This is just one way of controlling access to the discussion. You could also
-perform more specific permissions checks as the Guestbook app does for the Add
-Guestbook and Permissions buttons in its
-[`guestbook_actions.jsp`](https://github.com/liferay/liferay-docs/tree/master/develop/tutorials/code/osgi/modules/guestbook-social-features/comments/guestbook/guestbook-web/src/main/resources/META-INF/resources/html/guestbookmvcportlet/guestbook_actions.jsp).
-
-**Related Topics**
+## Related Topics
 
 [Adding, Updating, and Deleting Assets for Custom Entities](/develop/tutorials/-/knowledge_base/7-0/adding-updating-and-deleting-assets-for-custom-entities)
 
