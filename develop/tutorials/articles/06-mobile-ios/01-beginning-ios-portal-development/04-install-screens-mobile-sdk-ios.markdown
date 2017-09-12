@@ -25,6 +25,28 @@ install the Guestbook Mobile SDK manually.
 This article walks you through the installation of the Guestbook Mobile SDK and 
 Liferay Screens. When you finish, you'll be ready to start developing the app. 
 
+## Anatomy of the Liferay Guestbook iOS Project [](id=anatomy-of-the-liferay-guestbook-ios-project)
+
+Before getting started, you should learn a couple of terms this Learning Path 
+uses when referring to the project's structure. Knowing these terms ensures that 
+you know where to add folders and files in the project. In Xcode's Project 
+navigator, there are two *Liferay Guestbook* items: 
+
+1.  **The root project:** This is the first item in the Project navigator. It 
+    contains all other items in the project, and is labeled with a blue 
+    application document icon. In your file system, the root project is 
+    contained in a folder with the same name. This Learning Path refers to this 
+    folder as the *root project folder*. 
+
+2.  **The Liferay Guestbook folder:** This is immediately under the root 
+    project. It contains the files that make up the app, and is labeled with a 
+    manila folder icon. 
+
+![Figure 1: The root project and Liferay Guestbook folder are labeled in this screenshot.](../../../images/ios-lp-project-structure.png)
+
+It's important not to confuse these two items. Now that you know what they are, 
+you're ready to install Liferay Screens! 
+
 ## Installing Liferay Screens [](id=installing-liferay-screens)
 
 You'll use 
@@ -34,7 +56,7 @@ to install Liferay Screens.
 for instructions on installing CocoaPods. After installing it, use these steps 
 to install Screens: 
 
-1.  In your project's root folder, create a file named `Podfile` that contains 
+1.  In your root project's folder, create a file named `Podfile` that contains 
     the following: 
 
         source 'https://github.com/CocoaPods/Specs.git'
@@ -59,7 +81,7 @@ to install Screens:
     code is optional--it's a workaround for a benign bug that causes Screenlet 
     previews not to render in Interface Builder. 
 
-2.  On the terminal, navigate to your project's root folder and run this 
+2.  On the terminal, navigate to your root project's folder and run this 
     command: 
 
         pod repo update
@@ -67,7 +89,7 @@ to install Screens:
     This ensures you have the latest version of the CocoaPods repository on your 
     machine. Note that this command can take a while to run. 
 
-3.  Still in your project's root folder in the terminal, run this command: 
+3.  Still in your root project's folder in the terminal, run this command: 
 
         pod install
 
@@ -95,19 +117,19 @@ things now:
     Unzip this file to a location of your choosing on your machine. This creates 
     the following directory hierarchy: 
 
-    ![Figure 1: The Guestbook Mobile SDK's Objective-C classes unzip to this folder structure.](../../../images/ios-lp-sdk-structure.png)
+    ![Figure 2: The Guestbook Mobile SDK's Objective-C classes unzip to this folder structure.](../../../images/ios-lp-sdk-structure.png)
 
     This should look familiar. It's the same `Service` folder, contents and all, 
     from the Guestbook Mobile SDK you built in the previous article. 
 
 2.  To install the service classes in your project, drag the `v62` folder from 
-    your Finder into your Xcode project, directly under the top-level Liferay 
-    Guestbook project. In the dialog that appears, make sure you select the 
-    following items, and then click *Finish*: 
+    your Finder into your Xcode project, directly under the root project. In the 
+    dialog that appears, make sure you select the following items, and then 
+    click *Finish*: 
 
-    ![Figure 2: When adding the Guestbook Mobile SDK to your project, select these options and then click *Finish*.](../../../images/ios-lp-add-sdk.png)
+    ![Figure 3: When adding the Guestbook Mobile SDK to your project, select these options and then click *Finish*.](../../../images/ios-lp-add-sdk.png)
 
-    ![Figure 3: Your project structure should look like this after adding the Guestbook SDK.](../../../images/ios-lp-post-sdk-install.png)
+    ![Figure 4: Your project structure should look like this after adding the Guestbook SDK.](../../../images/ios-lp-post-sdk-install.png)
 
 3.  The `v62` folder and its contents are now inside your Xcode project. Now you 
     must change each Objective-C class header file in the Guestbook Mobile SDK 
@@ -122,17 +144,17 @@ To use the Guestbook Mobile SDK's Objective-C classes from Swift, you must add
 and configure an Objective-C bridging header in your project. Follow these 
 instructions to do so: 
 
-1.  In Xcode's project navigator, right-click the top-level project (Liferay 
-    Guestbook) and select *New File*. In the window that appears, select *Header 
-    File* from the *Source* section of the *iOS* tab, and click *Next*.
+1.  In Xcode's project navigator, right-click the root project and select *New 
+    File*. In the window that appears, select *Header File* from the *Source* 
+    section of the *iOS* tab, and click *Next*.
 
-    ![Figure 4: Create a new iOS header file.](../../../images/ios-lp-header-file-01.png)
+    ![Figure 5: Create a new iOS header file.](../../../images/ios-lp-header-file-01.png)
 
 2.  Name the file `Liferay Guestbook-Bridging-Header.h` and make sure that 
     *Liferay Guestbook* with the blue icon is selected in the *Group* menu. To 
     finish creating the file, uncheck any items in *Targets* and click *Create*.
 
-    ![Figure 5: Use these options to create the header file.](../../../images/ios-lp-header-file-02.png)
+    ![Figure 6: Use these options to create the header file.](../../../images/ios-lp-header-file-02.png)
 
 3.  Upon creating the header file, Xcode opens it in the editor. In this file, 
     you must import the Guestbook Mobile SDK's header files. Add these imports 
@@ -152,14 +174,14 @@ instructions to do so:
 
         #endif
 
-4.  Now you must configure your project to use this file. Select the top-level 
-    Liferay Guestbook project on the left and then click *Build Settings*. 
-    Search for *Objective-C Bridging Header* in the search box. The only build 
-    setting that appears is *Objective-C Bridging Header*, under the *Swift 
-    Compiler - General* section. In the two *Liferay Guestbook* fields for this 
-    build setting, enter the bridging header's file name. 
+4.  Now you must configure your project to use this file. Select the root 
+    project on the left and then click *Build Settings*. Search for *Objective-C 
+    Bridging Header* in the search box. The only build setting that appears is 
+    *Objective-C Bridging Header*, under the *Swift Compiler - General* section. 
+    In the two *Liferay Guestbook* fields for this build setting, enter the 
+    bridging header's file name. 
 
-    ![Figure 6: The project is now configured to use your Objective-C bridging header.](../../../images/ios-lp-build-settings-header.png)
+    ![Figure 7: The red boxes highlight the two Liferay Guestbook fields configured to use the bridging header file.](../../../images/ios-lp-build-settings-header.png)
 
 5.  Build the project. 
 
@@ -174,18 +196,18 @@ with your Liferay Portal installation. You'll do this by setting attributes in a
 attributes: 
 
 1.  In Xcode's project navigator, right-click the *Liferay Guestbook* folder 
-    (not the top-level project) and select *New File*. In the dialog that 
+    (**not** the root project) and select *New File*. In the dialog that 
     appears, select the *iOS* tab then scroll down to the *Resource* section and 
     select *Property List*. Click *Next*. 
 
-    ![Figure 7: Use the Property List template to create a new `plist` file.](../../../images/ios-lp-plist-01.png)
+    ![Figure 8: Use the Property List template to create a new `plist` file.](../../../images/ios-lp-plist-01.png)
 
 2.  Name the file `liferay-server-context.plist` and make sure you're creating 
     it in the *Liferay Guestbook* folder, which should be selected in the 
     *Group* menu. Also make sure that *Liferay Guestbook* is selected in the 
     *Targets* menu. Then click *Create*. 
 
-    ![Figure 8: Create the `plist` file as shown here.](../../../images/ios-lp-plist-02.png)
+    ![Figure 9: Create the `plist` file as shown here.](../../../images/ios-lp-plist-02.png)
 
 3.  The `plist` file now opens in the editor. Right-click the file in the 
     Project navigator and select *Open As* &rarr; *Source Code*. Replace the 
@@ -231,7 +253,7 @@ must therefore disable App Transport Security. Follow these steps to do so:
 1.  Select your project in Xcode's Project navigator. With the *Liferay 
     Guestbook* target selected in the outline, click the *Info* tab. 
 
-    ![Figure 9: You'll disable App Transport Security in the Info tab.](../../../images/ios-lp-ats-01.png)
+    ![Figure 10: You'll disable App Transport Security in the Info tab.](../../../images/ios-lp-ats-01.png)
 
 2.  In *Custom iOS Target Properties*, right-click *Bundle OS Type Code* and 
     select *Add Row*. In the new row's text field, enter *App Transport Security 
@@ -240,7 +262,7 @@ must therefore disable App Transport Security. Follow these steps to do so:
 3.  Click the *+* icon next to App Transport Security Settings and select *Allow 
     Arbitrary Loads*. Then select *YES* for this field's value. 
 
-    ![Figure 10: Your App Transport Security settings should look like this.](../../../images/ios-lp-ats-02.png)
+    ![Figure 11: Your App Transport Security settings should look like this.](../../../images/ios-lp-ats-02.png)
 
 Stupendous! You've successfully installed Liferay Screens and the Guestbook 
 Mobile SDK, and configured your app to communicate with your Liferay Portal 
