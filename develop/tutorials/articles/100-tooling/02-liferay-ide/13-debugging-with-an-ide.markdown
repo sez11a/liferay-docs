@@ -2,10 +2,10 @@
 
 To debug @product@ or its modules, you must first start it in debug mode. There 
 are two ways to do this, depending on how you're running your @product@ server. 
-If you're running your server inside Liferay @ide@, then you can simply click 
-the button to start the server in debug mode. If you're running the server 
-outside of Liferay @ide@, however, then things are a bit more complicated. This 
-article shows you both ways of starting the server in debug mode. 
+If you're running your server inside Liferay @ide@, you can simply click the 
+button to start the server in debug mode. If you're running the server outside 
+of Liferay @ide@, however, things are a bit more complicated. This article 
+shows you both ways of starting the server in debug mode. 
 
 ## Running the Server in Liferay @ide@ [](id=running-the-server-in-liferay-ide)
 
@@ -60,7 +60,7 @@ Here's an example of debugging in Eclipse (Liferay IDE or Developer Studio):
 3.  Name your debug configuration. It often makes sense to name it after the 
     @product@ version you're debugging against. For example, if you're debugging 
     against Liferay Portal 7.0.3 CE GA4, you could name your debug configuration 
-    7.0.3-ga4. 
+    `7.0.3-ga4`. 
 
 4.  Click *Apply*. 
 
