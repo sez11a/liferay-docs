@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Liferay_Guestbook" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rzd-AN-WIe" customClass="LoginScreenlet" customModule="LiferayScreens">
+                                <rect key="frame" x="52.5" y="240.5" width="270" height="185"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="270" id="QmF-XS-IAX"/>
+                                    <constraint firstAttribute="height" constant="185" id="fdE-MA-mNt"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="rzd-AN-WIe" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="0hq-gE-p6q"/>
+                            <constraint firstItem="rzd-AN-WIe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1CU-T7-H9X"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loginScreenlet" destination="rzd-AN-WIe" id="2Fm-2W-631"/>
+                        <segue destination="9bm-o1-0UX" kind="show" identifier="loginsegue" id="E2k-FQ-qky"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-15" y="35"/>
+        </scene>
+        <!--Guestbooks-->
+        <scene sceneID="HMI-h5-tKV">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="YNT-EG-IOD" customClass="GuestbooksViewController" customModule="Liferay_Guestbook" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qce-iJ-Zqu"/>
+                        <viewControllerLayoutGuide type="bottom" id="qB2-Kb-TJe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oJP-Ba-HzQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wcf-8Y-37c" customClass="GuestbookListScreenlet" customModule="Liferay_Guestbook" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qB2-Kb-TJe" firstAttribute="top" secondItem="Wcf-8Y-37c" secondAttribute="bottom" id="1Dl-To-IKD"/>
+                            <constraint firstAttribute="trailing" secondItem="Wcf-8Y-37c" secondAttribute="trailing" id="oGu-jp-SiN"/>
+                            <constraint firstItem="Wcf-8Y-37c" firstAttribute="leading" secondItem="oJP-Ba-HzQ" secondAttribute="leading" id="pym-1b-odJ"/>
+                            <constraint firstItem="Wcf-8Y-37c" firstAttribute="top" secondItem="Qce-iJ-Zqu" secondAttribute="bottom" id="vFC-62-F2c"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Guestbooks" id="pnM-Ce-knz">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Tma-BV-L5x"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="screenlet" destination="Wcf-8Y-37c" id="2ka-Z7-gh9"/>
+                        <segue destination="Wi8-pJ-UHK" kind="show" identifier="entriessegue" id="WOd-e9-bpc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jGt-Xh-OZi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1796" y="34.632683658170919"/>
+        </scene>
+        <!--Entries View Controller-->
+        <scene sceneID="AFb-Pm-bXr">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Wi8-pJ-UHK" customClass="EntriesViewController" customModule="Liferay_Guestbook" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TOM-Yu-eJH"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZeY-zR-GjF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0HR-9E-yXs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="phS-Yb-eyd" customClass="EntryListScreenlet" customModule="Liferay_Guestbook" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="phS-Yb-eyd" firstAttribute="leading" secondItem="0HR-9E-yXs" secondAttribute="leading" id="MkQ-3E-2JJ"/>
+                            <constraint firstItem="phS-Yb-eyd" firstAttribute="top" secondItem="TOM-Yu-eJH" secondAttribute="bottom" id="TLI-pn-vQV"/>
+                            <constraint firstItem="ZeY-zR-GjF" firstAttribute="top" secondItem="phS-Yb-eyd" secondAttribute="bottom" id="UJU-9B-Itv"/>
+                            <constraint firstAttribute="trailing" secondItem="phS-Yb-eyd" secondAttribute="trailing" id="x9h-ow-b4Z"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="screenlet" destination="phS-Yb-eyd" id="VYs-4X-hUR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y75-6n-khg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2732" y="34.632683658170919"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4j9-id-Lke">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9bm-o1-0UX" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4Cm-jv-sz6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YNT-EG-IOD" kind="relationship" relationship="rootViewController" id="dtn-aN-7Gk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8w8-6F-w9N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="856.79999999999995" y="34.632683658170919"/>
+        </scene>
+    </scenes>
+</document>
