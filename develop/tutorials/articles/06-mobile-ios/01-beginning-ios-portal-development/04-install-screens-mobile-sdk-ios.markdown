@@ -34,15 +34,20 @@ navigator, there are two *Liferay Guestbook* items:
 
 1.  **The root project:** This is the first item in the Project navigator. It 
     contains all other items in the project, and is labeled with a blue 
-    application document icon. In your file system, the root project is 
-    contained in a folder with the same name. This Learning Path refers to this 
-    folder as the *root project folder*. 
+    application document icon. The root project corresponds with a folder in 
+    your file system that this Learning Path refers to as the *root project 
+    folder*. For example, the root project folder for the Liferay Guestbook 
+    project is `Liferay Guestbook`. 
 
 2.  **The Liferay Guestbook folder:** This is immediately under the root 
-    project. It contains the files that make up the app, and is labeled with a 
-    manila folder icon. 
+    project. It contains the app's files, and is labeled with a manila folder 
+    icon. Even though this folder shares a name with the root project folder on 
+    your file system, it **is not** the same thing. The root project folder 
+    contains this `Liferay Guestbook` folder. 
 
 ![Figure 1: The root project and Liferay Guestbook folder are labeled in this screenshot.](../../../images/ios-lp-project-structure.png)
+
+![Figure 2: On your file system, the `Liferay Guestbook` root project folder contains the app's `Liferay Guestbook` folder. The latter is selected in this screenshot.](../../../images/ios-lp-project-file-system.png)
 
 It's important not to confuse these two items. If you're ever confused about 
 where things should go, 
@@ -264,8 +269,8 @@ must therefore disable App Transport Security. Follow these steps to do so:
     Settings*. 
 
 3.  Even though it doesn't yet contain any items, ensure that the App Transport 
-    Security Settings category is expanded (click the triangle icon to its left 
-    to open/close it). Now click the *+* icon next to App Transport Security 
+    Security Settings category is open (click the triangle icon to its left to 
+    open/close it). Now click the *+* icon next to App Transport Security 
     Settings and select *Allow Arbitrary Loads*. Then select *YES* for this 
     field's value. 
 
@@ -274,11 +279,13 @@ must therefore disable App Transport Security. Follow these steps to do so:
     The Allow Arbitrary Loads setting should look like this in your app's 
     `Info.plist` file: 
 
+        ...
         <key>NSAppTransportSecurity</key>
         <dict>
             <key>NSAllowsArbitraryLoads</key>
             <true/>
         </dict>
+        ...
 
 Stupendous! You've successfully installed Liferay Screens and the Guestbook 
 Mobile SDK, and configured your app to communicate with your Liferay Portal 
