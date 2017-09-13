@@ -12,18 +12,18 @@ package Screenlets.
 Since you'll use Guestbook List Screenlet in only this app, you can create it in 
 a new folder inside the app's project. Create this folder now: 
 
-1.  In the Finder, create the `GuestbookListScreenlet` folder inside your 
-    project's top-level `Liferay Guestbook` folder. 
+1.  In the Finder, create the `GuestbookListScreenlet` folder inside the root 
+    project folder. 
 
-    ![Figure 1: The new `GuestbookListScreenlet` folder should be inside your project's top-level `Liferay Guestbook` folder.](../../../images/ios-lp-guestbook-screenlet-finder.png)
+    ![Figure 1: The new `GuestbookListScreenlet` folder should be inside your root project folder.](../../../images/ios-lp-guestbook-screenlet-finder.png)
 
 2.  Drag and drop the `GuestbookListScreenlet` folder from the Finder into your 
-    Xcode project, under the top-level Liferay Guestbook project. In the dialog 
-    that appears, select *Copy items if needed*, *Create groups*, and the 
-    *Liferay Guestbook* target. Then click *Finish*. The 
-    `GuestbookListScreenlet` folder now appears in your project. 
+    Xcode project, under the root project. In the dialog that appears, select 
+    *Copy items if needed*, *Create groups*, and the *Liferay Guestbook* target. 
+    Then click *Finish*. The `GuestbookListScreenlet` folder now appears in your 
+    project. 
 
-    ![Figure 2: After adding the `GuestbookListScreenlet` folder, your project should look something like this. Note that you can reorder items in the Project navigator via drag and drop.](../../../images/ios-lp-gb-screenlet-proj-nav.png)
+    ![Figure 2: After adding the `GuestbookListScreenlet` folder, your project should look something like this.](../../../images/ios-lp-gb-screenlet-proj-nav.png)
 
 Great! Now you have a folder to create Guestbook List Screenlet in. Before 
 getting started, you should understand how pagination works in in list 
@@ -67,17 +67,16 @@ clear that this class doesn't belong exclusively to a single Screenlet.
 
 Follow these steps to create Guestbook List Screenlet's model class: 
 
-1.  In the Finder, create the `model` folder inside your project's top-level 
-    `Liferay Guestbook` folder. 
+1.  In the Finder, create the `model` folder inside your root project folder. 
 
-    ![Figure 3: The new `model` folder should be inside your project's top-level `Liferay Guestbook` folder.](../../../images/ios-lp-model-finder.png)
+    ![Figure 3: The new `model` folder should be inside your root project folder.](../../../images/ios-lp-model-finder.png)
 
 2.  Drag and drop the `model` folder from the Finder into your Xcode project, 
-    under the top-level Liferay Guestbook project. In the dialog that appears, 
-    select *Copy items if needed*, *Create groups*, and the *Liferay Guestbook* 
-    target. Then click *Finish*. The `model` folder now appears in your project. 
+    under the root project. In the dialog that appears, select *Copy items if 
+    needed*, *Create groups*, and the *Liferay Guestbook* target. Then click 
+    *Finish*. The `model` folder now appears in your project. 
 
-    ![Figure 4: After adding the `model` folder, your project should look something like this. Note that you can reorder items in the Project navigator via drag and drop.](../../../images/ios-lp-model-project-nav.png)
+    ![Figure 4: After adding the `model` folder, your project should look something like this.](../../../images/ios-lp-model-project-nav.png)
 
 3.  In the Project navigator, right-click the `model` folder and select *New 
     File*. In the dialog that appears, fill out each screen as follows: 

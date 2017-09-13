@@ -3,17 +3,16 @@
 Like Guestbook List Screenlet, you'll create Entry List Screenlet in its own 
 folder inside your app's project. Create this folder now: 
 
-1.  In the Finder, create the `EntryListScreenlet` folder inside your project's 
-    folder, on the same level as the `GuestbookListScreenlet` folder. 
+1.  In the Finder, create the `EntryListScreenlet` folder inside your root 
+    project folder (on the same level as the `GuestbookListScreenlet` folder). 
 
 2.  Drag and drop the `EntryListScreenlet` folder from the Finder into your 
-    Xcode project, under the top-level Liferay Guestbook project (on the same 
-    level as the `GuestbookListScreenlet` folder). In the dialog that appears, 
-    select *Copy items if needed*, *Create groups*, and the *Liferay Guestbook* 
-    target. Then click *Finish*. The `EntryListScreenlet` folder now appears in 
-    your project. 
+    Xcode project, under the root project (on the same level as the 
+    `GuestbookListScreenlet` folder). In the dialog that appears, select *Copy 
+    items if needed*, *Create groups*, and the *Liferay Guestbook* target. Then 
+    click *Finish*. The `EntryListScreenlet` folder now appears in your project. 
 
-    ![Figure 1: After adding the `EntryListScreenlet` folder, your project should look something like this. Note that you can reorder items in the Project navigator via drag and drop.](../../../images/ios-lp-entry-proj-nav.png)
+    ![Figure 1: After adding the `EntryListScreenlet` folder, your project should look something like this.](../../../images/ios-lp-entry-proj-nav.png)
 
 Now you're ready to begin! 
 

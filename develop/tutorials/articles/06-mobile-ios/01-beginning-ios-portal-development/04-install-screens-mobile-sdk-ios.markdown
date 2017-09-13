@@ -44,8 +44,12 @@ navigator, there are two *Liferay Guestbook* items:
 
 ![Figure 1: The root project and Liferay Guestbook folder are labeled in this screenshot.](../../../images/ios-lp-project-structure.png)
 
-It's important not to confuse these two items. Now that you know what they are, 
-you're ready to install Liferay Screens! 
+It's important not to confuse these two items. If you're ever confused about 
+where things should go, 
+[click here](https://github.com/liferay/liferay-docs/tree/6.2.x/develop/tutorials/code/05-mobile-ios/Liferay%20Guestbook) 
+to see the finished app in GitHub. 
+
+Now you're ready to install Liferay Screens! 
 
 ## Installing Liferay Screens [](id=installing-liferay-screens)
 
@@ -259,10 +263,22 @@ must therefore disable App Transport Security. Follow these steps to do so:
     select *Add Row*. In the new row's text field, enter *App Transport Security 
     Settings*. 
 
-3.  Click the *+* icon next to App Transport Security Settings and select *Allow 
-    Arbitrary Loads*. Then select *YES* for this field's value. 
+3.  Even though it doesn't yet contain any items, ensure that the App Transport 
+    Security Settings category is expanded (click the triangle icon to its left 
+    to open/close it). Now click the *+* icon next to App Transport Security 
+    Settings and select *Allow Arbitrary Loads*. Then select *YES* for this 
+    field's value. 
 
     ![Figure 11: Your App Transport Security settings should look like this.](../../../images/ios-lp-ats-02.png)
+
+    The Allow Arbitrary Loads setting should look like this in your app's 
+    `Info.plist` file: 
+
+        <key>NSAppTransportSecurity</key>
+        <dict>
+            <key>NSAllowsArbitraryLoads</key>
+            <true/>
+        </dict>
 
 Stupendous! You've successfully installed Liferay Screens and the Guestbook 
 Mobile SDK, and configured your app to communicate with your Liferay Portal 
