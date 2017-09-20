@@ -1,8 +1,8 @@
 # Importing Lexicon CSS into a Theme [](id=importing-lexicon-css-into-a-theme)
 
-As mentioned before, Lexicon CSS fills the gaps between Bootstrap and the specific 
-needs of @product@. Bootstrap features have been extended to cover more 
-use cases. Here are some of the new components added by Lexicon CSS:
+As mentioned before, Lexicon's CSS fills the gaps between Bootstrap and the 
+specific needs of @product@. Bootstrap features have been extended to cover more 
+use cases. Here are some of the new components added by Lexicon's CSS:
 
 - Aspect Ratio
 - Cards
@@ -29,15 +29,15 @@ consuming tasks such as these:
 - notification icons/messages
 - vertical alignment of content
 
-Next you can learn more about Lexicon's structure.
+Next you can learn more about Lexicon's CSS structure.
 
-## Lexicon Structure CSS[](id=lexicon-css-structure)
+## Lexicon CSS Structure[](id=lexicon-css-structure)
 
-Lexicon CSS is bundled with two sub-themes: Lexicon Base and Atlas. Lexicon Base is 
-@product@'s Bootstrap API extension. It is also the theme that is used in 
-@product@'s Styled Theme. It adds all the features and components you need and 
-inherits Bootstrap's styles. As a result, Lexicon Base is fully compatible with 
-third party themes that leverage Bootstrap's Sass variable API. As a best 
+Lexicon's CSS is bundled with two sub-themes: Lexicon Base and Atlas. Lexicon 
+Base is @product@'s Bootstrap API extension. It is also the theme that is used 
+in @product@'s Styled Theme. It adds all the features and components you need 
+and inherits Bootstrap's styles. As a result, Lexicon Base is fully compatible 
+with third party themes that leverage Bootstrap's Sass variable API. As a best 
 practice, you should use the Lexicon Base as your base theme to integrate third 
 party themes into @product@.
 
@@ -171,7 +171,7 @@ Follow these steps to add a third party theme:
 
 6.  Deploy your theme with `gulp deploy` (for legacy ant themes, use `ant deploy`)
 
-Now you know how to use Lexicon CSS in your theme!
+Now you know how to use Lexicon's CSS in your theme!
 
 ## Related Topics [](id=related-topics)
 
