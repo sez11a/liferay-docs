@@ -219,13 +219,13 @@ understand. Let's examine a sample `sitemap.json` file:
                 "columns": [
                     [
                         {
-                            "portletId": "com_liferay_login_web_internal_portlet_LoginPortlet"
+                            "portletId": "com_liferay_login_web_portlet_LoginPortlet"
                         },
                         {
-                            "portletId": "com_liferay_site_navigation_menu_web_internal_portlet_SiteNavigationMenuPortlet"
+                            "portletId": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet"
                         },
                         {
-                            "portletId": "com_liferay_journal_content_web_internal_portlet_JournalContentPortlet",
+                            "portletId": "com_liferay_journal_content_web_portlet_JournalContentPortlet",
                             "portletPreferences": {
                                 "articleId": "Without Border.html",
                                 "groupId": "${groupId}",
@@ -233,7 +233,7 @@ understand. Let's examine a sample `sitemap.json` file:
                             }
                         },
                         {
-                            "portletId": "com_liferay_journal_content_web_internal_portlet_JournalContentPortlet",
+                            "portletId": "com_liferay_journal_content_web_portlet_JournalContentPortlet",
                             "portletPreferences": {
                                 "articleId": "Custom Title.html",
                                 "groupId": "${groupId}",
@@ -245,10 +245,10 @@ understand. Let's examine a sample `sitemap.json` file:
                     ],
                     [
                         {
-                            "portletId": "com_liferay_hello_world_web_internal_portlet_HelloWorldPortlet"
+                            "portletId": "com_liferay_hello_world_web_portlet_HelloWorldPortlet"
                         },
                         {
-                            "portletId": "com_liferay_site_navigation_menu_web_internal_portlet_SiteNavigationMenuPortlet_INSTANCE_${groupId}",
+                            "portletId": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet_INSTANCE_${groupId}",
                             "portletPreferences": {
                                 "displayStyle": "[custom]",
                                 "headerType": "root-layout",
@@ -260,12 +260,12 @@ understand. Let's examine a sample `sitemap.json` file:
                         },
                         "Web Content with Image.html",
                         {
-                            "portletId": "com_liferay_nested_portlets_web_internal_portlet_NestedPortletsPortlet",
+                            "portletId": "com_liferay_nested_portlets_web_portlet_NestedPortletsPortlet",
                             "portletPreferences": {
                                 "columns": [
                                     [
                                         {
-                                            "portletId": "com_liferay_journal_content_web_internal_portlet_JournalContentPortlet",
+                                            "portletId": "com_liferay_journal_content_web_portlet_JournalContentPortlet",
                                             "portletPreferences": {
                                             "articleId": "Child Web Content 1.xml",
                                             "groupId": "${groupId}",
@@ -277,7 +277,7 @@ understand. Let's examine a sample `sitemap.json` file:
                                     ],
                                     [
                                         {
-                                            "portletId": "com_liferay_journal_content_web_internal_portlet_JournalContentPortlet",
+                                            "portletId": "com_liferay_journal_content_web_portlet_JournalContentPortlet",
                                             "portletPreferences": {
                                             "articleId": "Child Web Content 2.xml",
                                             "groupId": "${groupId}",
@@ -304,12 +304,12 @@ understand. Let's examine a sample `sitemap.json` file:
                 "columns": [
                     [
                         {
-                            "portletId": "com_liferay_login_web_internal_portlet_LoginPortlet"
+                            "portletId": "com_liferay_login_web_portlet_LoginPortlet"
                         }
                     ],
                     [
                         {
-                            "portletId": "com_liferay_hello_world_web_internal_portlet_HelloWorldPortlet"
+                            "portletId": "com_liferay_hello_world_web_portlet_HelloWorldPortlet"
                         }
                     ]
                 ],
@@ -335,12 +335,12 @@ understand. Let's examine a sample `sitemap.json` file:
                 "columns": [
                     [
                         {
-                            "portletId": "com_liferay_login_web_internal_portlet_LoginPortlet"
+                            "portletId": "com_liferay_login_web_portlet_LoginPortlet"
                         }
                     ],
                     [
                         {
-                            "portletId": "com_liferay_hello_world_web_internal_portlet_HelloWorldPortlet"
+                            "portletId": "com_liferay_hello_world_web_portlet_HelloWorldPortlet"
                         }
                     ]
                 ],
@@ -397,7 +397,7 @@ You can also specify portlet preferences for each portlet.
 the `sitemap.json` file by setting the `displayStyle` and `displayStyleGroupId`
 portlet preferences. For example:
 
-    "portletId": "com_liferay_asset_publisher_web_internal_portlet_AssetPublisherPortlet",
+    "portletId": "com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet",
         "portletPreferences": {
             "displayStyleGroupId": "10197",
             "displayStyle": "ddmTemplate_6fe4851b-53bc-4ca7-868a-c836982836f4",
