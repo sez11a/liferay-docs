@@ -1,19 +1,19 @@
 # Using a SharePoint Repository [](id=using-a-sharepoint-repository)
 
-With the help of Liferay's SharePoint Connector app, users can access SharePoint
-2013 and SharePoint 2010 libraries from within a Liferay Documents and Media
-Library. The app installs a SharePoint repository type that you can select on
-adding a new *Repository* to Documents and Media. The SharePoint Connector
-integrates sites with existing SharePoint libraries, so you can access all of
+With the help of Liferay's Sharepoint Connector app, users can access SharePoint 
+2013 and SharePoint 2010 libraries from within a @product@ Documents and Media 
+Library. The app installs a SharePoint repository type that you can select on 
+adding a new *Repository* to Documents and Media. The SharePoint Connector 
+integrates sites with existing SharePoint libraries, so you can access all of 
 your organization's files.
 
-The [Liferay SharePoint Connector](https://web.liferay.com/marketplace/-/mp/application/15188537)
+The [Liferay Sharepoint Connector](https://web.liferay.com/marketplace/-/mp/application/15188537)
 app is available to EE subscribers on Liferay's
 [Marketplace](http://marketplace.liferay.com/). Refer to [Managing Apps](/discover/portal/-/knowledge_base/7-0/managing-apps)
 for details on installing and activating apps.
 
-Users can gain these benefits by accessing the SharePoint repository through the
-Liferay SharePoint Connector: 
+Users gain these benefits by accessing the SharePoint repository through the
+Liferay Sharepoint Connector: 
 
 - Reading/writing documents and folders
 - Document check-in, check-out, and undo check-out
@@ -22,38 +22,50 @@ Liferay SharePoint Connector:
 - Getting revision history
 - Reverting to a revision
 
-The SharePoint Connector uses SharePoint's API, which has some limitations: 1)
-Version history is lost when moving or renaming a file without first checking it
-out; 2) you can't change file extensions, you can only change file names; 3) a
-file's current name propagates to all previous versions; 4) the user who checks
-out a file is the only one who can see its working copy version number; 5)
-queries for suffixes or intermediate wildcards convert to queries for
-containment; 6) ratings are unsupported. 
+The Sharepoint Connector uses SharePoint's API, which has some limitations: 
+
+- Version history is lost when moving or renaming a file without first 
+  checking it out.
+- You can't change file extensions, you can only change file names.
+- A file's current name propagates to all previous versions.
+- The user who checks out a file is the only one who can see its working copy 
+  version number.
+- Queries for suffixes or intermediate wildcards convert to queries for 
+  containment.  
+- Ratings are unsupported. 
+
+The Liferay Sharepoint Connector uses OAuth 2 for authorization against a 
+SharePoint server, using the Azure ACS. This means that **client applications 
+must use @product@ through HTTPS.** For more information on configuring 
+@product@ to work with HTTPS see Apache's docs [here](https://tomcat.apache.org/tomcat-8.0-doc/ssl-howto.html)
+<!-- is this only for apache Tomcat? If not we shouldn't point to only Tomcat's docs. -->
 
 To use a SharePoint repository inside Documents and Media, you must first
-configure the SharePoint and Liferay environments to support authentication with
-SharePoint and then add a Documents and Media Repository that connects to
-SharePoint. Let's start by configuring the environments.
+configure the SharePoint and @product@ environments to support authentication 
+with SharePoint and then add a Documents and Media Repository that connects to
+SharePoint. Start by configuring the environments.
 
 ## Environment Setup [](id=environment-setup)
 
 Here's an overview of what you must do to configure your host, @product@, and
-SharePoint to use SharePoint from Liferay's Documents and Media Library:
+SharePoint to use SharePoint from @product@'s Documents and Media Library:
 
 1. Enable Basic Authentication on the SharePoint host
 2. Enable Versioning Support on the SharePoint library
 3. Configure Authentication on @product@
 4. Synchronize user credentials between @product@ and SharePoint
+5. Create a New SharePoint Repository Configuration
 
 Note, these instructions are geared to @product@ and SharePoint system
 administrators.
 
 Before you can use SharePoint as an external repository with @product@, you must
-set up a few things on the SharePoint host and in the SharePoint server application.
+set up a few things on the SharePoint host and in the SharePoint server 
+application.
 
 ### Step 1: Enable Basic Authentication on the SharePoint Host [](id=step-1-enable-basic-authentication-on-the-sharepoint-host)
 
-So that Liferay's SharePoint Connector can authenticate against the SharePoint
+So that Liferay's Sharepoint Connector can authenticate against the SharePoint
 web services, you must enable Basic Authentication on the SharePoint host. As
 you do this, make sure to empty Basic Authentication's default domain and realm
 fields of all values. 
@@ -71,7 +83,9 @@ example, here are steps for enabling Basic Authentication on *Windows Server
     viewing area of the IIS Manager console.
 4.  Select the *Features View* tab and then double-click on the *Authentication* icon
     in the IIS section of the Features View. The Authentication panel appears.
+    
     ![Figure 1: The Features View for the site shows the Authentication icon.](../../../images-dxp/sharepoint-site-iis-authentication.png)
+    
 5.  In the Authentication panel, select the row named *Basic Authentication*.
     The Actions panel appears next to the main panel.
 6.  In the Actions panel, click *Enable* to activate Basic Authentication. 
@@ -107,30 +121,32 @@ Next, you'll configure authentication for @product@.
 
 ### Step 3: Authentication on Liferay [](id=step-3-authentication-on-liferay)
 
-In order to authenticate with the Sharepoint repository, you need to store
-passwords for the user sessions. You must configure an authentication type that
-supports storing passwords for the user sessions.
+To authenticate with the SharePoint repository, you must configure an 
+authentication type that supports storing passwords for the user sessions.
 
 **Important**: Since authentication with single sign-on (SSO) does not store
-encrypted passwords in the user sessions, SSO can't be used with the SharePoint
+encrypted passwords in the user sessions, SSO can't be used with the Sharepoint
 Connector app.
 
-Let's configure @product@ for authentication.  In your [Liferay Home](/discover/deployment/-/knowledge_base/7-0/installing-liferay-portal#liferay-home),
-create a `portal-ext.properties` file, if one doesn't already exist, and add a
-[`session.store.password`](https://docs.liferay.com/portal/7.0/propertiesdoc/portal.properties.html#Session)
-portal property set to `true`:
+Follow these steps:
 
-    session.store.password=true
+1.  In your [Liferay Home](/discover/deployment/-/knowledge_base/7-0/installing-liferay-portal#liferay-home),
+    create a `portal-ext.properties` file, if one doesn't already exist.
 
-Next, make sure to authenticate the same way on both @product@ and
-the external repository. You can do so by authenticating based on screen
-name. Add the following [`company.security.auth.type`]( https://docs.liferay.com/portal/7.0/propertiesdoc/portal.properties.html#Company)
-portal property to your `portal-ext.properties` file: 
+2.  Add a [`session.store.password`](https://docs.liferay.com/portal/7.0/propertiesdoc/portal.properties.html#Session)
+    portal property set to `true`:
 
-    company.security.auth.type=screenName
+        session.store.password=true
 
-Alternatively, you can configure this property in the Control Panel
-under *Configuration* &rarr; *Instance Settings* &rarr; *Authentication*.
+3.  Authenticate the same way on both @product@ and the external repository. To 
+    do so, authenticate by screen name. Add the following  
+    [`company.security.auth.type`](https://docs.liferay.com/portal/7.0/propertiesdoc/portal.properties.html#Company)
+    portal property to your `portal-ext.properties` file: 
+
+        company.security.auth.type=screenName
+
+    Alternatively, you can configure this property in the Control Panel under 
+    *Configuration* &rarr; *Instance Settings* &rarr; *Authentication*.
 
 Next, you must give @product@ users access to the SharePoint server.
 
@@ -143,46 +159,84 @@ for synchronizing them. If you don't have LDAP, however, you must manually
 synchronize the credentials and authentication. 
  
 For @product@ users to access the external repository, their screen names and
-passwords must be the same in @product@ and in Sharepoint. For details on adding
-and managing @product@ users, refer to [User Mangement](/discover/portal/-/knowledge_base/7-0/user-management).
+passwords must be the same in @product@ and in SharePoint. For details on adding
+and managing @product@ users, refer to [User Management](/discover/portal/-/knowledge_base/7-0/user-management).
 
-From within Liferay's Documents and Media Library, you are now prepared to mount
-the SharePoint library as an additional external repository. 
+Next, you must create a SharePoint repository configuration. 
+
+### Step 5: Creating a New SharePoint Repository Configuration
+
+To connect to a remote SharePoint server you must create a repository 
+configuration.
+
+Follow these steps:
+
+1.  Open the Control Panel and go to *Configuration* &rarr; *System Settings* 
+    &rarr; *Collaboration* &rarr; *Sharepoint OAuth2*
+
+2.  Click the *Add* icon (![Add](../../../images-dxp/icon-portlet-add-control.png)) 
+    to create a new configuration.
+
+3.  In the new Repository form specify values for the following fields 
+    (your SharePoint administrator can provide you with this information):
+
+    **Name:** The configuration's name.
+
+    **Authorization grant endpoint:** The URL used to request OAuth2 
+    authorization grants. If you're using SharePoint Online, this should look 
+    similar to this URL: `https://[site name]/sharepoint.com/_layouts/oauthauthorize.aspx`.
+    
+    **Authorization token endpoint:** The ACS URL. If you're using SharePoint 
+    Online with Azure ACS, the URL has the following pattern: 
+    `https://accounts.accesscontrol.windows.net/[App ID]/tokens/OAuth/2`.
+
+    **Client ID:**  The client ID.
+
+    **Client Secret:** The client secret.
+
+    **Scope:** The permission set required for your tokens. Valid scopes are 
+    configured during your app's SharePoint registration.
+
+    **Tenant ID:** The Tenant ID. If you're using SharePoint Online, you can use 
+    the same App ID you embedded in the *Authorization token endpoint*.
+
+    **Site domain:** The site domain registered for your application.
+
+    **Resource:** This value depends on the ACS service you use. If you're using 
+    SharePoint Online with Azure ACS, the value is similar to this: 
+    `00000003-0000-0ff1-ce00-000000000000/[site name].sharepoint.com@[tenant ID]`.
+    
+4.  Click *Save*.
+
+Now that your SharePoint repository is configured, you can mount it into 
+@product@'s Documents and Media Library. 
 
 ## Add SharePoint as a Liferay Documents and Media repository [](id=add-sharepoint-as-a-liferay-documents-and-media-repository)
 
-It's time to add a Documents and Media Library Repository of type SharePoint,
-so users can work with SharePoint in @product@. 
+It's time to add a SharePoint Library repository type to Documents and Media so 
+users can work with SharePoint in @product@. 
 
-Here are the steps for adding a SharePoint repository type:
+Follow these steps:
 
 1.  Add the Documents and Media application to a page, if you haven't done so
     already.
 
 2.  From the home location in the Documents and Media application, click the
-    *Add* icon (![Add](../../../images-dxp/icon-portlet-add-control.png)) and select
-    *Repository*. The  New Repository screen appears. 
+    *Add* icon (![Add](../../../images-dxp/icon-portlet-add-control.png)) and 
+    select *Repository*. The  New Repository screen appears. 
 
-3.  In the New Repository screen enter an arbitrary repository *Name* and a
-    *Description* (optional).
+3.  Select the repository type for the SharePoint OAuth2 configuration you 
+    created. For example, if your configuration is nammed *Foo*, the repository 
+    type is listed as *SharePoint (Foo)*.
 
-4.  Click on the *Repository Configuration* section to access its form. Then
-    specify values for the following fields:
+4.  Specify values for the following fields:
 
-    **Repository Type**: Select the SharePoint option.
+    **Site Absolute URL**: Resolves relative URLs. If you're using SharePoint 
+    Online the value is similar to this: `https://[site name].sharepoint.com`.
 
-    **Library Name**: Enter a name for the library. Typically you'd 
-    enter the name of the SharePoint Library you're connecting to.
-  
-    **Library Path**: This field defaults to the *Library Name*, if no path is
-	specified. If the Library Name you specified differs from the SharePoint
-	Library's name, specify the URL of the SharePoint Library here.
-
-    **Server Version**: Enter the SharePoint server version (e.g., `2013` or
-    `2010`). 
-
-    **Site URL:** Enter the URL of the site where your SharePoint Library lives
-    (e.g., `http://your-site`). 
+    **Library Path**: A relative path from the *Site Absolute URL* that points 
+    to the SharePoint Document Library you want to mount in Documents and Media 
+    (for example, *Shared Documents*).
 
     ![Figure 3: The Repostiory Configuration form is where you specify access to the SharePoint Library you want to use.](../../../images-dxp/sharepoint-repo-configuration-form.png)
 
@@ -191,9 +245,17 @@ Here are the steps for adding a SharePoint repository type:
 Your Documents and Media Library is now connected to the SharePoint repository.
 The new external repository is now listed in the Documents and Media home. 
 
++$$$
+
+**Note:** The first time you access a mounted SharePoint repository, it 
+redirects you to your SharePoint instance, where you must log in and grant 
+permissions to @product@ to access the repository.
+
+$$$
+
 Now that you've added a SharePoint Repository to Documents and Media, you can
 access and modify SharePoint Library files from within @product@'s Documents and
-Media Library. 
+Media Library!
 
 ## Related Articles [](id=related-articles)
 
