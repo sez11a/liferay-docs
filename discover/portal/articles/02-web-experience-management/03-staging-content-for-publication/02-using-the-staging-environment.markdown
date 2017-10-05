@@ -80,6 +80,13 @@ mainly on the date range and content type. If you choose a page to be published
 from the Pages menu, the portlets and their references are always published,
 even if you specified differently in the Content section.
 
++$$$
+
+**Note:** Since comments and ratings are meant for the end user, they are not 
+supported in staging and can only be added in the live site.
+
+$$$
+
 There are other filtering sub-options for certain content types. Next, you'll
 look at these content filtering options.
 

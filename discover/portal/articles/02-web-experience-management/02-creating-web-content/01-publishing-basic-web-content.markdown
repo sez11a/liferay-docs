@@ -487,7 +487,7 @@ now able to post comments on your web content article!
 You may decide you want one, some, or none of these features, which is why
 they're all implemented as simple selector buttons to be enabled or disabled at
 need. Once you've selected the features you want to include in your Web Content
-Display spp, click the *Save* button. You can now close the configuration
+Display app, click the *Save* button. You can now close the configuration
 window.
 
 To publish new content, select the *Add* icon
