@@ -1,10 +1,10 @@
 # Upgrading Your Theme from Liferay Portal 6.2 to 7.0 [](id=upgrading-themes)
 
-If you've developed themes in Liferay Portal 6.2, as part of your upgrade you'll want
-to use them in @product-ver@. While you're at it, you should leverage theme
-improvements, including support for Sass, Bootstrap 3, and Lexicon (Liferay's UI
-design language). This tutorial demonstrates upgrading a Liferay Portal 6.2 theme to
-@product-ver@. 
+This tutorial guides you through the process of upgrading your 6.2 theme to run 
+on @product-ver@. While you're at it, you should leverage theme improvements, 
+including support for Sass, Bootstrap 3, and Lexicon (Liferay's 
+UI design language). This tutorial demonstrates upgrading a Liferay Portal 6.2 
+theme to @product-ver@. 
 
 Theme upgrades involve these steps:
 
