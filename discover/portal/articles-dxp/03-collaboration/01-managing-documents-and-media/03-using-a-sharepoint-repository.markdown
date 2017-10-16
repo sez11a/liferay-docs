@@ -1,8 +1,8 @@
 # Using a SharePoint Repository [](id=using-a-sharepoint-repository)
 
 With the help of Liferay's Sharepoint Connector app, users can access SharePoint 
-2013 and SharePoint 2010 libraries from within a @product@ Documents and Media 
-Library. The app installs a SharePoint repository type that you can select on 
+2013 and SharePoint 2016 libraries from within a @product@ Documents and Media 
+Library. The app installs a SharePoint repository type that you can select when 
 adding a new *Repository* to Documents and Media. The SharePoint Connector 
 integrates sites with existing SharePoint libraries, so you can access all of 
 your organization's files.
@@ -32,139 +32,118 @@ The Sharepoint Connector uses SharePoint's API, which has some limitations:
   version number.
 - Queries for suffixes or intermediate wildcards convert to queries for 
   containment.  
-- Ratings are unsupported. 
+- Comments, ratings, and using a SharePoint folder as a Documents and Media root 
+  folder are unsupported. 
 
 The Liferay Sharepoint Connector uses OAuth 2 for authorization against a 
-SharePoint server, using the Azure ACS. This means that **client applications 
-must use @product@ through HTTPS.** For more information on configuring 
-@product@ to work with HTTPS see Apache's docs [here](https://tomcat.apache.org/tomcat-8.0-doc/ssl-howto.html)
-<!-- is this only for apache Tomcat? If not we shouldn't point to only Tomcat's docs. -->
+SharePoint server, using the Azure ACS. So, **client applications 
+must use @product@ through HTTPS.** 
 
-To use a SharePoint repository inside Documents and Media, you must first
-configure the SharePoint and @product@ environments to support authentication 
-with SharePoint and then add a Documents and Media Repository that connects to
-SharePoint. Start by configuring the environments.
+To use a SharePoint repository inside Documents and Media, you must first create 
+an application in SharePoint and authorize it to access the repository.
+
+## Creating a SharePoint Application
+
+Follow these steps to create a SharePoint application:
+
+1.  Go to your SharePoint installation's URL 
+    (`https://[name].sharepoint.com/_layouts/15/appregenw.aspx` for example) and 
+    click the two *Generate* buttons to generate a client ID and client secret.
+
+2.  Provide the following information:
+
+    **Title:** The name displayed in Documents and Media. This should be self 
+    explanatory.
+
+    **Domain Name:** The application's domain name along with the port 
+    (e.g. `localhost:8228`)
+
+    **redirect URL:** The application's URL. **The URL must use HTTPS.**
+
+    An example configuration is shown below:
+
+    - **Client ID:** `1234a56b-7890-1234-5ccc-67d8ea9b0c1c`
+    - **Client secret:** `1ABCDEfGh2IJKLmNoP3QrStuvwX41YzAB+CDEFg20G3=`
+    - **Title:** `My Application's Title`
+    - **App Domain:** `localhost:8228`
+    - **Redirect URL:** `https://localhost:8228/c/document_library/sharepoint/oauth2`
+
+3.  Next, you must grant permissions to your new SharePoint application. You can 
+    access this at your SharePoint installation's ? URL 
+    (`https://[name].sharepoint.com/_layouts/15/appinv.aspx` for example).
+
+    In the `APP ID` field, put the application's `Client ID` and click *Search*. 
+    This fills in all the information except *Permission Request XML*.
+    
+4.  Paste the following XML into the *Permission Request XML* field and click 
+    *Create*:
+
+        <AppPermissionRequests>
+            <AppPermissionRequest
+                scope="http://sharepoint/content/sitecollection/web/list"
+                Right="Write" 
+            />
+            <AppPermissionRequest
+                scope="http://sharepoint/search"
+                Right="QueryAsUserIgnoreAppPrincipal" 
+            />
+        </AppPermissionRequests>
+
+    The XML above grants your application write and search permission over the 
+    SharePoint instance.
+
+    +$$$
+
+    **Note:** @product@ only supports write and search permissions for SharePoint.
+
+    $$$
+
+5.  Next, go to *Settings* &rarr; *Site App Permissions* in your SharePoint 
+    installation. You can also access permissions from your SharePoint 
+    installation's ? URL 
+    (`https://[name].sharepoint.com/_layouts/15/appprincipals.aspx?Scope=Web` 
+    for example). Note your application's *app identifier* 
+    (`i:0i.t|ms.sp.ext|6123d38d-2998-4972-9aaa-71a4da9f3a5a@b9c24ab3-ad34-4943-ab57-729d8c329053` 
+    for example). You'll use this to configure the SharePoint connector. 
+
+Now that your SharePoint application is created, you can set up the environment 
+next.
 
 ## Environment Setup [](id=environment-setup)
 
-Here's an overview of what you must do to configure your host, @product@, and
-SharePoint to use SharePoint from @product@'s Documents and Media Library:
+These steps are required to configure your host, @product@, and SharePoint 
+installation to use SharePoint from @product@'s Documents and Media Library:
 
-1. Enable Basic Authentication on the SharePoint host
-2. Enable Versioning Support on the SharePoint library
-3. Configure Authentication on @product@
-4. Synchronize user credentials between @product@ and SharePoint
-5. Create a New SharePoint Repository Configuration
+1. Enable Versioning Support on the SharePoint library <!-- may not be needed, see googledoc -->
+2. Create a New SharePoint Repository Configuration
 
-Note, these instructions are geared to @product@ and SharePoint system
+Note, these instructions are geared towards @product@ and SharePoint system
 administrators.
 
 Before you can use SharePoint as an external repository with @product@, you must
-set up a few things on the SharePoint host and in the SharePoint server 
-application.
+configure the SharePoint host and the SharePoint server application. 
 
-### Step 1: Enable Basic Authentication on the SharePoint Host [](id=step-1-enable-basic-authentication-on-the-sharepoint-host)
+### Step 1: Enable Versioning Support in the SharePoint Library [](id=step-2-enable-versioning-support-in-the-sharepoint-library)
 
-So that Liferay's Sharepoint Connector can authenticate against the SharePoint
-web services, you must enable Basic Authentication on the SharePoint host. As
-you do this, make sure to empty Basic Authentication's default domain and realm
-fields of all values. 
-
-Authentication setup steps differ between Windows versions. But as an
-example, here are steps for enabling Basic Authentication on *Windows Server
-2008*: 
-
-1.  Sign in to the Windows server as a member of the Administrators group. 
-2.  Open *Administrative Tools*, and then click *Internet Information Services
-    (IIS) Manager* to launch the IIS Manager console. 
-3.  In the Connections navigation panel, navigate to the SharePoint web site
-    options by clicking on the server's name, then *Sites*, and then the name of
-    the SharePoint site. The site's Features View is available in the main
-    viewing area of the IIS Manager console.
-4.  Select the *Features View* tab and then double-click on the *Authentication* icon
-    in the IIS section of the Features View. The Authentication panel appears.
-    
-    ![Figure 1: The Features View for the site shows the Authentication icon.](../../../images-dxp/sharepoint-site-iis-authentication.png)
-    
-5.  In the Authentication panel, select the row named *Basic Authentication*.
-    The Actions panel appears next to the main panel.
-6.  In the Actions panel, click *Enable* to activate Basic Authentication. 
-7.  Also in the Actions panel, click *Edit*. An Edit Basic Authentication Settings
-    dialog box appears.
-   ![Figure 2: Clicking the *Edit...* action brings up the a dialog for setting the Default domain and Realm.](../../../images-dxp/sharepoint-host-edit-basic-auth-settings.png)
-8.  In the dialog box, empty the *Default domain* and *Realm* fields of any
-    values and click *OK*.
-
-You've configured Basic Authentication on the SharePoint host.
-
-Next, you should enable versioning support in your SharePoint library so that
-users can leverage file versioning between @product@ and SharePoint. 
-
-### Step 2: Enable Versioning Support in the SharePoint Library [](id=step-2-enable-versioning-support-in-the-sharepoint-library)
+<!-- Again, note this step may not be required. Pending answer from Adolfo in googledoc -->
 
 You must enable versioning in SharePoint library for @product@'s check-in/out
-features to work with SharePoint. To enable it, follow these steps: 
+features to work with SharePoint. To enable versioning, follow these steps: 
 
 1.  Open a browser to the SharePoint library's URL.
 2.  Click on the SharePoint library's name.
-3.  At the top of the toolbar, click on *Liferay Tools* and then on *Library*,
-    underneath *Liferay Tools*. 
-4.  In the toolbar, click on *Library Settings*.
+3.  At the top of the toolbar, go to *Liferay Tools* &rarr; *Library*. 
+4.  In the toolbar, select *Library Settings*.
 5.  Under *General Settings*, click on *Versioning settings*.
 6.  In *Document Version History*, select *Create major and minor (draft)
     versions*. 
-7.  In *Require Check Out* select *Yes*.
+7.  Select *Yes* in *Require Check Out*.
 
 You've set SharePoint to accept versioning requests from @product@.
 
 Next, you'll configure authentication for @product@. 
 
-### Step 3: Authentication on Liferay [](id=step-3-authentication-on-liferay)
-
-To authenticate with the SharePoint repository, you must configure an 
-authentication type that supports storing passwords for the user sessions.
-
-**Important**: Since authentication with single sign-on (SSO) does not store
-encrypted passwords in the user sessions, SSO can't be used with the Sharepoint
-Connector app.
-
-Follow these steps:
-
-1.  In your [Liferay Home](/discover/deployment/-/knowledge_base/7-0/installing-liferay-portal#liferay-home),
-    create a `portal-ext.properties` file, if one doesn't already exist.
-
-2.  Add a [`session.store.password`](https://docs.liferay.com/portal/7.0/propertiesdoc/portal.properties.html#Session)
-    portal property set to `true`:
-
-        session.store.password=true
-
-3.  Authenticate the same way on both @product@ and the external repository. To 
-    do so, authenticate by screen name. Add the following  
-    [`company.security.auth.type`](https://docs.liferay.com/portal/7.0/propertiesdoc/portal.properties.html#Company)
-    portal property to your `portal-ext.properties` file: 
-
-        company.security.auth.type=screenName
-
-    Alternatively, you can configure this property in the Control Panel under 
-    *Configuration* &rarr; *Instance Settings* &rarr; *Authentication*.
-
-Next, you must give @product@ users access to the SharePoint server.
-
-### Step 4: Synchronize Credentials [](id=step-4-synchronize-credentials)
-
-As a @product@ system administrator, you must ensure that the same credentials
-and authentication are used in @product@ and in SharePoint.
-[LDAP](/discover/deployment/-/knowledge_base/7-0/ldap) is a typical mechanism
-for synchronizing them. If you don't have LDAP, however, you must manually
-synchronize the credentials and authentication. 
- 
-For @product@ users to access the external repository, their screen names and
-passwords must be the same in @product@ and in SharePoint. For details on adding
-and managing @product@ users, refer to [User Management](/discover/portal/-/knowledge_base/7-0/user-management).
-
-Next, you must create a SharePoint repository configuration. 
-
-### Step 5: Creating a New SharePoint Repository Configuration
+### Step 2: Creating a New SharePoint Repository Configuration
 
 To connect to a remote SharePoint server you must create a repository 
 configuration.
