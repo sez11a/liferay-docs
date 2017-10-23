@@ -83,7 +83,7 @@ even if you specified differently in the Content section.
 +$$$
 
 **Note:** Since comments and ratings are meant for the end user, they are not 
-supported in staging and can only be added in the live site.
+supported in staging and can only be added to the live site.
 
 $$$
 
