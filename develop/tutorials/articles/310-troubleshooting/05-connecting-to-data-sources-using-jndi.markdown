@@ -8,8 +8,8 @@ demonstrates how.
 
 ## Using JNDI to Connect to a Data Source [](id=using-jndi-to-connect-to-a-data-source)
 
-You can use @product@'s JNDI data source from inside modules or traditional
-plugins. The following example code demonstrates this.
+You can use an external JNDI data source from inside modules or traditional
+plugins. The following code demonstrates this.
 
     Thread thread = Thread.currentThread();
 
@@ -62,11 +62,10 @@ Here are the class imports for the code above:
     import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 In traditional Java EE environments, you can access the application server's
-JNDI API directly. In @product@'s OSGi environment, you must use
-@product@'s classloader to access it. The example code sets @product@'s
-classloader on the thread to access the classes needed to use JNDI. After
-working with the data source, the code reinstates the thread's original
-classloader.
+JNDI API directly. In @product@'s OSGi environment, you must use @product@'s
+classloader to access it. The example code sets @product@'s classloader on the
+thread to access the JNDI APi. After working with the data source, the code
+reinstates the thread's original classloader.
 
 +$$$
 
@@ -87,12 +86,11 @@ You can use similar code to access a data source from your application. Make
 sure to substitute `jdbc/TestDB` with your data source name and invoke SQL
 statements as you desire.
 
-How you define a JNDI data source depends on your application server. If you
-need help defining a JNDI data source, see your application server's
-documentation. 
+How you define a JNDI data source depends on your application server. See your
+application server's documentation for assistance. 
 
-Configure @product@ with your external data source following
-[@product@'s manual installation documentation regarding your application server](/develop/tutorials/-/knowledge_base/7-0/installing-liferay-manually#manual-configuration).
+[@product@'s manual installation documentation](/develop/tutorials/-/knowledge_base/7-0/installing-liferay-manually#manual-configuration)
+explains how to configure @product@ with an external data source. 
 
 ## Related Topics [](id=related-topics)
 

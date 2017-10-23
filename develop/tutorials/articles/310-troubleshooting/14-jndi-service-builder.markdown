@@ -31,7 +31,7 @@ module. Follow these steps to use such a data source:
         entity. 
 
         Also note that in each of your entity's `<column> tags`, you must set
-        the  `db-name` attribute to the name of that entity's database column. 
+        the `db-name` attribute to the name of that entity's database column. 
 
 2.  Create a Spring bean that points to the JNDI data source you want to use. To
     do this, create a file called `ext-spring.xml` in your Service Builder
@@ -96,7 +96,7 @@ module. Follow these steps to use such a data source:
 
 Now the Liferay services use the external JNDI data source. You can implement
 [business logic with the services](/develop/tutorials/-/knowledge_base/7-0/business-logic-with-service-builder)
-the same way regardless of the data source. 
+the same way regardless of the underlying data source. 
 
 ## Related Topics [](id=related-topics)
 
