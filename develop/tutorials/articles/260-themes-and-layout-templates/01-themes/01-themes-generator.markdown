@@ -174,6 +174,13 @@ theme. Note that you can switch to using a different base theme by executing the
 [`gulp extend`](/develop/reference/-/knowledge_base/7-0/theme-gulp-tasks)
 command. 
 
++$$$
+
+**Warning**: The Classic theme is not supported. You should not extend the
+Classic theme. 
+
+$$$
+
 **Important**: By default, your theme is based off of the styled theme and uses
 lib-sass/bourbon, instead of Compass. If, however, you are on Windows and are
 using the Ruby version of Sass, you must configure the theme to support Compass.
