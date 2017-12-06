@@ -1,21 +1,20 @@
 # Using CKEditor Plugins in AlloyEditor [](id=using-ckeditor-plugins-in-alloyeditor)
 
-You can customize an editor's configuration to include several modifications, 
-such as 
+You can customize an editor in a number of ways, by 
 [adding new buttons](/develop/tutorials/-/knowledge_base/7-0/creating-and-contributing-new-buttons-to-alloyeditor) 
 and 
 [adding new behaviors](/develop/tutorials/-/knowledge_base/7-0/adding-new-behavior-to-an-editor).
-You can also use existing CKEditor plugins in @product@'s AlloyEditor. Several 
-of the CKEditor plugins are packaged with @product@'s AlloyEditor, so you can 
-use them with just a few configuration adjustments. This tutorial shows how to 
-use the CKEditor plugins that are bundled with @product@'s AlloyEditor.
+You can also use CKEditor plugins, several of which are packaged with 
+@product@'s AlloyEditor and can be used with minimal configuration 
+changes. This tutorial shows how to use the CKEditor plugins that are 
+bundled with @product@'s AlloyEditor.
 
 Follow these steps:
 
 1.  Create a module to 
     [modify the AlloyEditor's configuration](/develop/tutorials/-/knowledge_base/7-0/modifying-an-editors-configuration). 
-    The example boilerplate below modifies the AlloyEditor's configuration for 
-    the Blogs and Blogs Admin portlets:
+    The example boilerplate below configures AlloyEditor for the Blogs and 
+    Blogs Admin portlets:
 
         @Component(
           property = {
@@ -38,7 +37,7 @@ Follow these steps:
             }
           }
 
-2.  Add additional plugins to the AlloyEditor via the `extraPlugins` JSON 
+2.  Add additional plugins to the AlloyEditor with the `extraPlugins` JSON 
     object. To add a CKEditor plugin, first extract the current list of 
     `extraPlugins` from your editor configuration object as a `String`:
 
@@ -47,15 +46,15 @@ Follow these steps:
 3.  Choose the plugin(s) you want to use from the  
     [default CKEditor plugins bundled with @product@'s AlloyEditor](/develop/reference/-/knowledge_base/7-0/ckeditor-plugin-reference-guide).
 
-4.  Add the CKEditor plugin(s) you want to use to the `extraPlugins` 
-    configuration. @product@'s AlloyEditor also comes with several plugins to 
-    bridge the gap between the CKEditor's UI and the AlloyEditor's UI. These are 
-    prefixed with `ae_`. We recommend that you include them all to ensure 
-    compatibility. The example below checks for existing `extraPlugins` and adds 
-    the [`font` CKEditor plugin](https://ckeditor.com/cke4/addon/font)
-    along with it's required 
-    [Rich Combo plugin](https://ckeditor.com/cke4/addon/richcombo) 
-    dependency and the remaining UI bridge plugins:
+4.  Add the desired CKEditor plugin(s) to the `extraPlugins` configuration. 
+    @product@'s AlloyEditor comes with several plugins to bridge the gap 
+    between the CKEditor's UI and the AlloyEditor's UI. These are prefixed 
+    with `ae_`. We recommend that you include them all to ensure compatibility. 
+    The example below checks for existing `extraPlugins` and adds the 
+    [`font` CKEditor plugin](https://ckeditor.com/cke4/addon/font) along with 
+    it's required 
+    [Rich Combo plugin](https://ckeditor.com/cke4/addon/richcombo) dependency 
+    and the remaining UI bridge plugins:
 
         if (Validator.isNotNull(extraPlugins)) {
           extraPlugins = extraPlugins + ",ae_uibridge,ae_autolink,ae_buttonbridge,ae_menubridge,
@@ -77,9 +76,9 @@ Follow these steps:
 
     $$$
 
-5.  If the plugin includes buttons, add them to the toolbar you wish to display 
-    them in. The configuration below retrieves the text selection toolbar's 
-    buttons and adds the `font` plugin's `Font` and `FontSize` buttons to it: 
+5.  If the plugin includes buttons, add them to the toolbar where you want them 
+    displayed. The configuration below retrieves the text selection toolbar's 
+    buttons and adds the `font` plugin's `Font` and `FontSize` buttons: 
 
         JSONObject toolbarsJSONObject = jsonObject.getJSONObject("toolbars");
 
@@ -112,8 +111,11 @@ Follow these steps:
 **Note:** A plugin's buttons may not have the same name as the plugin. You can 
 find the button names for a plugin by 
 [searching its `plugin.js` file](/develop/reference/-/knowledge_base/7-0/ckeditor-plugin-reference-guide) 
-for `editor.ui.addButton`. Note that button names are case sensitive and may be 
-aliased in the `addButton()` method, such as the [`clipboard` plugin's](https://github.com/ckeditor/ckeditor-dev/blob/release/4.0.x/plugins/clipboard/plugin.js#L341-L350) `Cut`,`Copy`, and `Paste` buttons.
+for `editor.ui.addButton`. Button names are case sensitive and and some, such as 
+the [`clipboard` 
+plugin's](https://github.com/ckeditor/ckeditor-dev/blob/release/4.0. x/plugins/ 
+clipboard/plugin.js#L341-L350) `Cut`,`Copy`, and `Paste` buttons, may be aliased 
+in the `addButton()` method.
 
 $$$
 
@@ -189,7 +191,7 @@ plugin to the AlloyEditor for the Blogs and Blogs Admin portlets:
 
     }
 
-Now you know how to use @product@'s bundled CKEditor plugins in its AlloyEditor!
+Now you know how to use the CKEditor plugins bundled in @product@'s AlloyEditor!
 
 ## Related Topics [](id=related-topics)
 
