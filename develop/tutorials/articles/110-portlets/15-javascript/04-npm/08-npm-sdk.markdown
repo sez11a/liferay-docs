@@ -1,171 +1,208 @@
-# liferay-npm-sdk-assistant
+# Liferay npm SDK Assistant
 
-This is a tool to ease management of projects using Liferay's npm SDK.
+@product@ has several components that rely on npm build tools. *npm SDK* is an 
+abstract umbrella term that refers to all these components as a whole. It can be 
+hard keeping track of all the different component versions and which ones are 
+required to use certain features. The npm SDK assistant is a CLI tool that 
+helps manage this for you. 
 
-> This tool is experimental and not yet fully supported, so expect issues when
-> using it. Nevertheless, don't hesitate to ask for help via the
-> [Issues](https://github.com/liferay/liferay-npm-sdk-assistant/issues) section
-> of Github.
++$$$
 
-Given the distributed nature of the npm SDK, which is based on several 
-disconnected components of Liferay software, we have developed this tool to 
-help developers in managing their npm SDK based projects.
+**Note:** The [Liferay npm SDK Assistant](https://github.com/liferay/liferay-npm-sdk-assistant)
+is unsupported. The tool is still in development and is not guaranteed to work
+on all platforms and environments. You can, however, ask for help via the
+[Issues](https://github.com/liferay/liferay-npm-sdk-assistant/issues) section
+of the Github repo.
 
-If you want to learn the theoric foundations of this tool keep reading. 
-Otherwise, jump directly to the [Usage](#usage) section to learn the syntax of 
-the tool.
+$$$
 
-## Definition of npm SDK
+The npm SDK includes the components listed below:
 
-Currently, *npm SDK* is an abstract umbrella term to refer to the coordinated 
-functionalities of all these Liferay components:
-
-* The 
+- The 
 [liferay-npm-bundler](https://github.com/liferay/liferay-npm-build-tools/tree/master/packages/liferay-npm-bundler)
 tool.
-* The plugins for Babel contained in
+- The plugins for Babel contained in
 [liferay-npm-build-tools](https://github.com/liferay/liferay-npm-build-tools/tree/master/packages).
-* The plugins for liferay-npm-bundler contained in
+- The plugins for liferay-npm-bundler contained in
 [liferay-npm-build-tools](https://github.com/liferay/liferay-npm-build-tools/tree/master/packages).
-* The 
+- The 
 [frontend-js-loader-modules-extender](https://github.com/liferay/liferay-portal/tree/master/modules/apps/foundation/frontend-js/frontend-js-loader-modules-extender)
-OSGi bundle of the Portal.
-* The [Javascript AMD loader](https://github.com/liferay/liferay-amd-loader).
+OSGi bundle of @product@.
+- The [Javascript AMD loader](https://github.com/liferay/liferay-amd-loader).
 
-Additionally some external tools are used by the SDK:
+The npm SDK also uses the external tools listed below:
 
-* The [gradle build tool](https://gradle.org/).
-* The Liferay's 
+- The [gradle build tool](https://gradle.org/).
+- @product@'s 
 [gradle plugin for node](https://github.com/liferay/liferay-portal/tree/master/modules/sdk/gradle-plugins-node).
-* The [npm](https://www.npmjs.com/) Javascript package management tool.
+- The [npm Javascript package management tool](https://www.npmjs.com/). 
 
-To finish with, there may be 
+This tutorial covers how the npm SDK assistant tool works and how to use it.
+
+## Feature Levels [](id=feature-levels)
+
+Different components of the npm SDK may have different release cycles. The term 
+*feature level* refers to a complete set of component versions that produces 
+stable features(described by LPSs and GitHub issues). Feature levels are defined 
+by the minimum component versions needed for the supported features to work. 
+Note that you can use higher versions in any of the components, as long as they 
+are compatible with the one defined by the feature level.
+
++$$$
+
+**Note:** Certain 
 [blade samples](https://github.com/liferay/liferay-blade-samples/tree/master/gradle/apps/npm)
 and 
 [templates](https://github.com/liferay/liferay-portal/tree/master/modules/sdk/project-templates) 
-that rely on a certain feature level.
+may rely on a specific feature level.
 
-## Feature level concept
+<!-- How can you determine what feature level is required for the template or 
+sample to work?
+Running this tool will list the available feature levels and tell which one you 
+have, but it doesn't tell you what feature level is required to run your project.  -->
 
-Given that different components of the SDK may have different release cycles, we 
-have coined the term *feature level* to refer to specific cuts in time where 
-a complete set of defined versions of each component give some well defined 
-results.
+$$$
 
-Each feature level defines a set of features described by LPSs and GitHub 
-issues which work as expected.
+Running the command `lnka man features` displays the available feature levels 
+and their supported features:
 
-Feature levels are defined by the minimum versions needed for each component for
-the supported features to work but, of course, you can use higher versions in 
-any of the components as long as they are compatible with the one defined by the
-feature level.
+    Feature level 2
+      · Gradle: 2.5.0
+      · Gradle Node plugin: 2.3.0
+      · npm: 4.0.0
+      · Babel: 6.26.0
+      · Liferay npm bundler: 1.2.1
+      · Loader modules extender: 1.1.0
+      · AMD loader: 2.1.0
+      · Supported features:
+          - NPM resolver API (https://issues.liferay.com/browse/LPS-75257)
+          - Resolve own package from NPMResolver (https://issues.liferay.com/browse/LPS-75555)
+          - Source maps support (https://issues.liferay.com/browse/LPS-75339)
+          - Variable aliases in require attribute of <aui:script> tag (https://issues.liferay.com/browse/LPS-75553)
 
-### Feature level example
+    Feature level 1
+      · Gradle: 2.5.0
+      · Gradle Node plugin: 2.3.0
+      · npm: 4.0.0
+      · Babel: 6.26.0
+      · Liferay npm bundler: 1.2.1
+      · Loader modules extender: 1.0.14
+      · AMD loader: 2.1.0
+      · Supported features:
+          - Basic functionality
 
-Let's see and example for clarification: imagine that feature level 8 is defined
-by the following features (invented for the example):
++$$$
 
-* All those listed under feature level 7 (because they are always inherited)
-* LPS-91456
-* LPS-95555
-* Issue #98465 of liferay-npm-build-tools
+**Note:** The tool requires access to a running @product@ instance to get the 
+AMD loader version and the Gogo console to get the 
+frontend-js-loader-modules-extender version. If you don't have a @product@ 
+instance available, the tools can't determine the version number for these 
+components and doesn't take them into account when calculating the feature 
+level. This can cause a feature level to appear higher than it actually is, 
+since those components are not accounted for.
 
-And that it specifies the following minimum versions for each component 
-(version numbers invented too):
+$$$
 
-* gradle: 12.0
-* gradle plugin for node: 17.0.0
-* npm: 8.0
-* babel: 21.0
-* liferay-npm-build-tools: 27.0.0
-* frontend-js-loader-modules-extender: 15.0.0
-* liferay-amd-loader: 8.0.0
+As long your project has components with the minimum version numbers, you can 
+use the features listed in the feature level (plus all those inherited from the 
+previous feature level, of course). If you set a component to a higher version 
+number which is compatible according to semantic versioning, you are still in 
+the same feature level (or maybe a higher one if you increase version numbers 
+enough to reach a new level). This can lead to running an unsupported npm SDK 
+version that may be broken or produce unexpected results. For example, say that 
+feature level 2 is the maximum possible, and your component versions are 
+slightly higher than the minimum versions required (Loader modules extender has 
+increased from version 1.1.0 to 1.5.0):
 
-> Note that the version of liferay-npm-build-tools specifies the version for the
-> liferay-npm-bundler tool, the plugins for Babel, and the plugins for 
-> liferay-npm-bundler. 
->
-> In fact, all these components are always released together to make version 
-> management easier. That means that some subcomponent may have different 
-> version numbers for the same artifact, but we prefer such redundancy to having 
-> disparate version numbers for each subcomponent.
+- Gradle: 2.5.0
+- Gradle Node plugin: 2.3.0
+- npm: 4.0.0
+- Babel: 6.26.0
+- Liferay npm bundler: 1.2.1
+- Loader modules extender: 1.5.0
+- AMD loader: 2.1.0
 
-That means that, as long as we have components with the minimum version numbers,
-we can use the four features listed in the feature level (plus all those 
-inherited from the previous feature level, of course).
+You are still in feature level 2, as all version changes have been semantical 
+versioning compatible. If, however, you update to these version numbers:
 
-Also, if we set a component to a higher version number which is compatible 
-according to semantic versioning, we would still be in the same feature level 
-(or maybe a higher one if we increase version numbers enough to reach a new 
-level).
+- Gradle: 2.5.0
+- Gradle Node plugin: 2.3.0
+- npm: 4.0.0
+- Babel: 6.26.0
+- Liferay npm bundler: 1.5.2
+- Loader modules extender: 2.1.0
+- AMD loader: 2.1.0
 
-So, say that feature level 8 is the maximum possible, and that we have these
-versions:
+You are no longer in feature level 2, as you have introduced the possibility of 
+a breaking change when updating Loader Modules Extender from 1.1.0 to 2.1.0. In 
+this case, you would be in an indeterminate feature level (pre-3 for example) 
+that has not been tested. We recommend that you use component versions that are 
+semantical version compatible with the component versions listed in the feature 
+level you wish to use. 
 
-* gradle: 12.0
-* gradle plugin for node: 17.3.0
-* npm: 8.0
-* babel: 21.7
-* liferay-npm-build-tools: 27.0.0
-* frontend-js-loader-modules-extender: 15.4.1
-* liferay-amd-loader: 8.0.1
++$$$
 
-We are still in feature level 8 as all version changes have been semantical 
-versioning compatible.
+<!-- `liferay-npm-build-tools` version only shows up in your level 8 example in the README. Running 
+the tool does not list this component. Is it suppose to be listed, or has this 
+changed?  -->
 
-On the contrary, if we update to these version numbers:
+**Note:** The liferay-npm-build-tools version specifies the version for the 
+liferay-npm-bundler tool, the plugins for Babel, and the plugins for 
+liferay-npm-bundler. All these components are always released together to make 
+version management easier. That means that some subcomponent may have different 
+version numbers for the same artifact, but we prefer such redundancy to having 
+disparate version numbers for each subcomponent.
 
-* gradle: 12.0
-* gradle plugin for node: 17.0.0
-* npm: 8.0
-* babel: 21.0
-* liferay-npm-build-tools: 27.0.0
-* frontend-js-loader-modules-extender: 16.0.0
-* liferay-amd-loader: 8.0.0
+$$$
 
-We are no longer in feature level 8, as we have introduced the possibility of a
-breaking change when updating frontend-js-loader-modules-extender from 15.0.0
-to 16.0.0. 
+## Using the npm SDK Assistant Tool [](id=using-npm-sdk-assistant-tool)
 
-So, where are we if we said that feature level 8 was the maximum possible? In 
-this case we would be in an indeterminate feature level. Probably all features
-of level 8 would work, but we cannot assure it with 100% confidence because no
-feature level 9 has yet been released, so nobody has tested that the given 
-versions combination works correctly. This is the typical case of using a 
-development/unstable version of the SDK which has not yeet been released 
-officially. Thus, we could call this indeterminate state, feature level pre-9 or
-something alike.
+Follow these steps to use the npm SDK Assistant:
 
-## Usage
+1.  Run `npm install -g liferay-npm-sdk-assistant` to install the npm SDK 
+    assistant tool. 
+    
+2.  Navigate to your project's root folder and run `lnka man features` to list 
+    the supported feature levels.
+    
+3.  Run `lnka features` to list your current feature level.
 
-The tool is a CLI driven by commands given as arguments (much in the same way as
-tools like git or blade). 
+4.  Update any components that don't satisfy the minimum version requirements 
+    for the feature level you want.
 
-To see the list of all supported commands run `lnka help`. Then, to obtain help
-about a specific command run `lnka <command> help`.
+The available commands are listed below.
 
-Detailed descriptions of each supported command follow in the next sections.
+### Available Commands [](id=available-commands)
+    
+This tool supports the commands listed below:
 
-### features
+- `lnka help`: Lists all of the supported commands <!-- appears to do the same 
+as `lnka man` -->
 
-The `lnka features` command can be run in a project folder that uses the npm SDK 
-to determine its feature level. 
+- `lnka <command> help`: Obtains help about a specific command
+<!-- I was unable to run all the options shown for `lnka features help`. how do 
+you run them? With a sever running, `lnka features --server` for instance 
+produces an error. How do you configure this? -->
 
-When this command is run it examines the versions of all related components and
-uses them to report the supported feature level.
+- `lnka features`: Determines the feature level for a project that uses the npm 
+SDK. Examines the versions of all related components for the project and reports 
+the supported feature level.
 
-Keep in mind that the tool may not be able, for different reasons, to retrieve 
-the version number of a component. In that case the reported feature level may 
-be higher than the real one.
+- `lnka man`: Lists supported commands and options
+<!-- the output reads `lnka.js man...` and `lnka.js man features...`. Shouldn't 
+this just say `lnka man` and `lnka man features`? I'm not sure what the 
+description `Show information or documentation about the SDK` means or why it is 
+shown. Also `Doing nothing` is listed and has a description. Shouldn't this be 
+removed from the output? -->
 
-For example: the tool needs to contact Liferay Portal through HTTP to get the 
-AMD loader version and through the GoGo console to get the 
-frontend-js-loader-modules-extender version. Thus, if you don't have a Portal 
-available, the tools cannot determine the version number for those components
-and does not take them into account when calculating the feature level.
+- `lnka man <item>`: Shows information about the requested `<item>`. For 
+example, running `lnka man features` displays the available feature levels and 
+minimum component versions.
 
-### man
+Now you know how to use the npm SDK Assistant!
 
-The `lnka man <item>` command shows information about the requested `<item>`. 
-Use `lnka man` (with no item) to get a list of supported items.
+## Related Topics [](id=related-topics)
 
+[]()
+
+[]()
