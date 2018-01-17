@@ -105,9 +105,38 @@ The recommended way of setting up your @product@ database is also the simplest.
 @product@ takes care of just about everything. You only need to take two
 simple steps:
 
-1. Create a blank database encoded with the character set UTF-8. @product@ is a
+1.  Consult your database vendor's documentation about the database's default
+    query result order (e.g., case-sensitive or case-insensitive). Note how to
+    configure the default order. 
+
+    +$$$
+
+    **Important**: The default query result order varies by database vendor.
+    Here are some examples of result order. 
+
+    Case-sensitive:
+
+        111
+        222
+        AAA
+        BBB
+        aaa
+        bbb
+
+    Case-insensitive:
+
+        111
+        222
+        AAA
+        aaa
+        BBB
+        bbb
+
+    $$$
+
+2. Create a blank database encoded with the character set UTF-8. @product@ is a
    multilingual application and needs UTF-8 encoding to display all of its
-   supported character sets.
+   supported character sets. 
 
 2. Create a database user for accessing this database. Grant this database user
    all rights, including the rights to create and drop tables, to the blank
