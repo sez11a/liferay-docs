@@ -5,9 +5,9 @@ two applications for building forms to collect precisely the data you need:
 
 1.  [Liferay Forms](/discover/portal/-/knowledge_base/7-0/collecting-information-from-users): 
     @product@'s primary form building application lets you build forms ranging
-    from the simplest one or two question survey to the most complex,
-    multi-page, homeowners insurance application form featuring form rules and
-    lists populated by a REST data provider.
+    from a simple one or two question survey to a complex, multi-page, 
+    homeowners insurance application form featuring form rules and lists 
+    populated by a REST data provider.
 
 2.  [Dynamic Data
     Lists (DDL)](/discover/portal/-/knowledge_base/7-0/creating-simple-applications):
@@ -77,6 +77,4 @@ Once all form building features are fully merged into Liferay Forms, future
 improvements and new features will be instantly available to form builders. The
 best features of DDL, all the new features of Liferay Forms, and all future
 improvements will be at your fingertips, regardless of your form building use
-case. Now is the time to familiarize yourself with Liferay Forms and begin using
-it for all your form building needs, except for the narrow use cases described
-above.
+case.
