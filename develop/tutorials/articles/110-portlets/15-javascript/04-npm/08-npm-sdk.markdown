@@ -1,12 +1,13 @@
 # Liferay npm SDK Assistant [](id=liferay-npm-sdk-assistant)
 
-@product@ has several components--collectively known as *npm SDK*--on which
-certain features rely, but it can be difficult to keep track of the numerous
-component versions and the features that require them. Liferay npm SDK
-Assistant is a CLI tool that provides a list of features and their supported
-component versions, along with your current component versions, so you can
-update your components to a version that supports the features you need. This
-tutorial covers how the Liferay npm SDK Assistant works and how to use it.
+@product@ has several npm-dependent components--collectively known as *npm
+SDK*--on which certain features rely. It can be difficult, however, to keep track of
+the numerous component versions and the features that require them. Liferay npm
+SDK Assistant is a CLI tool that provides a list of features and their
+supported component versions, along with your current component versions, so
+you can update your components to a version that supports the features you
+need. This tutorial covers how the Liferay npm SDK Assistant works and how to
+use it.
 
 +$$$
 
