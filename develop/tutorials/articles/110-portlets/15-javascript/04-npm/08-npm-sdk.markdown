@@ -1,12 +1,12 @@
 # Liferay npm SDK Assistant [](id=liferay-npm-sdk-assistant)
 
-@product@ has several components that rely on npm build tools. *npm SDK* is an 
-abstract umbrella term that refers to all these components as a whole. It can be 
-hard keeping track of all the different component versions and which ones are 
-required to use certain features. The Liferay npm SDK Assistant is a CLI tool 
-that provides a list of features and their supported component versions, along 
-with your current component versions, so you can update your components to a 
-version that supports the features you need. 
+@product@ has several components--collectively known as *npm SDK*--on which
+certain features rely, but it can be difficult to keep track of the numerous
+component versions and the features that require them. Liferay npm SDK
+Assistant is a CLI tool that provides a list of features and their supported
+component versions, along with your current component versions, so you can
+update your components to a version that supports the features you need. This
+tutorial covers how the Liferay npm SDK Assistant works and how to use it.
 
 +$$$
 
@@ -18,25 +18,25 @@ the Github repo.
 
 $$$
 
-The npm SDK includes the components listed below:
+The npm SDK's components are:
 
 - The 
 [liferay-npm-bundler](https://github.com/liferay/liferay-npm-build-tools/tree/master/packages/liferay-npm-bundler)
-tool.
-- The plugins for Babel contained in
-[liferay-npm-build-tools](https://github.com/liferay/liferay-npm-build-tools/tree/master/packages).
-- The plugins for liferay-npm-bundler contained in
-[liferay-npm-build-tools](https://github.com/liferay/liferay-npm-build-tools/tree/master/packages).
+tool
+- The plugins for Babel in
+[liferay-npm-build-tools](https://github.com/liferay/liferay-npm-build-tools/tree/master/packages)
+- The plugins for liferay-npm-bundler in
+[liferay-npm-build-tools](https://github.com/liferay/liferay-npm-build-tools/tree/master/packages)
 - The 
 [frontend-js-loader-modules-extender](https://github.com/liferay/liferay-portal/tree/7.0.x/modules/apps/foundation/frontend-js/frontend-js-loader-modules-extender)
-OSGi bundle of @product@.
-- The [Javascript AMD loader](https://github.com/liferay/liferay-amd-loader).
+OSGi bundle 
+- The [Javascript AMD loader](https://github.com/liferay/liferay-amd-loader)
 
 +$$$
 
-**Note:** The liferay-npm-bundler tool and its plugins and Babel's plugins are 
+**Note:** The liferay-npm-bundler tool, its plugins, and Babel's plugins are 
 always released together to make version management easier. This means that some 
-subcomponent may have different version numbers for the same artifact. This is 
+subcomponents may have different version numbers for the same artifact. This is 
 preferred over having different version numbers for each subcomponent.
 
 $$$
@@ -48,13 +48,12 @@ The npm SDK also uses the external tools listed below:
 [gradle plugin for node](https://github.com/liferay/liferay-portal/tree/7.0.x/modules/sdk/gradle-plugins-node).
 - The [npm Javascript package management tool](https://www.npmjs.com/). 
 
-This tutorial covers how the Liferay npm SDK Assistant works and how to use it.
 
 ## Feature Levels [](id=feature-levels)
 
 Different components of the npm SDK may have different release cycles. The term 
 *feature level* refers to a complete set of component versions that produces 
-stable features(described by LPSs and GitHub issues). Feature levels are defined 
+stable features (described by LPSs and GitHub issues). Feature levels are defined 
 by the minimum component versions needed for the supported features to work. 
 Note that you can use higher versions in any of the components, as long as they 
 are compatible with the one defined by the feature level (see Semantic 
@@ -114,16 +113,19 @@ Now that you are a little more familiar with feature levels, you can dive deeper
 and learn how semantic versioning affects them.
 
 ### Semantic Versioning Compatibility [](id=semantic-versioning-compatibility)
-
-As long your project has components with the minimum version numbers, you can 
-use the features listed in the feature level (plus all those inherited from the 
-previous feature level, of course). If you set a component to a higher version 
-number that is compatible according to semantic versioning, you are still in 
-the same feature level (or maybe a higher one if you increase version numbers 
-enough to reach a new level). This can lead to running an unsupported npm SDK 
-version that may be broken or produce unexpected results. For example, say that 
-feature level 2 is the maximum possible, and your component versions are 
-slightly higher than the minimum versions required (Loader modules extender has 
+<!--This whole section is pretty vague. Maybe someone with a better knowledge
+base than me would understand it-NR--> As long your project has components with
+the minimum version numbers, you can use the features listed in the feature
+level (plus all those inherited from the previous feature level). If you set
+a component to a higher version number that is compatible according to semantic
+versioning, you are still in the same feature level (or maybe a higher one if
+you increase version numbers enough to reach a new level).<!--We need some
+precision here. If we have no idea how high is too high, shouldn't we be
+telling users to stick with the minimum version numbers? Is there any reason
+not to do this?-NR--> This can lead to running an unsupported npm SDK version
+that may be broken or produce unexpected results. For example, say that feature
+level 2 is the maximum possible, and your component versions are slightly
+higher than the minimum versions required (Loader modules extender has
 increased from version 1.1.0 to 1.5.0 for example):
 
 - Gradle: 2.5.0
@@ -134,9 +136,11 @@ increased from version 1.1.0 to 1.5.0 for example):
 - Loader modules extender: 1.5.0
 - AMD loader: 2.1.0
 
-You are still in feature level 2, as all version changes have been semantical 
+You are still in feature level 2, as all version changes have been semantic 
 versioning compatible. If, however, you update to these version numbers:
-
+<!--How is a user supposed to know if his version changes are compatible? As
+far as I can tell, the npm SDK Assistant only tells the user the minimum
+version numbers.-->
 - Gradle: 2.5.0
 - Gradle Node plugin: 2.3.0
 - npm: 4.0.0
@@ -149,7 +153,7 @@ You are no longer in feature level 2, as you have introduced the possibility of
 a breaking change when updating Loader Modules Extender from 1.1.0 to 2.1.0. In 
 this case, you would be in an indeterminate feature level (pre-3 for example) 
 that has not been tested. We recommend that you use component versions that are 
-semantical version compatible with the component versions listed in the feature 
+semantic version compatible with the component versions listed in the feature 
 level you wish to use. 
 
 Now that you know how feature levels work, you can learn how to use the Liferay 
