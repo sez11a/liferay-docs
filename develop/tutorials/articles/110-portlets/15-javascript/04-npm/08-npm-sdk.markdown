@@ -119,7 +119,7 @@ use the features listed in the feature level (plus all those inherited from the
 previous feature level). If you set a component to a higher version number that
 is compatible according to semantic versioning (e.g., 1.5.0 or 1.1.2 where the
 minimum is 1.1.0), you are still in the same feature level. However, setting
-a component's major version number of above the minimum value (e.g., 2.0 where
+a component's major version number above the minimum value (e.g., 2.0 where
 the minimum is 1.0) can lead to running an unsupported npm SDK version that may
 be broken or produce unexpected results. In general, you should use the major
 version number specified by the feature level, although some circumstances may
