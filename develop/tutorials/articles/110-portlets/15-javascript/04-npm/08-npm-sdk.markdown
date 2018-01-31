@@ -70,8 +70,8 @@ may rely on a specific feature level.
 
 $$$
 
-Running the command `lnka man features` displays the available feature levels 
-and their supported features:
+Running the command `lnka man features` displays the available feature levels
+with their minimum component versions and supported features:
 
     Feature level 2
       · Gradle: 2.5.0
@@ -114,51 +114,16 @@ Now that you are a little more familiar with feature levels, you can dive deeper
 and learn how semantic versioning affects them.
 
 ### Semantic Versioning Compatibility [](id=semantic-versioning-compatibility)
-<!--This whole section is pretty vague. Maybe someone with a better knowledge
-base than me would understand it-NR--> As long your project has components with
-the minimum version numbers, you can use the features listed in the feature
-level (plus all those inherited from the previous feature level). If you set
-a component to a higher version number that is compatible according to semantic
-versioning, you are still in the same feature level (or maybe a higher one if
-you increase version numbers enough to reach a new level).<!--We need some
-precision here. If we have no idea how high is too high, shouldn't we be
-telling users to stick with the minimum version numbers? Is there any reason
-not to do this?-NR--> This can lead to running an unsupported npm SDK version
-that may be broken or produce unexpected results. For example, say that feature
-level 2 is the maximum possible, and your component versions are slightly
-higher than the minimum versions required (Loader modules extender has
-increased from version 1.1.0 to 1.5.0 for example):
-
-- Gradle: 2.5.0
-- Gradle Node plugin: 2.3.0
-- npm: 4.0.0
-- Babel: 6.26.0
-- Liferay npm bundler: 1.2.1
-- Loader modules extender: 1.5.0
-- AMD loader: 2.1.0
-
-You are still in feature level 2, as all version changes have been semantic 
-versioning compatible. If, however, you update to these version numbers:
-<!--How is a user supposed to know if his version changes are compatible? As
-far as I can tell, the npm SDK Assistant only tells the user the minimum
-version numbers.-->
-- Gradle: 2.5.0
-- Gradle Node plugin: 2.3.0
-- npm: 4.0.0
-- Babel: 6.26.0
-- Liferay npm bundler: 1.5.2
-- Loader modules extender: 2.1.0
-- AMD loader: 2.1.0
-
-You are no longer in feature level 2, as you have introduced the possibility of 
-a breaking change when updating Loader Modules Extender from 1.1.0 to 2.1.0. In 
-this case, you would be in an indeterminate feature level (pre-3 for example) 
-that has not been tested. We recommend that you use component versions that are 
-semantic version compatible with the component versions listed in the feature 
-level you wish to use. 
-
-Now that you know how feature levels work, you can learn how to use the Liferay 
-npm SDK Assistant. 
+As long your project has components with the minimum version numbers, you can
+use the features listed in the feature level (plus all those inherited from the
+previous feature level). If you set a component to a higher version number that
+is compatible according to semantic versioning (e.g., 1.5.0 or 1.1.2 where the
+minimum is 1.1.0), you are still in the same feature level. However, setting
+a component's major version number of above the minimum value (e.g., 2.0 where
+the minimum is 1.0) can lead to running an unsupported npm SDK version that may
+be broken or produce unexpected results. In general, you should use the major
+version number specified by the feature level, although some circumstances may
+call for an exception to that rule.
 
 ## Using the Liferay npm SDK Assistant [](id=using-liferay-npm-sdk-assistant)
 
