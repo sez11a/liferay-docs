@@ -15,6 +15,7 @@ Installing @product@ manually requires these basic steps:
 - Configuring your application server for @product@
 - Installing the @product@ WAR file to your application server
 
+<<<<<<< HEAD:discover/deployment/articles/02-installing-liferay/04-installing-liferay-on-tomcat.markdown
 You'll see the term
 [*Liferay Home*](/discover/deployment/-/knowledge_base/7-0/installing-product#liferay-home)
 used in this installation guide. *Liferay Home* refers to the folder containing
@@ -23,6 +24,19 @@ Home folder contains the Tomcat server folder as well as `data`, `deploy`,
 `license`, and `osgi` folders. You'll also see the term `$TOMCAT_HOME` used in
 this guide. `$TOMCAT_HOME` refers to your Tomcat server folder. This folder is
 usually named `tomcat-[version]` or `apache-tomcat-[version]`.
+=======
+You'll see the term *Liferay Home* used in this installation guide. *Liferay
+Home* refers to the folder containing your Tomcat server folder. When Liferay
+is installed on Tomcat, the Liferay Home folder contains the Tomcat server
+folder as well as `data`, `deploy`, `license`, and `osgi` folders. You'll also
+see the terms `$CATALINA_HOME` and `$CATALINA_BASE` used in this guide. 
+`$CATALINA_BASE` refers to the folder that contains tomcat's binaries, while 
+`$CATALINA_HOME` refers to the folder that contains your configurations - just 
+as you're used to from tomcat's generic installation. If you download a Liferay 
+Tomcat-bundle, both refer to the same directory (just as with a standard tomcat 
+installation). This folder is usually named `tomcat-[version]` or 
+`apache-tomcat-[version]`.
+>>>>>>> 582a33d51f468025ea8a15cfc1caa5b055c1f8da:discover/deployment/articles/01-installing-liferay/04-installing-liferay-on-tomcat.markdown
 
 ## Installing @product@ Dependencies [](id=installing-liferay-dependencies)
 
@@ -35,14 +49,21 @@ third-parties, as described below.
    location of your choosing. You'll copy a number of resources from this
    bundle to your Tomcat server as you manually install @product@.
 
+<<<<<<< HEAD:discover/deployment/articles/02-installing-liferay/04-installing-liferay-on-tomcat.markdown
 2. If you have a @product@ Tomcat bundle, copy all the JARs from your bundle's
    `$TOMCAT_HOME/lib/ext` folder to your application server's
    `$TOMCAT_HOME/lib/ext` folder. If the `$TOMCAT_HOME/lib/ext` folder doesn't
    exist on your application server, create it. If you don't have a @product@
+=======
+2. If you have a Liferay Tomcat bundle, copy all the JARs from your bundle's
+   $`CATALINA_BASE/lib/ext` folder to your application server's
+   `$CATALINA_BASE/lib/ext` folder. If the `$CATALINA_BASE/lib/ext` folder doesn't
+   exist on your application server, create it. If you don't have a Liferay
+>>>>>>> 582a33d51f468025ea8a15cfc1caa5b055c1f8da:discover/deployment/articles/01-installing-liferay/04-installing-liferay-on-tomcat.markdown
    Tomcat bundle, you'll have to individually download the JARs listed below.
 
     Here's a list of the JARs that you need to copy or download to your
-    `$TOMCAT_HOME/lib/ext` folder:
+    `$CATALINA_BASE/lib/ext` folder:
 
     - `activation.jar` - [http://www.oracle.com/technetwork/java/jaf11-139815.html](http://www.oracle.com/technetwork/java/jaf11-139815.html)
     - `ccpp.jar` - [http://mvnrepository.com/artifact/javax.ccpp/ccpp/1.0](http://mvnrepository.com/artifact/javax.ccpp/ccpp/1.0)
@@ -63,7 +84,7 @@ third-parties, as described below.
 3. Make sure that Tomcat can access the JDBC driver for your database. The list
    of JARs above includes `mysql.jar` and `postgresql.jar`. If you're using a
    database whose JDBC driver is not included in the list above, download the
-   driver and copy it to your `$TOMCAT_HOME/lib/ext` folder.
+   driver and copy it to your `$CATALINA_BASE/lib/ext` folder.
 
 4. Create an `osgi` folder in your Liferay Home folder. Then extract the OSGi
    ZIP file that you downloaded into the `osgi` folder.
@@ -104,6 +125,7 @@ Checkpoint:
 Next, you need to configure Tomcat for running @product@.
 
 1. If you're working with a bundle, copy the `setenv.bat` and `setenv.sh` files
+<<<<<<< HEAD:discover/deployment/articles/02-installing-liferay/04-installing-liferay-on-tomcat.markdown
    from your bundle to your `$TOMCAT_HOME/bin` folder. If not, create these
    files. 
 
@@ -118,6 +140,12 @@ Next, you need to configure Tomcat for running @product@.
         export PATH=$JAVA_HOME/bin:$PATH
 
    Once you've done this, configure Catalina's options to support @product@: 
+=======
+   from your bundle to your `$CATALINA_BASE/bin` folder. If not, create these
+   files. `setenv.bat` looks like this:
+
+        set "CATALINA_OPTS=%CATALINA_OPTS% -Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true  -Dorg.apache.catalina.loader.WebappClassLoader.ENABLE_CLEAR_REFERENCES=false -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=384m"
+>>>>>>> 582a33d51f468025ea8a15cfc1caa5b055c1f8da:discover/deployment/articles/01-installing-liferay/04-installing-liferay-on-tomcat.markdown
 
         CATALINA_OPTS="$CATALINA_OPTS -Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true  -Dorg.apache.catalina.loader.WebappClassLoader.ENABLE_CLEAR_REFERENCES=false -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=384m" 
 
@@ -133,7 +161,7 @@ Next, you need to configure Tomcat for running @product@.
    system runs. 
 
 2. If you're working with a bundle, copy the
-   `$TOMCAT_HOME/conf/Catalina/localhost/ROOT.xml` file from your bundle to the
+   `$CATALINA_BASE/conf/Catalina/localhost/ROOT.xml` file from your bundle to the
    corresponding location in your application server. If not, create this file.
    The `ROOT.xml` file creates a web application context for @product@.
    `ROOT.xml` looks like this:
@@ -169,23 +197,27 @@ Next, you need to configure Tomcat for running @product@.
     disabling sessions entirely.
 
 3. Next, you should make sure that the libraries you copied to
-   `$TOMCAT_HOME/lib/ext` are loaded when you start your server. If you're
-   working with a bundle, copy the `$TOMCAT_HOME/conf/catalina.properties` file
+   `$CATALINA_BASE/lib/ext` are loaded when you start your server. If you're
+   working with a bundle, copy the `$CATALINA_BASE/conf/catalina.properties` file
    from your bundle to your server. If not, open
-   `$TOMCAT_HOME/conf/catalina.properties` and replace the line
+   `$CATALINA_BASE/conf/catalina.properties` and replace the line
 
         common.loader=${catalina.base}/lib,${catalina.base}/lib/*.jar,${catalina.home}/lib,${catalina.home}/lib/*.jar
 
     with this one:
 
+<<<<<<< HEAD:discover/deployment/articles/02-installing-liferay/04-installing-liferay-on-tomcat.markdown
         common.loader="${catalina.base}/lib","${catalina.base}/lib/*.jar","${catalina.home}/lib","${catalina.home}/lib/*.jar","${catalina.home}/lib/ext/global","${catalina.home}/lib/ext/global/*.jar","${catalina.home}/lib/ext","${catalina.home}/lib/ext/*.jar"
+=======
+        common.loader=${catalina.base}/lib,${catalina.base}/lib/*.jar,${catalina.home}/lib,${catalina.home}/lib/*.jar,${catalina.home}/lib/ext,${catalina.base}/lib/ext/*.jar
+>>>>>>> 582a33d51f468025ea8a15cfc1caa5b055c1f8da:discover/deployment/articles/01-installing-liferay/04-installing-liferay-on-tomcat.markdown
 
     This allows Catalina to access the JARs that you copied to
-    `$TOMCAT_HOME/lib/ext`.
+    `$CATALINA_BASE/lib/ext`.
 
 4. If you're working with a bundle, copy the
-   `$TOMCAT_HOME/conf/catalina.policy` file from your bundle to your server. If
-   not, just replace the contents of the `$TOMCAT_HOME/conf/catalina.policy`
+   `$CATALINA_BASE/conf/catalina.policy` file from your bundle to your server. If
+   not, just replace the contents of the `$CATALINA_BASE/conf/catalina.policy`
    file with this:
 
         grant {
@@ -194,13 +226,13 @@ Next, you need to configure Tomcat for running @product@.
 
     If you want to enable PACL for @product@, you have to enable Tomcat's
     security manager and instruct Catalina to use the
-    `$TOMCAT_HOME/conf/catalina.policy` file. See the Enabling PACL section for
+    `$CATALINA_BASE/conf/catalina.policy` file. See the Enabling PACL section for
     more information.
 
 5. Next, you should make sure that UTF-8 URI encoding is used consistently. If
-   you're working with a bundle, copy the `$TOMCAT_HOME/conf/server.xml` file
+   you're working with a bundle, copy the `$CATALINA_BASE/conf/server.xml` file
    to your server. If not, you can simply make a few edits to `server.xml`.
-   Edit your `$TOMCAT_HOME/conf/server.xml` file and add the attribute
+   Edit your `$CATALINA_BASE/conf/server.xml` file and add the attribute
    `URIEncoding="UTF-8"` wherever you see `redirectPort=8443`, in the
    definition of your connectors (HTTP and AJP). For example:
 
@@ -218,8 +250,8 @@ Next, you need to configure Tomcat for running @product@.
 
         <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" URIEncoding="UTF-8" />
 
-6. If you're on Unix, Linux, or Mac OS, navigate to your `$TOMCAT_HOME/bin`
-   folder and run the following command
+6. If you're on Unix, Linux, or Mac OS, navigate to your `$CATALINA_HOME/bin` 
+   and `$CATALINA_BASE/bin` folder(s) and run the following command
 
         chmod a+x *.sh
 
@@ -264,7 +296,7 @@ If you want Tomcat to manage your data source, use this procedure:
    on a different machine, make sure it's accessible from your @product@ machine.
 
 2. Add your data source as a resource in the context of your web application
-   specified in `$TOMCAT_HOME/conf/Catalina/localhost/ROOT.xml`:
+   specified in `$CATALINA_BASE/conf/Catalina/localhost/ROOT.xml`:
 
         <Context...>
             <Resource
@@ -362,14 +394,14 @@ To enable PACL, you need to enable Tomcat's security manager. In the Tomcat
 Configuration section above, you already added the required permissions to the
 Tomcat policy configuration file, `catalina.policy`.
 
-- Edit your `$TOMCAT_HOME/bin/setenv.sh` (if on Linux, Unix, or Mac OS) or
+- Edit your `$CATALINA_BASE/bin/setenv.sh` (if on Linux, Unix, or Mac OS) or
   `setenv.bat` (if on Windows) and enable the security manager by inserting the
   following code into the `CATALINA_OPTS` variable (inside the quotation
   marks):
 
     `-Djava.security.manager -Djava.security.policy=$CATALINA_BASE/conf/catalina.policy`
 
-- Check that your `$TOMCAT_HOME/conf/catalina.policy` file specifies the
+- Check that your `$CATALINA_BASE/conf/catalina.policy` file specifies the
   required permissions (you should have already addressed this in the
   Configuring Tomcat section):
 
@@ -533,18 +565,34 @@ global classpath.
 
 Now you're ready to deploy @product@ using your @product@ WAR file.
 
+<<<<<<< HEAD:discover/deployment/articles/02-installing-liferay/04-installing-liferay-on-tomcat.markdown
 1. If you are manually installing @product@ on a clean Tomcat server, delete the
    contents of the `$TOMCAT_HOME/webapps/ROOT` directory. This removes the default
    Tomcat home page.
 
 2. Extract the @product@ `.war` file to `$TOMCAT_HOME/webapps/ROOT`.
+=======
+1. If you are manually installing Liferay on a clean Tomcat server, delete the
+   contents of the `$CATALINA_BASE/webapps/ROOT` directory. This removes the default
+   Tomcat home page.
+
+2. Extract the Liferay `.war` file to `$CATALINA_BASE/webapps/ROOT`. Double check 
+   that the `.war` file content is indeed unpacked in that folder: You should now 
+   have a folder `$CATALINA_BASE/webapps/ROOT/WEB-INF` (among others, of course).
+>>>>>>> 582a33d51f468025ea8a15cfc1caa5b055c1f8da:discover/deployment/articles/01-installing-liferay/04-installing-liferay-on-tomcat.markdown
 
     Now it's time to launch @product@ on Tomcat!
 
-3. Start Tomcat by navigating to `$TOMCAT_HOME/bin` and executing `./startup.sh`
+3. Start Tomcat by navigating to `$CATALINA_HOME/bin` and executing `./startup.sh`
    or `startup.bat`. Alternatively, you can use `./catalina.sh run` or
    `catalina.bat run`. Using one of the latter commands makes your terminal or
+<<<<<<< HEAD:discover/deployment/articles/02-installing-liferay/04-installing-liferay-on-tomcat.markdown
    command prompt tail @product@'s log file. This can be useful if you want to
    see the startup activities performed by @product@.
+=======
+   command prompt tail Liferay's log file. This can be useful if you want to
+   see the startup activities performed by Liferay or debug reasons why the server
+   doesn't start.
+>>>>>>> 582a33d51f468025ea8a15cfc1caa5b055c1f8da:discover/deployment/articles/01-installing-liferay/04-installing-liferay-on-tomcat.markdown
 
 Congratulations on successfully installing and deploying @product@ on Tomcat!
