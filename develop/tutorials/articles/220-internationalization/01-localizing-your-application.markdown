@@ -206,14 +206,6 @@ the header this way:
 Now the language keys from the aggregated resource bundles compliment your
 module's language keys. 
 
-Note, setting the `-liferay-aggregate-resource-bundles` manifest header in a
-traditional plugin's `liferay-plugin-package.properties` file. The
-[plugin WAR to WAB conversion](/develop/tutorials/-/knowledge_base/7-0/using-the-wab-generator) 
-sets the header in the WAB's manifest. @product@ aggregates the resource bundles
-of the `-liferay-aggregate-resource-bundles` manifest header's specified modules
-with the plugin's resource bundle (if it has any). In this way, the aggregated
-resource bundle language keys are made available to the plugin. 
-
 +$$$
 
 The
