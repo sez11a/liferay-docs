@@ -24,15 +24,19 @@ that you'll learn how to create in this section. The application's view layer is
 implemented in the JSPs in the
 `bookmarks-web/src/main/resources/META-INF/resources` folder.
 
-You can learn how to generate a generic modular application from scratch that
-includes the `*api`, `*service`, and `*web` modules by default in the
-The tutorial
-[Modularizing an Existing Portlet](/develop/tutorials/-/knowledge_base/7-1/modularizing-an-existing-portlet)
-demonstrates how to generate a generic modular application that
-includes `*api`, `*service`, and `*web` modules. This tutorial assumes you've assembled your application's modules
-similarly to that tutorial. Make sure to also visit the
-[Fundamentals](/develop/tutorials/-/knowledge_base/7-1/fundamentals)
-tutorial for additional info on the `*api`, `*service`, and `*web` modules.
+This tutorial assumes your application has these types of modules :
+
+- `*-api`: Service interfaces
+- `*-service`: Service implementations
+- `*-web`: Portlet and controller
+
+The parent folder of these modules is referred to as the *application
+folder*. The
+[Service Builder project template](/develop/reference/-/knowledge_base/7-1/using-the-service-builder-template)
+is available for creating the `*-api` and `*-service` modules. Client UI project
+templates such as the
+[MVCPortlet template](/develop/reference/-/knowledge_base/7-12/using-the-mvc-portlet-template)
+are available for creating the `*-web` module. 
 
 The first step in using Service Builder is to define your model classes and
 their attributes in a `service.xml` file. This file typically resides
