@@ -1,125 +1,122 @@
 # Running Service Builder and Understanding the Generated Code [](id=running-service-builder-and-understanding-the-generated-code)
 
-This tutorial explains how to run Service Builder and provides an overview of
-the code that Service Builder generates. If you'd like to use Service Builder in
-your application but haven't yet created a `service.xml` file, visit the
-[Defining an Object-Relational Map with Service Builder](/develop/tutorials/-/knowledge_base/7-0/defining-an-object-relational-map-with-service-builder)
-tutorial and then come back to this one.
+This tutorial demonstrates
+[how to run Service Builder](#running-service-builder)
+and provides an
+[overview of the code that Service Builder generates](understanding-the-code-generated-by-service-builder).
+If want to use Service Builder in your application but haven't yet
+[created a `service.xml` file that defines an object-relational map for you application](/develop/tutorials/-/knowledge_base/7-1/defining-an-object-relational-map-with-service-builder),
+make sure to do so before proceeding with this tutorial.
 
 ## Running Service Builder [](id=running-service-builder)
 
-To build a service from a `service.xml` file, you can use Liferay @ide@ or a
-terminal window. In this tutorial, you'll refer to the Event Listing example
-project that's referenced throughout the Liferay Service Builder tutorials. 
+There are two ways to build services from a `service.xml` file:
 
-Now let's learn how to run Service Builder.
+- [Liferay @ide@](#using-liferay-ide-or-developer-studio)
+- [Command line](#using-the-command-line)  
+
+Liferay @ide@ is demonstrated first. 
 
 ### Using Liferay @ide@ [](id=using-liferay-ide-or-developer-studio)
 
 From the Package Explorer, open the `service.xml` file from your `*-service`
-module's root folder. By default, the file opens up in the Service Builder
-Editor. Make sure you are in Overview mode. Then click the *Build Services*
-button (![Build Services](../../../images/icon-build-services.png)) near the
-top-right corner of the view. 
+module's folder. By default, the file opens up in the Service Builder Editor.
+Make sure you are in Overview mode. Then click the *Build Services* button
+(![Build Services](../../../images/icon-build-services.png))
+near the top-right corner of the view. 
 
 Make sure to click the *Build Services* button and not the *Build WSDD* button
-(![Build WSDD](../../../images/icon-build-wsdd.png)) that appears next to it.
-Building the WSDDs won't hurt anything, but you'll generate files for the remote
-service instead of the local one. For information about WSDDs (web service
-deployment descriptors), please refer to the
-[SOAP Web Services](/develop/tutorials/-/knowledge_base/7-0/soap-web-services)
-tutorial. 
+(![Build WSDD](../../../images/icon-build-wsdd.png))
+that appears next to it. Building the WSDDs doesn't hurt anything, but it
+generates files for the remote service instead of the local one.
+A later tutorial explains
+[WSDDs (web service deployment descriptors) and SOAP web services](/develop/tutorials/-/knowledge_base/7-1/soap-web-services). 
 
-![Figure 1: The *Overview* mode in the editor provides a nested outline which you can expand, a form for editing basic Service Builder attributes, and buttons for building services or building web service deployment descriptors.](../../../images/service-xml-overview.png)
+![Figure 1: The editor's *Overview* mode provides a nested outline which you can expand, a form for editing basic Service Builder attributes, and buttons for building services or building web service deployment descriptors.](../../../images/service-xml-overview.png)
 
 Another simple way to run Service Builder is to right-click on your project's
 name in the Package Explorer and then select *Liferay* &rarr; *build-service*.
 
-After running Service Builder, your generated files are available. More
-information about the generated files appears below.
+Service Builder generates plenty of files--they're explained
+[later](understanding-the-code-generated-by-service-builder)
+in this tutorial. You can run Service Builder from the command line too. 
 
-### Using the Terminal [](id=using-the-terminal)
+### Using the Command Line [](id=using-the-command-line)
 
-Open a terminal window and navigate to your module project's root folder, which
-should be located in your Liferay Workspace's `modules` directory. To learn more
-about creating your module project in a
-[Liferay Workspace](/develop/tutorials/-/knowledge_base/7-0/liferay-workspace),
-visit the
-[Creating Modules with Blade CLI](/develop/tutorials/-/knowledge_base/7-0/creating-modules-with-blade-cli)
-tutorial. You can leverage the
-[Service Builder Template](/develop/reference/-/knowledge_base/7-0/using-the-service-builder-template)
-to create your own predefined Service Builder project.
+Open a command line and navigate to your application folder (the folder that
+contains your `*-api` and `*-service` modules). 
 
-Liferay Workspace offers a Gradle or Maven build environment; this tutorial
-shows how to use both. Liferay is tool agnostic, however, and you can use other
-tools, as well.
+To build your services using Gradle, enter the following command:
 
-For Gradle projects, enter the following command in your module project's root
-folder to build your services:
+    blade gw buildService  
+
+or
 
     gradlew buildService
 
+Blade's `gw` command works in any project that has a Gradle Wrapper available to
+it--projects generated using Liferay project templates have a Gradle Wrapper. 
+
 +$$$
 
-**Note:** Liferay Workspaces provide the Gradle Wrapper script for usage, if you
-don't have Gradle installed globally in your classpath. It is located in the
-workspace's root folder, so you can call it from your module project's root
-folder, if necessary (e.g., `../../gradlew buildService`).
+**Note:** Liferay Workspace's Gradle Wrapper script is in the workspace root 
+folder. If your application project folder is located at
+`[workspace]/modules/[application]`, for example, the Gradle Wrapper is
+available at `../../gradlew`. 
 
 $$$
 
-If your module project uses Maven, you can build services running the following
-command from the module project's root folder:
+If you're using Maven, build the services by running the following command:
 
     mvn service-builder:build
 
 **Important:** The `mvn service-builder:build` command only works if you're
 using the `com.liferay.portal.tools.service.builder` plugin version 1.0.145+.
 Maven projects using an earlier version of the Service Builder plugin should
-update their POM accordingly. See the
-[Using Service Builder in a Maven Project](/develop/tutorials/-/knowledge_base/7-0/using-service-builder-in-a-maven-project)
-tutorial for more information on using Maven to run Service Builder.
+update their POM accordingly. More information is available on
+[using Maven to run Service Builder](/develop/tutorials/-/knowledge_base/7-1/using-service-builder-in-a-maven-project).
 
-When the service has been successfully generated, a `BUILD SUCCESSFUL` message
-appears in your terminal window. You should also see that a large number of
-files have been generated in your project. These files include a model layer,
-service layer, and persistence layer. Don't worry about the number of generated
-files--you'll never have to customize more than three of them. To review the
-code that Service Builder generates for your entities, see the next section.
+On successfully building the services, Service Builder prints the message `BUILD
+SUCCESSFUL`. Many generated files appear in your project. They represent a model
+layer, service layer, and persistence layer for your entities. Don't worry about
+the number of generated files--you'll never have to customize more than three of
+them. Its time to review the code Service Builder generates for your entities.
 
 ## Understanding the Code Generated by Service Builder [](id=understanding-the-code-generated-by-service-builder)
 
-Now you'll examine the files Service Builder generated for your entity. Note
-that the files listed under Local Service and Remote Service below are only
-generated for an entity that has both `local-service` and `remote-service`
-attributes set to `true`. Service Builder generates services for these entities
-in two locations in your project. These locations use the package path that you
-specified in your `service.xml` file. For Liferay's Bookmarks application, for
-example, these two locations are the following ones:
+Service Builder generates code to support your entities. The files listed under
+Local Service and Remote Service below are only generated for an entity that has
+both `local-service` and `remote-service` attributes set to `true`. Service
+Builder generates services for these entities in your application's `*-api` and
+`*-service` modules. Your `service.xml` specifies the service package paths. For
+example, here are the package paths for Liferay's Bookmarks application:
 
 - `/bookmarks-api/src/main/java/com/liferay/bookmarks`
 - `/bookmarks-service/src/main/java/com/liferay/bookmarks`
 
-The `bookmarks-api` module contains the API for the Bookmarks project. All the
-classes and interfaces in the `*-api` module are packaged in a `.jar` file
-called `PROJECT_NAME-api.jar` in the module's `build/libs` folder. This `.jar`
-file is generated whenever you compile and deploy your module. When deploying
-this JAR to Liferay, the necessary interfaces to *define* the service API are
-available.
+The `bookmarks-api` module's interfaces define the Bookmarks application API.
+The `*-api` module interfaces define the application's persistence layer,
+service layer, and model layer. Whenever you compile and deploy the `*-api`
+module, all its classes and interfaces are packaged in a `.jar` file called
+`PROJECT_NAME-api.jar` in the module's `build/libs` folder. Deploying this JAR
+to Liferay *defines* the API as OSGi services. 
 
-The `bookmarks-service` module contains the implementation of the interfaces
-defined in the `bookmarks-api` module. These interfaces provide OSGi services
-for the portal instance to which your application is deployed. Service Builder
-generates classes and interfaces belonging to the persistence layer, service
-layer, and model layer in the
-`/bookmarks-api/src/main/java/com/liferay/bookmarks` and
-`/bookmarks-service/src/main/java/com/liferay/bookmarks` packages.
+The `bookmarks-service` module classes implement the `bookmarks-api` module
+interfaces. The `*-service` module provides the OSGi service implementations to
+deploy to Liferay's OSGi framework. 
 
-Now you'll look at the classes and interfaces generated for the entities you
-specified. Each entity has similar classes generated for it, depending on what
-you specfied for them in the `service.xml`. You won't have to customize more
-than three classes for each entity. These customizable classes are
-`*LocalServiceImpl`, `*ServiceImpl`, and `*ModelImpl`.
+Next, examine the classes and interfaces generated for the entities you
+specified. Similar classes are generated for each entity, depending on how each
+entity is specified in the `service.xml`. You won't have to customize more than
+three classes for each entity. Here are the three types of customizable classes:
+
+- `*LocalServiceImpl`
+- `*ServiceImpl`
+- `*Impl`
+
+The `*` represents the entity name in the classes listed above. 
+
+Here are the persistence, service, and model classes:
 
 - Persistence
     - `[ENTITY_NAME]Persistence`: Persistence interface that defines CRUD
@@ -130,12 +127,13 @@ than three classes for each entity. These customizable classes are
     - `[ENTITY_NAME]Util`: Persistence utility class that wraps
       `[ENTITY_NAME]PersistenceImpl` and provides direct access to the database
       for CRUD operations. This utility should only be used by the service
-      layer; in your portlet classes, use `[ENTITY_NAME]LocalServiceUtil` or
-      `[ENTITY_NAME]ServiceUtil` instead. 
+      layer; in your portlet classes, use the `[ENTITY_NAME]` class by
+      referencing it with the
+      [`@Reference` annotation](/develop/tutorials/-/knowledge_base/7-1/osgi-services-and-dependency-injection-with-declarative-services). 
 
     ![Figure 1: Service Builder generates these persistence classes and interfaces. You shouldn't (and you won't need to) customize any of these classes or interfaces.](../../../images/service-builder-persistence-diagram.png)
 
-- Local Service (generated for an entity only if an entity's `local-service`
+- Local Service (generated for an entity only if the entity's `local-service`
   attribute is set to `true` in `service.xml`)
     - `[ENTITY_NAME]LocalService`: Local service interface. 
     - `[ENTITY_NAME]LocalServiceImpl` (**LOCAL SERVICE IMPLEMENTATION**): Local
@@ -146,12 +144,15 @@ than three classes for each entity. These customizable classes are
     - `[ENTITY_NAME]LocalServiceBaseImpl`: Local service base implementation.
       This is an abstract class. Service Builder injects a number of instances
       of various service and persistence classes into this class. `@abstract`
-    - `[ENTITY_NAME]LocalServiceUtil`: Local service utility class which wraps
-      `[ENTITY_NAME]LocalServiceImpl` and serves as the primary local access
-      point to the service layer. 
+    - `[ENTITY_NAME]LocalServiceUtil`: Local service utility class 
+      which wraps `[ENTITY_NAME]LocalServiceImpl`. This class is generated for
+      backwards compatibility purposes only. Use the `*LocalService` class by
+      referencing it with the
+      [`@Reference` annotation](/develop/tutorials/-/knowledge_base/7-1/osgi-services-and-dependency-injection-with-declarative-services). 
     - `[ENTITY_NAME]LocalServiceWrapper`: Local service wrapper which implements
       `[ENTITY_NAME]LocalService`. This class is designed to be extended and it
-      allows developers to customize the entity's local services.
+      lets you
+      [customize the entity's local services](/develop/tutorials/-/knowledge_base/7-1/customizing-liferay-services-service-wrappers).
 
     ![Figure 2: Service Builder generates these service classes and interfaces. Only EventLocalServiceImpl allows custom methods to be added to the service layer.](../../../images/service-builder-service-diagram.png)
 
@@ -164,27 +165,30 @@ than three classes for each entity. These customizable classes are
       additional security checks and invokes the local services. For any custom
       methods added here, Service Builder adds corresponding methods to the
       `[ENTITY_NAME]Service` interface the next time you run it. 
-    - `[ENTITY_NAME]ServiceBaseImpl`: Remote service base implementation. This is
-      an abstract class.  `@abstract`
-    - `[ENTITY_NAME]ServiceUtil`: Remote service utility class which wraps
-      `[ENTITY_NAME]ServiceImpl` and serves as the primary remote access point
-      to the service layer.
+    - `[ENTITY_NAME]ServiceBaseImpl`: Remote service base implementation. This 
+      is an abstract class.  `@abstract`
+    - `[ENTITY_NAME]ServiceUtil`: Remote service utility class 
+      which wraps `[ENTITY_NAME]ServiceImpl`. This class is generated for
+      backwards compatibility purposes only. Use the `*Service` class by
+      referencing it with the
+      [`@Reference` annotation](/develop/tutorials/-/knowledge_base/7-1/osgi-services-and-dependency-injection-with-declarative-services).
     - `[ENTITY_NAME]ServiceWrapper`: Remote service wrapper which implements
-      `[ENTITY_NAME]Service`. This class is designed to be extended and it allows
-      developers to customize the remote entity's services.
-    - `[ENTITY_NAME]ServiceSoap`: SOAP utility which the remote `[ENTITY_NAME]ServiceUtil`
-      remote service utility can access.
+      `[ENTITY_NAME]Service`. This class is designed to be extended and it lets
+      you
+      [customize the entity's remote services](/develop/tutorials/-/knowledge_base/7-1/customizing-liferay-services-service-wrappers).
+    - `[ENTITY_NAME]ServiceSoap`: SOAP utility which the remote 
+      `[ENTITY_NAME]ServiceUtil` remote service utility can access.
     - `[ENTITY_NAME]Soap`: SOAP model, similar to `[ENTITY_NAME]ModelImpl`.
       `[ENTITY_NAME]Soap` is serializable; it does not implement
       `[ENTITY_NAME]`. 
 
 - Model
     - `[ENTITY_NAME]Model`: Base model interface. This interface and its
-      `[ENTITY_NAME]ModelImpl` implementation serve only as a container for the default
-      property accessors generated by Service Builder. Any helper methods and
-      all application logic should be added to `[ENTITY_NAME]Impl`. 
+      `[ENTITY_NAME]ModelImpl` implementation serve only as a container for the 
+      default property accessors Service Builder generates. Any helper methods
+      and all application logic should be added to `[ENTITY_NAME]Impl`. 
     - `[ENTITY_NAME]ModelImpl`: Base model implementation. 
-    - `[ENTITY_NAME]`: [ENTITY_NAME] model interface which extends
+    - `[ENTITY_NAME]`: `[ENTITY_NAME]` model interface which extends
       `[ENTITY_NAME]Model`. 
     - `[ENTITY_NAME]Impl`:  (**MODEL IMPLEMENTATION**) Model implementation. You
       can use this class to add helper methods and application logic to your
@@ -192,61 +196,67 @@ than three classes for each entity. These customizable classes are
       auto-generated field getters and setters are available. Whenever you
       add custom methods to this class, Service Builder adds corresponding
       methods to the `[ENTITY_NAME]` interface the next time you run it.
-    - `[ENTITY_NAME]Wrapper`: Wrapper, wraps `[ENTITY_NAME]`. 
+    - `[ENTITY_NAME]Wrapper`: Wrapper, wraps `[ENTITY_NAME]`. This class is 
+      designed to be extended and it lets you
+      [customize the entity](/develop/tutorials/-/knowledge_base/7-1/customizing-liferay-services-service-wrappers).
 
     ![Figure 3: Service Builder generates these model classes and interfaces. Only `EventImpl` allows custom methods to be added to the service layer.](../../../images/service-builder-model-diagram.png)
 
 +$$$
 
 **Note:** `*Util` classes are generated for backwards compatibility purposes
-only. Your module applications should avoid calling the util classes.
+only. Your module applications should avoid calling the util classes. Use the
+non-util classes instead--you can reference them using the
+[`@Reference` annotation](/develop/tutorials/-/knowledge_base/7-1/osgi-services-and-dependency-injection-with-declarative-services).
 
 $$$
 
 Each file that Service Builder generates is assembled from an associated
-FreeMarker template. You can find Service Builder's FreeMarker templates in the
-[portal-tools-service-builder](https://github.com/liferay/liferay-portal/tree/master/modules/util/portal-tools-service-builder/src/main/resources/com/liferay/portal/tools/service/builder/dependencies)
-module. For example, if you want to find out how a
-`*ServiceImpl.java` file is generated, just look at the
-[service_impl.ftl](https://github.com/liferay/liferay-portal/blob/master/modules/util/portal-tools-service-builder/src/main/resources/com/liferay/portal/tools/service/builder/dependencies/service_impl.ftl)
-template.
+FreeMarker template. The FreeMarker templates are in the
+[`com.liferay.portal.tools.service.builder` module's](https://repository.liferay.com/nexus/content/repositories/liferay-public-releases/com/liferay/com.liferay.portal.tools.service.builder/) `/com/liferay/portal/tools/service/builder/dependencies/` folder. For example,
+Service Builder uses the `service_impl.ftl` template to generate the
+`*ServiceImpl.java` classes. 
 
-Of all the classes generated by Service Builder, only three should be manually
+Of all the classes Service Builder generates, only three should be manually
 modified: `*LocalServiceImpl`, `*ServiceImpl` and `*Impl`. If you manually
-modify the other classes, your changes are overwritten the next time you run
-Service Builder. Whenever you add methods to, remove methods from, or change a
-method signature of a `*LocalServiceImpl` class, `*ServiceImpl` class, or
-`*Impl` class, you should run Service Builder again to regenerate the affected
+modify the other classes, Service Builder overwrites the changes the next time
+you run it. Whenever you add methods to, remove methods from, or change a method
+signature of a `*LocalServiceImpl` class, `*ServiceImpl` class, or `*Impl`
+class, you should run Service Builder again to regenerate the affected
 interfaces and the service JAR.
 
-During the course of development, you're likely to need to add fields to your
+As you develop an application, you might need to add fields to your
 database. This is a normal process of iterative development: you get an idea for
 a new feature, or it's suggested to you, and that feature requires additional
 data in the database. It's important to note, then, that **new fields added to
 `service.xml` are not automatically added to the database.** To add the fields,
 you must do one of two things: 
 
-1.  Write an [upgrade process](/develop/tutorials/-/knowledge_base/7-0/creating-an-upgrade-process-for-your-app) 
+1.  Write an
+    [upgrade process](/develop/tutorials/-/knowledge_base/7-1/creating-an-upgrade-process-for-your-app) 
     to modify the tables and preserve the data, or
 
 2.  Run the `cleanServiceBuilder`
-    [Gradle task](/develop/reference/-/knowledge_base/7-0/db-support-gradle-plugin)
+    [Gradle task](/develop/reference/-/knowledge_base/7-1/db-support-gradle-plugin)
     (also supported on Maven and Ant), which drops your tables so they get
-    re-created the next time your app is deployed. See the
-    [Maven DB Support Plugin](/develop/reference/-/knowledge_base/7-0/db-support-plugin)
-    reference article for instructions on how to run this command from a Maven
+    re-created the next time your app is deployed. The
+    [Maven DB Support Plugin](/develop/reference/-/knowledge_base/7-1/db-support-plugin)
+    reference article explains how to run this command from a Maven
     project.
 
-Use the first option when you have a released application and you must preserve
-your users' data. Use the second option when you're in the middle of development
-and you're adding new columns during that process. 
+Use the first option if you have a released application and you must preserve
+user data. Use the second option if you're adding new columns during
+development. 
+
+Congratulations! You've generated your application's initial model, persistence,
+and service layers and you understand the generated code. 
 
 ## Related Topics [](id=related-topics)
 
-[What is Service Builder](/develop/tutorials/-/knowledge_base/7-0/what-is-service-builder)
+[What is Service Builder](/develop/tutorials/-/knowledge_base/7-1/what-is-service-builder)
 
-[Running Service Builder and Understanding the Generated Code](/develop/tutorials/-/knowledge_base/7-0/running-service-builder-and-understanding-the-generated-code)
+[Running Service Builder and Understanding the Generated Code](/develop/tutorials/-/knowledge_base/7-1/running-service-builder-and-understanding-the-generated-code)
 
-[Understanding Service Context](/develop/tutorials/-/knowledge_base/7-0/understanding-servicecontext)
+[Understanding Service Context](/develop/tutorials/-/knowledge_base/7-1/understanding-servicecontext)
 
-[Creating Local Services](/develop/tutorials/-/knowledge_base/7-0/creating-local-services)
+[Creating Local Services](/develop/tutorials/-/knowledge_base/7-1/creating-local-services)
