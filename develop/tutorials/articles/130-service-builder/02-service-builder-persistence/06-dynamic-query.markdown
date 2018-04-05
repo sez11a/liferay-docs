@@ -26,18 +26,18 @@ service module, an API module, and a web module. Once you've used Service
 Builder to generate model, persistence, and service layers for your application,
 follow these steps to call custom finders using the Dynamic Query API:
 
-1. [Create a custom `-FinderImpl` class and define a `findBy-` finder method in this class](#step-1-defining-a-custom-finder-method).
+1. [Create a custom `*FinderImpl` class and define a `findBy*` finder method in this class](#step-1-defining-a-custom-finder-method).
    Run Service Builder to generate the required interfaces and
    utility classes.
 
 2. [Implement your finder method using the Dynamic Query API](#step-2-implementing-your-custom-finder-method-using-dynamic-query).
 
-3. [Add a method to your `-LocalServiceImpl` class that invokes your finder method](#step-3-accessing-your-custom-finder-method-from-the-service-layer). 
+3. [Add a method to your `*LocalServiceImpl` class that invokes your finder method](#step-3-accessing-your-custom-finder-method-from-the-service-layer). 
    Run Service Builder to add the required method to the service interface.
 
 Once you've taken these steps, you can access your custom finder as a service
-method. Note: You can create multiple or overloaded `findBy-` finder methods in
-your `-FinderImpl` class. Next, let's examine these steps in more detail.
+method. Note: You can create multiple or overloaded `findBy*` finder methods in
+your `*FinderImpl` class. Next, let's examine these steps in more detail.
 
 ## Step 1: Defining a Custom Finder Method [](id=step-1-defining-a-custom-finder-method)
 
@@ -51,7 +51,7 @@ in `service.xml`. Here's an example:
         ...
     </service-builder>
 
-Then define a `findBy-` finder method in the class you created. Make sure to
+Then define a `findBy*` finder method in the class you created. Make sure to
 add any required arguments to your finder method signature.
 
 For example, consider a fictitious Guestbook application. This application has
@@ -84,13 +84,13 @@ using the Dynamic Query API.
 
 ## Step 2: Implementing Your Custom Finder Method Using Dynamic Query [](id=step-2-implementing-your-custom-finder-method-using-dynamic-query)
 
-Your first step in implementing your custom finder method in your `-FinderImpl`
-class is to open a new Hibernate session. Since your `-FinderImpl` class extends
+Your first step in implementing your custom finder method in your `*FinderImpl`
+class is to open a new Hibernate session. Since your `*FinderImpl` class extends
 `BasePersistenceImpl<Entity>`, and `BasePersistenceImpl<Entity>` contains a
 session factory object and an
 [openSession](@platform-ref@/7.1-latest/javadocs/portal-kernel/com/liferay/portal/kernel/service/persistence/impl/BasePersistenceImpl.html#openSession--)
 method, you can simply invoke the
-`openSession` method of your `-FinderImpl`'s parent class to open a new
+`openSession` method of your `*FinderImpl`'s parent class to open a new
 Hibernate session. The basic structure of your finder method should look like
 this:
 
@@ -295,7 +295,7 @@ most recent to least recent.
 +$$$
 
 **Note:** Service Builder not only generates a `public List
-dynamicQuery(DynamicQuery dynamicQuery)` method in `-LocalServiceBaseImpl` but it
+dynamicQuery(DynamicQuery dynamicQuery)` method in `*LocalServiceBaseImpl` but it
 also generates `public List dynamicQuery(DynamicQuery dynamicQuery, int start,
 int end)` and `public List dynamicQuery(DynamicQuery dynamicQuery, int start,
 int end, OrderByComparator orderByComparator)` methods. You can go back to step
@@ -308,8 +308,8 @@ comparator by which to order the results.
 
 $$$
 
-To use the overloaded `dynamicQuery` methods of your `-LocalServiceBaseImpl`
-class in the (optionally overloaded) custom finders of your `-FinderImpl` class,
+To use the overloaded `dynamicQuery` methods of your `*LocalServiceBaseImpl`
+class in the (optionally overloaded) custom finders of your `*FinderImpl` class,
 just choose the appropriate methods for running the dynamic queries: 
 `dynamicQuery(eventQuery)`, or
 `dynamicQuery(eventQuery, start, end)` or
@@ -320,15 +320,15 @@ API. Your last step is to add a service method that calls your finder.
 
 ## Step 3: Accessing Your Custom Finder Method from the Service Layer [](id=step-3-accessing-your-custom-finder-method-from-the-service-layer)
 
-So far, you've created a `-FinderImpl` class, defined a custom `findBy-` finder
+So far, you've created a `*FinderImpl` class, defined a custom `findBy*` finder
 method in that class, and implemented the custom finder method using Dynamic
 Query. Now how do you call your custom finder method from the service layer?
 
 When you ran Service Builder after defining your custom finder method, the
-`-Finder` interface was generated (e.g., `GuestbookFinder`). Your portlet class,
-however, should not call the `-Finder` interface: only a local or remote service
-implementation (i.e., `-LocalServiceImpl` or `-ServiceImpl`) in your service
-module should invoke the `-Finder` class. This encourages a proper separation of
+`*Finder` interface was generated (e.g., `GuestbookFinder`). Your portlet class,
+however, should not call the `*Finder` interface: only a local or remote service
+implementation (i.e., `*LocalServiceImpl` or `*ServiceImpl`) in your service
+module should invoke the `*Finder` class. This encourages a proper separation of
 concerns: the portlet classes in your application's web module invoke the
 business logic of the services published from your application's service module.
 The services, in turn, access the data model using the persistence layer's
@@ -337,13 +337,13 @@ finder classes.
 +$$$
 
 **Note:** In previous versions of Liferay Portal, your finder methods were
-accessible via `-FinderUtil` utility classes. Finder methods are now injected
+accessible via `*FinderUtil` utility classes. Finder methods are now injected
 into your app's local services, removing the need to call finder utilities.
 
 $$$
 
-So you'll add a method in the `-LocalServiceImpl` class that invokes the finder
-method implementation via the `-Finder` class. Then you'll rebuild your
+So you'll add a method in the `*LocalServiceImpl` class that invokes the finder
+method implementation via the `*Finder` class. Then you'll rebuild your
 application's service layer so that the portlet classes and JSPs in your web
 module can access the services.
 
@@ -357,7 +357,7 @@ the `EntryLocalServiceImpl` class:
             String guestbookName);
     }
 
-After you've added your `findBy-` method to your `-LocalServiceImpl` class, run
+After you've added your `findBy*` method to your `*LocalServiceImpl` class, run
 Service Builder to generate the interface and make the finder method available
 in the `EntryLocalService` class.
 

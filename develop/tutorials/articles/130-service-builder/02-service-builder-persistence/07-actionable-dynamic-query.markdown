@@ -52,7 +52,7 @@ the `Foo` entity--this is the pattern shown in the
             clazz.getClassLoader());
     }
 
-Use `-LocalService.getActionableDynamicQuery()` to obtain a new
+Use `*LocalService.getActionableDynamicQuery()` to obtain a new
 [`ActionableDynamicQuery` instance](@platform-ref@/7.1-latest/javadocs/portal-kernel/com/liferay/portal/kernel/dao/orm/ActionableDynamicQuery.html)
 for the service entity. Once you have the `ActionableDynamicQuery` instance, you
 can use chaining to build up the query using any of the techniques described for
@@ -140,7 +140,7 @@ collection of documents to index. Lastly the search engine is assigned to the
 query and the query's action is performed. 
 
 For most actionable dynamic query use cases, the actionable query returned by
-`-LocalService.getActionableDynamicQuery` suffices. This actionable dynamic
+`*LocalService.getActionableDynamicQuery` suffices. This actionable dynamic
 query is an instance of the
 [concrete class
 `DefaultActionableDynamicQuery`](@platform-ref@/7.1-latest/javadocs/portal-kernel/com/liferay/portal/kernel/dao/orm/DefaultActionableDynamicQuery.html). 
@@ -156,12 +156,12 @@ contains methods designed to facilitate processing that involves export / import
 functionality. 
 
 They're concrete classes that extend `DefaultActionableDynamicQuery`. The
-`-LocalService` methods `getExportActionableDynamicQuery` and
+`*LocalService` methods `getExportActionableDynamicQuery` and
 `getIndexableActionableDynamicQuery` return instances
 `IndexableActionableDynamicQuery` or `ExportActionableDynamicQuery`,
 respectively.
 
-All `-LocalServiceBaseImpl` classes, including the
+All `*LocalServiceBaseImpl` classes, including the
 `com.liferay.bookmarks.service` module's `BookmarksEntryLocalServiceBaseImpl`
 class, implement several actionable dynamic query methods, including
 `getExportActionableDynamicQuery` and `getIndexableActionableDynamicQuery`.
