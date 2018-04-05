@@ -24,17 +24,17 @@ the generated API and service modules. For example, consider the
 [Basic Liferay Service Builder sample project](/develop/reference/-/knowledge_base/7-0/service-builder-samples). 
 The `FooLocalService` interface in the API module declares these methods:
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public ActionableDynamicQuery getActionableDynamicQuery();
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public ActionableDynamicQuery getActionableDynamicQuery();
 
-	public DynamicQuery dynamicQuery();
+    public DynamicQuery dynamicQuery();
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
-		PortletDataContext portletDataContext);
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public ExportActionableDynamicQuery getExportActionableDynamicQuery(
+        PortletDataContext portletDataContext);
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
 The service module's `FooLocalServiceBaseImpl` class implements each of these
 methods. 
@@ -44,13 +44,13 @@ The `FooLocalService.dynamicQuery()` implementation uses
 the `Foo` entity--this is the pattern shown in the
 [Dynamic Query tutorial](/develop/tutorials/-/knowledge_base/7-1/dynamic-query).
 
-	@Override
-	public DynamicQuery dynamicQuery() {
-		Class<?> clazz = getClass();
+    @Override
+    public DynamicQuery dynamicQuery() {
+        Class<?> clazz = getClass();
 
-		return DynamicQueryFactoryUtil.forClass(Foo.class,
-			clazz.getClassLoader());
-	}
+        return DynamicQueryFactoryUtil.forClass(Foo.class,
+            clazz.getClassLoader());
+    }
 
 Use `-LocalService.getActionableDynamicQuery()` to obtain a new
 [`ActionableDynamicQuery` instance](@platform-ref@/7.1-latest/javadocs/portal-kernel/com/liferay/portal/kernel/dao/orm/ActionableDynamicQuery.html)
@@ -70,62 +70,62 @@ The `reindexEntries` method from the Bookmarks
 `BookmarksEntryIndexer` class demonstrates performing an indexable actionable
 dynamic query.
 
-	protected void reindexEntries(
-			long companyId, final long groupId, final long folderId)
-		throws PortalException {
+    protected void reindexEntries(
+            long companyId, final long groupId, final long folderId)
+        throws PortalException {
 
-		final IndexableActionableDynamicQuery indexableActionableDynamicQuery =
-			_bookmarksEntryLocalService.getIndexableActionableDynamicQuery();
+        final IndexableActionableDynamicQuery indexableActionableDynamicQuery =
+            _bookmarksEntryLocalService.getIndexableActionableDynamicQuery();
 
-		indexableActionableDynamicQuery.setAddCriteriaMethod(
-			new ActionableDynamicQuery.AddCriteriaMethod() {
+        indexableActionableDynamicQuery.setAddCriteriaMethod(
+            new ActionableDynamicQuery.AddCriteriaMethod() {
 
-				@Override
-				public void addCriteria(DynamicQuery dynamicQuery) {
-					Property folderIdProperty = PropertyFactoryUtil.forName(
-						"folderId");
+                @Override
+                public void addCriteria(DynamicQuery dynamicQuery) {
+                    Property folderIdProperty = PropertyFactoryUtil.forName(
+                        "folderId");
 
-					dynamicQuery.add(folderIdProperty.eq(folderId));
+                    dynamicQuery.add(folderIdProperty.eq(folderId));
 
-					Property statusProperty = PropertyFactoryUtil.forName(
-						"status");
+                    Property statusProperty = PropertyFactoryUtil.forName(
+                        "status");
 
-					Integer[] statuses = {
-						WorkflowConstants.STATUS_APPROVED,
-						WorkflowConstants.STATUS_IN_TRASH
-					};
+                    Integer[] statuses = {
+                        WorkflowConstants.STATUS_APPROVED,
+                        WorkflowConstants.STATUS_IN_TRASH
+                    };
 
-					dynamicQuery.add(statusProperty.in(statuses));
-				}
+                    dynamicQuery.add(statusProperty.in(statuses));
+                }
 
-			});
-		indexableActionableDynamicQuery.setCompanyId(companyId);
-		indexableActionableDynamicQuery.setGroupId(groupId);
-		indexableActionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.PerformActionMethod<BookmarksEntry>() {
+            });
+        indexableActionableDynamicQuery.setCompanyId(companyId);
+        indexableActionableDynamicQuery.setGroupId(groupId);
+        indexableActionableDynamicQuery.setPerformActionMethod(
+            new ActionableDynamicQuery.PerformActionMethod<BookmarksEntry>() {
 
-				@Override
-				public void performAction(BookmarksEntry entry) {
-					try {
-						Document document = getDocument(entry);
+                @Override
+                public void performAction(BookmarksEntry entry) {
+                    try {
+                        Document document = getDocument(entry);
 
-						indexableActionableDynamicQuery.addDocuments(document);
-					}
-					catch (PortalException pe) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Unable to index bookmarks entry " +
-									entry.getEntryId(),
-								pe);
-						}
-					}
-				}
+                        indexableActionableDynamicQuery.addDocuments(document);
+                    }
+                    catch (PortalException pe) {
+                        if (_log.isWarnEnabled()) {
+                            _log.warn(
+                                "Unable to index bookmarks entry " +
+                                    entry.getEntryId(),
+                                pe);
+                        }
+                    }
+                }
 
-			});
-		indexableActionableDynamicQuery.setSearchEngineId(getSearchEngineId());
+            });
+        indexableActionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 
-		indexableActionableDynamicQuery.performActions();
-	}
+        indexableActionableDynamicQuery.performActions();
+    }
 
 The `reindexEntries` method gets an `IndexableActionableDynamicQuery` from its
 entity's local service.  
@@ -168,18 +168,18 @@ class, implement several actionable dynamic query methods, including
 Here's `BookmarksEntryLocalServiceBaseImpl`'s  implementation of
 `getIndexableActionableDynamicQuery`: 
 
-	@Override
-	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
+    @Override
+    public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
+        IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
-		indexableActionableDynamicQuery.setBaseLocalService(bookmarksEntryLocalService);
-		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
-		indexableActionableDynamicQuery.setModelClass(BookmarksEntry.class);
+        indexableActionableDynamicQuery.setBaseLocalService(bookmarksEntryLocalService);
+        indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+        indexableActionableDynamicQuery.setModelClass(BookmarksEntry.class);
 
-		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("entryId");
+        indexableActionableDynamicQuery.setPrimaryKeyPropertyName("entryId");
 
-		return indexableActionableDynamicQuery;
-	}
+        return indexableActionableDynamicQuery;
+    }
 
 Service Builder geneates the `getIndexableActionableDynamicQuery` method to
 create a new `IndexableActionableDynamicQuery` and set the query's local service
@@ -188,7 +188,7 @@ instance, class loader, model class type, and primary key name. Service.
 Actionable dynamic queries let you act on large numbers of entities in smaller
 groups. Its an efficient and performant way to affect entities. 
 
-## Related Topics [](id=related-topics)
+**Related Topics**
 
 [Service Builder Web Services](/develop/tutorials/-/knowledge_base/7-0/service-builder-web-services)
 
