@@ -1,12 +1,11 @@
 # Invoking Local Services [](id=invoking-local-services)
 
-Application business logic typically involves operating on the application's
-entities (models). In applications whose entities are defined using Service
-Builder, local services are the implementation that operates on the models.
-Service Builder generates local  service (and remote service) classes as OSGi
-Declarative Services (DS) components. The components are accessible to other
-components in your application. This tutorial demonstrates accessing and
-invoking local services. Here's what's involved:
+Application business logic involves operating on the application's entity model.
+The application's local services implement those operations. Service Builder
+generates local service (and remote service) classes as OSGi Declarative
+Services (DS) components. These components are accessible to other components in
+your application. This tutorial demonstrates accessing and invoking local
+services to operate on the entity model. Here's what's involved:
 
 1. [Access the local service component.](#step-1-access-the-local-service-component) 
 2. [Call the service component methods.](step-2-call-the-service-component-methods)
@@ -26,6 +25,9 @@ The `JSPPortlet` class in the sample project's `basic-web` module injects
 
     @Reference
 	private volatile FooLocalService _fooLocalService;
+
+**Important:** You should never invoke `*LocalServiceImpl` objects directly. You
+should only invoke them indirectly through the `*LocalService` objects. 
 
 As a convenience, the sample portlet's `getFooLocalService()` method returns the
 `FooLocalService` object.   
@@ -101,9 +103,9 @@ IDs.
 You can access your application's Service Builder-generated local service
 objects anywhere in the application. Your app's OSGi Declarative Service
 component classes can use the `@Reference` annotation to inject themselves with
-the local service objects and, as this tutorial demonstrates, you can provide
-your JSPs access to the local service objects via request attributes. You can
-use your local services anywhere and everywhere you want in your application. 
+the local service objects. Also you can, as this tutorial demonstrates, provide
+your JSPs access to the local service objects via request attributes. Local
+services are easy to use anywhere need them in your application. 
 
 ## Related Topics [](id=related-topics)
 
