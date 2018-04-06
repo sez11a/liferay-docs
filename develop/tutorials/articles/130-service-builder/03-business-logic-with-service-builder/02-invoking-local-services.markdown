@@ -1,69 +1,120 @@
 # Invoking Local Services [](id=invoking-local-services)
 
-In this tutorial, you'll learn about the differences between local and remote
-services, and when you should invoke local services rather than their remote
-service counterparts.
+Application business logic typically involves operating on the application's
+entities (models). In applications whose entities are defined using Service
+Builder, local services are the implementation that operates on the models.
+Service Builder generates local  service (and remote service) classes as OSGi
+Declarative Services (DS) components. The components are accessible to other
+components in your application. This tutorial demonstrates accessing and
+invoking local services. Here's what's involved:
 
-Once Service Builder has generated your module project's services, you can call
-them from anywhere in your application. When invoking a local service, you
-should call one of the service methods of a `*LocalService` class. You should
-never call the service methods of an `*Impl` class directly. Local services in
-your project are generated automatically when using Service Builder. To do this,
-set the `local-service` attribute to `true` for an entity in the `service.xml`
-file. Service Builder generates methods that call existing services, but you can
-create new methods in the `*LocalServiceImpl` class that can be generated into
-new exposed methods in your module's services (`*LocalService`,
-`*LocalServiceUtil`, etc.).
+1. [Access the local service component.](#step-1-access-the-local-service-component) 
+2. [Call the service component methods.](step-2-call-the-service-component-methods)
 
-Many of Liferay's module applications use their generated remote services for
-important calls in their controller layer, for example, because they offer
-conveniences like configured permissions checking. Remote services perform a
-permission check and then invoke the corresponding local service. However, there
-are many services you'd like to expose only to your local project, and do not
-want other applications to have access to.
+The
+[Basic Service Builder Liferay Blade sample project](/develop/reference/-/knowledge_base/7-1/service-builder-samples)
+has examples of invoking local services. Start with accessing the local service
+component object.
 
-In the Bookmarks application, for example, the
-[BookmarksEntryLocalService](https://github.com/liferay/liferay-portal/blob/master/modules/apps/collaboration/bookmarks/bookmarks-api/src/main/java/com/liferay/bookmarks/service/BookmarksEntryLocalService.java)
-interface provides the `openEntry` method, which opens a bookmark for viewing.
-The remote service interface
-[BookmarksEntryService](https://github.com/liferay/liferay-portal/blob/master/modules/apps/collaboration/bookmarks/bookmarks-api/src/main/java/com/liferay/bookmarks/service/BookmarksEntryService.java),
-however, does not
-provide this method. Why could this be?
+## Step 1: Access the Local Service Component [](id=step-1-access-the-local-service-component)
 
-There are many services that you don't want to expose to other applications in
-Liferay. In the example mentioned above, Bookmarks are configured to only open
-locally, meaning that other apps do not have access to open and view a bookmark
-entry. This should only be done by the Bookmarks application. Therefore, in
-certain cases, you'll need to invoke local services instead of remote services.
-For more information on invoking remote services, see the
-[Invoking Remote Services](/develop/tutorials/-/knowledge_base/7-0/invoking-remote-services)
-tutorial.
+Service Builder-generated local services are DS components that you can inject
+into your app's other DS components
+[using the `@Reference` annotation](/develop/tutorials/-/knowledge_base/7-1/osgi-services-and-dependency-injection-with-declarative-services).
+The `JSPPortlet` class in the sample project's `basic-web` module injects
+`FooLocalService`. 
 
-To see how you could call a local service from a portlet action class, you'll
-examine the
-[EditOrganizationMVCActionCommand](https://github.com/liferay/liferay-portal/blob/master/modules/apps/foundation/users-admin/users-admin-web/src/main/java/com/liferay/users/admin/web/portlet/action/EditOrganizationMVCActionCommand.java)
-class. Notice that this class has a private instance variable called
-`_dlAppLocalService`. The `_dlAppLocalService` instance variable of type
-`DLAppLocalService` gets an instance of `DLAppLocalService` at runtime via
-dependency injection. The instance variable is set like this:
+    @Reference
+	private volatile FooLocalService _fooLocalService;
 
-    @Reference(unbind = "-")
-    protected void setDLAppLocalService(DLAppLocalService dlAppLocalService) {
-        _dlAppLocalService = dlAppLocalService;
+As a convenience, the sample portlet's `getFooLocalService()` method returns the
+`FooLocalService` object.   
+
+    public FooLocalService getFooLocalService() {
+        return _fooLocalService;
     }
 
-This tutorial demonstrated how you can call the local services generated by
-Service Builder in your project. To learn how to call Liferay services, see the
-[Service Security Layers](/develop/tutorials/-/knowledge_base/7-0/service-security-layers)
-and
-[Finding and Invoking Liferay Services](/develop/tutorials/-/knowledge_base/7-0/finding-and-invoking-liferay-services)
-tutorials.
+To make the local service object available to the sample application's JSPs, the
+portlet's `render` method associates the `FooLocalService` object with a request
+attribute. 
+
+    @Override
+    public void render(RenderRequest request, RenderResponse response)
+        throws IOException, PortletException {
+
+        //set service bean
+        request.setAttribute("fooLocalService", getFooLocalService());
+
+        super.render(request, response);
+    }
+
+The portlet's `init.jsp` file accesses the local service object. 
+
+    ...
+    <<%@
+    page import="com.liferay.blade.samples.servicebuilder.service.FooLocalService" %>
+    ...
+
+    <liferay-theme:defineObjects />
+
+    <portlet:defineObjects />
+
+    <%
+    ...
+
+    //get service bean
+    FooLocalService fooLocalService = (FooLocalService)request.getAttribute("fooLocalService");
+    %>
+
+The `init.jsp` retrieves the `FooLocalService` from the request attribute.  You
+can invoke the service component's methods. The next step demonstrates using the
+local service object in other JSPs. 
+
+## Step 2: Call the Service Component Methods [](id=step-2-call-the-service-component-methods)
+
+Now that you have the service component object, you can invoke its methods as
+you would any Java object's methods. 
+
+The `basic-web` sample module's `view.jsp` and `edit_foo.jsp` files include
+`init.jsp` and, therefore, have access to the `fooLocalService` variable,
+previously assigned the local service object. The `view.jsp` file uses the local
+service in a Liferay Search Container to list `Foo` instances. 
+
+    <liferay-ui:search-container
+    	total="<%= fooLocalService.getFoosCount() %>"
+    >
+    	<liferay-ui:search-container-results
+    		results="<%= fooLocalService.getFoos(searchContainer.getStart(), searchContainer.getEnd()) %>"
+    	/>
+        ...
+    </liferay-ui:search-container>
+
+The `edit_foo.jsp` file calls `getFoo(long id)` to retrieve `Foo` entities based
+IDs.  
+
+    long fooId = ParamUtil.getLong(request, "fooId");
+    Foo foo = null;
+    if (fooId > 0) {
+    	foo = fooLocalService.getFoo(fooId);
+    }
+
+You can access your application's Service Builder-generated local service
+objects anywhere in the application. Your app's OSGi Declarative Service
+component classes can use the `@Reference` annotation to inject themselves with
+the local service objects and, as this tutorial demonstrates, you can provide
+your JSPs access to the local service objects via request attributes. You can
+use your local services anywhere and everywhere you want in your application. 
 
 ## Related Topics [](id=related-topics)
 
-[Creating Local Services](/develop/tutorials/-/knowledge_base/7-0/creating-local-services)
+[Creating Local Services](/develop/tutorials/-/knowledge_base/7-1/creating-local-services)
 
-[Creating Remote Services](/develop/tutorials/-/knowledge_base/7-0/creating-remote-services)
+[Creating Remote Services](/develop/tutorials/-/knowledge_base/7-1/creating-remote-services)
 
-[Invoking Remote Services](/develop/tutorials/-/knowledge_base/7-0/invoking-remote-services)
+[Invoking Remote Services](/develop/tutorials/-/knowledge_base/7-1/invoking-remote-services)
 
+[Service Security Layers](/develop/tutorials/-/knowledge_base/7-1/service-security-layers)
+
+[Finding and Invoking Liferay Services](/develop/tutorials/-/knowledge_base/7-1/finding-and-invoking-liferay-services)
+
+[OSGi Services and Dependency Injection with Declarative Services](/develop/tutorials/-/knowledge_base/7-1/osgi-services-and-dependency-injection-with-declarative-services)
