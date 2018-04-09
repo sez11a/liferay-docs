@@ -26,6 +26,9 @@ The `JSPPortlet` class in the sample project's `basic-web` module injects
     @Reference
 	private volatile FooLocalService _fooLocalService;
 
+The sample declares the `_fooLocalService` field to be volatile--making a field
+volatile is completely optional. 
+
 **Important:** You should never invoke `*LocalServiceImpl` objects directly. You
 should only invoke them indirectly through the `*LocalService` objects. 
 
