@@ -31,7 +31,7 @@ volatile is completely optional.
 +$$$
 
 **Note**: Service Builder generates `*LocalServiceImpl`, `*ServiceImpl`, and 
-`[ENTITY]Impl` classes for your entities as Service Builder Spring Beans--not
+`*PersistenceImpl` classes for your entities as Service Builder Spring Beans--not
 OSGi Declarative Services.
 [Service Builder Spring Beans must use means other than the `@Reference` annotation to reference Liferay services and OSGi services](/develop/reference/-/knowledge_base/7-1/invoking-services-from-service-builder-code).
 
