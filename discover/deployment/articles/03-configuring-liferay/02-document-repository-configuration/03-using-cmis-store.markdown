@@ -47,9 +47,10 @@ To use the CMIS store in a cluster, follow these steps:
 3.  Export the configuration from the *CMIS Repository* screen to a 
     [`.config` file](/discover/portal/-/knowledge_base/7-1/configuration-files). 
 
-3.  Copy the `.config` files to each node's `[Liferay Home]/osgi/configs` folder. 
+4.  Copy the `.config` files to each node's `[Liferay Home]/osgi/configs` 
+    folder. 
 
-4.  Restart @product@ on the nodes. 
+5.  Restart @product@ on the nodes. 
 
 The @product@ repository is connected to CMIS via the CMIS store. As
 long as all nodes are pointing to your CMIS repository, everything in your
