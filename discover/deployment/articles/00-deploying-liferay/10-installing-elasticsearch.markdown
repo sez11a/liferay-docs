@@ -40,11 +40,10 @@ Home]/bin/elasticsearch.in.sh`:
 
 $$$
 
-Now you'll actually perform these steps, and when you're done, you'll have a
-production-ready instance of @product@ up and running. After you're done
-following the installation guide, refer to the [Configuring Elasticsearch](/discover/deployment/-/knowledge_base/7-1/configuring-elasticsearch-for-liferay-0)
-article for more details on configuring @product@ for Elasticsearch. For more
-information on installing a search engine, see
+After you're done following the installation guide, refer to the 
+[Configuring Elasticsearch](/discover/deployment/-/knowledge_base/7-1/configuring-elasticsearch-for-liferay-0)
+article for more details on configuring @product@ for Elasticsearch in
+production. For more information on installing a search engine, see
 [here](/discover/deployment/-/knowledge_base/7-1/installing-a-search-engine).
 
 ### Step One: Find the Right Version of Elasticsearch [](id=step-one-find-the-right-version-of-elasticsearch)
@@ -57,8 +56,6 @@ Visit port 9200 on localhost to access the embedded Elasticsearch:
 
 A JSON document is returned that varies slightly, but should look similar to
 this: 
-
-<!-- UPDATE with 6.1 info -->
 
     {
       "name" : "g0m223N",
