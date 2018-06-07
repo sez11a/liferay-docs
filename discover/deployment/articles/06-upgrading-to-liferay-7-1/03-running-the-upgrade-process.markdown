@@ -16,11 +16,22 @@ Here are the ways to run upgrade processes:
     [Gogo shell](#gogo-shell-commands-for-module-upgrades) to upgrade the core. Then use Gogo shell to upgrade each module. 
 
 If you are upgrading from Liferay Portal 6.2 or earlier, it's recommended to use
-the  upgrade tool to upgrade everything. It's the easiest, most comprehensive
+the upgrade tool to upgrade everything. It's the easiest, most comprehensive
 way to upgrade from those versions. Since version 7.0, however, @product@'s
 modular framework lets you upgrade modules--even the core--individually.
 Focusing first on upgrading the core and your most important modules might be
-better for you. The point is, @product-ver@ upgrade process is flexible. 
+better for you. The point is, the @product-ver@ upgrade process is flexible. 
+
+**Note:** Liferay enterprise subscribers can use the upgrade tool to execute 
+upgrades for fix packs. As of @product@ 7.1, a fix pack's micro upgrade
+processes (core database schema micro version changes) are not mandatory. This
+means, you can install a fix pack (i.e., core code) without having to execute
+the database schema micro version changes---you can execute micro version
+changes when you want, even outside of a @product@ major or minor version
+upgrade. Before using the upgrade tool to execute a fix pack's micro upgrade
+process, however, you must shut down the portal server, install the fix pack,
+and 
+[back up the @product@ database, installation, and Document Library store](/discover/deployment/-/knowledge_base/7-1/backing-up-a-liferay-installation). 
 
 ## Running the Upgrade Tool [](id=running-the-upgrade)
 
@@ -34,29 +45,32 @@ manually, you can download the upgrade tool separately from the same location on
 [liferay.com](https://www.liferay.com/). 
 
 To upgrade only the core, add a file called
-`com.liferay.portal.upgrade.internal.configuration.ReleaseManagerConfiguration.cfg`
+`com.liferay.portal.upgrade.internal.configuration.ReleaseManagerConfiguration.config`
 to the `[Liferay Home]/osgi/configs` folder with the following content:
 
-    autoUpgrade=false
+    autoUpgrade="false"
 
 This configuration prevents automatic module upgrade, but causes the upgrade
-tool to open a Gogo shell after finishing the core upgrade. 
+tool to open a Gogo shell for
+[upgrading modules](#gogo-shell-commands-for-module-upgrades)
+after finishing the core upgrade. 
 
-The upgrade tool resides in the `[Liferay
-Home]/tools/portal-tools-db-upgrade-client` folder. 
+The `db-upgrade.sh` script (`db-upgrade.bat` on Windows) invokes the upgrade
+tool. It resides in the  `[Liferay Home]/tools/portal-tools-db-upgrade-client`
+folder. 
 
-This command starts the upgrade tool: 
+This command prints the upgrade tool usage: 
 
-    java -jar com.liferay.portal.tools.db.upgrade.client.jar
+    db-upgrade.sh --help
 
 +$$$
 
 **Warning**: To prevent the tool's expanded command from growing too large for
-Windows, execute the initial command in the
-`com.liferay.portal.tools.db.upgrade.client.jar` file's folder.
+Windows, execute the upgrade tool script from the `[Liferay
+Home]/tools/portal-tools-db-upgrade-client` folder.
 
 $$$
-
+ 
 Here are the tool's default Java parameters:
     
     -Dfile.encoding=UTF8 -Duser.country=US -Duser.language=en -Duser.timezone=GMT -Xmx2048m 
@@ -65,11 +79,11 @@ The `-j` option lets you override the JVM parameters. For example, these options
 set the JVM memory to 10GB, which is a good starting point for this process
 type:
 
-    java -jar com.liferay.portal.tools.db.upgrade.client.jar -j "-Dfile.encoding=UTF8 -Duser.country=US -Duser.language=en -Duser.timezone=GMT -Xmx10240m"
+    db-upgrade.sh -j "-Dfile.encoding=UTF8 -Duser.country=US -Duser.language=en -Duser.timezone=GMT -Xmx10240m"
 
 The `-l` option lets you specify the tool's log file name: 
 
-    java -jar com.liferay.portal.tools.db.upgrade.client.jar -l "output.log"
+    db-upgrade.sh -l "output.log"
 
 Here are all the upgrade tool command line options:
 
@@ -82,7 +96,22 @@ Here are all the upgrade tool command line options:
 **--shell** or **-s**: Automatically connects you to the Gogo shell after
 finishing the upgrade process.
 
-### Configuring the Upgrade [](id=configuring-the-core-upgrade)
+### Configuring Module upgrades [](id=configuring-module-upgrades)
+
+You can configure the upgrade tool to upgrade all installed modules
+automatically or to open a Gogo shell (after core upgrade completes) for you to
+execute module upgrades manually. 
+
+If the upgrade tool's `autoUpgrade` property is set to `true` (the default
+setting), upgrade processes for all installed modules are run too. 
+
+If you set `autoUpgrade="false"` in a file called
+`com.liferay.portal.upgrade.internal.configuration.ReleaseManagerConfiguration.config`
+and copy the file into the `[Liferay Home]/osgi/configs` folder, the upgrade
+tool opens Gogo shell after the core upgrade. In the Gogo shell, you can 
+[administer module upgrades](#gogo-shell-commands-for-module-upgrades). 
+
+### Configuring the Core Upgrade [](id=configuring-the-core-upgrade)
 
 The core upgrade requires configuration. You can configure it at runtime via the
 command line interface or pre-configure it in these files:
@@ -185,15 +214,11 @@ Here are example upgrade configuration files that you can customize:
         liferay.home=/home/user/servers/liferay7
         module.framework.base.dir=/home/user/servers/liferay7/osgi
 
-The upgrade tool first executes the core's upgrade processes and verifiers.
-
-If the upgrade tool's `autoUpgrade` property is set to `true` (the default
-setting), upgrade processes for all installed modules are run too. 
-
-If you set `autoUpgrade=false` in a file called
-`com.liferay.portal.upgrade.internal.configuration.ReleaseManagerConfiguration.cfg`
-and copy the file into the `[Liferay Home]/osgi/configs` folder, the upgrade tool opens Gogo shell
-automatically after the core upgrade.
+The upgrade tool shows the patch level at the beginning of the upgrade. Then it
+executes the core upgrade processes and verifiers. 
+ 
+Executing the upgrade tool after a core upgrade step for Portal 7.1 (or newer)
+fails, starts the upgrade at that step. 
 
 The Gogo shell lets you upgrade modules, check module upgrade status, and verify
 upgrades.  Read on to learn how to use Gogo shell commands to use the
