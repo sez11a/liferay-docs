@@ -1,4 +1,4 @@
-# Customizing Pages [](id=customizing-pages)
+# Customizing Individual Pages
 
 When you decide to customize a single page, options that were not available when
 initially creating a page appear. You can customize a specific page by
@@ -110,5 +110,3 @@ This configuration option is also available for page sets like Public Pages and
 Private Pages. Visit the
 [Executing JavaScript in Site Pages](/discover/portal/-/knowledge_base/7-1/creating-and-managing-pages#executing-javascript-in-site-pages)
 section for more information on doing this for page sets.
-
-Next you'll learn how to add applications to a site page.

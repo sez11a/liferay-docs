@@ -1,11 +1,15 @@
 # Creating and Managing Navigation Menus [](id=creating-and-managing-navigation-menus)
 
-While you can stick to the default, you can also create multiple, customizable 
-menus to take advantage of different features in Liferay.
+Navigation menus can be created for a number of reasons. In some cases, you 
+might want to display a different top level navigation on different pages of 
+the same site. In other cases, you might need a second level menu which 
+provides additional navigation options on a specific page. To better understand 
+Navigation Menus, it's time to create a new menu which uses a number of 
+features.
 
 ## Creating a Navigation Menu [](id=creating-a-navigation-menu)
 
-Go to *Site Administration* &rarr; *Navigation* &rarr; *Navigation Menus* to 
+Go to *Site Administration* &rarr; *Build* &rarr; *Navigation Menus* to 
 get started with Navigation Menus. Click on the `+` button to add a new menu.
 Give your menu a name and click *Submit*. On the next page, you're presented
 with a number of elements that you can add to a menu.
@@ -100,5 +104,4 @@ for the menu.
 
 **Delete**: Deletes the menu.
 
-These are all the tools you need to create and manage Liferay's powerful 
-Navigation Menus.
+Next you'll learn about the tools for displaying menus on pages.

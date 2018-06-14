@@ -1,7 +1,7 @@
-# Creating Fragments [](id=creating-fragments)
+# Creating Page Fragments [](id=creating-fragments)
 
-To create Content Pages you first need to create Fragments. Fragments are one of
-the building blocks that you can use to create rich content in Liferay.
+To create Content Pages, you're going to need some Fragments. Fragments are one 
+of the building blocks that you can use to create rich content in Liferay. Fragments are intended to be created by developers as they are built using HTML, CSS, and Javascript.
 
 ## Creating and Managing Fragments [](id=creating-and-managing-fragments)
 
@@ -12,9 +12,9 @@ Start in Site Administration. You can find Fragments in the Content section.
 2.  Under *Site Administration* make sure the Site where you want to work is 
     selected.
 
-3.  In the *Content* section, select *Fragments*.
+3.  In the *Build* section, select *Fragments*.
 
-![Figure 1: The Fragments page with no Fragments or Collections created.](../../../images/empty-fragments-page.png)
+![Figure 1: The Fragments page with no Fragments or Collections created.](../../../../../../images/empty-fragments-page.png)
 
 The main Fragments page will display any Collections that are available for the 
 current site, provide the option to Import and Export through the menu in the 
@@ -46,7 +46,11 @@ different function:
 *  The bottom left pane is for entering JavaScript.
 *  The bottom right pane provides a live preview as you work in the other panes.
 
-![Figure 2: The Fragments editor.](../../../images/fragments-editor.png)
+![Figure 2: The Fragments editor.](../../../../../../images/fragments-editor.png)
+
+In addition to standard HTML, CSS, and JavaScript, developers can also embed
+widgets and provide fields with editable text and images. The text and images
+can be edited during the final Content Page publication process.
 
 For more information on how to create to Fragments, see our Fragment 
 Development [link]tutorial.
