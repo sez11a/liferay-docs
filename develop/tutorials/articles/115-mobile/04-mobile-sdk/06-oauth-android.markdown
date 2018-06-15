@@ -55,6 +55,18 @@ authentication. You must also configure the redirect URI in your Android app.
 This lets the browser send the user back to the Android app when authentication 
 completes. 
 
++$$$
+
+**Note:** To use this redirect workflow with a local server that has an IP 
+address besides `127.0.0.1` or `localhost`, you must whitelist that server's IP 
+via the `redirect.url.ips.allowed` property in `portal-ext.properties`. For 
+example, set this property in your server's `portal-ext.properties` file as 
+follows, replacing `<your-local-ip>` with your local server's IP address: 
+
+    redirect.url.ips.allowed=<your-local-ip>
+
+$$$
+
 Here's an example of this workflow: 
 
 1.  Configure the redirect URI in the portal via the OAuth 2 Admin portlet. In 
@@ -131,12 +143,6 @@ Here's an example of this workflow:
                 );
             }
         }
-        
-   +$$$
-
-	**Note:** If you are using a local server with a ip different than 127.0.0.1 or localhost the redirect flow wouldn't work. Liferay would not redirect to this ip unless you add you list it as supported in you r instance. In order to do that you should define a new property in portal-ext.properties files with the following content: `redirect.url.ips.allowed=<your-local-ip>`
-	
-	$$$
 
 ## Resource Owner Password [](id=resource-owner-password)
 
