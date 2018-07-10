@@ -2,11 +2,12 @@
 
 ## Requirements [](id=requirements)
 
-- Xcode 9.0
-- iOS 11 SDK
-- Liferay Portal 6.2 (CE or EE), Liferay 7.0 CE, Liferay DXP 
-- OAuth Provider app (OAuth authentication is optional. Note that OAuth only 
-  works with Liferay EE and DXP instances). 
+-   Xcode 9.0
+-   iOS 11 SDK
+-   Liferay Portal 6.2 (CE or EE), Liferay 7.0 CE, Liferay DXP 
+-   The OAuth 2 Admin app from 
+    [Liferay Marketplace](https://web.liferay.com/marketplace). 
+    Note that OAuth 2 authentication is optional. 
 
 ## Compatibility [](id=compatibility)
 
@@ -28,8 +29,8 @@ authentication methods are supported:
   to provide the user's email address, screen name, or user ID. You also need to 
   provide the user's password. 
 
-- **OAuth:** implements the 
-  [OAuth 1.0a specification](http://oauth.net/core/1.0a/).
+- **OAuth:** implements 
+  [OAuth 2](https://oauth.net/2/).
 
 - **Cookie:** uses a cookie to log in. This lets you access documents and images 
   in the portal's document library without the guest view permission in the 
@@ -60,9 +61,11 @@ Note that user credentials and attributes can be stored securely in the keychain
 automatically log the user in to subsequent sessions. To do this, you can use 
 the method `SessionContext.loadStoredCredentials()` method.
 
+<!--
 <iframe width="560" height="315" src="https://www.youtube.com/embed/XivMMLBqH9E" frameborder="0" allowfullscreen></iframe>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/JlQ8nWGFsyg" frameborder="0" allowfullscreen></iframe>
+-->
 
 ## JSON Services Used [](id=json-services-used)
 
@@ -109,23 +112,10 @@ section of the User Guide.
 
 ### OAuth [](id=oauth)
 
-+$$$
-
-**Note:** OAuth authentication is only available in Liferay DXP instances. 
-
-$$$
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/hg70gpUEUI0" frameborder="0" allowfullscreen></iframe>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fo18U3SHhiI" frameborder="0" allowfullscreen></iframe>
-
-To use OAuth authentication, first install the OAuth provider app from the 
-Liferay Marketplace. 
-[Click here](https://web.liferay.com/marketplace/-/mp/application/45261909) 
-to get this app. Once it's installed, go to *Control Panel* &rarr; *Users* 
-&rarr; *OAuth Admin*, and add a new application to be used from Liferay Screens. 
-Once the application exists, copy the *Consumer Key* and *Consumer Secret* 
-values for later use in Login Screenlet. 
+OAuth authentication requires the OAuth 2 app from 
+[Liferay Marketplace](https://web.liferay.com/marketplace). 
+For instructions on using OAuth with Login Screenlet, see 
+[this tutorial](/develop/tutorials/-/knowledge_base/7-0/using-oauth-2-in-liferay-screens-for-ios). 
 
 ## Offline [](id=offline)
 
@@ -139,10 +129,12 @@ connection, you can use the `saveCredentials` attribute together with the
 | Attribute | Data type | Explanation |
 |-----------|-----------|-------------| 
 | `companyId` | `number` | The ID of the portal instance to authenticate to. If you don't set this attribute or set it to `0`, the Screenlet uses the `companyId` setting in `LiferayServerContext`. |
-| `loginMode` | `string` | The Screenlet's authentication type. You can set this attribute to `basic`, `oauth`, or `cookie`. If you don't set this attribute, the Screenlet defaults to basic authentication. |
-| `basicAuthMethod` | `string` | Specifies the basic authentication option to use. You can set this attribute to `email`, `screenName` or `userId`. This must match the server's authentication option. If you don't set this attribute, and don't set the `loginMode` attribute to `oauth` or `cookie`, the Screenlet defaults to basic authentication with the `email` option. |
-| `OAuthConsumerKey` | `string` | Specifies the *Consumer Key* to use in OAuth authentication. |
-| `OAuthConsumerSecret` | `string` | Specifies the *Consumer Secret* to use in OAuth authentication. |
+| `loginMode` | `string` | The Screenlet's authentication type. You can set this attribute to `basic`, `cookie`, `oauth2Redirect`, or `oauth2UsernameAndPassword`. If you don't set this attribute, the Screenlet defaults to basic authentication. |
+| `basicAuthMethod` | `string` | Specifies the basic authentication option to use. You can set this attribute to `email`, `screenName` or `userId`. This must match the server's authentication option. If you don't set this attribute, and don't set the `loginMode` attribute to one of the OAuth values or `cookie`, the Screenlet defaults to basic authentication with the `email` option. |
+| `oauth2clientId` | `string` | The ID of the OAuth 2 application in the portal. You can find this value in the portal's OAuth 2 Admin portlet. |
+| `oauth2redirectUrl` | `string` | The URL that the mobile browser will redirect the user to after successful login. You must configure this in the portal's OAuth 2 Admin portlet, and associate the URL with the iOS app. |
+| `oauth2clientSecret` | `string` | The client secret of the OAuth 2 application in the portal. You can find this value in the portal's OAuth 2 Admin portlet. |
+| `oauth2Scopes` | `string` | The portal permissions to request. You can define a set of permissions associated with an OAuth 2 application in the portal's OAuth 2 Admin portlet. Use this attribute to request a subset of those permissions. Separate multiple scopes with a space (e.g., `"scope1 scope2 scope3"`). |
 | `saveCredentials` | `boolean` | When set, the user credentials and attributes are stored securely in the keychain. This information can then be loaded in subsequent sessions by calling the `SessionContext.loadStoredCredentials()` method. |
 | `shouldHandleCookieExpiration` | `bool` | Whether to refresh the cookie automatically when using cookie login. When set to `true` (the default value), the cookie refreshes as it's about to expire.  |
 | `cookieExpirationTime` | `int` | How long the cookie lasts, in seconds. This value depends on your portal instance's configuration. The default value is `900`. |
