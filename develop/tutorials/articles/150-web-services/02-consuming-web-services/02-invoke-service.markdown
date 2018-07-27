@@ -2,9 +2,9 @@
 
 Once you identify the resource you want via the 
 [API's root entry point](/develop/tutorials/-/knowledge_base/7-1/get-started-discover-the-api), 
-you can access that resource's URL. Suppose you want to manage the users 
-organizations defined in the portal, and accessing the API's home URL returns 
-the following: 
+you can access that resource's URL. Suppose you want to manage the portal's 
+organizations. If you first send a request to the API's home URL, it returns the 
+following: 
 
     {
         "@id" : "http://localhost:8080/o/api",
@@ -27,10 +27,10 @@ the following:
         }, "https://www.w3.org/ns/hydra/core#" ]
     }
 
-To get information on organizations, issue a GET request to the organization 
+To get information on organizations, issue a GET request to the `organization` 
 resource's URL. Note that the following request isn't authenticated. Although 
 you'll typically want to send authenticated requests, an unauthenticated request 
-is made here for simplicity's sake: 
+is made here for simplicity: 
 
     curl http://localhost:8080/o/api/p/organization
 
@@ -63,28 +63,31 @@ The attributes in this response contain information about the resource:
 
 -   `@type`: The resource's type. This resource is a collection. 
 -   `@id`: The resource's URL. Note that this is the same URL that the GET 
-    request was sent to. This is, in fact, a self reference. 
+    request was sent to. This is a self reference. 
 -   `totalItems`: The total number of this resource's items in the portal. Since 
-    this example is for the organization resource, this lists the total number 
-    of organizations in the portal, which in this case is `0`. 
+    this example is for the organization resource, it lists the total number of 
+    organizations in the portal, which in this case is `0`. 
 -   `numberOfItems`: The number of this resource's items included in this 
     response. Since returning the total number of items can decrease 
-    performance, returning a subset of items is typically more efficient. In 
-    this example, the number is `0` because the collection is empty. 
--   `view`: The view page. The collections are paginated, we will explain that 
-    in detail in later sections, but, for now, keep in mind that the 
-    `totalItems` are paginated into `numberOfItems`, and the view attribute 
-    contains the following URL's for the pages. 
--   `@id`: The current page's URL. 
--   `first`: The first page's URL. 
--   `last`: The last page's URL. 
--   `type`: The page's type. In this example, this is a `PartialCollectionView`. 
+    performance for large data sets, returning a subset of items is typically 
+    more efficient. In this example, the number is `0` because the collection is 
+    empty. 
+-   `view`: The 
+    [pagination](/develop/tutorials/-/knowledge_base/7-1/pagination) 
+    info. Collections are paginated. The `totalItems` are paginated into 
+    `numberOfItems`. The `view` attribute contains the following URLs for the 
+    pages: 
+    -   `@id`: The current page's URL. 
+    -   `first`: The first page's URL. 
+    -   `last`: The last page's URL. 
+    -   `type`: The page's type. In this example, this is a 
+        `PartialCollectionView`. 
 
-Since this example is an empty collection, there are no elements. But it serves 
-as a simple example of the typical collection structure in the 
+Since this example is an empty collection, there are no elements. It serves as a 
+simple example of the typical collection structure in the 
 [JSON-LD hypermedia format](https://json-ld.org/). 
-The format is specified on the response headers, which you can see by asking 
-only for the headers: 
+The format is specified on the response headers, which you can see by requesting 
+only the headers: 
 
     curl --head http://localhost:8080/o/api/p/organization
 
@@ -101,8 +104,7 @@ the JSON-LD MIME type:
     Content-Type: application/ld+json
     Transfer-Encoding: chunked
 
-Of course, there are other hypermedia formats, and the API's consumer can select 
-which one to use. The 
+The API's consumer can select other hypermedia formats to use. The 
 [content negotiation tutorial](/develop/tutorials/-/knowledge_base/7-1/hypermedia-formats-and-content-negotiation) 
 discusses this further. 
 

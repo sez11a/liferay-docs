@@ -12,7 +12,7 @@ There are two authentication mechanisms available when invoking web APIs:
 -   **OAuth 2.0:** In @product-ver@, you can use OAuth 2.0 for authentication. 
     See the 
     [deployment guide](/discover/deployment/-/knowledge_base/7-1/oauth-2-0) 
-    for more information on OAuth 2.0 in @product@. 
+    for more information on OAuth 2.0. 
 
 First, you'll learn how send requests with basic authentication. 
 
@@ -21,9 +21,9 @@ First, you'll learn how send requests with basic authentication.
 Basic authentication requires that you send an HTTP `Authorization` header 
 containing the encoded username and password. You must first get that encoded 
 value. To do so, you can use the `openssl` command in a console, or a `Base64` 
-encoder. Either way, you must encode the `user:password` string. For example, 
-here's an example of the `openssl` command for encoding the `user:password` 
-string for a user `test@liferay.com` with the password `Liferay`: 
+encoder. Either way, you must encode the `user:password` string. Here's an 
+example of the `openssl` command for encoding the `user:password` string for a 
+user `test@liferay.com` with the password `Liferay`: 
 
     openssl base64 <<< test@liferay.com:Liferay
 
@@ -49,7 +49,7 @@ communication is made through HTTPS, which encrypts the entire message
 
 $$$
 
-Then use the encoded value for the HTTP Authorization header when sending the 
+Use the encoded value for the HTTP Authorization header when sending the 
 request: 
 
     curl -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/organization
