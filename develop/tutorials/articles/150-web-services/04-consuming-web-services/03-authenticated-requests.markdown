@@ -150,7 +150,7 @@ For example:
 The response contains the resources that the authenticated user has permission 
 to access, just like the response from Basic authentication. 
 
-## Related Topics
+## Related Topics [](id=related-topics)
 
 [OAuth 2.0](/discover/deployment/-/knowledge_base/7-1/oauth-2-0)
 

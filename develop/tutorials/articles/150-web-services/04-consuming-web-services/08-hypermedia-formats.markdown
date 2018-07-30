@@ -100,7 +100,7 @@ Requesting the headers, you can see that the response is in the HAL format:
     Content-Type: application/hal+json
     Transfer-Encoding: chunked
 
-## Related Topics
+## Related Topics [](id=related-topics)
 
 [API Vocabulary](/develop/tutorials/-/knowledge_base/7-1/api-vocabulary)
 

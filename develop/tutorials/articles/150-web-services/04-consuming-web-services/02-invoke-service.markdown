@@ -115,7 +115,7 @@ view. Unauthenticated requests access the API as a generic guest user, and
 therefore retrieve only public items. Next, you'll learn how to make 
 authenticated requests. 
 
-## Related Topics
+## Related Topics [](id=related-topics)
 
 [Get Started: Discover the API](/develop/tutorials/-/knowledge_base/7-1/get-started-discover-the-api)
 

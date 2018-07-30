@@ -83,7 +83,7 @@ collection. Follow these steps to do so:
 
         curl -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/web-site/20126
 
-## Related Topics
+## Related Topics [](id=related-topics)
 
 [Working with Collections of Data](/develop/tutorials/-/knowledge_base/7-1/working-with-collections-of-data)
 

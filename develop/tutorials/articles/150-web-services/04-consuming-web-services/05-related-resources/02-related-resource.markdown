@@ -61,7 +61,7 @@ Note that it's typically easier to identify related resources via the response,
 because it's easier to automate. Relying on the API vocabulary or schema 
 requires understanding and parsing the schema. 
 
-## Related Topics
+## Related Topics [](id=related-topics)
 
 [Navigating from a Collection to its Elements](/develop/tutorials/-/knowledge_base/7-1/navigating-from-a-collection-to-its-elements)
 

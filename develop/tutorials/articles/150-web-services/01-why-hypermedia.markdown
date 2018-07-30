@@ -28,7 +28,7 @@ JAX-RS, or JAX-WS.
 
 $$$
 
-## Use Cases for Hypermedia REST APIs
+## Use Cases for Hypermedia REST APIs [](id=use-cases-for-hypermedia-rest-apis)
 
 Hypermedia REST APIs will progressively offer all the features that @product@ 
 has in its built-in user interface. This means that developers can develop 
@@ -62,6 +62,6 @@ features entirely via that client.
         hypermedia links in the responses. You'll see examples of this in the 
         [Consuming Web Services tutorials](/develop/tutorials/-/knowledge_base/7-1/consuming-web-services). 
 
-## Related Topics
+## Related Topics [](id=related-topics)
 
 [Consuming Web Services](/develop/tutorials/-/knowledge_base/7-1/consuming-web-services)

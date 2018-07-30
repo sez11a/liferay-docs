@@ -84,7 +84,7 @@ on specifying other response formats, see the
         "@type": ["Collection"],
     }
 
-## Related Topics
+## Related Topics [](id=related-topics)
 
 [Pagination](/develop/tutorials/-/knowledge_base/7-1/pagination)
 
