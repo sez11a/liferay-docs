@@ -2,9 +2,15 @@
 
 Liferay's hypermedia REST APIs are available by default in Liferay CE Portal 7.1 
 GA2. To use these APIs in GA1, you must install them manually by following the 
-steps here. 
+steps here: 
 
-## 1. Remove the Pre-installed APIs [](id=1-remove-the-pre-installed-apis)
+1.  Remove the Pre-installed APIs
+2.  Install the Latest Version of the APIs
+3.  Enable Access to the APIs
+
+The following sections walk you through these steps. 
+
+## Remove the Pre-installed APIs [](id=remove-the-pre-installed-apis)
 
 You must first remove the older, pre-installed version of the APIs: 
 
@@ -48,14 +54,16 @@ You must first remove the older, pre-installed version of the APIs:
 4.  Lastly, remove the `*apio*` configuration file in 
     `[Liferay Home]/osgi/configs`. 
 
-## 2. Install the Latest Version of the APIs [](id=2-install-the-latest-version-of-the-apis)
+## Install the Latest Version of the APIs [](id=install-the-latest-version-of-the-apis)
 
-1.  Download the updated API modules: 
+Now you must download and install the latest version of the APIs:
 
-        http://central.maven.org/maven2/com/liferay/com.liferay.apio.architect.impl/1.0.6/com.liferay.apio.architect.impl-1.0.6.jar
-        http://central.maven.org/maven2/com/liferay/com.liferay.apio.architect.api/1.3.0/com.liferay.apio.architect.api-1.3.0.jar
-        http://central.maven.org/maven2/com/liferay/com.liferay.apio.architect.uri.mapper.impl/1.0.1/com.liferay.apio.architect.uri.mapper.impl-1.0.1.jar
-        http://central.maven.org/maven2/com/liferay/com.liferay.apio.architect.exception.mapper.impl/1.0.3/com.liferay.apio.architect.exception.mapper.impl-1.0.3.jar
+1.  Download the updated API modules by clicking the link for each: 
+
+    -   [`com.liferay.apio.architect.impl-1.0.6.jar`](http://central.maven.org/maven2/com/liferay/com.liferay.apio.architect.impl/1.0.6/com.liferay.apio.architect.impl-1.0.6.jar)
+    -   [`com.liferay.apio.architect.api-1.3.0.jar`](http://central.maven.org/maven2/com/liferay/com.liferay.apio.architect.api/1.3.0/com.liferay.apio.architect.api-1.3.0.jar)
+    -   [`com.liferay.apio.architect.uri.mapper.impl-1.0.1.jar`](http://central.maven.org/maven2/com/liferay/com.liferay.apio.architect.uri.mapper.impl/1.0.1/com.liferay.apio.architect.uri.mapper.impl-1.0.1.jar)
+    -   [`com.liferay.apio.architect.exception.mapper.impl-1.0.3.jar`](http://central.maven.org/maven2/com/liferay/com.liferay.apio.architect.exception.mapper.impl/1.0.3/com.liferay.apio.architect.exception.mapper.impl-1.0.3.jar)        
 
 2.  Deploy these files to the `[Liferay Home]/deploy` folder. The console should 
     show that the modules are starting: 
@@ -71,7 +79,7 @@ You must first remove the older, pre-installed version of the APIs:
 
     The modules should then appear in `[Liferay Home]/osgi/modules`. 
 
-## 3. Enable Access to the APIs [](id=3-enable-access-to-the-apis)
+## Enable Access to the APIs [](id=enable-access-to-the-apis)
 
 By default, security restricts access to the APIs. To enable access, you must 
 add a specific configuration file. 
