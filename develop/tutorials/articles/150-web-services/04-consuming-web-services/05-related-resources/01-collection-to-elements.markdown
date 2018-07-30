@@ -1,21 +1,20 @@
 # Navigating from a Collection to its Elements [](id=navigating-from-a-collection-to-its-elements)
 
-When you retrieve a collection, it contains links that you can use to navigate 
-through the pages of that collection. The 
-[pagination tutorial](/develop/tutorials/-/knowledge_base/7-1/pagination) 
-describes this in detail. You can also retrieve details from an element in the 
-collection. Follow these steps to do so: 
+When you 
+[get a collection](/develop/tutorials/-/knowledge_base/7-1/getting-collections), 
+you can use the response to get an element of that collection. Follow these 
+steps to do so: 
 
-1.  Retrieve a collection of data. This example gets a list of the sites in the 
-    portal by sending an 
-    [authenticated request](/develop/tutorials/-/knowledge_base/7-1/making-authenticated-requests) 
+1.  Get a collection. This example gets a list of the portal's sites by sending 
+    [an authenticated request](/develop/tutorials/-/knowledge_base/7-1/making-authenticated-requests) 
     to the `web-site` collection: 
 
         curl -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/web-site
 
-    Recall from the pagination tutorial that the response's `member` attribute 
-    contains the collection elements, which in this case are the sites *Global* 
-    and *Livingstone Hotels & Resorts*: 
+    Recall from the 
+    [Getting Collections tutorial](/develop/tutorials/-/knowledge_base/7-1/getting-collections) 
+    that the response's `member` attribute contains the collection elements. In 
+    this case, these are the sites *Global* and *Livingstone Hotels & Resorts*: 
 
         {
             "totalItems": 2,
@@ -71,14 +70,14 @@ collection. Follow these steps to do so:
             "@type": ["Collection"],
         }
 
-2.  In the collection, locate the URL of the element you want to get information 
-    from. Since the response from the first step is in the 
+2.  In the response, locate the URL of the element you want to get. Since the 
+    above response is in the 
     [JSON-LD format](https://json-ld.org/), 
     each element's `@id` attribute contains that element's URL. In this example, 
-    you'll get data from the the *Livingstone Hotels & Resorts* site, whose URL 
-    is `http://localhost:8080/o/api/p/web-site/20126`. 
+    you'll get data from the *Livingstone Hotels & Resorts* site, whose URL is 
+    `http://localhost:8080/o/api/p/web-site/20126`. 
 
-3.  Send a request to that element's URL. For example, this request gets 
+3.  Send a GET request to that element's URL. For example, this request gets 
     information from the *Livingstone Hotels & Resorts* site: 
 
         curl -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/web-site/20126

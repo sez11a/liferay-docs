@@ -1,23 +1,22 @@
 # Getting Collections [](id=getting-collections)
 
-Requests for getting a collection are the same as those for non-collection 
+Requests for collection resources are the same as those for non-collection 
 resources. For example, an 
 [authenticated request](/develop/tutorials/-/knowledge_base/7-1/making-authenticated-requests) 
 to the `person` endpoint returns a collection that contains the portal's users. 
-When sending a this request, use the credentials of an administrative user who 
-has permission to view other portal users: 
+When sending this request, use the credentials of an administrative user who has 
+permission to view other portal users: 
 
     curl -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/person
 
 The response (below) has two main parts: 
 
--   The list of elements returned as part of the collection. This is present in 
-    the `member` attribute. This example contains data on two users: an 
-    administrator (Livingstone Admin), and a user named Josiah Copeland. 
+-   The list of collection elements, inside the `member` attribute. This example 
+    contains data on two users: an administrator (Livingstone Admin), and a user 
+    named Josiah Copeland. 
 
 -   A set of metadata about the collection itself. This is the rest of the data 
-    in the response. This lets any clients know how to operate with the 
-    collection. 
+    in the response. This lets clients know how to use the collection. 
 
 This response is in the 
 [JSON-LD hypermedia format](https://json-ld.org/spec/latest/json-ld/), 

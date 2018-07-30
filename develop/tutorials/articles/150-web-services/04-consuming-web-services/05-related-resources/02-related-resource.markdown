@@ -1,8 +1,7 @@
 # Navigating to a Related Resource [](id=navigating-to-a-related-resource)
 
-Once you retrieve a resource, you can use the response to get its related 
-resources. For example, the get request to the *Livingstone Hotels & Resorts* 
-site in the 
+When you get a resource, you can use the response to get any related resources. 
+For example, the GET request to the *Livingstone Hotels & Resorts* site in the 
 [previous tutorial](/develop/tutorials/-/knowledge_base/7-1/navigating-from-a-collection-to-its-elements) 
 produces a response that contains information about that site, including any 
 related resources: 
@@ -32,10 +31,10 @@ related resources:
 
 The exact attributes in the response depend on the resource. This example 
 contains data on a site and has attributes that contain URLs to related 
-resources. By sending requests to these URLs, which are API endpoints, you can 
-retrieve the corresponding information: 
+resources. By sending GET requests to these URLs, which are API endpoints, you 
+can get the corresponding information: 
 
--   contentSpace
+-   `contentSpace`
 -   `members`: Users that belong to the site. 
 -   `webSites`: Child sites. 
 -   `embeddedWebPages`: Site pages. 
@@ -44,18 +43,16 @@ Also note that the attribute `publicURL` is a URL. However, this is the URL to
 access the site in a browser---it's not an API endpoint. So how can you identify 
 which URLs are API endpoints for resources? This is an excellent question! The 
 hypermedia format typically has a way to identify resources. This example uses 
-the 
-[JSON-LD format](https://json-ld.org/), 
+[the JSON-LD format](https://json-ld.org/), 
 which identifies related resources via the `@context` attribute. Note that the 
 `@context` attribute in the above response lists the attributes that contain the 
-resource URLs. Other formats may use a separate attribute (e.g., `_links`) to 
-group related resource URLs separate from other URLs. 
+resource URLs. Other formats may use an attribute (e.g., `_links`) to separate 
+related resource URLs from other URLs. 
 
 Alternatively, you can identify related resources by consulting the schema 
 definition for the resources. The schema sets the attributes' semantics and 
 type. For more information about schemas and the model used in the API, see the 
-[API Vocabulary](/develop/tutorials/-/knowledge_base/7-1/api-vocabulary) 
-tutorial.
+[API Vocabulary tutorial](/develop/tutorials/-/knowledge_base/7-1/api-vocabulary). 
 
 Note that it's typically easier to identify related resources via the response, 
 because it's easier to automate. Relying on the API vocabulary or schema 

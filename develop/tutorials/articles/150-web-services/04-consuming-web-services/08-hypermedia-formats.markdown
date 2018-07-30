@@ -2,11 +2,11 @@
 
 The responses in the preceding examples use the 
 [JSON-LD hypermedia format](https://json-ld.org/), 
-which is the default response format for @product@'s hypermedia REST APIs. You 
-can, however, use other formats. Other well-known hypermedia formats include 
-HAL, Siren, Collection+JSON, and Atom. Formats typically differ in the structure 
-or semantics of a resource's metadata. Note that there's no best hypermedia 
-format. You should use the one that best fits your use case. 
+which is the default response format for @product@'s hypermedia REST APIs. 
+Alternatively, you can use other formats. Other well-known hypermedia formats 
+include HAL, Siren, Collection+JSON, and Atom. Formats typically differ in the 
+structure or semantics of resource metadata. There's no best hypermedia 
+format---use the one that best fits your use case. 
 
 +$$$
 
@@ -32,7 +32,7 @@ for each format.
 | Collection JSON | [application/vnd.collection+json](https://www.iana.org/assignments/media-types/application/vnd.collection+json) |
 
 When you send a request without specifying the hypermedia format, the server 
-responds with the default JSON-LD. For example, here’s such a request for a 
+responds with the default JSON-LD. For example, here's such a request for a 
 site: 
 
     curl -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/web-site/20126
@@ -58,8 +58,7 @@ site:
         "embeddedWebPages": "http://localhost:8080/o/api/p/web-site/20126/embedded-web-page"
     }
 
-If you request the headers, you can see that the `Content-Type` lists the 
-hypermedia format: 
+If you request the headers, the `Content-Type` lists the hypermedia format: 
 
     curl --head -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/web-site/20126
 
