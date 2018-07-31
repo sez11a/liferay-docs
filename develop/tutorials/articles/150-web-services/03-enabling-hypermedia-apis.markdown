@@ -1,8 +1,8 @@
 # Enabling Hypermedia REST APIs [](id=enabling-hypermedia-rest-apis)
 
-Liferay's hypermedia REST APIs are available by default in Liferay CE Portal 7.1 
-GA2. To use these APIs in GA1, you must install them manually by following the 
-steps here: 
+Liferay's hypermedia REST APIs are included in Liferay CE Portal 7.1 GA2, and 
+Liferay DXP 7.1 Fix Pack 1. To use these APIs in earlier 7.1 releases, you must 
+install them manually by following these steps: 
 
 1.  Remove the Pre-installed APIs
 2.  Install the Latest Version of the APIs
@@ -18,10 +18,11 @@ You must first remove the older, pre-installed version of the APIs:
     [Liferay Home](/discover/deployment/-/knowledge_base/7-1/installing-liferay#liferay-home) 
     folder is typically the application server's parent folder. 
 
-2.  Delete these packages: 
+2.  Delete the APIO packages. For example, here are the APIO packages for 
+    Liferay CE Portal: 
 
-        Liferay CE Foundation - Liferay CE Apio Architect - API.lpkg 
-        Liferay CE Foundation - Liferay CE Apio Architect - Impl.lpkg
+        Liferay CE Foundation - Liferay CE APIO Architect - API.lpkg 
+        Liferay CE Foundation - Liferay CE APIO Architect - Impl.lpkg
 
     If the portal is running, you should see in the console that the modules in 
     those packages have been stopped: 
@@ -42,9 +43,8 @@ You must first remove the older, pre-installed version of the APIs:
 
     If this returns results for the `*apio*` bundles, then you'll have to delete 
     them via the Gogo shell. To do so, take note of each bundle's ID and run 
-    `uninstall [BUNDLE_ID]` for each bundle ID. For example, if the bundle IDs 
-    were 388, 713, 714, and 715, then you should run these commands in the Gogo 
-    shell: 
+    `uninstall [BUNDLE_ID]` for each. For example, if the bundle IDs were 388, 
+    713, 714, and 715, then you would run these commands in the Gogo shell: 
 
         uninstall 388
         uninstall 713
@@ -56,7 +56,7 @@ You must first remove the older, pre-installed version of the APIs:
 
 ## Install the Latest Version of the APIs [](id=install-the-latest-version-of-the-apis)
 
-Now you must download and install the latest version of the APIs:
+Now you must download and install the latest version of the APIs: 
 
 1.  Download the updated API modules by clicking the link for each: 
 
@@ -82,7 +82,7 @@ Now you must download and install the latest version of the APIs:
 ## Enable Access to the APIs [](id=enable-access-to-the-apis)
 
 By default, security restricts access to the APIs. To enable access, you must 
-add a specific configuration file. 
+add a specific configuration file: 
 
 1.  Create the file 
     `com.liferay.apio.architect.impl.application.ApioApplication-default.config` 

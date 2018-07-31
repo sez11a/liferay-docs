@@ -39,19 +39,19 @@ can get the corresponding information:
 -   `webSites`: Child sites. 
 -   `embeddedWebPages`: Site pages. 
 
-Also note that the attribute `publicURL` is a URL. However, this is the URL to 
+Also note that the `publicURL` attribute is a URL. However, this is the URL to 
 access the site in a browser---it's not an API endpoint. So how can you identify 
 which URLs are API endpoints for resources? This is an excellent question! The 
 hypermedia format typically has a way to identify resources. This example uses 
 [the JSON-LD format](https://json-ld.org/), 
 which identifies related resources via the `@context` attribute. Note that the 
 `@context` attribute in the above response lists the attributes that contain the 
-resource URLs. Other formats may use an attribute (e.g., `_links`) to separate 
-related resource URLs from other URLs. 
+resource URLs. Other formats may use a unique attribute (e.g., `_links`) to 
+separate related resource URLs from other URLs. 
 
 Alternatively, you can identify related resources by consulting the schema 
-definition for the resources. The schema sets the attributes' semantics and 
-type. For more information about schemas and the model used in the API, see the 
+definition. The schema sets the attributes' semantics and type. For more 
+information about schemas and the model used in the API, see the 
 [API Vocabulary tutorial](/develop/tutorials/-/knowledge_base/7-1/api-vocabulary). 
 
 Note that it's typically easier to identify related resources via the response, 

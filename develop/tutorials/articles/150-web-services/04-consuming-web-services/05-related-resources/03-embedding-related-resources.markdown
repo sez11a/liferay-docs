@@ -1,22 +1,20 @@
 # Embedding Related Resources [](id=embedding-related-resources)
 
-[The tutorial on getting related resources](/develop/tutorials/-/knowledge_base/7-1/navigating-to-a-related-resource) 
-shows you how to send a request to a resource and identify related resources in 
-the response. Getting information on such a related resource, however, requires 
-that you send another request to that resource. Instead, you can get information 
-on a related resource by embedding it in the first request, which avoids the 
-need for a second request. This is more efficient and can improve your API 
-client's performance. Note, however, that this is only appropriate for cases in 
-which you already know you want to get a related resource. 
+[The tutorial on related resources](/develop/tutorials/-/knowledge_base/7-1/navigating-to-a-related-resource) 
+shows you how to request a resource and identify related resources in the 
+response. Getting such a related resource, however, requires that you send 
+another request to that resource. Instead, you can get a related resource by 
+embedding its attribute in the first request. This avoids the need for a second 
+request and is therefore more efficient. To do this, however, you must already 
+know that you want to get a related resource. 
 
-Although embedding related resource requests is more efficient, it also 
-increases the response's size. Responses that include more than one attribute or 
-recurse into higher levels of nested resources can be especially large. You can 
-alleviate this by telling the server via the request which fields it should 
-include in the response. This is known as sparse fieldsets, which are covered in 
-another tutorial. API clients typically use embedded resources and sparse 
-fieldsets together to tune latency and performance of client-server 
-communication. 
+Despite efficiency gains, embedding related resource requests increases the 
+response's size. Responses that include multiple or nested resources can be 
+especially large. You can alleviate this by telling the server via the request 
+which fields it should include in the response. This is known as 
+*sparse fieldsets*, which are covered in another tutorial. API clients typically 
+use embedded resources and sparse fieldsets together to tune latency and 
+performance of client-server communication. 
 <!-- Link to sparse fieldsets tutorial once it exists. -->
 
 To make a request with an embedded resource, include the `embedded` parameter in 
@@ -77,8 +75,8 @@ hypothetical attributes `field02` and `field03` to `contentSpace`:
     curl -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/web-site/20126?embedded=contentSpace,field02,field03
 
 You can also embed nested attributes in the request via dot notation. For 
-example, to get `contentSpace`'s folder attribute, add `contentSpace.folder` to 
-the embedded parameter. Note that this also gets `contentSpace` itself: 
+example, to get `contentSpace`'s `folder` attribute, add `contentSpace.folder` 
+to the embedded parameter. This also gets `contentSpace` itself: 
 
     curl -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/web-site/20126?embedded=contentSpace.folder
 
@@ -107,13 +105,12 @@ folder:
         // ... 
     }
 
-The embedded parameter also works with collection resources to return the 
-specified related resource for every item in the collection. The efficiency 
-gains of this approach are significant, because it saves the API client from 
-sending a different request for each collection element. For example, if you 
-send a request to the `web-site` endpoint without specifying a site, and add 
-`embedded=contentSpace`, the response includes detailed `contentSpace` 
-information for every site: 
+The `embedded` parameter also works with collection resources to return the 
+specified related resource for every collection item. This approach's efficiency 
+gains are significant because the API client doesn't have to send a different 
+request for each collection item. For example, if you send a request to the 
+`web-site` endpoint without specifying a site, and add `embedded=contentSpace`, 
+the response includes detailed `contentSpace` information for every site: 
 
     curl -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/web-site/?embedded=contentSpace
 
