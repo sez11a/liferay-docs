@@ -83,3 +83,78 @@ DDM Fields:
     only be returned in the current display locale where the search is taking
     place.
 
+## Examples
+
+To see fully localized search in action,
+
+1.  Add a Basic Web Content article:
+
+    - Title: _What time is it?_
+    - Summary: _It's soccer time!_
+    - Content: _That's right, it's time for soccer. The 2018 World Cup recently
+        concluded, and teams all over the U.S. are gearing up for Fall Soccer
+        season. It's never too early to start practicing._
+
+2.  Add a second article:
+
+    - Title: _What is the best soccer team ever?_
+    - Summary: _There are many good teams? Which is the best?_
+    - Content: _Here are the 10 best teams in the world: 1. The Lunar Resort's
+        Club Team, Waxing Crescent FC..._
+
+3.  Add a Portuguese (_pt-BR_) translation of the article:
+
+    - Title: _Qual time de futebol é o melhor de todos os tempos?_
+    - Summary: _Existem muitas boas equipes. Qual é o melhor?_
+    - Content: _Aqui estao as 10 melhores equipes do mundo: 1. Selecao
+        brasileira de Futebol 2. O time do Resort Lunar, Waxing Crescent FC..._
+
+4.  Find a search bar widget and enter _time_ as the keyword.
+
+    The first article is returned, and so is the Portuguese translation of the
+    article about soccer teams (because _time_ in Portuguese translates to the
+    English word _team_).
+
+In fully localized search, fields are appended with the proper locale, and even
+fields with a locale other than the User's display context are returned if they
+contain matches to the searched keyword.
+
+To see an example of site-localized search:
+
+1.  Create a text file named `search-test.txt` with the following contents: 
+
+        Meu time de futebol favorito é o melhor
+
+2. Upload it as a Basic Document to the Documents and Media application.
+
+3.  If your site's language is currently set to English,adding this file will
+    append it's content field with the _en_ locale. 
+
+4.  Search in the site for the keyword _time_.
+
+    ![Figure x: Even though the content of this DM File is written in Portuguese, it was appended with the _en_ locale, so it's searchable in an English language site.](../../images/search-site-localized1.png)
+
+    The file is returned because even though the text in the file is
+    Portuguese, the locale appended to its _content_ field is for English.
+
+5.  Now change the Site's default language to _Portuguese (Brazil),.
+    Use Site Settings &rarr; Languages to accomplish this.
+
+6. Now search for _time_ in the site, and the document is not returned in the
+   results, because the search is looking for the _pt_ locale.
+
+   ![Figure x: The uploaded DM File doesn't appear when the site language is changed, because only fields with the site's locale are searched.](../../images/search-site-localized2.png)
+
+7.  Now go to Control Panel &rarr; Configuration &rarr; Search, and click
+    *Execute* next to _Reindex all search indexes._
+
+8. Search for _time_ in the site's Search Bar again, and now the document is
+   returned in the results, because the content field's locale was changed
+   from _en_ to _pt_ when reindexed.
+
+   ![Figure x: Once the field is reindexed with the site's locale, it can be returned as a search result in the site.](../../images/search-site-localized3.png)
+
+If an asset supports site-localized search, its fields must be reindexed after
+the site language is changed in order to be returned as search results.
+
+
