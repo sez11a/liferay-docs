@@ -1,4 +1,4 @@
-# Searching for Localized Content
+# Searching for Localized Content [](id=searching-for-localized-content)
 
 @product@ supports setting a virtual instance-wide 
 [default language](/discover/portal/-/knowledge_base/7-1/miscellaneous-settings#miscellaneous-display-settings) 
@@ -13,7 +13,7 @@ in a way that supports searching in a language other than the default language.
 Even assets that are translatable might not support searching for the content in
 that language.
 
-## What is Localized Search?
+## What is Localized Search? [](id=what-is-localized-search)
 
 In localized search, fields are indexed with a two letter locale appended (for
 example, `en` for English, making a localized title field indexed as
@@ -51,7 +51,7 @@ Site-localized search works like this:
 
 Not all assets support localized search, however.
 
-## Assets Supporting Localized Search
+## Assets Supporting Localized Search [](id=assets-supporting-localized-search)
 
 Whether or not an asset supports localized search depends on how the asset was
 indexed in the search engine. At this time, no cohesive pan-asset approach to
@@ -83,7 +83,7 @@ DDM Fields:
     only be returned in the current display locale where the search is taking
     place.
 
-## Examples
+## Examples [](id=examples)
 
 To see fully localized search in action,
 
@@ -132,7 +132,7 @@ To see an example of site-localized search:
 
 4.  Search in the site for the keyword _time_.
 
-    ![Figure x: Even though the content of this DM File is written in Portuguese, it was appended with the _en_ locale, so it's searchable in an English language site.](../../images/search-site-localized1.png)
+    ![Figure 1: Even though the content of this DM File is written in Portuguese, it was appended with the _en_ locale, so it's searchable in an English language site.](../../images/search-site-localized1.png)
 
     The file is returned because even though the text in the file is
     Portuguese, the locale appended to its _content_ field is for English.
@@ -143,7 +143,7 @@ To see an example of site-localized search:
 6. Now search for _time_ in the site, and the document is not returned in the
    results, because the search is looking for the _pt_ locale.
 
-   ![Figure x: The uploaded DM File doesn't appear when the site language is changed, because only fields with the site's locale are searched.](../../images/search-site-localized2.png)
+   ![Figure 2: The uploaded DM File doesn't appear when the site language is changed, because only fields with the site's locale are searched.](../../images/search-site-localized2.png)
 
 7.  Now go to Control Panel &rarr; Configuration &rarr; Search, and click
     *Execute* next to _Reindex all search indexes._
@@ -152,7 +152,7 @@ To see an example of site-localized search:
    returned in the results, because the content field's locale was changed
    from _en_ to _pt_ when reindexed.
 
-   ![Figure x: Once the field is reindexed with the site's locale, it can be returned as a search result in the site.](../../images/search-site-localized3.png)
+   ![Figure 3: Once the field is reindexed with the site's locale, it can be returned as a search result in the site.](../../images/search-site-localized3.png)
 
 If an asset supports site-localized search, its fields must be reindexed after
 the site language is changed in order to be returned as search results.
