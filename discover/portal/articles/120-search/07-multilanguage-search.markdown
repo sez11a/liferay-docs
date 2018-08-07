@@ -65,6 +65,13 @@ Web Content Articles:
 - At search time, any matching results (with any locale appended) can be
     returned.
 
+Categories:
+
+- The `name` and `description` fields support fully localized search.
+
+- At search time, any matching results (with any locale appended) can be
+    returned.
+
 Document Library File Entries:
 
 - The `content` field (which contains the content of an uploaded file) supports
@@ -127,7 +134,7 @@ To see an example of site-localized search:
 
 2. Upload it as a Basic Document to the Documents and Media application.
 
-3.  If your site's language is currently set to English,adding this file will
+3.  If your site's language is currently set to English, adding this file will
     append it's content field with the _en_ locale. 
 
 4.  Search in the site for the keyword _time_.
