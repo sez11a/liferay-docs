@@ -25,16 +25,16 @@ process is performed properly. There are two common approaches.
 
 Fully localized search works like this:
 
-1. One or more of an asset's fields are localizable in the user interface and
-   database (the locale is appended based on the asset creator's language
-   selection).
+1.  One or more of an asset's fields are localizable in the user interface and
+    database (the locale is appended based on the asset creator's language
+    selection).
 
-2. The fields are indexed with the appended locale and analyzed with the
-   corresponding language analyzer.
+2.  The fields are indexed with the appended locale and analyzed with the
+    corresponding language analyzer.
 
 3.  At search time, the user can be sure that content existing in a certain
-    language was analyzed properly and is their language, it's properly returned
-    according to search engine's relevance algorithms.
+    language was analyzed properly, and will be properly returned according to
+    search engine's relevance algorithms.
 
 Site-localized search works like this:
 
@@ -144,7 +144,7 @@ To see an example of site-localized search:
     The file is returned because even though the text in the file is
     Portuguese, the locale appended to its _content_ field is for English.
 
-5.  Now change the Site's default language to _Portuguese (Brazil),.
+5.  Now change the Site's default language to _Portuguese (Brazil)_.
     Use Site Settings &rarr; Languages to accomplish this.
 
 6. Now search for _time_ in the site, and the document is not returned in the
@@ -163,5 +163,4 @@ To see an example of site-localized search:
 
 If an asset supports site-localized search, its fields must be reindexed after
 the site language is changed in order to be returned as search results.
-
 
