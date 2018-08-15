@@ -17,11 +17,13 @@ All these JSP customization approaches are available to you.
 
 +$$$
 
-**Note:** Since @product@ 7.0, JSP overrides using
+**Note:** JSP overrides using
 [OSGi Fragments](/develop/tutorials/-/knowledge_base/7-0/overriding-a-modules-jsps)
 and 
 [Custom JSP Bags](/develop/tutorials/-/knowledge_base/7-0/overriding-core-jsps)
-are deprecated. They're replaced by the API-based JSP customization approaches:
+were deprecated in @product@ 7.0 and are completely removed in @product@ 7.1.
+It's no longer possible to override JSPs in these ways. They're replaced by the
+API-based JSP customization approaches:
 
 -   [Dynamic includes](/develop/tutorials/-/knowledge_base/7-1/customizing-jsps-with-dynamic-includes)
 -   [Portlet filters](/develop/tutorials/-/knowledge_base/7-1/jsp-overrides-using-portlet-filters)
