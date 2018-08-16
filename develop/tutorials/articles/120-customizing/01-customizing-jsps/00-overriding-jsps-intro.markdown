@@ -13,5 +13,21 @@ customizing JSPs:
 Inlined content | Some @product@ JSPs include content from other JSPs that you can modify. This "inlines" the content from the other JSPs into specific places in the root JSP. | Limited to JSPs that inline other JSPs. |
 -->
 
-All these JSP customization approaches are available to you. It's time to
-customize some JSPs!
+All these JSP customization approaches are available to you.
+
++$$$
+
+**Note:** JSP overrides using
+[OSGi Fragments](/develop/tutorials/-/knowledge_base/7-0/overriding-a-modules-jsps)
+and 
+[Custom JSP Bags](/develop/tutorials/-/knowledge_base/7-0/overriding-core-jsps)
+were deprecated in @product@ 7.0 and are completely removed in @product@ 7.1.
+It's no longer possible to override JSPs in these ways. They're replaced by the
+API-based JSP customization approaches:
+
+-   [Dynamic includes](/develop/tutorials/-/knowledge_base/7-1/customizing-jsps-with-dynamic-includes)
+-   [Portlet filters](/develop/tutorials/-/knowledge_base/7-1/jsp-overrides-using-portlet-filters)
+
+$$$
+
+It's time to customize some JSPs!
