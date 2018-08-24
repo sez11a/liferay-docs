@@ -6,30 +6,27 @@ which is the default response format for @product@'s hypermedia REST APIs.
 Alternatively, you can use other formats. Other well-known hypermedia formats 
 include HAL, Siren, Collection+JSON, and Atom. Formats typically differ in the 
 structure or semantics of resource metadata. There's no best hypermedia 
-format---use the one that best fits your use case. 
+format; use the one that best fits your use case. 
 
 +$$$
 
 **Note:** Currently, Liferay's hypermedia REST APIs only support the JSON-LD and 
-HAL hypermedia formats. Support for more hypermedia formats may or may not be 
-added in the future. 
+HAL hypermedia formats. Support for more hypermedia formats may be added in the
+future. 
 
 $$$
 
-You use *content negotiation* to specify different hypermedia formats for use. 
-Content negotiation is the process by which the client and server establish the 
-format they use to exchange messages. The client can tell the server its 
-preferred format via the HTTP headers `Accept` and `Content-Type`. Each 
-hypermedia format has a string identifier (its MIME type) that you can use in 
-the HTTP headers to specify the format. The following table lists the MIME type 
-for each format. 
+You use *content negotiation* to specify different hypermedia formats for use.
+Content negotiation is how the client and server establish the format they use
+to exchange messages. The client tells the server its preferred format via the
+HTTP headers `Accept` and `Content-Type`. Each hypermedia format has a string
+identifier (its MIME type) that you can use in the HTTP headers to specify the
+format. The following table lists the MIME type for each supported format. 
 
 | Hypermedia Format | &nbsp;MIME Type | 
 | --------- | ----------------------- | 
 | JSON-LD | [application/ld+json](https://www.iana.org/assignments/media-types/application/ld+json) |
 | HAL | [application/vnd.hal+json, application/hal+json](https://www.iana.org/assignments/media-types/application/vnd.hal+json) |
-| SIREN | [application/vnd.siren+json](https://www.iana.org/assignments/media-types/application/vnd.siren+json) |
-| Collection JSON | [application/vnd.collection+json](https://www.iana.org/assignments/media-types/application/vnd.collection+json) |
 
 When you send a request without specifying the hypermedia format, the server 
 responds with the default JSON-LD. For example, here's such a request for a 

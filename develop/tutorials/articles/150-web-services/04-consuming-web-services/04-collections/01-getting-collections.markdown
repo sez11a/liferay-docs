@@ -2,9 +2,9 @@
 
 Requests for collection resources are the same as those for non-collection 
 resources. For example, an 
-[authenticated request](/develop/tutorials/-/knowledge_base/7-1/making-authenticated-requests) 
-to the `person` endpoint returns a collection that contains the portal's users. 
-When sending this request, use the credentials of an administrative user who has 
+[authenticated request](/develop/tutorials/-/knowledge_base/7-1/making-authenticated-requests)
+to the `person` endpoint returns a collection containing the portal's users.
+When sending this request, use the credentials of an administrative user who has
 permission to view other portal users: 
 
     curl -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/person

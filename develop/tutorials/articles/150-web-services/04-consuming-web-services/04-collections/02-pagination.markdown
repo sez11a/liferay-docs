@@ -50,12 +50,11 @@ collection:
         "@type": ["Collection"],
     }
 
-You can use this information in a client app to build a UI component that lets 
-the user navigate the pages. Such page navigation UIs are very common. For 
-example, you could link the *First* button to the URL in the `first` attribute, 
-the *1* button to the URL in the `@id` attribute, the *Next* button to the URL 
-in the `next` attribute, and the *Last* button to the URL in the `last` 
-attribute. 
+You can use this information in a client app to build a UI component for
+navigating the pages. For example, you could link the *First* button to the URL
+in the `first` attribute, the *1* button to the URL in the `@id` attribute, the
+*Next* button to the URL in the `next` attribute, and the *Last* button to the
+URL in the `last` attribute. 
 
 ![Figure 1: This simple UI lets users navigate the pages of data that the server returns.](../../../../images/apio-pagination-01.png)
 
@@ -114,8 +113,9 @@ a `next` link:
         "@type": ["Collection"],
     }
 
-Also note that the last page in this example includes only 3 elements. You can 
-reflect this (and remove the *Next* button) in the client's page navigation UI: 
+Also note that the last page in this example includes only three elements. You
+can reflect this (and remove the *Next* button) in the client's page navigation
+UI: 
 
 ![Figure 3: The last page lists the number of items it displays, and no longer includes a *Next* button.](../../../../images/apio-pagination-03.png)
 

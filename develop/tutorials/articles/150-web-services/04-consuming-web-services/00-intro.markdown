@@ -1,9 +1,9 @@
 # Consuming Web Services [](id=consuming-web-services)
 
-Consuming web services is often the first thing that developers want to do when 
-developing client apps. Since @product@'s web services are implemented via 
-hypermedia REST APIs, developers can discover and traverse the APIs using the 
-hypermedia URLs that the server returns in response to one or more requests. 
+Client apps can't work without web services to consume. Since @product@'s web
+services are implemented via hypermedia REST APIs, developers can discover and
+traverse the APIs using the hypermedia URLs that the server returns in response
+to one or more requests. 
 
 +$$$
 

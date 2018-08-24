@@ -5,7 +5,7 @@ When you
 you can use the response to get an element of that collection. Follow these 
 steps to do so: 
 
-1.  Get a collection. This example gets a list of the portal's sites by sending 
+1.  Get a collection. This example gets a list of Sites by sending 
     [an authenticated request](/develop/tutorials/-/knowledge_base/7-1/making-authenticated-requests) 
     to the `web-site` collection: 
 
@@ -13,8 +13,8 @@ steps to do so:
 
     Recall from the 
     [Getting Collections tutorial](/develop/tutorials/-/knowledge_base/7-1/getting-collections) 
-    that the response's `member` attribute contains the collection elements. In 
-    this case, these are the sites *Global* and *Livingstone Hotels & Resorts*: 
+    that the response's `member` attribute contains the collection elements. In
+    this case, there are two Sites: *Global* and *Livingstone Hotels & Resorts*: 
 
         {
             "totalItems": 2,
@@ -70,15 +70,15 @@ steps to do so:
             "@type": ["Collection"],
         }
 
-2.  In the response, locate the URL of the element you want to get. Since the 
-    above response is in the 
+2.  In the response, locate the URL of the element you want. Since the above
+    response is in the 
     [JSON-LD format](https://json-ld.org/), 
     each element's `@id` attribute contains that element's URL. In this example, 
-    you'll get data from the *Livingstone Hotels & Resorts* site, whose URL is 
+    you'll get data from the *Livingstone Hotels & Resorts* Site, whose URL is 
     `http://localhost:8080/o/api/p/web-site/20126`. 
 
 3.  Send a GET request to that element's URL. For example, this request gets 
-    information from the *Livingstone Hotels & Resorts* site: 
+    information from the *Livingstone Hotels & Resorts* Site: 
 
         curl -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/web-site/20126
 

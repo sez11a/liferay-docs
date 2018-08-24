@@ -1,9 +1,9 @@
 # Navigating to a Related Resource [](id=navigating-to-a-related-resource)
 
-When you get a resource, you can use the response to get any related resources. 
-For example, the GET request to the *Livingstone Hotels & Resorts* site in the 
-[previous tutorial](/develop/tutorials/-/knowledge_base/7-1/navigating-from-a-collection-to-its-elements) 
-produces a response that contains information about that site, including any 
+When you get a resource, you can use the response to get related resources. For
+example, the GET request to the *Livingstone Hotels & Resorts* Site in the 
+[previous tutorial](/develop/tutorials/-/knowledge_base/7-1/navigating-from-a-collection-to-its-elements)
+produces a response containing information about that Site, including its
 related resources: 
 
     curl -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/web-site/20126
@@ -29,10 +29,10 @@ related resources:
         ]
     }
 
-The exact attributes in the response depend on the resource. This example 
-contains data on a site and has attributes that contain URLs to related 
-resources. By sending GET requests to these URLs, which are API endpoints, you 
-can get the corresponding information: 
+The attributes in the response depend on the resource. This example contains
+data on a Site and has attributes containing URLs to related resources. By
+sending GET requests to these URLs, which are API endpoints, you can get the
+corresponding information: 
 
 -   `contentSpace`
 -   `members`: Users that belong to the site. 
@@ -40,13 +40,13 @@ can get the corresponding information:
 -   `embeddedWebPages`: Site pages. 
 
 Also note that the `publicURL` attribute is a URL. However, this is the URL to 
-access the site in a browser---it's not an API endpoint. So how can you identify 
-which URLs are API endpoints for resources? This is an excellent question! The 
-hypermedia format typically has a way to identify resources. This example uses 
+access the Site in a browser---it's not an API endpoint. So how can you identify
+which URLs are API endpoints for resources? This is an excellent question! Most
+hypermedia formats have a way to identify resources. This example uses 
 [the JSON-LD format](https://json-ld.org/), 
-which identifies related resources via the `@context` attribute. Note that the 
-`@context` attribute in the above response lists the attributes that contain the 
-resource URLs. Other formats may use a unique attribute (e.g., `_links`) to 
+which identifies related resources via the `@context` attribute. Note that the
+`@context` attribute in the above response lists the attributes that contain the
+resource URLs. Other formats may use a unique attribute (e.g., `_links`) to
 separate related resource URLs from other URLs. 
 
 Alternatively, you can identify related resources by consulting the schema 

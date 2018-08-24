@@ -2,24 +2,24 @@
 
 [The tutorial on related resources](/develop/tutorials/-/knowledge_base/7-1/navigating-to-a-related-resource) 
 shows you how to request a resource and identify related resources in the 
-response. Getting such a related resource, however, requires that you send 
-another request to that resource. Instead, you can get a related resource by 
-embedding its attribute in the first request. This avoids the need for a second 
-request and is therefore more efficient. To do this, however, you must already 
-know that you want to get a related resource. 
+response. Getting a related resource, however, requires that you send another
+request to that resource. Instead, you can get a related resource by embedding
+its attribute in the first request. This avoids the need for a second request
+and is therefore more efficient. To do this, however, you must already know that
+you want to get a related resource. 
 
 Despite efficiency gains, embedding related resource requests increases the 
 response's size. Responses that include multiple or nested resources can be 
-especially large. You can alleviate this by telling the server via the request 
-which fields it should include in the response. This is known as 
-*sparse fieldsets*, which are covered in another tutorial. API clients typically 
-use embedded resources and sparse fieldsets together to tune latency and 
-performance of client-server communication. 
-<!-- Link to sparse fieldsets tutorial once it exists. -->
+especially large. You can alleviate this by telling the server via the request
+the fields it should include in the response. This is known as *sparse
+fieldsets*, which are covered in another tutorial. You can use embedded
+resources and sparse fieldsets together to tune latency and performance of
+client-server communication. <!-- Link to sparse fieldsets tutorial once it
+exists. -->
 
 To make a request with an embedded resource, include the `embedded` parameter in 
 the URL with the name of the related resource's attribute. For example, to get 
-information on a site's `content-space`, send a GET request to the site's API 
+information on a Site's `content-space`, send a GET request to the Site's API 
 endpoint with `embedded=contentSpace` appended to the URL: 
 
     curl -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/web-site/20126?embedded=contentSpace
@@ -80,9 +80,8 @@ to the embedded parameter. This also gets `contentSpace` itself:
 
     curl -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/web-site/20126?embedded=contentSpace.folder
 
-Also note that even though the response includes all the requested information 
-(e.g., the site and `contentSpace`), this example omits it to focus on the 
-folder: 
+Also note that even though the response includes all the requested information
+(e.g., the Site and `contentSpace`), it's omitted below to focus on the folder: 
 
     {
         "@id": "http://localhost:8080/o/api/p/web-site/20126",
@@ -105,12 +104,12 @@ folder:
         // ... 
     }
 
-The `embedded` parameter also works with collection resources to return the 
-specified related resource for every collection item. This approach's efficiency 
-gains are significant because the API client doesn't have to send a different 
-request for each collection item. For example, if you send a request to the 
-`web-site` endpoint without specifying a site, and add `embedded=contentSpace`, 
-the response includes detailed `contentSpace` information for every site: 
+The `embedded` parameter also works with collection resources to return the
+specified related resource for every collection item. The efficiency gains are
+significant because the API client doesn't have to send a different request for
+each collection item. For example, if you send a request to the `web-site`
+endpoint without specifying a Site and add `embedded=contentSpace`, the
+response includes detailed `contentSpace` information for every Site: 
 
     curl -H "Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5C" http://localhost:8080/o/api/p/web-site/?embedded=contentSpace
 

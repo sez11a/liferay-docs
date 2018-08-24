@@ -2,28 +2,28 @@
 
 When you make an unauthenticated request, you do so as a guest user and receive 
 only public information in the response. To make an authenticated request, you 
-must authenticate as a specific portal user. 
+must authenticate as a specific user. 
 
 There are two authentication mechanisms available when invoking web APIs: 
 
--   **Basic Authentication:** Sends the user credentials as an encoded username 
+-   **Basic Authentication:** Sends the user credentials as an encoded user name
     and password pair. This is the simplest authentication protocol (available 
     since HTTP/1.0). 
 -   **OAuth 2.0:** In @product-ver@, you can use OAuth 2.0 for authentication. 
     See the 
-    [deployment guide](/discover/deployment/-/knowledge_base/7-1/oauth-2-0) 
-    for more information on OAuth 2.0. 
+    [OAuth 2.0 documentation](/discover/deployment/-/knowledge_base/7-1/oauth-2-0) 
+    for more information. 
 
 First, you'll learn how send requests with basic authentication. 
 
 ## Basic Authentication [](id=basic-authentication)
 
-Basic authentication requires that you send an HTTP `Authorization` header 
-containing the encoded username and password. You must first get that encoded 
-value. To do so, you can use the `openssl` command in a console, or a `Base64` 
-encoder. Either way, you must encode the `user:password` string. Here's an 
-example of the `openssl` command for encoding the `user:password` string for a 
-user `test@liferay.com` with the password `Liferay`: 
+Basic authentication requires that you send an HTTP `Authorization` header
+containing the encoded user name and password. You must first get that encoded
+value. To do so, you can use `openssl` or a `Base64` encoder. Either way, you
+must encode the `user:password` string. Here's an example of the `openssl`
+command for encoding the `user:password` string for a user `test@liferay.com`
+with the password `Liferay`: 
 
     openssl base64 <<< test@liferay.com:Liferay
 
@@ -31,8 +31,7 @@ This returns the encoded value:
 
     dGVzdEBsaWZlcmF5LmNvbTpMaWZlcmF5Cg==
 
-If you don't have the `openssl` command in your console, try the `base64` 
-command: 
+If you don't have `openssl` installed, try the `base64` command: 
 
     base64 <<< test@liferay.com:Liferay
 
@@ -125,8 +124,8 @@ Before using OAuth 2.0 to invoke a web API, you must register your application
 (your web API's consumer) as an authorized OAuth client. To do this, follow the 
 instructions in the 
 [Creating an Application](/discover/deployment/-/knowledge_base/7-1/oauth-2-0#creating-an-application) 
-section of the OAuth 2.0 documentation. When creating the application in the 
-portal, fill in the form as follows: 
+section of the OAuth 2.0 documentation. When creating the application, fill in
+the form as follows: 
 
 -   **Application Name:** Your application's name. 
 -   **Client Profile:** Headless Server.
