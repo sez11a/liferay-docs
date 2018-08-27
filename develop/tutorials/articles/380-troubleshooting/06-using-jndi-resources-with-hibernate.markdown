@@ -2,22 +2,34 @@
 
 If you're using Hibernate to connect to JNDI resources on Tomcat (or an
 application server that manages JNDI resources the same way), this tutorial is
-for you! As background, Tomcat lets applications access JNDI resources via a
-classloader. Although the DXP 7.1 application deploys on Tomcat, its portlets
-are not---they're OSGi bundles installed to DXP's OSGi container. For a portlet
-to access JNDI resources on Tomcat, the portlet must use DXP's classloader. This
-tutorial demonstrates using this classloader to leverage a Hibernate
-configuration's JNDI data source. 
+for you!
+
+As background, one way that Tomcat checks whether applications can access JNDI
+resources is by checking the context classloader. If the context classloader is
+a web application classloader or the child of a web application classloader,
+then you have access to the JNDI resources that Tomcat has made available to
+that web application.
+
+Although the DXP 7.1 application deploys on Tomcat, and the DXP 7.1 classloader
+is a web application classloader, its portlets' classloaders are not---they're
+OSGi bundles installed to DXP's OSGi container using OSGi classloaders. For a
+portlet to access the JNDI resources made available to the DXP 7.1 application
+on Tomcat, the portlet must switch to a classloader that is a child of DXP's
+classloader.
+
+This tutorial demonstrates how to perform context classloader switching so that
+a Hibernate configuration can leverage a JNDI data source.
 
 +$$$
 
-**Note:** The code demonstrated here works with Tomcat but is not guaranteed to 
+**Note:** The code demonstrated here works with Tomcat but is not guaranteed to
 work on other application servers. Refer to your application server's
-documentation for how it manages JNDI resources. 
+documentation for how it manages access to JNDI resources.
 
 $$$
 
-First in your Hibernate configuration descriptor, specify a session factory that uses a JNDI data source. Here's an abbreviated descriptor:
+First in your Hibernate configuration descriptor, specify a session factory that
+uses a JNDI data source. Here's an abbreviated descriptor:
 
     <?xml version="1.0"?>
     <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
@@ -35,12 +47,12 @@ First in your Hibernate configuration descriptor, specify a session factory that
 
 If you base your descriptor on the one above, make sure to replace the
 `connection.datasource` property value with your JNDI data source name and
-specify resources to use in your sessions. 
+specify resources to use in your sessions.
 
 Next, the `HibernateUtil` class demonstrates creating and managing Hibernate
 sessions that use DXP's classloader. Note, `// Customization START/END` comments
-mark code that lets the caller access the Hibernate session factory configured
-with the JNDI data source. 
+mark code that lets the caller access the JNDI data source when processing the
+Hibernate configuration.
 
     import com.liferay.portal.kernel.log.Log;
     import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -131,7 +143,7 @@ with the JNDI data source.
 
     }
 
-Let's break down this class' logic. First, its static members are declared at
+Let's break down this class's logic. First, its static members are declared at
 the bottom.
 
     private static Log _log = LogFactoryUtil.getLog(HibernateUtil.class);
@@ -142,33 +154,37 @@ the bottom.
 
 Here's a description for each:
 
--   `_log`: Logs messages for this class. 
+-   `_log`: Logs messages for this class.
 -   `_instance`: the `HibernateUtil` instance.
--   `_sessionFactory`: manages sessions to the JNDI resources (e.g., the JNDI 
-    data source. 
+-   `_sessionFactory`: manages Hibernate sessions which, as configured, will
+    want to have access to the JNDI resources (e.g., the JNDI data source).
 
-The `HibernateUtil` class uses these members. 
+The `HibernateUtil` class uses these members.
 
 The constructor `HibernateUtil()` makes the "magic" happen:
 
-1.  Get the current thread, its class loader, and DXP's class loader. 
+1.  Get the current thread, its context classloader (which will be an OSGi
+    classloader), and DXP's classloader.
 
         Thread thread = Thread.currentThread();
         ClassLoader threadClassLoader = thread.getContextClassLoader();
         ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 
-2.  Aggregate the classloaders as a convenience to use with Hibernate.   
+2.  Create a new classloader that is the child of the portal classloader and
+    is able to access classes and configurations from the OSGi classloader
+    created for our OSgi bundle. `AggregateClassLoader` allows us to do this
+    without a lot of boilerplate code.
 
         ClassLoader hibernateClassLoader =
             AggregateClassLoader.getAggregateClassLoader(
                 portalClassLoader, threadClassLoader);
 
-2.  Set the Hibernate classloader on the thread. 
+2.  Set the new classloader as our current thread's context classloader.
 
         thread.setContextClassLoader(hibernateClassLoader);
 
-3.  Create a session factory that uses the Hibernate configuration (the one 
-    configured earlier that uses the JNDI data source). 
+3.  Create a session factory, which will proceed to load the Hibernate
+    configuration (the one configured earlier that uses the JNDI data source).
 
         try {
            Configuration configuration = new Configuration();
@@ -181,10 +197,10 @@ The constructor `HibernateUtil()` makes the "magic" happen:
            _log.error(e, e);
         }
 
-    At this point, the session factory services requests on the JNDI data
-    source. 
+    At this point, the session factory service successfully requests the JNDI
+    data source, using the new classloader we created.
 
-4.  Restore the original classloader to the thread. 
+4.  Restore the original OSGi classloader as the thread's context classloader.
 
         finally {
             thread.setContextClassLoader(threadClassLoader);
@@ -200,7 +216,7 @@ and its sessions.
 
 Classes like `HibernateUtil` facilitate getting Hibernate sessions that use JNDI
 resources, such as JNDI data sources. You can use a version of it in your
-projects that use Hibernate. 
+projects that use Hibernate.
 
 ## Related Topics [](id=related-topics)
 
