@@ -4,18 +4,17 @@ If you're using Hibernate to connect to JNDI resources on Tomcat (or an
 application server that manages JNDI resources the same way), this tutorial is
 for you!
 
-As background, one way that Tomcat checks whether applications can access JNDI
-resources is by checking the context classloader. If the context classloader is
-a web application classloader or the child of a web application classloader,
-then you have access to the JNDI resources that Tomcat has made available to
-that web application.
+As background, one way that Tomcat determines whether applications can access
+JNDI resources is by checking the context classloader. If the context
+classloader is a web application classloader or the child of a web application
+classloader, Tomcat lets it access the JNDI resources. 
 
-Although the DXP 7.1 application deploys on Tomcat, and the DXP 7.1 classloader
-is a web application classloader, its portlets' classloaders are not---they're
-OSGi bundles installed to DXP's OSGi container using OSGi classloaders. For a
-portlet to access the JNDI resources made available to the DXP 7.1 application
-on Tomcat, the portlet must switch to a classloader that is a child of DXP's
-classloader.
+Although the @product-ver@ application deploys on Tomcat, and the @product-ver@
+classloader is a web application classloader, @product@ portlet classloaders are
+not---the portlets are OSGi bundles installed to @product@'s OSGi container
+using OSGi classloaders. For a portlet to access the JNDI resources made
+available to the @product@ application on Tomcat, the portlet must switch to a
+classloader that is a child of @product@'s classloader.
 
 This tutorial demonstrates how to perform context classloader switching so that
 a Hibernate configuration can leverage a JNDI data source.
@@ -50,9 +49,9 @@ If you base your descriptor on the one above, make sure to replace the
 specify resources to use in your sessions.
 
 Next, the `HibernateUtil` class demonstrates creating and managing Hibernate
-sessions that use DXP's classloader. Note, `// Customization START/END` comments
-mark code that lets the caller access the JNDI data source when processing the
-Hibernate configuration.
+sessions that use @product@'s classloader. Note, `// Customization START/END`
+comments mark code that lets the caller access the JNDI data source when
+processing the Hibernate configuration.
 
     import com.liferay.portal.kernel.log.Log;
     import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -163,16 +162,16 @@ The `HibernateUtil` class uses these members.
 
 The constructor `HibernateUtil()` makes the "magic" happen:
 
-1.  Get the current thread, its context classloader (which will be an OSGi
-    classloader), and DXP's classloader.
+1.  Get the current thread, its context classloader (which is an OSGi 
+    classloader), and @product@'s classloader.
 
         Thread thread = Thread.currentThread();
         ClassLoader threadClassLoader = thread.getContextClassLoader();
         ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 
-2.  Create a new classloader that is the child of the portal classloader and
+2.  Create a new classloader that is the child of the Portal classloader and
     is able to access classes and configurations from the OSGi classloader
-    created for our OSgi bundle. `AggregateClassLoader` allows us to do this
+    created for our OSGi bundle. `AggregateClassLoader` allows us to do this
     without a lot of boilerplate code.
 
         ClassLoader hibernateClassLoader =
@@ -183,8 +182,8 @@ The constructor `HibernateUtil()` makes the "magic" happen:
 
         thread.setContextClassLoader(hibernateClassLoader);
 
-3.  Create a session factory, which will proceed to load the Hibernate
-    configuration (the one configured earlier that uses the JNDI data source).
+3.  Create a session factory, which loads the Hibernate configuration (the one 
+    configured earlier that uses the JNDI data source).
 
         try {
            Configuration configuration = new Configuration();
