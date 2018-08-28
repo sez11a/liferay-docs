@@ -40,6 +40,14 @@ Click a question to view the answer.
 
 <br/>
 <div class="ldn-faq-question">
+  <span class="ldn-faq-toggle-button" data-show="false" style="font-weight: normal;">How can I connect to a JNDI data source if I'm using Hibernate?&nbsp;<span class="icon-caret-right" style="pointer-events:none;"></span></span>
+  <div class="hide">  
+    <p>Code is available that facilitates <a href="/develop/tutorials/-/knowledge_base/7-0/using-jndi-resources-with-hibernate">using JNDI resources with Hibernate</a>. </p>
+  </div>
+</div>
+
+<br/>
+<div class="ldn-faq-question">
   <span class="ldn-faq-toggle-button" data-show="false" style="font-weight: normal;">How can I make sure my module works?&nbsp;<span class="icon-caret-right" style="pointer-events:none;"></span></span>
   <div class="hide">  
     <p><a href="/develop/tutorials/-/knowledge_base/7-0/testing">The Testing tutorials demonstrate several ways to test Liferay Portal modules</a>:</p>
