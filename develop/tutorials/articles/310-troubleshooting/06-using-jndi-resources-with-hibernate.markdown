@@ -153,7 +153,7 @@ the bottom.
 
     private SessionFactory _sessionFactory;
 
-Here's each member is described:
+Here each member is described:
 
 -   `_log`: Logs messages for this class.
 -   `_instance`: the `HibernateUtil` instance.
