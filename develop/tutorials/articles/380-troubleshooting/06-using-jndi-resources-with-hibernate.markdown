@@ -9,12 +9,12 @@ JNDI resources is by checking the context classloader. If the context
 classloader is a web application classloader or the child of a web application
 classloader, Tomcat lets it access the JNDI resources. 
 
-Although the @product-ver@ application deploys on Tomcat, and the @product-ver@
+Although the @product-ver@ application deploys on Tomcat, and the @product@
 classloader is a web application classloader, @product@ portlet classloaders are
-not---the portlets are OSGi bundles installed to @product@'s OSGi container
-using OSGi classloaders. For a portlet to access the JNDI resources made
-available to the @product@ application on Tomcat, the portlet must switch to a
-classloader that is a child of @product@'s classloader.
+not---the portlets are OSGi bundles installed to Liferay's OSGi container using
+OSGi classloaders. For a portlet to access the JNDI resources made available to
+the @product@ application on Tomcat, the portlet must switch to a classloader
+that is a child of @product@'s classloader.
 
 This tutorial demonstrates how to perform context classloader switching so that
 a Hibernate configuration can leverage a JNDI data source.
@@ -48,10 +48,10 @@ If you base your descriptor on the one above, make sure to replace the
 `connection.datasource` property value with your JNDI data source name and
 specify resources to use in your sessions.
 
-Next, the `HibernateUtil` class demonstrates creating and managing Hibernate
-sessions that use @product@'s classloader. Note, `// Customization START/END`
-comments mark code that lets the caller access the JNDI data source when
-processing the Hibernate configuration.
+Next, the `HibernateUtil` class provides methods for creating and managing
+Hibernate sessions that use @product@'s classloader. Note, `// Customization
+START/END` comments mark code that lets the caller access the JNDI data source
+when processing the Hibernate configuration.
 
     import com.liferay.portal.kernel.log.Log;
     import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -151,14 +151,12 @@ the bottom.
 
     private SessionFactory _sessionFactory;
 
-Here's a description for each:
+Here each member is described:
 
 -   `_log`: Logs messages for this class.
 -   `_instance`: the `HibernateUtil` instance.
 -   `_sessionFactory`: manages Hibernate sessions which, as configured, will
     want to have access to the JNDI resources (e.g., the JNDI data source).
-
-The `HibernateUtil` class uses these members.
 
 The constructor `HibernateUtil()` makes the "magic" happen:
 
@@ -169,16 +167,16 @@ The constructor `HibernateUtil()` makes the "magic" happen:
         ClassLoader threadClassLoader = thread.getContextClassLoader();
         ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 
-2.  Create a new classloader that is the child of the Portal classloader and
-    is able to access classes and configurations from the OSGi classloader
-    created for our OSGi bundle. `AggregateClassLoader` allows us to do this
-    without a lot of boilerplate code.
+2.  Create a new classloader that is the child of @product@'s classloader (the 
+    Portal classloader) and is able to access classes and configurations from
+    the OSGi classloader created for the OSGi bundle. `AggregateClassLoader`
+    allows us to do this without a lot of boilerplate code.
 
         ClassLoader hibernateClassLoader =
             AggregateClassLoader.getAggregateClassLoader(
                 portalClassLoader, threadClassLoader);
 
-2.  Set the new classloader as our current thread's context classloader.
+2.  Set the new classloader as the current thread's context classloader.
 
         thread.setContextClassLoader(hibernateClassLoader);
 
@@ -196,8 +194,8 @@ The constructor `HibernateUtil()` makes the "magic" happen:
            _log.error(e, e);
         }
 
-    At this point, the session factory service successfully requests the JNDI
-    data source, using the new classloader we created.
+    The session factory service requests the JNDI data source, using the new
+    classloader.
 
 4.  Restore the original OSGi classloader as the thread's context classloader.
 

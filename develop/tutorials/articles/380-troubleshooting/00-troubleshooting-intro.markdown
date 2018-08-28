@@ -40,6 +40,14 @@ Click a question to view the answer.
 
 <br/>
 <div class="ldn-faq-question">
+  <span class="ldn-faq-toggle-button" data-show="false" style="font-weight: normal;">How can I connect to a JNDI data source if I'm using Hibernate?&nbsp;<span class="icon-caret-right" style="pointer-events:none;"></span></span>
+  <div class="hide">  
+    <p>Code is available that facilitates <a href="/develop/tutorials/-/knowledge_base/7-0/using-jndi-resources-with-hibernate">using JNDI resources with Hibernate</a>. </p>
+  </div>
+</div>
+
+<br/>
+<div class="ldn-faq-question">
   <span class="ldn-faq-toggle-button" data-show="false" style="font-weight: normal;">My module has an unresolved requirement. What can I do?&nbsp;<span class="icon-caret-right" style="pointer-events:none;"></span></span>
   <div class="hide">  
     <p>If one of your bundles imports a package that no other bundle in the Liferay OSGi runtime exports, @product@ reports an unresolved requirement:</p>
