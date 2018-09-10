@@ -2,28 +2,28 @@
 
 Follow these steps to create your OSGi bundle for your new button:
 
-1.  [Create an OSGi module](/develop/tutorials/-/knowledge_base/7-1/starting-module-development#creating-a-module) 
+1.  [Create an OSGi module](/develop/tutorials/-/knowledge_base/7-1/starting-module-development#creating-a-module)
 
-2.  Add a `resources\META-INF\resources\js` folder to your module's `src\main` 
+2.  Add a `resources\META-INF\resources\js` folder to your module's `src\main`
     folder.
 
-3.  Specify your bundle's `Web-ContextPath` in its `bnd.bnd` file. An example 
-    BND file configuration is shown below with the `Web-ContextPath` pointing to 
-    the bundle's root folder. This is required to properly locate and load the 
-    module's JavaScript: 
+3.  Specify your bundle's `Web-ContextPath` in its `bnd.bnd` file. An example
+    BND file configuration is shown below with the `Web-ContextPath` pointing to
+    the bundle's root folder. This is required to properly locate and load the
+    module's JavaScript:
 
         Bundle-Name: my-log-text-button
         Bundle-SymbolicName: com.liferay.docs.portlet
         Bundle-Version: 1.0.0
         Web-ContextPath: /my-button-portlet-project
 
-4.  Since the button's configuration is defined in a JSX file, it must be 
-    transpiled for the browser. You can do this by adding the `transpileJS` task 
+4.  Since the button's configuration is defined in a JSX file, it must be
+    transpiled for the browser. You can do this by adding the `transpileJS` task
     to your `build.gradle` file. An example configuration is shown below:
 
-				configJSModules {
-					enabled = false
-				}
+        configJSModules {
+            enabled = false
+        }
 
         dependencies {
         	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.6.2"
@@ -35,12 +35,12 @@ Follow these steps to create your OSGi bundle for your new button:
         	compileOnly group: "org.osgi", name: "org.osgi.core", version: "6.0.0"
         }
 
-				transpileJS {
-					bundleFileName = "js/buttons.js"
-					globalName = "AlloyEditor.Buttons"
-					modules = "globals"
-					srcIncludes = "**/*.jsx"
-				}
+        transpileJS {
+            bundleFileName = "js/buttons.js"
+            globalName = "AlloyEditor.Buttons"
+            modules = "globals"
+            srcIncludes = "**/*.jsx"
+        }
 
 5.  Add the following `devDependencies` to your `package.json` file:
 
@@ -53,7 +53,7 @@ Follow these steps to create your OSGi bundle for your new button:
           "version": "1.0.0"
         }
 
-6.  Add following preset to your module's `.babelc` file to transpile your JSX 
+6.  Add following preset to your module's `.babelc` file to transpile your JSX
     file:
 
         {
