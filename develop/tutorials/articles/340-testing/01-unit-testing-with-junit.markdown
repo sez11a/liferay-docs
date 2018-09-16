@@ -9,7 +9,7 @@ applications.
 
 JUnit integrates with build environments such as Maven and Gradle. JUnit plugins
 are available in IDEs such as Eclipse, IntelliJ, and NetBeans. And of course,
-[Liferay Workspace](/develop/tutorials/-/knowledge_base/7-0/liferay-workspace) 
+[Liferay Workspace](/develop/tutorials/-/knowledge_base/7-1/liferay-workspace) 
 supports running JUnit tests. 
 
 This tutorial covers the following topics:
@@ -76,28 +76,28 @@ To help illustrate creating unit tests, here's an example class to test:
 
     public class MySampleNameClass {
 
-       public MySampleNameClass(String firstName, String middleName, String lastName) {
-          _firstName = firstName;
-          _middleName = middleName;
-          _lastName = lastName;
-       }
+        public MySampleNameClass(String firstName, String middleName, String lastName) {
+            _firstName = firstName;
+            _middleName = middleName;
+            _lastName = lastName;
+        }
 
-       public int fullNameLength() {
-          return _firstName.length() + _middleName.length() + _lastName.length();
-       }
+        public int fullNameLength() {
+            return _firstName.length() + _middleName.length() + _lastName.length();
+        }
 
-       public String getMiddleInitial() {
-          return _middleName.charAt(0) + ".";
-       }
+        public String getMiddleInitial() {
+            return _middleName.charAt(0) + ".";
+        }
 
-       @Override
-       public String toString() {
-          return _firstName + " " + getMiddleInitial() + " " + _lastName;
-       }
+        @Override
+        public String toString() {
+            return _firstName + " " + getMiddleInitial() + " " + _lastName;
+        }
 
-       private String _firstName;
-       private String _middleName;
-       private String _lastName;
+        private String _firstName;
+        private String _middleName;
+        private String _lastName;
 
     }
 
@@ -147,12 +147,12 @@ method:
 
     public class MySampleNameClassTest {
 
-       @Before
-       public void setUp() {
-          _mySampleNameClass = new MySampleNameClass("Brian", "Edward", "Greenwald");
-       }
+        @Before
+        public void setUp() {
+            _mySampleNameClass = new MySampleNameClass("Brian", "Edward", "Greenwald");
+        }
 
-       private MySampleNameClass _mySampleNameClass;
+        private MySampleNameClass _mySampleNameClass;
 
     }
 
@@ -180,23 +180,23 @@ test for each of its methods:
 
     @Test
     public void testFullNameLength() {
-       int length = _mySampleNameClass.fullNameLength();
+        int length = _mySampleNameClass.fullNameLength();
 
-       Assert.assertEquals(20, length);
+        Assert.assertEquals(20, length);
     }
 
     @Test
     public void testGetMiddleInitial() {
-       String middleInitial = _mySampleNameClass.getMiddleInitial();
+        String middleInitial = _mySampleNameClass.getMiddleInitial();
 
-       Assert.assertEquals("E.", middleInitial);
+        Assert.assertEquals("E.", middleInitial);
     }
 
     @Test
     public void testToString() {
-       String fullName = _mySampleNameClass.toString();
+        String fullName = _mySampleNameClass.toString();
 
-       Assert.assertEquals("Brian E. Greenwald", fullName);
+        Assert.assertEquals("Brian E. Greenwald", fullName);
     }
 
 Since you know the test input (e.g., the parameters passed into the
@@ -211,7 +211,7 @@ any assertions in the test method.
 
     @Test(expected = MySampleException.class)
     public void testToString() {
-       String fullName = _mySampleNamenClass.toString();
+        String fullName = _mySampleNamenClass.toString();
     }
 
 **Warning**: Each test method should be independent. Since JUnit doesn't
@@ -248,7 +248,7 @@ Add JUnit as a dependency. Here's a dependency on JUnit in Gradle:
 
 If your tests require accessing classes outside the module, declare them as
 `testCompile`
-[dependencies](/develop/tutorials/-/knowledge_base/7-0/configuring-dependencies)
+[dependencies](/develop/tutorials/-/knowledge_base/7-1/configuring-dependencies)
 in the module's `build.gradle` file. Here's an example `testCompile` dependency. 
 
     testCompile group: "com.sample", name: "com.sample.external", version: "1.0.0"
@@ -266,6 +266,13 @@ The module's classes and tests compile and its tests run. The following figure
 shows command output for a successful test execution.
 
 ![Figure 3: Command output of successful test execution looks like this.](../../images/junit-command-output.png)
+
+[Gradle's test options](https://docs.gradle.org/current/userguide/java_testing.html)
+let you attach a debugger to tests and filter on test classes and methods. The
+following command, for example, suspends processing in all test classes matching
+`*MyTest` and listens for a debugger to attach to port `5005`. 
+
+    gradlew test --tests *MyTest --debug-jvm 
 
 Reports are generated to module subfolders based on the build environment and/or
 reporting mechanism.
@@ -310,8 +317,8 @@ Congratulations on creating and executing unit tests with JUnit!
 
 ## Related Topics [](id=related-topics)
 
-[Integration Testing with the Arquillian Extension](/develop/tutorials/-/knowledge_base/7-0/arquillian-extension-for-liferay-example)
+[Injecting Service Components into Tests](/develop/tutorials/-/knowledge_base/7-1/injecting-service-components-into-tests)
 
-[Liferay Workspace](/develop/tutorials/-/knowledge_base/7-0/liferay-workspace)
+[Liferay Workspace](/develop/tutorials/-/knowledge_base/7-1/liferay-workspace)
 
-[Liferay @ide@](/develop/tutorials/-/knowledge_base/7-0/liferay-ide)
+[Liferay @ide@](/develop/tutorials/-/knowledge_base/7-1/liferay-ide)
