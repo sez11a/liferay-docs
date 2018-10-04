@@ -4,9 +4,9 @@ The Liferay Marketplace app QA/review process begins as soon as you submit your
 app for review. Every third-party app submitted to the Liferay Marketplace is
 reviewed by our team to ensure that certain standards for information are upheld
 and the app installs as expected. *However, Liferay cannot be a substitute for
-your own testing and debugging team*. Ultimately, it is the responsibility of
-the developer to test, refine, and ensure that the app functions as promised and
-performs as expected.
+your own testing and debugging team*. Ultimately, it is your responsibility to
+test, refine, and ensure that the app functions as promised and performs as
+expected.
 
 +$$$
 
@@ -17,7 +17,7 @@ User Agreement*, *Liferay Marketplace Developer Agreement*, and the individual
 
 $$$
 
-Once you've submitted your app for review, your app will change its status as it
+Once you've submitted your app for review, your app's status will change as it
 moves through the review process. You will be updated via email as your app's
 status changes, and we will try to provide as much detail as we can if we
 discover a potential issue with your app. Overall, we don't want our app review
@@ -25,7 +25,7 @@ process to feel like a barrier or a black box. We love having new apps in the
 Marketplace, and we'll try to be as helpful as we can to bring your app to
 approval!
 
-![Figure 1: Here's a diagram of the the QA/review process.](../../images/app_review_process.png)
+![Figure 1: Here's a diagram of the QA/review process.](../../images/app_review_process.png)
 
 If you submit an updated version of a previously approved app, the app
 statuses will display as: Approved (Version Unsubmitted), Approved (Version
