@@ -18,25 +18,25 @@ One of the main reasons for developing and publishing apps on the Marketplace
 is to drive downloads and adoption of your app. The Marketplace enables you, as
 the developer of your app, to get detailed reports about the number of views,
 downloads, and purchases of your app(s). To access these metrics, navigate
-to *Home* &rarr; *Metrics* (under *Development*). 
+to *Account Home* &rarr; *Metrics* (under *Development*). 
 
-![Figure 1: The App Performance view in Marketplace lets you see how many times your apps has been viewed, downloaded, and purchased over a time interval.](../../images/marketplace-app-metrics-over-time.png) 
+![Figure 1: The App Performance view in Marketplace lets you see how many times your apps have been viewed, downloaded, and purchased over a time interval.](../../images/marketplace-app-metrics-over-time.png) 
 
-The view shown above is the default metrics view for a single app. Across the
-top is a list of data series options (*Views*, *Downloads*, or *Purchases*).
-Below that, a date range can be chosen. In the middle, a graph is shown for the
-data within the date range. Finally, the same data that is graphed is also shown
-in tabular format, in case you want to know the exact values making up the
-graph. The different types of data available to view are described below.
+The view shown above is the default metrics view for a developer's apps. Across
+the bottom is a list of data series options (*Views*, *Downloads*, or
+*Purchases*). At the top, a date range can be chosen. In the middle, a graph is
+shown for the data within the date range. Finally, the same data that is graphed
+is also shown in tabular format, in case you want to know the exact values
+making up the graph. The different types of data available to view are described
+below.
 
 ### Views [](id=views)
 
 When someone searches or browses the Marketplace, they click on apps to see
 detailed views of the apps they're interested in. When this occurs for your app,
 a *View* is recorded for the app, and this data is what is shown on the App
-Metrics screen when *Views* is selected at the top. *Views* is also the default
-view, as shown above. The number of recorded views per day per user is
-unlimited.
+Metrics screen when *Views* is selected. *Views* is also the default view, as
+shown above. The number of recorded views per day per user is unlimited.
 
 ### Downloads [](id=downloads)
 
@@ -63,9 +63,9 @@ or more of these kinds of changes during the life of the app:
 - Adding new license bundles (quantities)
 - Editing app prices of bundles
 - Modifying regional availability
-- Adding support for a new version of Liferay Portal
+- Adding support for a new version of Liferay
 - Releasing a new version of your app to fix bugs or offer new functionality
-- Disabling your apps
+- Disabling your app
 
 Your currently approved app remains available while you're in the process of
 submitting changes to your app and while your submitted changes are under review
@@ -76,10 +76,9 @@ Liferay Marketplace supports all of the above operations as described below.
 ### Editing Your App's Metadata [](id=editing-your-app-details)
 
 App metadata includes the name, description, icon, screenshots, and other
-information that you supplied on the first screen during the app creation
-process. To make changes to this content for your app, navigate to *Home* &rarr;
-*Apps* and select the app you wish to edit. Click the *Edit* button to edit that
-app. 
+information that you supplied during the app creation process. To make changes
+to this content for your app, navigate to *Account Home* &rarr; *Apps* and
+select the app you wish to edit. Click the *Edit* button to edit that app. 
 
 This screen shows you what the app looks like on the Marketplace. To edit the
 detail information, click the *Edit* button at the bottom of the preview. This
@@ -106,8 +105,7 @@ click *Edit* &rarr; *Pricing*. When you've finished editing your app's prices,
 click *Next*. 
 
 These changes do not require Liferay verification process to approve. Simply
-make the changes you wish and save your app. These new prices are reflected
-immediately. 
+make the changes you wish and save your app. The new prices show immediately. 
 
 You however, cannot modify the following attributes of an approved app: 
 
@@ -120,7 +118,7 @@ Next, you can consider adding support for new versions of Liferay.
 ### Adding Support for New Versions of Liferay Portal [](id=adding-support-for-new-versions-of-liferay-portal)
 
 If you need to add files in support of another Liferay release, the process is
-similar. Navigate to navigate to *Home* &rarr; *Apps* and select the app you
+similar. Navigate to navigate to *Account Home* &rarr; *Apps* and select the app you
 wish to edit. Click the *Edit* button to edit that app. Click *Next* to advance
 past the details screen (making any changes as needed), and click *Next* to
 advance past the version edit screen (you can't actually edit the version number
@@ -136,11 +134,13 @@ must create a new version of the app--see the later section on adding versions
 for details on how to do this).
 
 Upload your new files (ensuring that your new plugins have updated compatibility
-information: see the section on *Specify App Compatibility* for details on
-versions), click *Next*, and observe the newly-added files listed at the
-bottom of the preview screen. Click *Submit for Review* to submit your requested
-change (adding of files). The files will be reviewed by Liferay, and once
-approved, the new package becomes available for download in the Marketplace.
+information: see the
+[Marketplace App Metadata Guidelines](/distribute/how-to-publish/-/knowledge_base/how-to-publish/preparing-your-app#marketplace-app-metadata-guidelines)
+for details on versions), click *Next*, and observe the newly-added files listed
+at the bottom of the preview screen. Click *Submit for Review* to submit your
+requested change (adding of files). The files will be reviewed by Liferay, and
+once approved, the new package becomes available for download in the
+Marketplace.
 
 ### Releasing a New Version of your App [](id=releasing-a-new-version-of-your-app)
 
@@ -152,12 +152,12 @@ version of your app becomes available, existing users are notified automatically
 through Liferay's notification system.
 
 New versions of your apps are created in a similar fashion to creating new apps.
-To add a new version, navigate to *Home* &rarr; *Apps* and select the app you
-wish to edit. Click the *Edit* button to edit that app. You are taken to the
-Details screen. At the bottom of the Details screen, click the *Add New Version*
-button. This button begins the process of adding a new version, starting with
-the App Details screen. In this case, the screen is pre-filled with data from
-the current version of the app. 
+To add a new version, navigate to *Account Home* &rarr; *Apps* and select the
+app you wish to edit. Click the *Edit* button to edit that app. You are taken to
+the Details screen. At the bottom of the Details screen, click the *Add New
+Version* button. This button begins the process of adding a new version,
+starting with the App Details screen. In this case, the screen is pre-filled
+with data from the current version of the app. 
 
 You can make any changes to the pre-filled data on this screen. Since this is a
 new version of an existing app, making major changes (such as completely
@@ -186,27 +186,26 @@ any versions they've not already received. The app remains in your inventory,
 with all of its history, in case you need to re-activate or reference it in the
 future.
 
-To deactivate your app, navigate to *Home* &rarr; *Apps* and select the app you
-wish to deactivate. Click the *Deactivate* button.
+To deactivate your app, navigate to *Account Home* &rarr; *Apps* and select the
+app you wish to deactivate. Click the *Deactivate* button.
 
 In this set of articles, we looked at how to create, publish, maintain, and
 track Liferay Marketplace apps. You can do this through the App Manager that's
-available on your profile [liferay.com](http://liferay.com) page
-([liferay.com](http://liferay.com) account required!). Then, we covered the
-requirements for publishing apps, which did not differ significantly from
-requirements for general Liferay development. Next, we showed how you can
-publish apps on the Marketplace and how you can modify it as the app
+available on your *Account Home* page on [liferay.com](http://liferay.com)
+(liferay.com) account required!). We covered requirements for publishing
+variations of your apps for different versions of Liferay. Next, we showed how
+you can publish an app on the Marketplace and how you can modify the app as it
 evolves. Finally, we looked at how to track the adoption of apps using view,
 download, and install metrics.
 
 ## Related Topics [](id=related-topics)
 
-[Beginning Liferay Development](/develop/learning-paths/-/knowledge_base/6-2/beginning-liferay-development)
+[Starting Module Development](/develop/tutorials/-/knowledge_base/7-1/themes-and-layout-templates)
 
-[Developing with the Plugins SDK](/develop/tutorials/-/knowledge_base/6-2/plugins-sdk)
+[Developing a Web Application](/develop/tutorials/-/knowledge_base/7-1/developing-a-web-application)
 
-[Developing Plugins with Liferay IDE](/develop/tutorials/-/knowledge_base/6-2/liferay-ide)
+[Portlets](/develop/tutorials/-/knowledge_base/7-1/portlets)
 
-[Developing with Maven](/develop/tutorials/-/knowledge_base/6-2/maven)
+[Themes and Layout Templates](/develop/tutorials/-/knowledge_base/7-1/themes-and-layout-templates)
 
 [Plugin Security and PACL](/develop/tutorials/-/knowledge_base/6-2/plugin-security-and-pacl)
