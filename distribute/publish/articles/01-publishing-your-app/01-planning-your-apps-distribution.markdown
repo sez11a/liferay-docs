@@ -1,14 +1,13 @@
 # Planning Your App's Distribution [](id=planning-your-apps-distribution)
 
 When you start the formal process of submitting your app to the Marketplace, in
-addition to uploading your app's files you'll need to answer a host of important
-questions. For example, you'll need to clarify who owns the app, specify pricing
-for the app, define its licensing scheme (if it's a paid app), associate a
-person or company as its owner and maintainer, and specify the versions of
-Liferay that the app supports. Your answers to these questions will also help
-you determine whether you'll need to package multiple versions of the app. This
-tutorial prepares you by explaining the questions and ways you might answer
-them. 
+addition to uploading your app's files you must answer a host of important
+questions. For example, you must clarify who owns the app, specify pricing for
+the app, define its licensing scheme (if it's a paid app), associate a person or
+company as its owner and maintainer, and specify the versions of Liferay that
+the app supports. Your answers to these questions helps you determine whether
+you must package multiple versions of the app. This tutorial prepares you by
+explaining the questions and ways you might answer them. 
 
 ## Selling Your App or Making it Free [](id=selling-your-app-or-making-it-free)
 
@@ -16,17 +15,17 @@ Do you want to sell your app on the Marketplace? Or do you want to freely share
 it with anyone on the Marketplace? It's up to you. Most of the content that
 follows describes options for paid apps (apps you sell). 
 
-If you're selling your app, you must publish using a Paid App Account. You must
-also specify licensing, a price structure, and regional availability for your
-paid apps.
+If you're selling your app, you must publish using a *Paid App Account*. You
+must also specify licensing, a price structure, and regional availability for
+your paid apps.
 
 Importantly, you can't change the app from free to paid or from paid to free
-once the app is published to the Marketplace. In order to offer the app in the
-other license type, you must submit another app under a different name (title).
-If you wish to have both free and paid licenses for your app, you must submit
-the app under one name for free licenses and submit it under another name for
-paid licenses. Make sure to select the license type (i.e., free or paid) that's
-best for your app. 
+once the app is published to the Marketplace. Offering the app in the other
+license type, requires submitting another app under a different name (title). If
+you wish to have both free and paid licenses for your app, you must submit the
+app under one name for free licenses and submit it under another name for paid
+licenses. Make sure to select the license type (i.e., free or paid) that's best
+for your app. 
 
 Have you decided who's going to be listed as the app's author/owner? Have
 you decided who's going to manage the app once it's on the Marketplace? App
@@ -35,13 +34,13 @@ ownership options are explained next.
 ## Publishing as an Individual or on Behalf of a Company [](id=publishing-as-an-individual-or-on-behalf-of-a-company)
 
 You can publish an app as yourself (an individual) or on behalf of a *company*.
-This determines the who is shown as the app's author and owner. Your selection
-also determines who can access the app behind the scenes, once it's published. 
+This determines who is shown as the app's author and owner. Your selection also
+determines who can access the app behind the scenes, once it's published. 
 
 The default option is publishing on behalf of yourself. If you go with this
-option, your name is shown as the app's author/owner in the Marketplace. The
-term *personal app* refers to an app published by an individual. That individual
-is the only one who can manage the personal app. Managing an app includes such
+option, your name shows as the app's author/owner in the Marketplace. The term
+*personal app* refers to an app published by an individual. That individual is
+the only one who can manage the personal app. Managing an app includes such
 duties as adding new releases to it, adding new versions of it, and editing its
 details. 
 
@@ -49,10 +48,11 @@ Publishing on behalf of a company effectively hands the keys over to the
 company's administrators. The app shows on the company's Marketplace app
 development page and in the company's list of apps on the company's public
 profile page. Company admins have the same permission that an individual author
-has to manage the app (add new releases, new versions, edit details, etc). The
+has to manage the app (add new releases, new versions, edit details, etc.). The
 company's name alone is shown as the app's author/owner. 
 
-You can [register](https://www.liferay.com/marketplace/become-a-developer)
+You can
+[register](https://www.liferay.com/marketplace/become-a-developer)
 yourself as a Marketplace Developer or one of your company's administrators can
 register the company as a Marketplace Developer. You can either register for a
 Free Basic Account or register for a Paid App Developer Account. A Paid App
@@ -72,7 +72,7 @@ developer account options:
 <ul class="text-left">
 	<li>No cost to register as a Marketplace developer</li>
 	<li>Distribute free apps on the Marketplace</li>
-	<li>Access to developer-only resources (e.g., Developer Portal, Liferay IDE, Liferay Developer License)</li>
+	<li>Access to developer-only resources (e.g., Liferay Dev Studio, Liferay Developer License)</li>
 	<li>Participate in Marketplace promotions</li>
 </ul>
 </div>
@@ -127,9 +127,9 @@ Here are the license term options:
 - Non-perpetual license: must be renewed annually.
 
 Importantly, you can't change your app's license terms once the app is approved.
-In order to release an approved app under a different license term you must
-submit another app under a new name (title). So make sure you think through the
-license term that makes the most sense for your app. 
+Releasing an approved app under a different license term requires submitting
+another app under a new name (title). So make sure to think through the license
+term that makes the most sense for your app. 
 
 +$$$
 
@@ -144,10 +144,10 @@ $$$
 ### Determining License Type and License Unit Pricing [](id=determining-license-type-and-license-unit-pricing)
 
 Licenses are set to run on a permitted number of Instance Units (defined as a
-single installation of the Liferay Portal, which corresponds to one (1) Liferay
-Portal `.war` file). You can create tiers of bundled options to accommodate the
-number of Instance Units to offer to customers. You can also offer a discounted
-price for a bundle of multiple Instance Units.
+single installation of the Liferay, which corresponds to one (1) Liferay `.war`
+file). You can create tiers of bundled options to accommodate the number of
+Instance Units to offer to customers. You can also offer a discounted price for
+a bundle of multiple Instance Units.
 
 There are two types of licenses that you can offer for your app: standard
 licenses and developer licenses. Standard licenses are intended for production
@@ -184,7 +184,7 @@ submission process if you choose to *offer subscription services*, you should
 build the price of subscription services into the annual price of the
 non-perpetual license; please take this into account as you price non-perpetual
 licenses. In effect, the customer pays one price annually for both the app
-license and subscription services. Customers is entitled to support,
+license and subscription services. The customer is entitled to support,
 maintenance, and updates as long as they continue to renew their non-perpetual
 license.
 
@@ -204,8 +204,8 @@ Choose the currency to use with your pricing options. Decide on the renewal cost
 for any support services you offer. The support services price is per instance,
 so if you specify $100 USD and the customer is running 10 instances, their
 annual support services renewal cost will be $1000. Note: This only applies to
-perpetual licenses. For non-perpetual licenses, you should include any support
-services cost in the annual license price. 
+perpetual licenses. For non-perpetual licenses, include any support services
+cost in the annual license price. 
 
 Even after an app has been approved, you can change the currency type and
 currency price of its license bundles, and you can modify regional availability
@@ -265,23 +265,24 @@ Marketplaces**
 
 As you can see, Liferay's fee is reasonable. 
 
-You need a valid Paypal account to receive payment; you're asked to provide this
+You need a valid PayPal account to receive payment; you're asked to provide this
 info when registering for or converting to a Paid App Developer Account.
 Payments are issued no later than 90 days after the transaction. 
 
 Now that you've decided on licensing options and pricing, you can concentrate on
-what versions of Liferay your app will run on. 
+the Liferay versions your app runs on. 
 
 ## Determining Editions and Versions of Liferay to Target [](id=determining-versions-of-liferay-to-target)
 
 Of course, targeting the widest possible range of Liferay editions and versions
 in an app typically draws larger audiences to the app. And there may be certain
 features in these editions and versions that you want to take advantage of. In
-your app's plugin [packaging properties](/distribute/how-to-publish/-/knowledge_base/how-to-publish/preparing-your-app#specifying-packaging-directives),
-you specify packaging directives to indicate the [editions](/discover/deployment/-/knowledge_base/6-2/editions-of-liferay)
-the app supports and the version that the app supports. To ensure the widest
-audience for your app, we encourage you to make your app compatible with both
-Liferay Community Edition (CE) and Liferay Enterprise Edition (EE). 
+your app's plugin
+[packaging properties](/distribute/how-to-publish/-/knowledge_base/how-to-publish/preparing-your-app#specifying-packaging-directives),
+specify packaging directives to indicate the editions the app supports and the
+version that the app supports. To ensure the widest audience for your app, make
+your app compatible with both Liferay Digital Experience Platform (DXP) and
+Liferay Portal Community Edition (CE). 
 
 You can prepare a set of app files (including its
 `liferay-plugin-package.properties` file) for each version of Liferay you want
@@ -310,9 +311,9 @@ time. When you first create an app, you give it an initial version (e.g.,
 cases, you specify additional qualifiers in order to convey a special meaning.
 For example, you may declare that the version of your app is always in x.y.z
 format (where you've clearly defined the significance of x, y, and z). Liferay
-Portal versions and official Liferay app versions use this format.
+versions and official Liferay app versions use this format.
 
-In any case, you're free to your app's assign version designators any way you
+In any case, you're free to assign your app's version designators any way you
 like. We recommend that you stick to a well known and easily understandable
 format, such as `1.0`, `1.1`, `1.2`, and so on. Although you may want to include
 alphabetical characters (e.g., `1.0 Beta 2` or `6.3 Patch 123235-01`), we
