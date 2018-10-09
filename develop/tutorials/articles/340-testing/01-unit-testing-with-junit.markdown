@@ -3,13 +3,11 @@
 Test driven development is a best practice for any developer. Unit tests verify
 and validate functionality of classes and methods in isolation by "mocking" 
 external dependencies. One of the most widely-used tools for test driven
-development on the Java platform is JUnit. You can use the
-[JUnit](http://junit.org) framework to write unit tests for @product@
-applications. 
+development on the Java platform is [JUnit](https://www.junit.org). 
 
-JUnit integrates with build environments such as Maven and Gradle. JUnit plugins
-are available in IDEs such as Eclipse, IntelliJ, and NetBeans. And of course,
-[Liferay Workspace](/develop/tutorials/-/knowledge_base/7-1/liferay-workspace) 
+JUnit integrates with Maven and Gradle build environments. JUnit plugins are
+available in IDEs such as Eclipse, IntelliJ, and NetBeans. And of course,
+[Liferay Workspace](/develop/tutorials/-/knowledge_base/7-1/liferay-workspace)
 supports running JUnit tests. 
 
 This tutorial covers the following topics:
