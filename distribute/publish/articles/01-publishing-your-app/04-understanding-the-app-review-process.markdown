@@ -204,7 +204,7 @@ table td {
 				</ul>
 			</td>
 		</tr>
-		<tr>
+        <tr>
 			<td class="first-column"> Database </td>
 			<td class="">
 				<span>For versions up to Liferay Portal 6.2</span>
@@ -215,6 +215,11 @@ table td {
 				<span>For Liferay Digital Enterprise 7.0 and Liferay Portal CE 7.0</span>
 				<ul>
 					<li> MySQL 5.6.x </li>
+				</ul>
+
+				<span>For Liferay DXP 7.1 and Liferay Portal CE 7.1</span>
+				<ul>
+					<li> MySQL 5.7.x </li>
 				</ul>
 			</td>
 			<td class="third-column">
@@ -227,6 +232,10 @@ table td {
 					<span>For Liferay Digital Enterprise 7.0 and Liferay Portal CE 7.0</span>
 					<ul>
 						<li> MySQL 5.6.x </li>
+					</ul>
+					<span>For Liferay DXP 7.1 and Liferay Portal CE 7.1</span>
+					<ul>
+						<li> MySQL 5.7.x </li>
 					</ul>
 				</ul>
 			</td>
@@ -241,7 +250,7 @@ table td {
 					<li> Wildfly 10 </li>
 				</ul>
 
-				<span>For Liferay Digital Enterprise 7.0 and Liferay Portal CE 7.0</span>
+				<span>For Liferay DXP 7.1, Liferay Digital Enterprise 7.0, Liferay Portal CE 7.1, and CE 7.0</span>
 				<ul>
 					<li> Tomcat 8 </li>
 					<li> Wildfly 10 </li>
@@ -252,7 +261,7 @@ table td {
 					<li> Tomcat 7 </li>
 				</ul>
 
-				<span>For Liferay Digital Enterprise 7.0 and Liferay Portal CE 7.0</span>
+				<span>For Liferay DXP 7.1, Liferay Digital Enterprise 7.0, Liferay Portal CE 7.1 and CE 7.0</span>
 				<ul>
 					<li> Tomcat 8 </li>
 					<li> Wildfly 10 </li>
@@ -268,7 +277,7 @@ table td {
 					<li> Oracle JDK 7 </li>
 				</ul>
 
-				<span>For Liferay Digital Enterprise 7.0 and Liferay Portal CE 7.0</span>
+				<span>For Liferay DXP 7.1, Liferay Digital Enterprise 7.0 and Liferay Portal CE 7.0</span>
 				<ul>
 					<li>Oracle JDK 8</li>
 				</ul>
@@ -280,7 +289,7 @@ table td {
 					<li> Oracle JDK 7 </li>
 				</ul>
 
-				<span>For Liferay Digital Enterprise 7.0 and Liferay Portal CE 7.0</span>
+				<span>For Liferay DXP 7.1, Liferay Digital Enterprise 7.0 and Liferay Portal CE 7.0</span>
 				<ul>
 					<li>Oracle JDK 8</li>
 				</ul>
