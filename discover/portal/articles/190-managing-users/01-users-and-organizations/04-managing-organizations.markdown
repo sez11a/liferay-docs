@@ -15,17 +15,11 @@ organization to the Lunar Resort):
 2.  Go to the *Organizations* tab and click the *Add* button. Fill out the Name
     field at a minimum.
 
-3.  To attach a Site when you create an Organization, click on *Organization
-    Site* and check the *Create Site* box. If you don't know right now if your
-    organization needs a site, that's fine. You can always add one later. 
-
-    ![Figure 1: Fill out the add Organization form and click *Save*. ](../../../images/orgs-add-organization-site.png)
-
-4.  If you're creating a child Organization, use the Parent Organization
+3.  If you're creating a child Organization, use the Parent Organization
     *Select* button to select an Organization in the system to be the direct
     parent. Click the *Remove* button to remove the currently configured parent.
 
-5.  Click *Save* when finished filling out the Add Organization form.
+4.  Click *Save* when finished filling out the Add Organization form.
 
 As when creating a new user, once you submit the form a success message appears
 and you have access to a new form which lets you enter additional information
@@ -57,11 +51,12 @@ listed. Click the *Actions* button next to an Organization. This shows a list of
 actions you can perform on this Organization.
 
 - *Edit* lets you specify details about the Organization, including addresses,
-  phone numbers, email addresses and websites.
+  phone numbers, and email addresses. You can also create a Site for the
+  Organization.
 
 - *Manage Site* lets you create and manage the public and private pages of the
-  Organization's site. This only appears for Organizations that have attached
-  Sites.
+  Organization's Site. This only appears after a Site has been created for the
+  Organization. 
 
 - *Assign Organization Roles* lets you assign Organization-scoped Roles to
   Users. By default, Organizations are created with three Roles: Organization
