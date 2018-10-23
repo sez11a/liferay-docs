@@ -229,7 +229,6 @@ Follow these steps to create the search results JSP:
         <%@ page import="com.liferay.portal.kernel.search.Hits" %>
         <%@ page import="com.liferay.portal.kernel.search.Document" %>
         <%@ page import="com.liferay.portal.kernel.search.Field" %>
-        <%@ page import="com.liferay.portal.kernel.util.StringPool" %>
         <%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
         <%@ page import="com.liferay.portal.kernel.util.Validator" %>
         <%@ page import="com.liferay.portal.kernel.util.PortalUtil" %>

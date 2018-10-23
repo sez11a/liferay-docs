@@ -33,7 +33,7 @@
 
             for (int i = 0; i < guestbooks.size(); i++) {
 
-                Guestbook curGuestbook = (Guestbook) guestbooks.get(i);
+                Guestbook curGuestbook = guestbooks.get(i);
                 String cssClass = StringPool.BLANK;
 
                 if (curGuestbook.getGuestbookId() == guestbookId) {
