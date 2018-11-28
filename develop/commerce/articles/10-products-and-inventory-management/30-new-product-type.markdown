@@ -1,4 +1,4 @@
-# Creating New Product Types
+# Creating New Product Types [](id=creating-new-product-types)
 
 @commerce@ supports three different 
 [product types](/web/emporio/documentation/-/knowledge_base/1-0/product-types) 
@@ -36,7 +36,7 @@ admin screens, see
 
 $$$
 
-## Defining the New Type
+## Defining the New Type [](id=defining-the-new-type)
 
 First, create a module and add dependencies to its `build.gradle`. The build
 script should look like this:
@@ -45,7 +45,7 @@ script should look like this:
     targetCompatibility = "1.8"
 
     dependencies {
-        compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "2.0.0-SNAPSHOT"
+        compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "2.0.0"
         compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.5.0"
         compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations", version: "1.3.0"
         compileOnly group: "javax.servlet", name: "javax.servlet-api", version: "3.0.1"
@@ -96,7 +96,7 @@ The interface's `getLabel` method returns the localized version of your type's
 name to display in the UI, while the `getName` method returns a unique
 identifier for the type to be stored in the database.
 
-## Providing the Type's Functionality
+## Providing the Type's Functionality [](id=providing-the-types-functionality)
 
 At this point, you can deploy your module and create products belonging to your
 new type. Other than the type's label, however, these products will have no
