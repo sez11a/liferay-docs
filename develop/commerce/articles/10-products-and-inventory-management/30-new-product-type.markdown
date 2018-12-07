@@ -19,8 +19,8 @@ You need four things to create a new product type:
 
 Follow these steps to create a new product type:
 
-1.  Create a new module add a dependency on the `commerce.product.api` module
-    to its `build.gradle` file.
+1.  Create a new module and add a dependency on the `commerce.product.api`
+    module to its `build.gradle` file.
 
 2.  Implement the `com.liferay.commerce.product.type.CPType` interface.
 
@@ -52,7 +52,7 @@ script should look like this:
     }
 
 Then create a new Java class implementing the `CPType` interface. Insert the
-following Component annotation before the class declaration:
+following `@Component` annotation before the class declaration:
 
     @Component(
         immediate = true,
@@ -99,17 +99,15 @@ identifier for the type to be stored in the database.
 ## Providing the Type's Functionality [](id=providing-the-types-functionality)
 
 At this point, you can deploy your module and create products belonging to your
-new type. Other than the type's label, however, these products will have no
+new type. Other than the type's label, however, these products have no
 special characteristics distinguishing them from
 [simple](/web/emporio/documentation/-/knowledge_base/1-0/product-types)
 products. 
 
-Defining your new type's functionality involves extending the catalog's UI to
-give administrators the ability to configure products of that type.
+Defining your new type's functionality involves extending the catalog's UI, so
+administrators can configure products of that type.
 
-![Figure 2: Admin screens are provided by extending product tab menu. The
-*Virtual* tab, above, is an admin screen unique to the virtual product
-type.](../../images/cptype-menu.png)
+![Figure 2: Admin screens are provided by extending product tab menu. The *Virtual* tab, above, is an admin screen unique to the virtual product type.](../../images/cptype-menu.png)
 
 Follow these steps:
 
