@@ -99,7 +99,7 @@ with the appropriate login screen.
 
 Upon successful authentication, the IdP constructs a SAML Response. It includes
 attribute statements configured in the designated Service Provider Connection
-(SPC; see the [next article](/discover/portal/-/knowledge_base/7-1/setting-up-saml) on setting up
+(SPC; see the [next article](/discover/deployment/-/knowledge_base/7-1/setting-up-liferay-as-a-saml-identity-provider) on setting up
 the SPC in @product@'s SAML adapter).
 
 The IdP sends the response to the Assertion Consumer Service URL using HTTP-POST
@@ -264,7 +264,7 @@ A SAML `LogoutRequest` is sent to the Single Log Out service URL of the IdP.
 
 -  If @product@ serves as the SP, the `LogoutRequest` is sent to the IdP 
 configured by the IdP Connection tab of the SAML provider (see the
-[next article](/discover/portal/-/knowledge_base/7-1/setting-up-saml) to set up the
+[next article](/discover/deployment/-/knowledge_base/7-1/setting-up-liferay-as-a-saml-identity-provider) to set up the
 IdP Connection) and the SLO service URL defined in the SAML metadata. The
 request is sent using HTTP-POST or HTTP-Redirect binding.
 

@@ -80,7 +80,7 @@ The UI is segmented into three tabs:
     handle each separately. 
 
 2.  **Registration:** Generate and download 
-    [*environment tokens*](#using-environment-tokens) 
+    [*environment tokens*](https://customer.liferay.com/documentation/7.1/deploy/-/official_documentation/deployment/understanding-environment-tokens) 
     that connect your servers to LCS. 
 
 3.  **Environment Settings:** Change the environment's name, location, and

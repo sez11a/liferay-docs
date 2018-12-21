@@ -81,7 +81,7 @@ automatically. You can view data on your elastic servers from the
 
 **Note:** To register elastic servers in an environment, that environment must 
 be set as elastic when it's created. For more information, see the 
-[documentation on creating environments](#creating-an-environment).
+[documentation on creating environments](https://customer.liferay.com/documentation/7.1/deploy/-/official_documentation/deployment/managing-lcs-environments#creating-environments).
 
 $$$
 
