@@ -30,9 +30,8 @@ Follow these steps to create a new product type:
 
 +$$$
 
-This tutorial covers the first two steps in detail. For more on generating
-admin screens, see 
-[Screen Navigation Framework](/develop/tutorials/-/knowledge_base/7-1/screen-navigation-framework).
+This tutorial covers the implementation of the interfaces involved. Writing the
+JSPs and any additional supporting code is outside the scope of this article.
 
 $$$
 
@@ -70,7 +69,7 @@ properties set at 5, 10, and 15, respectively, leaving plenty of space for you
 to disperse your types wherever you want.
 
 ![Figure 1: The `Integer=20` setting places the "sample" type effectively in
-fourth position in the menu.](../../images/commerce-cptype-menu.png)
+fourth position in the menu.](../images/commerce-cptype-menu.png)
 
 Then implement the interface: 
 
@@ -107,9 +106,7 @@ products.
 Defining your new type's functionality involves extending the catalog's UI to
 give administrators the ability to configure products of that type.
 
-![Figure 2: Admin screens are provided by extending product tab menu. The
-*Virtual* tab, above, is an admin screen unique to the virtual product
-type.](../../images/cptype-menu.png)
+![Figure 2: Admin screens are provided by extending product tab menu. The *Virtual* tab, above, is an admin screen unique to the virtual product type.](../images/cptype-tab-menu.png)
 
 Follow these steps:
 
@@ -121,22 +118,106 @@ Follow these steps:
 3.  Write the Java class(es) handling your type's business logic. Map the JSP's
     tags to this code as your use case requires.
 
-See 
-[Screen Navigation Framework](/develop/tutorials/-/knowledge_base/7-1/screen-navigation-framework)
-for details on how to implement the `ScreenNavigationCategory` and
-`ScreenNavigationEntry` interfaces. In this case, the implementation's
-`build.gradle` file dependencies should look like this:
+First, add some additional dependencies to your `build.gradle` file:
 
-    sourceCompatibility = "1.8"
-    targetCompatibility = "1.8"
-
-    dependencies {
     compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib", version: "3.0.0"
     compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib.soy", version: "2.0.0"
-    compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "2.0.0"
-    compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.5.0"
     compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib", version: "3.0.0"
     compileOnly group: "javax.portlet", name: "portlet-api", version: "3.0.0"
-    compileOnly group: "javax.servlet", name: "javax.servlet-api", version: "3.0.1"
-    compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations", version: "1.3.0"
+
+Then create a new component in the same package as your `CPType` implementation,
+and implement the `ScreenNavigationCategory` and `ScreenNavigationEntry`
+interfaces:
+
+    @Component(
+        property = {
+            "screen.navigation.category.order:Integer=20",
+            "screen.navigation.entry.order:Integer=20"
+        },
+        service = {ScreenNavigationCategory.class, ScreenNavigationEntry.class}
+    )
+    public class SampleCPTypeVirtualScreenNavigationEntry
+        implements ScreenNavigationCategory, ScreenNavigationEntry<CPDefinition> {
+
+Note that the two `order` properties locate the your admin screen in the
+product's tab bar.
+
+![Figure 3: In this case, the product type admin tab is placed immediately after the *Details* tab.](../images/product-tab-bar.png).
+
+Include the methods required by the interfaces:
+
+    @Override
+    public String getCategoryKey() {
+        return "sample";
     }
+
+    @Override
+    public String getEntryKey() {
+        return "sample";
+    }
+
+    @Override
+    public String getLabel(Locale locale) {
+        ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
+            "content.Language", locale, getClass());
+
+        return LanguageUtil.get(resourceBundle, "sample");
+    }
+
+    @Override
+    public String getScreenNavigationKey() {
+        return "cp.definition.general";
+    }
+
+    @Override
+    public boolean isVisible(User user, CPDefinition cpDefinition) {
+        if (cpDefinition == null) {
+            return false;
+        }
+
+        String productTypeName = cpDefinition.getProductTypeName();
+
+        if (productTypeName.equals(getCategoryKey())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void render(
+            HttpServletRequest httpServletRequest,
+            HttpServletResponse httpServletResponse)
+        throws IOException {
+
+        try {
+            _jspRenderer.renderJSP(
+            _servletContext, httpServletRequest, httpServletResponse,
+            "/edit_sample_product.jsp");
+        } finally {
+        }
+    }
+
+See [Screen Navigation Framework](/develop/tutorials/-/knowledge_base/7-1/screen-navigation-framework)
+for details on these methods. Note that the `render` method, calls for a
+`edit_sample_product.jsp` which should be placed in your `META-INF/resources`
+folder.
+
+Finally, include the following references:
+
+        @Reference
+        private JSPRenderer _jspRenderer;
+
+        @Reference(target = "(osgi.web.symbolicname=com.liferay.commerce.sample)")
+        private ServletContext _servletContext;
+
+    }
+
+The `osgi.web.symbolicname` should match the `Bundle-SymbolicName` from your
+module's `bnd.bnd` file.
+
+Completing the process is a matter of implementing your custom logic. You'll
+need a file to render HTML---this example calls for a JSP---in order to
+complete your type's admin screen. Once you've provided a UI that meets your
+needs and written any supporting Java classes your use case might require, your
+new product type is ready to go.
