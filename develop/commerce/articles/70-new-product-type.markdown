@@ -142,7 +142,7 @@ interfaces:
 Note that the two `order` properties locate the your admin screen in the
 product's tab bar.
 
-![Figure 3: In this case, the product type admin tab is placed immediately after the *Details* tab.](../images/product-tab-bar.png).
+![Figure 3: In this case, the product type admin tab is placed immediately after the *Details* tab.](../images/product-tab-bar.png)
 
 Include the methods required by the interfaces:
 
