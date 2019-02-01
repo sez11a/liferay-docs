@@ -1,10 +1,9 @@
 # Creating New Product Types [](id=creating-new-product-types)
 
-@commerce@ supports three different 
+@commerce@ supports three 
 [product types](/web/emporio/documentation/-/knowledge_base/1-0/product-types) 
 out of the box, but additional types can be created. This tutorial covers
-creating a new product type and generating admin screens for managing products
-of that type.
+creating a new product type and generating admin screens for its products.
 
 You need four things to create a new product type:
 
@@ -17,23 +16,18 @@ You need four things to create a new product type:
 
 -  Java class(es) handling your type's business logic
 
-Follow these steps to create a new product type:
+Follow these steps:
 
-1.  Create a new module add a dependency on the `commerce.product.api` module
+1.  Create a new module and add a dependency on the `commerce.product.api` module
     to its `build.gradle` file.
 
 2.  Implement the `com.liferay.commerce.product.type.CPType` interface.
 
 3.  Create your product type's admin screen by implementing the
-    `ScreenNavigationCategory` and `ScreenNavigationEntry` interfaces, and
-    creating corresponding JSP files.
+    `ScreenNavigationCategory` and `ScreenNavigationEntry` interfaces. 
 
-+$$$
-
-This tutorial covers the implementation of the interfaces involved. Writing the
-JSPs and any additional supporting code is outside the scope of this article.
-
-$$$
+4.  Create JSP files to populate the admin screen, and provide whatever
+    additional Java classes are necessary to support them.
 
 ## Defining the New Type [](id=defining-the-new-type)
 
@@ -51,7 +45,7 @@ script should look like this:
     }
 
 Then create a new Java class implementing the `CPType` interface. Insert the
-following Component annotation before the class declaration:
+following `@Component` annotation before the class declaration:
 
     @Component(
         immediate = true,
@@ -68,8 +62,7 @@ product types---*Simple*, *Grouped* and *Virtual*---have their `display.order`
 properties set at 5, 10, and 15, respectively, leaving plenty of space for you
 to disperse your types wherever you want.
 
-![Figure 1: The `Integer=20` setting places the "sample" type effectively in
-fourth position in the menu.](../images/commerce-cptype-menu.png)
+![Figure 1: The `Integer=20` setting places the "sample" type in fourth position in the menu.](../images/commerce-cptype-menu.png)
 
 Then implement the interface: 
 
@@ -95,28 +88,18 @@ The interface's `getLabel` method returns the localized version of your type's
 name to display in the UI, while the `getName` method returns a unique
 identifier for the type to be stored in the database.
 
-## Providing the Type's Functionality [](id=providing-the-types-functionality)
+## Creating an Admin Screen[](id=providing-the-types-functionality)
 
 At this point, you can deploy your module and create products belonging to your
-new type. Other than the type's label, however, these products will have no
-special characteristics distinguishing them from
+new type. Other than the type's label, however, these products have no special
+characteristics distinguishing them from
 [simple](/web/emporio/documentation/-/knowledge_base/1-0/product-types)
 products. 
 
 Defining your new type's functionality involves extending the catalog's UI to
-give administrators the ability to configure products of that type.
+give administrators the ability to configure products.
 
 ![Figure 2: Admin screens are provided by extending product tab menu. The *Virtual* tab, above, is an admin screen unique to the virtual product type.](../images/cptype-tab-menu.png)
-
-Follow these steps:
-
-1.  Create your product type's admin screen by implementing the
-    `ScreenNavigationCategory` and `ScreenNavigationEntry` interfaces.
-
-2.  Provide the admin screen with UI, typically with a JSP.
-
-3.  Write the Java class(es) handling your type's business logic. Map the JSP's
-    tags to this code as your use case requires.
 
 First, add some additional dependencies to your `build.gradle` file:
 
@@ -198,10 +181,11 @@ Include the methods required by the interfaces:
         }
     }
 
-See [Screen Navigation Framework](/develop/tutorials/-/knowledge_base/7-1/screen-navigation-framework)
-for details on these methods. Note that the `render` method, calls for a
-`edit_sample_product.jsp` which should be placed in your `META-INF/resources`
-folder.
+The `getLabel` method provides a name for the admin screen on the frontend. You
+must have a `Language.properties` file containing a language key for
+appropriate string (`sample` in the example above). For more details on the
+above methods, see
+[Screen Navigation Framework](/develop/tutorials/-/knowledge_base/7-1/screen-navigation-framework).
 
 Finally, include the following references:
 
@@ -216,8 +200,31 @@ Finally, include the following references:
 The `osgi.web.symbolicname` should match the `Bundle-SymbolicName` from your
 module's `bnd.bnd` file.
 
-Completing the process is a matter of implementing your custom logic. You'll
-need a file to render HTML---this example calls for a JSP---in order to
-complete your type's admin screen. Once you've provided a UI that meets your
-needs and written any supporting Java classes your use case might require, your
-new product type is ready to go.
+## Providing a UI
+
+At this point if you deploy your module to the server and create a product of
+the new type, you'll see that you've added a new item to the product tab menu,
+but the new tab has no content.
+
+![Figure 4: The admin screen exists, but is not much use.](../images/product-tab-bar.png)
+
+Note that the `render` method calls for a `edit_sample_product.jsp` which
+should be placed in your `META-INF/resources` folder.
+
+Create the JSP. This example creates a simple text field:
+
+    <%@ include file="/init.jsp" %>
+
+    <aui:input name="sampleInput" type="text"/>
+
+The example above requires one import, which---per convention---belongs in an
+`init.jsp` file in the same directory.
+
+    <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
+
+![Figure 4: At this point your admin screen displays with content. Well done.](../images/product-tab-bar.png)
+
+Depending on your use case, you need additional Java classes in your module to
+handle user input from the admin screen and implement any other business logic.
+If your screen looks like the image above, however, you've successfully created
+a new product and created an admin screen to manage it.
