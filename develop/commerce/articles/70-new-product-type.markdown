@@ -200,7 +200,7 @@ Finally, include the following references:
 The `osgi.web.symbolicname` should match the `Bundle-SymbolicName` from your
 module's `bnd.bnd` file.
 
-## Providing a UI
+## Providing a UI [](id=providing-a-ui)
 
 At this point if you deploy your module to the server and create a product of
 the new type, you'll see that you've added a new item to the product tab menu,
@@ -222,7 +222,7 @@ The example above requires one import, which---per convention---belongs in an
 
     <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
-![Figure 4: At this point your admin screen displays with content. Well done.](../images/cptype-full-tab.png)
+![Figure 5: At this point your admin screen displays with content. Well done.](../images/cptype-full-tab.png)
 
 Depending on your use case, you need additional Java classes in your module to
 handle user input from the admin screen and implement any other business logic.
