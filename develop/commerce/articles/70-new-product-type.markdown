@@ -99,7 +99,7 @@ products.
 Defining your new type's functionality involves extending the catalog's UI to
 give administrators the ability to configure products.
 
-![Figure 2: Admin screens are provided by extending product tab menu. The *Virtual* tab, above, is an admin screen unique to the virtual product type.](../images/cptype-tab-menu.png)
+![Figure 2: Admin screens are provided by extending product tab menu. The *Virtual* tab, for example, is an admin screen unique to the virtual product type.](../images/cptype-tab-menu.png)
 
 First, add some additional dependencies to your `build.gradle` file:
 
@@ -125,7 +125,7 @@ interfaces:
 Note that the two `order` properties locate the your admin screen in the
 product's tab bar.
 
-![Figure 3: In this case, the product type admin tab is placed immediately after the *Details* tab.](../images/product-tab-bar.png)
+![Figure 3: In this case, the product type admin tab is placed immediately after the *Details* tab.](../images/cptype-tab-menu-2.png)
 
 Include the methods required by the interfaces:
 
@@ -181,7 +181,7 @@ Include the methods required by the interfaces:
         }
     }
 
-The `getLabel` method provides a name for the admin screen on the frontend. You
+The `getLabel` method provides a name for the new tab on the frontend. You
 must have a `Language.properties` file containing a language key for
 appropriate string (`sample` in the example above). For more details on the
 above methods, see
@@ -206,7 +206,7 @@ At this point if you deploy your module to the server and create a product of
 the new type, you'll see that you've added a new item to the product tab menu,
 but the new tab has no content.
 
-![Figure 4: The admin screen exists, but is not much use.](../images/product-tab-bar.png)
+![Figure 4: The admin screen exists, but is not much use.](../images/cptype-empty-tab.png)
 
 Note that the `render` method calls for a `edit_sample_product.jsp` which
 should be placed in your `META-INF/resources` folder.
@@ -222,7 +222,7 @@ The example above requires one import, which---per convention---belongs in an
 
     <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
-![Figure 4: At this point your admin screen displays with content. Well done.](../images/product-tab-bar.png)
+![Figure 4: At this point your admin screen displays with content. Well done.](../images/cptype-full-tab.png)
 
 Depending on your use case, you need additional Java classes in your module to
 handle user input from the admin screen and implement any other business logic.
