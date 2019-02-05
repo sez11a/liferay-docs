@@ -56,10 +56,10 @@ add users:
 
 +$$$
 
-Note: When you create a user segment with more than one criterion, the criteria
-are combined inclusively. For example, if a user segment includes members of the
-Organization *Procurement* and the User Group *Purchasing Managers*, the
-resulting segment includes every user who is a member of *either* group. It is
-not limited to users who are members of *both*.
+**Note:** When you create a user segment with more than one criterion, the
+criteria are combined exclusively. For example, if a user segment includes
+members of the Organization *Procurement* and the User Group *Purchasing
+Managers*, the resulting segment includes only users who are members of *both*
+groups. It does not include users who are members of only one.
 
 $$$
