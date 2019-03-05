@@ -242,10 +242,16 @@ In the `$JBOSS_HOME/bin` folder, you must make these modifications to your
 standalone domain's configuration script file `standalone.conf`
 (`standalone.conf.bat` on Windows):
 
-- Set the file encoding
-- Set the user time-zone
+- Set the file encoding to UTF-8
+- Set the user time zone to GMT
 - Set the preferred protocol stack
 - Increase the default amount of memory available.
+
++$$$
+
+**Important:** @product@ requires that the application server JVM use the GMT time zone and UTF-8 file encoding. 
+
+$$$
 
 Make the following edits as applicable to your operating system:
 
