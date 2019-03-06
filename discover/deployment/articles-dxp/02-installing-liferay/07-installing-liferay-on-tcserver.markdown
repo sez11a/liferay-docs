@@ -205,7 +205,14 @@ runtime instance.
         wrapper.java.additional.9="-Xss512K"
         wrapper.java.additional.10="-XX:MaxMetaspaceSize=256M"
         wrapper.java.additional.11="-Dfile.encoding=UTF-8"
+        wrapper.java.additional.12="-Duser.timezone=GMT"
 
+    +$$$
+
+    **Important:** @product@ requires that the application server JVM use the 
+    GMT time zone and UTF-8 file encoding. 
+
+    $$$
 
 4. Last, open `[TCSERVER_INSTANCE_HOME]/servers/dxp-server/conf/web.xml` and add the following after `<load-on-startup>3</load-on-startup>`    
 
