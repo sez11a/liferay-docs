@@ -249,7 +249,8 @@ standalone domain's configuration script file `standalone.conf`
 
 +$$$
 
-**Important:** @product@ requires that the application server JVM use the GMT time zone and UTF-8 file encoding. 
+**Important:** @product@ requires that the application server JVM use the GMT 
+time zone and UTF-8 file encoding. 
 
 $$$
 
