@@ -11,15 +11,11 @@ VM environments.
     create an Ehcache XML configuration file to specify cache for single VM
     environments. The file name is arbitrary. 
 
-    +$$$
-
-    Refer to the
-    [Ehcache 2.8 documentation](http://www.ehcache.org/documentation/2.8/configuration/index.html)
-    and the
-    [ehcache.xsd](http://www.ehcache.org/ehcache.xsd)
-    to correctly specify class cache. 
-
-    $$$
+    | Refer to the
+    | [Ehcache 2.8 documentation](http://www.ehcache.org/documentation/2.8/configuration/index.html)
+    | and the
+    | [ehcache.xsd](http://www.ehcache.org/ehcache.xsd)
+    | to correctly specify class cache.
 
 2.  In your application context, create an Ehcache XML configuration file for 
     multi-VM environments. 
