@@ -4,8 +4,8 @@ header-id: configuring-cache-in-a-module
 
 # Configuring Cache in a Module
 
-Configuring module class cache for single VM and multi-VM environments is
-straightforward. 
+Configuring module class cache for single VM and multi-VM environments requires
+editing only one file. 
 
 1.  For single VM cache, create a file called `module-single-vm.xml` in your 
     `src/main/resources/META-INF` folder. 
