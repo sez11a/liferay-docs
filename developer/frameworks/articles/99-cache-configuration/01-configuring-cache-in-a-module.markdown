@@ -1,4 +1,8 @@
-# Configuring Cache in a Module [](id=configuring-cache-in-a-module)
+---
+header-id: configuring-cache-in-a-module
+---
+
+# Configuring Cache in a Module
 
 Configuring module class cache for single VM and multi-VM environments is
 straightforward. 
@@ -41,6 +45,6 @@ to specify cache for its `com.liferay.journal.util.JournalContent` class.
 
 Congratulations! You configured cache in your module. 
 
-## Related Topics [](id=related-topics)
+## Related Topics
 
 [Configuring Cache in a Portlet WAR](/developer/frameworks/-/knowledge_base/7-2/configuring-cache-in-a-portlet-war)

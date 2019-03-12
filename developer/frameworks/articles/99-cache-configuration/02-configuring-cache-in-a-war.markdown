@@ -1,4 +1,8 @@
-# Configuring Cache in a Portlet WAR [](id=configuring-cache-in-a-portlet-war)
+---
+header-id: configuring-cache-in-a-portlet-war
+---
+
+# Configuring Cache in a Portlet WAR
 
 Here you will configure cache for a portlet WAR classes in single VM and multi
 VM environments. 
@@ -47,6 +51,6 @@ The `portlet.properties` file specifies these properties:
 
 Congratulations! You configured cache in your portlet WAR. 
 
-## Related Topics [](id=related-topics)
+## Related Topics
 
 [Configuring Cache in a Module](/developer/frameworks/-/knowledge_base/7-2/configuring-cache-in-a-module)
