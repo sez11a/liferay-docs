@@ -11,7 +11,7 @@ VM environments.
     create an Ehcache XML configuration file to specify cache for single VM
     environments. The file name is arbitrary. 
 
-    $$$+ 
+    +$$$
 
     Refer to the
     [Ehcache 2.8 documentation](http://www.ehcache.org/documentation/2.8/configuration/index.html)
@@ -29,7 +29,7 @@ VM environments.
 
         ehcache.single.vm.config.location=path/to/file
         ehcache.multi.vm.config.location=path/to/file 
-        
+
     The paths are relative to your application context root (e.g.,
     `WEB-INF/src`). Replace `path/to/file` with each environment's cache
     configuration file path. 
