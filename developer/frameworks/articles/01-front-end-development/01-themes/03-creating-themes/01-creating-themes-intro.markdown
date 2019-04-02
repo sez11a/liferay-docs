@@ -2,7 +2,7 @@
 header-id: creating-themes
 ---
 
-# Creating Themes [](id=creating-themes)
+# Creating Themes
 
 [TOC levels=1-4]
 
@@ -24,5 +24,5 @@ required versions are listed in the table below:
 | 7.2 | 9.x.x | `npm install -g generator-liferay-theme |
 
 While you can create themes using the tools you prefer, the Liferay Theme 
-Generator is designed with theme development for @product@ in mind. It's toolset 
+Generator is designed with theme development for @product@ in mind. Its toolset 
 and features help streamline theme development.
