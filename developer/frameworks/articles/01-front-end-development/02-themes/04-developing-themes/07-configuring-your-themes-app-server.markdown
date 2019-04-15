@@ -2,7 +2,7 @@
 header-id: updating-your-themes-app-server
 ---
 
-# Updating Your Theme's App Server [](id=configuring-your-themes-app-server)
+# Updating Your Theme's App Server
 
 [TOC levels=1-4]
 
