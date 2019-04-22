@@ -23,7 +23,7 @@ wizard to configure portal essentials.
 
 Extract your @product@ bundle to the appropriate location on your server.
 This folder is the
-[*Liferay Home*](/deployment/reference/-/knowledge_base/7-2/liferay-home). 
+[*Liferay Home*](/docs/7-2/deploy/-/knowledge_base/deploy/liferay-home). 
 
 ## Installing the JDBC Driver 
 

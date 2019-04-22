@@ -17,7 +17,7 @@ and more) can be addressed *after* deploying @product@.
 | **Note:** If you are installing @product@ to multiple machines (e.g., in a 
 | [cluster](/deployment/-/knowledge_base/7-2/product-clustering))
 | or prefer centralizing configuration in a file, using portal properties in a
-| [`[LIFERAY_HOME]/portal-ext.properties` file](/deployment/reference/-/knowledge_base/7-2/portal-properties)
+| [`[LIFERAY_HOME]/portal-ext.properties` file](/docs/7-2/deploy/-/knowledge_base/deploy/portal-properties)
 | is the recommended way to configure. The install preparation topics here and
 | the configuration topics throughout this guide demonstrate using applicable
 | portal properties. 
@@ -149,7 +149,7 @@ Here's how to use your application server's data source:
     ```
 
 4.  Put the `portal-ext.properties` file into your
-    [LIFERAY_HOME](/deployment/reference/-/knowledge_base/7-2/liferay-home),
+    [LIFERAY_HOME](/docs/7-2/deploy/-/knowledge_base/deploy/liferay-home),
     once you've established your LIFERAY_HOME based on your installation. 
 
 @product@ connects to your data source on startup.

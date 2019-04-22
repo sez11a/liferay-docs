@@ -107,7 +107,7 @@ If you prefer specifying your mail session offline or before deploying
 3.  Replace the default mail session values with your own. 
 
 4.  Put the `portal-ext.properties` file into your
-    [LIFERAY_HOME](/deployment/reference/-/knowledge_base/7-2/liferay-home),
+    [LIFERAY_HOME](/docs/7-2/deploy/-/knowledge_base/deploy/liferay-home),
     once you've established it based on your installation. 
 
 @product@ connects to the mail session on the next startup. 
