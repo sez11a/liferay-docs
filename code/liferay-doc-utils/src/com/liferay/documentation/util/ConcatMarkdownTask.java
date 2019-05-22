@@ -72,7 +72,7 @@ public class ConcatMarkdownTask extends Task {
 							count = count + 1;
 						}
 						
-						book = book + line + "\n";
+						book = book + line + System.lineSeparator();
 						
 					}
 					
@@ -80,7 +80,7 @@ public class ConcatMarkdownTask extends Task {
 					count = 1;
 					
 					//book = book + FileUtils.readFileToString(file);
-					book = book + "\n";
+					book = book + System.lineSeparator();
 				}
 				
 			}

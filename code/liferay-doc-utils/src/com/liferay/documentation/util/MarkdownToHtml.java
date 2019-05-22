@@ -41,7 +41,7 @@ public class MarkdownToHtml {
 
 	    while (line != null) {
 	    	sb.append(line);
-	    	sb.append("\n");
+	    	sb.append(System.lineSeparator());
 	    	line = br.readLine();
 		}
 
@@ -55,7 +55,7 @@ public class MarkdownToHtml {
 			new BufferedWriter(new FileWriter(htmlFile));
 
 		out.append(html);
-		out.append("\n");
+		out.append(System.lineSeparator());
 		out.flush();
 		out.close();
 	}

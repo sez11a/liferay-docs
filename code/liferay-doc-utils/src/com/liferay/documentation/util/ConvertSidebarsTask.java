@@ -136,12 +136,12 @@ public class ConvertSidebarsTask extends Task {
 							String modifiedLine = sidebarSpacing.get(j) + "| " + codeSpace + line.trim();
 
 							out.append(modifiedLine);
-							out.append("\n");
+							out.append(System.lineSeparator());
 							continue;
 						}
 
 						out.append(line);
-						out.append("\n");
+						out.append(System.lineSeparator());
 					}
 
 

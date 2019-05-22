@@ -45,7 +45,7 @@ public class ConvertHeadersTask extends Task {
 					
 					if (line.startsWith(newHeaderIdPrefix)) {
 						out.append(line);
-						out.append("\n");
+						out.append(System.lineSeparator());
 						continue;
 					}
 					
@@ -59,9 +59,9 @@ public class ConvertHeadersTask extends Task {
 
 						line = line.substring(0, idStartIndex);
 						
-						out.append("---\n");
-						out.append(newHeaderIdPrefix + id + "\n");
-						out.append("---\n\n");
+						out.append("---" + System.lineSeparator());
+						out.append(newHeaderIdPrefix + id + System.lineSeparator());
+						out.append("---" + System.lineSeparator() + System.lineSeparator());
 						
 						System.out.println("Converted header(s) for " + filename);
 					}
@@ -70,7 +70,7 @@ public class ConvertHeadersTask extends Task {
 						line = line.substring(0, idStartIndex);
 					}
 					out.append(line);
-					out.append("\n");
+					out.append(System.lineSeparator());
 					
 				}
 				

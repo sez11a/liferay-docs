@@ -65,15 +65,15 @@ public class AddTOCTask extends Task {
 
 				if (line.startsWith("#") && !line.startsWith("##") && !tocAdded) {
 					out.append(line);
-					out.append("\n\n");
+					out.append(System.lineSeparator() + System.lineSeparator());
 					out.append(tocSyntax);
-					out.append("\n");
+					out.append(System.lineSeparator());
 
 					tocAdded = true;
 				}
 				else {
 					out.append(line);
-					out.append("\n");
+					out.append(System.lineSeparator());
 				}
 
 			}

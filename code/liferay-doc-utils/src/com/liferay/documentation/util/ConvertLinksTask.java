@@ -248,7 +248,7 @@ public class ConvertLinksTask  extends Task {
 					}
 				
 				out.append(line);
-				out.append("\n");
+				out.append(System.lineSeparator());
 			}
 
 				in.close();

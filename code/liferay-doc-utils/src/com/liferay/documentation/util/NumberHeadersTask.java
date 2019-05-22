@@ -105,9 +105,9 @@ public class NumberHeadersTask extends Task {
 								
 							if (headerIdLine == null) {
 								String headerId = generateNewHeader(filename, line, in.getLineNumber());
-								out.append("---\n");
-								out.append(headerIdPrefix + headerId + "\n");
-								out.append("---\n\n");
+								out.append("---" + System.lineSeparator());
+								out.append(headerIdPrefix + headerId + System.lineSeparator());
+								out.append("---" + System.lineSeparator() + System.lineSeparator());
 							}
 							// validate existing header
 							else {
@@ -122,7 +122,7 @@ public class NumberHeadersTask extends Task {
 						}
 						
 						out.append(line);
-						out.append("\n");
+						out.append(System.lineSeparator());
 					}
 					in.close();
 				
@@ -265,11 +265,11 @@ public class NumberHeadersTask extends Task {
 			while ((line = in.readLine()) != null) {
 				if (line.startsWith(headerIdPrefix)) {
 					out.append(headerIdLineCe);
-					out.append("\n");
+					out.append(System.lineSeparator());
 				}
 				else {
 					out.append(line);
-					out.append("\n");
+					out.append(System.lineSeparator());
 				}
 			}
 
@@ -286,11 +286,11 @@ public class NumberHeadersTask extends Task {
 			while ((line = in2.readLine()) != null) {
 				if (line.startsWith(headerIdPrefix)) {
 					out2.append(headerIdLineDxp);
-					out2.append("\n");
+					out2.append(System.lineSeparator());
 				}
 				else {
 					out2.append(line);
-					out2.append("\n");
+					out2.append(System.lineSeparator());
 				}
 			}
 
