@@ -1,0 +1,13 @@
+allprojects {
+   repositories {
+
+        maven {
+			credentials {
+				username "$mavenUser"
+				password "$mavenPassword"
+			}
+            url "https://repository.liferay.com/nexus/content/repositories/xanadu/"
+		}
+
+   }
+}
