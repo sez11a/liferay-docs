@@ -2,10 +2,6 @@
 header-id: search
 ---
 
----
-header-id: introduction-to-liferay-search
----
-
 # Search
 
 [TOC levels=1-4]
