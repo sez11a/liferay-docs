@@ -14,10 +14,10 @@
 
 package com.liferay.docs.guestbook.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.docs.guestbook.model.Guestbook;
 import com.liferay.docs.guestbook.service.GuestbookLocalServiceUtil;
+
+import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * The extended model base implementation for the Guestbook service. Represents a row in the &quot;GB_Guestbook&quot; database table, with each column mapped to a property of this class.
@@ -32,12 +32,13 @@ import com.liferay.docs.guestbook.service.GuestbookLocalServiceUtil;
  * @generated
  */
 @ProviderType
-public abstract class GuestbookBaseImpl extends GuestbookModelImpl
-	implements Guestbook {
+public abstract class GuestbookBaseImpl
+	extends GuestbookModelImpl implements Guestbook {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a guestbook model instance should use the {@link Guestbook} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a guestbook model instance should use the <code>Guestbook</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class GuestbookBaseImpl extends GuestbookModelImpl
 			GuestbookLocalServiceUtil.updateGuestbook(this);
 		}
 	}
+
 }

@@ -6,3 +6,4 @@ Liferay-Service: true
 Export-Package:
 	com.liferay.docs.guestbook.service.permission, \
 	com.liferay.docs.guestbook.search,\
+-dsannotations-options: inherit

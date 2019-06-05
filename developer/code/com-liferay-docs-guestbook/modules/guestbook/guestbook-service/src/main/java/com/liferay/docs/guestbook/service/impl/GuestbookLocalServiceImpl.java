@@ -19,7 +19,9 @@ import com.liferay.asset.kernel.model.AssetLinkConstants;
 import com.liferay.docs.guestbook.exception.GuestbookNameException;
 import com.liferay.docs.guestbook.model.Entry;
 import com.liferay.docs.guestbook.model.Guestbook;
+import com.liferay.docs.guestbook.service.EntryLocalService;
 import com.liferay.docs.guestbook.service.base.GuestbookLocalServiceBaseImpl;
+import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.ResourceConstants;
@@ -30,6 +32,8 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.Date;
 import java.util.List;
@@ -48,6 +52,10 @@ import java.util.List;
  * @see GuestbookLocalServiceBaseImpl
  * @see com.liferay.docs.guestbook.service.GuestbookLocalServiceUtil
  */
+@Component(
+		property = "model.class.name=com.liferay.docs.guestbook.model.Guestbook",
+		service = AopService.class
+)
 public class GuestbookLocalServiceImpl extends GuestbookLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -205,4 +213,8 @@ assetEntryLocalService.deleteEntry(assetEntry);
 	        throw new GuestbookNameException();
 	    }
 	}
+	
+	@Reference
+	protected EntryLocalService entryLocalService;
+
 }

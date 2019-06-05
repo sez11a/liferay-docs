@@ -14,13 +14,10 @@
 
 package com.liferay.docs.guestbook.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.docs.guestbook.model.Guestbook;
-
+import com.liferay.petra.lang.HashUtil;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.model.CacheModel;
-import com.liferay.portal.kernel.util.HashUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -29,16 +26,18 @@ import java.io.ObjectOutput;
 
 import java.util.Date;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 /**
  * The cache model class for representing Guestbook in entity cache.
  *
  * @author liferay
- * @see Guestbook
  * @generated
  */
 @ProviderType
-public class GuestbookCacheModel implements CacheModel<Guestbook>,
-	Externalizable {
+public class GuestbookCacheModel
+	implements CacheModel<Guestbook>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -188,8 +187,7 @@ public class GuestbookCacheModel implements CacheModel<Guestbook>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -249,4 +247,5 @@ public class GuestbookCacheModel implements CacheModel<Guestbook>,
 	public String statusByUserName;
 	public long statusDate;
 	public String name;
+
 }

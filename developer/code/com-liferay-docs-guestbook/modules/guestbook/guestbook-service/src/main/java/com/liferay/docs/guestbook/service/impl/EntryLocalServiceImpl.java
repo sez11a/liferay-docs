@@ -20,7 +20,9 @@ import com.liferay.docs.guestbook.exception.EntryEmailException;
 import com.liferay.docs.guestbook.exception.EntryMessageException;
 import com.liferay.docs.guestbook.exception.EntryNameException;
 import com.liferay.docs.guestbook.model.Entry;
+import com.liferay.docs.guestbook.service.EntryLocalService;
 import com.liferay.docs.guestbook.service.base.EntryLocalServiceBaseImpl;
+import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.ResourceConstants;
@@ -34,6 +36,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.List;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * The implementation of the entry local service.
@@ -49,6 +54,10 @@ import java.util.List;
  * @see EntryLocalServiceBaseImpl
  * @see com.liferay.docs.guestbook.service.EntryLocalServiceUtil
  */
+@Component(
+		property = "model.class.name=com.liferay.docs.guestbook.model.Entry",
+		service = AopService.class
+)
 public class EntryLocalServiceImpl extends EntryLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -211,4 +220,5 @@ assetEntryLocalService.deleteEntry(assetEntry);
 		        throw new EntryMessageException();
 		    }
 		}
+	
 }

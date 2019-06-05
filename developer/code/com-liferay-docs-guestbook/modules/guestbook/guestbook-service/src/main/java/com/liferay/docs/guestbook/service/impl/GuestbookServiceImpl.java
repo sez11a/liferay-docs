@@ -14,7 +14,10 @@
 
 package com.liferay.docs.guestbook.service.impl;
 
+import org.osgi.service.component.annotations.Component;
+
 import com.liferay.docs.guestbook.service.base.GuestbookServiceBaseImpl;
+import com.liferay.portal.aop.AopService;
 
 /**
  * The implementation of the guestbook remote service.
@@ -30,6 +33,13 @@ import com.liferay.docs.guestbook.service.base.GuestbookServiceBaseImpl;
  * @see GuestbookServiceBaseImpl
  * @see com.liferay.docs.guestbook.service.GuestbookServiceUtil
  */
+@Component(
+		property = {
+				"json.web.service.context.name=gb",
+				"json.web.service.context.path=Guestbook"
+		},
+		service = AopService.class
+)
 public class GuestbookServiceImpl extends GuestbookServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:

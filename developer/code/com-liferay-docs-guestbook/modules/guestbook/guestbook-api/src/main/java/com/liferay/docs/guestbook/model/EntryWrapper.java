@@ -14,21 +14,15 @@
 
 package com.liferay.docs.guestbook.model;
 
-import aQute.bnd.annotation.ProviderType;
-
-import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
-import com.liferay.portal.kernel.service.ServiceContext;
-
-import java.io.Serializable;
+import com.liferay.portal.kernel.model.wrapper.BaseModelWrapper;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+
+import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * <p>
@@ -40,19 +34,11 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class EntryWrapper implements Entry, ModelWrapper<Entry> {
+public class EntryWrapper
+	extends BaseModelWrapper<Entry> implements Entry, ModelWrapper<Entry> {
+
 	public EntryWrapper(Entry entry) {
-		_entry = entry;
-	}
-
-	@Override
-	public Class<?> getModelClass() {
-		return Entry.class;
-	}
-
-	@Override
-	public String getModelClassName() {
-		return Entry.class.getName();
+		super(entry);
 	}
 
 	@Override
@@ -178,610 +164,479 @@ public class EntryWrapper implements Entry, ModelWrapper<Entry> {
 		}
 	}
 
-	@Override
-	public Object clone() {
-		return new EntryWrapper((Entry)_entry.clone());
-	}
-
-	@Override
-	public int compareTo(Entry entry) {
-		return _entry.compareTo(entry);
-	}
-
 	/**
-	* Returns the company ID of this entry.
-	*
-	* @return the company ID of this entry
-	*/
+	 * Returns the company ID of this entry.
+	 *
+	 * @return the company ID of this entry
+	 */
 	@Override
 	public long getCompanyId() {
-		return _entry.getCompanyId();
+		return model.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this entry.
-	*
-	* @return the create date of this entry
-	*/
+	 * Returns the create date of this entry.
+	 *
+	 * @return the create date of this entry
+	 */
 	@Override
 	public Date getCreateDate() {
-		return _entry.getCreateDate();
+		return model.getCreateDate();
 	}
 
 	/**
-	* Returns the email of this entry.
-	*
-	* @return the email of this entry
-	*/
+	 * Returns the email of this entry.
+	 *
+	 * @return the email of this entry
+	 */
 	@Override
 	public String getEmail() {
-		return _entry.getEmail();
+		return model.getEmail();
 	}
 
 	/**
-	* Returns the entry ID of this entry.
-	*
-	* @return the entry ID of this entry
-	*/
+	 * Returns the entry ID of this entry.
+	 *
+	 * @return the entry ID of this entry
+	 */
 	@Override
 	public long getEntryId() {
-		return _entry.getEntryId();
-	}
-
-	@Override
-	public ExpandoBridge getExpandoBridge() {
-		return _entry.getExpandoBridge();
+		return model.getEntryId();
 	}
 
 	/**
-	* Returns the group ID of this entry.
-	*
-	* @return the group ID of this entry
-	*/
+	 * Returns the group ID of this entry.
+	 *
+	 * @return the group ID of this entry
+	 */
 	@Override
 	public long getGroupId() {
-		return _entry.getGroupId();
+		return model.getGroupId();
 	}
 
 	/**
-	* Returns the guestbook ID of this entry.
-	*
-	* @return the guestbook ID of this entry
-	*/
+	 * Returns the guestbook ID of this entry.
+	 *
+	 * @return the guestbook ID of this entry
+	 */
 	@Override
 	public long getGuestbookId() {
-		return _entry.getGuestbookId();
+		return model.getGuestbookId();
 	}
 
 	/**
-	* Returns the message of this entry.
-	*
-	* @return the message of this entry
-	*/
+	 * Returns the message of this entry.
+	 *
+	 * @return the message of this entry
+	 */
 	@Override
 	public String getMessage() {
-		return _entry.getMessage();
+		return model.getMessage();
 	}
 
 	/**
-	* Returns the modified date of this entry.
-	*
-	* @return the modified date of this entry
-	*/
+	 * Returns the modified date of this entry.
+	 *
+	 * @return the modified date of this entry
+	 */
 	@Override
 	public Date getModifiedDate() {
-		return _entry.getModifiedDate();
+		return model.getModifiedDate();
 	}
 
 	/**
-	* Returns the name of this entry.
-	*
-	* @return the name of this entry
-	*/
+	 * Returns the name of this entry.
+	 *
+	 * @return the name of this entry
+	 */
 	@Override
 	public String getName() {
-		return _entry.getName();
+		return model.getName();
 	}
 
 	/**
-	* Returns the primary key of this entry.
-	*
-	* @return the primary key of this entry
-	*/
+	 * Returns the primary key of this entry.
+	 *
+	 * @return the primary key of this entry
+	 */
 	@Override
 	public long getPrimaryKey() {
-		return _entry.getPrimaryKey();
-	}
-
-	@Override
-	public Serializable getPrimaryKeyObj() {
-		return _entry.getPrimaryKeyObj();
+		return model.getPrimaryKey();
 	}
 
 	/**
-	* Returns the status of this entry.
-	*
-	* @return the status of this entry
-	*/
+	 * Returns the status of this entry.
+	 *
+	 * @return the status of this entry
+	 */
 	@Override
 	public int getStatus() {
-		return _entry.getStatus();
+		return model.getStatus();
 	}
 
 	/**
-	* Returns the status by user ID of this entry.
-	*
-	* @return the status by user ID of this entry
-	*/
+	 * Returns the status by user ID of this entry.
+	 *
+	 * @return the status by user ID of this entry
+	 */
 	@Override
 	public long getStatusByUserId() {
-		return _entry.getStatusByUserId();
+		return model.getStatusByUserId();
 	}
 
 	/**
-	* Returns the status by user name of this entry.
-	*
-	* @return the status by user name of this entry
-	*/
+	 * Returns the status by user name of this entry.
+	 *
+	 * @return the status by user name of this entry
+	 */
 	@Override
 	public String getStatusByUserName() {
-		return _entry.getStatusByUserName();
+		return model.getStatusByUserName();
 	}
 
 	/**
-	* Returns the status by user uuid of this entry.
-	*
-	* @return the status by user uuid of this entry
-	*/
+	 * Returns the status by user uuid of this entry.
+	 *
+	 * @return the status by user uuid of this entry
+	 */
 	@Override
 	public String getStatusByUserUuid() {
-		return _entry.getStatusByUserUuid();
+		return model.getStatusByUserUuid();
 	}
 
 	/**
-	* Returns the status date of this entry.
-	*
-	* @return the status date of this entry
-	*/
+	 * Returns the status date of this entry.
+	 *
+	 * @return the status date of this entry
+	 */
 	@Override
 	public Date getStatusDate() {
-		return _entry.getStatusDate();
+		return model.getStatusDate();
 	}
 
 	/**
-	* Returns the user ID of this entry.
-	*
-	* @return the user ID of this entry
-	*/
+	 * Returns the user ID of this entry.
+	 *
+	 * @return the user ID of this entry
+	 */
 	@Override
 	public long getUserId() {
-		return _entry.getUserId();
+		return model.getUserId();
 	}
 
 	/**
-	* Returns the user name of this entry.
-	*
-	* @return the user name of this entry
-	*/
+	 * Returns the user name of this entry.
+	 *
+	 * @return the user name of this entry
+	 */
 	@Override
 	public String getUserName() {
-		return _entry.getUserName();
+		return model.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this entry.
-	*
-	* @return the user uuid of this entry
-	*/
+	 * Returns the user uuid of this entry.
+	 *
+	 * @return the user uuid of this entry
+	 */
 	@Override
 	public String getUserUuid() {
-		return _entry.getUserUuid();
+		return model.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this entry.
-	*
-	* @return the uuid of this entry
-	*/
+	 * Returns the uuid of this entry.
+	 *
+	 * @return the uuid of this entry
+	 */
 	@Override
 	public String getUuid() {
-		return _entry.getUuid();
-	}
-
-	@Override
-	public int hashCode() {
-		return _entry.hashCode();
+		return model.getUuid();
 	}
 
 	/**
-	* Returns <code>true</code> if this entry is approved.
-	*
-	* @return <code>true</code> if this entry is approved; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this entry is approved.
+	 *
+	 * @return <code>true</code> if this entry is approved; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isApproved() {
-		return _entry.isApproved();
-	}
-
-	@Override
-	public boolean isCachedModel() {
-		return _entry.isCachedModel();
+		return model.isApproved();
 	}
 
 	/**
-	* Returns <code>true</code> if this entry is denied.
-	*
-	* @return <code>true</code> if this entry is denied; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this entry is denied.
+	 *
+	 * @return <code>true</code> if this entry is denied; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDenied() {
-		return _entry.isDenied();
+		return model.isDenied();
 	}
 
 	/**
-	* Returns <code>true</code> if this entry is a draft.
-	*
-	* @return <code>true</code> if this entry is a draft; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this entry is a draft.
+	 *
+	 * @return <code>true</code> if this entry is a draft; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDraft() {
-		return _entry.isDraft();
-	}
-
-	@Override
-	public boolean isEscapedModel() {
-		return _entry.isEscapedModel();
+		return model.isDraft();
 	}
 
 	/**
-	* Returns <code>true</code> if this entry is expired.
-	*
-	* @return <code>true</code> if this entry is expired; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this entry is expired.
+	 *
+	 * @return <code>true</code> if this entry is expired; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isExpired() {
-		return _entry.isExpired();
+		return model.isExpired();
 	}
 
 	/**
-	* Returns <code>true</code> if this entry is inactive.
-	*
-	* @return <code>true</code> if this entry is inactive; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this entry is inactive.
+	 *
+	 * @return <code>true</code> if this entry is inactive; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isInactive() {
-		return _entry.isInactive();
+		return model.isInactive();
 	}
 
 	/**
-	* Returns <code>true</code> if this entry is incomplete.
-	*
-	* @return <code>true</code> if this entry is incomplete; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this entry is incomplete.
+	 *
+	 * @return <code>true</code> if this entry is incomplete; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isIncomplete() {
-		return _entry.isIncomplete();
-	}
-
-	@Override
-	public boolean isNew() {
-		return _entry.isNew();
+		return model.isIncomplete();
 	}
 
 	/**
-	* Returns <code>true</code> if this entry is pending.
-	*
-	* @return <code>true</code> if this entry is pending; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this entry is pending.
+	 *
+	 * @return <code>true</code> if this entry is pending; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isPending() {
-		return _entry.isPending();
+		return model.isPending();
 	}
 
 	/**
-	* Returns <code>true</code> if this entry is scheduled.
-	*
-	* @return <code>true</code> if this entry is scheduled; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this entry is scheduled.
+	 *
+	 * @return <code>true</code> if this entry is scheduled; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isScheduled() {
-		return _entry.isScheduled();
+		return model.isScheduled();
 	}
 
 	@Override
 	public void persist() {
-		_entry.persist();
-	}
-
-	@Override
-	public void setCachedModel(boolean cachedModel) {
-		_entry.setCachedModel(cachedModel);
+		model.persist();
 	}
 
 	/**
-	* Sets the company ID of this entry.
-	*
-	* @param companyId the company ID of this entry
-	*/
+	 * Sets the company ID of this entry.
+	 *
+	 * @param companyId the company ID of this entry
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
-		_entry.setCompanyId(companyId);
+		model.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this entry.
-	*
-	* @param createDate the create date of this entry
-	*/
+	 * Sets the create date of this entry.
+	 *
+	 * @param createDate the create date of this entry
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
-		_entry.setCreateDate(createDate);
+		model.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets the email of this entry.
-	*
-	* @param email the email of this entry
-	*/
+	 * Sets the email of this entry.
+	 *
+	 * @param email the email of this entry
+	 */
 	@Override
 	public void setEmail(String email) {
-		_entry.setEmail(email);
+		model.setEmail(email);
 	}
 
 	/**
-	* Sets the entry ID of this entry.
-	*
-	* @param entryId the entry ID of this entry
-	*/
+	 * Sets the entry ID of this entry.
+	 *
+	 * @param entryId the entry ID of this entry
+	 */
 	@Override
 	public void setEntryId(long entryId) {
-		_entry.setEntryId(entryId);
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
-		_entry.setExpandoBridgeAttributes(baseModel);
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_entry.setExpandoBridgeAttributes(expandoBridge);
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		_entry.setExpandoBridgeAttributes(serviceContext);
+		model.setEntryId(entryId);
 	}
 
 	/**
-	* Sets the group ID of this entry.
-	*
-	* @param groupId the group ID of this entry
-	*/
+	 * Sets the group ID of this entry.
+	 *
+	 * @param groupId the group ID of this entry
+	 */
 	@Override
 	public void setGroupId(long groupId) {
-		_entry.setGroupId(groupId);
+		model.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the guestbook ID of this entry.
-	*
-	* @param guestbookId the guestbook ID of this entry
-	*/
+	 * Sets the guestbook ID of this entry.
+	 *
+	 * @param guestbookId the guestbook ID of this entry
+	 */
 	@Override
 	public void setGuestbookId(long guestbookId) {
-		_entry.setGuestbookId(guestbookId);
+		model.setGuestbookId(guestbookId);
 	}
 
 	/**
-	* Sets the message of this entry.
-	*
-	* @param message the message of this entry
-	*/
+	 * Sets the message of this entry.
+	 *
+	 * @param message the message of this entry
+	 */
 	@Override
 	public void setMessage(String message) {
-		_entry.setMessage(message);
+		model.setMessage(message);
 	}
 
 	/**
-	* Sets the modified date of this entry.
-	*
-	* @param modifiedDate the modified date of this entry
-	*/
+	 * Sets the modified date of this entry.
+	 *
+	 * @param modifiedDate the modified date of this entry
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
-		_entry.setModifiedDate(modifiedDate);
+		model.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the name of this entry.
-	*
-	* @param name the name of this entry
-	*/
+	 * Sets the name of this entry.
+	 *
+	 * @param name the name of this entry
+	 */
 	@Override
 	public void setName(String name) {
-		_entry.setName(name);
-	}
-
-	@Override
-	public void setNew(boolean n) {
-		_entry.setNew(n);
+		model.setName(name);
 	}
 
 	/**
-	* Sets the primary key of this entry.
-	*
-	* @param primaryKey the primary key of this entry
-	*/
+	 * Sets the primary key of this entry.
+	 *
+	 * @param primaryKey the primary key of this entry
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		_entry.setPrimaryKey(primaryKey);
-	}
-
-	@Override
-	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		_entry.setPrimaryKeyObj(primaryKeyObj);
+		model.setPrimaryKey(primaryKey);
 	}
 
 	/**
-	* Sets the status of this entry.
-	*
-	* @param status the status of this entry
-	*/
+	 * Sets the status of this entry.
+	 *
+	 * @param status the status of this entry
+	 */
 	@Override
 	public void setStatus(int status) {
-		_entry.setStatus(status);
+		model.setStatus(status);
 	}
 
 	/**
-	* Sets the status by user ID of this entry.
-	*
-	* @param statusByUserId the status by user ID of this entry
-	*/
+	 * Sets the status by user ID of this entry.
+	 *
+	 * @param statusByUserId the status by user ID of this entry
+	 */
 	@Override
 	public void setStatusByUserId(long statusByUserId) {
-		_entry.setStatusByUserId(statusByUserId);
+		model.setStatusByUserId(statusByUserId);
 	}
 
 	/**
-	* Sets the status by user name of this entry.
-	*
-	* @param statusByUserName the status by user name of this entry
-	*/
+	 * Sets the status by user name of this entry.
+	 *
+	 * @param statusByUserName the status by user name of this entry
+	 */
 	@Override
 	public void setStatusByUserName(String statusByUserName) {
-		_entry.setStatusByUserName(statusByUserName);
+		model.setStatusByUserName(statusByUserName);
 	}
 
 	/**
-	* Sets the status by user uuid of this entry.
-	*
-	* @param statusByUserUuid the status by user uuid of this entry
-	*/
+	 * Sets the status by user uuid of this entry.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this entry
+	 */
 	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
-		_entry.setStatusByUserUuid(statusByUserUuid);
+		model.setStatusByUserUuid(statusByUserUuid);
 	}
 
 	/**
-	* Sets the status date of this entry.
-	*
-	* @param statusDate the status date of this entry
-	*/
+	 * Sets the status date of this entry.
+	 *
+	 * @param statusDate the status date of this entry
+	 */
 	@Override
 	public void setStatusDate(Date statusDate) {
-		_entry.setStatusDate(statusDate);
+		model.setStatusDate(statusDate);
 	}
 
 	/**
-	* Sets the user ID of this entry.
-	*
-	* @param userId the user ID of this entry
-	*/
+	 * Sets the user ID of this entry.
+	 *
+	 * @param userId the user ID of this entry
+	 */
 	@Override
 	public void setUserId(long userId) {
-		_entry.setUserId(userId);
+		model.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this entry.
-	*
-	* @param userName the user name of this entry
-	*/
+	 * Sets the user name of this entry.
+	 *
+	 * @param userName the user name of this entry
+	 */
 	@Override
 	public void setUserName(String userName) {
-		_entry.setUserName(userName);
+		model.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this entry.
-	*
-	* @param userUuid the user uuid of this entry
-	*/
+	 * Sets the user uuid of this entry.
+	 *
+	 * @param userUuid the user uuid of this entry
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
-		_entry.setUserUuid(userUuid);
+		model.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this entry.
-	*
-	* @param uuid the uuid of this entry
-	*/
+	 * Sets the uuid of this entry.
+	 *
+	 * @param uuid the uuid of this entry
+	 */
 	@Override
 	public void setUuid(String uuid) {
-		_entry.setUuid(uuid);
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<Entry> toCacheModel() {
-		return _entry.toCacheModel();
-	}
-
-	@Override
-	public Entry toEscapedModel() {
-		return new EntryWrapper(_entry.toEscapedModel());
-	}
-
-	@Override
-	public String toString() {
-		return _entry.toString();
-	}
-
-	@Override
-	public Entry toUnescapedModel() {
-		return new EntryWrapper(_entry.toUnescapedModel());
-	}
-
-	@Override
-	public String toXmlString() {
-		return _entry.toXmlString();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-
-		if (!(obj instanceof EntryWrapper)) {
-			return false;
-		}
-
-		EntryWrapper entryWrapper = (EntryWrapper)obj;
-
-		if (Objects.equals(_entry, entryWrapper._entry)) {
-			return true;
-		}
-
-		return false;
+		model.setUuid(uuid);
 	}
 
 	@Override
 	public StagedModelType getStagedModelType() {
-		return _entry.getStagedModelType();
+		return model.getStagedModelType();
 	}
 
 	@Override
-	public Entry getWrappedModel() {
-		return _entry;
+	protected EntryWrapper wrap(Entry entry) {
+		return new EntryWrapper(entry);
 	}
 
-	@Override
-	public boolean isEntityCacheEnabled() {
-		return _entry.isEntityCacheEnabled();
-	}
-
-	@Override
-	public boolean isFinderCacheEnabled() {
-		return _entry.isFinderCacheEnabled();
-	}
-
-	@Override
-	public void resetOriginalValues() {
-		_entry.resetOriginalValues();
-	}
-
-	private final Entry _entry;
 }

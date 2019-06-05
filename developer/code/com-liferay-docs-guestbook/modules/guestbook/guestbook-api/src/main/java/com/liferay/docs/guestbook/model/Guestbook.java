@@ -14,30 +14,31 @@
 
 package com.liferay.docs.guestbook.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.annotation.ImplementationClassName;
 import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.util.Accessor;
+
+import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * The extended model interface for the Guestbook service. Represents a row in the &quot;GB_Guestbook&quot; database table, with each column mapped to a property of this class.
  *
  * @author liferay
  * @see GuestbookModel
- * @see com.liferay.docs.guestbook.model.impl.GuestbookImpl
- * @see com.liferay.docs.guestbook.model.impl.GuestbookModelImpl
  * @generated
  */
 @ImplementationClassName("com.liferay.docs.guestbook.model.impl.GuestbookImpl")
 @ProviderType
 public interface Guestbook extends GuestbookModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.docs.guestbook.model.impl.GuestbookImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.docs.guestbook.model.impl.GuestbookImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<Guestbook, Long> GUESTBOOK_ID_ACCESSOR = new Accessor<Guestbook, Long>() {
+	public static final Accessor<Guestbook, Long> GUESTBOOK_ID_ACCESSOR =
+		new Accessor<Guestbook, Long>() {
+
 			@Override
 			public Long get(Guestbook guestbook) {
 				return guestbook.getGuestbookId();
@@ -52,5 +53,7 @@ public interface Guestbook extends GuestbookModel, PersistedModel {
 			public Class<Guestbook> getTypeClass() {
 				return Guestbook.class;
 			}
+
 		};
+
 }

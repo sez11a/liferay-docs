@@ -14,21 +14,15 @@
 
 package com.liferay.docs.guestbook.model;
 
-import aQute.bnd.annotation.ProviderType;
-
-import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
-import com.liferay.portal.kernel.service.ServiceContext;
-
-import java.io.Serializable;
+import com.liferay.portal.kernel.model.wrapper.BaseModelWrapper;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+
+import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * <p>
@@ -40,19 +34,12 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class GuestbookWrapper implements Guestbook, ModelWrapper<Guestbook> {
+public class GuestbookWrapper
+	extends BaseModelWrapper<Guestbook>
+	implements Guestbook, ModelWrapper<Guestbook> {
+
 	public GuestbookWrapper(Guestbook guestbook) {
-		_guestbook = guestbook;
-	}
-
-	@Override
-	public Class<?> getModelClass() {
-		return Guestbook.class;
-	}
-
-	@Override
-	public String getModelClassName() {
-		return Guestbook.class.getName();
+		super(guestbook);
 	}
 
 	@Override
@@ -157,550 +144,419 @@ public class GuestbookWrapper implements Guestbook, ModelWrapper<Guestbook> {
 		}
 	}
 
-	@Override
-	public Object clone() {
-		return new GuestbookWrapper((Guestbook)_guestbook.clone());
-	}
-
-	@Override
-	public int compareTo(Guestbook guestbook) {
-		return _guestbook.compareTo(guestbook);
-	}
-
 	/**
-	* Returns the company ID of this guestbook.
-	*
-	* @return the company ID of this guestbook
-	*/
+	 * Returns the company ID of this guestbook.
+	 *
+	 * @return the company ID of this guestbook
+	 */
 	@Override
 	public long getCompanyId() {
-		return _guestbook.getCompanyId();
+		return model.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this guestbook.
-	*
-	* @return the create date of this guestbook
-	*/
+	 * Returns the create date of this guestbook.
+	 *
+	 * @return the create date of this guestbook
+	 */
 	@Override
 	public Date getCreateDate() {
-		return _guestbook.getCreateDate();
-	}
-
-	@Override
-	public ExpandoBridge getExpandoBridge() {
-		return _guestbook.getExpandoBridge();
+		return model.getCreateDate();
 	}
 
 	/**
-	* Returns the group ID of this guestbook.
-	*
-	* @return the group ID of this guestbook
-	*/
+	 * Returns the group ID of this guestbook.
+	 *
+	 * @return the group ID of this guestbook
+	 */
 	@Override
 	public long getGroupId() {
-		return _guestbook.getGroupId();
+		return model.getGroupId();
 	}
 
 	/**
-	* Returns the guestbook ID of this guestbook.
-	*
-	* @return the guestbook ID of this guestbook
-	*/
+	 * Returns the guestbook ID of this guestbook.
+	 *
+	 * @return the guestbook ID of this guestbook
+	 */
 	@Override
 	public long getGuestbookId() {
-		return _guestbook.getGuestbookId();
+		return model.getGuestbookId();
 	}
 
 	/**
-	* Returns the modified date of this guestbook.
-	*
-	* @return the modified date of this guestbook
-	*/
+	 * Returns the modified date of this guestbook.
+	 *
+	 * @return the modified date of this guestbook
+	 */
 	@Override
 	public Date getModifiedDate() {
-		return _guestbook.getModifiedDate();
+		return model.getModifiedDate();
 	}
 
 	/**
-	* Returns the name of this guestbook.
-	*
-	* @return the name of this guestbook
-	*/
+	 * Returns the name of this guestbook.
+	 *
+	 * @return the name of this guestbook
+	 */
 	@Override
 	public String getName() {
-		return _guestbook.getName();
+		return model.getName();
 	}
 
 	/**
-	* Returns the primary key of this guestbook.
-	*
-	* @return the primary key of this guestbook
-	*/
+	 * Returns the primary key of this guestbook.
+	 *
+	 * @return the primary key of this guestbook
+	 */
 	@Override
 	public long getPrimaryKey() {
-		return _guestbook.getPrimaryKey();
-	}
-
-	@Override
-	public Serializable getPrimaryKeyObj() {
-		return _guestbook.getPrimaryKeyObj();
+		return model.getPrimaryKey();
 	}
 
 	/**
-	* Returns the status of this guestbook.
-	*
-	* @return the status of this guestbook
-	*/
+	 * Returns the status of this guestbook.
+	 *
+	 * @return the status of this guestbook
+	 */
 	@Override
 	public int getStatus() {
-		return _guestbook.getStatus();
+		return model.getStatus();
 	}
 
 	/**
-	* Returns the status by user ID of this guestbook.
-	*
-	* @return the status by user ID of this guestbook
-	*/
+	 * Returns the status by user ID of this guestbook.
+	 *
+	 * @return the status by user ID of this guestbook
+	 */
 	@Override
 	public long getStatusByUserId() {
-		return _guestbook.getStatusByUserId();
+		return model.getStatusByUserId();
 	}
 
 	/**
-	* Returns the status by user name of this guestbook.
-	*
-	* @return the status by user name of this guestbook
-	*/
+	 * Returns the status by user name of this guestbook.
+	 *
+	 * @return the status by user name of this guestbook
+	 */
 	@Override
 	public String getStatusByUserName() {
-		return _guestbook.getStatusByUserName();
+		return model.getStatusByUserName();
 	}
 
 	/**
-	* Returns the status by user uuid of this guestbook.
-	*
-	* @return the status by user uuid of this guestbook
-	*/
+	 * Returns the status by user uuid of this guestbook.
+	 *
+	 * @return the status by user uuid of this guestbook
+	 */
 	@Override
 	public String getStatusByUserUuid() {
-		return _guestbook.getStatusByUserUuid();
+		return model.getStatusByUserUuid();
 	}
 
 	/**
-	* Returns the status date of this guestbook.
-	*
-	* @return the status date of this guestbook
-	*/
+	 * Returns the status date of this guestbook.
+	 *
+	 * @return the status date of this guestbook
+	 */
 	@Override
 	public Date getStatusDate() {
-		return _guestbook.getStatusDate();
+		return model.getStatusDate();
 	}
 
 	/**
-	* Returns the user ID of this guestbook.
-	*
-	* @return the user ID of this guestbook
-	*/
+	 * Returns the user ID of this guestbook.
+	 *
+	 * @return the user ID of this guestbook
+	 */
 	@Override
 	public long getUserId() {
-		return _guestbook.getUserId();
+		return model.getUserId();
 	}
 
 	/**
-	* Returns the user name of this guestbook.
-	*
-	* @return the user name of this guestbook
-	*/
+	 * Returns the user name of this guestbook.
+	 *
+	 * @return the user name of this guestbook
+	 */
 	@Override
 	public String getUserName() {
-		return _guestbook.getUserName();
+		return model.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this guestbook.
-	*
-	* @return the user uuid of this guestbook
-	*/
+	 * Returns the user uuid of this guestbook.
+	 *
+	 * @return the user uuid of this guestbook
+	 */
 	@Override
 	public String getUserUuid() {
-		return _guestbook.getUserUuid();
+		return model.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this guestbook.
-	*
-	* @return the uuid of this guestbook
-	*/
+	 * Returns the uuid of this guestbook.
+	 *
+	 * @return the uuid of this guestbook
+	 */
 	@Override
 	public String getUuid() {
-		return _guestbook.getUuid();
-	}
-
-	@Override
-	public int hashCode() {
-		return _guestbook.hashCode();
+		return model.getUuid();
 	}
 
 	/**
-	* Returns <code>true</code> if this guestbook is approved.
-	*
-	* @return <code>true</code> if this guestbook is approved; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this guestbook is approved.
+	 *
+	 * @return <code>true</code> if this guestbook is approved; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isApproved() {
-		return _guestbook.isApproved();
-	}
-
-	@Override
-	public boolean isCachedModel() {
-		return _guestbook.isCachedModel();
+		return model.isApproved();
 	}
 
 	/**
-	* Returns <code>true</code> if this guestbook is denied.
-	*
-	* @return <code>true</code> if this guestbook is denied; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this guestbook is denied.
+	 *
+	 * @return <code>true</code> if this guestbook is denied; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDenied() {
-		return _guestbook.isDenied();
+		return model.isDenied();
 	}
 
 	/**
-	* Returns <code>true</code> if this guestbook is a draft.
-	*
-	* @return <code>true</code> if this guestbook is a draft; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this guestbook is a draft.
+	 *
+	 * @return <code>true</code> if this guestbook is a draft; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDraft() {
-		return _guestbook.isDraft();
-	}
-
-	@Override
-	public boolean isEscapedModel() {
-		return _guestbook.isEscapedModel();
+		return model.isDraft();
 	}
 
 	/**
-	* Returns <code>true</code> if this guestbook is expired.
-	*
-	* @return <code>true</code> if this guestbook is expired; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this guestbook is expired.
+	 *
+	 * @return <code>true</code> if this guestbook is expired; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isExpired() {
-		return _guestbook.isExpired();
+		return model.isExpired();
 	}
 
 	/**
-	* Returns <code>true</code> if this guestbook is inactive.
-	*
-	* @return <code>true</code> if this guestbook is inactive; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this guestbook is inactive.
+	 *
+	 * @return <code>true</code> if this guestbook is inactive; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isInactive() {
-		return _guestbook.isInactive();
+		return model.isInactive();
 	}
 
 	/**
-	* Returns <code>true</code> if this guestbook is incomplete.
-	*
-	* @return <code>true</code> if this guestbook is incomplete; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this guestbook is incomplete.
+	 *
+	 * @return <code>true</code> if this guestbook is incomplete; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isIncomplete() {
-		return _guestbook.isIncomplete();
-	}
-
-	@Override
-	public boolean isNew() {
-		return _guestbook.isNew();
+		return model.isIncomplete();
 	}
 
 	/**
-	* Returns <code>true</code> if this guestbook is pending.
-	*
-	* @return <code>true</code> if this guestbook is pending; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this guestbook is pending.
+	 *
+	 * @return <code>true</code> if this guestbook is pending; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isPending() {
-		return _guestbook.isPending();
+		return model.isPending();
 	}
 
 	/**
-	* Returns <code>true</code> if this guestbook is scheduled.
-	*
-	* @return <code>true</code> if this guestbook is scheduled; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this guestbook is scheduled.
+	 *
+	 * @return <code>true</code> if this guestbook is scheduled; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isScheduled() {
-		return _guestbook.isScheduled();
+		return model.isScheduled();
 	}
 
 	@Override
 	public void persist() {
-		_guestbook.persist();
-	}
-
-	@Override
-	public void setCachedModel(boolean cachedModel) {
-		_guestbook.setCachedModel(cachedModel);
+		model.persist();
 	}
 
 	/**
-	* Sets the company ID of this guestbook.
-	*
-	* @param companyId the company ID of this guestbook
-	*/
+	 * Sets the company ID of this guestbook.
+	 *
+	 * @param companyId the company ID of this guestbook
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
-		_guestbook.setCompanyId(companyId);
+		model.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this guestbook.
-	*
-	* @param createDate the create date of this guestbook
-	*/
+	 * Sets the create date of this guestbook.
+	 *
+	 * @param createDate the create date of this guestbook
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
-		_guestbook.setCreateDate(createDate);
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
-		_guestbook.setExpandoBridgeAttributes(baseModel);
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_guestbook.setExpandoBridgeAttributes(expandoBridge);
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		_guestbook.setExpandoBridgeAttributes(serviceContext);
+		model.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets the group ID of this guestbook.
-	*
-	* @param groupId the group ID of this guestbook
-	*/
+	 * Sets the group ID of this guestbook.
+	 *
+	 * @param groupId the group ID of this guestbook
+	 */
 	@Override
 	public void setGroupId(long groupId) {
-		_guestbook.setGroupId(groupId);
+		model.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the guestbook ID of this guestbook.
-	*
-	* @param guestbookId the guestbook ID of this guestbook
-	*/
+	 * Sets the guestbook ID of this guestbook.
+	 *
+	 * @param guestbookId the guestbook ID of this guestbook
+	 */
 	@Override
 	public void setGuestbookId(long guestbookId) {
-		_guestbook.setGuestbookId(guestbookId);
+		model.setGuestbookId(guestbookId);
 	}
 
 	/**
-	* Sets the modified date of this guestbook.
-	*
-	* @param modifiedDate the modified date of this guestbook
-	*/
+	 * Sets the modified date of this guestbook.
+	 *
+	 * @param modifiedDate the modified date of this guestbook
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
-		_guestbook.setModifiedDate(modifiedDate);
+		model.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the name of this guestbook.
-	*
-	* @param name the name of this guestbook
-	*/
+	 * Sets the name of this guestbook.
+	 *
+	 * @param name the name of this guestbook
+	 */
 	@Override
 	public void setName(String name) {
-		_guestbook.setName(name);
-	}
-
-	@Override
-	public void setNew(boolean n) {
-		_guestbook.setNew(n);
+		model.setName(name);
 	}
 
 	/**
-	* Sets the primary key of this guestbook.
-	*
-	* @param primaryKey the primary key of this guestbook
-	*/
+	 * Sets the primary key of this guestbook.
+	 *
+	 * @param primaryKey the primary key of this guestbook
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		_guestbook.setPrimaryKey(primaryKey);
-	}
-
-	@Override
-	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		_guestbook.setPrimaryKeyObj(primaryKeyObj);
+		model.setPrimaryKey(primaryKey);
 	}
 
 	/**
-	* Sets the status of this guestbook.
-	*
-	* @param status the status of this guestbook
-	*/
+	 * Sets the status of this guestbook.
+	 *
+	 * @param status the status of this guestbook
+	 */
 	@Override
 	public void setStatus(int status) {
-		_guestbook.setStatus(status);
+		model.setStatus(status);
 	}
 
 	/**
-	* Sets the status by user ID of this guestbook.
-	*
-	* @param statusByUserId the status by user ID of this guestbook
-	*/
+	 * Sets the status by user ID of this guestbook.
+	 *
+	 * @param statusByUserId the status by user ID of this guestbook
+	 */
 	@Override
 	public void setStatusByUserId(long statusByUserId) {
-		_guestbook.setStatusByUserId(statusByUserId);
+		model.setStatusByUserId(statusByUserId);
 	}
 
 	/**
-	* Sets the status by user name of this guestbook.
-	*
-	* @param statusByUserName the status by user name of this guestbook
-	*/
+	 * Sets the status by user name of this guestbook.
+	 *
+	 * @param statusByUserName the status by user name of this guestbook
+	 */
 	@Override
 	public void setStatusByUserName(String statusByUserName) {
-		_guestbook.setStatusByUserName(statusByUserName);
+		model.setStatusByUserName(statusByUserName);
 	}
 
 	/**
-	* Sets the status by user uuid of this guestbook.
-	*
-	* @param statusByUserUuid the status by user uuid of this guestbook
-	*/
+	 * Sets the status by user uuid of this guestbook.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this guestbook
+	 */
 	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
-		_guestbook.setStatusByUserUuid(statusByUserUuid);
+		model.setStatusByUserUuid(statusByUserUuid);
 	}
 
 	/**
-	* Sets the status date of this guestbook.
-	*
-	* @param statusDate the status date of this guestbook
-	*/
+	 * Sets the status date of this guestbook.
+	 *
+	 * @param statusDate the status date of this guestbook
+	 */
 	@Override
 	public void setStatusDate(Date statusDate) {
-		_guestbook.setStatusDate(statusDate);
+		model.setStatusDate(statusDate);
 	}
 
 	/**
-	* Sets the user ID of this guestbook.
-	*
-	* @param userId the user ID of this guestbook
-	*/
+	 * Sets the user ID of this guestbook.
+	 *
+	 * @param userId the user ID of this guestbook
+	 */
 	@Override
 	public void setUserId(long userId) {
-		_guestbook.setUserId(userId);
+		model.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this guestbook.
-	*
-	* @param userName the user name of this guestbook
-	*/
+	 * Sets the user name of this guestbook.
+	 *
+	 * @param userName the user name of this guestbook
+	 */
 	@Override
 	public void setUserName(String userName) {
-		_guestbook.setUserName(userName);
+		model.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this guestbook.
-	*
-	* @param userUuid the user uuid of this guestbook
-	*/
+	 * Sets the user uuid of this guestbook.
+	 *
+	 * @param userUuid the user uuid of this guestbook
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
-		_guestbook.setUserUuid(userUuid);
+		model.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this guestbook.
-	*
-	* @param uuid the uuid of this guestbook
-	*/
+	 * Sets the uuid of this guestbook.
+	 *
+	 * @param uuid the uuid of this guestbook
+	 */
 	@Override
 	public void setUuid(String uuid) {
-		_guestbook.setUuid(uuid);
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<Guestbook> toCacheModel() {
-		return _guestbook.toCacheModel();
-	}
-
-	@Override
-	public Guestbook toEscapedModel() {
-		return new GuestbookWrapper(_guestbook.toEscapedModel());
-	}
-
-	@Override
-	public String toString() {
-		return _guestbook.toString();
-	}
-
-	@Override
-	public Guestbook toUnescapedModel() {
-		return new GuestbookWrapper(_guestbook.toUnescapedModel());
-	}
-
-	@Override
-	public String toXmlString() {
-		return _guestbook.toXmlString();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-
-		if (!(obj instanceof GuestbookWrapper)) {
-			return false;
-		}
-
-		GuestbookWrapper guestbookWrapper = (GuestbookWrapper)obj;
-
-		if (Objects.equals(_guestbook, guestbookWrapper._guestbook)) {
-			return true;
-		}
-
-		return false;
+		model.setUuid(uuid);
 	}
 
 	@Override
 	public StagedModelType getStagedModelType() {
-		return _guestbook.getStagedModelType();
+		return model.getStagedModelType();
 	}
 
 	@Override
-	public Guestbook getWrappedModel() {
-		return _guestbook;
+	protected GuestbookWrapper wrap(Guestbook guestbook) {
+		return new GuestbookWrapper(guestbook);
 	}
 
-	@Override
-	public boolean isEntityCacheEnabled() {
-		return _guestbook.isEntityCacheEnabled();
-	}
-
-	@Override
-	public boolean isFinderCacheEnabled() {
-		return _guestbook.isFinderCacheEnabled();
-	}
-
-	@Override
-	public void resetOriginalValues() {
-		_guestbook.resetOriginalValues();
-	}
-
-	private final Guestbook _guestbook;
 }

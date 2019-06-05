@@ -14,9 +14,9 @@
 
 package com.liferay.docs.guestbook.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
+
+import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * Provides a wrapper for {@link EntryService}.
@@ -26,17 +26,18 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @generated
  */
 @ProviderType
-public class EntryServiceWrapper implements EntryService,
-	ServiceWrapper<EntryService> {
+public class EntryServiceWrapper
+	implements EntryService, ServiceWrapper<EntryService> {
+
 	public EntryServiceWrapper(EntryService entryService) {
 		_entryService = entryService;
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _entryService.getOSGiServiceIdentifier();
@@ -53,4 +54,5 @@ public class EntryServiceWrapper implements EntryService,
 	}
 
 	private EntryService _entryService;
+
 }
