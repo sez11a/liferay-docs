@@ -12,15 +12,16 @@ files, you must configure @product@ to connect with an application in the
 
 | **Note:** You must be an administrator to complete these steps. 
 
-## Register an application with the Microsoft identity platform
+## Register an Application with the Microsoft Identity Platform
 
-First, you must configure your application with Microsoft identity platform&trade; 
-following the steps described in https://docs.microsoft.com/en-gb/graph/auth-register-app-v2. 
+First, configure your application with Microsoft identity platform&trade;. To do 
+so, follow the steps described in 
+[Microsoft's documentation](https://docs.microsoft.com/en-gb/graph/auth-register-app-v2). 
 
-## Configuring the Portal
+## Configuring @product@
 
-Now that you have your application set up for use with @product@, 
-you must connect your installation to that project. You can do this at two scopes: 
+Now you must connect your @product@ installation with your Microsoft identity 
+platform&trade; application. You can do this at two scopes: 
 
 1.  Globally, for all instances in your @product@ installation.
 2.  At the instance scope, for one or more instances in your @product@ 
@@ -45,14 +46,15 @@ application:
 
 2.  Under *VIRTUAL INSTANCE SCOPE*, select *OneDrive*. 
 
-3.  Enter your applications's OAuth 2 client ID and client secret into the 
-    *Client ID* and *Client Secret* fields. 
+3.  Enter your applications's OAuth 2 client ID and client secret in the 
+    *Client ID* and *Client Secret* fields, respectively. 
 
-4.  Enter your tenant into the *Tenant* field. 
+4.  Enter your tenant ID in the *Tenant* field. To find your tenant ID, see 
+    [Microsoft's documentation](https://docs.microsoft.com/onedrive/find-your-office-365-tenant-id). 
 
 4.  Click *Save*. 
 
-| **Note:** To turn this feature off, delete the client ID, client secret and tenant
-| values from the form. 
+| **Note:** Once enabled, you can disable this feature by deleting the client 
+| ID, client secret, and tenant values from the form. 
 
-![Figure 1: Enter your application's OAuth 2 client ID and client secret.](../../../../images/onedrive-system-settings.png)
+![Figure 1: Enter your application's client ID, client secret, and tenant.](../../../../images/onedrive-system-settings.png)
