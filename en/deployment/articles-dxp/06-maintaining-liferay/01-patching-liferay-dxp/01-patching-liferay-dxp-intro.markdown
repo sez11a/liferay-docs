@@ -27,5 +27,12 @@ hotfixes.
 | tool](/docs/7-2/deploy/-/knowledge_base/d/upgrading-to-product-ver)
 | before server startup.
 
+| **Important:** Installing a new fix pack on top of 7.2 FP1 requires running 
+| the data upgrade tool first, as the Portal Core on FP2 contains a minor data 
+| version schema change. While on FP1,
+| [run the data upgrade tool](/docs/7-2/deploy/-/knowledge_base/d/upgrading-the-product-data)
+| and test your system before switching over to a server running the new fix 
+| pack. 
+
 | **Note:** [Patching a cluster](/docs/7-2/deploy/-/knowledge_base/d/updating-a-cluster)
 | requires additional considerations.
