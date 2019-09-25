@@ -12,6 +12,13 @@ failure protects your data and helps you get your system back in working order
 quickly. And if you're a DXP customer, patching your system regularly brings the
 latest bug fixes to your running instance.
 
+| **Important:** Updating a @product@ 7.2 GA1 installation requires running 
+| the data upgrade tool first, as the Portal Core on GA2 contains a minor data 
+| version schema change. While on GA1,
+| [run the data upgrade tool](/docs/7-2/deploy/-/knowledge_base/d/upgrading-the-product-data)
+| and test your system before switching over to a server running a newer 7.2 
+| GA. 
+
 | Upgrading @product-ver@ to a new GA version can require
 | [data upgrade](/docs/7-2/deploy/-/knowledge_base/d/upgrading-to-product-ver).
 | Until you perform all required data upgrades (if any), @product@ startup fails
