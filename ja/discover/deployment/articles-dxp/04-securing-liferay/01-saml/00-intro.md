@@ -190,7 +190,7 @@ SPによって開始されたSLOでは、ユーザーのブラウザはログア
 
 SAML`LogoutRequest`はIdPのSingle Log OutサービスURLに送信されます。
 
-- @product@がSPとして機能する場合、`LogoutRequest`はSAMLプロバイダーのIdP Connectionタブで設定されたIdP（IdP接続を設定するためには次の記事を参照してください：[next article](/discover/deployment/-/knowledge_base/7-1/setting-up-liferay-as-a-saml-identity-provider)）およびSAMLメタデータで定義されたSLOサービスURLに送信されます。リクエストはHTTP-POSTまたはHTTPリダイレクトバインディングを使用して送信されます。
+- @product@がSPとして機能する場合、`LogoutRequest`はSAMLプロバイダーのIdP Connectionタブで設定されたIdP（IdP接続を設定するためには次の記事(/discover/deployment/-/knowledge_base/7-1/setting-up-liferay-as-a-saml-identity-provider)を参照してください。）およびSAMLメタデータで定義されたSLOサービスURLに送信されます。リクエストはHTTP-POSTまたはHTTPリダイレクトバインディングを使用して送信されます。
 
 
 

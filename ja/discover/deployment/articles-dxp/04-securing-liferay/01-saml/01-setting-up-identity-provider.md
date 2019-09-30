@@ -1,7 +1,7 @@
 # SAML Identity Providerとして@product@を設定する[](id=setting-up-liferay-as-a-saml-identity-provider)
 
 Identity Providerは、ユーザーが他のWebサイトにアクセスするためのシングルサインオンを提供する、信頼できるプロバイダです。Service Providerは、アプリケーションをホストするウェブサイトで、適切な資格情報を持つ識別されたユーザーにのみアクセスを許可します。
-SAMLは[OASIS Security Services Technical Committee]（https://www.oasis-open.org/ committees/security/）によって管理されています。
+SAMLは[OASIS Security Services Technical Committee](https://www.oasis-open.org/ committees/security/)によって管理されています。
 Liferay Portal 6.1 EE以降のバージョンは、[Liferay SAML 2.0 Provider](https://web.liferay.com/marketplace/-/mp/application/15188711)アプリケーションを通じてLiferay SAML 2.0の統合をサポートしています。Liferayマーケットプレイスから提供されており、@product@をSAML 2.0 Identity ProviderまたはService Providerとして機能させることができます。 
 **重要：**@product@をIdentity ProviderまたはService Providerとして設定できます。それぞれの単一の@product@インスタンスは、Identity ProviderまたはService Providerのどちらかとして機能できますが、**両方**は機能できません。この記事では両方の設定方法について説明します。
 
@@ -15,7 +15,7 @@ SAML Identity Providerとして機能するように@product@ upを設定する�
 ファイルシステムキーストアマネージャがデフォルトで使用され、デフォルトのロケーションは`[Liferay Home]/data`ディレクトリです。ファイルシステムストレージの代わりにDocumentおよびMedia Libraryストレージをキーストアに使用するには、document library
 keystore managerを使用します。
 
-キーストアマネージャを選択するには、*[Control Panel]*>*[System Settings]*>*[SAML KeyStoreManager Implementation Configuration]*に行きます。そこでのオプションは*Filesystem Keystore Manager*と*Document Library Keystore Manager*です。
+キーストアマネージャを選択するには、[Control Panel]>[System Settings]>[SAML KeyStoreManager Implementation Configuration]に行きます。そこでのオプションは*Filesystem Keystore Manager*と*Document Library Keystore Manager*です。
 
 
 
@@ -27,7 +27,7 @@ SAML Identity Providerとして機能するように@product@を設定する手�
 
 
 1. Liferay SAML 2.0 Providerアプリをインストールします。
-SAMLのAdminインターフェースにアクセスするには、*[Control Panel]*>*[Configuration]* へ行き、 *[SAML Admin]*をクリックします。
+SAMLのAdminインターフェースにアクセスするには、[Control Panel]>[Configuration] へ行き、 [SAML Admin]をクリックします。
 
 
 
@@ -37,7 +37,7 @@ SAMLのAdminインターフェースにアクセスするには、*[Control Pane
 
    <!-- [Figure 1: Select a SAML role for Liferay and enter an entity ID.](../../../images-dxp/saml-initial-config.png) -->
 
-   *Identity Provider*のSAMLロールを選択します。模範の@product@インスタンスを設定する場合は、*liferaysamlidp*を入力してください。あるいは、独自のエンティティIDを選択してください。そしたら*[Save]*をクリックします。新しいCertificateとPrivate Key のセクションが表示されます。
+   *Identity Provider*のSAMLロールを選択します。模範の@product@インスタンスを設定する場合は、*liferaysamlidp*を入力してください。あるいは、独自のエンティティIDを選択してください。そしたら[Save]をクリックします。新しいCertificateとPrivate Key のセクションが表示されます。
 
 
 
@@ -64,7 +64,7 @@ SAMLのAdminインターフェースにアクセスするには、*[Control Pane
 
    - キーパスワード
 
-   必要な情報をすべて入力したら、*[Save]*をクリックしてください。
+   必要な情報をすべて入力したら、[Save]をクリックしてください。
 
 
 
@@ -72,7 +72,7 @@ SAMLのAdminインターフェースにアクセスするには、*[Control Pane
 
 
 
-4. *[Save]*をクリックした後、*[Replace Certificate]*をクリックして、有効期限が切れていたり、キーのパスワードを変更したい場合に新しい証明書に置き換えることができます。
+4. [Save]をクリックした後、[Replace Certificate]をクリックして、有効期限が切れていたり、キーのパスワードを変更したい場合に新しい証明書に置き換えることができます。
 
 
 
@@ -96,7 +96,7 @@ SAMLのAdminインターフェースにアクセスするには、*[Control Pane
 
 
 
-5. 証明書とプライベートキーの情報を保存したら、Generalタブの一番上にある*Enabled*のボックスをチェックして*[Save]*をクリックします。
+5. 証明書とプライベートキーの情報を保存したら、Generalタブの一番上にある*Enabled*のボックスをチェックして[Save]をクリックします。
 これで@product@をSAML Identity Providerとして設定できました。
 
 ## Identity Provider設定の変更 [](id=changing-the-identity-provider-settings)
@@ -166,7 +166,7 @@ Service Provider（SP）を追加する前に、次の作業が完了してい�
 3. *Enabled* チェックボックスをオンにすると、IdPが有効になり、必要なメタデータを生成できます。このURLは、@product@のメタデータXMLファイルのデフォルトの場所です。
 
        [host]:[port]/c/portal/saml/metadata
-   
+
 このURLが正しく表示されない場合は、SAMLインスタンスが有効になっていない証拠です。
 URLを使用するか、ブラウザで*Save* をクリックして実際の`XML`ファイルを生成します。
 
@@ -281,6 +281,6 @@ URLは`https://[SP host name]/c/portal/saml/keep_alive`です。
 
 
 
-今追加するService Providerを持っていないのであれば、それで結構です。次のセクションでは、@product@をSAMLService Providerとして設定する方法を学びます。別の@product@インスタンスをService Providerとして設定した後、この@product@インストールに戻ってService Providerを追加します：*[Control Panel]*
->*[SAML Admin]*>*[Service Provider Connections]* >*[Add Service
-Provider]*
+今追加するService Providerを持っていないのであれば、それで結構です。次のセクションでは、@product@をSAMLService Providerとして設定する方法を学びます。別の@product@インスタンスをService Providerとして設定した後、この@product@インストールに戻ってService Providerを追加します：[Control Panel]
+>[SAML Admin]>[Service Provider Connections] >[Add Service
+Provider]

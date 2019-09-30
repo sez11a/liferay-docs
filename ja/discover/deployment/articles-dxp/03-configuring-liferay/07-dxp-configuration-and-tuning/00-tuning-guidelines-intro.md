@@ -80,7 +80,7 @@ DBCP、C3P0、HikariCP、およびTomcatなど、さまざまなデータベー�
 
 初期スレッドプール設定を50スレッドにしてから、アプリケーションサーバーの監視コンソールで監視します。平均ページ時間が2〜3秒の範囲にある場合は、もっと大きい数（たとえば250）を使用することをお勧めします。スレッドプール内のスレッドが少なすぎると、過剰なリクエストをキューする可能性があります；スレッドが多すぎると、過度のコンテキストの切り替えが発生する可能性があります
 
-Tomcatでは、スレッドプールは`$CATALINA_HOME/conf/server.xml`ファイルの`Connector`要素で設定されています。 [Apache Tomcat documentation](https://tomcat.apache.org/tomcat-9.0-doc/config/http.html)では、 詳細がより細かく説明してあります。Liferay Engineeringはこの設定方法でテストします：
+Tomcatでは、スレッドプールは`$CATALINA_HOME/conf/server.xml`ファイルの`Connector`要素で設定されています。 [Apache Tomcat 資料](https://tomcat.apache.org/tomcat-9.0-doc/config/http.html)では、 詳細がより細かく説明してあります。Liferay Engineeringはこの設定方法でテストします：
 
     <Connector maxThreads="75" minSpareThreads="50"
     maxConnections="16384" port="8080"

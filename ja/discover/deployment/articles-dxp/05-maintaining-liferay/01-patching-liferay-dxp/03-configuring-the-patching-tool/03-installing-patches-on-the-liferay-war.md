@@ -1,6 +1,6 @@
 # @product-ver@ WARへのパッチのインストール[](id=installing-patches-on-the-liferay-de-war)
 
-サポートされているアプリケーションサーバーにWARファイルとして@ product @をマニュアルでインストールした場合は（参照：[installed @product@ manually](/discover/deployment/-/knowledge_base/7-1/installing-liferay-manually)） 、WARファイルとサポートファイルにパッチを適用し、それらを再びデプロイする必要があります。ここではそれをどう行うか説明します。
+サポートされているアプリケーションサーバーにWARファイルとして@product@をマニュアルでインストールした場合は（参照：[installed @product@ manually](/discover/deployment/-/knowledge_base/7-1/installing-liferay-manually)） 、WARファイルとサポートファイルにパッチを適用し、それらを再びデプロイする必要があります。ここではそれをどう行うか説明します。
 
 
 
@@ -41,7 +41,7 @@
        war.path=../../patching-home/liferay-dxp-[version].war
        global.lib.path=../../patching-home/liferay-dxp-dependencies-[version]
        liferay.home=../../patching-home
-   
+
    別のOSGiフォルダー構造を使用している場合は、それを[Patching Tool Advanced Configuration](/discover/deployment/-/knowledge_base/7-1/patching-tool-advanced-configuration)の文書で説明されているとおりに指定できます。
 
        module.framework.core.path=/osgi-home/osgi/core
@@ -49,11 +49,11 @@
        module.framework.modules.path=/osgi-home/osgi/modules
        module.framework.portal.path=/osgi-home/osgi/portal
        module.framework.static.path=/osgi-home/osgi/static
-   
+
 3. インストールするためにパッチ（フィックスパックまたはホットフィックス）をダウンロードして、パッチングツールフォルダ内の`patches`という名前のフォルダに入れてください。
 
        [patching-home]/patching-tool/patches
-   
+
 4. パッチングツールの`info`コマンドを実行します：
 
        /patching-home/patching-tool> patching-tool info
@@ -74,7 +74,7 @@
        
        Detailed patch list:
        [ I] dxp-2-7110 :: Currently not installed; Will be installed. :: Built for LIFERAY
-   
+
 5. パッチをインストールしてください。
 
        /patching-home/patching-tool> patching-tool.sh  install
@@ -82,7 +82,7 @@
        Cleaning up: [1%..10%..20%..30%..40%..50%..60%..70%..80%..90%..100%]
        Installing patches: [1%..10%..20%..30%..40%..50%..60%..70%..80%..90%...100%]
        The installation was successful. One patch is installed on the system.
-   
+
  これでアーティファクトは正常にパッチされたため、サポートされているアプリケーションサーバーにデプロイする準備が整いました。
 
 ## 関連トピック[](id=related-topics)

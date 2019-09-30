@@ -1,6 +1,6 @@
 # X-Pack Monitoring (6.1)のインストール [](id=installing-x-pack-monitoring-6-1)
 
-X-Pack Monitoringを使ってElasticsearchを監視します。まず Elasticsearch上にX-Packをインストールし（詳細[install X-Pack onto Elasticsearch](discover/deployment/-/knowledge_base-7-1/installing-x-pack))、X-Packのセキュリティ機能を使用している場合は、セキュリティを設定します。上記のことが完了したら、X-Packで保護されているElasticsearchとKibana、および@product@が簡単かつ安全に通信できるように、以下のX-PackでKibana（監視サーバー）をインストール、および構成する手順に従ってください。この統合を行うには、(Premiumに含まれている）Liferay Enterprise Search Standardサブスクリプション契約が必要です。詳細はこちらまでお問い合わせください：[Liferay's Sales department for more information](https://www.liferay.com/contact-us#contact-sales)
+X-Pack Monitoringを使ってElasticsearchを監視します。まず Elasticsearch上にX-Packをインストールし（詳細[install X-Pack onto Elasticsearch](discover/deployment/-/knowledge_base-7-1/installing-x-pack))、X-Packのセキュリティ機能を使用している場合は、セキュリティを設定します。上記のことが完了したら、X-Packで保護されているElasticsearchとKibana、および@product@が簡単かつ安全に通信できるように、以下のX-PackでKibana（監視サーバー）をインストール、および構成する手順に従ってください。この統合を行うには、(Premiumに含まれている）Liferay Enterprise Search Standardサブスクリプション契約が必要です。詳細は[こちら](https://www.liferay.com/contact-us#contact-sales)までお問い合わせください。
 
 1. Kibanaをダウンロードしてインストールします。
 
@@ -18,7 +18,7 @@ X-Pack Monitoringを使ってElasticsearchを監視します。まず Elasticsea
 
 
 
-X-Packのインストール手順については、[X-Pack security article](/discover/deployment/-/knowledge_base-7-1/installing-x-pack-security)を参照してください。
+X-Packのインストール手順については、[X-Packセキュリティ](/discover/deployment/-/knowledge_base-7-1/installing-x-pack-security)を参照してください。
 
 
 
@@ -27,11 +27,11 @@ Kibanaのインストールから始めます。
 ## Kibanaをインストール
 [](id=install-kibana)
 
-必ず正しいバージョンのKibanaをインストールしてください。詳細については、[Liferay Enterprise Search compatibility matrix](https://web.liferay.com/group/customer/dxp/support/compatibility-matrix/enterprise-search)を確認してください。
+必ず正しいバージョンのKibanaをインストールしてください。詳細については、[Liferay Enterprise Search 互換性マトリクス](https://web.liferay.com/group/customer/dxp/support/compatibility-matrix/enterprise-search)を確認してください。
 
 
 
-1. Kibanaをダウンロードし（詳細：[Download Kibana](https://www.elastic.co/downloads/kibana)）抽出します。 
+1. Kibanaをダウンロードし（詳細：[ダウンロード Kibana](https://www.elastic.co/downloads/kibana)）抽出します。 
 ルートフォルダの名前は*Kibana Home*です。
 
 
@@ -39,13 +39,13 @@ Kibanaのインストールから始めます。
 2. X-PackをKibanaにインストールします:
 
        ./bin/kibana-plugin install x-pack
-   
+
 3. ElasticsearchのURLを`kibana.yml`で設定して、Kibanaにモニタリングデータの送信先を指示します。
 
 
 
        elasticsearch.url: "http://localhost:9200"
-   
+
    ElasticsearchでSSLが有効になっている場合は、`https`のURLです。
 
 
@@ -55,7 +55,7 @@ Kibanaのインストールから始めます。
 
 
        ./bin/kibana
-   
+
 ElasticsearchサーバーでX-Packのセキュリティ機能を使用している場合は、Kibanaを起動する前に追加の設定が必要です。
 
 ### 認証付きのKibanaを設定する
@@ -69,7 +69,7 @@ X-PackがElasticsearchクラスターにアクセスするために認証を必�
 
        elasticsearch.username: "kibana"
        elasticsearch.password: "liferay"
-   
+
    X-Packセットアップに`kibana`のユーザーパスワードを使用してください。Kibanaをインストールしたら、*Management*ユーザーインターフェイスから組み込みのユーザーパスワードを変更できます。
 
 
@@ -77,15 +77,14 @@ X-PackがElasticsearchクラスターにアクセスするために認証を必�
 2. Elasticsearchクラスターとの通信を暗号化していない場合は、KibanaホームからKibanaを起動してください。
 
        ./bin/kibana
-   
-3. `localhost:5601`に移動して、`kibana_user`がある[user](https://www.elastic.co/guide/en/x-pack/6.1/native-realm.html#native-add)としてサインインできることを確認してください。
 
+3. `localhost:5601`に移動して、`kibana_user`がある[user](https://www.elastic.co/guide/en/x-pack/6.1/native-realm.html#native-add)としてサインインできることを確認してください。
    [role](https://www.elastic.co/guide/en/x-pack/6.1/built-in-roles.html).
 
 ### 暗号化を使用したKibanaの設定
  [](id=configuring-kibana-with-encryption)
 
-X-PackがElasticsearchクラスターとの通信を暗号化する場合は、次の手順に従ってKibanaを設定してください。詳細については[Elastic's guide](https://www.elastic.co/guide/en/kibana/6.1/using-kibana-with-security.html#using-kibana-with-security)を参照してください。
+X-PackがElasticsearchクラスターとの通信を暗号化する場合は、次の手順に従ってKibanaを設定してください。詳細については[Elasticのガイド](https://www.elastic.co/guide/en/kibana/6.1/using-kibana-with-security.html#using-kibana-with-security)を参照してください。
 
 以下の設定を`kibana.yml`に追加します：
 
@@ -100,7 +99,7 @@ X-PackがElasticsearchクラスターとの通信を暗号化する場合は、�
     server.ssl.certificate: /path/to/[Elasticsearch Home]/config/localhost.crt
     server.ssl.key: /path/to/[Elasticsearch Home]/config/localhost.key
 
-クラスター環境での監視およびセキュリティのベストプラクティスの詳細については、[Elastic's documentation](https://www.elastic.co/guide/en/x-pack/6.1/secure-monitoring.html)を参照してください 。
+クラスター環境での監視およびセキュリティのベストプラクティスの詳細については、[Elasticの資料](https://www.elastic.co/guide/en/x-pack/6.1/secure-monitoring.html)を参照してください 。
 
 この手順の後、`https://localhost:5601`でKibanaにアクセスし、Kibanaのユーザーでサインインすることができます。最後のステップはKibanaを@product@に接続することです。
 
@@ -110,16 +109,16 @@ Liferay Enterprise Search（プレミアムまたはスタンダード）サブ�
 
 
 
-1. コネクタがインストールされ、KibanaとElasticsearchが安全に設定されたら、以下の名前の[configuration file](/discover/portal/-/knowledge_base/7-1/understanding-system-configuration-files) を作成します。<segment 0155>
+1. コネクタがインストールされ、KibanaとElasticsearchが安全に設定されたら、以下の名前の[コンフィグレーションファイル](/discover/portal/-/knowledge_base/7-1/understanding-system-configuration-files) を作成します。<segment 0155>
 
        com.liferay.portal.search.elasticsearch6.xpack.monitoring.web.internal.configuration.XPackMonitoringConfiguration.config
-   
+
 2. 以下の設定を`.config`ファイルに配置します：
 
        kibanaPassword="liferay"
        kibanaUserName="elastic"
        kibanaURL="http://localhost:5601"
-   
+
    値はKibanaの設定によって異なります。X-Pack Security機能を使用している場合、`kibanaURL="https://localhost:5601"`のような安全なURLを使ってください。
 
 
@@ -138,7 +137,7 @@ Liferay Enterprise Search（プレミアムまたはスタンダード）サブ�
 
 
        server.basePath: "/o/portal-search-elasticsearch-xpack-monitoring/xpack-monitoring-proxy"
-   
+
    一度`server.basePath`を設定すると、KibanaのURLからKibanaのUIにアクセスできなくなります。（例：`https://localhost:5601`）。Kibana UIへのアクセスはすべてMonitoringポートレットを介して行われます。これはログインした@product@ユーザーにのみアクセス可能です。以下のURLを使用してポートレットに直接移動します：
 
    [http://localhost:8080/o/portal-search-elasticsearch-xpack-monitoring/xpack-monitoring-proxy/app/monitoring](http://localhost:8080/o/portal-search-elasticsearch-xpack-monitoring/xpack-monitoring-proxy/app/monitoring)
@@ -148,15 +147,15 @@ Liferay Enterprise Search（プレミアムまたはスタンダード）サブ�
    まず、Elasticsearch Homeに移動し、X-Packセキュリティの設定時に作成したCAからPKSC＃12証明書を生成します。
 
        ./bin/x-pack/certutil cert --ca-cert /path/to/ca.crt --ca-key /path/to/ca.key --ip 127.0.0.1 --dns localhost --name localhost --out /path/to/Elasticsearch_Home/config/localhost.p12
-   
+
    次に`keytool`コマンドを使用してトラストストアを生成します。
 
        keytool -importkeystore -deststorepass liferay -destkeystore /path/to/truststore.jks -srckeystore /path/to/Elasticsearch_Home/config/localhost.p12 -srcstoretype PKCS12 -srcstorepass liferay
-   
+
    アプリケーションサーバーの立ち上げ時JVMパラメータにトラストストアパスとパスワードを追加します。以下はTomcatサーバーの`CATALINA_OPTS`に追加するためのトラストストアとパスのパラメーターの例をです：
 
        -Djavax.net.ssl.trustStore=/path/to/truststore.jks -Djavax.net.ssl.trustStorePassword=liferay
-   
+
 @product@とKibanaを再起動してください。
 
 ## @product@での監視[](id=monitoring-in-product)

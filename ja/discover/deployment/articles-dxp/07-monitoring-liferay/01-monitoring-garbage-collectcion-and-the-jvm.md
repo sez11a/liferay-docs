@@ -10,7 +10,7 @@ VisualVMは、Oracle JVMのパフォーマンス情報を表示するための�
 
 +$$$
 
-**注： **OracleのJDKにはVisualVMバンドルがあります。（`$JAVA_HOME/bin/jvisualvm`）
+**注：**OracleのJDKにはVisualVMバンドルがあります。（`$JAVA_HOME/bin/jvisualvm`）
 ただし、常に最新のVisualVMを[official website](https://visualvm.github.io/)からダウンロードして使用してください。
 
 $$$
@@ -48,7 +48,7 @@ JMX接続を有効にするには、以下のJVM引数を追加します：
 **注：**これらのJVM引数を追加すると、`OutOfMemoryError`が発生した場合にヒープダンプが生成されます。
 
 ダンプは指定されたヒープ・ダンプ・パスに書き込まれます。
-使用するパスを指定してください。<segment 0032>
+使用するパスを指定してください。
 
 
     -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/heap/dump/path/

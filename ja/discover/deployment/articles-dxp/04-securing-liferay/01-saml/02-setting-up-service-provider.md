@@ -15,7 +15,7 @@ $$$
 
 
 2. SAMLを使用するように@product@の設定を開始するには、@product@のSAMLロールを選択し、エンティティIDを選択する必要があります。*Service
-Provider*SAMLロールを選択します。模範の@product@インストールを設定している場合は、*liferaysamlsp* と入力してください。あるいは、独自のエンティティIDを選択してください。次に *[Save]* をクリックすると、CertificateとPrivate Keyという新しいセクションが表示されます。
+Provider*SAMLロールを選択します。模範の@product@インストールを設定している場合は、*liferaysamlsp* と入力してください。あるいは、独自のエンティティIDを選択してください。次に [Save]をクリックすると、CertificateとPrivate Keyという新しいセクションが表示されます。
 
 
 3. CertificateとPrivate Keyセクションは、SAML用のキーストアを作成するためのものです。
@@ -41,11 +41,11 @@ Provider*SAMLロールを選択します。模範の@product@インストール�
 
    - キーパスワード
 
-   必要な情報をすべて入力したら、*[Save]*をクリックしてください。
+   必要な情報をすべて入力したら、[Save]をクリックしてください。
 
 
 
-4.  *[Save]*をクリックした後、証明書に関する情報を表示できるか、証明書をダウンロードできるかを確認してください。
+4.  [Save]をクリックした後、証明書に関する情報を表示できるか、証明書をダウンロードできるかを確認してください。
 
 できた場合、キーストアが正常に作成されたということです。キーストアを作成した後、追加のオプションが表示されます。3つのタブがあります。
 
@@ -77,7 +77,7 @@ IdP接続は1つだけです。
 
    - Force Authn
 
-   - メタデータURL：http：// localhost：8080 / c / portal / saml / metadata（最初にこのURLをテストしてください）
+   - メタデータURL：http://localhost:8080/c/portal/saml/metadata（最初にこのURLをテストしてください）
 
    - Name Identifier Format
 
@@ -90,7 +90,7 @@ IdP接続は1つだけです。
 
 
 
-6. 最後に、証明書とプライベートキーの情報を保存して Identity Provider接続を設定したら、Generalタブの上部にある*Enabled* チェックボックスをオンにして*[Save]*をクリックします。これで@product@がSAMLService Providerになりました！
+6. 最後に、証明書とプライベートキーの情報を保存して Identity Provider接続を設定したら、Generalタブの上部にある*Enabled* チェックボックスをオンにして[Save]をクリックします。これで@product@がSAMLService Providerになりました！
 
 SAMLService Providerセッションは、アプリケーションサーバー上の通常のセッションに関連付けられています。アプリケーションサーバーでのセッションの有効期限が切れた場合、Service Providerーでのセッションは終了しますが、シングルログアウトは開始されません。
 
@@ -120,7 +120,7 @@ SAMLService Providerセッションは、アプリケーションサーバー上
 4. *Enabled* チェックボックスをオンにすると、Service Providerのメタデータが利用可能になります：
 
        [host]:[port]/c/portal/saml/metadata
-   
+
 ## SAMLService Provider設定の変更 [](id=changing-the-saml-service-provider-settings)
 
 @product@のSAMLService Provider設定を設定する場合は、SAML管理ポートレットのService Providerタブに移動します。

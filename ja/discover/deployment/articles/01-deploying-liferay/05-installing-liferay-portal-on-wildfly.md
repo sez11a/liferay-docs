@@ -1,42 +1,27 @@
-# Installing @product@ on Wildfly [](id=installing-product-on-wildfly)
+# Wildflyに@product@をインストールする[](id=installing-product-on-wildfly)
 
-@product-ver@ bundled with Wildfly 11 is available on the
-[Customer Portal](https://web.liferay.com/group/customer/dxp/downloads/7-1)
-(DXP) or [Liferay Downloads](https://www.liferay.com/downloads) (Portal CE).
-@product-ver@ supports deployment to Wildfly 10 and Wildfly 11. Even if you want
-to manually install @product@ on an existing Wildfly application server, it can
-be helpful to download a @product@ Wildfly bundle to make gathering the
-dependencies easier. Before proceeding, also download these files for
-[DXP](https://web.liferay.com/group/customer/dxp/downloads/7-1)
-and [Portal CE](https://www.liferay.com/downloads):
+Wildfly 11にバンドルされている@product-ver@は、[カスタマーポータル](https://web.liferay.com/group/customer/dxp/downloads/7-1)（DXP）または[Liferay Downloads](https://www.liferay.com/downloads)（ポータルCE）で入手できます。
+@product-ver@は、Wildfly 10およびWildfly 11へのデプロイをサポートしています。既存のWildflyアプリケーションサーバーに手動で@product@をインストールする場合でも、依存関係を簡単に収集するために@product@ Wildflyバンドルをダウンロードすると便利です。先へ進む前に、[DXP](https://web.liferay.com/group/customer/dxp/downloads/7-1)と[Portal CE](https://www.liferay.com/downloads)用にこれらのファイルもダウンロードしてください。
 
 - @product@ WARファイル
 - 依存関係のZIPファイル
 
-- OSGi JARファイルのZIPファイル
+- OSGi JARのZIPファイル
 
-Installing @product@ manually takes three steps:
+@product@を手動でインストールするには、3つのステップがあります。
 
-- [アプリケーションサーバーへの依存関係のインストール](#installing-dependencies)
+- [アプリケーションサーバーへ依存関係をインストールする](#installing-dependencies)
 
 - [@product@用にアプリケーションサーバーを設定する](#configuring-wildfly)
-- [Liferay DXP WARファイルをアプリケーションサーバーにデプロイする](#deploying-product)
+- [@product@ WARファイルをアプリケーションサーバーにデプロイする](#deploying-product)
 
-[*Liferay Home*](/discover/deployment/-/knowledge_base/7-1/installing-liferay#liferay-home)
-is the folder containing your Wildfly server folder. After installing and
-deploying @product@, the Liferay Home folder contains the Wildfly server folder
-as well as `data`, `deploy`, `logs`, and `osgi` folders. `$WILDFLY_HOME` refers
-to your Wildfly server folder. It is usually named `wildfly-[version]`.
+[*Liferay Home*](/discover/deployment/-/knowledge_base/7-1/installing-liferay#liferay-home)は、Wildflyサーバーのフォルダを含むフォルダです。@product@がインストールされ、デプロイされると、Liferay Homeフォルダーには、Wildflyサーバーフォルダー、`data`、`deploy`、 `logs`、そして`osgi`フォルダーが作成されます。`$WILDFLY_HOME`はWildflyサーバーフォルダを参照します。通常は`wildfly-[version`]という名前になっています。
 
-## Liferay DXP の依存ファイルをインストールする[](id=installing-dependencies)
+## 依存関係をインストールする[](id=installing-dependencies)
 
-@product@ depends on many JARs that are included in the @product@ Wildfly
-bundle. Some of the bundle's JARs are not strictly required but can still be
-useful. If you don't have a @product@ Wildfly bundle, download the required JARs
-from third-parties as described below.
+@product@は@product@ Wildflyバンドルに含まれる多くのJARに依存します。バンドル内のJARの中には必須ではないファイルもありますが、それでも有用です。@product@ Wildflyバンドルがない場合は、下記のようにサードパーティから必要なJARをダウンロードしてください。
 
-1. Create the folder `$WILDFLY_HOME/modules/com/liferay/portal/main` if it
-doesn't exist and extract the dependencies ZIP JARs to it:
+1. `$WILDFLY_HOME/modules/com/liferay/portal/main`フォルダが存在しない場合は作成し、そのフォルダに依存関係のZIP JARを抽出します。
 
    - `com.liferay.petra.concurrent.jar`
    - `com.liferay.petra.executor.jar`
@@ -53,16 +38,9 @@ doesn't exist and extract the dependencies ZIP JARs to it:
    - `portal-kernel.jar`
    - `portlet.jar`
 
-2. Download your database driver `.jar` file and copy it into the
-same folder. For example,
-[copy MySQL's driver](http://dev.mysql.com/downloads/connector/j/)
-into the `$WILDFLY_HOME/modules/com/liferay/portal/main` folder. The
-`mariadb.jar`, `mysql.jar`, and `postgresql.jar` driver JARs are also
-available in the Wildfly bundle.
+2. データベースドライバの`.jar`ファイルをダウンロードして、同じフォルダにコピーします。たとえば、[MySQLのドライバ](http://dev.mysql.com/downloads/connector/j/)を` $WILDFLY_HOME/modules/com/liferay/portal/main`フォルダに コピーします。`mariadb.jar`、`mysql.jar`、および`postgresql.jar`ドライバのJARがWildflyバンドルでも利用できます。
 
-3. Create the file `module.xml` in the
-`$WILDFLY_HOME/modules/com/liferay/portal/main` folder and insert this
-configuration:
+3. `$WILDFLY_HOME/modules/com/liferay/portal/main`フォルダに`module.xml`ファイルを作成し、この設定を挿入します。
 
        <?xml version="1.0"?>
        
@@ -93,19 +71,15 @@ configuration:
        </dependencies>
        </module>
 
-   If you use a different database, replace the MySQL `.jar` with the driver
-JAR for your database (e.g., HSQL, PostgreSQL, etc.).
+   別のデータベースを使用する場合は、MySQL `.jar`をご使用のデータベース用のドライバJAR（HSQL、PostgreSQLなど）に置き換えてください。
 
-4. Create an `osgi` folder in your Liferay Home folder. Extract the OSGi ZIP
-file that you downloaded into the `osgi` folder.
+4. Liferay Homeフォルダに`osgi`フォルダを作成します。ダウンロードしたOSGi ZIPファイルを`osgi`フォルダに解凍します。
 
-   The `osgi` folder provides the necessary modules for @product@'s OSGi
-runtime.
+   この`osgi`フォルダは@product@のOSGiランタイムに必要なモジュールを提供します。
 
-チェックポイント:
+**チェックポイント:**
 
-1. At this point, you should have the following files in the
-`$WILDFLY_HOME/modules/com/liferay/portal/main` folder:
+1. この時点で、`$WILDFLY_HOME/modules/com/liferay/portal/main`フォルダ内に次のファイルがあるはずです 。
 
    - `com.liferay.petra.concurrent`
    - `com.liferay.petra.executor.jar`
@@ -120,11 +94,11 @@ runtime.
    - `com.liferay.registry.api.jar`
    - `portal-kernel.jar`
    - `portlet.jar`
-   - a database JAR such as the MySQL Connector.
+   - MySQL ConnectorなどのデータベースJAR。
 
-2. The `module.xml` has listed all JARs in the `<resource-root-path>` elements.
+2. `module.xml`には`<resource-root-path>`要素内のすべてのJARが列挙されています。
 
-3. The `osgi` folder has the following subfolders:
+3. この`osgi`フォルダには、次のサブフォルダがあります。
 
    - `configs`
    - `core`
@@ -135,79 +109,60 @@ runtime.
    - `test`
    - `war`
 
-Great! You have your `.jar` files ready.
+ `.jar`ファイルの準備ができました。
 
-## Running @product@ on Wildfly in Standalone Mode vs. Domain Mode [](id=running-product-on-wildfly-in-standalone-mode-vs-domain-mode)
+## Wildflyで@product@を実行する場合のスタンドアロンモードとドメインモード[](id=running-product-on-wildfly-in-standalone-mode-vs-domain-mode)
 
-Wildfly can be launched in either *standalone* mode or *domain* mode. Domain
-mode allows multiple application server instances to be managed from a single
-control point. A collection of such application servers is known as a *domain*.
-For more information on standalone mode vs. domain mode, please refer to the
-section on this topic in the
-[Wildfly Admin Guide](https://docs.jboss.org/author/display/WFLY/Admin+Guide#AdminGuide-Operatingmodes).
-@product@ fully supports Wildfly in standalone mode but not in domain mode.
+Wildflyは、*スタンドアロンモード*または*ドメインモード*のどちらでも起動できます。ドメインモードでは、複数のアプリケーションサーバーインスタンスを単一の制御点から管理できます。このようなアプリケーションサーバーの集まりは*ドメイン*と呼ばれます。
+スタンドアロンモードとドメインモードの詳細については、[Wildfly Admin Guide](https://docs.jboss.org/author/display/WFLY/Admin+Guide#AdminGuide-Operatingmodes)のこのトピックに関するセクションを参照してください 。
+@product@は、スタンドアロンモードではWildflyを完全にサポートしていますが、ドメインモードではサポートしていません。
 
-You can run @product@ on Wildfly in domain mode, but this method is not fully
-supported. In particular, @product@'s hot-deploy does not work with a managed
-deployment, since Wildfly manages the content of a managed deployment by copying
-files (exploded or non-exploded). This prevents JSP hooks and Ext plugins from
-working as intended. For example, JSP hooks don't work on Wildfly running in
-managed domain mode, since @product@'s JSP override mechanism relies on the
-application server. Since both of these features are deprecated, however, you
-may not be using them.
+ドメインモードではWildflyで@product@を実行できますが、この方法は完全にはサポートされていません。特に、@product@のホットデプロイは管理されたデプロイでは機能しません。なぜなら、Wildflyはファイルをコピーすることによって管理されたデプロイメントの内容を管理するからです（展開または非展開）これにより、JSPフックとExtプラグインが意図したとおりに機能しなくなります。たとえば、@product@のJSPオーバーライドメカニズムはアプリケーションサーバーに依存しているため、JSPフックは、管理ドメインモードで実行されているWildflyでは機能しません。これらの機能はどちらも非推奨であるため、使用されない可能性があります。
 
-The command line interface is recommended for domain mode deployments.
+コマンドラインインターフェイスは、ドメインモードのデプロイに推奨されます。
+
 
 +$$$
 
-**Note:** This does not prevent @product@ from running in a clustered
-environment on multiple Wildfly servers. You can set up a cluster of @product@
-instances running on Wildfly servers running in standalone mode. Please refer to
-the chapter of this guide on
-[@product@ Clustering](/discover/deployment/-/knowledge_base/7-1/liferay-clustering)
-for information on setting up a @product@ cluster.
+**注：**これは@product@が複数のWildflyサーバー上のクラスター環境で実行されるのを妨ぐわけではありません。スタンドアロンモードのWildflyサーバー上で実行されている@product@インスタンスのクラスターをセットアップできます。@product@クラスタの設定方法については、このガイドの[@product@ クラスタリング](/discover/deployment/-/knowledge_base/7-1/liferay-clustering)に関する章を参照してください 。
 
 $$$
 
-## Configuring Wildfly [](id=configuring-wildfly)
+## Wildflyの設定[](id=configuring-wildfly)
 
-Configuring Wildfly to run @product@ includes these things:
+次に、@product@を起動できるようにWildflyを設定します。
 
 - 環境変数を設定する
-- プロパティと記述子の設定
-- Removing unnecessary configurations
+- プロパティとディスクリプタを設定する
+- 不要な設定を削除する
 
-Optionally, you can configure Wildfly to manage @product@'s data source and mail
-session.
+オプションとして、@product@のデータソースとメールセッションを管理するようにWildflyを設定することができます。
 
-Start with configuring Wildfly to run @product@.
 
-Make the following modifications to
-`$WILDFLY_HOME/standalone/configuration/standalone.xml`:
+次に、@product@を起動できるようにWildflyを設定します。
 
-1. Locate the closing `</extensions>` tag. Directly beneath that tag, insert
-the following system properties:
+`$WILDFLY_HOME/standalone/configuration/standalone.xml`へ以下の変更を行います。
+
+
+1. `</extensions>`という終了タグを見つけます。そのタグのすぐ下に、次のシステムプロパティを挿入します。
 
        <system-properties>
        <property name="org.apache.catalina.connector.URI_ENCODING" value="UTF-8" />
        <property name="org.apache.catalina.connector.USE_BODY_ENCODING_FOR_QUERY_STRING" value="true" />
        </system-properties>
 
-2. Add the following `<filter-spec>` tag within the `<console-handler>` tag,
-directly below the `<level name="INFO"/>` tag:
+2. `<level name="INFO"/>`タグのすぐ下にある`<console-handler>`タグ内に、以下の`<filter-spec>`タグを追加します。
 
        <filter-spec value="not(any(match(&quot;WFLYSRV0059&quot;),match(&quot;WFLYEE0007&quot;)))" />
 
-3. Add a timeout for the deployment scanner by setting
-`deployment-timeout="360"` as seen in the excerpt below.
+3. `deployment-timeout="360"`を以下の抜粋のように設定して、デプロイメントスキャナーのタイムアウトを追加し ます。
+
 
        <subsystem xmlns="urn:jboss:domain:deployment-scanner:2.0">
        <deployment-scanner deployment-timeout="360" path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000" runtime-failure-causes-rollback="${jboss.deployment.scanner.rollback.on.failure:false}"/>
        </subsystem>
 
-4. Add the following JAAS security domain to the security subsystem
-`<security-domains>` defined in element `<subsystem
-xmlns="urn:jboss:domain:security:2.0">`.
+4. 次のJAASセキュリティドメインを`<subsystem xmlns="urn:jboss:domain:security:2.0">`要素で定義されたセキュリティサブシステムの`<security-domains>`に追加します 。
 
        <security-domain name="PortalRealm">
        <authentication>
@@ -215,136 +170,117 @@ xmlns="urn:jboss:domain:security:2.0">`.
        </authentication>
        </security-domain>
 
-5. Remove the following Weld-related tags:
+5. 以下のWeld関連のタグを削除します。
 
    - `<extension module="org.jboss.as.weld"/>`
    - `<subsystem xmlns="urn:jboss:domain:weld:4.0"/>`
 
-6. Remove the two code snippets providing welcome content:
+6. ウェルカムコンテンツを提供する2つのコードスニペットを削除します。
 
        <location name="/" handler="welcome-content"/>
-   
-   and
+
+   そして
 
        <handlers>
        <file name="welcome-content" path="${jboss.home.dir}/welcome-content"/>
        </handlers>
 
-7. Find the `<jsp-config/>` tag and set the `development`, `source-vm`, and
-`target-vm` attributes in the tag. Once finished, the tag should look like
-this:
+7. ``<jsp-config/>タグを検索し、そのタグ内に`development`、`source-vm`、および`target-vm`の属性を設定します。終了すると、タグは次のようになります。
 
        <jsp-config development="true" source-vm="1.8" target-vm="1.8" />
-   
-チェックポイント:
 
-Before continuing, verify the following properties have been set in the
-`standalone.xml` file:
+**チェックポイント:**
 
-1. The new `<system-property>` is added.
+続行する前に、`standalone.xml`ファイルに以下のプロパティが設定されていることを確認してください。
 
-2. The new `<filter-spec>` is added.
+1. 新しい`<system-property>`が追加されました。
 
-3. The `<deployment-timeout>` is set to `360`.
+2. 新しい`<filter-spec>`が追加されました。
 
-4. The new `<security-domain>` is created.
+3. `<deployment-timeout>`は`360`に設定されています。
 
-5. Weld tags are removed.
+4. 新しい`<security-domain>`が作成されました。
 
-6. Welcome content is removed.
+5. Weldタグは削除されました。
 
-7. The `<jsp-config>` tag contains its new attributes.
+6. ウェルカムコンテンツも削除されました。
 
-Now you must configure your JVM and startup scripts.
+7. `<jsp-config>`タグには、新しい属性が含まれています。
 
-In the `$WILDFLY_HOME/bin/` folder, you must make these modifications to your
-standalone domain's configuration script file `standalone.conf`
-(`standalone.conf.bat` on Windows):
+次に、JVMと起動スクリプトを設定する必要があります。
 
-- Set the file encoding
-- Set the user time-zone
-- Set the preferred protocol stack
-- Increase the default amount of memory available.
+`$WILDFLY_HOME/bin/`フォルダ内にある、スタンドアロンドメインの設定スクリプトファイルの`standalone.conf`を変更する必要があります。（Windowsの場合は`standalone.conf.bat`）
 
-Make the following edits as applicable for your operating system:
+- ファイルエンコーディングを設定します
+
+- ユーザーのタイムゾーンを設定します
+
+- 優先プロトコルスタックを設定します
+
+- デフォルトの利用可能なメモリ容量を増やします。
+
+使用しているオペレーティングシステムに応じて、以下の編集を行います。
 
 **Windows:**
 
-1. Comment out the initial `JAVA_OPTS` assignment like this:
+1. 最初の`JAVA_OPTS`の割り当てを以下のようにコメントアウトします。
 
        rem set "JAVA_OPTS=-Xms64M -Xmx512M -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m"
-   
-2. Add the following `JAVA_OPTS` assignment one line above the `:JAVA_OPTS_SET`
-line found at end of the file:
+
+2. ファイルの末尾にある`JAVA_OPTS_SET`の行の1行上に、以下の`JAVA_OPTS`の割り当てを追加します。
 
        set "JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Djboss.as.management.blocking.timeout=480 -Duser.timezone=GMT -Xmx2048m -XX:MaxMetaspaceSize=512m -XX:MetaspaceSize=200m"
-   
+
 **Unix:**
 
-1. Below the `if [ "x$JAVA_OPTS" = "x" ];` statement, replace this `JAVA_OPTS`
-statement:
+1. `if [ "x$JAVA_OPTS" = "x" ];`の文の下にある、以下の`JAVA_OPTS`の文を削除します。
 
        JAVA_OPTS="-Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true"
-   
-   with this:
+
+   そして、以下の文を挿入します。
 
        JAVA_OPTS="-Djava.net.preferIPv4Stack=true"
-   
-2. Add the following statement to the bottom of the file:
+
+2. ファイルの末尾に以下の文を追加します。
 
        JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true  -Djboss.as.management.blocking.timeout=480 -Duser.timezone=GMT -Xmx2048m -XX:MaxMetaspaceSize=512m -XX:MetaspaceSize=200m"
 
 +$$$
 
-**Note:** If you plan on using the IBM JDK with your Wildfly server, you must
-complete some additional steps. First, navigate to the
-`$WILDFLY_HOME/modules/com/liferay/portal/main/module.xml` file and insert the
-following dependency within the `<dependencies>` element:
+**注：**WildflyサーバーでIBM JDKを使用する予定の場合は、いくつか追加のステップを実行する必要があります。まず、`$WILDFLY_HOME/modules/com/liferay/portal/main/module.xml`ファイルに移動して 、`<dependencies>`要素内に以下の依存関係を挿入します。
 
     <module name="ibm.jdk" />
 
-Then navigate to the
-`$WILDFLY_HOME/modules/system/layers/base/sun/jdk/main/module.xml` file and
-insert the following path names inside the `<paths>...</paths>` element:
+次に、`$WILDFLY_HOME/modules/system/layers/base/sun/jdk/main/module.xml`ファイルに移動して 、`<paths>...</paths>`要素内に以下のパス名を挿入します。
 
     <path name="com/sun/crypto" />
     <path name="com/sun/crypto/provider" />
     <path name="com/sun/org/apache/xml/internal/resolver" />
     <path name="com/sun/org/apache/xml/internal/resolver/tools" />
 
-The added paths resolve issues with deployment exceptions and image uploading
-problems.
+追加されたパスは、デプロイの例外およびイメージのアップロードの問題に関した事象を解決します。
 
 $$$
 
-チェックポイント:
+**チェックポイント:**
 
-At this point, you've finished configuring the application server's JVM
-settings.
+これで、アプリケーションサーバーのJVM設定は完了しました。
 
-1. The file encoding, user time-zone, preferred protocol stack have been set in
-the `JAVA_OPTS` in the `standalone.conf.bat` file.
+1. ファイルのエンコーディング、ユーザーのタイムゾーン、優先プロトコルスタックは`standalone.conf.bat`ファイルの`JAVA_OPTS`に設定されています。
 
-2. The default amount of memory available has been increased.
+2. デフォルトの利用可能なメモリ容量が増えました。
 
-The prescribed script modifications are now complete for your @product@
-installation on Wildfly. Next you'll configure your database.
+Wildflyに@product@をインストールするための規定されたスクリプトの修正は、完了しました。次に、データベースを設定します。
 
 ### データベースの設定[](id=database-configuration)
 
-The easiest way to handle database configuration is to let @product@ manage your
-data source. The
-[Basic Configuration](/discover/deployment/-/knowledge_base/7-1/installing-liferay#using-liferays-setup-wizard)
-page lets you configure @product@'s built-in data source. @product@に備わっているデータソースを使用する場合は、このセクションは必要ではありません。
+データベース設定を処理する上で一番簡単な方法は @product@にデータソースを管理させることです。  [基本設定](/discover/deployment/-/knowledge_base/7-1/installing-liferay#using-liferays-setup-wizard)ページでは、@product@の組み込みデータソースを設定できます。組み込みデータソースを使用する場合は、このセクションは必要ではありません。
 
-MySQL is used as the example below. If you're using a different database, modify
-the data source and driver snippets as necessary.
+以下の例ではMySQLを使用しています。別のデータベースを使用している場合は、必要に応じてデータソースとドライバのスニペットを変更します。
 
-If you want Wildfly to manage your data source, follow these steps:
+Wildflyでデータソースを管理する場合は、次の手順で行います:
 
-1. Add your data source inside
-`$WILDFLY_HOME/standalone/configuration/standalone.xml` file's
-`<datasources>` element:
+1. `$WILDFLY_HOME/standalone/configuration/standalone.xml`ファイルの `<datasources>`要素内にデータソースを追加します 。
 
        <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" jta="true" use-java-context="true" use-ccm="true">
        <connection-url>jdbc:mysql://localhost/lportal</connection-url>
@@ -355,19 +291,15 @@ If you want Wildfly to manage your data source, follow these steps:
        </security>
        </datasource>
 
-   Be sure to replace the database name (i.e., `lportal`), user name, and
-password with the appropriate values.
+   必ず、データベース名（つまり`lportal`）、ユーザー名、およびパスワードを適切な値に置き換えてください。
 
    +$$$
 
-   **Note:** If you must change your datasource `jndi-name` to something
-different, you must also edit the `datasource` element in the
-`<default-bindings>` tag.
+   **注：**データソースの`jndi-name`を別のものに変更する必要がある場合は、`<default-bindings>`タグの`datasource`要素も編集する必要があります。
 
    $$$
 
-2. Add your driver to the `standalone.xml` file's `<drivers>` element also
-found within the `<datasources>` element:
+2. ` standalone.xml `ファイルの` <drivers>`要素にもドライバを追加します。この要素は`<datasources>`要素内にもあります。
 
        <drivers>
        <driver name="mysql" module="com.liferay.portal">
@@ -375,7 +307,7 @@ found within the `<datasources>` element:
        </driver>
        </drivers>
 
-   Your final data sources subsystem should look like this:
+   最終的なデータソースのサブシステムは次のようになります。
 
        <subsystem xmlns="urn:jboss:domain:datasources:1.0">
        <datasources>
@@ -395,20 +327,19 @@ found within the `<datasources>` element:
        </datasources>
        </subsystem>
 
-3. `portal-ext.properties`では、Liferay Home内のファイル、データソースを指定します。
+3. Liferay Home内の`portal-ext.properties`ファイルで、データソースを指定します。
 
        jdbc.default.jndi.name=java:jboss/datasources/ExampleDS
 
-Now that you've configured your data source, the mail session is next.
+データソースが設定できたので、次にメールセッションを設定します。
 
-### メール設定
+### メール設定[](id=mail-configuration)
 
-データベースと同様、メール設定の処理もLiferay DXPに行わせるのが一番簡単な方法です。Liferay DXPの内蔵メールセッションを使用したい場合は、このセクションを飛ばしてコントロールパネルで[メールセッションを設定](/discover/deployment/-/knowledge_base/7-1/installing-liferay#configuring-mail)してください。
+データベースと同様に、メール設定の処理も@product@に行わせるのが一番簡単な方法です。@product@の組み込みメールセッションを使用したい場合は、このセクションを飛ばしてコントロールパネルで[メールセッションを設定](/discover/deployment/-/knowledge_base/7-1/installing-liferay#configuring-mail)してください。
 
-If you want to manage your mail session with Wildfly, follow these steps:
+Wildflyでメールセッションを管理したい場合は、次の手順に従ってください。
 
-1. Specify your mail subsystem in the
-`$WILDFLY_HOME/standalone/configuration/standalone.xml` file like this:
+1. `$WILDFLY_HOME/standalone/configuration/standalone.xml` ファイル内のメールサブシステムを以下のように指定します。
 
        <subsystem xmlns="urn:jboss:domain:mail:3.0">
        <mail-session jndi-name="java:jboss/mail/MailSession" name="mail-smtp">
@@ -423,36 +354,31 @@ If you want to manage your mail session with Wildfly, follow these steps:
        </outbound-socket-binding>
        </socket-binding-group>
 
-2. Liferayのホーム内の`portal-ext.properties`ファイル、メールセッションを参照します。
+2. Liferay Home内の`portal-ext.properties`ファイルで、メールセッションを参照します。
 
        mail.session.jndi.name=java:jboss/mail/MailSession
 
-You've got mail! Next, you'll deploy @product@ to your Wildfly app server.
+ 次に、@product@をWildflyアプリサーバーにデプロイします。
 
 ## @product@をデプロイする [](id=deploying-product)
 
-これで、@product@ DXP WARファイルを使用して@product@をデプロイする準備が整いました。
+これで、@product@ WARファイルを使用して@product@をデプロイする準備が整いました。
 
-1. If the folder `$WILDFLY_HOME/standalone/deployments/ROOT.war` already exists
-in your Wildfly installation, delete all of its subfolders and files.
-Otherwise, create a new folder called
-`$WILDFLY_HOME/standalone/deployments/ROOT.war`.
+1. Wildflyインストールに`$WILDFLY_HOME/standalone/deployments/ROOT.war`フォルダがすでに存在する場合は、そのサブフォルダとファイルをすべて削除してください。
+そうでない場合は、`$WILDFLY_HOME/standalone/deployments/ROOT.war`という名称の新しいフォルダを作成します 。
 
-2. Unzip the @product@ `.war` file into the `ROOT.war` folder.
+2. `ROOT.war`フォルダに@product@`.war`ファイルを解凍します。
 
-3. To trigger deployment of `ROOT.war`, create an empty file named
-`ROOT.war.dodeploy` in your `$WILDFLY_HOME/standalone/deployments/` folder.
-On startup, Wildfly detects the presence of this file and deploys it as a
-web application.
+3. `ROOT.war`のデプロイを実行するために、`$WILDFLY_HOME/standalone/deployments/`フォルダ内に`ROOT.war.dodeploy`という名前の空のファイルを作成します。
+立ち上げ時に、Wildflyはこのファイルの存在を検出し、それをWebアプリケーションとしてデプロイします。
 
-4. Start the Wildfly application server by navigating to `$WILDFLY_HOME/bin`
-and running `standalone.bat` or `standalone.sh`.
+4. `$WILDFLY_HOME/bin`に移動し、`standalone.bat`または`standalone.sh`を実行して、Wildflyアプリケーションサーバーを起動します。
 
-Congratulations; you've deployed @product@ on Wildfly!
+これで、Wildflyに@product@をデプロイできました。
 
 +$$$
 
-@product@を展開した後、`PhaseOptimizer`を含む以下のような過剰な警告とログメッセージが表示される場合があります。これらは良性なので無視することができます。このようなログメッセージを回避するために、必ずアプリケーションサーバーのログレベルまたはログフィルターを調整してください。
+@product@をデプロイした後、`PhaseOptimizer`を含む以下のような過剰な警告とログメッセージが表示される場合があります。これらは良性なので無視することができます。このようなログメッセージを回避するために、必ずアプリケーションサーバーのログレベルまたはログフィルターを調整してください。
 
     May 02, 2018 9:12:27 PM com.google.javascript.jscomp.PhaseOptimizer$NamedPass process
     WARNING: Skipping pass gatherExternProperties

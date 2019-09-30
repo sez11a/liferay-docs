@@ -61,7 +61,7 @@ $$$
 
 ### ノード証明書を生成する [](id=generate-node-certificates)
 
-各ノードに対して[Generate a node certificate](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/configuring-tls.html#node-certificates)。認証局を使用してノード証明書を取得することもできます。
+各ノードに対して[ノード証明書を生成します](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/configuring-tls.html#node-certificates)。認証局を使用してノード証明書を取得することもできます。
 
 
 
@@ -70,7 +70,7 @@ $$$
 
 
        ./bin/elasticsearch-certutil ca --pem --ca-dn CN=localhost
-   
+
    これをすることによりZIPファイルを生成します。
 内容を安全な場所に解凍します。
 
@@ -79,7 +79,7 @@ $$$
 
 
        ./bin/elasticsearch-certutil cert --pem --ca-cert /path/to/ca.crt --ca-key /path/to/ca.key --dns localhost --ip 127.0.0.1 --name localhost
-   
+
    これをすることにより、別のZIPファイルを生成します。`[Elasticsearch Home]/config`フォルダ内のどこかにコンテンツを抽出します。
 
 +$$$
@@ -100,7 +100,7 @@ $$$
        xpack.ssl.certificate: /path/to/[Elasticsearch Home]/config/localhost.crt
        xpack.ssl.key: /path/to/[Elasticsearch Home]/config/localhost.key
        xpack.ssl.certificate_authorities: ["/path/to/ca.crt"]
-   
+
    上記のパス例は証明書を`Elasticsearch Home/config/`に追加したことを仮定としています。
 
 
@@ -111,13 +111,13 @@ $$$
 
        xpack.security.transport.ssl.enabled: true
        xpack.security.transport.ssl.verification_mode: certificate
-   
+
 3. クライアント通信を暗号化するためにHTTPレイヤ上でTLSを有効にします。
 
 
 
        xpack.security.http.ssl.enabled: true
-   
+
 X-PackをインストールしてTLSを有効にしたら、@product@でX-Packセキュリティアダプターを設定します。
 
 ## X-PackセキュリティにLiferayコネクタのインストールと設定を行う [](id=install-and-configure-the-liferay-connector-to-x-pack-security)

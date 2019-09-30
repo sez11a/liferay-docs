@@ -1,223 +1,153 @@
 # @product@のインストール[](id=installing-liferay)
 
-Now that you've performed the steps needed to [prepare for your
-installation](/discover/deployment/-/knowledge_base/7-1/preparing-for-install),
-you're ready to install @product@! Since bundles are the easiest way to complete
-an installation, all the installation steps below assume you're installing a
-@product@ bundle. If you plan to install @product@ manually, please refer to the
-article for your app server of choice, and then come back here to complete the
-configuration steps.
+[インストールの準備](/discover/deployment/-/knowledge_base/7-1/preparing-for-install)に必要な手順を実行したので、@product@をインストールする準備が整いました。バンドルはインストールを完了するための最も簡単な方法なので、以下のすべてのインストール手順は@product@バンドルをインストールすることを想定しています。手動で@product@をインストールする予定の場合は、選択したアプリケーションサーバーの記事を参照してから、ここに戻って設定手順を完了してください。
 
-Now you're ready. You've created a blank database for @product@ and have
-gathered the credentials you need for your mail server. The next step is to
-install @product@.
+
+これで準備は整いました。@product@用の空のデータベースを作成し、メールサーバーに必要な認証情報を収集しました。次の手順は、 @product@をインストールすることです。
+
 
 ## Liferay Home [](id=liferay-home)
 
-@product@ bundles contain the same folder structure regardless of application
-server. The top-level folder is named for the @product@ release. This folder is
-called *Liferay Home*. This folder is usually the  application server's parent
-folder. This is why @product@ bundles place the application server inside the
-bundle's root folder. On a manual installation, the location of this folder
-varies by application server. In a bundle, it's part of the bundle. If you're
-doing a manual installation, please refer to the article covering that app
-server for its location.
+@product@バンドルには、アプリケーションサーバーに関係なく同じフォルダー構造が含まれています。最上位フォルダは、@product@リリースにちなんだ名前が付けられています。このフォルダは*Liferay Home*と呼ばれます。このフォルダは通常、アプリケーションサーバーの親フォルダです。従って、@product@ バンドルはアプリケーションサーバーをバンドルのルートフォルダ内に配置します。手動インストールでは、このフォルダの場所はアプリケーションサーバーによって異なります。バンドルでは、フォルダがバンドルの一部になっています。手動でインストールをする場合は、フォルダの場所についてはアプリケーションサーバーに関する記事を参照してください。
 
-Liferay Home has folders for various purposes:
+Liferay Home にはさまざまな目的のためのフォルダがあります。
 
 - **[Liferay Home]**
-   - **[Application Server]**: The name of this folder varies depending on
-the bundle you're using. This folder contains the application server in
-which @product@ has been installed.
-   - `data`: Stores an embedded HSQL database, @product@'s file repository,
-and @product@'s search indexes. @product@ is initially configured to use
-the embedded HSQL database but the HSQL database is primarily intended
-for demonstration and trial purposes.
-[Portal property `jdbc.default.url`](@platform-ref@/7.1-latest/propertiesdoc/portal.properties.html#JDBC)
-sets the Hypersonic embedded HSQL database location.
-   - `deploy`: To auto-deploy @product@ plugins, copy them to this folder.
-Legacy style `.war` files, @product-ver@ style `.jar` files, and `.lpkg`
-files from Liferay Marketplace are supported.
-[Portal property `auto.deploy.deploy.dir`](@platform-ref@/7.1-latest/propertiesdoc/portal.properties.html#Auto%20Deploy)
-sets the auto-deploy location.
-   - `license`: @product@'s copyright and version files are here.
-   - `logs`: This folder contains @product@'s log files. The information in
-@product@'s log files can be quite valuable for system administrators,
-especially when trying to diagnose a problem. `portal-impl.jar`'s
-`portal-impl/src/META-INF/portal-log4j.xml` file sets the location for
-the log files. To override the log file location, you must
-[use an `ext-impl/src/META-INF/portal-log4j-ext.xml` file in an Ext plugin](/develop/tutorials/-/knowledge_base/7-0/advanced-customization-with-ext-plugins#using-advanced-configuration-files).
-   - `osgi`: All the JAR files and a few configuration files for @product@'s
-OSGi runtime belong in this folder.
-[Portal property `module.framework.base.dir`](@platform-ref@/7.1-latest/propertiesdoc/portal.properties.html#Module%20Framework)
-sets the OSGi folder location. Here are its subfolders:
+   - **[[アプリケーションサーバー]]**：このフォルダの名前は、使用しているバンドルによって異なります。このフォルダには、@product@ がインストールされているアプリケーションサーバーが含まれています。
 
-      - `configs`: Component configuration files go here
-      - `core`: @product@'s core modules
-      - `marketplace`: Marketplace applications and application suites
-      - `modules`: Modules you've deployed
-      - `portal`: @product@'s non-core modules
-      - `state`: Contains OSGi internal state files for such things as OSGi
-bundle installation, bundle storage, and more
-      - `target-platform`: Target platform index
-      - `test`: Modules that support test integration
-      - `war`: WAR plugins you've deployed
-   - `patching-tool`: (Liferay DXP only) This folder
-contains patches for @product@ and files for installing the patches.
-   - `tools`: For @product@ upgrade and target platform indexer.
-   - `work`: Module Jasper work files.
+   - `[data]`：組み込みHSQLデータベース、@product@のファイルリポジトリ、および@product@の検索インデックスを格納します。@product@は、最初は組み込みHSQLデータベースを使用するように構成されていますが、HSQLデータベースは主にデモンストレーションおよび試用目的のためのものです。
+[Portalプロパティ`jdbc.default.url`](@platform-ref@/7.1-latest/propertiesdoc/portal.properties.html#JDBC) は、Hypersonicの組み込みHSQLデータベースの場所を設定します。
+   - `[deploy]`：@product@プラグインを自動デプロイするには、プラグインをこのフォルダにコピーしてください。
+従来のスタイル`.war`ファイル、@product-ver@スタイル`.jar`ファイル、および Liferay マーケットプレイスの`.lpkg`ファイルがサポートされています。 
+[ポータルプロパティ`auto.deploy.deploy.dir`](@platform-ref@/7.1-latest/propertiesdoc/portal.properties.html#Auto%20Deploy)は自動デプロイの場所を設定します。
+   - `[license]`：@product@の著作権とバージョンファイルはここにあります。
 
-If @product@ is unable to create the resources it needs in the Liferay Home
-folder or if it finds itself running on certain application servers, it creates
-a folder called `liferay` in the home folder of the operating system user that
-is running @product@. In this case, the `liferay` folder becomes Liferay Home.
-For example, if the operating system user's name is jbloggs, the Liferay Home
-folder is `/home/jbloggs/liferay` or `C:\Users\jbloggs\liferay`.
+   - `[logs]`：このフォルダには@product@のログファイルが含まれています。特に問題の原因を分析しようとする時に、@product@のログファイル内の情報はシステム管理者にとって非常に有益です。`portal-impl.jar`の`portal-impl/src/META-INF/portal-log4j.xml`ファイルはログファイルの場所を設定します。ログファイルの場所を上書きするには、`Extプラグイン](/develop/tutorials/-/knowledge_base/7-0/advanced-customization-with-ext-plugins#using-advanced-configuration-files)にある[ext-impl/src/META-INF/portal-log4j-ext.xml`ファイルを使用する必要があります。
+   - `[osgi]`：@product@のOSGiランタイム用のすべてのJARファイルといくつかの構成ファイルはこのフォルダにあります。
+[ポータルプロパティ`module.framework.base.dir`](@platform-ref@/7.1-latest/propertiesdoc/portal.properties.html#Module%20Framework)はOSGiフォルダの場所を設定します。そのサブフォルダは次のとおりです。
 
-## Extracting a @product@ Bundle [](id=extracting-a-liferay-bundle)
+      - `[configs]`：コンポーネント設定ファイルはここにあります。
+      - `[core]`：@product@のコアモジュール
 
-Getting a @product@ bundle up and running involves uncompressing the archive,
-possibly copying a JDBC driver, and then starting the application server. Let's
-use the @product@ Tomcat bundle as an example.
+      - `[marketplace]`：Marketplaceアプリケーションとアプリケーションスイート
 
-1. Extract your @product@ bundle.
-2. If you're using a supported open source database or if you're setting up
-@product@ for demo purposes, you can skip this step. Otherwise, copy your
-database's JDBC driver `.jar` file to `[Tomcat]/lib/ext`.
+      - `[modules]`：デプロイしたモジュール
 
- You've extracted @product@, and it's ready for use. This is much
-easier than doing a manual installation on an app server. If, however, that's
-what you need to do, please at this point click the link on the left and go
-through the installation procedure for your app server of choice. When you're
-finished with the installation (and before you've started @product@ for the
-first time), come back to this spot, because you must hook it up to your
-database.
+      - `[portal]`：@product@の非コアモジュール
 
-## Connecting @product@ to Your Database [](id=connecting-product-to-your-database)
+      - `[state]`：OSGiバンドルのインストール、バンドル・ストレージなどのためのOSGi内部状態ファイルが含まれています。
 
-You can connect to your database with JNDI on your app server or the data source
-shipped with @product@ (recommended). Refer to the article on your app server
-for instructions on using JNDI. For the internal data source, you can configure
-it by specifying the configuration in a `portal-ext.properties` file or the
-[Setup Wizard](/discover/deployment/-/knowledge_base/7-1/installing-liferay#using-liferays-setup-wizard):
+      - `target-platform`：ターゲットプラットフォームインデックス
 
-1. Create a `portal-ext.properties` file in your Liferay Home folder.
+      - `test`：テスト統合をサポートするモジュール
 
-2. Copy a relevant example data source configuration from
-one of the
-[data source configuration templates](/discover/reference/-/knowledge_base/7-0/database-templates)
-or
-[portal properties reference's JDBC section](@platform-ref@/7.1-latest/propertiesdoc/portal.properties.html#JDBC)
-and paste it into the `portal-ext.properties` file.
+      - `war`：デプロイしたWARプラグイン
+   - `patching-tool`：（Liferay DXPのみ）このフォルダには、@product@用のパッチとパッチをインストールするためのファイルが含まれています。
+   - `tools`：@product@ のアップグレードおよびターゲットプラットフォームのインデクサ用
 
-3. Customize the configuration with the proper host name and user and password
-credentials for your database, and save the file.
+   - `work`：Jasper作業ファイルのモジュール
 
-You're ready to start @product@.
+@product@がLiferay Homeフォルダに必要なリソースを作成できない場合、または特定のアプリケーションサーバーで実行されていることが判明した場合、@product@を実行しているオペレーティングシステムユーザーのホームフォルダにliferayというフォルダを作成します。この場合、`liferay`フォルダがLiferay Homeになります。
+たとえば、オペレーティングシステムのユーザー名がjbloggsの場合、Liferay Homeフォルダは`/home/jbloggs/liferay`または`C:\Users\jbloggs\liferay`です。
 
-## Running @product@ for the First Time [](id=running-product-for-the-first-time)
+## @product@バンドルを抽出する[](id=extracting-a-liferay-bundle)
 
-Next, start your app server, or start the @product@ app in your app server.
-@product@ writes log files to folder `[Liferay Home]/logs`.
 
-The first time @product@ starts, it creates all of its database tables. Once it
-has successfully started, it automatically launches a web browser that displays
-the Basic Configuration page. If for some reason your browser doesn't load the
-Basic Configuration page, launch it and navigate to your app server's address
-and port (for example, http://localhost:8080).
+@product@バンドルを起動して実行するには、アーカイブを解凍し、場合によってはJDBCドライバをコピーしてから、アプリケーションサーバーを起動します。例として@product@ Tomcatバンドルを使用しましょう。
 
-## Using @product@'s Setup Wizard [](id=using-liferays-setup-wizard)
+1. @product@バンドルを解凍します。
 
-The Setup Wizard runs when you start @product@ for the first time. The title of
-the setup wizard page is Basic Configuration. This page provides a convenient
-way to make an initial configuration.
+2. サポートされているオープンソースデータベースを使用している場合、またはデモ目的で@product@を設定している場合は、この手順を省略できます。それ以外の場合は、データベースのJDBCドライバ`.jar`ファイルを`[Tomcat]/lib/ext`にコピーします。
 
-There are two sections of the wizard: the portal and the administrator.  For the
-portal, you need to supply the following information:
+ @product@を抽出し、使用する準備が整いました。アプリケーションサーバーに手動でインストールするよりもはるかに簡単です。ただし、必要な場合は、この時点で左側のリンクをクリックして、選択したアプリケーションサーバーのインストール手順を実行してください。インストールが終了したら（そして@product@を初めて起動する前に）、この場所に戻ってください。データベースに接続する必要があります。
 
-**Portal Name:** the name of the portal you're powering with @product@.
+## データベースに@product@を接続する
 
-**Default Language:** choose the default locale of your portal.
+アプリケーションサーバーのJNDIまたは@product@に同梱されているデータソース（推奨）を使用してデータベースに接続できます。JNDIの使用方法については、アプリケーションサーバーの記事を参照してください。内部データソースの場合は、`portal-ext.properties`ファイルまたは[セットアップウィザード](/discover/deployment/-/knowledge_base/7-1/installing-liferay#using-liferays-setup-wizard)の設定を指定することでデータソースの設定ができます。
 
-For the administrator, you need to supply the following information:
+1. `portal-ext.properties`ファイルをLiferay Homeフォルダに作成します。
 
-**First Name:** the first name of the default administrator user
 
-**Last Name:** the last name of the default administrator user
+2. [データソース設定テンプレート](/discover/reference/-/knowledge_base/7-0/database-templates)または[ポータルプロパティのレファレンスにあるJDBCセクション](@platform-ref@/7.1-latest/propertiesdoc/portal.properties.html#JDBC)の1つから、関連するサンプルデータソース設定をコピー して、`portal-ext.properties`ファイルに貼り付けます。
 
-**Email:** the email address of the default administrator user
 
-![Figure 1: Supply the information for your portal and your portal's default administrator user on the Basic Configuration page.](../../images/basic-configuration1.png)
+3. データベースの適切なホスト名とユーザーおよびパスワード資格情報を使用して設定をカスタマイズし、ファイルを保存します。
 
-The Basic Configuration page also includes a checkbox labeled *Add Sample Data*.
-If you check this box, sample data is added to your database. This data includes
-users, sites, and organizations. The sample data is for demo purposes. If you're
-installing @product@ on your own machine to explore its features, the sample
-data may be useful. If, however, you're installing @product@ on a real server,
-start with a clean system.
+@product@を起動する準備が整いました。
 
-Once you've filled out the form, click *Finish Configuration*. The setup wizard
-creates a `portal-setup-wizard.properties` file which stores the settings that
-you entered. When you begin customizing your portal's configuration, however,
-use the `portal-ext.properties` file you created earlier. All the
-possible properties that can be placed in this file are documented in
-[our reference documentation](http://docs.liferay.com/portal/7.0/propertiesdoc).
+## 初めて@product@を実行する
+
+次に、アプリケーションサーバーを起動するか、アプリケーションサーバー内の@product@ appを起動します。
+@product@はログファイルを`[Liferay Home]/logs`フォルダに書き込みます。
+
+
+@product@が最初に起動したときに、すべてのデータベーステーブルが作成されます。起動に成功すると、基本設定ページを表示するWebブラウザを自動的に起動します。何らかの理由でブラウザが基本設定ページを読み込まない場合は、基本設定ページを立ち上げて、アプリケーションサーバーのアドレスとポートに移動します（たとえば、http://localhost:8080）。
+
+## @product@のセットアップウィザードを使用する[](id=using-liferays-setup-wizard)
+
+セットアップウィザードは、@product@を初めて起動したときに実行されます。セットアップウィザードページのタイトルはBasic Configurationです。このページは初期設定を行うための便利な方法を提供します。
+
+
+ウィザードにはポータルと管理者の2つのセクションがあります。ポータルの場合は、以下の情報を入力する必要があります。
+
+
+**ポータル名**： @product@を使用しているポータルの名前。
+
+**デフォルトの言語**：ポータル内のデフォルトのロケールを選択します。
+
+管理者の場合は、以下の情報を入力する必要があります。
+
+**名**：デフォルトの管理者ユーザーの名
+
+**姓**：デフォルトの管理者ユーザーの姓
+
+**電子メール**：デフォルトの管理者ユーザーの電子メールアドレス
+
+![図1：基本設定ページで、ポータルとデフォルトの管理ユーザー情報を入力します。](../../images/basic-configuration1.png)
+
+基本設定ページには、*[サンプルデータの追加]*というラベルの付いたチェックボックスもあります。
+このチェックボックスをオンにすると、サンプルデータがデータベースに追加されます。このデータには、ユーザー、サイト、および組織が含まれます。サンプルデータはデモ用です。自分のマシンに@product@をインストールしてその機能を調べるのであれば、サンプルデータが役に立つかもしれません。ただし、@product@をリアルサーバーにインストールする場合は、クリーンなシステムで始めてください。
+
+フォームを入力したら、*[設定の終了]*をクリックします。セットアップウィザードは、入力した設定を保存する`portal-setup-wizard.properties`ファイルを作成します。ただし、ポータルの設定のカスタマイズを始めるときは、先に作成しておいた`portal-ext.properties`ファイルを使用してください。このファイルに入れることができるすべての可能なプロパティは[参照ドキュメント](http://docs.liferay.com/portal/7.0/propertiesdoc)に文書化されています。
 
 +$$$
 
-**Tip:** The wizard is an extremely helpful tool, especially if you're setting
-up @product@ for the first time. If you're a veteran and you already have
-your various properties set up, you can disable the setup wizard. If you disable
-the setup wizard, you must configure everything manually from the
-`portal-ext.properties` file. To disable the setup wizard, enter
-`setup.wizard.enabled=false` in your `portal-ext.properties` file. Note that
-property values in `portal-setup-wizard.properties` (the file created in Liferay
-Home by the setup wizard) override property values in `portal-ext.properties`.
+**ヒント：**特に@product@を初めてセットアップする場合は、ウィザードは非常に便利なツールです。もし、ベテランですでに様々なプロパティをセットアップしたことがある場合は、セットアップウィザードを無効にしても大丈夫です。セットアップウィザードを無効にした場合は、`portal-ext.properties`ファイルからすべてを手動で設定する必要があり ます。セットアップウィザードを無効にするには、`setup.wizard.enabled=false`を`portal-ext.properties`ファイルに入力します。`portal-setup-wizard.properties`（セットアップウィザードによってLiferay Homeに作成されたファイル）のプロパティ値は`portal-ext.properties`のプロパティ値を上書きすることに注意してください。
 
 $$$
 
-After you've entered the information requested by the Basic Configuration page,
-the home page appears. You should set up your mail configuration next.
+基本設定ページで必要とされる情報を入力すると、ホームページが表示されます。次にメールの設定をします。
 
-## Configuring Mail [](id=configuring-mail)
+## メールを設定する[](id=configuring-mail)
 
-Log in as the administrative user you created in the setup wizard. Click the
-menu icon and then go to Control Panel &rarr; Server Administration &rarr; Mail,
-and have your mail credentials ready.
+セットアップウィザードで作成した管理ユーザーとしてログインします。メニューアイコンをクリックし、[コントロールパネル]→[サーバー管理]→[メール]の順に選択して、メール認証情報を準備します。
 
-Fill out the form. You're asked for the following information:
+フォームを入力する。
+次の情報を求められます。
 
-**Incoming POP Server:** The hostname for a server running the Post Office
-Protocol. @product@ checks this mailbox for incoming messages, such as message
-board replies.
+**受信POPサーバー： **Post Office Protocolを実行しているサーバーのホスト名。@product@は、このメールボックスでメッセージボードの返信などの受信メッセージをチェックします。
 
-**Incoming Port:** The port on which the POP server is listening.
+**受信ポート：** POPサーバーが待機しているポート。
 
-**Use a Secure Network Connection:** Use an encrypted connection when connecting
-to the POP server.
+**セキュリティで保護されたネットワーク接続を使用する： **POPサーバーに接続するときに暗号化された接続を使用します。
 
-**User Name:** The user ID @product@ should use to log into the POP server.
 
-**Password:** The password @product@ should use to log into the POP server.
+**ユーザー名： **POPサーバーへのログインに@product@が使用するユーザーID。
 
-**Outgoing SMTP Server:** The hostname for a server running the Simple Mail
-Transfer Protocol. @product@ uses this server to send emails, such as password
-change emails and other notifications.
+**パスワード： **@product@がPOPサーバーへのログインに使用するパスワード。
 
-**Outgoing Port:** The port on which the SMTP server is listening.
+**送信SMTPサーバー：**簡易メール転送プロトコルを実行しているサーバーのホスト名。@product@は、このサーバーを使用して、パスワード変更のEメールやその他の通知のEメールなどを送信します。
 
-**Use a Secure Network Connection:** Use an encrypted connection when connecting
-to the SMTP server.
+**送信ポート：** SMTPサーバーが待機しているポート。
 
-**User Name:** The user ID @product@ should use to log into the SMTP server.
+**セキュリティで保護されたネットワーク接続を使用する： **SMTPサーバーに接続するときに暗号化された接続を使用します。
 
-**Password:** The password @product@ should use to log into the SMTP server.
+**ユーザー名：** SMTPサーバーにログインするために@product@が使用するユーザーID 。
 
-**Manually specify additional JavaMail properties to override the above
-configuration:** If there are additional properties you need to specify, supply
-them here.
+**パスワード：** SMTPサーバーにログインするために@product@が使用するパスワード。
 
-When you're finished setting up your mail configuration, click *Save*.
+**上記の設定を上書きするために追加のJavaMailプロパティーを手動で指定する：**指定する必要がある追加のプロパティーがある場合は、ここに入力します。
 
-Your next step is to convert the search implementation from its default demo
-mode into a production-ready mode.
+メール設定を完了したら、*[ 保存 ]*をクリックします。
+
+次に、検索実装をデフォルトのデモモードからプロダクション対応モードに変換します。

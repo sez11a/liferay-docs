@@ -1,108 +1,60 @@
-# Installing @product@ Manually [](id=installing-liferay-manually)
+# 手動で@product@をインストールする[](id=installing-liferay-manually)
 
-The easiest way to install @product@ is to
-[use a bundle](/discover/deployment/-/knowledge_base/7-1/installing-liferay).
-However, this is not always possible. Some organizations have an existing
-infrastructure into which @product@ must be installed. Other organizations have
-standardized on a particular application server. @product@ works well with many
-leading application servers. Before you get started, note that there are two distinct
-approaches to managing @product@'s data source and mail session. All these
-topics are covered:
+@product@をインストールする最も簡単な方法は[バンドルを 使う](/discover/deployment/-/knowledge_base/7-1/installing-liferay)ことです。
+しかし、これは常に可能というわけではありません。組織によっては、@product@をインストールする必要がある既存のインフラストラクチャがあります。また、特定のアプリケーションサーバーで標準化している組織もあります。@product@は、多くの主要なアプリケーションサーバーとうまく連携します。インストールを始める前に、@product@のデータソースとメールセッションを管理するための2つの異なるアプローチがあることに注意してください。これらのトピックはすべて網羅されています。
 
-- [Using data sources](#using-data-sources)
-- [Using mail sessions](#using-mail-sessions)
-- [Manual configuration for data sources and mail sessions](#manual-configuration)
+- [データソースを使用する](#using-data-sources)
+- [メールセッションを使用する](#using-mail-sessions)
+- [データソースとメールセッションの手動設定](#manual-configuration)
 
-Start with data sources.
+データソースから始めます。
 
-## Using Data Sources [](id=using-data-sources)
+## データソースの使用[](id=using-data-sources)
 
-@product@ provides two ways to configure your data source:
+@product@には、データソースを設定するためには2つの方法があります。
 
-- Use @product@'s built-in data source
-- Use your application's server's JNDI data source
+- @product@の組み込みデータソースを使用する
+- ご利用のアプリケーションサーバーのJNDIデータソースを使用する
 
-We recommend the built-in data source. @product@'s data source is configured
-by properties set in a properties file. By default, you can enter database
-connection information on the
-[Basic Configuration page](/discover/deployment/-/knowledge_base/7-1/installing-liferay#using-liferays-setup-wizard)
-that appears when @product@ starts for the first time. The Setup Wizard stores
-the information you entered in a configuration file called
-`portal-setup-wizard.properties` in your
-[Liferay Home](/discover/deployment/-/knowledge_base/7-1/installing-liferay#liferay-home)
-folder. The built-in data source uses this information to connect to the
-database.
+組み込みデータソースの使用をお勧めします。@product@のデータソースは、プロパティファイルで設定されているプロパティによって設定されています。デフォルトでは、 @product@の初回起動時に表示される[基本設定ページ](/discover/deployment/-/knowledge_base/7-1/installing-liferay#using-liferays-setup-wizard)にデータベースの接続情報を入力できます。セットアップウィザードは入力された情報を[Liferay Home](/discover/deployment/-/knowledge_base/7-1/installing-liferay#liferay-home)フォルダにある`portal-setup-wizard.properties`という名前の設定ファイルに保管します。組み込みデータソースはこの情報を使用してデータベースに接続します。
 
-Although using the built-in data source is recommended, that's not the only
-option. You might prefer to use the data source your application server
-provides. In this case, a JNDI lookup provides a handle to the data
-source and the application server manages the connection pools.
+組み込みデータソースを使用することをお勧めしますが、それ以外の方法もあります。アプリケーションサーバーが提供するデータソースを使用することもできます。この場合、JNDIルックアップはデータソースへのハンドルを提供し、アプリケーションサーバーは接続プールを管理します。
 
-To configure your application server's data source, you must create your own
-configuration file and skip the setup wizard. Since you'd be creating this file
-*after* the wizard anyway, this isn't a big deal. The
-[Manual Configuration](#manual-configuration) section below demonstrates configuring
-a JNDI data source.
+アプリケーションサーバーのデータソースを設定するには、独自の設定ファイルを作成してセットアップウィザードをスキップする必要があります。ウィザードの*後に*このファイルを作成することになるので 、いずれにしても大したことではありません。以下の[手動設定](#manual-configuration)のセクションでは、JNDIデータソースの設定について説明します。
 
-Since mail sessions are configured similarly to data sources, they're next.
+メールセッションもデータソースと同じように設定されているので、それを次に紹介します。
 
-## Using Mail Sessions [](id=using-mail-sessions)
+## メールセッションを使用する[](id=using-mail-sessions)
 
-@product@ uses SMTP to send mail. As with databases, you have two ways to
-configure your mail server:
+@product@はSMTPを使用してメールを送信します。データベースと同様に、メールサーバーを設定するには2つの方法があります。
 
-- Use @product@'s built-in mail session
-- Use your application server's mail session
+- @product@の組み込みメールセッションを使用する
+- アプリケーションサーバーのメールセッションを使用する
 
-Using the built-in mail session is recommended. After you've started @product@,
-you can configure a mail server through the Control Panel. The default
-configuration is a mail server on the same machine running @product@. If this is
-not your configuration, you must modify the defaults. To do this, use
-a `portal-ext.properties` file in your Liferay Home folder (see below).
+組み込みメールセッションを使用することをお勧めします。@product@を起動した後は、[コントロールパネル]からメールサーバーを設定できます。デフォルト設定は、@product@を実行している同じマシン上のメールサーバです。これが自身の設定ではない場合は、デフォルトを変更する必要があります。これを行うには、Liferay Homeフォルダ内の、`portal-ext.properties`ファイルを使用します（下記参照）。
 
-To use your application server's mail session, you must create it in your
-application server. Once you've created a mail session, you can point @product@
-to it through your `portal-ext.properties` file or through the Control Panel.
+アプリケーションサーバーのメールセッションを使用するには、それをアプリケーションサーバー内に作成する必要があります。メールセッションを作成したら、`portal-ext.properties`ファイルまたは[コントロールパネル]から@product@をつなげることができます。
 
-If you plan to use @product@ to manage both your database connection and mail
-session, enter your database connection information on the Basic Configuration
-page when @product@ first starts, and then enter your mail server information
-through the Control Panel.
+データベース接続とメールセッションの両方を管理するために@product@を使用する場合は、@product@の最初の起動時に基本設定ページにデータベース接続情報を入力してから、[コントロールパネル]からメールサーバー情報を入力します。
 
-If you plan to let your application server manage your database connection or
-your mail server, you can't use @product@'s setup wizard: you must follow the
-instructions in the [Manual Configuration](#manual-configuration) section below.
+自身のアプリケーションサーバでデータベース接続、またはメールサーバーを管理する予定の場合、@product@のセットアップウィザードを使うことができません：以下の[Manual Configuration](#manual-configuration)セクションの指示に従う必要があります。
 
-The installation articles for each application server also include instructions
-for configuring your application server to manage the database connection and
-mail server.
+各アプリケーションサーバーのインストール記事には、データベース接続とメールサーバーを管理するためにアプリケーションサーバーを設定するための手順も含まれています。
 
-## Manual Configuration [](id=manual-configuration)
+## 手動設定方法[](id=manual-configuration)
 
-To have your application server manage your database connection or mail server
-(or both), you must manually create this configuration. Create a text file
-called `portal-ext.properties` in your Liferay Home folder. This file overrides
-the default properties.
+アプリケーションサーバーにデータベース接続またはメールサーバー（あるいはその両方）を管理させるには、この設定を手動で作成する必要があります。Liferay Homeフォルダに`portal-ext.properties`という名前のテキストファイルを作成します。このファイルはデフォルトのプロパティを上書きします。
 
-To use your application server's data source, create a connection pool in your
-application server that points to your database. The connection pool should be
-called `jdbc/LiferayPool`. This is spelled out for each application server in
-its article. To tell @product@ to use your `jdbc/LiferayPool` connection pool,
-add the following directive to your `portal-ext.properties` file:
+アプリケーションサーバーのデータソースを使用するには、データベースとつなげる接続プールをアプリケーションサーバー内に作成します。この接続プールを`jdbc/LiferayPool`と名付けます。以上は、各アプリケーションサーバーの記事で詳しく説明しています。`jdbc/LiferayPool`接続プールを使用するように@product@に指示するには、`portal-ext.properties`ファイルに次のディレクティブを追加します。
 
     jdbc.default.jndi.name=jdbc/LiferayPool
 
-Next, install @product@ according to the article for your application server.
-Once it's installed, you can set up the mail configuration.
+次に、アプリケーションサーバーの記事に従って@product@をインストールします。
+インストールしたら、メール設定をセットアップできます。
 
-You should use the Control Panel to create the mail configuration. Go to
-*Control Panel &rarr; Configuration &rarr; Server Administration &rarr; Mail*
-and enter your settings for your mail session settings.
+メール設定を作成するために、コントロールパネルを使用する必要があります。[コントロールパネル]→[設定]→[サーバ管理]→[メール]へ行き、メールセッション設定のための設定を入力します。
 
-You can also configure this with the `portal-ext.properties` file, which lets
-you do the configuration once and then copy the configuration file to multiple
-machines. To use the built-in mail session, use the following properties and
-customize their values for your environment:
+これを`portal-ext.properties`ファイルで設定することもできます。これにより、設定を1回実行してから設定ファイルを複数のマシンにコピーできます。組み込みメールセッションを使用するには、以下のプロパティを使用して、環境に合わせてそれらの値をカスタマイズします。
 
     mail.session.mail.pop3.host=localhost
     mail.session.mail.pop3.password=
@@ -116,16 +68,15 @@ customize their values for your environment:
     mail.session.mail.store.protocol=pop3
     mail.session.mail.transport.protocol=smtp
 
-To use your application server's mail session, create it first. Then specify it
-in the `portal-ext.properties` file:
+アプリケーションサーバーのメールセッションを使用するには、まずメールセッションを作成します。それから、それを`portal-ext.properties`ファイルに指定します。
 
     mail.session.jndi.name=mail/MailSession
 
-When you're finished, save the file.
+完了したら、ファイルを保存します。
 
-## Logging [](id=logging)
+## ログ[](id=logging)
 
-@product@を展開した後、`PhaseOptimizer`を含む以下のような過剰な警告とログメッセージが表示される場合があります。これらは良性なので無視することができます。このようなログメッセージを回避するために、必ずアプリケーションサーバーのログレベルまたはログフィルターを調整してください。
+@product@をデプロイした後、`PhaseOptimizer`を含む以下のような過剰な警告とログメッセージが表示される場合があります。これらは良性なので無視することができます。このようなログメッセージを回避するために、必ずアプリケーションサーバーのログレベルまたはログフィルターを調整してください。
 
     May 02, 2018 9:12:27 PM com.google.javascript.jscomp.PhaseOptimizer$NamedPass process
     WARNING: Skipping pass gatherExternProperties

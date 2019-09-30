@@ -42,7 +42,7 @@ TLSを有効にするための以下の手順では、パスワードが必要�
 
 ### ノード証明書を生成する [](id=generate-node-certificates)
 
-各ノードに対して[Generate a node certificate](https://www.elastic.co/guide/en/elasticsearch/reference/6.1/configuring-tls.html#node-certificates)。認証局を使用してノード証明書を取得することもできます。
+各ノードに対して[ノード証明書を生成します](https://www.elastic.co/guide/en/elasticsearch/reference/6.1/configuring-tls.html#node-certificates)。認証局を使用してノード証明書を取得することもできます。
 
 
 
@@ -51,7 +51,7 @@ TLSを有効にするための以下の手順では、パスワードが必要�
 
 
        ./bin/x-pack/certutil ca --pem --ca-dn CN=localhost
-   
+
    これをすることによりZIPファイルを生成します。
 内容を安全な場所に解凍します。
 
@@ -59,12 +59,12 @@ TLSを有効にするための以下の手順では、パスワードが必要�
 2. ステップ1のCAを使用してX.509証明書と秘密鍵を作ります。以下は例です:
 
        ./bin/x-pack/certutil cert --pem --ca-cert /path/to/ca.crt --ca-key /path/to/ca.key --dns localhost --ip 127.0.0.1 --name localhost
-   
+
    これをすることにより、別のZIPファイルを生成します。`Elasticsearch Home/config`フォルダ内のどこかにコンテンツを抽出します。
 
 +$$$
 
-** 注：**`Certutil`コマンドは証明書を生成するにあたり、デフォルトで*PKSC＃12*形式を使用するようになっています。KibanaはPKSC＃12証明書では機能しないため、X-Pack monitoringを使用している場合`--pem`オプション（PEM形式で証明書を生成する）が重要です。
+** 注：** `Certutil`コマンドは証明書を生成するにあたり、デフォルトで*PKSC＃12*形式を使用するようになっています。KibanaはPKSC＃12証明書では機能しないため、X-Pack monitoringを使用している場合`--pem`オプション（PEM形式で証明書を生成する）が重要です。
 
 $$$
 
@@ -80,7 +80,7 @@ $$$
        xpack.ssl.certificate: /path/to/[Elasticsearch Home]/config/localhost.crt
        xpack.ssl.key: /path/to/[Elasticsearch Home]/config/localhost.key
        xpack.ssl.certificate_authorities: ["/path/to/ca.crt"]
-   
+
    上記のパス例は証明書を`Elasticsearch Home/config/`に追加したことを仮定としています。
 
 
@@ -91,18 +91,18 @@ $$$
 
        xpack.security.transport.ssl.enabled: true
        xpack.security.transport.ssl.verification_mode: certificate
-   
+
 3. クライアント通信を暗号化するためにHTTPレイヤ上でTLSを有効にします。
 
 
 
        xpack.security.http.ssl.enabled: true
-   
+
 X-PackをインストールしてTLSを有効にしたら、@product@でX-Packセキュリティアダプターを設定します。
 
 ## X-PackセキュリティにLiferayコネクタのインストールと設定を行う [](id=install-and-configure-the-liferay-connector-to-x-pack-security)
 
-Liferay Enterprise Search Premiumを購読している場合は 、Liferay ConnectorをX-Packセキュリティ[[Elastic Stack 6.x]]に[download](https://web.liferay.com/group/customer/dxp/downloads/enterprise-search)してください。LPKGファイルを`Liferay Home/deploy`フォルダにコピーしてインストールします。
+Liferay Enterprise Search Premiumを購読している場合は 、Liferay ConnectorをX-Packセキュリティ[[Elastic Stack 6.x]]に[ダウンロード](https://web.liferay.com/group/customer/dxp/downloads/enterprise-search)してください。LPKGファイルを`Liferay Home/deploy`フォルダにコピーしてインストールします。
 以上で準備完了です。
 
 X-Packアダプターを設定するには、*[Control Panel]* >*[Configuration]* > *[System Settings]*に行きます。*[Search]*カテゴリを見つけて、*X-Pack Security*エントリをクリックします。
