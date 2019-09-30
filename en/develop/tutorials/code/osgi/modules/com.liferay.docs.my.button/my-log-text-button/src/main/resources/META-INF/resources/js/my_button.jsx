@@ -7,8 +7,6 @@
 
         var LogSelectedTextButton = React.createClass(
                 {
-                        mixins: [AlloyEditor.ButtonStateClasses, AlloyEditor.ButtonKeystroke],
-
                         displayName: 'ButtonMyButton',
 
                         propTypes: {
@@ -77,8 +75,7 @@
                          * @return {Object} The content which should be rendered.
                          */
                         render: function() {
-                                var cssClass = 'ae-button ' + 
-                                this.getStateClasses();
+                                var cssClass = 'ae-button';
                                 var svg = Liferay.Util.getLexiconIconTpl('desktop');
 
                                 return (
