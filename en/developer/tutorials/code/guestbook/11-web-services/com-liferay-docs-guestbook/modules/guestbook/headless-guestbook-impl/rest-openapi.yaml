@@ -1,0 +1,419 @@
+openapi: 3.0.1
+info:
+  description: "Headless access to Guestbook"
+  license:
+        name: "Apache 2.0"
+        url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+  title: "Headless Guestbook"
+  version: "v1.0"
+components:
+  schemas:
+    Guestbook:
+      description: Contains all of the data for a Guestbook
+      properties:
+        name: 
+          description: The Guestbook name
+          type: string
+        id:
+          description: The Guestbook ID
+          type: string
+        creator:
+          $ref: "#/components/schemas/Creator"
+      type: object
+    GuestbookEntry:
+      description: Guestbooks have entries.
+      properties:
+        name:
+          description: A user-enterable name.
+          type: string
+        id: 
+          description: The guestbook entry's ID
+          type: string
+        email: 
+          description: A user-enterable email.
+          type: string
+        message: 
+          description: A message for the guestbook.
+          type: string
+        guestbook:
+          $ref: "#/components/schemas/Guestbook"
+        creator:
+          $ref: "#/components/schemas/Creator"
+    Creator:
+      description: The Guestbook creator/author account.
+      properties:
+        additionalName:
+          description: The author's middle name
+          readOnly: true
+          type: string
+        familyName:
+          description: The author's surname.
+          readOnly: true
+          type: string
+        givenName: 
+          description: The author's first name.
+          readOnly: true
+          type: string
+        id:
+          description: The author's ID
+          format: int64
+          readOnly: true
+          type: integer
+        image:
+          description: A relative URL to the author's profile image.
+          format: uri
+          readOnly: true
+          type: string
+        name:
+          description: The author's full name
+          readOnly: true
+          type: string
+        profileURL:
+          description: A relative URL to the author's user profile.
+          format: uri
+          readOnly: true
+          type: string
+      type: object
+paths:
+  "/guestbooks/":
+    get:
+      operationId: getGuestbooksPage
+      tags: ["Guestbook"]
+      description: Retrieves the list of Guestbooks.
+      parameters:
+        - in: query
+          name: filter
+          schema:
+            type: string
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+        - in: query
+          name: search
+          schema:
+            type: string
+        - in: query
+          name: sort
+          schema:
+            type: string
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Guestbook"
+                type: array
+            application/xml: 
+              schema:
+                items:
+                  $ref: "#/components/schemas/Guestbook"
+                type: array
+    post:
+      operationId: postGuestbook
+      tags: ["Guestbook"]
+      description: Create a new Guestbook. 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Guestbook"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/Guestbook"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Guestbook"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Guestbook"
+  "/guestbooks/{guestbookId}":
+    get:
+      operationId: getGuestbook
+      tags: ["Guestbook"]
+      description: Retrieves the guestbook via its ID.
+      parameters:
+        - name: guestbookId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Guestbook"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Guestbook"
+    put:
+      operationId: putGuestbook
+      tags: ["Guestbook"]
+      description: Replaces the guestbook with the information sent in the request body. Any missing fields are deleted, unless they are required.
+      parameters:
+        - name: guestbookId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Guestbook"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/Guestbook"
+      responses:
+        200:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Guestbook"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Guestbook"
+    patch:
+      operationId: patchGuestbook
+      tags: ["Guestbook"]
+      description: Replaces the guestbook with the information sent in the request body. Any missing fields are deleted, unless they are required.
+      parameters:
+        - name: guestbookId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Guestbook"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/Guestbook"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Guestbook"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Guestbook"
+    delete:
+      operationId: deleteGuestbook
+      tags: ["Guestbook"]
+      description: Deletes the guestbook and returns a 204 if the operation succeeds.
+      parameters:
+        - name: guestbookId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: ""
+          content:
+            application/json: {} 
+  "/guestbooks/{guestbookId}/entries/":
+    get:
+      description: Get entries that belong to a Guestbook
+      operationId: getGuestbookEntriesPage
+      tags: ["GuestbookEntry"]
+      parameters: 
+        - in: path
+          name: guestbookId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+        - in: query
+          name: search
+          schema:
+            type: string
+        - in: query
+          name: sort
+          schema:
+            type: string
+      responses:
+        200:
+          description: ""
+          content:
+            application/json: 
+              schema:
+                items: 
+                  $ref: "#/components/schemas/GuestbookEntry"
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/GuestbookEntry"
+                type: array
+    post:
+      operationId: postGuestbookEntry
+      tags: ["GuestbookEntry"]
+      description: Create a new Guestbook Entry. 
+      parameters: 
+        - in: path
+          name: guestbookId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GuestbookEntry"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/GuestbookEntry"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GuestbookEntry"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GuestbookEntry"
+  "/guestbooks/{guestbookId}/entries/{guestbookEntryId}":
+    get:
+      operationId: getGuestbookEntryGuestbookEntry
+      tags: ["GuestbookEntry"]
+      description: Retrieves the guestbook entry via its ID.
+      parameters:
+        - name: guestbookEntryId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: guestbookId
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GuestbookEntry"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GuestbookEntry"
+    put:
+      operationId: putGuestbookEntryGuestbookEntry
+      tags: ["GuestbookEntry"]
+      description: Replaces the guestbook entry with the information sent in the request body. Any missing fields are deleted, unless they are required.
+      parameters:
+        - name: guestbookId
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - name: guestbookEntryId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GuestbookEntry"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/GuestbookEntry"
+      responses:
+        200:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GuestbookEntry"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GuestbookEntry"
+    patch:
+      operationId: patchGuestbookEntryGuestbookEntry
+      tags: ["GuestbookEntry"]
+      description: Replaces the guestbook entry with the information sent in the request body. Any missing fields are deleted, unless they are required.
+      parameters:
+        - name: guestbookId
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - name: guestbookEntryId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GuestbookEntry"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/GuestbookEntry"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GuestbookEntry"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GuestbookEntry"
+    delete:
+      operationId: deleteGuestbookEntryGuestbookEntry
+      tags: ["GuestbookEntry"]
+      description: Deletes the guestbook entry and returns a 204 if the operation succeeds.
+      parameters:
+        - name: guestbookId
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - name: guestbookEntryId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: ""
+          content:
+            application/json: {} 
+  

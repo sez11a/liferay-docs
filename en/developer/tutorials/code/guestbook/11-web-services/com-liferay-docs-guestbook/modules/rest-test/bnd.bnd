@@ -1,0 +1,4 @@
+Bundle-Name: rest-test
+Bundle-SymbolicName: com.liferay.docs.rest
+Bundle-Version: 1.0.0
+Liferay-Configuration-Path: /configuration

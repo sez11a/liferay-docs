@@ -1,0 +1,4 @@
+Bundle-Name: headless-guestbook-test
+Bundle-SymbolicName: headless.guestbook.test
+Bundle-Version: 1.0.0
+Export-Package: headless.guestbook.test.api
