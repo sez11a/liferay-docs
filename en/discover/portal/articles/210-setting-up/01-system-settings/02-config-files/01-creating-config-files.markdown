@@ -54,7 +54,9 @@ multiple single value entries for *Characters Blacklist*:
 In the configuration file, this is really a single key with an array of 
 comma-separated values: 
 
-    charactersblacklist=["&","'","@","\\","]","}",":","\=",">","/","<","[","{","%","+","#","`","?","\"",";","*","~"]
+```
+charactersblacklist=["&","'","@","\\","]","}",":","\=",">","/","<","[","{","%","+","#","`","?","\"",";","*","~"]
+```
 
 ## Escaping Characters
 
@@ -109,5 +111,4 @@ To deploy the `.config` file, place it in your
 
 In a clustered environment, each node needs the same configuration values for
 each entry. For example, all nodes should use the same *Blogs* configuration
-settings. To accomplish this, deploy a `.config` file to *one* node.  An
-internal system applies the change to all nodes in the cluster. 
+settings. To accomplish this, deploy copies of the same `.config` file to each node's `[Liferay Home]/osgi/configs` folder.
