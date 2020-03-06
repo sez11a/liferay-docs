@@ -393,7 +393,24 @@ If you want Wildfly to manage your data source, follow these steps:
             </datasources>
         </subsystem>
 
-3.  In a `portal-ext.properties` file in your Liferay Home, specify your data
+3.  Add a dependency from ROOT.war to your data source inside 
+    `$WILDFLY_HOME/standalone/deployments/ROOT.war/WEB-INF/jboss-web.xml` file's 
+    `<jboss-web>` element:
+
+    ```xml
+    <resource-ref>
+        <res-ref-name>jboss/datasources/ExampleDS</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+        <lookup-name>java:jboss/datasources/ExampleDS</lookup-name>
+    </resource-ref>
+    ```
+
+    This will tell application server that Liferay is using the data source, so it 
+    must not be closed until Liferay is stopped. For more information, see 
+    [jboss-web.xml documentation](https://access.redhat.com/documentation/en-us/jboss_enterprise_application_platform/5/html/administration_and_configuration_guide/naming_on_jboss-j2ee_and_jndi___the_application_component_environment#ENC_Usage_Conventions-Resource_Manager_Connection_Factory_References_with_jboss.xml_and_jboss_web.xml)
+
+4.  In a `portal-ext.properties` file in your Liferay Home, specify your data
     source:
 
         jdbc.default.jndi.name=java:jboss/datasources/ExampleDS
