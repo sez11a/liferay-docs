@@ -6,6 +6,11 @@ header-id: patching-tool
 
 [TOC levels=1-4]
 
+<aside class="alert alert-info">
+  <span class="wysiwyg-color-blue120">This document has been updated and ported to <a href="https://learn.liferay.com/dxp/7.x/en/installation-and-upgrades/maintaining-a-liferay-dxp-installation/patching-liferay/installing-patches.html">Liferay Learn</a> and is no longer maintained here.</span>
+</aside>
+
+
 If you're using a @product@ bundle, the Patching Tool is already installed. When
 an update is necessary to install a patch, the Patching Tool automatically
 asks for an update.
