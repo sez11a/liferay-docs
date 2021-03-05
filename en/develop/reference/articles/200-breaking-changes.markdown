@@ -239,6 +239,39 @@ configuration changes.
 
 ---------------------------------------
 
+### No More Exceptions Are Thrown When a DDMStructure Is Fetched
+- **Date:** 2017-Mar-31
+- **JIRA Ticket:** LPS-52675
+
+#### What changed?
+
+The following methods don’t throw `PortalException` anymore:
+
+```java
+public DDMStructure fetchStructure(
+  long groupId, long classNameId, String structureKey,
+  boolean includeAncestorStructures)
+
+public DDMStructure fetchStructureByUuidAndGroupId(
+  String uuid, long groupId, boolean includeAncestorStructures)
+```
+
+#### Who is affected?
+
+This affects anyone using these methods.
+
+#### How should I update my code?
+
+Keep using these methods, but be aware that no exceptions will be thrown.
+
+#### Why was this change made?
+
+The current implementation of these methods won't generate any exception during
+their execution, therefore doesn't make sense keep `PortalException` on the
+method signature.
+
+---------------------------------------
+
 ### Removed Indexation of Fields ratings and viewCount
 - **Date:** 2017-May-16
 - **JIRA Ticket:** [LPS-70724](https://issues.liferay.com/browse/LPS-70724)
